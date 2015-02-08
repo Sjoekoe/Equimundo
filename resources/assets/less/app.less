@@ -1,8 +1,20 @@
 @import "bootstrap/bootstrap";
 
 @btn-font-weight: 300;
+@btn-primary-color: #A5473D;
 @font-family-sans-serif: "Roboto", Helvetica, Arial, sans-serif;
 
 body, label, .checkbox label {
 	font-weight: 300;
+}
+
+.btn-default {
+  background-color: @btn-primary-color;
+  color: #fff;
+  font-weight: 100;
+}
+
+.btn-default:hover {
+  background-color: darken(@btn-primary-color, 10%);
+  color: #fff;
 }

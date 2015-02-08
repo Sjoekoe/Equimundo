@@ -1,4 +1,5 @@
-<?php namespace HorseStories\Http\Controllers\Auth;
+<?php
+namespace HorseStories\Http\Controllers\Auth;
 
 use HorseStories\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
