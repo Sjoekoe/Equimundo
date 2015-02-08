@@ -1,6 +1,8 @@
 <?php 
-namespace HorseStories\Http\Controllers;
+namespace HorseStories\Http\Controllers\Pages;
   
+use HorseStories\Http\Controllers\Controller;
+
 class PagesController extends Controller
 {
     public function home()

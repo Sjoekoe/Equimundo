@@ -2809,7 +2809,7 @@ fieldset[disabled] .btn-default.active {
   background-color: #333333;
 }
 .btn-primary {
-  color: #a5473d;
+  color: #ffffff;
   background-color: #337ab7;
   border-color: #2e6da4;
 }
@@ -2819,7 +2819,7 @@ fieldset[disabled] .btn-default.active {
 .btn-primary:active,
 .btn-primary.active,
 .open > .dropdown-toggle.btn-primary {
-  color: #a5473d;
+  color: #ffffff;
   background-color: #286090;
   border-color: #204d74;
 }
@@ -2851,7 +2851,7 @@ fieldset[disabled] .btn-primary.active {
 }
 .btn-primary .badge {
   color: #337ab7;
-  background-color: #a5473d;
+  background-color: #ffffff;
 }
 .btn-success {
   color: #ffffff;
@@ -6239,4 +6239,23 @@ label,
 .btn-default:hover {
   background-color: #80372f;
   color: #fff;
+}
+.panel-default > .panel-heading {
+  background-color: #a5473d;
+  color: #fff;
+}
+.navbar-default .container-fluid,
+.navbar-default .navbar-brand,
+.navbar-default .navbar-nav > li > a {
+  background-color: #a5473d;
+  color: #fff;
+}
+.navbar-default .container-fluid:hover,
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .container-fluid:active,
+.navbar-default .navbar-brand:active,
+.navbar-default .navbar-nav > li > a:active {
+  background-color: #a5473d;
+  color: #55374D;
 }

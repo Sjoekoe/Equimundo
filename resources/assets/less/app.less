@@ -1,20 +1,37 @@
 @import "bootstrap/bootstrap";
 
 @btn-font-weight: 300;
-@btn-primary-color: #A5473D;
+@primary-color: #A5473D;
 @font-family-sans-serif: "Roboto", Helvetica, Arial, sans-serif;
 
 body, label, .checkbox label {
-	font-weight: 300;
+  font-weight: 300;
 }
 
 .btn-default {
-  background-color: @btn-primary-color;
+  background-color: @primary-color;
   color: #fff;
   font-weight: 100;
 }
 
 .btn-default:hover {
-  background-color: darken(@btn-primary-color, 10%);
+  background-color: darken(@primary-color, 10%);
   color: #fff;
 }
+
+.panel-default > .panel-heading {
+  background-color: @primary-color;
+  color: #fff;
+}
+
+.navbar-default .container-fluid, .navbar-default .navbar-brand, .navbar-default .navbar-nav > li > a {
+  background-color: @primary-color;
+  color: #fff;
+}
+
+.navbar-default .container-fluid:hover, .navbar-default .navbar-brand:hover, .navbar-default .navbar-nav > li > a:hover,
+.navbar-default .container-fluid:active, .navbar-default .navbar-brand:active, .navbar-default .navbar-nav > li > a:active {
+  background-color: @primary-color;
+  color: #55374D;
+}
+

@@ -28,7 +28,7 @@ return [
 	|
 	*/
 
-	'model' => 'HorseStories\User',
+	'model' => 'HorseStories\Models\Users\User',
 
 	/*
 	|--------------------------------------------------------------------------
