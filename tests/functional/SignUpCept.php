@@ -3,14 +3,15 @@ $I = new FunctionalTester($scenario);
 $I->am('guest');
 $I->wantTo('sign up for an account');
 
-$I->amInPath('/');
+$I->amOnPage('/');
 $I->click('Register');
 $I->seeCurrentUrlEquals('/register');
 
 $I->fillField('Username:', 'JohnDoe');
-$I->fillField('Email:', 'john@example.com');
-$I->fillField('Password:', 'demo');
-$I->fillField('Password Confirmation:', 'demo');
-$I->click('register');
+$I->fillField('E-Mail Address:', 'john@example.com');
+$I->fillField('Password:', 'password');
+$I->fillField('Password Confirmation:', 'password');
+$I->click('Sign Up');
 
-$I->seeCurrentUrlEquals('/');
+$I->seeCurrentUrlEquals('');
+$I->see('Welcome to HorseStories');

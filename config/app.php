@@ -146,6 +146,9 @@ return [
 		'HorseStories\Providers\EventServiceProvider',
 		'HorseStories\Providers\RouteServiceProvider',
 
+		'Laracasts\Flash\FlashServiceProvider',
+		'Barryvdh\Debugbar\ServiceProvider',
+
 	],
 
 	/*
@@ -195,7 +198,7 @@ return [
 		'View'      => 'Illuminate\Support\Facades\View',
 		'Form'		=> 'Illuminate\Html\FormFacade',
 		'Html'		=> 'Illuminate\Html\HtmlFacade',
-
+		'Flash'		=> 'Laracasts\Flash\Flash',
 	],
 
 ];

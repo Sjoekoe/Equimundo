@@ -7,3 +7,7 @@ Route::group(['namespace' => 'Auth'], function() {
 Route::group(['namespace' => 'Pages'], function() {
     require __DIR__ . '/Routes/Pages/pages.php';
 });
+
+Route::group(['namespace' => 'Users'], function() {
+    require __DIR__  .'/Routes/Users/profiles.php';
+});

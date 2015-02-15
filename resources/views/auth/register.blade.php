@@ -45,7 +45,7 @@
                     <!-- Submit button -->
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">
-                            {!! Form::submit('Register', ['class' => 'btn btn-default']) !!}
+                            {!! Form::submit('Sign Up', ['class' => 'btn btn-default']) !!}
                         </div>
                     </div>
 

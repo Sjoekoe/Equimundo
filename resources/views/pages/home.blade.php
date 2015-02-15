@@ -10,7 +10,13 @@
         </p>
     </div>
     @else
-        <p>You are logged in</p>
+        @include('users.partials.user_sidebar_left')
+        <div class="col-md-6">
+            Timeline
+        </div>
+        <div class="col-md-3">
+            Other Things
+        </div>
     @endif
 
 @stop
