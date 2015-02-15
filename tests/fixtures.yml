@@ -1,0 +1,13 @@
+HorseStories\Models\Users\User:
+  username: $string
+  email: $string@example.com
+  first_name: $string
+  last_name: $string
+  date_of_birth: $string
+  country: $string
+  gender: $string
+  about: $text
+  password: $string
+  remember_token: $string
+  created_at: $date
+  updated_at: $date
