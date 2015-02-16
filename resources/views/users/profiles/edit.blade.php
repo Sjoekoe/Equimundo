@@ -37,7 +37,7 @@
                 <div class="form-group">
                     {!! Form::label('country', 'Country', ['class' => 'col-sm-2 control-label']) !!}
                     <div class="col-sm-4">
-                        {!! Form::select('country', Config::get('countries'), Auth::user()->country, ['class' => 'form-control']) !!}
+                        {!! Form::select('country', Lang::get('countries'), Auth::user()->country, ['class' => 'form-control']) !!}
                     </div>
                 </div>
 
