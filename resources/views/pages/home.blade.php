@@ -10,13 +10,7 @@
         </p>
     </div>
     @else
-        @include('users.partials.user_sidebar_left')
-        <div class="col-md-6">
-            Timeline
-        </div>
-        <div class="col-md-3">
-            Other Things
-        </div>
+        @include('statuses.index')
     @endif
 
 @stop

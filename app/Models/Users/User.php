@@ -43,8 +43,19 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     protected $hidden = ['password', 'remember_token'];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function horses()
     {
         return $this->hasMany('HorseStories\Models\Horses\Horse', 'user_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
+    public function statuses()
+    {
+        return $this->hasManyThrough('HorseStories\Models\Statuses\Status', 'Horsestories\Models\Horses\Horse', 'user_id', 'horse_id');
     }
 }

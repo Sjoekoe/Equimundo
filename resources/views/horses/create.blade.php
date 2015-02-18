@@ -3,7 +3,7 @@
 @section('content')
     @include('users.partials/user_sidebar_left')
 
-    <div class="col-md-6">
+    <div class="col-md-6 col-md-offset-1">
         <div class="panel panel-default">
             <div class="panel-heading">Create a horse</div>
             <div class="panel-body">

@@ -11,3 +11,23 @@ HorseStories\Models\Users\User:
   remember_token: $string
   created_at: $date
   updated_at: $date
+
+HorseStories\Models\Horses\Horse:
+  user_id:
+    type: HorseStories\Models\Users\User
+  name: $string
+  gender: $integer
+  breed: $string
+  height: $string
+  date_of_birth: $string
+  color: $integer
+  life_number: string
+  created_at: $date
+  updated_at: $date
+
+HorseStories\Models\Statuses\Status:
+  horse_id:
+    type: HorseStories\Models\Horses\Horse
+  body: $text
+  created_at: $date
+  updated_at: $date

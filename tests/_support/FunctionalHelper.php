@@ -10,11 +10,13 @@ class FunctionalHelper extends \Codeception\Module
 {
     public function signIn()
     {
+        $id = 1;
         $email = 'john@example.com';
         $password = bcrypt('password');
         $username = 'JohnDoe';
 
-        $this->haveAnAccount(compact('email', 'password', 'username'));
+        $user = $this->haveAnAccount(compact('id', 'email', 'password', 'username'));
+        $this->haveAHorse(['id' => 1, 'user_id' => $user->id]);
 
         $I = $this->getModule('Laravel5');
 
@@ -26,6 +28,24 @@ class FunctionalHelper extends \Codeception\Module
 
     public function haveAnAccount($overrides = [])
     {
-        TestDummy::create('HorseStories\Models\Users\User', $overrides);
+        return $this->have('HorseStories\Models\Users\User', $overrides);
+    }
+
+    public function haveAHorse($overrides = [])
+    {
+        return $this->have('HorseStories\Models\Horses\Horse', $overrides);
+    }
+
+    public function postAStatus($body)
+    {
+        $I = $this->getModule('Laravel5');
+
+        $I->fillfield('status', $body);
+        $I->click('Post Status');
+    }
+
+    public function have($model, $overrides = [])
+    {
+        return TestDummy::create($model, $overrides);
     }
 }
