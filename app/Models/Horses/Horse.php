@@ -21,8 +21,19 @@ class Horse extends Model
         'name', 'gender', 'breed', 'height', 'date_of_birth', 'color', 'life_number', 'user_id'
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function owner()
     {
         return $this->belongsTo('HorseStories\Models\Users\User');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function statuses()
+    {
+        return $this->hasMany('HorseStories\Models\Statuses\Status');
     }
 }

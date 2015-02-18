@@ -1,6 +1,6 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
-        <div class="navbar-header">
+        <div class="navbar-header col-md-2">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                     data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle Navigation</span>
@@ -12,9 +12,11 @@
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li><a href="{{ route('home') }}">Home</a></li>
-            </ul>
+            @if (Auth::check())
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ route('home') }}">Timeline</a></li>
+                </ul>
+            @endif
 
             <ul class="nav navbar-nav navbar-right">
                 @if (Auth::guest())
