@@ -18,7 +18,7 @@
     <hr/>
     <ul>
         @foreach(Auth::user()->horses as $horse)
-            <li> {{ $horse->name }} </li>
+            <li><a href="{{ route('horses.show', $horse->slug) }}">{{ $horse->name }}</a> </li>
         @endforeach
     </ul>
 </div>

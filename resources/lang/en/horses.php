@@ -24,6 +24,7 @@ return [
         20 => 'Smoky Cream',
         21 => 'White'
     ],
+
     'genders' => [
         1 => 'Colt',
         2 => 'Filly',

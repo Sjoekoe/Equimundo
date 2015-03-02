@@ -4,6 +4,7 @@ namespace HorseStories\Http\Controllers\Horses;
 use Auth;
 use Flash;
 use HorseStories\Http\Requests\CreateHorse;
+use HorseStories\Models\Horses\Horse;
 use HorseStories\Models\Horses\HorseCreator;
 use Illuminate\Routing\Controller;
 
@@ -37,5 +38,12 @@ class HorseController extends Controller
         Flash::success($horse->name . ' was successfully created.');
 
         return redirect()->route('horses.index');
+    }
+
+    public function show($slug)
+    {
+        $horse = Horse::where('slug', '=', $slug)->with('statuses')->firstOrFail();
+
+        return view('horses.show', compact('horse'));
     }
 }

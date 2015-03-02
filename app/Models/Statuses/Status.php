@@ -23,4 +23,9 @@ class Status extends Model
     {
         return $this->belongsTo('HorseStories\Models\Horses\Horse');
     }
+
+    public function user()
+    {
+        return $this->horse->owner;
+    }
 }
