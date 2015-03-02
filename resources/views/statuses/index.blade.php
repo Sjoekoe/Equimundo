@@ -3,34 +3,36 @@
 @section('content')
     @include('users.partials.user_sidebar_left')
 
-    <div class="col-md-6 col-md-offset-1">
-        <h1>Post a status</h1>
+    <div class="col-md-6 col-md-offset-1 status">
+        <div class="row">
+            <div class="col-md-8 status status-form">
+                @include('layout.partials.errors')
 
-        @include('layout.partials.errors')
+                {!! Form::open(['route' => 'statuses.store']) !!}
 
-        {!! Form::open(['route' => 'statuses.store']) !!}
+                <!-- Status Form input -->
+                <div class="form-group">
+                    {!! Form::select('horse', $horses, null, ['class' => 'form-control']) !!}
+                </div>
 
-        <!-- Status Form input -->
-        <div class="form-group">
-            {!! Form::label('horse', 'Horse:') !!}
-            {!! Form::select('horse', $horses, null, ['class' => 'form-control']) !!}
+                <!-- Status Form input -->
+                <div class="form-group">
+                    {!! Form::textarea('status', null, ['class' => 'form-control', 'rows' => 3]) !!}
+                </div>
+
+                <!-- Submit button -->
+                <div class="form-group">
+                    {!! Form::submit('Post Status', ['class' => 'btn btn-default form-control']) !!}
+                </div>
+
+                {!! Form::close() !!}
+            </div>
+            <div class="col-md-4 status">
+                Picture
+            </div>
         </div>
-
-        <!-- Status Form input -->
-        <div class="form-group">
-            {!! Form::label('status', 'Status:') !!}
-            {!! Form::textarea('status', null, ['class' => 'form-control']) !!}
-        </div>
-
-        <!-- Submit button -->
-        <div class="form-group">
-            {!! Form::submit('Post Status', ['class' => 'btn btn-default form-control']) !!}
-        </div>
-
-        {!! Form::close() !!}
-
-        @foreach(Auth::user()->statuses as $status)
-            {{ $status->body }}
+        @foreach($statuses as $status)
+            @include('statuses.partials.status')
         @endforeach
     </div>
 
