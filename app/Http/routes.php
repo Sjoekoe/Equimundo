@@ -1,5 +1,9 @@
 <?php
 
+Route::group(['namespace' => 'Admin'], function() {
+    require __DIR__ . '/Routes/Admin/admins.php';
+});
+
 Route::group(['namespace' => 'Auth'], function() {
     require __DIR__ . '/Routes/Auth/auth.php';
 });

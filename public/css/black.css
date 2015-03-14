@@ -1,0 +1,52 @@
+a {
+  text-decoration: none;
+}
+body > .header {
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1030;
+  background: #f1f1f1;
+}
+body > .header .navbar {
+  height: 50px;
+  margin-bottom: 0;
+  margin-left: 250px;
+  background-color: #515763;
+}
+body > .header .navbar .sidebar-toggle {
+  color: #444954;
+  border: 1px solid transparent;
+  float: left;
+  padding: 15px 10px 10px 10px;
+  margin: 0 0 8px 5px;
+  background-image: none;
+  border-radius: 0;
+}
+body > .header .logo {
+  display: block;
+  background-color: #515763;
+  float: left;
+  height: 50px;
+  line-height: 50px;
+  padding: 0 10px;
+  text-align: center;
+  width: 250px;
+  color: #f1f1f1;
+}
+.responsive_nav {
+  width: 25px;
+  height: 17px;
+}
+.responsive_nav i {
+  color: #f1f1f1;
+  font-size: 2em;
+  margin-top: -5px;
+}
+.navbar .navbar-right > .nav {
+  margin-right: 10px;
+}
+.navbar .nav a {
+  color: #333;
+}
