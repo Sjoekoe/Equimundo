@@ -5,8 +5,7 @@ $I->wantTo('create a new horse');
 
 $I->signIn();
 
-$I->amOnPage('/');
-$I->click('+');
+$I->amOnPage('/horses/create');
 
 $I->fillField('name', 'Florien');
 $I->selectOption('gender', 'Mare');

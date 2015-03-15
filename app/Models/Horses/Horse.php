@@ -36,4 +36,9 @@ class Horse extends Model
     {
         return $this->hasMany('HorseStories\Models\Statuses\Status');
     }
+    
+    public function pictures()
+    {
+        return $this->hasMany('HorseStories\Models\Pictures\Picture');
+    }
 }
