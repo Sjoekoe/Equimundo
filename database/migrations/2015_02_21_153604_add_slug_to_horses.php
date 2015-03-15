@@ -13,7 +13,7 @@ class AddSlugToHorses extends Migration {
 	public function up()
 	{
 		Schema::table('horses', function(Blueprint $table) {
-            $table->string('slug')->unique()->nullable();
+            $table->string('slug');
         });
 	}
 
