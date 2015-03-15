@@ -5,6 +5,7 @@ Route::group(['namespace' => 'Auth'], function() {
 });
 
 Route::group(['namespace' => 'Horses'], function() {
+    require __DIR__ . '/Routes/Horses/follows.php';
     require __DIR__ . '/Routes/Horses/horses.php';
 });
 

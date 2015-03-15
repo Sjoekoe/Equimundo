@@ -3,19 +3,22 @@ namespace HorseStories\Core\Files;
 
 use File;
 use HorseStories\Models\Pictures\Picture;
-use Illuminate\Contracts\Filesystem\Factory as Storage;
+use Illuminate\Contracts\Filesystem\Filesystem;
 use Image;
 
 class Uploader
 {
     /**
-     * @var \Illuminate\Contracts\Filesystem\Factory
+     * @var \Illuminate\Contracts\Filesystem\Filesystem
      */
-    private $storage;
+    private $file;
 
-    public function __construct(Storage $storage)
+    /**
+     * @param \Illuminate\Contracts\Filesystem\Filesystem $file
+     */
+    public function __construct(Filesystem $file)
     {
-        $this->storage = $storage;
+        $this->file = $file;
     }
 
     /**
@@ -32,7 +35,7 @@ class Uploader
 
 
         if ( ! file_exists(public_path() . $path) ) {
-            File::makeDirectory(public_path() . $path, 0755);
+            $this->file->makeDirectory(public_path() . $path, 0755);
         }
 
         Image::make($file->getrealpath())->resize(null, 350, function ($constraints) {

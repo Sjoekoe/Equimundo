@@ -8,6 +8,8 @@
             <img src="{{ asset('uploads/pictures/' . $horse->id . '/' . $horse->pictures()->first()->path) }}" alt=""/></span>
         @endif
 
+        @include('horses.partials.follow-form')
+
         @if (! count($horse->statuses))
             <p>There are no statuses yet</p>
         @else
