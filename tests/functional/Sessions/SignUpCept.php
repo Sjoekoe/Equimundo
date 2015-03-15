@@ -14,7 +14,6 @@ $I->fillField('Password Confirmation:', 'password');
 $I->click('Sign Up');
 
 $I->seeCurrentUrlEquals('');
-$I->see('Welcome to HorseStories');
 
 $I->seeRecord('users', [
     'username' => 'JohnDoe',
