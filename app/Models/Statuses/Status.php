@@ -5,7 +5,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Status extends Model
 {
-
     /**
      * @var string
      */
@@ -24,8 +23,19 @@ class Status extends Model
         return $this->belongsTo('HorseStories\Models\Horses\Horse');
     }
 
+    /**
+     * @return \HorseStories\Models\Users\User
+     */
     public function user()
     {
-        return $this->horse->owner;
+        return $this->horse()->owner();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function comments()
+    {
+        return $this->hasMany('HorseStories\Models\Comments\Comment');
     }
 }

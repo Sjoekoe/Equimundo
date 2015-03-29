@@ -122,14 +122,13 @@ nav .container-fluid {
     border: none;
     box-shadow: none;
 
-
     &:focus {
       box-shadow: none;
     }
   }
 
   textarea {
-    border:none;
+    border: none;
     border-top: 1px solid darken(@grey-color, 20%);
     border-radius: 0;
 
@@ -153,7 +152,8 @@ nav .container-fluid {
 
 .status-media {
   border: 1px solid darken(@grey-color, 20%);
-  margin-bottom: 2em;
+  margin-bottom: 0;
+  border-bottom: none;
 }
 
 .status-left {
@@ -168,5 +168,26 @@ nav .container-fluid {
 .status-right {
   border-left: 1px solid darken(@grey-color, 20%);
   padding: 15px;
+}
+
+form.comments__create-form.row {
+  height: 32px;
+}
+
+.comments__create-form textarea {
+  border: 1px solid #E3E3E3;
+  border-top: none;
+  border-radius: 0;
+}
+
+.comments {
+  margin-bottom: 5em;
+}
+
+.comments__comment {
+  background: darken(white, 5%);
+  margin-top: 0;
+  border: 1px solid darken(white, 15%);
+  border-bottom: 1px solid darken(white, 15%);
 }
 
