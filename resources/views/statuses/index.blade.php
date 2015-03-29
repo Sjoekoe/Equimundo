@@ -9,24 +9,24 @@
                 <div class="col-md-8 status status-form">
                     @include('layout.partials.errors')
 
-                    {!! Form::open(['route' => 'statuses.store']) !!}
+                    {{ Form::open(['route' => 'statuses.store']) }}
 
                     <!-- Status Form input -->
                     <div class="form-group">
-                        {!! Form::select('horse', $horses, null, ['class' => 'form-control']) !!}
+                        {{ Form::select('horse', $horses, null, ['class' => 'form-control']) }}
                     </div>
 
                     <!-- Status Form input -->
                     <div class="form-group">
-                        {!! Form::textarea('status', null, ['class' => 'form-control', 'rows' => 3]) !!}
+                        {{ Form::textarea('status', null, ['class' => 'form-control', 'rows' => 3]) }}
                     </div>
 
                     <!-- Submit button -->
                     <div class="form-group">
-                        {!! Form::submit('Post Status', ['class' => 'btn btn-default form-control']) !!}
+                        {{ Form::submit('Post Status', ['class' => 'btn btn-default form-control']) }}
                     </div>
 
-                    {!! Form::close() !!}
+                    {{ Form::close() }}
                 </div>
                 <div class="col-md-4 status">
 

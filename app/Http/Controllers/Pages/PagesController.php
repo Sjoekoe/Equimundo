@@ -35,7 +35,11 @@ class PagesController extends Controller
     {
         if (Auth::check()) {
             $horses = $this->users->findHorsesForSelect(Auth::user());
-            $statuses = $this->statuses->getAllForUser(Auth::user());
+            if (count($horses)) {
+                $statuses = $this->statuses->getFeedForUser(Auth::user());
+            } else {
+                $statuses = [];
+            }
         }
 
         return view('pages.home', compact('horses', 'statuses'));

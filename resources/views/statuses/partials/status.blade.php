@@ -14,3 +14,22 @@
         </div>
     </div>
 </div>
+
+@if (Auth::check())
+    {{ Form::open(['route' => ['comment.store', $status->id], 'class' => 'comments__create-form row']) }}
+        {{ Form::hidden('status_id', $status->id) }}
+
+        <!-- Body Form input -->
+        <div class="form-group">
+            {{ Form::textarea('body', null, ['class' => 'form-control', 'rows' => 1]) }}
+        </div>
+    {{ Form::close() }}
+@endif
+
+@unless ($status->comments->isEmpty())
+    <div class="comments">
+        @foreach($status->comments as $comment)
+            @include('statuses.partials.comment')
+        @endforeach
+    </div>
+@endif
