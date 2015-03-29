@@ -26,7 +26,7 @@ class Horse extends Model
      */
     public function owner()
     {
-        return $this->belongsTo('HorseStories\Models\Users\User');
+        return $this->belongsTo('HorseStories\Models\Users\User', 'user_id');
     }
 
     /**
@@ -36,7 +36,10 @@ class Horse extends Model
     {
         return $this->hasMany('HorseStories\Models\Statuses\Status');
     }
-    
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function pictures()
     {
         return $this->hasMany('HorseStories\Models\Pictures\Picture');
