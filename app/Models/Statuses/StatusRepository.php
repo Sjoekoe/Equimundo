@@ -24,6 +24,6 @@ class StatusRepository
 
         $horseIds[] = $user->horses()->lists('id');
 
-        return Status::whereIn('horse_id', $horseIds)->latest()->get();
+        return Status::with('comments')->whereIn('horse_id', $horseIds)->latest()->get();
     }
 }
