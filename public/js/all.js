@@ -1,4 +1,12 @@
 (function() {
+    $('.comments__create-form').on('keydown', function(e) {
+        if (e.keyCode == 13 && $.trim($(this).find('textarea').val()) !== "" ) {
+            e.preventDefault();
+            $(this).submit();
+        }
+    });
+})();
+(function() {
     var submitAjaxRequest = function(e) {
         var form = $(this);
         var method = form.find('input[name=_method]').val() || 'POST';
