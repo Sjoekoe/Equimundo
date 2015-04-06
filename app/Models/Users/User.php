@@ -65,4 +65,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return $this->hasMany('HorseStories\Models\Comments\Comment', 'user_id', 'id');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function likes()
+    {
+        return $this->belongsToMany('HorseStories\Models\Statuses\Status', 'likes')->withTimestamps();
+    }
 }
