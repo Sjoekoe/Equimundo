@@ -15,6 +15,7 @@ Route::group(['namespace' => 'Pages'], function() {
 
 Route::group(['namespace' => 'Statuses'], function() {
     require __DIR__ . '/Routes/Statuses/comments.php';
+    require __DIR__ . '/Routes/Statuses/likes.php';
     require __DIR__ . '/Routes/Statuses/statuses.php';
 });
 
