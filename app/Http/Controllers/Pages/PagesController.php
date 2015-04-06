@@ -2,6 +2,7 @@
 namespace HorseStories\Http\Controllers\Pages;
 
 use Auth;
+use DB;
 use HorseStories\Http\Controllers\Controller;
 use HorseStories\Models\Statuses\StatusRepository;
 use HorseStories\Models\Users\UserRepository;
@@ -37,11 +38,12 @@ class PagesController extends Controller
             $horses = $this->users->findHorsesForSelect(Auth::user());
             if (count($horses)) {
                 $statuses = $this->statuses->getFeedForUser(Auth::user());
+                $likes = DB::table('likes')->whereUserId(Auth::user()->id)->lists('status_id');
             } else {
                 $statuses = [];
             }
         }
 
-        return view('pages.home', compact('horses', 'statuses'));
+        return view('pages.home', compact('horses', 'statuses', 'likes'));
     }
 }

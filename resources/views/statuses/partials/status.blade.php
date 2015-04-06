@@ -10,7 +10,12 @@
     </div>
     <div class="col-md-1 status-right">
         <div class="text-center">
-            <i class="fa fa-heart-o"></i>
+            {{ Form::open(['route' => ['status.like', $status->id], 'class' => 'like-button', 'data-remote']) }}
+                {{ Form::hidden('status_id', $status->id) }}
+                <button type="submit" class="btn-naked">
+                    <i class="fa {{ in_array($status->id, $likes) ? 'fa-heart' : 'fa-heart-o' }}"></i>
+                </button>
+            {{ Form::close() }}
         </div>
     </div>
 </div>

@@ -6383,3 +6383,13 @@ form.comments__create-form.row {
   border: 1px solid #d9d9d9;
   border-bottom: 1px solid #d9d9d9;
 }
+i.fa.fa-heart-o {
+  color: #b6bac3;
+}
+i.fa.fa-heart {
+  color: #FF0000;
+}
+.btn-naked {
+  background: none;
+  border: none;
+}
