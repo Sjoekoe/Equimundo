@@ -16,6 +16,9 @@
                     <i class="fa {{ in_array($status->id, $likes) ? 'fa-heart' : 'fa-heart-o' }}"></i>
                 </button>
             {{ Form::close() }}
+            <p class="muted like-counter">
+                {{ count($status->likes) }}
+            </p>
         </div>
     </div>
 </div>
@@ -23,10 +26,10 @@
 @if (Auth::check())
     {{ Form::open(['route' => ['comment.store', $status->id], 'class' => 'comments__create-form row']) }}
         {{ Form::hidden('status_id', $status->id) }}
-
+        {{ Form::hidden('username', Auth::user()->username) }}
         <!-- Body Form input -->
         <div class="form-group">
-            {{ Form::textarea('body', null, ['class' => 'form-control', 'rows' => 1]) }}
+            {{ Form::textarea('body', null, ['class' => 'form-control', 'rows' => 1, 'placeholder' => 'write a comment ...']) }}
         </div>
     {{ Form::close() }}
 @endif

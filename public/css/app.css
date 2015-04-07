@@ -6393,3 +6393,6 @@ i.fa.fa-heart {
   background: none;
   border: none;
 }
+.btn-naked:focus {
+  outline: none;
+}
