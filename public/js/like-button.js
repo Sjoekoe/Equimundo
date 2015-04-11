@@ -15,7 +15,6 @@
             type: method,
             url: form.prop('action'),
             data: form.serialize()
-
         });
 
         e.preventDefault();

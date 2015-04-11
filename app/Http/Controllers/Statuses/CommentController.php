@@ -24,7 +24,7 @@ class CommentController extends Controller
     }
 
     /**
-     * @param $status
+     * @param int $status
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store($status)
@@ -35,6 +35,6 @@ class CommentController extends Controller
 
         Flash::success('Your comment was posted');
 
-        return Redirect::back();
+        return response()->json('success', 200);
     }
 }

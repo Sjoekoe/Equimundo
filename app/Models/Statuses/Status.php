@@ -38,4 +38,12 @@ class Status extends Model
     {
         return $this->hasMany('HorseStories\Models\Comments\Comment');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function likes()
+    {
+        return $this->belongsToMany('HorseStories\Models\Users\User', 'likes');
+    }
 }
