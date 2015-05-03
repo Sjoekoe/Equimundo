@@ -53,7 +53,7 @@ $menubar-icon-spacing: $menubar-item-padding !default;
 
 @mixin menu-bar-layout (
   $orientation: horizontal,
-  $stretch: true
+  $stretch: false
 ) {
   /*
     Orientation
@@ -228,7 +228,7 @@ $menubar-icon-spacing: $menubar-item-padding !default;
 
   @output An appropriate justify-content value.
 */
-@mixin menu-bar-align($align: left) {
+@mixin menu-bar-align($align: right) {
   $options: (
     left: flex-start,
     right: flex-end,
