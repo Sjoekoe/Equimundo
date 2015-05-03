@@ -23,10 +23,24 @@
 
 	@include('layout.partials.nav')
 
-	<div class="container-fluid">
+	<div class="grid-frame">
 		@include('flash::message')
 
-		@yield('content')
+        @if (Auth::check())
+            <div class="grid-block medium-3">
+                @include('users.partials.user_sidebar_left')
+            </div>
+        @endif
+
+        <div class="vertical grid-block medium-6">
+		    @yield('content')
+        </div>
+
+        @if (Auth::check())
+            <div class="grid-block medium-3">
+                Other Things
+            </div>
+        @endif
 	</div>
 
 	<!-- Scripts -->

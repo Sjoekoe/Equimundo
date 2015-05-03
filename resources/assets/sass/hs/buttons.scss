@@ -1,0 +1,8 @@
+.btn-naked {
+  background: none;
+  border: none;
+
+  &:focus {
+    outline: none;
+  }
+}

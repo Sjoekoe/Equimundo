@@ -4,7 +4,7 @@
         var commentEl = $(commentHtml);
         commentEl.hide();
         var postsList = data.form.next();
-        console.log(postsList);
+
         postsList.append(commentEl);
         commentEl.slideDown();
     }
