@@ -1,9 +1,6 @@
 <article class="comments__comment media status-media row">
-    <div class="pull-left">
-
-    </div>
-    <div class="media-body">
-        <h4 class="media-heading">{{ $comment->poster->username }}</h4>
-        {{ $comment->body }}
+    <div class="media-body clearfix">
+        <h5 class="media-heading pull-left">{{ $comment->poster->username }}</h5>
+        <p>{{ $comment->body }}</p>
     </div>
 </article>
