@@ -1,46 +1,35 @@
 @extends('layout.app')
 
 @section('content')
-    @include('users.partials.user_sidebar_left')
+    <div class="grid-content">
+        @if (count($horses))
+            <div class="grid-block medium-12 status">
+                @include('layout.partials.errors')
 
-    <div class="col-md-6 col-md-offset-1 status">
-        <div class="row">
-            @if (count($horses))
-                <div class="col-md-8 status status-form">
-                    @include('layout.partials.errors')
+                {{ Form::open(['route' => 'statuses.store', 'class' => 'grid-content medium-12 status_form']) }}
 
-                    {{ Form::open(['route' => 'statuses.store']) }}
-
-                    <!-- Status Form input -->
-                    <div class="form-group">
-                        {{ Form::select('horse', $horses, null, ['class' => 'form-control']) }}
-                    </div>
-
-                    <!-- Status Form input -->
-                    <div class="form-group">
-                        {{ Form::textarea('status', null, ['class' => 'form-control', 'rows' => 3]) }}
-                    </div>
-
-                    <!-- Submit button -->
-                    <div class="form-group">
-                        {{ Form::submit('Post Status', ['class' => 'btn btn-default form-control']) }}
-                    </div>
-
-                    {{ Form::close() }}
+                <!-- Status Form input -->
+                <div class="medium-12 grid-content">
+                    {{ Form::select('horse', $horses, null, ['class' => 'form-control']) }}
                 </div>
-                <div class="col-md-4 status">
 
+                <!-- Status Form input -->
+                <div class="medium-12 grid-content">
+                    {{ Form::textarea('status', null, ['class' => 'form-control', 'rows' => 3, 'placeholder' => 'what have you been doing ...']) }}
                 </div>
-            @else
-                <p>Please create a horse first before you can post a status</p>
-            @endif
-        </div>
-        @foreach($statuses as $status)
+
+                <!-- Submit button -->
+                <div class="medium-12 grid-content">
+                    {{ Form::submit('Post Status', ['class' => 'button pull-right']) }}
+                </div>
+
+                {{ Form::close() }}
+            </div>
+        @else
+            <p>Please create a horse first before you can post a status</p>
+        @endif
+        @foreach ($statuses as $status)
             @include('statuses.partials.status')
         @endforeach
-    </div>
-
-    <div class="col-md-2">
-        Other Things
     </div>
 @stop

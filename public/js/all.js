@@ -4,7 +4,7 @@
         var commentEl = $(commentHtml);
         commentEl.hide();
         var postsList = data.form.next();
-        console.log(postsList);
+
         postsList.append(commentEl);
         commentEl.slideDown();
     }
@@ -71,3 +71,4 @@
 
     $('.like-button').on('submit', submitAjaxRequest);
 })();
+//# sourceMappingURL=all.js.map
