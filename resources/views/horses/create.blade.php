@@ -1,12 +1,6 @@
 @extends('layout.app')
 
 @section('content')
-    @include('users.partials/user_sidebar_left')
-
-    <div class="col-md-6 col-md-offset-1">
-        <div class="panel panel-default">
-            <div class="panel-heading">Create a horse</div>
-            <div class="panel-body">
                 @include('layout.partials.errors')
 
                 {{ Form::open(['route' => 'horses.create', 'class' => 'form-horizontal', 'files' => 'true']) }}
@@ -37,7 +31,7 @@
                     <div class="form-group">
                         {{ Form::label('breed', 'Breed:', ['class' => 'col-sm-2 control-label']) }}
                         <div class="col-sm-10">
-                            {{ Form::text('breed', null, ['class' => 'form-control']) }}
+                            {{ Form::select('breed', trans('horses.breeds'), null, ['class' => 'form-control']) }}
                         </div>
                     </div>
 
@@ -81,7 +75,4 @@
                     </div>
 
                 {{ Form::close() }}
-            </div>
-        </div>
-    </div>
 @stop

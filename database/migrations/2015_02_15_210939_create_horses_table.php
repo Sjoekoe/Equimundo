@@ -18,7 +18,7 @@ class CreateHorsesTable extends Migration {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 			$table->string('name');
 			$table->string('gender');
-			$table->string('breed');
+			$table->integer('breed');
 			$table->string('height');
 			$table->string('date_of_birth');
 			$table->string('color');
