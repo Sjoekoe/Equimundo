@@ -3,8 +3,7 @@
         var commentHtml = createComment(data);
         var commentEl = $(commentHtml);
         commentEl.hide();
-        var postsList = data.form.next();
-
+        var postsList = data.form.prev();
         postsList.append(commentEl);
         commentEl.slideDown();
     }
@@ -12,11 +11,9 @@
     function createComment(data) {
         var html = '' +
             '<article class="comments__comment media status-media row">' +
-            '<div class="pull-left">' +
-            '</div>' +
-            '<div class="media-body">' +
-            '<h4 class="media-heading">' + data.username+ '</h4>' +
-            data.body +
+            '<div class="media-body clearfix">' +
+            '<h5 class="media-heading pull-left">' + data.username + '</h5>' +
+            '<p>' + data.body  + '</p>' +
             '</div>' +
             '</article>';
 

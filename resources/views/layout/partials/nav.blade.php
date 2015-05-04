@@ -1,6 +1,6 @@
 <div class="primary title-bar">
     <div class="center title">
-        <a class="navbar-brand" href="{{ route('home') }}">Horsestories</a>
+        <a class="navbar-brand" href="{{ route('home') }}">Horse Stories</a>
     </div>
     <span class="left success"><a href="#">Left</a></span>
     <span class="right">
