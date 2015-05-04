@@ -1,9 +1,8 @@
 @extends('layout.app')
 
 @section('content')
-    @include('users.partials.user_sidebar_left')
-    <div class="col-md-6 col-md-offset-1">
-        <div class="row">
+    <div class="grid-content">
+        <div class="grid-block medium-12 clearfix heading">
             <div class="pull-left">
                 <h1>{{ $horse->name }}</h1>
             </div>
@@ -11,6 +10,8 @@
             <div class="pull-right">
                 @if ($horse->owner()->first()->id !== Auth::user()->id)
                     @include('horses.partials.follow-form')
+                @else
+                    <a href="{{ route('horses.edit', $horse->id) }}" class="button">Edit {{ $horse->name }}</a>
                 @endif
             </div>
         </div>

@@ -3,7 +3,9 @@
         <div class="card-header clearfix">
             <div class="name pull-left">
                 <h5>
-                    {{ $status->horse->name }}
+                    <a href="{{ route('horses.show', $status->horse->slug) }}">
+                        {{ $status->horse->name }}
+                    </a>
                 </h5>
             </div>
             <div class="time pull-right">

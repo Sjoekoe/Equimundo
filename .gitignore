@@ -4,3 +4,7 @@
 .env.*
 .idea
 tests/_output/*
+public/css/app.css
+public/css/app.css.map
+public/js/all.js.map
+public/js/all.js
