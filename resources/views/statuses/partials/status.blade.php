@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="card-section">
-            {{ $status->body }}
+            {{ nl2br($status->body) }}
         </div>
         <div class="card-divider">
             {{ Form::open(['route' => ['status.like', $status->id], 'class' => 'like-button pull-left', 'data-remote']) }}

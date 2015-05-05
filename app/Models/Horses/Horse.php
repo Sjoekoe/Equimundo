@@ -44,4 +44,12 @@ class Horse extends Model
     {
         return $this->hasMany('HorseStories\Models\Pictures\Picture');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function palmares()
+    {
+        return $this->hasMany('HorseStories\Models\Palmares\Palmares');
+    }
 }

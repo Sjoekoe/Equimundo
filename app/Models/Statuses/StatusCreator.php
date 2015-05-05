@@ -1,7 +1,9 @@
 <?php 
 namespace HorseStories\Models\Statuses;
   
-class StatusCreator 
+use HorseStories\Models\Horses\Horse;
+
+class StatusCreator
 {
     /**
      * @param array $data
@@ -13,5 +15,23 @@ class StatusCreator
         $status->horse_id = $data['horse'];
 
         $status->save();
+    }
+
+    /**
+     * @param \HorseStories\Models\Horses\Horse $horse
+     * @param array $data
+     * @return array
+     */
+    public function createPalmares(Horse $horse, $data = [])
+    {
+        $data['status'] = $horse->name  . ' has added an achievement.<br>';
+        $data['status'] .= 'She finished ' . $data['ranking'] . ' at ' . $data['event_name']  . ' in the ' . $data['level'] . ' category<br><hr>';
+        $data['status'] .= nl2br($data['body']);
+
+        $data['horse'] = $horse->id;
+
+        $this->create($data);
+
+        return $data;
     }
 }
