@@ -4,6 +4,7 @@ namespace HorseStories\Http\Controllers\Horses;
 use HorseStories\Http\Controllers\Controller;
 use HorseStories\Models\Horses\Horse;
 use HorseStories\Models\Palmares\PalmaresCreator;
+use HorseStories\Models\Palmares\PalmaresRepository;
 use Input;
 
 class PalmaresController extends Controller
@@ -14,11 +15,18 @@ class PalmaresController extends Controller
     private $palmaresCreator;
 
     /**
-     * @param \HorseStories\Models\Palmares\PalmaresCreator $palmaresCreator
+     * @var \HorseStories\Models\Palmares\PalmaresRepository
      */
-    public function __construct(PalmaresCreator $palmaresCreator)
+    private $palmaresRepository;
+
+    /**
+     * @param \HorseStories\Models\Palmares\PalmaresCreator $palmaresCreator
+     * @param \HorseStories\Models\Palmares\PalmaresRepository $palmaresRepository
+     */
+    public function __construct(PalmaresCreator $palmaresCreator, PalmaresRepository $palmaresRepository)
     {
         $this->palmaresCreator = $palmaresCreator;
+        $this->palmaresRepository = $palmaresRepository;
     }
 
     /**
@@ -29,7 +37,9 @@ class PalmaresController extends Controller
     {
         $horse = $this->initHorse($horseSlug);
 
-        return view('horses.palmares.index', compact('horse'));
+        $palmaresResults = $this->palmaresRepository->getPalmaresForHorse($horse);
+
+        return view('horses.palmares.index', compact('horse', 'palmaresResults'));
     }
 
     /**

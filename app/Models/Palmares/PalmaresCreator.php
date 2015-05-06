@@ -1,6 +1,7 @@
 <?php
 namespace HorseStories\Models\Palmares;
 
+use DateTime;
 use HorseStories\Models\Events\EventCreator;
 use HorseStories\Models\Horses\Horse;
 use HorseStories\Models\Statuses\StatusCreator;
@@ -32,17 +33,16 @@ class PalmaresCreator
      */
     public function create(Horse $horse, array $values)
     {
+        $values = $this->statusCreator->createForPalmares($horse, $values);
+        $event = $this->eventCreator->create($values);
+
         $palmares = new Palmares();
         $palmares->horse_id = $horse->id;
         $palmares->discipline = $values['discipline'];
         $palmares->level = $values['level'];
         $palmares->ranking = $values['ranking'];
-        $palmares->date = $values['date'];
-
-        $values = $this->statusCreator->createPalmares($horse, $values);
-
-        $event = $this->eventCreator->create($values);
-
+        $palmares->date = new DateTime($values['date']);
+        $palmares->status_id = $values['status']->id;
         $palmares->event_id = $event->id;
 
         $palmares->save();

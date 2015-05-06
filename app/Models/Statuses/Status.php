@@ -46,4 +46,12 @@ class Status extends Model
     {
         return $this->belongsToMany('HorseStories\Models\Users\User', 'likes');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function palmares()
+    {
+        return $this->hasOne('HorseStories\Models\Palmares\Palmares');
+    }
 }

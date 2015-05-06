@@ -21,11 +21,8 @@
         @if (! count($horse->palmares))
             <p>{{ $horse->name }} has no palmares yet.</p>
         @else
-            @foreach ($horse->palmares as $palmares)
-                {{ array_flatten(trans('disciplines.list'))[$palmares->discipline - 1] }}
-                @if ($palmares->event)
-                    {{ $palmares->event->name }}
-                @endif
+            @foreach ($palmaresResults as $palmares)
+                @include('horses.palmares._partials.palmares')
             @endforeach
         @endif
     </div>
