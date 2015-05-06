@@ -27,7 +27,6 @@ class EventCreator
         $event = new Event();
 
         $event->name = $data['event_name'];
-        $event->date = $data['date'];
         $event->creator_id = $this->auth->user()->id;
 
         $event->save();
