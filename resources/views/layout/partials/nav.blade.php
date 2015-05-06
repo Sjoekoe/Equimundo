@@ -2,7 +2,11 @@
     <div class="center title">
         <a class="navbar-brand" href="{{ route('home') }}">Horse Stories</a>
     </div>
-    <span class="left success"><a href="#">Left</a></span>
+    <span class="left success">
+        @if (Auth::check())
+            <a href="{{ route('home') }}">Timeline</a>
+        @endif
+    </span>
     <span class="right">
         <div class="menu-group-right">
             @if (Auth::guest())
