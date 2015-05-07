@@ -27,10 +27,10 @@ class Palmares extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function status()
     {
-        return $this->hasOne('HorseStories\Models\Statuses\Status');
+        return $this->belongsTo('HorseStories\Models\Statuses\Status');
     }
 }

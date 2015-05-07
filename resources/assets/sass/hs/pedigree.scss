@@ -1,0 +1,25 @@
+.pedigree {
+  margin-top: 1em;
+
+  .grid-content {
+    border: 1px solid darken($secondary-color, 10%);
+    text-align: center;
+    padding: 1em;
+  }
+
+  .male {
+    background-color: lightblue;
+  }
+
+  .female {
+    background-color: lighten($primary-color, 25%);
+  }
+
+  .self {
+    background-color: $primary-color;
+
+    a {
+      color: white;
+    }
+  }
+}
