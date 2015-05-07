@@ -7,6 +7,7 @@ class StatusCreator
 {
     /**
      * @param array $data
+     * @return \HorseStories\Models\Statuses\Status
      */
     public function create($data = [])
     {
@@ -15,6 +16,8 @@ class StatusCreator
         $status->horse_id = $data['horse'];
 
         $status->save();
+
+        return $status;
     }
 
     /**
@@ -22,7 +25,7 @@ class StatusCreator
      * @param array $data
      * @return array
      */
-    public function createPalmares(Horse $horse, $data = [])
+    public function createForPalmares(Horse $horse, $data = [])
     {
         $data['status'] = $horse->name  . ' has added an achievement.<br>';
         $data['status'] .= 'She finished ' . $data['ranking'] . ' at ' . $data['event_name']  . ' in the ' . $data['level'] . ' category<br><hr>';
@@ -30,7 +33,7 @@ class StatusCreator
 
         $data['horse'] = $horse->id;
 
-        $this->create($data);
+        $data['status'] = $this->create($data);
 
         return $data;
     }

@@ -52,4 +52,80 @@ class Horse extends Model
     {
         return $this->hasMany('HorseStories\Models\Palmares\Palmares');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function pedigree()
+    {
+        return $this->hasMany('HorseStories\Models\Pedigrees\Pedigree');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
+    public function family()
+    {
+        return $this->hasManyThrough('HorseStories\Models\Horses\Horse', 'HorseStories\Models\Pedigrees\Pedigree', 'family_id', 'id');
+    }
+
+    /**
+     * @return \HorseStories\Models\Pedigrees\Pedigree
+     */
+    public function father()
+    {
+        return $this->pedigree->filter(function ($family) {
+            return $family->type == 1;
+        })->first();
+    }
+
+    /**
+     * @return \HorseStories\Models\Pedigrees\Pedigree
+     */
+    public function mother()
+    {
+        return $this->pedigree->filter(function ($family) {
+            return $family->type == 2;
+        })->first();
+    }
+
+    /**
+     * @return \HorseStories\Models\Pedigrees\Pedigree
+     */
+    public function fathersFather()
+    {
+        return $this->pedigree->filter(function ($family) {
+            return $family->type == 3;
+        })->first();
+    }
+
+    /**
+     * @return \HorseStories\Models\Pedigrees\Pedigree
+     */
+    public function fathersMother()
+    {
+        return $this->pedigree->filter(function ($family) {
+            return $family->type == 4;
+        })->first();
+    }
+
+    /**
+     * @return \HorseStories\Models\Pedigrees\Pedigree
+     */
+    public function mothersFather()
+    {
+        return $this->pedigree->filter(function ($family) {
+            return $family->type == 5;
+        })->first();
+    }
+
+    /**
+     * @return \HorseStories\Models\Pedigrees\Pedigree
+     */
+    public function mothersMother()
+    {
+        return $this->pedigree->filter(function ($family) {
+            return $family->type == 6;
+        })->first();
+    }
 }

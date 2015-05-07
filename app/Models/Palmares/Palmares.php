@@ -25,4 +25,12 @@ class Palmares extends Model
     {
         return $this->belongsTo('HorseStories\Models\Events\Event');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function status()
+    {
+        return $this->belongsTo('HorseStories\Models\Statuses\Status');
+    }
 }
