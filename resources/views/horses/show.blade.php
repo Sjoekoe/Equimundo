@@ -3,11 +3,11 @@
 @section('content')
     <div class="grid-content">
         <div class="grid-block medium-12 clearfix heading">
-            <div class="pull-left">
+            <div class="heading-name">
                 <h1>{{ $horse->name }}</h1>
             </div>
 
-            <div class="pull-right">
+            <div class="heading-button">
                 @if ($horse->owner()->first()->id !== Auth::user()->id)
                     @include('horses.partials.follow-form')
                 @else

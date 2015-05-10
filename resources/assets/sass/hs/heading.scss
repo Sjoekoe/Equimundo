@@ -1,0 +1,24 @@
+.heading {
+  margin-top: 1em;
+  height: 18em;
+  background-image: url(https://scontent-ams.xx.fbcdn.net/hphotos-xfp1/v/t1.0-9/10553388_10203915881569093_2920146316036226222_n.jpg?oh=6e110c44b513925b9e16c0d59d68b92e&oe=55DD955F);
+
+  .heading-name {
+    position: relative;
+    left: 0.8em;
+    font-style: $body-font-style;
+
+    h1 {
+      color: darken($primary-color, 25%);
+    }
+  }
+
+  .heading-button {
+    position: relative;
+    right: -35em;
+  }
+
+  a {
+    margin-top: 1em;
+  }
+}
