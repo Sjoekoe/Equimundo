@@ -1,24 +1,30 @@
 <?php 
 namespace HorseStories\Core\Files;
 
-use File;
 use HorseStories\Models\Pictures\Picture;
-use Illuminate\Contracts\Filesystem\Filesystem;
-use Image;
+use Illuminate\Contracts\Filesystem\Factory as Filesystem;
+use Intervention\Image\ImageManager;
 
 class Uploader
 {
     /**
-     * @var \Illuminate\Contracts\Filesystem\Filesystem
+     * @var \Illuminate\Contracts\Filesystem\Factory
      */
     private $file;
 
     /**
-     * @param \Illuminate\Contracts\Filesystem\Filesystem $file
+     * @var \Intervention\Image\ImageManager
      */
-    public function __construct(Filesystem $file)
+    private $image;
+
+    /**
+     * @param \Illuminate\Contracts\Filesystem\Factory $file
+     * @param \Intervention\Image\ImageManager $image
+     */
+    public function __construct(Filesystem $file, ImageManager $image)
     {
         $this->file = $file;
+        $this->image = $image;
     }
 
     /**
@@ -31,16 +37,7 @@ class Uploader
         $extension  = $file->getClientOriginalExtension();
         $path       = '/uploads/pictures/' . $horse->id;
         $fileName   = str_random(12);
-        $pathToFile = public_path() . $path . '/' . $fileName . '.' . $extension;
-
-
-        if ( ! file_exists(public_path() . $path) ) {
-            $this->file->makeDirectory(public_path() . $path, 0755);
-        }
-
-        Image::make($file->getrealpath())->resize(null, 350, function ($constraints) {
-            $constraints->aspectRatio();
-        })->save($pathToFile);
+        $pathToFile = storage_path() . '/app' . $path . '/' . $fileName . '.' . $extension;
 
         $picture = new Picture();
         $picture->path = $fileName . '.' . $extension;
@@ -48,5 +45,13 @@ class Uploader
         $picture->profile_pic = $profile;
 
         $picture->save();
+
+        if ( ! file_exists(storage_path() . $path) ) {
+            $this->file->makeDirectory($path);
+        }
+
+        $this->image->make($file->getrealpath())->resize(null, 350, function ($constraints) {
+            $constraints->aspectRatio();
+        })->save($pathToFile);
     }
 }

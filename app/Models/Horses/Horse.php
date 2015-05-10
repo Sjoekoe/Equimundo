@@ -46,6 +46,14 @@ class Horse extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function followers()
+    {
+        return $this->belongsToMany('HorseStories\Models\Users\User', 'follows', 'horse_id', 'user_id')->withTimestamps();
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function palmares()

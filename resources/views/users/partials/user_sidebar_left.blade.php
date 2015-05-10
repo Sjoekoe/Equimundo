@@ -14,6 +14,7 @@
         </a>
     </h3>
     <ul>
+        <li><a href="{{ route('horses.index', Auth::user()->id) }}">My Horses</a></li>
         @foreach(Auth::user()->horses as $horse)
             <li><a href="{{ route('horses.show', $horse->slug) }}">{{ $horse->name }}</a> </li>
         @endforeach

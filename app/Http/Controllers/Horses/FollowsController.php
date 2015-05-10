@@ -3,6 +3,8 @@ namespace HorseStories\Http\Controllers\Horses;
 
 use Auth;
 use Flash;
+use HorseStories\Models\Follows\FollowsRepository;
+use HorseStories\Models\Horses\Horse;
 use HorseStories\Models\Horses\HorseRepository;
 use Illuminate\Routing\Controller;
 use Input;
@@ -16,11 +18,27 @@ class FollowsController extends Controller
     private $horseRepository;
 
     /**
-     * @param \HorseStories\Models\Horses\HorseRepository $horseRepository
+     * @var \HorseStories\Models\Follows\FollowsRepository
      */
-    public function __construct(HorseRepository $horseRepository)
+    private $followsRepository;
+
+    /**
+     * @param \HorseStories\Models\Horses\HorseRepository $horseRepository
+     * @param \HorseStories\Models\Follows\FollowsRepository $followsRepository
+     */
+    public function __construct(HorseRepository $horseRepository, FollowsRepository $followsRepository)
     {
         $this->horseRepository = $horseRepository;
+        $this->followsRepository = $followsRepository;
+    }
+
+    public function index($horseSlug)
+    {
+        $horse = Horse::where('slug', $horseSlug)->firstOrFail();
+
+        $followers = $this->followsRepository->findForHorse($horse);
+
+        return view('follows.index', compact('horse', 'followers'));
     }
 
     /**
@@ -34,7 +52,7 @@ class FollowsController extends Controller
 
         Flash::success('You are now following ' . $horse->name);
 
-        return Redirect::back();
+        return redirect()->back();
     }
 
     /**
