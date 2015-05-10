@@ -10,6 +10,7 @@ use HorseStories\Http\Requests\UpdateHorse;
 use HorseStories\Models\Horses\Horse;
 use HorseStories\Models\Horses\HorseCreator;
 use HorseStories\Models\Horses\HorseUpdater;
+use HorseStories\Models\Users\User;
 use Illuminate\Routing\Controller;
 use Request;
 
@@ -43,11 +44,14 @@ class HorseController extends Controller
     }
 
     /**
+     * @param int $userId
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function index($userId)
     {
-        return view('horses.index');
+        $user = User::with('horses')->where('id', $userId)->firstOrFail();
+
+        return view('horses.index', compact('user'));
     }
 
     /**
@@ -72,7 +76,7 @@ class HorseController extends Controller
 
         Flash::success($horse->name . ' was successfully created.');
 
-        return redirect()->route('horses.index');
+        return redirect()->route('horses.index', Auth::user()->id);
     }
 
     /**
@@ -110,7 +114,7 @@ class HorseController extends Controller
 
         $this->horseUpdater->update($horse, $request->all());
 
-        Flash::success($horse->name  . ' was updated');
+        Flash::success($horse->name . ' was updated');
 
         return redirect()->route('horses.show', $horse->slug);
     }

@@ -6,6 +6,19 @@ use HorseStories\Models\Users\User;
 class StatusRepository
 {
     /**
+     * @var \HorseStories\Models\Statuses\Status
+     */
+    private $status;
+
+    /**
+     * @param \HorseStories\Models\Statuses\Status $status
+     */
+    public function __construct(Status $status)
+    {
+        $this->status = $status;
+    }
+
+    /**
      * @param \HorseStories\Models\Users\User $user
      * @return \HorseStories\Models\Statuses\Status[]
      */
@@ -24,6 +37,6 @@ class StatusRepository
 
         $horseIds[] = $user->horses()->lists('id');
 
-        return Status::with('comments')->whereIn('horse_id', $horseIds)->latest()->get();
+        return $this->status->with('comments')->whereIn('horse_id', array_flatten($horseIds))->latest()->get();
     }
 }
