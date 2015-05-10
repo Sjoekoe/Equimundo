@@ -42,6 +42,8 @@ class Uploader
         $picture = new Picture();
         $picture->path = $fileName . '.' . $extension;
         $picture->horse_id = $horse->id;
+        $picture->mime = $file->getClientMimeType();
+        $picture->original_name = $file->getClientOriginalName();
         $picture->profile_pic = $profile;
 
         $picture->save();
