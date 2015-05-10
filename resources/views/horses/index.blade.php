@@ -10,13 +10,13 @@
 
         <div class="grid-block medium-12">
         @foreach ($user->horses as $horse)
-            <div class="grid-content medium-6">
+            <div class="grid-content medium-6 horse-overview">
                 <div class="card">
                     @if ($horse->getProfilePicture())
-                        <img src="{{ route('file.picture', [$horse->id, $horse->getProfilePicture()->path]) }}"
-                             alt="{{ $horse->name }}" style="width: 100%"/>
+                        <div class="card-image" style="background-image: url({{ route('file.picture', [$horse->id, $horse->getProfilePicture()->path]) }})">
+                        </div>
                     @else
-                        <img src="https://scontent-ams.xx.fbcdn.net/hphotos-xfp1/v/t1.0-9/10553388_10203915881569093_2920146316036226222_n.jpg?oh=6e110c44b513925b9e16c0d59d68b92e&oe=55DD955F" style="width: 100%">
+                        <div class="card-image" style="background-image: url(https://scontent-ams.xx.fbcdn.net/hphotos-xfp1/v/t1.0-9/10553388_10203915881569093_2920146316036226222_n.jpg?oh=6e110c44b513925b9e16c0d59d68b92e&oe=55DD955F)"></div>
                     @endif
                     <div class="card-divider">
                         <a href="{{ route('horses.show', $horse->slug) }}">
