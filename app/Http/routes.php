@@ -4,6 +4,10 @@ Route::group(['namespace' => 'Auth'], function() {
     require __DIR__ . '/Routes/Auth/auth.php';
 });
 
+Route::group(['namespace' => 'Files'], function() {
+    require __DIR__ . '/Routes/Files/files.php';
+});
+
 Route::group(['namespace' => 'Horses'], function() {
     require __DIR__ . '/Routes/Horses/follows.php';
     require __DIR__ . '/Routes/Horses/horses.php';

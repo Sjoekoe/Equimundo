@@ -136,4 +136,14 @@ class Horse extends Model
             return $family->type == 6;
         })->first();
     }
+
+    /**
+     * @return \HorseStories\Models\Pictures\Picture
+     */
+    public function getProfilePicture()
+    {
+        return $this->pictures->filter(function ($picture) {
+            return $picture->profile_pic == true;
+        })->first();
+    }
 }
