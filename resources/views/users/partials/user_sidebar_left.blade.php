@@ -1,23 +1,23 @@
-<section id="left-sidebar" class="block-list medium-10">
-    <h3 class="subheader">About You</h3>
-    <ul>
-        <li>
-            <a href="#"><span class="fa fa-user"></span> {{ Auth::user()->username }}</a></li>
-        <li> <a href="{{ route('users.profiles.edit') }}">Edit Profile</a> </li>
-        <li><a href="#">Messages <span class="badge pull-right">1</span></a></li>
-        <li><a href="#">Albums</a></li>
-    </ul>
-    <h3 class="subheader">
+<ul id="nav-mobile" class="side-nav fixed user-left-sidebar grey lighten-3" style="left: 0px; top: 65px;">
+    <h4>About You</h4>
+    <div class="collection">
+        <a href="#" class="collection-item grey lighten-3"><span class="fa fa-user"></span> {{ Auth::user()->username }}</a>
+        <a href="{{ route('users.profiles.edit') }}" class="collection-item grey lighten-3">Edit Profile</a>
+        <a href="#" class="collection-item grey lighten-3">Messages <span class="new badge">1</span></a>
+        <a href="#" class="collection-item grey lighten-3">Albums</a>
+    </div>
+    <h4>
         Horses
-        <a href="{{ route('horses.create') }}">
-            <i class="fa fa-plus-square-o pull-right"></i>
+    </h4>
+
+    <div class="collection">
+        <a href="{{ route('horses.create') }}" class="collection-item grey lighten-3">
+            Create a horse <span class="badge"><i class="fa fa-plus-square-o"></i></span>
         </a>
-    </h3>
-    <ul>
-        <li><a href="{{ route('horses.index', Auth::user()->id) }}">My Horses</a></li>
+        <a href="{{ route('horses.index', Auth::user()->id) }}" class="collection-item grey lighten-3">My Horses</a>
         @foreach(Auth::user()->horses as $horse)
-            <li><a href="{{ route('horses.show', $horse->slug) }}">{{ $horse->name }}</a> </li>
+            <a href="{{ route('horses.show', $horse->slug) }}" class="collection-item grey lighten-3">{{ $horse->name }}</a>
         @endforeach
-    </ul>
-</section>
+    </div>
+</ul>
 

@@ -1,48 +1,46 @@
-<div class="grid-block medium-12">
-    <div class="card grid-content medium-12">
-        <div class="card-header clearfix">
-            <div class="name pull-left">
-                <h5>
+<div class="row">
+    <div class="col s12">
+        <div class="card status">
+            <div class="card-header">
+                <div class="card-title">
                     <a href="{{ route('horses.show', $status->horse->slug) }}">
                         {{ $status->horse->name }}
                     </a>
-                </h5>
+                    <span class="badge">{{ $status->created_at->diffForHumans() }}</span>
+                </div>
             </div>
-            <div class="time pull-right">
-                {{ $status->created_at->diffForHumans() }}
+            <div class="card-content">
+                {{ nl2br($status->body) }}
             </div>
-        </div>
-        <div class="card-section">
-            {{ nl2br($status->body) }}
-        </div>
-        <div class="card-divider">
-            {{ Form::open(['route' => ['status.like', $status->id], 'class' => 'like-button pull-left', 'data-remote']) }}
+            <div class="card-divider">
+                {{ Form::open(['route' => ['status.like', $status->id], 'class' => 'like-button pull-left', 'data-remote']) }}
                 {{ Form::hidden('status_id', $status->id) }}
                 <button type="submit" class="btn-naked">
                     <i class="fa {{ in_array($status->id, $likes) ? 'fa-heart' : 'fa-heart-o' }}"></i>
                 </button>
-            {{ Form::close() }}
-            <p class="muted like-counter">
-                {{ count($status->likes) }}
-            </p>
-            @unless ($status->comments->isEmpty())
-                <div class="comments">
-                    @foreach($status->comments as $comment)
-                        @include('statuses.partials.comment')
-                    @endforeach
+                {{ Form::close() }}
+                <p class="muted like-counter">
+                    {{ count($status->likes) }}
+                </p>
+                @unless ($status->comments->isEmpty())
+                    <div class="comments">
+                        @foreach($status->comments as $comment)
+                            @include('statuses.partials.comment')
+                        @endforeach
+                    </div>
+                @endif
+            </div>
+            @if (Auth::check())
+                <div class="row comment">
+                    {{ Form::open(['route' => ['comment.store', $status->id], 'class' => 'comments__create-form col s12']) }}
+                    <div class="row">
+                        <div class="input-field col s12">
+                            {{ Form::textarea('body', null, ['class' => 'materialize-textarea', 'rows' => 1, 'placeholder' => 'write a comment ...']) }}
+                        </div>
+                    </div>
+                    {{ Form::close() }}
                 </div>
             @endif
         </div>
     </div>
-
-    @if (Auth::check())
-        {{ Form::open(['route' => ['comment.store', $status->id], 'class' => 'comments__create-form medium-12']) }}
-            {{ Form::hidden('status_id', $status->id) }}
-            {{ Form::hidden('username', Auth::user()->username) }}
-            <!-- Body Form input -->
-            <div class="form-group">
-                {{ Form::textarea('body', null, ['class' => 'form-control', 'rows' => 1, 'placeholder' => 'write a comment ...']) }}
-            </div>
-        {{ Form::close() }}
-    @endif
 </div>

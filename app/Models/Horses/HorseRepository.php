@@ -25,4 +25,13 @@ class HorseRepository
     {
            return $this->horse->findOrFail($id);
     }
+
+    /**
+     * @param string $lifeNumber
+     * @return \HorseStories\Models\Horses\Horse|null
+     */
+    public function findByLifeNumber($lifeNumber)
+    {
+        return $this->horse->where('life_number', $lifeNumber)->first();
+    }
 }
