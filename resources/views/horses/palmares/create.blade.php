@@ -1,37 +1,52 @@
 @extends('layout.app')
 
 @section('content')
-    <div class="grid-content">
-        <div class="grid-block medium-12 clearfix heading">
-            <div class="pull-left">
-                <h1>{{ $horse->name }}</h1>
-            </div>
-
-            <div class="pull-right">
-                @if ($horse->owner()->first()->id !== Auth::user()->id)
-                    @include('horses.partials.follow-form')
-                @endif
-            </div>
-        </div>
-
-        @include('horses.partials.menu-bar')
-        
-        <div class="grid-block medium-12">
+    @include('layout.partials.heading')
+    <div class="row">
+        <div class="col s12">
             {{ Form::open(['route' => ['palmares.store', $horse->slug], 'class' => 'grid-content medium-12']) }}
-                {{ Form::label('event_name', 'Venue') }}
-                {{ Form::text('event_name') }}
-                {{ Form::label('date', 'Date') }}
-                {{ Form::text('date') }}
-                {{ Form::label('discipline', 'Discipline') }}
-                {{ Form::select('discipline', trans('disciplines.list'), null) }}
-                {{ Form::label('level', 'category') }}
-                {{ Form::text('level') }}
-                {{ Form::label('ranking', 'ranking') }}
-                {{ Form::text('ranking') }}
-                {{ Form::label('body', 'Your story') }}
-                {{ Form::textarea('body') }}
-                {{ Form::submit('save achievement', ['class' => 'button']) }}
+                <div class="row">
+                    <div class="col s6 input-field">
+                        {{ Form::label('event_name', 'Venue') }}
+                        {{ Form::text('event_name') }}
+                    </div>
+                    <div class="col s6 input-field">
+                        {{ Form::label('date', 'Date') }}
+                        {{ Form::text('date', null, ['placeholder' => 'dd/mm/YYYY']) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s6 input-field">
+                        {{ Form::select('discipline', trans('disciplines.list'), null, ['class' => 'discipline-select']) }}
+                        {{ Form::label('discipline', 'Discipline') }}
+                    </div>
+                    <div class="col s6 input-field">
+                        {{ Form::label('level', 'category') }}
+                        {{ Form::text('level') }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s6 input-field">
+                        {{ Form::label('ranking', 'ranking') }}
+                        {{ Form::text('ranking') }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 input-field">
+                        {{ Form::label('body', 'Your story') }}
+                        {{ Form::textarea('body', null, ['class' => 'materialize-textarea']) }}
+                    </div>
+                </div>
+                {{ Form::submit('save achievement', ['class' => 'btn']) }}
             {{ Form::close() }}
         </div>
     </div>
+@stop
+
+@section('footer')
+    <script>
+        $(document).ready(function() {
+            $('.discipline-select').material_select();
+        });
+    </script>
 @stop

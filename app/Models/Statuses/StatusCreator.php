@@ -1,10 +1,32 @@
-<?php 
+<?php
 namespace HorseStories\Models\Statuses;
-  
+
+use HorseStories\Core\Files\Uploader;
 use HorseStories\Models\Horses\Horse;
+use HorseStories\Models\Horses\HorseRepository;
 
 class StatusCreator
 {
+    /**
+     * @var \HorseStories\Core\Files\Uploader
+     */
+    private $uploader;
+
+    /**
+     * @var \HorseStories\Models\Horses\HorseRepository
+     */
+    private $horses;
+
+    /**
+     * @param \HorseStories\Core\Files\Uploader $uploader
+     * @param \HorseStories\Models\Horses\HorseRepository $horses
+     */
+    public function __construct(Uploader $uploader, HorseRepository $horses)
+    {
+        $this->uploader = $uploader;
+        $this->horses = $horses;
+    }
+
     /**
      * @param array $data
      * @return \HorseStories\Models\Statuses\Status
@@ -16,6 +38,13 @@ class StatusCreator
         $status->horse_id = $data['horse'];
 
         $status->save();
+
+        if (array_key_exists('picture', $data)) {
+            $horse = $this->horses->findById($data['horse']);
+            $picture = $this->uploader->uploadPicture($data['picture'], $horse);
+
+            $status->setPicture($picture);
+        }
 
         return $status;
     }

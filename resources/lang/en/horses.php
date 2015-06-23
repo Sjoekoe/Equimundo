@@ -26,17 +26,13 @@ return [
     ],
 
     'genders' => [
-        1 => 'Colt',
-        2 => 'Filly',
-        3 => 'Foal',
-        4 => 'Gelding',
-        5 => 'Mare',
-        6 => 'Stallion',
-        7 => 'Yearling',
+        1 => 'Gelding',
+        2 => 'Mare',
+        3 => 'Stallion',
     ],
 
     'breeds' =>  [
-        'horses' => [
+
             1 => 'Abtenauer',
             2 => 'Abyssinian horse',
             3 => 'Aegidienberger',
@@ -307,8 +303,7 @@ return [
             268 => 'Yili horse',
             269 => 'Yonaguni horse',
             270 => 'Zweibrücker',
-        ],
-        'pony\'s' => [
+
             271 => 'American Walking Pony',
             272 => 'Anadolu pony',
             273 => 'Australian Pony',
@@ -384,6 +379,6 @@ return [
             342 => 'Western Sudan pony',
             343 => 'Zaniskari pony',
             344 => 'Žemaitukas',
-        ],
+
     ],
 ];

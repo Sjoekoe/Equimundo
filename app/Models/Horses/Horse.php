@@ -146,4 +146,14 @@ class Horse extends Model
             return $picture->profile_pic == true;
         })->first();
     }
+
+    /**
+     * @return \DateTime
+     */
+    public function getBirthDay()
+    {
+        $result = new \DateTime($this->date_of_birth);
+
+        return $result->format('d/m/Y');
+    }
 }

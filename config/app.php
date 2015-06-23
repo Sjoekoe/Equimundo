@@ -139,6 +139,7 @@ return [
         'Laracasts\Flash\FlashServiceProvider',
         'Barryvdh\Debugbar\ServiceProvider',
         'Intervention\Image\ImageServiceProvider',
+        'HieuLe\Active\ActiveServiceProvider',
 
     ],
     /*
@@ -190,6 +191,7 @@ return [
         'Html'      => 'Illuminate\Html\HtmlFacade',
         'Flash'     => 'Laracasts\Flash\Flash',
         'Image'     => 'Intervention\Image\Facades\Image',
+        'Active' => 'HieuLe\Active\Facades\Active',
     ],
 
 ];

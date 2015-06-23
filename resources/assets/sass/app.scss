@@ -1,9 +1,10 @@
-@import "foundation";
-@import "utilities";
-@import "hs/left_sidebar";
-@import "hs/status_form";
+@import "materialize";
+@import "hs/user-sidebar";
+@import "hs/cards";
+@import "hs/heading";
+@import "hs/helpers";
 @import "hs/buttons";
 @import "hs/icons";
-@import "hs/navbar";
-@import "hs/palmares";
+@import "hs/status";
 @import "hs/pedigree";
+@import "hs/palmares";

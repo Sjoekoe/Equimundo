@@ -1,7 +1,9 @@
 <?php
 namespace HorseStories\Models\Horses;
 
-class HorseUpdater 
+use DateTime;
+
+class HorseUpdater
 {
     /**
      * @param \HorseStories\Models\Horses\Horse $horse
@@ -14,7 +16,7 @@ class HorseUpdater
         $horse->breed = $values['breed'];
         $horse->height = $values['height'];
         $horse->color = $values['color'];
-        $horse->date_of_birth = $values['date_of_birth'];
+        $horse->date_of_birth = DateTime::createFromFormat('d/m/Y', $values['date_of_birth']);
         $horse->life_number = $values['life_number'];
 
         $horse->save();

@@ -1,126 +1,89 @@
-/*
-  MODAL
-  -----
+.modal {
+  @extend .z-depth-4;
 
-  The humble modal hides off-canvas until summoned with an fa-open directive. Modals appear over an overlay that darkens the rest of the page, and have a maxmimum width. You can construct a grid inside a modal, or attach panels to it.
+  display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  background-color: #fafafa;
+  padding: 0;
+  max-height: 70%;
+  width: 55%;
+  margin: auto;
+  overflow-y: auto;
+  z-index: 1000;
 
-  Note that the modal overlay is hardcoded into the CSS, because whether or not you build your modal semantically, the overlay is always required and will always look the same.
-*/
+  border-radius: 2px;
+  @include transform(translate(0));
+  will-change: top, opacity;
 
-/// @Foundation.settings
-// Modal
-$modal-background: #fff !default;
-$modal-border: 0 !default;
-$modal-radius: 0px !default;
-$modal-shadow: none !default;
-$modal-zindex: 1000 !default;
-$modal-sizes: (
-  tiny: 300px,
-  small: 500px,
-  medium: 600px,
-  large: 800px,
-) !default;
-
-$modal-overlay-class: 'modal-overlay' !default;
-$modal-overlay-background: rgba(#333, 0.7) !default;
-///
-
-%modal {
-  position: relative;
-  z-index: $modal-zindex + 1;
-  background: $modal-background;
-  flex: 0 0 auto;
-  width: 100%;
-  height: 100vh;
-  max-height: 100%;
-  overflow: hidden;
-  padding: $global-padding;
-
-  @include breakpoint(medium) {
-    height: auto;
-    max-width: map-get($modal-sizes, medium);
+  @media #{$medium-and-down} {
+   width: 80%;
   }
 
-  .grid-content, .grid-block {
-    margin: 0;
+  h1,h2,h3,h4 {
+    margin-top: 0;
   }
 
-  .close-button, [fa-close] {
-    z-index: $modal-zindex + 1;
+  .modal-content {
+    padding: 24px;
   }
-}
 
-@mixin modal-dialog() {
-  height: auto;
-}
-@mixin modal-layout(
-  $width: map-get($modal-sizes, medium),
-  $dialog: false
-) {
-  max-width: $width;
-}
-@mixin modal-style(
-  $border: $modal-border,
-  $radius: $modal-radius,
-  $shadow: $modal-shadow
-) {
-  @if $border != 0 {
-    border: $border;
-  }
-  @if $radius != 0 {
-    border-radius: $radius;
-  }
-  @if $shadow != none {
-    box-shadow: $shadow;
-  }
-}
+  .modal-footer {
+    border-radius: 0 0 2px 2px;
+    background-color: #fafafa;
+    padding: 4px 6px;
+    height: 56px;
+    width: 100%;
 
-@mixin modal(
-  $width: map-get($modal-sizes, medium),
-  $border: $modal-border,
-  $radius: $modal-radius,
-  $shadow: $modal-shadow
-) {
-  @extend %modal;
-  @include modal-layout($width);
-  @include modal-style($border, $radius, $shadow);
-}
-
-@include exports(modal) {
-  .modal {
-    @include modal;
-
-    @each $size in map-keys($modal-sizes) {
-      $width: map-get($modal-sizes, $size);
-      @if $size != medium {
-        .#{$size} > & { @include modal-layout($width); }
-      }
-    }
-
-    .dialog > & {
-      @include modal-dialog;
-    }
-    .collapse > & {
-      padding: 0;
+    .btn, .btn-flat {
+      float: right;
+      margin: 6px 0;
     }
   }
-
-  .#{$modal-overlay-class} {
+}
+#lean-overlay {
     position: fixed;
+    z-index:999;
     top: 0;
-    right: 0;
-    bottom: 0;
     left: 0;
-    z-index: $modal-zindex;
+    bottom: 0;
+    right: 0;
+    height: 115%;
+    width: 100%;
+    background: #000;
     display: none;
-    background-color: $modal-overlay-background;
 
-    // Horizontally and vertically center the modal
-    align-items: center;
-    justify-content: center;
+    will-change: opacity;
+}
 
-    &.is-active {
-      display: flex;
-    }
+// Modal with fixed action footer
+.modal.modal-fixed-footer {
+  padding: 0;
+  height: 70%;
+
+  .modal-content {
+    position: fixed;
+    max-height: 100%;
+    padding-bottom: 64px;
+    width: 100%;
+    overflow-y: auto;
   }
+
+  .modal-footer {
+    border-top: 1px solid rgba(0,0,0,.1);
+    position: fixed;
+    bottom: 0;
+  }
+}
+
+// Modal Bottom Sheet Style
+.modal.bottom-sheet {
+  top: auto;
+  bottom: -100%;
+  margin: 0;
+  width: 100%;
+  max-height: 45%;
+  border-radius: 0;
+  will-change: bottom, opacity;
 }

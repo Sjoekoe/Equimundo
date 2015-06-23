@@ -1,76 +1,76 @@
 @extends('layout.app')
 
 @section('content')
-    <div class="grid-content">
-        <div class="grid-block medium-12 clearfix heading">
-            <div class="pull-left">
-                <h1>{{ $horse->name }}</h1>
-            </div>
-
-            <div class="pull-right">
-                @if ($horse->owner()->first()->id !== Auth::user()->id)
-                    @include('horses.partials.follow-form')
-                @else
-                    <a href="{{ route('pedigree.create', $horse->slug) }}" class="button">Add Family</a>
-                @endif
-            </div>
-        </div>
-
-        @include('horses.partials.menu-bar')
-
-        <div class="pedigree">
-            <div class="pedigree grid-block medium-12">
-                <div class="grid-content medium-3 grandparent male">
+    @include('layout.partials.heading')
+    <div class="row">
+        <div class="row pedigree">
+            <div class="col s12">
+                <div class="col s3 grandparent male">
                     @if ($family = $horse->fathersFather())
                         @include('horses.pedigree._partials._pedigree')
                     @else
-                        Fathers Father
+                        <a href="{{ route('pedigree.create', [$horse->slug, 'type=3']) }}" class="black-text">Add Fathers Father</a>
                     @endif
                 </div>
-                <div class="grid-content medium-3 grandparent female">
+                <div class="col s3 grandparent female">
                     @if ($family = $horse->fathersMother())
                         @include('horses.pedigree._partials._pedigree')
                     @else
-                        Fathers Mother
+                        <a href="{{ route('pedigree.create', [$horse->slug, 'type=4']) }}" class="black-text">Add Fathers Mother</a>
                     @endif
                 </div>
-                <div class="grid-content medium-3 grandparent male">
+                <div class="col s3 grandparent male">
                     @if ($family = $horse->mothersFather())
                         @include('horses.pedigree._partials._pedigree')
                     @else
-                        Mothers Father
+                        <a href="{{ route('pedigree.create', [$horse->slug, 'type=5']) }}" class="black-text">Add Mothers Father</a>
                     @endif
                 </div>
-                <div class="grid-content medium-3 grandparent female">
+                <div class="col s3 grandparent female">
                     @if ($family = $horse->mothersMother())
                         @include('horses.pedigree._partials._pedigree')
                     @else
-                        Mothers Mother
+                        <a href="{{ route('pedigree.create', [$horse->slug, 'type=6']) }}" class="black-text">Add Mothers Mother</a>
                     @endif
                 </div>
             </div>
-            <div class="grid-block medium-12">
-                <div class="grid-content medium-6 parent male">
+        </div>
+        <div class="row pedigree">
+            <div class="col s12">
+                <div class="col s6 parent male">
                     @if ($family = $horse->father())
                         @include('horses.pedigree._partials._pedigree')
+                    @else
+                        <a href="{{ route('pedigree.create', [$horse->slug, 'type=1']) }}" class="black-text">Add Father</a>
                     @endif
                 </div>
-                <div class="grid-content medium-6 parent female">
+                <div class="col s6 parent female">
                     @if ($family = $horse->mother())
                         @include('horses.pedigree._partials._pedigree')
+                    @else
+                        <a href="{{ route('pedigree.create', [$horse->slug, 'type=2']) }}" class="black-text">Add Mother</a>
                     @endif
                 </div>
             </div>
-            <div class="grid-block medium-12">
-                <div class="grid-content medium-12 self">
-                    <a href="{{ route('horses.show', $horse->slug) }}">{{ $horse->name }}</a>
+        </div>
+        <div class="row pedigree">
+            <div class="col s12">
+                <div class="col s12 self">
+                    <a href="{{ route('horses.show', $horse->slug) }}">
+                        <h4>{{ $horse->name }}</h4>
+                    </a>
+                    <p>Born: {{ date('Y', strtotime($horse->date_of_birth)) }}</p>
+                    <p>Passed Away: {{ $horse->date_of_death ? date('Y', strtotime($family->date_of_death)) : '-' }}</p>
+                    <p>Life number: {{ $horse->family_life_number ? : '-' }}</p>
                 </div>
             </div>
-            <div class="grid-block medium-12">
-                <div class="grid-content medium-6 offspring male">
+        </div>
+        <div class="row pedigree">
+            <div class="col s12">
+                <div class="col s6 offspring male">
                     Sons
                 </div>
-                <div class="grid-content medium-6 offspring female">
+                <div class="col s6 offspring female">
                     Daughters
                 </div>
             </div>

@@ -1,100 +1,42 @@
-/*
-  TABS
-  ----
-*/
+.tabs {
+  position: relative;
+  height: 48px;
+  background-color: $tabs-bg-color;
+  margin: 0 auto;
+  width: 100%;
+  white-space: nowrap;
 
-/// @Foundation.settings
-// Tabs
-$tabstrip-background: transparent !default;
-
-$tab-title-background: $gray-light !default;
-$tab-title-background-hover: smartscale($tab-title-background, 5%) !default;
-$tab-title-background-active: smartscale($tab-title-background, 3%) !default;
-$tab-title-color: isitlight($tab-title-background) !default;
-$tab-title-color-active: $tab-title-color !default;
-
-$tab-title-padding: $global-padding !default;
-$tab-content-padding: $global-padding !default;
-///
-
-@mixin tabstrip(
-	$orientation: horizontal,
-	$background: $tabstrip-background
-) {
-	/*
-		Container styles
-	*/
-	display: flex;
-	background: $background;
-
-	@if $orientation == vertical {
-	  flex-flow: column nowrap;
-	}
-	@else {
-		flex-flow: row wrap;
-	}
-}
-
-@mixin tabstrip-item(
-	$background: $tab-title-background,
-	$background-hover: $tab-title-background-hover,
-	$background-active: $tab-title-background-active,
-	$color: $tab-title-color,
-	$color-active: $tab-title-color-active,
-	$padding: $tab-title-padding
-) {
-  background: $background;
-  padding: $padding;
-  line-height: 1;
-  margin: 0;
-  flex: 0 1 auto;
-  cursor: pointer;
-  color: $color;
-
-  &.is-active {
-    background: $background-active;
-    color: $color-active;
-
-    &:hover {
-      background: $background-hover;
-    }
-  }
-  &:hover {
-    background: $background-hover;
-  }
-}
-
-@mixin tab-content(
-	$padding: $tab-content-padding
-) {
-  padding: $padding;
-}
-
-@mixin tab-content-item {
-  display: none;
-  &.is-active {
+  .tab {
     display: block;
+    float: left;
+    text-align: center;
+    line-height: 48px;
+    height: 48px;
+    padding: 0 20px;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+    width: 15%;
+
+    a {
+      color: $tabs-text-color;
+      display: block;
+      width: 100%;
+      height: 100%;
+      @include transition( color .28s ease);
+      &:hover {
+        color: lighten($tabs-text-color, 20%);
+      }
+    }
+  }
+  .indicator {
+    position: absolute;
+    bottom: 0;
+    height: 2px;
+    background-color: $tabs-underline-color;
+    will-change: left, right;
   }
 }
 
-@include exports(tabs) {
-  .tabs {
-    @include tabstrip(horizontal);
+.tabs .tab { padding: 0; }
 
-    &.vertical {
-      @include tabstrip(vertical);
-    }
-
-    .tab-item {
-      @include tabstrip-item;
-    }
-  }
-
-  .tab-contents {
-    @include tab-content;
-
-    .tab-content {
-      @include tab-content-item;
-    }
-  }
-}

@@ -2,7 +2,7 @@
 
 return [
     'list' => [
-        'General' => [
+
             1 => 'Ban\'ei racing',
             2 => 'Camargue equitation',
             3 => 'Charreria',
@@ -23,15 +23,13 @@ return [
             18 => 'Deporte de lazo',
             19 => 'Icelandic equitation',
             20 => 'Doma Menorquina',
-        ],
-        'Racing' => [
+
             21 => 'Flat racing',
             22 => 'Harness racing',
             23 => 'Point-to-point',
             24 => 'Steeplechase',
             25 => 'Thoroughbred horse racing',
-        ],
-        'English Riding' => [
+
             26 => 'Classical dressage',
             27 => 'Dressage',
             28 => 'English pleasure',
@@ -47,24 +45,21 @@ return [
             38 => 'Show hack',
             39 => 'Team chasing',
             40 => 'Quadrille',
-        ],
-        'Western Riding' => [
-            41 => 'Cowboy Mounted Shooting',
+
+        41 => 'Cowboy Mounted Shooting',
             42 => 'Cowboy polo',
             43 => 'O-Mok-See',
             44 => 'Reining',
             45 => 'Trail (horse show)',
             46 => 'Western pleasure',
             47 => 'Western riding (horse show)',
-        ],
-        'Stock Handling' => [
+
             48 => 'Campdrafting',
             49 => 'Cutting (sport)',
             50 => 'Ranch sorting',
             51 => 'Team penning',
             52 => 'Working cow horse',
-        ],
-        'Rodeo' => [
+
             53 => 'Australian rodeo',
             54 => 'Barrel racing',
             55 => 'Breakaway roping',
@@ -76,27 +71,24 @@ return [
             70 => 'Saddle bronc and bareback riding',
             71 => 'Steer wrestling',
             72 => 'Team roping',
-        ],
-        'Harness' => [
+
             73 => 'Combined driving',
             74 => 'Draft horse showing',
             75 => 'Fine harness',
             76 => 'Pleasure driving',
             77 => 'Roadster',
             78 => 'Scurry Driving',
-        ],
-        'Team sports-arena' => [
+
             79 => 'Horseball',
             80 => 'Pato',
             81 => 'Polo',
             82 => 'Polocrosse',
-        ],
-        'Defined Area' => [
+
             83 => 'Buzkashi',
             84 => 'Jousting',
             85 => 'Mounted archery',
             86 => 'Mounted Games',
             87 => 'Tent pegging',
-        ]
+
     ]
 ];

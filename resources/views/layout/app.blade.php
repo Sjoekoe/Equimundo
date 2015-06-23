@@ -10,7 +10,6 @@
 
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -23,29 +22,33 @@
 
 	@include('layout.partials.nav')
 
-	<div class="grid-frame">
-		@include('flash::message')
+    <div class="row">
+        @include('flash::message')
 
-        @if (Auth::check())
-            <div class="grid-block medium-3">
-                @include('users.partials.user_sidebar_left')
-            </div>
-        @endif
-
-        <div class="vertical grid-block medium-6">
-		    @yield('content')
+        <div class="col s2">
+            @if (Auth::check())
+                <div class="">
+                    @include('users.partials.user_sidebar_left')
+                </div>
+            @endif
         </div>
 
+        <div class="col s8 offset-s2">
+            @yield('content')
+        </div>
+
+
         @if (Auth::check())
-            <div class="grid-block medium-3">
+            <div class="col s2">
                 Other Things
             </div>
         @endif
-	</div>
+    </div>
 
-	<!-- Scripts -->
+    <!-- Scripts -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="/js/all.js"></script>
+    @yield('footer')
 </body>
 </html>

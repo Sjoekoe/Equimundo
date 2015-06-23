@@ -1,78 +1,70 @@
 @extends('layout.app')
 
 @section('content')
-                @include('layout.partials.errors')
+    @include('layout.partials.errors')
+    <div class="row">
+        <div class="row">
+            <div class="col s6">
+                <h3>Create a Horse</h3>
+            </div>
+        </div>
+        {{ Form::open(['route' => 'horses.create', 'class' => 'form-horizontal col s12', 'files' => 'true']) }}
 
-                {{ Form::open(['route' => 'horses.create', 'class' => 'form-horizontal', 'files' => 'true']) }}
-                    <!-- Name Form input -->
-                    <div class="form-group">
-                        {{ Form::label('name', 'Name:', ['class' => 'col-sm-2 control-label']) }}
-                        <div class="col-sm-10">
-                            {{ Form::text('name', null, ['class' => 'form-control']) }}
-                        </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    {{ Form::text('name', null) }}
+                    {{ Form::label('name', 'Name:') }}
+                </div>
+                <div class="input-field col s6">
+                    {{ Form::label('date_of_birth', 'Date Of Birth:') }}
+                    {{ Form::text('date_of_birth', null, ['placeholder' => 'dd/mm/yyyy']) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6 file-field">
+                    <input class="file-path validate" type="text"/>
+                    {{ Form::label(null, 'Profile Picture', ['style' => 'left:115px;']) }}
+                    <div class="btn waves-effect waves-light">
+                        <span>File</span>
+                        {{ Form::file('profile_pic') }}
                     </div>
+                </div>
+                <div class="input-field col s6">
+                    {{ Form::label('height', 'Height:') }}
+                    {{ Form::text('height', null) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    {{ Form::select('gender', trans('horses.genders'), null, ['class' => 'gender-select']) }}
+                    {{ Form::label('gender', 'Gender:') }}
+                </div>
+                <div class="input-field col s6">
+                    {{ Form::select('breed', trans('horses.breeds'), null, ['class' => 'breed-select']) }}
+                    {{ Form::label('breed', 'Breed:') }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    {{ Form::select('color', trans('horses.colors'), null, ['class' => 'color-select']) }}
+                    {{ Form::label('color', 'Color:') }}
+                </div>
+                <div class="input-field col s6">
+                    {{ Form::label('life_number', 'Life Number:') }}
+                    {{ Form::text('life_number', null) }}
+                </div>
+            </div>
+            {{ Form::submit('Create Horse', ['class' => 'btn']) }}
+        {{ Form::close() }}
+    </div>
+@stop
 
-                    <div class="form-group">
-                        {{ Form::label('profile_pic', 'Profile Picture', ['class' => 'col-sm-2 control-label']) }}
-                        <div class="col-sm-10">
-                            {{ Form::file('profile_pic') }}
-                        </div>
-                    </div>
-
-                    <!-- Gender Form Input -->
-                    <div class="form-group">
-                        {{ Form::label('gender', 'Gender:', ['class' => 'col-sm-2 control-label']) }}
-                        <div class="col-sm-10">
-                            {{ Form::select('gender', Lang::get('horses.genders'), null, ['class' => 'form-control']) }}
-                        </div>
-                    </div>
-
-                    <!-- Breed Form input -->
-                    <div class="form-group">
-                        {{ Form::label('breed', 'Breed:', ['class' => 'col-sm-2 control-label']) }}
-                        <div class="col-sm-10">
-                            {{ Form::select('breed', trans('horses.breeds'), null, ['class' => 'form-control']) }}
-                        </div>
-                    </div>
-
-                    <!-- Height Form input -->
-                    <div class="form-group">
-                        {{ Form::label('height', 'Height:', ['class' => 'col-sm-2 control-label']) }}
-                        <div class="col-sm-10">
-                            {{ Form::text('height', null, ['class' => 'form-control']) }}
-                        </div>
-                    </div>
-
-                    <!-- Color Form Input -->
-                    <div class="form-group">
-                        {{ Form::label('color', 'Color:', ['class' => 'col-sm-2 control-label']) }}
-                        <div class="col-sm-10">
-                            {{ Form::select('color', Lang::get('horses.colors'), null, ['class' => 'form-control']) }}
-                        </div>
-                    </div>
-
-                    <!-- Date_of_birth Form input -->
-                    <div class="form-group">
-                        {{ Form::label('date_of_birth', 'Date Of Birth:', ['class' => 'col-sm-2 control-label']) }}
-                        <div class="col-sm-10">
-                            {{ Form::text('date_of_birth', null, ['class' => 'form-control', 'placeholder' => 'dd/mm/yyy']) }}
-                        </div>
-                    </div>
-
-                    <!-- Life_number Form input -->
-                    <div class="form-group">
-                        {{ Form::label('life_number', 'Life Number:', ['class' => 'col-sm-2 control-label']) }}
-                        <div class="col-sm-10">
-                            {{ Form::text('life_number', null, ['class' => 'form-control']) }}
-                        </div>
-                    </div>
-
-                    <!-- Submit button -->
-                    <div class="form-group">
-                        <div class="col-sm-3 col-sm-offset-2">
-                            {{ Form::submit('Create Horse', ['class' => 'btn btn-default form-control']) }}
-                        </div>
-                    </div>
-
-                {{ Form::close() }}
+@section('footer')
+    <script>
+        $(document).ready(function() {
+            $('.gender-select').material_select();
+            $('.breed-select').material_select();
+            $('.color-select').material_select();
+        });
+    </script>
 @stop
