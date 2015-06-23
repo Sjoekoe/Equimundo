@@ -11,6 +11,10 @@
             </div>
             <div class="card-content">
                 {{ nl2br($status->body) }}
+                @if ($status->hasPicture())
+                    <br/>
+                    <img src="{{ route('file.picture', [$status->horse->id, $status->getPicture()->path]) }}" alt=""/>
+                @endif
             </div>
             <div class="card-divider">
                 {{ Form::open(['route' => ['status.like', $status->id], 'class' => 'like-button pull-left', 'data-remote']) }}

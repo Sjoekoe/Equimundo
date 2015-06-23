@@ -1,6 +1,11 @@
-<?php 
+<?php
 namespace HorseStories\Models\Statuses;
-  
+
+use HorseStories\Models\Comments\Comment;
+use HorseStories\Models\Horses\Horse;
+use HorseStories\Models\Palmares\Palmares;
+use HorseStories\Models\Pictures\Picture;
+use HorseStories\Models\Users\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Status extends Model
@@ -20,7 +25,7 @@ class Status extends Model
      */
     public function horse()
     {
-        return $this->belongsTo('HorseStories\Models\Horses\Horse');
+        return $this->belongsTo(Horse::class);
     }
 
     /**
@@ -36,7 +41,7 @@ class Status extends Model
      */
     public function comments()
     {
-        return $this->hasMany('HorseStories\Models\Comments\Comment');
+        return $this->hasMany(Comment::class);
     }
 
     /**
@@ -44,7 +49,7 @@ class Status extends Model
      */
     public function likes()
     {
-        return $this->belongsToMany('HorseStories\Models\Users\User', 'likes');
+        return $this->belongsToMany(User::class, 'likes');
     }
 
     /**
@@ -52,6 +57,32 @@ class Status extends Model
      */
     public function palmares()
     {
-        return $this->hasOne('HorseStories\Models\Palmares\Palmares');
+        return $this->hasOne(Palmares::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function pictures()
+    {
+        return $this->belongsToMany(Picture::class)->withTimestamps();
+    }
+
+    /**
+     * @param \HorseStories\Models\Pictures\Picture $picture
+     */
+    public function setPicture($picture)
+    {
+        $this->pictures()->attach($picture);
+    }
+
+    public function hasPicture()
+    {
+        return count($this->pictures) !== 0;
+    }
+
+    public function getPicture()
+    {
+        return $this->pictures()->first();
     }
 }

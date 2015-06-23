@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace HorseStories\Core\Files;
 
 use HorseStories\Models\Pictures\Picture;
@@ -31,6 +31,7 @@ class Uploader
      * @param \Symfony\Component\HttpFoundation\File\UploadedFile $file
      * @param \HorseStories\Models\Horses\Horse $horse
      * @param bool $profile
+     * @return \HorseStories\Models\Pictures\Picture
      */
     public function uploadPicture($file, $horse, $profile = false)
     {
@@ -55,5 +56,7 @@ class Uploader
         $this->image->make($file->getrealpath())->resize(null, 350, function ($constraints) {
             $constraints->aspectRatio();
         })->save($pathToFile);
+
+        return $picture;
     }
 }

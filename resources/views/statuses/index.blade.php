@@ -7,7 +7,7 @@
                 <div class="row">
                     <div class="col s12 status-form">
                         @include('layout.partials.errors')
-                        {{ Form::open(['route' => 'statuses.store', 'class' => 'col s12 status_form']) }}
+                        {{ Form::open(['route' => 'statuses.store', 'class' => 'col s12 status_form', 'files' => 'true']) }}
 
                         <!-- Status Form input -->
                         <div class="row">
@@ -24,6 +24,13 @@
                         </div>
 
                         <!-- Submit button -->
+                        <div class="file-field input-field">
+                            <input class="file-path validate" type="text"/>
+                            <div class="btn">
+                                <span>File</span>
+                                {{ Form::file('picture') }}
+                            </div>
+                        </div>
                         {{ Form::submit('Post Status', ['class' => 'btn right']) }}
 
                         {{ Form::close() }}
