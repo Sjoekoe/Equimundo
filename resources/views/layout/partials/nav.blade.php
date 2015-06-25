@@ -1,6 +1,9 @@
 <div class="navbar-fixed">
     <nav>
         <div class="nav-wrapper teal lighten-2">
+            {{ Form::open(['route' => 'search', 'class' => 'left']) }}
+                {{ Form::text('search', null, ['placeholder' => 'Search...']) }}
+            {{ Form::close() }}
             <a href="{{ route('home') }}" class="brand-logo center">Horse Stories</a>
             <ul id="nav-mobile" class="left hide-on-med-and-down">
                 @if (Auth::check())

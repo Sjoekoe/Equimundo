@@ -43,4 +43,13 @@ class HorseRepository
     {
         return $this->horse->where('slug', $slug)->firstOrFail();
     }
+
+    /**
+     * @param string $value
+     * @return \HorseStories\Models\Horses\Horse[]
+     */
+    public function search($value)
+    {
+        return $this->horse->where('name', 'like', '%' . $value . '%')->get();
+    }
 }

@@ -9,7 +9,6 @@
                 <span class="new badge">{{ Auth::user()->countUnreadMessages() }}</span>
             @endif
         </a>
-        <a href="#" class="collection-item grey lighten-3">Albums</a>
     </div>
     <h4>
         Horses
