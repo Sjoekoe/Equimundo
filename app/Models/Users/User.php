@@ -1,6 +1,12 @@
 <?php
 namespace HorseStories\Models\Users;
 
+use HorseStories\Events\Event;
+use HorseStories\Models\Comments\Comment;
+use HorseStories\Models\Conversations\Conversation;
+use HorseStories\Models\Horses\Horse;
+use HorseStories\Models\Roles\Role;
+use HorseStories\Models\Statuses\Status;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -47,7 +53,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function horses()
     {
-        return $this->hasMany('HorseStories\Models\Horses\Horse', 'user_id', 'id');
+        return $this->hasMany(Horse::class, 'user_id', 'id');
     }
 
     /**
@@ -55,7 +61,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function statuses()
     {
-        return $this->hasManyThrough('HorseStories\Models\Statuses\Status', 'Horsestories\Models\Horses\Horse', 'user_id', 'horse_id');
+        return $this->hasManyThrough(Status::class, Horse::class, 'user_id', 'horse_id');
     }
 
     /**
@@ -63,7 +69,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function comments()
     {
-        return $this->hasMany('HorseStories\Models\Comments\Comment', 'user_id', 'id');
+        return $this->hasMany(Comment::class, 'user_id', 'id');
     }
 
     /**
@@ -71,7 +77,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function likes()
     {
-        return $this->belongsToMany('HorseStories\Models\Statuses\Status', 'likes')->withTimestamps();
+        return $this->belongsToMany(Status::class, 'likes')->withTimestamps();
     }
 
     /**
@@ -79,7 +85,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function events()
     {
-        return $this->hasMany('HorseStories\Models\Events\Event', 'creator_id', 'id');
+        return $this->hasMany(Event::class, 'creator_id', 'id');
     }
 
     /**
@@ -87,7 +93,15 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function roles()
     {
-        return $this->belongsToMany('HorseStories\Models\Roles\Role')->withTimestamps();
+        return $this->belongsToMany(Role::class)->withTimestamps();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function conversations()
+    {
+        return $this->belongsToMany(Conversation::class)->withPivot('last_view', 'deleted_at')->withTimestamps();
     }
 
     /**
@@ -126,5 +140,43 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function isAdmin()
     {
         return $this->hasRole('administrator') ? true : false;
+    }
+
+    /**
+     * @param \HorseStories\Models\Conversations\Conversation $conversation
+     */
+    public function addConversation(Conversation $conversation)
+    {
+        $this->conversations()->attach($conversation);
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasUnreadMessages()
+    {
+        foreach ($this->conversations as $conversation) {
+            if ($conversation->pivot->last_view == null) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @return int
+     */
+    public function countUnreadMessages()
+    {
+        $count = 0;
+
+        foreach ($this->conversations as $conversation) {
+            if ($conversation->pivot->last_view == null) {
+                $count++;
+            }
+        }
+
+        return $count;
     }
 }
