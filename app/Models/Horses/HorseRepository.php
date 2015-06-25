@@ -1,8 +1,8 @@
 <?php
 
 namespace HorseStories\Models\Horses;
-  
-class HorseRepository 
+
+class HorseRepository
 {
     /**
      * @var \HorseStories\Models\Horses\Horse
@@ -33,5 +33,23 @@ class HorseRepository
     public function findByLifeNumber($lifeNumber)
     {
         return $this->horse->where('life_number', $lifeNumber)->first();
+    }
+
+    /**
+     * @param string $slug
+     * @return \HorseStories\Models\Horses\Horse
+     */
+    public function findBySlug($slug)
+    {
+        return $this->horse->where('slug', $slug)->firstOrFail();
+    }
+
+    /**
+     * @param string $value
+     * @return \HorseStories\Models\Horses\Horse[]
+     */
+    public function search($value)
+    {
+        return $this->horse->where('name', 'like', '%' . $value . '%')->get();
     }
 }

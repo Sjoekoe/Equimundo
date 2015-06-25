@@ -7,7 +7,7 @@
                 <h3>Edit {{ $horse->name }}</h3>
             </div>
         </div>
-        {{ Form::open(['route' => ['horses.edit', $horse->id], 'class' => 'col s12', 'files' => 'true', 'method' => 'put']) }}
+        {{ Form::open(['route' => ['horses.edit', $horse->slug], 'class' => 'col s12', 'files' => 'true', 'method' => 'put']) }}
 
             <div class="row">
                 <div class="input-field col s6">

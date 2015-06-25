@@ -1,7 +1,17 @@
 <?php
 
+Route::group(['namespace' => 'Admin', 'middleware' => 'admin'], function() {
+    require __DIR__ . '/Routes/Admin/dashboards.php';
+    require __DIR__ . '/Routes/Admin/users.php';
+});
+
 Route::group(['namespace' => 'Auth'], function() {
     require __DIR__ . '/Routes/Auth/auth.php';
+});
+
+Route::group(['namespace' => 'Conversations'], function() {
+    require __DIR__ . '/Routes/Conversations/conversations.php';
+    require __DIR__ . '/Routes/Conversations/messages.php';
 });
 
 Route::group(['namespace' => 'Files'], function() {
@@ -19,6 +29,10 @@ Route::group(['namespace' => 'Horses'], function() {
 
 Route::group(['namespace' => 'Pages'], function() {
     require __DIR__ . '/Routes/Pages/pages.php';
+});
+
+Route::group(['namespace' => 'Search'], function() {
+    require __DIR__ . '/Routes/Search/searches.php';
 });
 
 Route::group(['namespace' => 'Statuses'], function() {

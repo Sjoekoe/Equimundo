@@ -1,6 +1,6 @@
-<?php 
+<?php
 namespace HorseStories\Models\Horses;
-  
+
 use Illuminate\Database\Eloquent\Model;
 
 class Horse extends Model
@@ -155,5 +155,19 @@ class Horse extends Model
         $result = new \DateTime($this->date_of_birth);
 
         return $result->format('d/m/Y');
+    }
+
+    public function sons()
+    {
+        return $this->pedigree->filter(function($family) {
+            return $family->type == 7;
+        })->all();
+    }
+
+    public function Daughters()
+    {
+        return $this->pedigree->filter(function($family) {
+            return $family->type == 8;
+        })->all();
     }
 }

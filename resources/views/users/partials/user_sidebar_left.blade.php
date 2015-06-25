@@ -3,8 +3,12 @@
     <div class="collection">
         <a href="#" class="collection-item grey lighten-3"><span class="fa fa-user"></span> {{ Auth::user()->username }}</a>
         <a href="{{ route('users.profiles.edit') }}" class="collection-item grey lighten-3">Edit Profile</a>
-        <a href="#" class="collection-item grey lighten-3">Messages <span class="new badge">1</span></a>
-        <a href="#" class="collection-item grey lighten-3">Albums</a>
+        <a href="{{ route('conversation.index') }}" class="collection-item grey lighten-3">
+            Messages
+            @if (Auth::user()->hasUnreadMessages())
+                <span class="new badge">{{ Auth::user()->countUnreadMessages() }}</span>
+            @endif
+        </a>
     </div>
     <h4>
         Horses
