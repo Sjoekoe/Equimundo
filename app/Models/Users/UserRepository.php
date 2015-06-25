@@ -31,4 +31,12 @@ class UserRepository
     {
         return User::find($user->id)->conversations()->orderBy('updated_at', 'DESC')->where('deleted_at', null)->get();
     }
+
+    /**
+     * @return \HorseStories\Models\Users\User[]
+     */
+    public function all()
+    {
+        return User::all();
+    }
 }

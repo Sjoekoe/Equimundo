@@ -1,5 +1,10 @@
 <?php
 
+Route::group(['namespace' => 'Admin', 'middleware' => 'admin'], function() {
+    require __DIR__ . '/Routes/Admin/dashboards.php';
+    require __DIR__ . '/Routes/Admin/users.php';
+});
+
 Route::group(['namespace' => 'Auth'], function() {
     require __DIR__ . '/Routes/Auth/auth.php';
 });

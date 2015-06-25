@@ -17,7 +17,7 @@
                 @else
                     <li><a href="{{ route('logout') }}">Logout</a></li>
                     @if (Auth::user()->isAdmin())
-                        <li><a href="#">Admin Panel</a></li>
+                        <li><a href="{{ route('admin.dashboard') }}">Admin Panel</a></li>
                     @endif
                 @endif
             </ul>
