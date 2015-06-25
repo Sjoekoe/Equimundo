@@ -108,7 +108,9 @@ class HorseController extends Controller
     {
         $horse = $this->initHorse($slug);
 
-        return view('horses.edit', compact('horse'));
+        $disciplines = trans('disciplines.list');
+
+        return view('horses.edit', compact('horse', 'disciplines'));
     }
 
     /**

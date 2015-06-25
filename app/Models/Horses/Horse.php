@@ -1,6 +1,12 @@
 <?php
 namespace HorseStories\Models\Horses;
 
+use HorseStories\Models\Disciplines\Discipline;
+use HorseStories\Models\Palmares\Palmares;
+use HorseStories\Models\Pedigrees\Pedigree;
+use HorseStories\Models\Pictures\Picture;
+use HorseStories\Models\Statuses\Status;
+use HorseStories\Models\Users\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Horse extends Model
@@ -26,7 +32,7 @@ class Horse extends Model
      */
     public function owner()
     {
-        return $this->belongsTo('HorseStories\Models\Users\User', 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     /**
@@ -34,7 +40,7 @@ class Horse extends Model
      */
     public function statuses()
     {
-        return $this->hasMany('HorseStories\Models\Statuses\Status');
+        return $this->hasMany(Status::class);
     }
 
     /**
@@ -42,7 +48,7 @@ class Horse extends Model
      */
     public function pictures()
     {
-        return $this->hasMany('HorseStories\Models\Pictures\Picture');
+        return $this->hasMany(Picture::class);
     }
 
     /**
@@ -50,7 +56,7 @@ class Horse extends Model
      */
     public function followers()
     {
-        return $this->belongsToMany('HorseStories\Models\Users\User', 'follows', 'horse_id', 'user_id')->withTimestamps();
+        return $this->belongsToMany(User::class, 'follows', 'horse_id', 'user_id')->withTimestamps();
     }
 
     /**
@@ -58,7 +64,7 @@ class Horse extends Model
      */
     public function palmares()
     {
-        return $this->hasMany('HorseStories\Models\Palmares\Palmares');
+        return $this->hasMany(Palmares::class);
     }
 
     /**
@@ -66,7 +72,7 @@ class Horse extends Model
      */
     public function pedigree()
     {
-        return $this->hasMany('HorseStories\Models\Pedigrees\Pedigree');
+        return $this->hasMany(Pedigree::class);
     }
 
     /**
@@ -74,7 +80,12 @@ class Horse extends Model
      */
     public function family()
     {
-        return $this->hasManyThrough('HorseStories\Models\Horses\Horse', 'HorseStories\Models\Pedigrees\Pedigree', 'family_id', 'id');
+        return $this->hasManyThrough(Horse::class, Pedigree::class, 'family_id', 'id');
+    }
+
+    public function disciplines()
+    {
+        return $this->hasMany(Discipline::class);
     }
 
     /**
@@ -157,6 +168,9 @@ class Horse extends Model
         return $result->format('d/m/Y');
     }
 
+    /**
+     * @return \HorseStories\Models\Pedigrees\Pedigree
+     */
     public function sons()
     {
         return $this->pedigree->filter(function($family) {
@@ -164,10 +178,24 @@ class Horse extends Model
         })->all();
     }
 
+    /**
+     * @return \HorseStories\Models\Pedigrees\Pedigree
+     */
     public function Daughters()
     {
         return $this->pedigree->filter(function($family) {
             return $family->type == 8;
         })->all();
+    }
+
+    /**
+     * @param int $disciplineId
+     * @return bool
+     */
+    public function performsDiscipline($disciplineId)
+    {
+        return $this->disciplines->filter(function($discipline) use ($disciplineId) {
+           return $discipline->discipline === $disciplineId;
+        })->first();
     }
 }
