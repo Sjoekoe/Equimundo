@@ -6,7 +6,6 @@ use HorseStories\Http\Controllers\Controller;
 use HorseStories\Models\Conversations\ConversationRepository;
 use HorseStories\Models\Conversations\MessageCreator;
 use Input;
-use Redirect;
 
 class MessageController extends Controller
 {
@@ -45,6 +44,6 @@ class MessageController extends Controller
             $conversation->unDeleteForContactPerson(Auth::user());
         }
 
-        return Redirect::back();
+        return redirect()->back();
     }
 }

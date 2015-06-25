@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace HorseStories\Http\Controllers\Horses;
 
 use Auth;
@@ -9,6 +9,7 @@ use HorseStories\Http\Requests\CreateHorse;
 use HorseStories\Http\Requests\UpdateHorse;
 use HorseStories\Models\Horses\Horse;
 use HorseStories\Models\Horses\HorseCreator;
+use HorseStories\Models\Horses\HorseRepository;
 use HorseStories\Models\Horses\HorseUpdater;
 use HorseStories\Models\Users\User;
 use Illuminate\Routing\Controller;
@@ -32,15 +33,22 @@ class HorseController extends Controller
     private $horseUpdater;
 
     /**
+     * @var \HorseStories\Models\Horses\HorseRepository
+     */
+    private $horses;
+
+    /**
      * @param \HorseStories\Models\Horses\HorseCreator $horseCreator
      * @param \HorseStories\Core\Files\Uploader $uploader
      * @param \HorseStories\Models\Horses\HorseUpdater $horseUpdater
+     * @param \HorseStories\Models\Horses\HorseRepository $horses
      */
-    public function __construct(HorseCreator $horseCreator, Uploader $uploader, HorseUpdater $horseUpdater)
+    public function __construct(HorseCreator $horseCreator, Uploader $uploader, HorseUpdater $horseUpdater, HorseRepository $horses)
     {
         $this->horseCreator = $horseCreator;
         $this->uploader = $uploader;
         $this->horseUpdater = $horseUpdater;
+        $this->horses = $horses;
     }
 
     /**
@@ -93,24 +101,24 @@ class HorseController extends Controller
     }
 
     /**
-     * @param int $horseId
+     * @param string $slug
      * @return \Illuminate\View\View
      */
-    public function edit($horseId)
+    public function edit($slug)
     {
-        $horse = $this->initHorse($horseId);
+        $horse = $this->initHorse($slug);
 
         return view('horses.edit', compact('horse'));
     }
 
     /**
-     * @param int $horseId
+     * @param string $slug
      * @param \HorseStories\Http\Requests\UpdateHorse $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update($horseId, UpdateHorse $request)
+    public function update($slug, UpdateHorse $request)
     {
-        $horse = $this->initHorse($horseId);
+        $horse = $this->initHorse($slug);
 
         $this->horseUpdater->update($horse, $request->all());
 
@@ -125,7 +133,7 @@ class HorseController extends Controller
      */
     private function initHorse($horseId)
     {
-        $horse = Horse::findOrFail($horseId);
+        $horse = $this->horses->findBySlug($horseId);
 
         if ($horse->owner()->first()->id !== Auth::user()->id) {
             abort(403);

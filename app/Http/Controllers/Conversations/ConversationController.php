@@ -9,7 +9,6 @@ use HorseStories\Models\Conversations\ConversationRepository;
 use HorseStories\Models\Conversations\MessageCreator;
 use HorseStories\Models\Users\UserRepository;
 use Input;
-use Redirect;
 
 class ConversationController extends Controller
 {
@@ -67,7 +66,7 @@ class ConversationController extends Controller
     public function create()
     {
         if (! Input::has('contact')) {
-            return Redirect::back();
+            return redirect()->back();
         }
 
         $owner = $this->users->findById(Input::get('contact'));
@@ -93,7 +92,7 @@ class ConversationController extends Controller
 
         $recipient->addConversation($conversation);
 
-        return Redirect::route('conversation.index');
+        return redirect()->route('conversation.index');
     }
 
     public function show($conversationId)
@@ -113,6 +112,6 @@ class ConversationController extends Controller
 
         $conversation->deleteForUser(Auth::user());
 
-        return Redirect::back();
+        return redirect()->back();
     }
 }

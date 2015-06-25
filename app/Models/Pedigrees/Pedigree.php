@@ -1,6 +1,7 @@
 <?php
 namespace HorseStories\Models\Pedigrees;
 
+use HorseStories\Models\Horses\Horse;
 use Illuminate\Database\Eloquent\Model;
 
 class Pedigree extends Model
@@ -15,7 +16,7 @@ class Pedigree extends Model
      */
     public function horse()
     {
-        return $this->belongsTo('HorseStories\Models\Horses\Horse');
+        return $this->belongsTo(Horse::class);
     }
 
     /**
@@ -23,6 +24,26 @@ class Pedigree extends Model
      */
     public function originalHorse()
     {
-        return $this->hasOne('HorseStories\Models\Horses\Horse', 'id', 'family_id');
+        return $this->hasOne(Horse::class, 'id', 'family_id');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasFather()
+    {
+        if ($this->originalHorse()->first()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @return \HorseStories\Models\Pedigrees\Pedigree
+     */
+    public function father()
+    {
+        return $this->originalHorse()->first()->father();
     }
 }
