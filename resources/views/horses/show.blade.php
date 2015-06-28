@@ -6,7 +6,7 @@
         @if (! count($horse->statuses))
             <p>There are no statuses yet</p>
         @else
-            @foreach($horse->statuses as $status)
+            @foreach($statuses as $status)
                 @include('statuses.partials.status')
             @endforeach
         @endif

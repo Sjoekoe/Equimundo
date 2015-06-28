@@ -1,6 +1,6 @@
-<?php 
+<?php
 namespace HorseStories\Models\Horses;
-  
+
 use DateTime;
 use HorseStories\Core\Slugs\SlugCreator;
 use HorseStories\Models\Users\User;
@@ -36,11 +36,15 @@ class HorseCreator
         $horse->breed = $values['breed'];
         $horse->life_number = $values['life_number'];
         $horse->color = $values['color'];
-        $horse->date_of_birth = new DateTime($values['date_of_birth']);
+        $horse->date_of_birth = DateTime::createFromFormat('d/m/Y', $values['date_of_birth']);
         $horse->height = $values['height'];
         $horse->slug = $this->slugCreator->createForHorse($values['name']);
 
         $horse->save();
+
+        foreach($values['disciplines'] as $discipline) {
+            $horse->disciplines()->updateOrCreate(['discipline' => $discipline, 'horse_id' => $horse->id]);
+        }
 
         return $horse;
     }

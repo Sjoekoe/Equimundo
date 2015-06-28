@@ -83,6 +83,9 @@ class Horse extends Model
         return $this->hasManyThrough(Horse::class, Pedigree::class, 'family_id', 'id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function disciplines()
     {
         return $this->hasMany(Discipline::class);

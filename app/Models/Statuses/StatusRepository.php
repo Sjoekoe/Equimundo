@@ -1,6 +1,7 @@
-<?php 
+<?php
 namespace HorseStories\Models\Statuses;
-  
+
+use HorseStories\Models\Horses\Horse;
 use HorseStories\Models\Users\User;
 
 class StatusRepository
@@ -38,5 +39,10 @@ class StatusRepository
         $horseIds[] = $user->horses()->lists('id');
 
         return $this->status->with('comments')->whereIn('horse_id', array_flatten($horseIds))->latest()->get();
+    }
+
+    public function getFeedForHorse(Horse $horse)
+    {
+        return $this->status->where('horse_id', $horse->id)->orderBy('created_at', 'DESC')->get();
     }
 }

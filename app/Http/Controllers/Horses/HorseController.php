@@ -11,6 +11,7 @@ use HorseStories\Models\Horses\Horse;
 use HorseStories\Models\Horses\HorseCreator;
 use HorseStories\Models\Horses\HorseRepository;
 use HorseStories\Models\Horses\HorseUpdater;
+use HorseStories\Models\Statuses\StatusRepository;
 use HorseStories\Models\Users\User;
 use Illuminate\Routing\Controller;
 use Request;
@@ -38,17 +39,29 @@ class HorseController extends Controller
     private $horses;
 
     /**
+     * @var \HorseStories\Models\Statuses\StatusRepository
+     */
+    private $statuses;
+
+    /**
      * @param \HorseStories\Models\Horses\HorseCreator $horseCreator
      * @param \HorseStories\Core\Files\Uploader $uploader
      * @param \HorseStories\Models\Horses\HorseUpdater $horseUpdater
      * @param \HorseStories\Models\Horses\HorseRepository $horses
+     * @param \HorseStories\Models\Statuses\StatusRepository $statuses
      */
-    public function __construct(HorseCreator $horseCreator, Uploader $uploader, HorseUpdater $horseUpdater, HorseRepository $horses)
-    {
+    public function __construct(
+        HorseCreator $horseCreator,
+        Uploader $uploader,
+        HorseUpdater $horseUpdater,
+        HorseRepository $horses,
+        StatusRepository $statuses
+    ) {
         $this->horseCreator = $horseCreator;
         $this->uploader = $uploader;
         $this->horseUpdater = $horseUpdater;
         $this->horses = $horses;
+        $this->statuses = $statuses;
     }
 
     /**
@@ -67,7 +80,9 @@ class HorseController extends Controller
      */
     public function create()
     {
-        return view('horses.create');
+        $disciplines = trans('disciplines.list');
+
+        return view('horses.create', compact('disciplines'));
     }
 
     /**
@@ -93,11 +108,13 @@ class HorseController extends Controller
      */
     public function show($slug)
     {
-        $horse = Horse::where('slug', '=', $slug)->with('statuses')->firstOrFail();
+        $horse = $this->horses->findBySlug($slug);
+
+        $statuses = $this->statuses->getFeedForHorse($horse);
 
         $likes = DB::table('likes')->whereUserId(Auth::user()->id)->lists('status_id');
 
-        return view('horses.show', compact('horse', 'likes'));
+        return view('horses.show', compact('horse', 'likes', 'statuses'));
     }
 
     /**
