@@ -6,6 +6,7 @@ use HorseStories\Models\Comments\Comment;
 use HorseStories\Models\Conversations\Conversation;
 use HorseStories\Models\Horses\Horse;
 use HorseStories\Models\Roles\Role;
+use HorseStories\Models\Settings\Setting;
 use HorseStories\Models\Statuses\Status;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -102,6 +103,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function conversations()
     {
         return $this->belongsToMany(Conversation::class)->withPivot('last_view', 'deleted_at')->withTimestamps();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function settings()
+    {
+        return $this->hasOne(Setting::class);
     }
 
     /**
