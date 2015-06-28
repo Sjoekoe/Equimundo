@@ -41,7 +41,7 @@ class PalmaresCreator
         $palmares->discipline = $values['discipline'];
         $palmares->level = $values['level'];
         $palmares->ranking = $values['ranking'];
-        $palmares->date = new DateTime($values['date']);
+        $palmares->date = DateTime::createFromFormat('d/m/Y', $values['date']);
         $palmares->status_id = $values['status']->id;
         $palmares->event_id = $event->id;
 
