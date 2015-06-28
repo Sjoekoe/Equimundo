@@ -2,9 +2,11 @@
 
 @section('content')
     @include('layout.partials.heading')
-    <div class="row">
-        <a href="{{ route('palmares.create', $horse->slug) }}" class="btn">Add Achievement</a>
-    </div>
+    @if (Auth::user()->isHorseOwner($horse))
+        <div class="row">
+            <a href="{{ route('palmares.create', $horse->slug) }}" class="btn">Add Achievement</a>
+        </div>
+    @endif
     <div class="row">
         @if (! count($horse->palmares))
             <p>{{ $horse->name }} has no palmares yet.</p>
