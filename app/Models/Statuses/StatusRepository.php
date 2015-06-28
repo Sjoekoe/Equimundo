@@ -20,6 +20,15 @@ class StatusRepository
     }
 
     /**
+     * @param $id
+     * @return \HorseStories\Models\Statuses\Status
+     */
+    public function findById($id)
+    {
+        return $this->status->findOrFail($id);
+    }
+
+    /**
      * @param \HorseStories\Models\Users\User $user
      * @return \HorseStories\Models\Statuses\Status[]
      */
@@ -41,6 +50,10 @@ class StatusRepository
         return $this->status->with('comments')->whereIn('horse_id', array_flatten($horseIds))->latest()->get();
     }
 
+    /**
+     * @param \HorseStories\Models\Horses\Horse $horse
+     * @return \HorseStories\Models\Statuses\Status[]
+     */
     public function getFeedForHorse(Horse $horse)
     {
         return $this->status->where('horse_id', $horse->id)->orderBy('created_at', 'DESC')->get();

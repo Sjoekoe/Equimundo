@@ -33,7 +33,7 @@ class Status extends Model
      */
     public function user()
     {
-        return $this->horse()->owner();
+        return $this->horse->owner;
     }
 
     /**
