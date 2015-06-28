@@ -1,5 +1,5 @@
 <?php namespace HorseStories\Models\Users;
- 
+
 use HorseStories\Models\Horses\Horse;
 
 trait FollowingTrait
@@ -9,7 +9,7 @@ trait FollowingTrait
      */
     public function follows()
     {
-        return $this->belongsToMany('HorseStories\Models\Horses\Horse', 'follows', 'user_id', 'horse_id')->withTimestamps();
+        return $this->belongsToMany(Horse::class, 'follows', 'user_id', 'horse_id')->withTimestamps();
     }
 
     /**
