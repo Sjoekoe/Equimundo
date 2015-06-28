@@ -1,7 +1,7 @@
 <ul id="nav-mobile" class="side-nav fixed user-left-sidebar grey lighten-3" style="left: 0px; top: 65px;">
     <h4>About You</h4>
     <div class="collection">
-        <a href="#" class="collection-item grey lighten-3"><span class="fa fa-user"></span> {{ Auth::user()->username }}</a>
+        <a href="{{ route('users.profiles.show', Auth::user()->id) }}" class="collection-item grey lighten-3"><span class="fa fa-user"></span> {{ Auth::user()->username }}</a>
         <a href="{{ route('users.profiles.edit') }}" class="collection-item grey lighten-3">Edit Profile</a>
         <a href="{{ route('conversation.index') }}" class="collection-item grey lighten-3">
             Messages

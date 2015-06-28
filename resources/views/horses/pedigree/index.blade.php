@@ -2,9 +2,11 @@
 
 @section('content')
     @include('layout.partials.heading')
-    <div class="row">
-        <a href="{{ route('pedigree.create', $horse->slug) }}" class="btn">Add Family</a>
-    </div>
+    @if (Auth::user()->isHorseOwner($horse))
+        <div class="row">
+            <a href="{{ route('pedigree.create', $horse->slug) }}" class="btn">Add Family</a>
+        </div>
+    @endif
     <div class="row pedigree">
         <div class="col s12">
             <div class="col s3 grandparent male">

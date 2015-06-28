@@ -10,7 +10,7 @@
         </div>
         <div class="col s2">
             <h4>{{ $palmares->ranking }} Place</h4>
-            <p class="palmares-link"><a href="#">Show Story</a></p>
+            <p class="palmares-link"><a href="{{ route('statuses.show', $palmares->status->id) }}">Show Story</a></p>
         </div>
     </div>
 </div>

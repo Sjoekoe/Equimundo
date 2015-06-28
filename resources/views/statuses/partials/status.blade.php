@@ -15,6 +15,8 @@
                     <br/>
                     <img src="{{ route('file.picture', [$status->horse->id, $status->getPicture()->path]) }}" alt=""/>
                 @endif
+                <span class="right"><a href="{{ route('statuses.edit', $status->id) }}">Edit</a></span>
+                <span class="right"><a href="{{ route('statuses.delete', $status->id) }}">Delete</a></span>
             </div>
             <div class="card-divider">
                 {{ Form::open(['route' => ['status.like', $status->id], 'class' => 'like-button pull-left', 'data-remote']) }}

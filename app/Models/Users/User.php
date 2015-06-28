@@ -179,4 +179,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
         return $count;
     }
+
+    /**
+     * @param \HorseStories\Models\Horses\Horse $horse
+     * @return bool
+     */
+    public function isHorseOwner(Horse $horse)
+    {
+        return $this == $horse->owner;
+    }
 }
