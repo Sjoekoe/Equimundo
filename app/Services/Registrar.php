@@ -1,5 +1,6 @@
 <?php namespace HorseStories\Services;
 
+use HorseStories\Models\Settings\Setting;
 use HorseStories\Models\Users\User;
 use Validator;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
@@ -36,6 +37,11 @@ class Registrar implements RegistrarContract {
 		]);
 
         $user->assignRole(1);
+
+        $settings = new Setting();
+        $settings->user_id = $user->id;
+        $settings->date_format = 'd/m/Y';
+        $settings->save();
 
         return $user;
 	}

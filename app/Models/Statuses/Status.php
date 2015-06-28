@@ -18,7 +18,7 @@ class Status extends Model
     /**
      * @var array
      */
-    protected $fillable = ['body'];
+    protected $fillable = ['body', 'prefix'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -76,11 +76,17 @@ class Status extends Model
         $this->pictures()->attach($picture);
     }
 
+    /**
+     * @return bool
+     */
     public function hasPicture()
     {
         return count($this->pictures) !== 0;
     }
 
+    /**
+     * @return \HorseStories\Models\Pictures\Picture
+     */
     public function getPicture()
     {
         return $this->pictures()->first();
