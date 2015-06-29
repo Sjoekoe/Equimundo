@@ -6,3 +6,10 @@
 <p>Born: {{ date('Y', strtotime($family->date_of_birth)) }}</p>
 <p>Passed Away: {{ $family->date_of_death ? date('Y', strtotime($family->date_of_death)) : '-' }}</p>
 <p>Life number: {{ $family->family_life_number ? : '-' }}</p>
+
+@if (Auth::user()->isHorseOwner($horse))
+    <p>
+        <a href="{{ route('pedigree.edit', $family->id) }}">Edit</a> /
+        <a href="{{ route('pedigree.delete', $family->id) }}">Delete</a>
+    </p>
+@endif
