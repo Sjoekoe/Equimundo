@@ -23,6 +23,9 @@ class CreatePedigreeTable extends Migration {
             $table->foreign('family_id')->references('id')->on('horses')->onDelete('set null');
             $table->timestamp('date_of_birth')->nullable();
             $table->timestamp('date_of_death')->nullable();
+            $table->integer('breed');
+            $table->string('height');
+            $table->integer('color');
             $table->timestamps();
         });
     }

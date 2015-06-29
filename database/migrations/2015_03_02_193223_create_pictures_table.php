@@ -19,6 +19,8 @@ class CreatePicturesTable extends Migration {
             $table->foreign('horse_id')->references('id')->on('horses')->onDelete('cascade');
             $table->string('path');
             $table->boolean('profile_pic');
+            $table->string('mime');
+            $table->string('original_name');
             $table->timestamps();
         });
 	}
