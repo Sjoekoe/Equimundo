@@ -2,6 +2,8 @@
 
 namespace HorseStories\Models\Horses;
 
+use HorseStories\Models\Users\User;
+
 class HorseRepository
 {
     /**
@@ -51,5 +53,14 @@ class HorseRepository
     public function search($value)
     {
         return $this->horse->where('name', 'like', '%' . $value . '%')->get();
+    }
+
+    /**
+     * @param \HorseStories\Models\Users\User $user
+     * @return array
+     */
+    public function findHorsesForSelect(User $user)
+    {
+        return $this->horse->with('statuses')->where('user_id', $user->id)->lists('name', 'id');
     }
 }

@@ -17,6 +17,7 @@ class CreateStatusesTable extends Migration
             $table->integer('horse_id')->unsigned();
             $table->foreign('horse_id')->references('id')->on('horses')->onDelete('cascade');
             $table->text('body');
+            $table->integer('prefix')->nullable();
             $table->timestamps();
         });
     }

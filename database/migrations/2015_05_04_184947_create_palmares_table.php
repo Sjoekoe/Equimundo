@@ -19,6 +19,8 @@ class CreatePalmaresTable extends Migration {
             $table->foreign('horse_id')->references('id')->on('horses')->onDelete('cascade');
             $table->integer('event_id')->unsigned()->nullable();
             $table->foreign('event_id')->references('id')->on('events')->onDelete('set null');
+            $table->integer('status_id')->unsigned();
+            $table->foreign('status_id')->references('id')->on('statuses')->onDelete('cascade');
             $table->integer('discipline');
             $table->string('level');
             $table->integer('ranking');

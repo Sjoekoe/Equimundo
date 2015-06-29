@@ -1,32 +1,33 @@
-<?php 
+<?php
 namespace HorseStories\Http\Controllers\Pages;
 
 use Auth;
 use DB;
 use HorseStories\Http\Controllers\Controller;
+use HorseStories\Models\Horses\HorseRepository;
 use HorseStories\Models\Statuses\StatusRepository;
-use HorseStories\Models\Users\UserRepository;
 
 class PagesController extends Controller
 {
-
-    /**
-     * @var \HorseStories\Models\Users\UserRepository
-     */
-    private $users;
     /**
      * @var \HorseStories\Models\Statuses\StatusRepository
      */
     private $statuses;
 
     /**
+     * @var \HorseStories\Models\Horses\HorseRepository
+     */
+    private $horses;
+
+    /**
      * @param \HorseStories\Models\Users\UserRepository $users
      * @param \HorseStories\Models\Statuses\StatusRepository $statuses
+     * @param \HorseStories\Models\Horses\HorseRepository $horses
      */
-    public function __construct(UserRepository $users, StatusRepository $statuses)
+    public function __construct(StatusRepository $statuses, HorseRepository $horses)
     {
-        $this->users = $users;
         $this->statuses = $statuses;
+        $this->horses = $horses;
     }
 
     /**
@@ -35,7 +36,7 @@ class PagesController extends Controller
     public function home()
     {
         if (Auth::check()) {
-            $horses = $this->users->findHorsesForSelect(Auth::user());
+            $horses = $this->horses->findHorsesForSelect(Auth::user());
             if (count($horses)) {
                 $statuses = $this->statuses->getFeedForUser(Auth::user());
                 $likes = DB::table('likes')->whereUserId(Auth::user()->id)->lists('status_id');

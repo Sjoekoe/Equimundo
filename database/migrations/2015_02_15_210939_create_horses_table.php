@@ -20,9 +20,10 @@ class CreateHorsesTable extends Migration {
 			$table->string('gender');
 			$table->integer('breed');
 			$table->string('height');
-			$table->string('date_of_birth');
+            $table->timestamp('date_of_birth')->nullable();
 			$table->string('color');
 			$table->string('life_number');
+            $table->string('slug');
             $table->timestamps();
 		});
 	}
