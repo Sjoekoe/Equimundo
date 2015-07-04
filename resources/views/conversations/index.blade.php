@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="grid-block medium-12">
-        <h2>Messages</h2>
+        <h2>{{ trans('copy.titles.messages') }}</h2>
         @if (count($conversations))
             <ul>
                 @foreach ($conversations as $conversation)
@@ -15,7 +15,7 @@
                 @endforeach
             </ul>
         @else
-            You have no conversations yet
+            {{ trans('copy.p.no_conversations') }}
         @endif
     </div>
 @stop

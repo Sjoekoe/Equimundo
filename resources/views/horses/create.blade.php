@@ -5,7 +5,7 @@
     <div class="row">
         <div class="row">
             <div class="col s6">
-                <h3>Create a Horse</h3>
+                <h3>{{ trans('copy.titles.create_horse') }}</h3>
             </div>
         </div>
         {{ Form::open(['route' => 'horses.create', 'class' => 'form-horizontal col s12', 'files' => 'true']) }}
@@ -13,44 +13,44 @@
             <div class="row">
                 <div class="input-field col s6">
                     {{ Form::text('name', null) }}
-                    {{ Form::label('name', 'Name:') }}
+                    {{ Form::label('name', trans('forms.labels.name')) }}
                 </div>
                 <div class="input-field col s6">
-                    {{ Form::label('date_of_birth', 'Date Of Birth:') }}
+                    {{ Form::label('date_of_birth', trans('forms.labels.date_of_birth')) }}
                     {{ Form::text('date_of_birth', null, ['placeholder' => 'dd/mm/yyyy']) }}
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s6 file-field">
                     <input class="file-path validate" type="text"/>
-                    {{ Form::label(null, 'Profile Picture', ['style' => 'left:115px;']) }}
+                    {{ Form::label(null, trans('forms.labels.profile_picture'), ['style' => 'left:115px;']) }}
                     <div class="btn waves-effect waves-light">
-                        <span>File</span>
+                        <span>{{ trans('copy.span.file') }}</span>
                         {{ Form::file('profile_pic') }}
                     </div>
                 </div>
                 <div class="input-field col s6">
-                    {{ Form::label('height', 'Height:') }}
+                    {{ Form::label('height', trans('forms.labels.height')) }}
                     {{ Form::text('height', null) }}
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s6">
                     {{ Form::select('gender', trans('horses.genders'), null, ['class' => 'gender-select']) }}
-                    {{ Form::label('gender', 'Gender:') }}
+                    {{ Form::label('gender', trans('forms.labels.gender')) }}
                 </div>
                 <div class="input-field col s6">
                     {{ Form::select('breed', trans('horses.breeds'), null, ['class' => 'breed-select']) }}
-                    {{ Form::label('breed', 'Breed:') }}
+                    {{ Form::label('breed', trans('forms.labels.breed')) }}
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s6">
                     {{ Form::select('color', trans('horses.colors'), null, ['class' => 'color-select']) }}
-                    {{ Form::label('color', 'Color:') }}
+                    {{ Form::label('color', trans('forms.labels.color')) }}
                 </div>
                 <div class="input-field col s6">
-                    {{ Form::label('life_number', 'Life Number:') }}
+                    {{ Form::label('life_number', trans('forms.labels.life_number')) }}
                     {{ Form::text('life_number', null) }}
                 </div>
             </div>
@@ -62,7 +62,7 @@
                     </div>
                 @endforeach
             </div>
-            {{ Form::submit('Create Horse', ['class' => 'btn']) }}
+            {{ Form::submit(trans('forms.buttons.save'), ['class' => 'btn']) }}
         {{ Form::close() }}
     </div>
 @stop

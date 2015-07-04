@@ -11,6 +11,6 @@
             <li>{{ $horse->height }}</li>
             <li>{{ trans('horses.colors')[$horse->color] }}</li>
         </ul>
-        <a href="{{ route('conversation.create', ['contact' => $horse->owner->id]) }}">Contact the owner {{ $horse->owner->username }}</a>
+        <a href="{{ route('conversation.create', ['contact' => $horse->owner->id]) }}">{{ trans('copy.a.contact_owner') }} {{ $horse->owner->username }}</a>
     </div>
 @stop

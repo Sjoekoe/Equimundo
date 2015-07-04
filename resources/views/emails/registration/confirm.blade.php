@@ -1,1 +1,1 @@
-Welcome to Horse Stories
+{{ trans('emails.welcome_message') }}
