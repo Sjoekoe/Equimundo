@@ -55,7 +55,7 @@ class PedigreeController extends Controller
      */
     public function index($horseSlug)
     {
-        $horse = $this->initHorse($horseSlug);
+        $horse = $this->horses->findBySlug($horseSlug);
 
         return view('horses.pedigree.index', compact('horse'));
     }

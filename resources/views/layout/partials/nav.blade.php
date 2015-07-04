@@ -16,6 +16,7 @@
                     <li><a href="{{ route('register') }}">{{ trans('copy.a.sign_up') }}</a></li>
                 @else
                     <li><a href="{{ route('logout') }}">{{ trans('copy.a.logout') }}</a></li>
+                    <li><a href="{{ route('settings.index') }}">{{ trans('copy.a.settings') }}</a></li>
                     @if (Auth::user()->isAdmin())
                         <li><a href="{{ route('admin.dashboard') }}">Admin Panel</a></li>
                     @endif

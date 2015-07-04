@@ -64,7 +64,6 @@
                     <h4>{{ $horse->name }}</h4>
                 </a>
                 <p>{{ trans('copy.p.born') . ' ' . date('Y', strtotime($horse->date_of_birth)) }}</p>
-                <p>{{ trans('copy.p.passed_away') . ' ' . $horse->date_of_death ? date('Y', strtotime($family->date_of_death)) : '-' }}</p>
                 <p>{{ trans('copy.p.life_number') . ' ' . $horse->life_number ? : '-' }}</p>
             </div>
         </div>

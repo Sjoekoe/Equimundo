@@ -1,5 +1,6 @@
 <?php namespace HorseStories\Http;
 
+use HorseStories\Http\Middleware\Locale;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel {
@@ -16,6 +17,7 @@ class Kernel extends HttpKernel {
 		'Illuminate\Session\Middleware\StartSession',
 		'Illuminate\View\Middleware\ShareErrorsFromSession',
 		'HorseStories\Http\Middleware\VerifyCsrfToken',
+        Locale::class
 	];
 
 	/**
