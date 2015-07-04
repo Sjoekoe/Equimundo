@@ -2,27 +2,27 @@
 
 @section('content')
     <div class="row">
-        <h3>Results</h3>
-        <h5>Horses</h5>
+        <h3>{{ trans('copy.titles.results') }}</h3>
+        <h5>{{ trans('copy.titles.horses') }}</h5>
 
         @if (count($horses))
             @foreach ($horses as $horse)
                 <p><a href="{{ route('horses.show', $horse->slug) }}">{{ $horse->name }}</a></p>
             @endforeach
         @else
-            <p>No horses found</p>
+            <p>{{ trans('copy.p.no_horses_found') }}</p>
         @endif
 
         <hr/>
 
-        <h5>Users</h5>
+        <h5>{{ trans('copy.titles.users') }}</h5>
 
         @if (count($profiles))
             @foreach ($profiles as $profile)
                 <p><a href="{{ route('users.profiles.show', $profile->id) }}">{{ $profile->username }}</a></p>
             @endforeach
         @else
-            <p>No users found</p>
+            <p>{{ trans('copy.p.no_users_found') }}</p>
         @endif
 
     </div>

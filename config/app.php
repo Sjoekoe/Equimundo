@@ -191,7 +191,7 @@ return [
         'Html'      => 'Illuminate\Html\HtmlFacade',
         'Flash'     => 'Laracasts\Flash\Flash',
         'Image'     => 'Intervention\Image\Facades\Image',
-        'Active' => 'HieuLe\Active\Facades\Active',
+        'Active'    => 'HieuLe\Active\Facades\Active',
     ],
 
 ];

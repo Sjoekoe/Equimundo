@@ -8,7 +8,7 @@
             @if ($horse->owner()->first()->id !== Auth::user()->id)
                 @include('horses.partials.follow-form')
             @else
-                <a href="{{ route('horses.edit', $horse->slug) }}" class="btn">Edit {{ $horse->name }}</a>
+                <a href="{{ route('horses.edit', $horse->slug) }}" class="btn">{{ trans('copy.a.edit') . ' ' . $horse->name }}</a>
             @endif
         </div>
     </div>

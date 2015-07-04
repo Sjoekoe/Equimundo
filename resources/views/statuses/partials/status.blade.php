@@ -15,15 +15,15 @@
                     <br/>
                     <img src="{{ route('file.picture', [$status->horse->id, $status->getPicture()->path]) }}" alt=""/>
                 @endif
-                <span class="right"><a href="{{ route('statuses.edit', $status->id) }}">Edit</a></span>
-                <span class="right"><a href="{{ route('statuses.delete', $status->id) }}">Delete</a></span>
+                <span class="right"><a href="{{ route('statuses.edit', $status->id) }}">{{ trans('copy.a.edit') }}</a></span>
+                <span class="right"><a href="{{ route('statuses.delete', $status->id) }}">{{ trans('copy.a.delete') }}</a></span>
             </div>
             <div class="card-divider">
                 {{ Form::open(['route' => ['status.like', $status->id], 'class' => 'like-button pull-left', 'data-remote']) }}
-                {{ Form::hidden('status_id', $status->id) }}
-                <button type="submit" class="btn-naked">
-                    <i class="fa {{ in_array($status->id, $likes) ? 'fa-heart' : 'fa-heart-o' }}"></i>
-                </button>
+                    {{ Form::hidden('status_id', $status->id) }}
+                    <button type="submit" class="btn-naked">
+                        <i class="fa {{ in_array($status->id, $likes) ? 'fa-heart' : 'fa-heart-o' }}"></i>
+                    </button>
                 {{ Form::close() }}
                 <p class="muted like-counter">
                     {{ count($status->likes) }}
@@ -39,11 +39,11 @@
             @if (Auth::check())
                 <div class="row comment">
                     {{ Form::open(['route' => ['comment.store', $status->id], 'class' => 'comments__create-form col s12']) }}
-                    <div class="row">
-                        <div class="input-field col s12">
-                            {{ Form::textarea('body', null, ['class' => 'materialize-textarea', 'rows' => 1, 'placeholder' => 'write a comment ...']) }}
+                        <div class="row">
+                            <div class="input-field col s12">
+                                {{ Form::textarea('body', null, ['class' => 'materialize-textarea', 'rows' => 1, 'placeholder' => trans('forms.placeholders.write_a_comment')]) }}
+                            </div>
                         </div>
-                    </div>
                     {{ Form::close() }}
                 </div>
             @endif

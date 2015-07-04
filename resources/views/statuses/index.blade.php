@@ -19,7 +19,7 @@
                         <!-- Status Form input -->
                         <div class="row">
                             <div class="input-field col s12">
-                                {{ Form::textarea('status', null, ['class' => 'materialize-textarea', 'rows' => 3, 'placeholder' => 'what have you been doing ...']) }}
+                                {{ Form::textarea('status', null, ['class' => 'materialize-textarea', 'rows' => 3, 'placeholder' => trans('forms.placeholders.what_you_been_doing')]) }}
                             </div>
                         </div>
 
@@ -27,17 +27,17 @@
                         <div class="file-field input-field">
                             <input class="file-path validate" type="text"/>
                             <div class="btn">
-                                <span>File</span>
+                                <span>{{ trans('copy.span.file') }}</span>
                                 {{ Form::file('picture') }}
                             </div>
                         </div>
-                        {{ Form::submit('Post Status', ['class' => 'btn right']) }}
+                        {{ Form::submit(trans('forms.buttons.post_status'), ['class' => 'btn right']) }}
 
                         {{ Form::close() }}
                     </div>
                 </div>
             @else
-                <p>Please create a horse first before you can post a status</p>
+                <p>{{ trans('copy.p.please_create_horse') }}</p>
             @endif
         </div>
     </div>

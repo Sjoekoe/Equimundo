@@ -6,37 +6,37 @@
             {{ Form::open(['route' => ['palmares.update', $palmares->id], 'class' => 'grid-content medium-12']) }}
             <div class="row">
                 <div class="col s6 input-field">
-                    {{ Form::label('event_name', 'Venue') }}
+                    {{ Form::label('event_name', trans('forms.labels.venue')) }}
                     {{ Form::text('event_name', $palmares->event->name) }}
                 </div>
                 <div class="col s6 input-field">
-                    {{ Form::label('date', 'Date') }}
+                    {{ Form::label('date', trans('forms.labels.date')) }}
                     {{ Form::text('date', date('d/m/Y', strtotime($palmares->date)), ['placeholder' => 'dd/mm/YYYY']) }}
                 </div>
             </div>
             <div class="row">
                 <div class="col s6 input-field">
                     {{ Form::select('discipline', trans('disciplines.list'), $palmares->discipline, ['class' => 'discipline-select']) }}
-                    {{ Form::label('discipline', 'Discipline') }}
+                    {{ Form::label('discipline', trans('forms.labels.discipline')) }}
                 </div>
                 <div class="col s6 input-field">
-                    {{ Form::label('level', 'category') }}
+                    {{ Form::label('level', trans('forms.labels.category')) }}
                     {{ Form::text('level', $palmares->level) }}
                 </div>
             </div>
             <div class="row">
                 <div class="col s6 input-field">
-                    {{ Form::label('ranking', 'ranking') }}
+                    {{ Form::label('ranking', trans('forms.labels.ranking')) }}
                     {{ Form::text('ranking', $palmares->ranking) }}
                 </div>
             </div>
             <div class="row">
                 <div class="col s12 input-field">
-                    {{ Form::label('body', 'Your story') }}
+                    {{ Form::label('body', trans('forms.labels.story')) }}
                     {{ Form::textarea('body', $palmares->status->body, ['class' => 'materialize-textarea']) }}
                 </div>
             </div>
-            {{ Form::submit('save achievement', ['class' => 'btn']) }}
+            {{ Form::submit(trans('forms.buttons.save'), ['class' => 'btn']) }}
             {{ Form::close() }}
         </div>
     </div>

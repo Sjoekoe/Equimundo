@@ -197,4 +197,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return $this == $horse->owner;
     }
+
+    /**
+     * @return string
+     */
+    public function getLocale()
+    {
+        return $this->settings->language;
+    }
 }

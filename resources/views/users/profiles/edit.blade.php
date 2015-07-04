@@ -6,29 +6,25 @@
             @include('layout.partials.errors')
             {{ Form::open(['route' => 'users.profiles.update', 'class' => 'form-horizontal']) }}
 
-            <!-- First_name Form input -->
-            {{ Form::label('first_name', 'First Name:') }}
+            {{ Form::label('first_name', trans('forms.labels.first_name')) }}
             {{ Form::text('first_name', Auth::user()->first_name) }}
 
-            <!-- Last_name Form input -->
-            {{ Form::label('last_name', 'Last Name:') }}
+            {{ Form::label('last_name', trans('forms.labels.last_name')) }}
             {{ Form::text('last_name', Auth::user()->last_name) }}
 
-            <!-- Dob Form input -->
-            {{ Form::label('date_of_birth', 'Date Of Birth:') }}
+            {{ Form::label('date_of_birth', trans('forms.labels.date_of_birth')) }}
             {{ Form::text('date_of_birth', Auth::user()->date_of_birth, ['placeholder' => 'dd/mm/YYYY']) }}
 
-            {{ Form::label('country', 'Country') }}
+            {{ Form::label('country', trans('forms.labels.country')) }}
             {{ Form::select('country', Lang::get('countries'), Auth::user()->country) }}
 
-            {{ Form::label('gender', 'Gender') }}
+            {{ Form::label('gender', trans('forms.labels.gender')) }}
             {{ Form::select('gender', ['F' => 'Female', 'M' => 'Male'], Auth::user()->gender) }}
 
-            {{ Form::label('about', 'About You:') }}
+            {{ Form::label('about', trans('forms.labels.about_you')) }}
             {{ Form::textarea('about', Auth::user()->about, ['rows' => 3]) }}
 
-            <!-- Submit button -->
-            {{ Form::submit('Save Profile', ['class' => 'button']) }}
+            {{ Form::submit(trans('forms.buttons.save'), ['class' => 'button']) }}
 
             {{ Form::close() }}
         </div>

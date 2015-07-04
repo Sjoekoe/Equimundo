@@ -11,12 +11,12 @@
             @endif
         @endforeach
     @else
-        <p>No more messages in this conversation</p>
+        <p>{{ trans('copy.p.empty_conversation') }}</p>
     @endif
 
     {{ Form::open(['route' => ['message.store', $conversation->id]]) }}
-        {{ Form::label('message', 'Reply') }}
+        {{ Form::label('message', trans('forms.labels.reply')) }}
         {{ Form::textarea('message', null, ['class' => 'materialize-textarea']) }}
-        {{ Form::submit('reply', ['class' => 'btn']) }}
+        {{ Form::submit(trans('forms.buttons.reply'), ['class' => 'btn']) }}
     {{ Form::close() }}
 @stop

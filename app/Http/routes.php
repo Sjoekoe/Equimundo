@@ -43,4 +43,5 @@ Route::group(['namespace' => 'Statuses'], function() {
 
 Route::group(['namespace' => 'Users'], function() {
     require __DIR__  .'/Routes/Users/profiles.php';
+    require __DIR__ . '/Routes/Users/settings.php';
 });

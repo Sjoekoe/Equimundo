@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col s12">
-            <h1>Horses of {{ $user->username }}</h1>
+            <h1>{{ trans('copy.titles.horses_of') }} {{ $user->username }}</h1>
         </div>
     </div>
 
