@@ -1,8 +1,9 @@
-<?php 
+<?php
 namespace HorseStories\Http\Controllers\Statuses;
 
 use Auth;
 use DB;
+use HorseStories\Events\StatusLiked;
 use HorseStories\Models\Statuses\Status;
 use Illuminate\Routing\Controller;
 
@@ -22,6 +23,8 @@ class LikeController extends Controller
             Auth::user()->likes()->detach($status);
         } else {
             Auth::user()->likes()->attach($status);
+
+            event(new StatusLiked($status, Auth::user()));
         }
 
         return response()->json('success', 200);

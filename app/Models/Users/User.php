@@ -5,6 +5,7 @@ use HorseStories\Events\Event;
 use HorseStories\Models\Comments\Comment;
 use HorseStories\Models\Conversations\Conversation;
 use HorseStories\Models\Horses\Horse;
+use HorseStories\Models\Notifications\Notification;
 use HorseStories\Models\Roles\Role;
 use HorseStories\Models\Settings\Setting;
 use HorseStories\Models\Statuses\Status;
@@ -114,6 +115,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class, 'receiver_id', 'id');
+    }
+
+    /**
      * @param string $name
      * @return bool
      */
@@ -204,5 +213,36 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function getLocale()
     {
         return $this->settings->language;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasUnreadNotifications()
+    {
+        return $this->countUnreadNotifications() > 0;
+    }
+
+    /**
+     * @return int
+     */
+    public function countUnreadNotifications()
+    {
+        $count = 0;
+
+        foreach ($this->notifications as $notification) {
+            if ($notification->read == false) {
+                $count++;
+            }
+        }
+
+        return $count;
+    }
+
+    public function markNotificationsAsRead()
+    {
+        foreach ($this->notifications as $notification) {
+            $notification->markAsRead();
+        }
     }
 }

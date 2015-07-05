@@ -27,6 +27,10 @@ Route::group(['namespace' => 'Horses'], function() {
     require __DIR__ . '/Routes/Horses/pictures.php';
 });
 
+Route::group(['namespace' => 'Notifications'], function() {
+    require __DIR__ . '/Routes/Notifications/notifications.php';
+});
+
 Route::group(['namespace' => 'Pages'], function() {
     require __DIR__ . '/Routes/Pages/pages.php';
 });

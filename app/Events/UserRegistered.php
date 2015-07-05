@@ -1,7 +1,5 @@
 <?php namespace HorseStories\Events;
 
-use HorseStories\Events\Event;
-
 use HorseStories\Models\Users\User;
 use Illuminate\Queue\SerializesModels;
 

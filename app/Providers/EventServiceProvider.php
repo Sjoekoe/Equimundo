@@ -1,5 +1,9 @@
 <?php namespace HorseStories\Providers;
 
+use HorseStories\Events\StatusLiked;
+use HorseStories\Events\UserRegistered;
+use HorseStories\Listeners\Events\EmailRegisteredUser;
+use HorseStories\Listeners\Events\NotifyStatusPoster;
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -11,9 +15,12 @@ class EventServiceProvider extends ServiceProvider {
 	 * @var array
 	 */
 	protected $listen = [
-		'HorseStories\Events\UserRegistered' => [
-			'HorseStories\Handlers\Events\EmailRegisteredUser',
+		UserRegistered::class => [
+			EmailRegisteredUser::class,
 		],
+        StatusLiked::class => [
+            NotifyStatusPoster::class,
+        ],
 	];
 
 	/**

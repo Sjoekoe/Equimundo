@@ -6,7 +6,7 @@ class SettingsUpdater
     public function update(Setting $setting, $values)
     {
         if (array_key_exists('email_notifications', $values)) {
-            $setting->email_notifications = $values['email_notifications'];
+            $setting->email_notifications = true;
         } else {
             $setting->email_notifications = false;
         }
