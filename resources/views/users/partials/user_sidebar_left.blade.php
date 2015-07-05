@@ -9,6 +9,12 @@
                 <span class="new badge">{{ Auth::user()->countUnreadMessages() }}</span>
             @endif
         </a>
+        <a href="{{ route('notifications.index') }}" class="collection-item grey lighten-3">
+            {{ trans('copy.a.notifications') }}
+            @if (Auth::user()->hasUnreadNotifications())
+                <span class="new badge">{{ Auth::user()->countUnreadNotifications() }}</span>
+            @endif
+        </a>
     </div>
 
     <h4>{{ trans('copy.titles.horses') }}</h4>

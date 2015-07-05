@@ -19,7 +19,6 @@ class EmailRegisteredUser {
      */
     public function __construct(UserMailer $mailer)
     {
-        //
         $this->mailer = $mailer;
     }
 
