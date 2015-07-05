@@ -1,4 +1,5 @@
-<?php namespace HorseStories\Handlers\Events;
+<?php
+namespace HorseStories\Listeners\Events;
 
 use HorseStories\Core\Mailers\UserMailer;
 use HorseStories\Events\UserRegistered;

@@ -128,6 +128,7 @@ return [
         'Illuminate\Validation\ValidationServiceProvider',
         'Illuminate\View\ViewServiceProvider',
         'Illuminate\Html\HtmlServiceProvider',
+        'Illuminate\Broadcasting\BroadcastServiceProvider',
         /*
          * Application Service Providers...
          */
@@ -137,7 +138,6 @@ return [
         'HorseStories\Providers\EventServiceProvider',
         'HorseStories\Providers\RouteServiceProvider',
         'Laracasts\Flash\FlashServiceProvider',
-        'Barryvdh\Debugbar\ServiceProvider',
         'Intervention\Image\ImageServiceProvider',
         'HieuLe\Active\ActiveServiceProvider',
 

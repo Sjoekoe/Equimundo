@@ -45,7 +45,7 @@ class StatusRepository
     {
         $horseIds = $user->follows()->lists('horse_id');
 
-        $horseIds[] = $user->horses()->lists('id');
+        $horseIds[] = $user->horses()->lists('id')->all();
 
         return $this->status->with('comments')->whereIn('horse_id', array_flatten($horseIds))->latest()->get();
     }

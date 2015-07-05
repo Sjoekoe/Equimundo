@@ -1,5 +1,5 @@
 <?php
-namespace HorseStories\Handlers\Events;
+namespace HorseStories\Listeners\Events;
 
 use HorseStories\Events\StatusLiked;
 use HorseStories\Models\Notifications\Notification;
