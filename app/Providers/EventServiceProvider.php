@@ -1,5 +1,6 @@
 <?php namespace HorseStories\Providers;
 
+use HorseStories\Events\CommentWasPosted;
 use HorseStories\Events\StatusLiked;
 use HorseStories\Events\UserRegistered;
 use HorseStories\Listeners\Events\EmailRegisteredUser;
@@ -20,6 +21,9 @@ class EventServiceProvider extends ServiceProvider {
 		],
         StatusLiked::class => [
             NotifyStatusPoster::class,
+        ],
+        CommentWasPosted::class => [
+            NotifyStatusPoster::class
         ],
 	];
 

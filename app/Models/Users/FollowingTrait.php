@@ -35,7 +35,7 @@ trait FollowingTrait
      */
     public function isFollowing(Horse $horse)
     {
-        $followedHorses = $this->follows()->lists('horse_id');
+        $followedHorses = $this->follows()->lists('horse_id')->all();
 
         return in_array($horse->id, $followedHorses);
     }

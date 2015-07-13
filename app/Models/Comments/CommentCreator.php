@@ -1,6 +1,6 @@
-<?php 
+<?php
 namespace HorseStories\Models\Comments;
-  
+
 use HorseStories\Models\Statuses\Status;
 use Illuminate\Auth\AuthManager;
 
@@ -22,6 +22,7 @@ class CommentCreator
     /**
      * @param \HorseStories\Models\Statuses\Status $status
      * @param string $body
+     * @return \HorseStories\Models\Comments\Comment
      */
     public function create(Status $status, $body)
     {
@@ -31,5 +32,7 @@ class CommentCreator
         $comment->user_id = $this->auth->user()->id;
 
         $comment->save();
+
+        return $comment;
     }
 }

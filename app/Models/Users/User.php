@@ -212,7 +212,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function getLocale()
     {
-        return $this->settings->language;
+        return $this->settings->language ?: 'en';
     }
 
     /**

@@ -1,6 +1,7 @@
-<?php 
+<?php
 namespace HorseStories\Models\Comments;
-  
+
+use HorseStories\Models\Statuses\Status;
 use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
@@ -16,5 +17,13 @@ class Comment extends Model
     public function poster()
     {
         return $this->belongsTo('\HorseStories\Models\Users\User', 'user_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
     }
 }

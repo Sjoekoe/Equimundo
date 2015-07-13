@@ -1,12 +1,14 @@
-<?php 
+<?php
 namespace HorseStories\Http\Controllers\Statuses;
 
+use Auth;
 use Flash;
+use HorseStories\Events\CommentWasPosted;
 use HorseStories\Models\Comments\CommentCreator;
+use HorseStories\Models\Notifications\Notification;
 use HorseStories\Models\Statuses\Status;
 use Illuminate\Routing\Controller;
 use Input;
-use Redirect;
 
 class CommentController extends Controller
 {
@@ -31,7 +33,9 @@ class CommentController extends Controller
     {
         $status = Status::findOrFail($status);
 
-        $this->commentCreator->create($status, Input::get('body'));
+        $comment = $this->commentCreator->create($status, Input::get('body'));
+
+        event(new CommentWasPosted($comment->status, Auth::user(), Notification::COMMENT_POSTED));
 
         Flash::success('Your comment was posted');
 

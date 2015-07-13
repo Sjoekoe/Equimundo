@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Notification extends Model
 {
     const STATUS_LIKED = 1;
+    const COMMENT_POSTED = 2;
 
     /**
      * @var array
@@ -54,6 +55,9 @@ class Notification extends Model
     {
         switch ($type) {
             case self::STATUS_LIKED:
+                return route('statuses.show', $entity->id);
+
+            case self::COMMENT_POSTED;
                 return route('statuses.show', $entity->id);
         }
     }

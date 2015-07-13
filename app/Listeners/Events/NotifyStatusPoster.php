@@ -1,8 +1,6 @@
 <?php
 namespace HorseStories\Listeners\Events;
 
-use HorseStories\Events\StatusLiked;
-use HorseStories\Models\Notifications\Notification;
 use HorseStories\Models\Notifications\NotificationCreator;
 
 class NotifyStatusPoster
@@ -20,8 +18,8 @@ class NotifyStatusPoster
         $this->creator = $creator;
     }
 
-    public function handle(StatusLiked $event)
+    public function handle($event)
     {
-        $this->creator->create($event->sender, $event->status->user(), Notification::STATUS_LIKED, $event->status);
+        $this->creator->create($event->sender, $event->status->user(), $event->notification, $event->status);
     }
 }

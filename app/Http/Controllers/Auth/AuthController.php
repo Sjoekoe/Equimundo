@@ -2,9 +2,10 @@
 namespace HorseStories\Http\Controllers\Auth;
 
 use HorseStories\Http\Controllers\Controller;
+use HorseStories\Models\Settings\Setting;
 use HorseStories\Models\Users\User;
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Validator;
 
 class AuthController extends Controller {
 
