@@ -204,7 +204,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function isHorseOwner(Horse $horse)
     {
-        return $this == $horse->owner;
+        return $this->id == $horse->owner->id;
     }
 
     /**
