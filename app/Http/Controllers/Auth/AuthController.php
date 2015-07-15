@@ -1,6 +1,7 @@
 <?php
 namespace HorseStories\Http\Controllers\Auth;
 
+use HorseStories\Events\UserRegistered;
 use HorseStories\Http\Controllers\Controller;
 use HorseStories\Models\Settings\Setting;
 use HorseStories\Models\Users\User;
@@ -59,7 +60,10 @@ class AuthController extends Controller {
         $settings = new Setting();
         $settings->user_id = $user->id;
         $settings->date_format = 'd/m/Y';
+        $settings->language = 'en';
         $settings->save();
+
+        event(new UserRegistered($user));
 
         return $user;
     }
