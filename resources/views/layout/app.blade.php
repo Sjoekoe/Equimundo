@@ -24,7 +24,6 @@
 	@include('layout.partials.nav')
 
     <div class="row">
-        @include('flash::message')
 
         <div class="col s2">
             @if (Auth::check())

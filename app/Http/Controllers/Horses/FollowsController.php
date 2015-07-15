@@ -1,14 +1,14 @@
-<?php 
+<?php
 namespace HorseStories\Http\Controllers\Horses;
 
 use Auth;
-use Flash;
 use HorseStories\Models\Follows\FollowsRepository;
 use HorseStories\Models\Horses\Horse;
 use HorseStories\Models\Horses\HorseRepository;
 use Illuminate\Routing\Controller;
 use Input;
 use Redirect;
+use Session;
 
 class FollowsController extends Controller
 {
@@ -50,7 +50,7 @@ class FollowsController extends Controller
 
         Auth::user()->follow($horse);
 
-        Flash::success('You are now following ' . $horse->name);
+        Session::put('success', 'You are now following ' . $horse->name);
 
         return redirect()->back();
     }
@@ -65,7 +65,7 @@ class FollowsController extends Controller
 
         Auth::user()->unFollow($horse);
 
-        Flash::success('You are no longer following ' . $horse->name);
+        Session::put('succes', 'You are no longer following ' . $horse->name);
 
         return Redirect::back();
     }

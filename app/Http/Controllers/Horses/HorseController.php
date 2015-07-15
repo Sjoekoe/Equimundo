@@ -3,11 +3,9 @@ namespace HorseStories\Http\Controllers\Horses;
 
 use Auth;
 use DB;
-use Flash;
 use HorseStories\Core\Files\Uploader;
 use HorseStories\Http\Requests\CreateHorse;
 use HorseStories\Http\Requests\UpdateHorse;
-use HorseStories\Models\Horses\Horse;
 use HorseStories\Models\Horses\HorseCreator;
 use HorseStories\Models\Horses\HorseRepository;
 use HorseStories\Models\Horses\HorseUpdater;
@@ -15,6 +13,7 @@ use HorseStories\Models\Statuses\StatusRepository;
 use HorseStories\Models\Users\User;
 use Illuminate\Routing\Controller;
 use Request;
+use Session;
 
 class HorseController extends Controller
 {
@@ -98,6 +97,7 @@ class HorseController extends Controller
         }
 
         Flash::success($horse->name . ' was successfully created.');
+        Session::put('success', $horse->name . ' was successfully created.');
 
         return redirect()->route('horses.index', Auth::user()->id);
     }
@@ -141,7 +141,7 @@ class HorseController extends Controller
 
         $this->horseUpdater->update($horse, $request->all());
 
-        Flash::success($horse->name . ' was updated');
+        Session::put('success', $horse->name . ' was updated');
 
         return redirect()->route('horses.show', $horse->slug);
     }

@@ -2,13 +2,13 @@
 namespace HorseStories\Http\Controllers\Statuses;
 
 use Auth;
-use Flash;
 use HorseStories\Events\CommentWasPosted;
 use HorseStories\Models\Comments\CommentCreator;
 use HorseStories\Models\Notifications\Notification;
 use HorseStories\Models\Statuses\Status;
 use Illuminate\Routing\Controller;
 use Input;
+use Session;
 
 class CommentController extends Controller
 {
@@ -37,7 +37,7 @@ class CommentController extends Controller
 
         event(new CommentWasPosted($comment->status, Auth::user(), Notification::COMMENT_POSTED));
 
-        Flash::success('Your comment was posted');
+        Session::put('success', 'Your comment was posted');
 
         return response()->json('success', 200);
     }
