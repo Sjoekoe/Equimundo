@@ -1,12 +1,11 @@
 <?php
 namespace HorseStories\Events;
 
-use HorseStories\Models\Notifications\Notification;
 use HorseStories\Models\Statuses\Status;
 use HorseStories\Models\Users\User;
 use Illuminate\Queue\SerializesModels;
 
-class StatusLiked extends Event
+class CommentWasPosted extends Event
 {
     use SerializesModels;
 

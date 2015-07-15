@@ -8,7 +8,7 @@ use HorseStories\Models\Statuses\StatusRepository;
 use HorseStories\Models\Statuses\StatusUpdater;
 use Illuminate\Routing\Controller;
 use Input;
-use Laracasts\Flash\Flash;
+use Session;
 
 class StatusController extends Controller
 {
@@ -47,7 +47,7 @@ class StatusController extends Controller
     {
         $this->statusCreator->create($request->all());
 
-        Flash::success('Status has been posted');
+        Session::put('success', 'Status has been posted');
 
         return redirect()->refresh();
     }

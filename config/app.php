@@ -137,7 +137,6 @@ return [
         'HorseStories\Providers\ConfigServiceProvider',
         'HorseStories\Providers\EventServiceProvider',
         'HorseStories\Providers\RouteServiceProvider',
-        'Laracasts\Flash\FlashServiceProvider',
         'Intervention\Image\ImageServiceProvider',
         'HieuLe\Active\ActiveServiceProvider',
 
@@ -189,7 +188,6 @@ return [
         'View'      => 'Illuminate\Support\Facades\View',
         'Form'      => 'Illuminate\Html\FormFacade',
         'Html'      => 'Illuminate\Html\HtmlFacade',
-        'Flash'     => 'Laracasts\Flash\Flash',
         'Image'     => 'Intervention\Image\Facades\Image',
         'Active'    => 'HieuLe\Active\Facades\Active',
     ],

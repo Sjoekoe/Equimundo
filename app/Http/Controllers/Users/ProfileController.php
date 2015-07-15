@@ -2,11 +2,10 @@
 namespace HorseStories\Http\Controllers\Users;
 
 use Auth;
-use Flash;
 use HorseStories\Http\Controllers\Controller;
 use HorseStories\Http\Requests\UpdateUserProfile;
-use HorseStories\Models\Users\User;
 use HorseStories\Models\Users\UserRepository;
+use Session;
 
 class ProfileController extends  Controller
 {
@@ -41,7 +40,7 @@ class ProfileController extends  Controller
 
         $user->update($request->all());
 
-        Flash::success('Profile was updated');
+        Session::put('success', 'Profile was updated');
 
         return back();
     }
