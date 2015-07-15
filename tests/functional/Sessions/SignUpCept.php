@@ -1,23 +1,23 @@
-<?php 
+<?php
 $I = new FunctionalTester($scenario);
 $I->am('guest');
 $I->wantTo('sign up for an account');
 
 $I->amOnPage('/');
-$I->click('Register');
+$I->click('Sign Up');
 $I->seeCurrentUrlEquals('/register');
 
-$I->fillField('Username:', 'JohnDoe');
-$I->fillField('E-Mail Address:', 'john@example.com');
+$I->fillField('Username:', 'foo');
+$I->fillField('Email:', 'foo@bar.com');
 $I->fillField('Password:', 'password');
-$I->fillField('Password Confirmation:', 'password');
+$I->fillField('Confirm Password:', 'password');
 $I->click('Sign Up');
 
 $I->seeCurrentUrlEquals('');
 
 $I->seeRecord('users', [
-    'username' => 'JohnDoe',
-    'email' => 'john@example.com'
+    'username' => 'foo',
+    'email' => 'foo@bar.com'
 ]);
 
 $I->amLoggedAs(Auth::user());

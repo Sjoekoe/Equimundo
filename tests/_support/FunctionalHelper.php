@@ -1,6 +1,8 @@
 <?php
 namespace Codeception\Module;
 
+use HorseStories\Models\Horses\Horse;
+use HorseStories\Models\Users\User;
 use Laracasts\TestDummy\Factory as TestDummy;
 
 // here you can define custom actions
@@ -21,19 +23,19 @@ class FunctionalHelper extends \Codeception\Module
         $I = $this->getModule('Laravel5');
 
         $I->amOnPage('/login');
-        $I->fillField('email', $email);
-        $I->fillField('password', 'password');
-        $I->click('Login');
+        $I->fillField('Email:', $email);
+        $I->fillField('Password:', 'password');
+        $I->click('Sign In');
     }
 
     public function haveAnAccount($overrides = [])
     {
-        return $this->have('HorseStories\Models\Users\User', $overrides);
+        return $this->have(User::class, $overrides);
     }
 
     public function haveAHorse($overrides = [])
     {
-        return $this->have('HorseStories\Models\Horses\Horse', $overrides);
+        return $this->have(Horse::class, $overrides);
     }
 
     public function postAStatus($body)

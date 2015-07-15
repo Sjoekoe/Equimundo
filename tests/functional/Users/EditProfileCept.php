@@ -6,10 +6,10 @@ $I->wantTo('edit my profile details');
 $I->signIn();
 $I->amOnPage('/edit-profile');
 
-$I->fillField('first_name', 'John');
-$I->fillField('last_name', 'Doe');
-$I->fillField('about', 'lorem ipsum');
-$I->selectOption('gender', 'M');
+$I->fillField('First name:', 'John');
+$I->fillField('Last name:', 'Doe');
+$I->fillField('About:', 'lorem ipsum');
+$I->selectOption('Gender:', 'M');
 $I->fillField('date_of_birth', '08/06/1982');
 $I->selectOption('country', 'BE');
 $I->click('Save Profile');
