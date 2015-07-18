@@ -96,7 +96,6 @@ class HorseController extends Controller
             $this->uploader->uploadPicture(Request::file('profile_pic'), $horse, true);
         }
 
-        Flash::success($horse->name . ' was successfully created.');
         Session::put('success', $horse->name . ' was successfully created.');
 
         return redirect()->route('horses.index', Auth::user()->id);
