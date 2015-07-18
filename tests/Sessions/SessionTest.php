@@ -3,9 +3,8 @@ namespace Sessions;
 
 use HorseStories\Models\Settings\Setting;
 use HorseStories\Models\Users\User;
-use TestCase;
 
-class SessionTest extends TestCase
+class SessionTest extends \TestCase
 {
     /** @test */
     public function login()
@@ -22,6 +21,24 @@ class SessionTest extends TestCase
             ->type($user->email, 'email')
             ->type('password', 'password')
             ->press('Sign In')
-            ->onPage('/');
+            ->onPage('/')
+            ->dontSee('Welcome to Horse Stories');
+    }
+
+    /** @test */
+    public function logout()
+    {
+        $user = factory(User::class)->create();
+
+        factory(Setting::class)->create([
+            'user_id' => $user->id
+        ]);
+
+        $this->actingAs($user)
+            ->withSession(['foo' => 'bar'])
+            ->visit('/')
+            ->click('Sign Out')
+            ->onPage('/')
+            ->see('Welcome to Horse Stories');
     }
 }
