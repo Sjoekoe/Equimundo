@@ -90,7 +90,7 @@ class HorseController extends Controller
      */
     public function store(CreateHorse $request)
     {
-        $horse = $this->horseCreator->create(Auth::user(), $request->all());
+        $horse = $this->horseCreator->create($request->all());
 
         if (Request::hasFile('profile_pic')) {
             $this->uploader->uploadPicture(Request::file('profile_pic'), $horse, true);

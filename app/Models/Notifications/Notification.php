@@ -8,6 +8,7 @@ class Notification extends Model
 {
     const STATUS_LIKED = 1;
     const COMMENT_POSTED = 2;
+    const PEDIGREE_CREATED = 3;
 
     /**
      * @var array
@@ -59,6 +60,9 @@ class Notification extends Model
 
             case self::COMMENT_POSTED;
                 return route('statuses.show', $entity->id);
+
+            case self::PEDIGREE_CREATED:
+                return route('horses.show', $entity->slug);
         }
     }
 

@@ -9,34 +9,39 @@
     @endif
     <div class="row pedigree">
         <div class="col s12">
-            <div class="col s3 grandparent male">
-                @if ($family = $horse->fathersFather())
-                    @include('horses.pedigree._partials._pedigree')
-                @else
-                    <a href="{{ route('pedigree.create', [$horse->slug, 'type=3']) }}" class="black-text">{{ trans('copy.a.add_father_father') }}</a>
-                @endif
-            </div>
-            <div class="col s3 grandparent female">
-                @if ($family = $horse->fathersMother())
-                    @include('horses.pedigree._partials._pedigree')
-                @else
-                    <a href="{{ route('pedigree.create', [$horse->slug, 'type=4']) }}" class="black-text">{{ trans('copy.a.add_father_mother') }}</a>
-                @endif
-            </div>
-            <div class="col s3 grandparent male">
-                @if ($family = $horse->mothersFather())
-                    @include('horses.pedigree._partials._pedigree')
-                @else
-                    <a href="{{ route('pedigree.create', [$horse->slug, 'type=5']) }}" class="black-text">{{ trans('copy.a.add_mother_father') }}</a>
-                @endif
-            </div>
-            <div class="col s3 grandparent female">
-                @if ($family = $horse->mothersMother())
-                    @include('horses.pedigree._partials._pedigree')
-                @else
-                    <a href="{{ route('pedigree.create', [$horse->slug, 'type=6']) }}" class="black-text">{{ trans('copy.a.add_mother_mother') }}</a>
-                @endif
-            </div>
+            @if ($horse->hasFather())
+                <div class="col s3 grandparent male">
+                    @if ($family = $horse->fathersFather())
+                        @include('horses.pedigree._partials._pedigree')
+                    @else
+                        <a href="{{ route('pedigree.create', [$horse->slug, 'type=5']) }}" class="black-text">{{ trans('copy.a.add_father_father') }}</a>
+                    @endif
+                </div>
+                <div class="col s3 grandparent female">
+                    @if ($family = $horse->fathersMother())
+                        @include('horses.pedigree._partials._pedigree')
+                    @else
+                        <a href="{{ route('pedigree.create', [$horse->slug, 'type=6']) }}" class="black-text">{{ trans('copy.a.add_father_mother') }}</a>
+                    @endif
+                </div>
+            @endif
+
+            @if ($horse->hasMother())
+                <div class="col s3 grandparent male">
+                    @if ($family = $horse->mothersFather())
+                        @include('horses.pedigree._partials._pedigree')
+                    @else
+                        <a href="{{ route('pedigree.create', [$horse->slug, 'type=7']) }}" class="black-text">{{ trans('copy.a.add_mother_father') }}</a>
+                    @endif
+                </div>
+                <div class="col s3 grandparent female">
+                    @if ($family = $horse->mothersMother())
+                        @include('horses.pedigree._partials._pedigree')
+                    @else
+                        <a href="{{ route('pedigree.create', [$horse->slug, 'type=8']) }}" class="black-text">{{ trans('copy.a.add_mother_mother') }}</a>
+                    @endif
+                </div>
+            @endif
         </div>
     </div>
     <div class="row pedigree">
@@ -74,14 +79,14 @@
                 {{ trans('copy.titles.sons') }}
                 <hr/>
                 @foreach ($horse->sons() as $son)
-                    {{ $son->family_name }} {{ $son->hasFather() ? ' f.' . $son->father()->family_name : '' }}
+                    {{ $son->originalHorse->name }}
                 @endforeach
             </div>
             <div class="col s6 offspring female">
                 {{ trans('copy.titles.daughters') }}
                 <hr/>
                 @foreach ($horse->daughters() as $daughter)
-                    {{ $daughter->family_name }} {{ $daughter->hasFather() ? ' f.' . $daughter->father()->family_name : '' }}
+                    {{ $daughter->originalHorse->name }}
                 @endforeach
             </div>
         </div>

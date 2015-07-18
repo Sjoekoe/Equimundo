@@ -4,6 +4,7 @@ namespace HorseStories\Models\Horses;
 use DateTime;
 use HorseStories\Core\Slugs\SlugCreator;
 use HorseStories\Models\Users\User;
+use Illuminate\Auth\AuthManager;
 use Illuminate\Support\Str;
 
 class HorseCreator
@@ -14,24 +15,35 @@ class HorseCreator
     private $slugCreator;
 
     /**
-     * @param \HorseStories\Core\Slugs\SlugCreator $slugCreator
+     * @var \Illuminate\Auth\AuthManager
      */
-    public function __construct(SlugCreator $slugCreator)
+    private $auth;
+
+    /**
+     * @param \HorseStories\Core\Slugs\SlugCreator $slugCreator
+     * @param \Illuminate\Auth\AuthManager $auth
+     */
+    public function __construct(SlugCreator $slugCreator, AuthManager $auth)
     {
         $this->slugCreator = $slugCreator;
+        $this->auth = $auth;
     }
 
     /**
-     * @param \HorseStories\Models\Users\User $user
      * @param array $values
+     * @param bool $pedigree
      * @return \HorseStories\Models\Horses\Horse
      */
-    public function create(User $user, $values = [])
+    public function create($values = [], $pedigree = false)
     {
         $horse = new Horse();
 
         $horse->name = $values['name'];
-        $horse->user_id = $user->id;
+
+        if (! $pedigree) {
+            $horse->user_id = $this->auth->user()->id;
+        }
+
         $horse->gender = $values['gender'];
         $horse->breed = $values['breed'];
         $horse->life_number = $values['life_number'];
@@ -42,8 +54,10 @@ class HorseCreator
 
         $horse->save();
 
-        foreach($values['disciplines'] as $discipline) {
-            $horse->disciplines()->updateOrCreate(['discipline' => $discipline, 'horse_id' => $horse->id]);
+        if (array_key_exists('disciplines', $values)) {
+            foreach($values['disciplines'] as $discipline) {
+                $horse->disciplines()->updateOrCreate(['discipline' => $discipline, 'horse_id' => $horse->id]);
+            }
         }
 
         return $horse;

@@ -1,6 +1,7 @@
 <?php
 namespace HorseStories\Models\Horses;
 
+use DateTime;
 use HorseStories\Models\Disciplines\Discipline;
 use HorseStories\Models\Palmares\Palmares;
 use HorseStories\Models\Pedigrees\Pedigree;
@@ -11,6 +12,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Horse extends Model
 {
+    const FEMALE = 2;
+
     /**
      * The table name used by the entity
      *
@@ -33,6 +36,14 @@ class Horse extends Model
     public function owner()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasOwner()
+    {
+        return $this->user_id !== null;
     }
 
     /**
@@ -92,63 +103,75 @@ class Horse extends Model
     }
 
     /**
-     * @return \HorseStories\Models\Pedigrees\Pedigree
+     * @return \HorseStories\Models\Horses\Horse
      */
     public function father()
     {
-        return $this->pedigree->filter(function ($family) {
+        $pedigree =  $this->pedigree->filter(function ($family) {
             return $family->type == 1;
         })->first();
+
+        return $pedigree ? $pedigree->originalHorse : null;
     }
 
     /**
-     * @return \HorseStories\Models\Pedigrees\Pedigree
+     * @return bool
      */
-    public function mother()
+    public function hasFather()
     {
-        return $this->pedigree->filter(function ($family) {
-            return $family->type == 2;
-        })->first();
+        return $this->father() !== null;
     }
 
     /**
-     * @return \HorseStories\Models\Pedigrees\Pedigree
+     * @return \HorseStories\Models\Horses\Horse
      */
     public function fathersFather()
     {
-        return $this->pedigree->filter(function ($family) {
-            return $family->type == 3;
-        })->first();
+        return $this->father()->father();
     }
 
     /**
-     * @return \HorseStories\Models\Pedigrees\Pedigree
+     * @return \HorseStories\Models\Horses\Horse
      */
     public function fathersMother()
     {
-        return $this->pedigree->filter(function ($family) {
-            return $family->type == 4;
-        })->first();
+        return $this->father()->mother();
     }
 
     /**
-     * @return \HorseStories\Models\Pedigrees\Pedigree
+     * @return \HorseStories\Models\Horses\Horse
+     */
+    public function mother()
+    {
+        $pedigree =  $this->pedigree->filter(function ($family) {
+            return $family->type == 2;
+        })->first();
+
+        return $pedigree ? $pedigree->originalHorse : null;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasMother()
+    {
+        return $this->mother() !== null;
+    }
+
+    /**
+     * @return \HorseStories\Models\Horses\Horse
      */
     public function mothersFather()
     {
-        return $this->pedigree->filter(function ($family) {
-            return $family->type == 5;
-        })->first();
+        return $this->mother()->father();
     }
 
     /**
-     * @return \HorseStories\Models\Pedigrees\Pedigree
+     * @return \HorseStories\Models\Horses\Horse
      */
     public function mothersMother()
     {
-        return $this->pedigree->filter(function ($family) {
-            return $family->type == 6;
-        })->first();
+        return $this->mother()->mother();
     }
 
     /**
@@ -162,11 +185,11 @@ class Horse extends Model
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
     public function getBirthDay()
     {
-        $result = new \DateTime($this->date_of_birth);
+        $result = new DateTime($this->date_of_birth);
 
         return $result->format('d/m/Y');
     }
@@ -177,7 +200,7 @@ class Horse extends Model
     public function sons()
     {
         return $this->pedigree->filter(function($family) {
-            return $family->type == 7;
+            return $family->type == 3;
         })->all();
     }
 
@@ -187,7 +210,7 @@ class Horse extends Model
     public function Daughters()
     {
         return $this->pedigree->filter(function($family) {
-            return $family->type == 8;
+            return $family->type == 4;
         })->all();
     }
 
@@ -200,5 +223,13 @@ class Horse extends Model
         return $this->disciplines->filter(function($discipline) use ($disciplineId) {
            return $discipline->discipline === $disciplineId;
         })->first();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isFemale()
+    {
+        return $this->gender == self::FEMALE;
     }
 }

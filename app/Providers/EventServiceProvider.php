@@ -4,6 +4,7 @@ use HorseStories\Events\CommentWasPosted;
 use HorseStories\Events\StatusLiked;
 use HorseStories\Events\UserRegistered;
 use HorseStories\Listeners\Events\EmailRegisteredUser;
+use HorseStories\Listeners\Events\NotifyHorseOwner;
 use HorseStories\Listeners\Events\NotifyStatusPoster;
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -24,6 +25,9 @@ class EventServiceProvider extends ServiceProvider {
         ],
         CommentWasPosted::class => [
             NotifyStatusPoster::class
+        ],
+        PedigreeWasCreated::class => [
+            NotifyHorseOwner::class
         ],
 	];
 

@@ -6,10 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pedigree extends Model
 {
+    const FATHER = 1;
+    const MOTHER = 2;
+    const SON = 3;
+    const DAUGHTER = 4;
+
     /**
      * @var array
      */
-    protected $fillable = ['horse_id', 'type', 'family_name', 'family_life_number', 'family_id', 'date_of_birth', 'date_of_death', 'color', 'height', 'breed'];
+    protected $fillable = ['horse_id', 'type', 'family_id'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

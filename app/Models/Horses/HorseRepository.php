@@ -43,7 +43,7 @@ class HorseRepository
      */
     public function findBySlug($slug)
     {
-        return $this->horse->where('slug', $slug)->firstOrFail();
+        return $this->horse->where('slug', $slug)->whereNotNull('user_id')->firstOrFail();
     }
 
     /**

@@ -2,8 +2,11 @@
 namespace HorseStories\Models\Pedigrees;
 
 use DateTime;
+use HorseStories\Events\PedigreeWasCreated;
 use HorseStories\Models\Horses\Horse;
+use HorseStories\Models\Horses\HorseCreator;
 use HorseStories\Models\Horses\HorseRepository;
+use HorseStories\Models\Notifications\Notification;
 
 class PedigreeCreator
 {
@@ -13,11 +16,25 @@ class PedigreeCreator
     private $horses;
 
     /**
-     * @param \HorseStories\Models\Horses\HorseRepository $horses
+     * @var \HorseStories\Models\Horses\HorseCreator
      */
-    public function __construct(HorseRepository $horses)
+    private $horseCreator;
+
+    /**
+     * @var \HorseStories\Models\Pedigrees\PedigreeConnector
+     */
+    private $pedigreeConnector;
+
+    /**
+     * @param \HorseStories\Models\Horses\HorseRepository $horses
+     * @param \HorseStories\Models\Horses\HorseCreator $horseCreator
+     * @param \HorseStories\Models\Pedigrees\PedigreeConnector $pedigreeConnector
+     */
+    public function __construct(HorseRepository $horses, HorseCreator $horseCreator, PedigreeConnector $pedigreeConnector)
     {
         $this->horses = $horses;
+        $this->horseCreator = $horseCreator;
+        $this->pedigreeConnector = $pedigreeConnector;
     }
 
     /**
@@ -26,47 +43,57 @@ class PedigreeCreator
      */
     public function create(Horse $horse, $values)
     {
-        $pedigree = new Pedigree();
+        if ($values['type'] == 5 || $values['type'] ==  6) {
+            $horse = $horse->father();
 
-        $pedigree->horse_id = $horse->id;
-        $pedigree->type = $values['type'];
+            $values['type'] == 5 ? $values['type'] = 1 : $values['type'] = 2;
+        } elseif ($values['type'] == 7 || $values['type'] == 8 ) {
+            $horse = $horse->mother();
 
-        if ($values['life_number'] && $family = $this->horses->findByLifeNumber($values['life_number'])) {
-            $pedigree = $this->createFamilyTree($family, $pedigree);
-        } else {
-            $pedigree->family_name = $values['name'];
-            $pedigree->family_life_number = $values['life_number'];
-            $pedigree->color = $values['color'];
-            $pedigree->height = $values['height'];
-            $pedigree->breed = $values['breed'];
-
-            if ($values['date_of_birth']) {
-                $pedigree->date_of_birth = new DateTime($values['date_of_birth']);
-            }
-
-            if ($values['date_of_death']) {
-                $pedigree->date_of_death = new DateTime($values['date_of_death']);
-            }
+            $values['type'] == 7 ? $values['type'] = 1 : $values['type'] = 2;
         }
 
-        $pedigree->save();
+        $family = $this->createFamilyConnection($horse, $values);
+
+        $this->createPedigree($horse, $family, $values['type']);
+
+        event(new PedigreeWasCreated($horse, $family, Notification::PEDIGREE_CREATED));
     }
 
     /**
-     * @param \HorseStories\Models\Horses\Horse $family
-     * @param \HorseStories\Models\Pedigrees\Pedigree $pedigree
-     * @return \HorseStories\Models\Pedigrees\Pedigree
+     * @param \HorseStories\Models\Horses\Horse $horse
+     * @param array $values
+     * @return \HorseStories\Models\Horses\Horse|null
      */
-    private function createFamilyTree(Horse $family, Pedigree $pedigree)
+    private function createFamilyConnection(Horse $horse, $values)
     {
-        $pedigree->family_name = $family->name;
-        $pedigree->family_life_number = $family->life_number;
-        $pedigree->color = $family->color;
-        $pedigree->height = $family->height;
-        $pedigree->breed = $family->breed;
-        $pedigree->date_of_birth = $family->date_of_birth;
+        if ($values['life_number'] && $family = $this->horses->findByLifeNumber($values['life_number'])) {
+            $family = $family;
+        } else {
+            $values ['gender'] = $this->pedigreeConnector->getGender($values['type']);
+            $family = $this->horseCreator->create($values, true);
+        }
+
+        $values['type'] = $this->pedigreeConnector->getConnection($horse, $values['type']);
+
+        $this->createPedigree($family, $horse, $values['type']);
+
+        return $family;
+    }
+
+    /**
+     * @param \HorseStories\Models\Horses\Horse $horse
+     * @param \HorseStories\Models\Horses\Horse $family
+     * @param $type
+     */
+    private function createPedigree(Horse $horse, Horse $family, $type)
+    {
+        $pedigree = new Pedigree();
+
+        $pedigree->horse_id = $horse->id;
+        $pedigree->type = $type;
         $pedigree->family_id = $family->id;
 
-        return $pedigree;
+        $pedigree->save();
     }
 }
