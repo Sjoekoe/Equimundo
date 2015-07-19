@@ -20,6 +20,6 @@ class NotifyStatusPoster
 
     public function handle($event)
     {
-        $this->creator->create($event->sender, $event->status->user(), $event->notification, $event->status);
+        $this->creator->create($event->sender, $event->status->user(), $event->notification, $event->status, $event->data);
     }
 }

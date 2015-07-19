@@ -18,6 +18,7 @@ class CreateUserSettingsTable extends Migration {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->boolean('email_notifications');
             $table->string('date_format');
+            $table->string('language');
             $table->timestamps();
         });
 	}

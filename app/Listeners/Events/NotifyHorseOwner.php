@@ -25,7 +25,7 @@ class NotifyHorseOwner
     public function handle(PedigreeWasCreated $event)
     {
         if ($event->family->hasOwner()) {
-            $this->creator->create($event->horse->owner()->id, $event->horse->owner()->id, $event->notification, $event->horse);
+            $this->creator->create($event->horse->owner()->id, $event->horse->owner()->id, $event->notification, $event->horse, $event->data);
         }
     }
 }

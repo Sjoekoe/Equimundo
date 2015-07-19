@@ -5,7 +5,7 @@
         <a href="{{ route('notifications.mark-read') }}">{{ trans('copy.a.mark_as_read') }}</a>
         <ul>
             @foreach ($notifications as $notification)
-                <li><a href="{{ $notification->link }}">{{ trans('notifications.' . $notification->type, ['sender' => $notification->sender->username]) }}</a></li>
+                <li><a href="{{ $notification->link }}">{{ trans('notifications.' . $notification->type, json_decode($notification->data, true)) }}</a></li>
             @endforeach
         </ul>
     </div>

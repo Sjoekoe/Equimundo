@@ -20,6 +20,7 @@ class CreateNotificationsTable extends Migration {
             $table->foreign('sender_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('receiver_id')->unsigned();
             $table->foreign('receiver_id')->references('id')->on('users')->onDelete('cascade');
+            $table->json('data');
             $table->boolean('read');
             $table->timestamps();
         });

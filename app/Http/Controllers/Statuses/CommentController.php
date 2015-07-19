@@ -35,7 +35,9 @@ class CommentController extends Controller
 
         $comment = $this->commentCreator->create($status, Input::get('body'));
 
-        event(new CommentWasPosted($comment->status, Auth::user(), Notification::COMMENT_POSTED));
+        $data = ['sender' => Auth::user()->username, 'horse' => $status->horse->name];
+
+        event(new CommentWasPosted($comment->status, Auth::user(), Notification::COMMENT_POSTED, $data));
 
         Session::put('success', 'Your comment was posted');
 

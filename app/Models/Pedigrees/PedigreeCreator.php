@@ -57,7 +57,9 @@ class PedigreeCreator
 
         $this->createPedigree($horse, $family, $values['type']);
 
-        event(new PedigreeWasCreated($horse, $family, Notification::PEDIGREE_CREATED));
+        $data = ['family' => $horse->name, 'horse' => $family->name];
+
+        event(new PedigreeWasCreated($horse, $family, Notification::PEDIGREE_CREATED, $data));
     }
 
     /**
