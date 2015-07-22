@@ -28,6 +28,15 @@ class UserRepository
     }
 
     /**
+     * @param string $email
+     * @return \HorseStories\Models\Users\User
+     */
+    public function findByEmail($email)
+    {
+        return $this->user->where('email', $email)->firstOrFail();
+    }
+
+    /**
      * @param \HorseStories\Models\Users\User $user
      * @return \Illuminate\Database\Eloquent\Collection
      */

@@ -12,7 +12,10 @@ class UserMailer extends Mailer
     {
         $subject = 'Welcome to Horse Stories';
         $view = 'emails.registration.confirm';
+        $data = [
+            'activationLink' => route('activate', ['token' => $user->getRememberToken(), 'email' => $user->email]),
+        ];
 
-        return $this->sendTo($user, $subject, $view);
+        return $this->sendTo($user, $subject, $view, $data);
     }
 }

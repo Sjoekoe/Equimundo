@@ -2,5 +2,5 @@
 
 return [
     'reset_password' => 'Klik hier om ja wachtwoord te herstellen',
-    'welcome_message' => 'Welkom bij Horse Stories',
+    'welcome_message' => 'Welkom bij Equimundo',
 ];

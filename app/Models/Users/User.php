@@ -40,7 +40,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'date_of_birth',
         'country',
         'gender',
-        'about'
+        'about',
+        'remember_token'
     ];
 
     /**
