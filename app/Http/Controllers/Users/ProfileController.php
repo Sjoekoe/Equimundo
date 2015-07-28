@@ -1,21 +1,21 @@
 <?php
-namespace HorseStories\Http\Controllers\Users;
+namespace EQM\Http\Controllers\Users;
 
 use Auth;
-use HorseStories\Http\Controllers\Controller;
-use HorseStories\Http\Requests\UpdateUserProfile;
-use HorseStories\Models\Users\UserRepository;
+use EQM\Http\Controllers\Controller;
+use EQM\Http\Requests\UpdateUserProfile;
+use EQM\Models\Users\UserRepository;
 use Session;
 
 class ProfileController extends  Controller
 {
     /**
-     * @var \HorseStories\Models\Users\UserRepository
+     * @var \EQM\Models\Users\UserRepository
      */
     private $users;
 
     /**
-     * @param \HorseStories\Models\Users\UserRepository $users
+     * @param \EQM\Models\Users\UserRepository $users
      */
     public function __construct(UserRepository $users)
     {
@@ -31,7 +31,7 @@ class ProfileController extends  Controller
     }
 
     /**
-     * @param \HorseStories\Http\Requests\UpdateUserProfile $request
+     * @param \EQM\Http\Requests\UpdateUserProfile $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UpdateUserProfile $request)

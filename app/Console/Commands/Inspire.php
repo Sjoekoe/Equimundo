@@ -1,4 +1,4 @@
-<?php namespace HorseStories\Console\Commands;
+<?php namespace EQM\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Inspiring;

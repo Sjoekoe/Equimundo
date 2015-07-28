@@ -1,7 +1,7 @@
 <?php
-namespace HorseStories\Http\Controllers\Horses;
+namespace EQM\Http\Controllers\Horses;
 
-use HorseStories\Models\Horses\Horse;
+use EQM\Models\Horses\Horse;
 use Illuminate\Routing\Controller;
 
 class InfoController extends Controller

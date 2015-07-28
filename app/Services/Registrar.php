@@ -1,7 +1,7 @@
-<?php namespace HorseStories\Services;
+<?php namespace EQM\Services;
 
-use HorseStories\Models\Settings\Setting;
-use HorseStories\Models\Users\User;
+use EQM\Models\Settings\Setting;
+use EQM\Models\Users\User;
 use Validator;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
 

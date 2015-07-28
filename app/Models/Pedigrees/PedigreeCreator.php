@@ -1,34 +1,34 @@
 <?php
-namespace HorseStories\Models\Pedigrees;
+namespace EQM\Models\Pedigrees;
 
 use DateTime;
-use HorseStories\Events\PedigreeWasCreated;
-use HorseStories\Models\Horses\Horse;
-use HorseStories\Models\Horses\HorseCreator;
-use HorseStories\Models\Horses\HorseRepository;
-use HorseStories\Models\Notifications\Notification;
+use EQM\Events\PedigreeWasCreated;
+use EQM\Models\Horses\Horse;
+use EQM\Models\Horses\HorseCreator;
+use EQM\Models\Horses\HorseRepository;
+use EQM\Models\Notifications\Notification;
 
 class PedigreeCreator
 {
     /**
-     * @var \HorseStories\Models\Horses\HorseRepository
+     * @var \EQM\Models\Horses\HorseRepository
      */
     private $horses;
 
     /**
-     * @var \HorseStories\Models\Horses\HorseCreator
+     * @var \EQM\Models\Horses\HorseCreator
      */
     private $horseCreator;
 
     /**
-     * @var \HorseStories\Models\Pedigrees\PedigreeConnector
+     * @var \EQM\Models\Pedigrees\PedigreeConnector
      */
     private $pedigreeConnector;
 
     /**
-     * @param \HorseStories\Models\Horses\HorseRepository $horses
-     * @param \HorseStories\Models\Horses\HorseCreator $horseCreator
-     * @param \HorseStories\Models\Pedigrees\PedigreeConnector $pedigreeConnector
+     * @param \EQM\Models\Horses\HorseRepository $horses
+     * @param \EQM\Models\Horses\HorseCreator $horseCreator
+     * @param \EQM\Models\Pedigrees\PedigreeConnector $pedigreeConnector
      */
     public function __construct(HorseRepository $horses, HorseCreator $horseCreator, PedigreeConnector $pedigreeConnector)
     {
@@ -38,7 +38,7 @@ class PedigreeCreator
     }
 
     /**
-     * @param \HorseStories\Models\Horses\Horse $horse
+     * @param \EQM\Models\Horses\Horse $horse
      * @param array $values
      */
     public function create(Horse $horse, $values)
@@ -63,9 +63,9 @@ class PedigreeCreator
     }
 
     /**
-     * @param \HorseStories\Models\Horses\Horse $horse
+     * @param \EQM\Models\Horses\Horse $horse
      * @param array $values
-     * @return \HorseStories\Models\Horses\Horse|null
+     * @return \EQM\Models\Horses\Horse|null
      */
     private function createFamilyConnection(Horse $horse, $values)
     {
@@ -84,8 +84,8 @@ class PedigreeCreator
     }
 
     /**
-     * @param \HorseStories\Models\Horses\Horse $horse
-     * @param \HorseStories\Models\Horses\Horse $family
+     * @param \EQM\Models\Horses\Horse $horse
+     * @param \EQM\Models\Horses\Horse $family
      * @param $type
      */
     private function createPedigree(Horse $horse, Horse $family, $type)

@@ -1,9 +1,9 @@
 <?php
-namespace HorseStories\Events;
+namespace EQM\Events;
 
-use HorseStories\Models\Notifications\Notification;
-use HorseStories\Models\Statuses\Status;
-use HorseStories\Models\Users\User;
+use EQM\Models\Notifications\Notification;
+use EQM\Models\Statuses\Status;
+use EQM\Models\Users\User;
 use Illuminate\Queue\SerializesModels;
 
 class StatusLiked extends Event
@@ -11,12 +11,12 @@ class StatusLiked extends Event
     use SerializesModels;
 
     /**
-     * @var \HorseStories\Models\Statuses\Status
+     * @var \EQM\Models\Statuses\Status
      */
     public $status;
 
     /**
-     * @var \HorseStories\Models\Users\User
+     * @var \EQM\Models\Users\User
      */
     public $sender;
 
@@ -31,8 +31,8 @@ class StatusLiked extends Event
     public $data;
 
     /**
-     * @param \HorseStories\Models\Statuses\Status $status
-     * @param \HorseStories\Models\Users\User $sender
+     * @param \EQM\Models\Statuses\Status $status
+     * @param \EQM\Models\Users\User $sender
      * @param int $notification
      * @param array $data
      */

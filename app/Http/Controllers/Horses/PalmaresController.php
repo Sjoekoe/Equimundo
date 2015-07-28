@@ -1,48 +1,48 @@
 <?php
-namespace HorseStories\Http\Controllers\Horses;
+namespace EQM\Http\Controllers\Horses;
 
 use Auth;
-use HorseStories\Http\Controllers\Controller;
-use HorseStories\Models\Horses\HorseRepository;
-use HorseStories\Models\Palmares\PalmaresCreator;
-use HorseStories\Models\Palmares\PalmaresDeleter;
-use HorseStories\Models\Palmares\PalmaresRepository;
-use HorseStories\Models\Palmares\PalmaresUpdater;
+use EQM\Http\Controllers\Controller;
+use EQM\Models\Horses\HorseRepository;
+use EQM\Models\Palmares\PalmaresCreator;
+use EQM\Models\Palmares\PalmaresDeleter;
+use EQM\Models\Palmares\PalmaresRepository;
+use EQM\Models\Palmares\PalmaresUpdater;
 use Input;
 
 class PalmaresController extends Controller
 {
     /**
-     * @var \HorseStories\Models\Palmares\PalmaresCreator
+     * @var \EQM\Models\Palmares\PalmaresCreator
      */
     private $palmaresCreator;
 
     /**
-     * @var \HorseStories\Models\Palmares\PalmaresRepository
+     * @var \EQM\Models\Palmares\PalmaresRepository
      */
     private $palmaresRepository;
 
     /**
-     * @var \HorseStories\Models\Palmares\PalmaresUpdater
+     * @var \EQM\Models\Palmares\PalmaresUpdater
      */
     private $updater;
 
     /**
-     * @var \HorseStories\Models\Horses\HorseRepository
+     * @var \EQM\Models\Horses\HorseRepository
      */
     private $horses;
 
     /**
-     * @var \HorseStories\Models\Palmares\PalmaresDeleter
+     * @var \EQM\Models\Palmares\PalmaresDeleter
      */
     private $deleter;
 
     /**
-     * @param \HorseStories\Models\Palmares\PalmaresCreator $palmaresCreator
-     * @param \HorseStories\Models\Palmares\PalmaresRepository $palmaresRepository
-     * @param \HorseStories\Models\Palmares\PalmaresUpdater $updater
-     * @param \HorseStories\Models\Horses\HorseRepository $horses
-     * @param \HorseStories\Models\Palmares\PalmaresDeleter $deleter
+     * @param \EQM\Models\Palmares\PalmaresCreator $palmaresCreator
+     * @param \EQM\Models\Palmares\PalmaresRepository $palmaresRepository
+     * @param \EQM\Models\Palmares\PalmaresUpdater $updater
+     * @param \EQM\Models\Horses\HorseRepository $horses
+     * @param \EQM\Models\Palmares\PalmaresDeleter $deleter
      */
     public function __construct(
         PalmaresCreator $palmaresCreator,
@@ -138,7 +138,7 @@ class PalmaresController extends Controller
 
     /**
      * @param string horseSlug
-     * @return \HorseStories\Models\Horses\Horse
+     * @return \EQM\Models\Horses\Horse
      */
     private function initHorse($horseSlug)
     {
@@ -149,7 +149,7 @@ class PalmaresController extends Controller
 
     /**
      * @param int $palmaresId
-     * @return \HorseStories\Models\Palmares\Palmares
+     * @return \EQM\Models\Palmares\Palmares
      */
     private function initPalmares($palmaresId)
     {

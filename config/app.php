@@ -132,11 +132,11 @@ return [
         /*
          * Application Service Providers...
          */
-        'HorseStories\Providers\AppServiceProvider',
-        'HorseStories\Providers\BusServiceProvider',
-        'HorseStories\Providers\ConfigServiceProvider',
-        'HorseStories\Providers\EventServiceProvider',
-        'HorseStories\Providers\RouteServiceProvider',
+        'EQM\Providers\AppServiceProvider',
+        'EQM\Providers\BusServiceProvider',
+        'EQM\Providers\ConfigServiceProvider',
+        'EQM\Providers\EventServiceProvider',
+        'EQM\Providers\RouteServiceProvider',
         'Intervention\Image\ImageServiceProvider',
         'HieuLe\Active\ActiveServiceProvider',
 

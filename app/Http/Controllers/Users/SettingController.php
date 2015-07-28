@@ -1,7 +1,7 @@
 <?php
-namespace HorseStories\Http\Controllers\Users;
+namespace EQM\Http\Controllers\Users;
 
-use HorseStories\Models\Settings\SettingsUpdater;
+use EQM\Models\Settings\SettingsUpdater;
 use Illuminate\Auth\AuthManager;
 use Illuminate\Routing\Controller;
 use Input;
@@ -10,7 +10,7 @@ use Redirect;
 class SettingController extends Controller
 {
     /**
-     * @var \HorseStories\Models\Settings\SettingsUpdater
+     * @var \EQM\Models\Settings\SettingsUpdater
      */
     private $updater;
 
@@ -20,7 +20,7 @@ class SettingController extends Controller
     private $auth;
 
     /**
-     * @param \HorseStories\Models\Settings\SettingsUpdater $updater
+     * @param \EQM\Models\Settings\SettingsUpdater $updater
      * @param \Illuminate\Auth\AuthManager $auth
      */
     public function __construct(SettingsUpdater $updater, AuthManager $auth)

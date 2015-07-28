@@ -1,11 +1,11 @@
 <?php
-namespace HorseStories\Http\Controllers\Auth;
+namespace EQM\Http\Controllers\Auth;
 
 use Auth;
-use HorseStories\Events\UserRegistered;
-use HorseStories\Http\Controllers\Controller;
-use HorseStories\Models\Settings\Setting;
-use HorseStories\Models\Users\User;
+use EQM\Events\UserRegistered;
+use EQM\Http\Controllers\Controller;
+use EQM\Models\Settings\Setting;
+use EQM\Models\Users\User;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
 use Lang;

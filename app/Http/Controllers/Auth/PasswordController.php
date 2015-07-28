@@ -1,6 +1,6 @@
-<?php namespace HorseStories\Http\Controllers\Auth;
+<?php namespace EQM\Http\Controllers\Auth;
 
-use HorseStories\Http\Controllers\Controller;
+use EQM\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class PasswordController extends Controller {

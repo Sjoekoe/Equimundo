@@ -1,14 +1,14 @@
 <?php
-namespace HorseStories\Models\Users;
+namespace EQM\Models\Users;
 
-use HorseStories\Events\Event;
-use HorseStories\Models\Comments\Comment;
-use HorseStories\Models\Conversations\Conversation;
-use HorseStories\Models\Horses\Horse;
-use HorseStories\Models\Notifications\Notification;
-use HorseStories\Models\Roles\Role;
-use HorseStories\Models\Settings\Setting;
-use HorseStories\Models\Statuses\Status;
+use EQM\Events\Event;
+use EQM\Models\Comments\Comment;
+use EQM\Models\Conversations\Conversation;
+use EQM\Models\Horses\Horse;
+use EQM\Models\Notifications\Notification;
+use EQM\Models\Roles\Role;
+use EQM\Models\Settings\Setting;
+use EQM\Models\Statuses\Status;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -137,7 +137,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
-     * @param \HorseStories\Models\Roles\Role|int $role
+     * @param \EQM\Models\Roles\Role|int $role
      */
     public function assignRole($role)
     {
@@ -145,7 +145,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
-     * @param \HorseStories\Models\Roles\Role|int $role
+     * @param \EQM\Models\Roles\Role|int $role
      * @return int
      */
     public function removeRole($role)
@@ -162,7 +162,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
-     * @param \HorseStories\Models\Conversations\Conversation $conversation
+     * @param \EQM\Models\Conversations\Conversation $conversation
      */
     public function addConversation(Conversation $conversation)
     {
@@ -200,7 +200,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
-     * @param \HorseStories\Models\Horses\Horse $horse
+     * @param \EQM\Models\Horses\Horse $horse
      * @return bool
      */
     public function isHorseOwner(Horse $horse)

@@ -1,16 +1,16 @@
-<?php namespace HorseStories\Http\Requests;
+<?php namespace EQM\Http\Requests;
 
-use HorseStories\Http\Requests\Request;
-use HorseStories\Models\Horses\Horse;
+use EQM\Http\Requests\Request;
+use EQM\Models\Horses\Horse;
 
 class UpdateHorse extends Request {
     /**
-     * @var \HorseStories\Models\Horses\Horse
+     * @var \EQM\Models\Horses\Horse
      */
     private $horse;
 
     /**
-     * @param \HorseStories\Models\Horses\Horse $horse
+     * @param \EQM\Models\Horses\Horse $horse
      */
     public function __construct(Horse $horse)
     {

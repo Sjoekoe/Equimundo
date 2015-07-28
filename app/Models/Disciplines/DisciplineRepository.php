@@ -1,15 +1,15 @@
 <?php
-namespace HorseStories\Models\Disciplines;
+namespace EQM\Models\Disciplines;
 
 class DisciplineRepository
 {
     /**
-     * @var \HorseStories\Models\Disciplines\Discipline
+     * @var \EQM\Models\Disciplines\Discipline
      */
     private $discipline;
 
     /**
-     * @param \HorseStories\Models\Disciplines\Discipline $discipline
+     * @param \EQM\Models\Disciplines\Discipline $discipline
      */
     public function __construct(Discipline $discipline)
     {

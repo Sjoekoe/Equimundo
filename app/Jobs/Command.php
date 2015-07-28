@@ -1,4 +1,4 @@
-<?php namespace HorseStories\Jobs;
+<?php namespace EQM\Jobs;
 
 abstract class Command {
 

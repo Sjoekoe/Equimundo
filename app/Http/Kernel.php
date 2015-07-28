@@ -1,6 +1,6 @@
-<?php namespace HorseStories\Http;
+<?php namespace EQM\Http;
 
-use HorseStories\Http\Middleware\Locale;
+use EQM\Http\Middleware\Locale;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel {
@@ -16,7 +16,7 @@ class Kernel extends HttpKernel {
 		'Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse',
 		'Illuminate\Session\Middleware\StartSession',
 		'Illuminate\View\Middleware\ShareErrorsFromSession',
-		'HorseStories\Http\Middleware\VerifyCsrfToken',
+		'EQM\Http\Middleware\VerifyCsrfToken',
         Locale::class
 	];
 
@@ -26,10 +26,10 @@ class Kernel extends HttpKernel {
 	 * @var array
 	 */
 	protected $routeMiddleware = [
-		'auth' => 'HorseStories\Http\Middleware\Authenticate',
+		'auth' => 'EQM\Http\Middleware\Authenticate',
 		'auth.basic' => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
-		'guest' => 'HorseStories\Http\Middleware\RedirectIfAuthenticated',
-        'admin' => 'HorseStories\Http\MiddleWare\Admin',
+		'guest' => 'EQM\Http\Middleware\RedirectIfAuthenticated',
+        'admin' => 'EQM\Http\MiddleWare\Admin',
 	];
 
 }

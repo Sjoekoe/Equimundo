@@ -1,7 +1,7 @@
 <?php
-namespace HorseStories\Events;
+namespace EQM\Events;
 
-use HorseStories\Models\Horses\Horse;
+use EQM\Models\Horses\Horse;
 use Illuminate\Queue\SerializesModels;
 
 class PedigreeWasCreated extends Event
@@ -9,12 +9,12 @@ class PedigreeWasCreated extends Event
     use SerializesModels;
 
     /**
-     * @var \HorseStories\Models\Horses\Horse
+     * @var \EQM\Models\Horses\Horse
      */
     public $horse;
 
     /**
-     * @var \HorseStories\Models\Horses\Horse
+     * @var \EQM\Models\Horses\Horse
      */
     public $family;
 
@@ -29,8 +29,8 @@ class PedigreeWasCreated extends Event
     public $data;
 
     /**
-     * @param \HorseStories\Models\Horses\Horse $horse
-     * @param \HorseStories\Models\Horses\Horse $family
+     * @param \EQM\Models\Horses\Horse $horse
+     * @param \EQM\Models\Horses\Horse $family
      * @param int $notification
      * @param array $data
      */

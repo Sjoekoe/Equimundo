@@ -1,8 +1,8 @@
 <?php
-namespace HorseStories\Http\Controllers\Horses;
+namespace EQM\Http\Controllers\Horses;
 
-use HorseStories\Http\Controllers\Controller;
-use HorseStories\Models\Horses\Horse;
+use EQM\Http\Controllers\Controller;
+use EQM\Models\Horses\Horse;
 
 class PicturesController extends Controller
 {

@@ -1,5 +1,5 @@
 <?php
-namespace HorseStories\Models\Settings;
+namespace EQM\Models\Settings;
 
 class SettingsUpdater
 {

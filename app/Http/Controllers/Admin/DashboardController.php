@@ -1,5 +1,5 @@
 <?php
-namespace HorseStories\Http\Controllers\Admin;
+namespace EQM\Http\Controllers\Admin;
 
 use Illuminate\Routing\Controller;
 

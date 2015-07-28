@@ -1,11 +1,11 @@
 <?php
-namespace HorseStories\Http\Controllers\Statuses;
+namespace EQM\Http\Controllers\Statuses;
 
 use Auth;
-use HorseStories\Http\Requests\PostStatus;
-use HorseStories\Models\Statuses\StatusCreator;
-use HorseStories\Models\Statuses\StatusRepository;
-use HorseStories\Models\Statuses\StatusUpdater;
+use EQM\Http\Requests\PostStatus;
+use EQM\Models\Statuses\StatusCreator;
+use EQM\Models\Statuses\StatusRepository;
+use EQM\Models\Statuses\StatusUpdater;
 use Illuminate\Routing\Controller;
 use Input;
 use Session;
@@ -13,24 +13,24 @@ use Session;
 class StatusController extends Controller
 {
     /**
-     * @var \HorseStories\Models\Statuses\StatusCreator
+     * @var \EQM\Models\Statuses\StatusCreator
      */
     private $statusCreator;
 
     /**
-     * @var \HorseStories\Models\Statuses\StatusRepository
+     * @var \EQM\Models\Statuses\StatusRepository
      */
     private $statuses;
 
     /**
-     * @var \HorseStories\Models\Statuses\StatusUpdater
+     * @var \EQM\Models\Statuses\StatusUpdater
      */
     private $updater;
 
     /**
-     * @param \HorseStories\Models\Statuses\StatusCreator $statusCreator
-     * @param \HorseStories\Models\Statuses\StatusRepository $statuses
-     * @param \HorseStories\Models\Statuses\StatusUpdater $updater
+     * @param \EQM\Models\Statuses\StatusCreator $statusCreator
+     * @param \EQM\Models\Statuses\StatusRepository $statuses
+     * @param \EQM\Models\Statuses\StatusUpdater $updater
      */
     public function __construct(StatusCreator $statusCreator, StatusRepository $statuses, StatusUpdater $updater)
     {
@@ -40,7 +40,7 @@ class StatusController extends Controller
     }
 
     /**
-     * @param \HorseStories\Http\Requests\PostStatus $request
+     * @param \EQM\Http\Requests\PostStatus $request
      * @return string
      */
     public function store(PostStatus $request)
@@ -72,7 +72,7 @@ class StatusController extends Controller
 
     /**
      * @param int $statusId
-     * @param \HorseStories\Http\Requests\PostStatus $request
+     * @param \EQM\Http\Requests\PostStatus $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update($statusId, PostStatus $request)
@@ -99,7 +99,7 @@ class StatusController extends Controller
 
     /**
      * @param int $statusId
-     * @return \HorseStories\Models\Statuses\Status
+     * @return \EQM\Models\Statuses\Status
      */
     private function initStatus($statusId)
     {

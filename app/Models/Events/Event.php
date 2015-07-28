@@ -1,5 +1,5 @@
 <?php
-namespace HorseStories\Models\Events;
+namespace EQM\Models\Events;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,7 +15,7 @@ class Event extends Model
      */
     public function creator()
     {
-        return $this->belongsTo('HorseStories\Models\Users\User', 'id', 'creator_id');
+        return $this->belongsTo('EQM\Models\Users\User', 'id', 'creator_id');
     }
 
     /**
@@ -23,6 +23,6 @@ class Event extends Model
      */
     public function palmares()
     {
-        return $this->hasMany('HorseStories\Models\Palmares\Palmares');
+        return $this->hasMany('EQM\Models\Palmares\Palmares');
     }
 }

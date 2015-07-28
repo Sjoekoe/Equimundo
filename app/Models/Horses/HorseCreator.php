@@ -1,16 +1,16 @@
 <?php
-namespace HorseStories\Models\Horses;
+namespace EQM\Models\Horses;
 
 use DateTime;
-use HorseStories\Core\Slugs\SlugCreator;
-use HorseStories\Models\Users\User;
+use EQM\Core\Slugs\SlugCreator;
+use EQM\Models\Users\User;
 use Illuminate\Auth\AuthManager;
 use Illuminate\Support\Str;
 
 class HorseCreator
 {
     /**
-     * @var \HorseStories\Core\Slugs\SlugCreator
+     * @var \EQM\Core\Slugs\SlugCreator
      */
     private $slugCreator;
 
@@ -20,7 +20,7 @@ class HorseCreator
     private $auth;
 
     /**
-     * @param \HorseStories\Core\Slugs\SlugCreator $slugCreator
+     * @param \EQM\Core\Slugs\SlugCreator $slugCreator
      * @param \Illuminate\Auth\AuthManager $auth
      */
     public function __construct(SlugCreator $slugCreator, AuthManager $auth)
@@ -32,7 +32,7 @@ class HorseCreator
     /**
      * @param array $values
      * @param bool $pedigree
-     * @return \HorseStories\Models\Horses\Horse
+     * @return \EQM\Models\Horses\Horse
      */
     public function create($values = [], $pedigree = false)
     {

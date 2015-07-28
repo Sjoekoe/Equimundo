@@ -1,11 +1,11 @@
 <?php
-namespace HorseStories\Http\Controllers\Statuses;
+namespace EQM\Http\Controllers\Statuses;
 
 use Auth;
 use DB;
-use HorseStories\Events\StatusLiked;
-use HorseStories\Models\Notifications\Notification;
-use HorseStories\Models\Statuses\Status;
+use EQM\Events\StatusLiked;
+use EQM\Models\Notifications\Notification;
+use EQM\Models\Statuses\Status;
 use Illuminate\Routing\Controller;
 
 class LikeController extends Controller

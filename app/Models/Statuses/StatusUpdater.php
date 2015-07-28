@@ -1,10 +1,10 @@
 <?php
-namespace HorseStories\Models\Statuses;
+namespace EQM\Models\Statuses;
 
 class StatusUpdater
 {
     /**
-     * @param \HorseStories\Models\Statuses\Status $status
+     * @param \EQM\Models\Statuses\Status $status
      * @param array $values
      */
     public function update(Status $status, $values)

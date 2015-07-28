@@ -1,27 +1,27 @@
 <?php
-namespace HorseStories\Http\Controllers\Conversations;
+namespace EQM\Http\Controllers\Conversations;
 
 use Auth;
-use HorseStories\Http\Controllers\Controller;
-use HorseStories\Models\Conversations\ConversationRepository;
-use HorseStories\Models\Conversations\MessageCreator;
+use EQM\Http\Controllers\Controller;
+use EQM\Models\Conversations\ConversationRepository;
+use EQM\Models\Conversations\MessageCreator;
 use Input;
 
 class MessageController extends Controller
 {
     /**
-     * @var \HorseStories\Models\Conversations\ConversationRepository
+     * @var \EQM\Models\Conversations\ConversationRepository
      */
     private $conversations;
 
     /**
-     * @var \HorseStories\Models\Conversations\MessageCreator
+     * @var \EQM\Models\Conversations\MessageCreator
      */
     private $creator;
 
     /**
-     * @param \HorseStories\Models\Conversations\ConversationRepository $conversations
-     * @param \HorseStories\Models\Conversations\MessageCreator $creator
+     * @param \EQM\Models\Conversations\ConversationRepository $conversations
+     * @param \EQM\Models\Conversations\MessageCreator $creator
      */
     public function __construct(ConversationRepository $conversations, MessageCreator $creator)
     {

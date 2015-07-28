@@ -1,10 +1,10 @@
 <?php
-namespace HorseStories\Http\Controllers\Horses;
+namespace EQM\Http\Controllers\Horses;
 
 use Auth;
-use HorseStories\Models\Follows\FollowsRepository;
-use HorseStories\Models\Horses\Horse;
-use HorseStories\Models\Horses\HorseRepository;
+use EQM\Models\Follows\FollowsRepository;
+use EQM\Models\Horses\Horse;
+use EQM\Models\Horses\HorseRepository;
 use Illuminate\Routing\Controller;
 use Input;
 use Redirect;
@@ -13,18 +13,18 @@ use Session;
 class FollowsController extends Controller
 {
     /**
-     * @var \HorseStories\Models\Horses\HorseRepository
+     * @var \EQM\Models\Horses\HorseRepository
      */
     private $horseRepository;
 
     /**
-     * @var \HorseStories\Models\Follows\FollowsRepository
+     * @var \EQM\Models\Follows\FollowsRepository
      */
     private $followsRepository;
 
     /**
-     * @param \HorseStories\Models\Horses\HorseRepository $horseRepository
-     * @param \HorseStories\Models\Follows\FollowsRepository $followsRepository
+     * @param \EQM\Models\Horses\HorseRepository $horseRepository
+     * @param \EQM\Models\Follows\FollowsRepository $followsRepository
      */
     public function __construct(HorseRepository $horseRepository, FollowsRepository $followsRepository)
     {

@@ -1,4 +1,4 @@
-<?php namespace HorseStories\Http\Controllers;
+<?php namespace EQM\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesCommands;
 use Illuminate\Routing\Controller as BaseController;

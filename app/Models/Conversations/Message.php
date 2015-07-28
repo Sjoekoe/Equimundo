@@ -1,7 +1,7 @@
 <?php
-namespace HorseStories\Models\Conversations;
+namespace EQM\Models\Conversations;
 
-use HorseStories\Models\Users\User;
+use EQM\Models\Users\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model

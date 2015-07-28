@@ -1,11 +1,11 @@
 <?php
-namespace HorseStories\Models\Statuses;
+namespace EQM\Models\Statuses;
 
-use HorseStories\Models\Comments\Comment;
-use HorseStories\Models\Horses\Horse;
-use HorseStories\Models\Palmares\Palmares;
-use HorseStories\Models\Pictures\Picture;
-use HorseStories\Models\Users\User;
+use EQM\Models\Comments\Comment;
+use EQM\Models\Horses\Horse;
+use EQM\Models\Palmares\Palmares;
+use EQM\Models\Pictures\Picture;
+use EQM\Models\Users\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Status extends Model
@@ -29,7 +29,7 @@ class Status extends Model
     }
 
     /**
-     * @return \HorseStories\Models\Users\User
+     * @return \EQM\Models\Users\User
      */
     public function user()
     {
@@ -69,7 +69,7 @@ class Status extends Model
     }
 
     /**
-     * @param \HorseStories\Models\Pictures\Picture $picture
+     * @param \EQM\Models\Pictures\Picture $picture
      */
     public function setPicture($picture)
     {
@@ -85,7 +85,7 @@ class Status extends Model
     }
 
     /**
-     * @return \HorseStories\Models\Pictures\Picture
+     * @return \EQM\Models\Pictures\Picture
      */
     public function getPicture()
     {

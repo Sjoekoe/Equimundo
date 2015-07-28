@@ -1,18 +1,18 @@
 <?php
-namespace HorseStories\Http\Controllers\Admin;
+namespace EQM\Http\Controllers\Admin;
 
-use HorseStories\Models\Users\UserRepository;
+use EQM\Models\Users\UserRepository;
 use Illuminate\Routing\Controller;
 
 class UserController extends Controller
 {
     /**
-     * @var \HorseStories\Models\Users\UserRepository
+     * @var \EQM\Models\Users\UserRepository
      */
     private $users;
 
     /**
-     * @param \HorseStories\Models\Users\UserRepository $users
+     * @param \EQM\Models\Users\UserRepository $users
      */
     public function __construct(UserRepository $users)
     {

@@ -1,7 +1,7 @@
 <?php
-namespace HorseStories\Models\Notifications;
+namespace EQM\Models\Notifications;
 
-use HorseStories\Models\Users\User;
+use EQM\Models\Users\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Notification extends Model

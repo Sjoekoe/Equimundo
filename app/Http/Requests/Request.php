@@ -1,4 +1,4 @@
-<?php namespace HorseStories\Http\Requests;
+<?php namespace EQM\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

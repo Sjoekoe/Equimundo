@@ -1,19 +1,19 @@
 <?php
-namespace HorseStories\Http\Controllers\Notifications;
+namespace EQM\Http\Controllers\Notifications;
 
 use Auth;
-use HorseStories\Models\Notifications\NotificationRepository;
+use EQM\Models\Notifications\NotificationRepository;
 use Illuminate\Routing\Controller;
 
 class NotificationController extends Controller
 {
     /**
-     * @var \HorseStories\Models\Notifications\NotificationRepository
+     * @var \EQM\Models\Notifications\NotificationRepository
      */
     private $notifications;
 
     /**
-     * @param \HorseStories\Models\Notifications\NotificationRepository $notifications
+     * @param \EQM\Models\Notifications\NotificationRepository $notifications
      */
     public function __construct(NotificationRepository $notifications)
     {

@@ -1,13 +1,13 @@
 <?php
-namespace HorseStories\Models\Conversations;
+namespace EQM\Models\Conversations;
 
-use HorseStories\Models\Users\User;
+use EQM\Models\Users\User;
 
 class ConversationRepository
 {
     /**
      * @param $conversationId
-     * @return \HorseStories\Models\Conversations\Conversation
+     * @return \EQM\Models\Conversations\Conversation
      */
     public function findById($conversationId)
     {
@@ -15,8 +15,8 @@ class ConversationRepository
     }
 
     /**
-     * @param \HorseStories\Models\Users\User $user
-     * @return \HorseStories\Models\Conversations\Conversation[]
+     * @param \EQM\Models\Users\User $user
+     * @return \EQM\Models\Conversations\Conversation[]
      */
     public function findByUser(User $user)
     {
@@ -24,8 +24,8 @@ class ConversationRepository
     }
 
     /**
-     * @param \HorseStories\Models\Conversations\Conversation $conversation
-     * @return \HorseStories\Models\Conversations\Message[]
+     * @param \EQM\Models\Conversations\Conversation $conversation
+     * @return \EQM\Models\Conversations\Message[]
      */
     public function findMessages(Conversation $conversation)
     {

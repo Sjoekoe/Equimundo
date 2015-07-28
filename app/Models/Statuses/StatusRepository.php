@@ -1,18 +1,18 @@
 <?php
-namespace HorseStories\Models\Statuses;
+namespace EQM\Models\Statuses;
 
-use HorseStories\Models\Horses\Horse;
-use HorseStories\Models\Users\User;
+use EQM\Models\Horses\Horse;
+use EQM\Models\Users\User;
 
 class StatusRepository
 {
     /**
-     * @var \HorseStories\Models\Statuses\Status
+     * @var \EQM\Models\Statuses\Status
      */
     private $status;
 
     /**
-     * @param \HorseStories\Models\Statuses\Status $status
+     * @param \EQM\Models\Statuses\Status $status
      */
     public function __construct(Status $status)
     {
@@ -21,7 +21,7 @@ class StatusRepository
 
     /**
      * @param $id
-     * @return \HorseStories\Models\Statuses\Status
+     * @return \EQM\Models\Statuses\Status
      */
     public function findById($id)
     {
@@ -29,8 +29,8 @@ class StatusRepository
     }
 
     /**
-     * @param \HorseStories\Models\Users\User $user
-     * @return \HorseStories\Models\Statuses\Status[]
+     * @param \EQM\Models\Users\User $user
+     * @return \EQM\Models\Statuses\Status[]
      */
     public function getAllForUser(User $user)
     {
@@ -38,8 +38,8 @@ class StatusRepository
     }
 
     /**
-     * @param \HorseStories\Models\Users\User $user
-     * @return \HorseStories\Models\Statuses\Status[]
+     * @param \EQM\Models\Users\User $user
+     * @return \EQM\Models\Statuses\Status[]
      */
     public function getFeedForUser(User $user)
     {
@@ -51,8 +51,8 @@ class StatusRepository
     }
 
     /**
-     * @param \HorseStories\Models\Horses\Horse $horse
-     * @return \HorseStories\Models\Statuses\Status[]
+     * @param \EQM\Models\Horses\Horse $horse
+     * @return \EQM\Models\Statuses\Status[]
      */
     public function getFeedForHorse(Horse $horse)
     {

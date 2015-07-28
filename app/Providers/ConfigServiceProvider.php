@@ -1,4 +1,4 @@
-<?php namespace HorseStories\Providers;
+<?php namespace EQM\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

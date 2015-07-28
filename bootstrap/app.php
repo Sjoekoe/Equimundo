@@ -28,17 +28,17 @@ $app = new Illuminate\Foundation\Application(
 
 $app->singleton(
 	'Illuminate\Contracts\Http\Kernel',
-	'HorseStories\Http\Kernel'
+	'EQM\Http\Kernel'
 );
 
 $app->singleton(
 	'Illuminate\Contracts\Console\Kernel',
-	'HorseStories\Console\Kernel'
+	'EQM\Console\Kernel'
 );
 
 $app->singleton(
 	'Illuminate\Contracts\Debug\ExceptionHandler',
-	'HorseStories\Exceptions\Handler'
+	'EQM\Exceptions\Handler'
 );
 
 /*

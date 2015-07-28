@@ -1,12 +1,12 @@
 <?php
-namespace HorseStories\Models\Pedigrees;
+namespace EQM\Models\Pedigrees;
 
-use HorseStories\Models\Horses\Horse;
+use EQM\Models\Horses\Horse;
 
 class PedigreeConnector
 {
     /**
-     * @param \HorseStories\Models\Horses\Horse $horse
+     * @param \EQM\Models\Horses\Horse $horse
      * @param int $type
      * @return int
      */

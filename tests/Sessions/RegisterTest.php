@@ -1,7 +1,7 @@
 <?php
 namespace Sessions;
 
-use HorseStories\Events\UserRegistered;
+use EQM\Events\UserRegistered;
 
 class RegisterTest extends \TestCase
 {

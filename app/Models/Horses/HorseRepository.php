@@ -1,18 +1,18 @@
 <?php
 
-namespace HorseStories\Models\Horses;
+namespace EQM\Models\Horses;
 
-use HorseStories\Models\Users\User;
+use EQM\Models\Users\User;
 
 class HorseRepository
 {
     /**
-     * @var \HorseStories\Models\Horses\Horse
+     * @var \EQM\Models\Horses\Horse
      */
     private $horse;
 
     /**
-     * @param \HorseStories\Models\Horses\Horse $horse
+     * @param \EQM\Models\Horses\Horse $horse
      */
     public function __construct(Horse $horse)
     {
@@ -21,7 +21,7 @@ class HorseRepository
 
     /**
      * @param $id
-     * @return \HorseStories\Models\Horses\Horse
+     * @return \EQM\Models\Horses\Horse
      */
     public function findById($id)
     {
@@ -30,7 +30,7 @@ class HorseRepository
 
     /**
      * @param string $lifeNumber
-     * @return \HorseStories\Models\Horses\Horse|null
+     * @return \EQM\Models\Horses\Horse|null
      */
     public function findByLifeNumber($lifeNumber)
     {
@@ -39,7 +39,7 @@ class HorseRepository
 
     /**
      * @param string $slug
-     * @return \HorseStories\Models\Horses\Horse
+     * @return \EQM\Models\Horses\Horse
      */
     public function findBySlug($slug)
     {
@@ -48,7 +48,7 @@ class HorseRepository
 
     /**
      * @param string $value
-     * @return \HorseStories\Models\Horses\Horse[]
+     * @return \EQM\Models\Horses\Horse[]
      */
     public function search($value)
     {
@@ -56,7 +56,7 @@ class HorseRepository
     }
 
     /**
-     * @param \HorseStories\Models\Users\User $user
+     * @param \EQM\Models\Users\User $user
      * @return array
      */
     public function findHorsesForSelect(User $user)

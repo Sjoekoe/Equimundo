@@ -1,7 +1,7 @@
 <?php
-namespace HorseStories\Core\Mailers;
+namespace EQM\Core\Mailers;
 
-use HorseStories\Models\Users\User;
+use EQM\Models\Users\User;
 use Illuminate\Mail\Mailer as Mail;
 
 abstract class Mailer
@@ -20,7 +20,7 @@ abstract class Mailer
     }
 
     /**
-     * @param \HorseStories\Models\Users\User $user
+     * @param \EQM\Models\Users\User $user
      * @param string $subject
      * @param string $view
      * @param array $data

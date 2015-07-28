@@ -1,22 +1,22 @@
 <?php
-namespace HorseStories\Listeners\Events;
+namespace EQM\Listeners\Events;
 
-use HorseStories\Core\Mailers\UserMailer;
-use HorseStories\Events\UserRegistered;
+use EQM\Core\Mailers\UserMailer;
+use EQM\Events\UserRegistered;
 
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldBeQueued;
 
 class EmailRegisteredUser {
     /**
-     * @var \HorseStories\Core\Mailers\UserMailer
+     * @var \EQM\Core\Mailers\UserMailer
      */
     private $mailer;
 
     /**
      * Create the event handler.
      *
-     * @param \HorseStories\Core\Mailers\UserMailer $mailer
+     * @param \EQM\Core\Mailers\UserMailer $mailer
      */
     public function __construct(UserMailer $mailer)
     {
@@ -33,5 +33,4 @@ class EmailRegisteredUser {
     {
         $this->mailer->sendWelcomeMessageTo($event->user);
     }
-
 }

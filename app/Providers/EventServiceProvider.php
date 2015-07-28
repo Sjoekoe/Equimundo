@@ -1,11 +1,13 @@
-<?php namespace HorseStories\Providers;
+<?php namespace EQM\Providers;
 
-use HorseStories\Events\CommentWasPosted;
-use HorseStories\Events\StatusLiked;
-use HorseStories\Events\UserRegistered;
-use HorseStories\Listeners\Events\EmailRegisteredUser;
-use HorseStories\Listeners\Events\NotifyHorseOwner;
-use HorseStories\Listeners\Events\NotifyStatusPoster;
+use EQM\Events\CommentWasPosted;
+use EQM\Events\HorseWasCreated;
+use EQM\Events\StatusLiked;
+use EQM\Events\UserRegistered;
+use EQM\Listeners\Events\CreateStandardAlbums;
+use EQM\Listeners\Events\EmailRegisteredUser;
+use EQM\Listeners\Events\NotifyHorseOwner;
+use EQM\Listeners\Events\NotifyStatusPoster;
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -28,6 +30,9 @@ class EventServiceProvider extends ServiceProvider {
         ],
         PedigreeWasCreated::class => [
             NotifyHorseOwner::class
+        ],
+		HorseWasCreated::class => [
+            CreateStandardAlbums::class
         ],
 	];
 

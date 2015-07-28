@@ -1,12 +1,12 @@
 <?php
-namespace HorseStories\Core\Mailers;
+namespace EQM\Core\Mailers;
 
-use HorseStories\Models\Users\User;
+use EQM\Models\Users\User;
 
 class UserMailer extends Mailer
 {
     /**
-     * @param \HorseStories\Models\Users\User $user
+     * @param \EQM\Models\Users\User $user
      */
     public function sendWelcomeMessageTo(User $user)
     {

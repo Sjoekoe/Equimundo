@@ -1,8 +1,8 @@
 <?php
 namespace Sessions;
 
-use HorseStories\Models\Settings\Setting;
-use HorseStories\Models\Users\User;
+use EQM\Models\Settings\Setting;
+use EQM\Models\Users\User;
 
 class SessionTest extends \TestCase
 {
@@ -11,6 +11,7 @@ class SessionTest extends \TestCase
     {
         $user = factory(User::class)->create([
             'email' => 'foo@bar.com',
+            'activated' => true
         ]);
 
         factory(Setting::class)->create([

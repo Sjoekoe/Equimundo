@@ -1,4 +1,4 @@
-<?php namespace HorseStories\Events;
+<?php namespace EQM\Events;
 
 abstract class Event {
 

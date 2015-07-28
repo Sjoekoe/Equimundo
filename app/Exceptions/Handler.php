@@ -1,4 +1,4 @@
-<?php namespace HorseStories\Exceptions;
+<?php namespace EQM\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;

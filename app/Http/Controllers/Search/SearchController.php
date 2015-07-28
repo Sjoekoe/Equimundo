@@ -1,26 +1,26 @@
 <?php
-namespace HorseStories\Http\Controllers\Search;
+namespace EQM\Http\Controllers\Search;
 
-use HorseStories\Models\Horses\HorseRepository;
-use HorseStories\Models\Users\UserRepository;
+use EQM\Models\Horses\HorseRepository;
+use EQM\Models\Users\UserRepository;
 use Illuminate\Routing\Controller;
 use Input;
 
 class SearchController extends Controller
 {
     /**
-     * @var \HorseStories\Models\Horses\HorseRepository
+     * @var \EQM\Models\Horses\HorseRepository
      */
     private $horses;
 
     /**
-     * @var \HorseStories\Models\Users\UserRepository
+     * @var \EQM\Models\Users\UserRepository
      */
     private $users;
 
     /**
-     * @param \HorseStories\Models\Horses\HorseRepository $horses
-     * @param \HorseStories\Models\Users\UserRepository $users
+     * @param \EQM\Models\Horses\HorseRepository $horses
+     * @param \EQM\Models\Users\UserRepository $users
      */
     public function __construct(HorseRepository $horses, UserRepository $users)
     {

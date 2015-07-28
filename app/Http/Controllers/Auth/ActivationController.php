@@ -1,20 +1,20 @@
 <?php
-namespace HorseStories\Http\Controllers\Auth;
+namespace EQM\Http\Controllers\Auth;
 
-use HorseStories\Http\Controllers\Controller;
-use HorseStories\Models\Users\UserRepository;
+use EQM\Http\Controllers\Controller;
+use EQM\Models\Users\UserRepository;
 use Input;
 use Session;
 
 class ActivationController extends Controller
 {
     /**
-     * @var \HorseStories\Models\Users\UserRepository
+     * @var \EQM\Models\Users\UserRepository
      */
     private $users;
 
     /**
-     * @param \HorseStories\Models\Users\UserRepository $users
+     * @param \EQM\Models\Users\UserRepository $users
      */
     function __construct(UserRepository $users)
     {

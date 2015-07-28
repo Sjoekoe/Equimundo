@@ -1,8 +1,8 @@
 <?php
-namespace HorseStories\Models\Conversations;
+namespace EQM\Models\Conversations;
 
 use Carbon\Carbon;
-use HorseStories\Models\Users\User;
+use EQM\Models\Users\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Conversation extends Model
@@ -29,7 +29,7 @@ class Conversation extends Model
     }
 
     /**
-     * @param \HorseStories\Models\Users\User $user
+     * @param \EQM\Models\Users\User $user
      */
     public function setRead(User $user)
     {
@@ -37,7 +37,7 @@ class Conversation extends Model
     }
 
     /**
-     * @param \HorseStories\Models\Users\User $user
+     * @param \EQM\Models\Users\User $user
      */
     public function setUnread(User $user)
     {
@@ -45,7 +45,7 @@ class Conversation extends Model
     }
 
     /**
-     * @param \HorseStories\Models\Users\User $user
+     * @param \EQM\Models\Users\User $user
      */
     public function deleteForUser(User $user)
     {
@@ -53,7 +53,7 @@ class Conversation extends Model
     }
 
     /**
-     * @param \HorseStories\Models\Users\User $user
+     * @param \EQM\Models\Users\User $user
      * @return bool
      */
     public function isDeletedForContactPerson(User $user)
@@ -62,7 +62,7 @@ class Conversation extends Model
     }
 
     /**
-     * @param \HorseStories\Models\Users\User $user
+     * @param \EQM\Models\Users\User $user
      */
     public function unDeleteForContactPerson(User $user)
     {
@@ -70,8 +70,8 @@ class Conversation extends Model
     }
 
     /**
-     * @param \HorseStories\Models\Users\User $auhtenticatedUser
-     * @return \HorseStories\Models\Users\User
+     * @param \EQM\Models\Users\User $auhtenticatedUser
+     * @return \EQM\Models\Users\User
      */
     public function contactPerson(User $auhtenticatedUser)
     {

@@ -1,28 +1,28 @@
 <?php
-namespace HorseStories\Http\Controllers\Pages;
+namespace EQM\Http\Controllers\Pages;
 
 use Auth;
 use DB;
-use HorseStories\Http\Controllers\Controller;
-use HorseStories\Models\Horses\HorseRepository;
-use HorseStories\Models\Statuses\StatusRepository;
+use EQM\Http\Controllers\Controller;
+use EQM\Models\Horses\HorseRepository;
+use EQM\Models\Statuses\StatusRepository;
 
 class PagesController extends Controller
 {
     /**
-     * @var \HorseStories\Models\Statuses\StatusRepository
+     * @var \EQM\Models\Statuses\StatusRepository
      */
     private $statuses;
 
     /**
-     * @var \HorseStories\Models\Horses\HorseRepository
+     * @var \EQM\Models\Horses\HorseRepository
      */
     private $horses;
 
     /**
-     * @param \HorseStories\Models\Users\UserRepository $users
-     * @param \HorseStories\Models\Statuses\StatusRepository $statuses
-     * @param \HorseStories\Models\Horses\HorseRepository $horses
+     * @param \EQM\Models\Users\UserRepository $users
+     * @param \EQM\Models\Statuses\StatusRepository $statuses
+     * @param \EQM\Models\Horses\HorseRepository $horses
      */
     public function __construct(StatusRepository $statuses, HorseRepository $horses)
     {

@@ -1,23 +1,23 @@
 <?php
-namespace HorseStories\Models\Palmares;
+namespace EQM\Models\Palmares;
 
-use HorseStories\Models\Events\EventRepository;
-use HorseStories\Models\Statuses\StatusRepository;
+use EQM\Models\Events\EventRepository;
+use EQM\Models\Statuses\StatusRepository;
 
 class PalmaresDeleter
 {
     /**
-     * @var \HorseStories\Models\Statuses\StatusRepository
+     * @var \EQM\Models\Statuses\StatusRepository
      */
     private $statuses;
     /**
-     * @var \HorseStories\Models\Events\EventRepository
+     * @var \EQM\Models\Events\EventRepository
      */
     private $events;
 
     /**
-     * @param \HorseStories\Models\Statuses\StatusRepository $statuses
-     * @param \HorseStories\Models\Events\EventRepository $events
+     * @param \EQM\Models\Statuses\StatusRepository $statuses
+     * @param \EQM\Models\Events\EventRepository $events
      */
     public function __construct(StatusRepository $statuses, EventRepository $events)
     {
@@ -26,7 +26,7 @@ class PalmaresDeleter
     }
 
     /**
-     * @param \HorseStories\Models\Palmares\Palmares $palmares
+     * @param \EQM\Models\Palmares\Palmares $palmares
      */
     public function delete(Palmares $palmares)
     {

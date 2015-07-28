@@ -1,5 +1,5 @@
 <?php 
-namespace HorseStories\Models\Roles;
+namespace EQM\Models\Roles;
   
 use Illuminate\Database\Eloquent\Model;
 
