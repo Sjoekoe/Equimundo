@@ -2,9 +2,9 @@
     <nav>
         <div class="nav-wrapper teal lighten-2">
             {{ Form::open(['route' => 'search', 'class' => 'left']) }}
-                {{ Form::text('search', null, ['placeholder' => 'Search...']) }}
+                {{ Form::text('search', null, ['placeholder' => trans('forms.placeholders.search') . '...']) }}
             {{ Form::close() }}
-            <a href="{{ route('home') }}" class="brand-logo center">Horse Stories</a>
+            <a href="{{ route('home') }}" class="brand-logo center">Equimundo</a>
             <ul id="nav-mobile" class="left hide-on-med-and-down">
                 @if (Auth::check())
                     <li><a href="{{ route('home') }}">{{ trans('copy.a.timeline') }}</a></li>
@@ -18,7 +18,7 @@
                     @if (Auth::user()->hasUnreadNotifications())
                         <li>
                             <a href="#">
-                                {{ Auth::user()->countUnreadNotifications() }} notifications
+                                {{ Auth::user()->countUnreadNotifications() }} {{trans('copy.a.notifications')}}
                             </a>
                         </li>
                     @endif

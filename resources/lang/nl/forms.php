@@ -54,5 +54,6 @@ return [
     'placeholders' => [
         'what_you_been_doing' => 'Wat heb je gedaan ...',
         'write_a_comment' => 'Geef een reactie ...',
+        'search' => 'Zoeken',
     ],
 ];

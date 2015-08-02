@@ -14,7 +14,7 @@ return [
         'settings' => 'Instellingen',
         'sons' => 'Zonen',
         'users' => 'Gebruikers',
-        'welcome_message' => 'Welkom bij Horse Stories',
+        'welcome_message' => 'Welkom bij Equimundo',
     ],
 
     'p' => [

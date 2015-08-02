@@ -14,7 +14,7 @@ return [
         'settings' => 'Settings',
         'sons' => 'Sons',
         'users' => 'Users',
-        'welcome_message' => 'Welcome to Horse Stories',
+        'welcome_message' => 'Welcome to Equimundo',
     ],
 
     'p' => [
