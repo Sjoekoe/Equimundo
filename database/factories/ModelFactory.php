@@ -11,7 +11,7 @@
 */
 $factory->define(EQM\Models\Users\User::class, function (Faker\Generator $faker) {
     return [
-        'username' => $faker->name,
+        'last_name' => $faker->name,
         'first_name' => $faker->name,
         'email' => $faker->email,
         'password' => bcrypt('password'),

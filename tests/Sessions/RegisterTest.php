@@ -11,7 +11,7 @@ class RegisterTest extends \TestCase
         $this->expectsEvents(UserRegistered::class);
 
         $this->visit('/register')
-            ->type('John', 'firstname')
+            ->type('John', 'first_name')
             ->type('john@example.com', 'email')
             ->type('password', 'password')
             ->type('password', 'password_confirmation')

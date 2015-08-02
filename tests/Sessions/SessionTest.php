@@ -23,7 +23,7 @@ class SessionTest extends \TestCase
             ->type('password', 'password')
             ->press('Sign In')
             ->onPage('/')
-            ->dontSee('Welcome to Horse Stories');
+            ->dontSee('Welcome to Equimundo');
     }
 
     /** @test */
@@ -40,6 +40,6 @@ class SessionTest extends \TestCase
             ->visit('/')
             ->click('Sign Out')
             ->onPage('/')
-            ->see('Welcome to Horse Stories');
+            ->see('Welcome to Equimundo');
     }
 }
