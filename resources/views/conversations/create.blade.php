@@ -4,7 +4,7 @@
     <div class="grid-block medium-12">
         {{ Form::open(['route' => 'conversation.store']) }}
             {{ Form::label('to', trans('forms.labels.to')) }}
-            {{ Form::text('to', $owner->username, ['disabled']) }}
+            {{ Form::text('to', $owner->fullName(), ['disabled']) }}
             {{ Form::hidden('contact_id', $owner->id) }}
             {{ Form::label('subject', trans('forms.labels.subject')) }}
             {{ Form::text('subject') }}

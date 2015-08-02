@@ -246,4 +246,18 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             $notification->markAsRead();
         }
     }
+
+    /**
+     * @return string
+     */
+    public function fullName()
+    {
+        $name = $this->first_name;
+
+        if ($this->last_name !== null) {
+            $name .= ' ' . $this->last_name;
+        }
+
+        return $name;
+    }
 }

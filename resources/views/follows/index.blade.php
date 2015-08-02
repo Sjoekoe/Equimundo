@@ -3,6 +3,6 @@
 @section('content')
     @include('layout.partials.heading')
             @foreach ($horse->followers as $follower)
-                {{ $follower->username }}
+                {{ $follower->fullName() }}
             @endforeach
 @stop

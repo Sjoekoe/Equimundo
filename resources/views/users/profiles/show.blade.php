@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('content')
-    <h3>{{ $user->username }}</h3>
+    <h3>{{ $user->fullName() }}</h3>
     <div class="row">
         <h5>{{ trans('copy.titles.horses') }}</h5>
         <ul>

@@ -11,7 +11,7 @@ class RegisterTest extends \TestCase
         $this->expectsEvents(UserRegistered::class);
 
         $this->visit('/register')
-            ->type('JohnDoe', 'username')
+            ->type('John', 'firstname')
             ->type('john@example.com', 'email')
             ->type('password', 'password')
             ->type('password', 'password_confirmation')
@@ -19,7 +19,7 @@ class RegisterTest extends \TestCase
             ->seePageIs('/');
 
         $this->seeInDatabase('users', [
-            'username' => 'JohnDoe',
+            'first_name' => 'John',
             'email' => 'john@example.com'
         ]);
     }

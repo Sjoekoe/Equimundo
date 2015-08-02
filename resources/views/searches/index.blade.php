@@ -19,7 +19,7 @@
 
         @if (count($profiles))
             @foreach ($profiles as $profile)
-                <p><a href="{{ route('users.profiles.show', $profile->id) }}">{{ $profile->username }}</a></p>
+                <p><a href="{{ route('users.profiles.show', $profile->id) }}">{{ $profile->fullName() }}</a></p>
             @endforeach
         @else
             <p>{{ trans('copy.p.no_users_found') }}</p>

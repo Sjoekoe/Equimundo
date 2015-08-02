@@ -59,8 +59,7 @@ class UserRepository
      */
     public function search($input)
     {
-        return $this->user->where('username', 'like', '%' . $input . '%')
-            ->orWhere('first_name', 'like', '%' . $input . '%')
+        return $this->user->where('first_name', 'like', '%' . $input . '%')
             ->orWhere('last_name', 'like', '%' . $input . '%')
             ->get();
     }

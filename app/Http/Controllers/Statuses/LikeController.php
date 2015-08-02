@@ -25,7 +25,7 @@ class LikeController extends Controller
         } else {
             Auth::user()->likes()->attach($status);
 
-            $data = ['sender' => Auth::user()->username, 'horse' => $status->horse->name];
+            $data = ['sender' => Auth::user()->fullName(), 'horse' => $status->horse->name];
 
             event(new StatusLiked($status, Auth::user(), Notification::STATUS_LIKED, $data));
         }

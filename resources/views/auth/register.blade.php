@@ -6,10 +6,15 @@
     {{ Form::open(['class' => 'form-horizontal']) }}
     <!-- Name Form input -->
     <div class="form-group">
-        {{ Form::label('username', trans('forms.labels.username'), ['class' => 'col-md-4 control-label']) }}
+        {{ Form::label('first_name', trans('forms.labels.first_name'), ['class' => 'col-md-4 control-label']) }}
         <div class="col-md-6">
-            {{ Form::text('username', null, ['class' => 'form-control']) }}
+            {{ Form::text('first_name', null, ['class' => 'form-control']) }}
         </div>
+    </div>
+
+    <div class="form-group">
+        {{ Form::label('lastname', trans('forms.labels.last_name'), ['class' => 'col-md-4 control-label']) }}
+        {{ Form::text('lastname', null, ['class' => 'form-control']) }}
     </div>
 
     <!-- Email Form input -->
