@@ -29,6 +29,22 @@ class Picture extends Model
      */
     public function albums()
     {
-        return $this->belongsToMany(Album::class, 'album_picture', 'picture_id', 'album_id');
+        return $this->belongsToMany(Album::class, 'album_picture', 'picture_id', 'album_id')->withTimestamps();
+    }
+
+    /**
+     * @param int $albumId
+     */
+    public function addToAlbum($albumId)
+    {
+        $this->albums()->attach($albumId);
+    }
+
+    /**
+     * @param int $albumId
+     */
+    public function removeFromAlbum($albumId)
+    {
+        $this->albums()->detach($albumId);
     }
 }

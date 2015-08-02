@@ -25,11 +25,11 @@ class Album extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function pictures()
     {
-        return $this->hasMany(Picture::class);
+        return $this->belongsToMany(Picture::class);
     }
 
     public function setProfileAlbum()

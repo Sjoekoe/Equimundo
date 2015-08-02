@@ -2,6 +2,7 @@
 namespace EQM\Models\Statuses;
 
 use EQM\Core\Files\Uploader;
+use EQM\Models\Albums\Album;
 use EQM\Models\Horses\Horse;
 use EQM\Models\Horses\HorseRepository;
 
@@ -43,6 +44,7 @@ class StatusCreator
             $horse = $this->horses->findById($data['horse']);
             $picture = $this->uploader->uploadPicture($data['picture'], $horse);
 
+            $picture->addToAlbum($horse->getStandardAlbum(Album::TIMELINEPICTURES));
             $status->setPicture($picture);
         }
 

@@ -7,6 +7,7 @@ use EQM\Core\Files\Uploader;
 use EQM\Events\HorseWasCreated;
 use EQM\Http\Requests\CreateHorse;
 use EQM\Http\Requests\UpdateHorse;
+use EQM\Models\Albums\Album;
 use EQM\Models\Horses\HorseCreator;
 use EQM\Models\Horses\HorseRepository;
 use EQM\Models\Horses\HorseUpdater;
@@ -93,11 +94,13 @@ class HorseController extends Controller
     {
         $horse = $this->horseCreator->create($request->all());
 
-        if (Request::hasFile('profile_pic')) {
-            $this->uploader->uploadPicture(Request::file('profile_pic'), $horse, true);
-        }
-
         event(new HorseWasCreated($horse));
+
+        if (Request::hasFile('profile_pic')) {
+            $picture = $this->uploader->uploadPicture(Request::file('profile_pic'), $horse, true);
+
+            $picture->addToAlbum($horse->getStandardAlbum(Album::PROFILEPICTURES));
+        }
 
         Session::put('success', $horse->name . ' was successfully created.');
 

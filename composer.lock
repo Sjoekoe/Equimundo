@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f1d29a3abd47ce39e25ca89bd13ab4c4",
+    "hash": "21c64a743db414f8cff00b741a141afb",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -2166,7 +2166,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padraic/mockery/zipball/971dcdfdc2239b3d516672139f4368c19f6c2060",
+                "url": "https://api.github.com/repos/padraic/mockery/zipball/e585573c91b0c821e511afd14666b4503ef7255b",
                 "reference": "971dcdfdc2239b3d516672139f4368c19f6c2060",
                 "shasum": ""
             },

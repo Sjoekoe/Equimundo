@@ -241,4 +241,17 @@ class Horse extends Model
     {
         return $this->gender == self::FEMALE;
     }
+
+    /**
+     * @param int $type
+     * @return \EQM\Models\Albums\Album
+     */
+    public function getStandardAlbum($type)
+    {
+        foreach($this->albums as $album) {
+            if ($album->type == $type) {
+                return $album->id;
+            }
+        }
+    }
 }

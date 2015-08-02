@@ -61,6 +61,6 @@ class HorseRepository
      */
     public function findHorsesForSelect(User $user)
     {
-        return $this->horse->with('statuses')->where('user_id', $user->id)->lists('name', 'id');
+        return $this->horse->with('statuses')->where('user_id', $user->id)->lists('name', 'id')->all();
     }
 }

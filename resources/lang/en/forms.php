@@ -3,6 +3,7 @@
 return [
     'labels' => [
         'about_you' => 'About You:',
+        'add_pictures' => 'Add Pictures:',
         'breed' => 'Breed:',
         'category' => 'category:',
         'color' => 'Color:',
@@ -10,6 +11,7 @@ return [
         'date' => 'Date:',
         'date_of_birth' => 'Date Of Birth:',
         'date_of_death' => 'Passed away:',
+        'description' => 'Decription:',
         'discipline' => 'Discipline:',
         'email' => 'Email:',
         'email_notifications' => 'Email notifications',
