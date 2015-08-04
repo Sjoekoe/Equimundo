@@ -1,7 +1,7 @@
-<?php namespace HorseStories\Services;
+<?php namespace EQM\Services;
 
-use HorseStories\Models\Settings\Setting;
-use HorseStories\Models\Users\User;
+use EQM\Models\Settings\Setting;
+use EQM\Models\Users\User;
 use Validator;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
 
@@ -16,7 +16,7 @@ class Registrar implements RegistrarContract {
 	public function validator(array $data)
 	{
 		return Validator::make($data, [
-			'username' => 'required|max:255|unique:users',
+			'firstname' => 'required|max:255|unique:users',
 			'email' => 'required|email|max:255|unique:users',
 			'password' => 'required|confirmed|min:6',
 		]);
@@ -31,7 +31,7 @@ class Registrar implements RegistrarContract {
 	public function create(array $data)
 	{
 		$user =  User::create([
-			'username' => $data['username'],
+			'firstname' => $data['username'],
 			'email' => $data['email'],
 			'password' => bcrypt($data['password']),
 		]);

@@ -1,12 +1,12 @@
 <?php
-namespace HorseStories\Models\Pedigrees;
+namespace EQM\Models\Pedigrees;
 
 use DateTime;
 
 class PedigreeUpdater
 {
     /**
-     * @param \HorseStories\Models\Pedigrees\Pedigree $pedigree
+     * @param \EQM\Models\Pedigrees\Pedigree $pedigree
      * @param array $values
      */
     public function update(Pedigree $pedigree, $values)

@@ -1,4 +1,4 @@
-<?php namespace HorseStories\Exceptions;
+<?php namespace EQM\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -44,11 +44,11 @@ class Handler extends ExceptionHandler {
             return $this->renderHttpException($e);
         }
 
-
         if (config('app.debug'))
         {
             return $this->renderExceptionWithWhoops($e);
         }
+
 		return parent::render($request, $e);
 	}
 

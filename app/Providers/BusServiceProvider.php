@@ -1,4 +1,4 @@
-<?php namespace HorseStories\Providers;
+<?php namespace EQM\Providers;
 
 use Illuminate\Bus\Dispatcher;
 use Illuminate\Support\ServiceProvider;
@@ -16,7 +16,7 @@ class BusServiceProvider extends ServiceProvider {
 		$dispatcher->mapUsing(function($command)
 		{
 			return Dispatcher::simpleMapping(
-				$command, 'HorseStories\Commands', 'HorseStories\Handlers\Commands'
+				$command, 'EQM\Commands', 'EQM\Handlers\Commands'
 			);
 		});
 	}

@@ -1,11 +1,11 @@
 <?php
-namespace HorseStories\Http\Controllers\Statuses;
+namespace EQM\Http\Controllers\Statuses;
 
 use Auth;
 use DB;
-use HorseStories\Events\StatusLiked;
-use HorseStories\Models\Notifications\Notification;
-use HorseStories\Models\Statuses\Status;
+use EQM\Events\StatusLiked;
+use EQM\Models\Notifications\Notification;
+use EQM\Models\Statuses\Status;
 use Illuminate\Routing\Controller;
 
 class LikeController extends Controller
@@ -25,7 +25,7 @@ class LikeController extends Controller
         } else {
             Auth::user()->likes()->attach($status);
 
-            $data = ['sender' => Auth::user()->username, 'horse' => $status->horse->name];
+            $data = ['sender' => Auth::user()->fullName(), 'horse' => $status->horse->name];
 
             event(new StatusLiked($status, Auth::user(), Notification::STATUS_LIKED, $data));
         }

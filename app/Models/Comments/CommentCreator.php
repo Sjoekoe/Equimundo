@@ -1,7 +1,7 @@
 <?php
-namespace HorseStories\Models\Comments;
+namespace EQM\Models\Comments;
 
-use HorseStories\Models\Statuses\Status;
+use EQM\Models\Statuses\Status;
 use Illuminate\Auth\AuthManager;
 
 class CommentCreator
@@ -20,9 +20,9 @@ class CommentCreator
     }
 
     /**
-     * @param \HorseStories\Models\Statuses\Status $status
+     * @param \EQM\Models\Statuses\Status $status
      * @param string $body
-     * @return \HorseStories\Models\Comments\Comment
+     * @return \EQM\Models\Comments\Comment
      */
     public function create(Status $status, $body)
     {

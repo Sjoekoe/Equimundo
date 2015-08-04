@@ -1,6 +1,6 @@
-<?php namespace HorseStories\Http\Requests;
+<?php namespace EQM\Http\Requests;
 
-use HorseStories\Http\Requests\Request;
+use EQM\Http\Requests\Request;
 
 class CreateFamilyMember extends Request {
 

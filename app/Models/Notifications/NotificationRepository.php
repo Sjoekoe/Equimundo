@@ -1,17 +1,17 @@
 <?php
-namespace HorseStories\Models\Notifications;
+namespace EQM\Models\Notifications;
 
-use HorseStories\Models\Users\User;
+use EQM\Models\Users\User;
 
 class NotificationRepository
 {
     /**
-     * @var \HorseStories\Models\Notifications\Notification
+     * @var \EQM\Models\Notifications\Notification
      */
     private $notification;
 
     /**
-     * @param \HorseStories\Models\Notifications\Notification $notification
+     * @param \EQM\Models\Notifications\Notification $notification
      */
     public function __construct(Notification $notification)
     {
@@ -19,8 +19,8 @@ class NotificationRepository
     }
 
     /**
-     * @param \HorseStories\Models\Users\User $user
-     * @return \HorseStories\Models\Notifications\Notification[]
+     * @param \EQM\Models\Users\User $user
+     * @return \EQM\Models\Notifications\Notification[]
      */
     public function findForUser(User $user)
     {

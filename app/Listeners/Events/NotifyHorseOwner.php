@@ -1,18 +1,18 @@
 <?php
-namespace HorseStories\Listeners\Events;
+namespace EQM\Listeners\Events;
 
-use HorseStories\Events\PedigreeWasCreated;
-use HorseStories\Models\Notifications\NotificationCreator;
+use EQM\Events\PedigreeWasCreated;
+use EQM\Models\Notifications\NotificationCreator;
 
 class NotifyHorseOwner
 {
     /**
-     * @var \HorseStories\Models\Notifications\NotificationCreator
+     * @var \EQM\Models\Notifications\NotificationCreator
      */
     private $creator;
 
     /**
-     * @param \HorseStories\Models\Notifications\NotificationCreator $creator
+     * @param \EQM\Models\Notifications\NotificationCreator $creator
      */
     public function __construct(NotificationCreator $creator)
     {
@@ -20,7 +20,7 @@ class NotifyHorseOwner
     }
 
     /**
-     * @param \HorseStories\Events\PedigreeWasCreated $event
+     * @param \EQM\Events\PedigreeWasCreated $event
      */
     public function handle(PedigreeWasCreated $event)
     {

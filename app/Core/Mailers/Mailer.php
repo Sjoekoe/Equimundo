@@ -1,7 +1,7 @@
 <?php
-namespace HorseStories\Core\Mailers;
+namespace EQM\Core\Mailers;
 
-use HorseStories\Models\Users\User;
+use EQM\Models\Users\User;
 use Illuminate\Mail\Mailer as Mail;
 
 abstract class Mailer
@@ -16,12 +16,11 @@ abstract class Mailer
      */
     public function __construct(Mail $mail)
     {
-
         $this->mail = $mail;
     }
 
     /**
-     * @param \HorseStories\Models\Users\User $user
+     * @param \EQM\Models\Users\User $user
      * @param string $subject
      * @param string $view
      * @param array $data
@@ -29,7 +28,7 @@ abstract class Mailer
     public function sendTo(User $user, $subject, $view, $data = [])
     {
         $this->mail->queue($view, $data, function($message) use ($user, $subject) {
-            $message->to('test@test.com')->subject($subject);
+            $message->to($user->email)->subject($subject);
         });
     }
 }

@@ -1,4 +1,4 @@
-<?php namespace HorseStories\Providers;
+<?php namespace EQM\Providers;
 
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -12,7 +12,7 @@ class RouteServiceProvider extends ServiceProvider {
 	 *
 	 * @var string
 	 */
-	protected $namespace = 'HorseStories\Http\Controllers';
+	protected $namespace = 'EQM\Http\Controllers';
 
 	/**
 	 * Define your route model bindings, pattern filters, etc.
@@ -24,7 +24,7 @@ class RouteServiceProvider extends ServiceProvider {
 	{
 		parent::boot($router);
 
-        $router->model('horse', 'HorseStories\Models\Horses\Horse');
+        $router->model('horse', 'EQM\Models\Horses\Horse');
 		//
 	}
 

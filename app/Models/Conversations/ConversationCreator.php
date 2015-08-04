@@ -1,11 +1,11 @@
 <?php
-namespace HorseStories\Models\Conversations;
+namespace EQM\Models\Conversations;
 
 class ConversationCreator
 {
     /**
      * @param array $values
-     * @return \HorseStories\Models\Conversations\Conversation
+     * @return \EQM\Models\Conversations\Conversation
      */
     public function create($values)
     {

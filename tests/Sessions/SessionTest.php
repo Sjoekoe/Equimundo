@@ -1,8 +1,8 @@
 <?php
 namespace Sessions;
 
-use HorseStories\Models\Settings\Setting;
-use HorseStories\Models\Users\User;
+use EQM\Models\Settings\Setting;
+use EQM\Models\Users\User;
 
 class SessionTest extends \TestCase
 {
@@ -11,6 +11,7 @@ class SessionTest extends \TestCase
     {
         $user = factory(User::class)->create([
             'email' => 'foo@bar.com',
+            'activated' => true
         ]);
 
         factory(Setting::class)->create([
@@ -22,7 +23,7 @@ class SessionTest extends \TestCase
             ->type('password', 'password')
             ->press('Sign In')
             ->onPage('/')
-            ->dontSee('Welcome to Horse Stories');
+            ->dontSee('Welcome to Equimundo');
     }
 
     /** @test */
@@ -39,6 +40,6 @@ class SessionTest extends \TestCase
             ->visit('/')
             ->click('Sign Out')
             ->onPage('/')
-            ->see('Welcome to Horse Stories');
+            ->see('Welcome to Equimundo');
     }
 }

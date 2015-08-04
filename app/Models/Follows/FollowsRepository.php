@@ -1,12 +1,12 @@
 <?php
-namespace HorseStories\Models\Follows;
+namespace EQM\Models\Follows;
 
-use HorseStories\Models\Horses\Horse;
+use EQM\Models\Horses\Horse;
 
 class FollowsRepository
 {
     /**
-     * @param \HorseStories\Models\Horses\Horse $horse
+     * @param \EQM\Models\Horses\Horse $horse
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function findForHorse(Horse $horse)

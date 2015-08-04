@@ -1,12 +1,12 @@
 <?php
-namespace HorseStories\Models\Palmares;
+namespace EQM\Models\Palmares;
 
 use DateTime;
 
 class PalmaresUpdater
 {
     /**
-     * @param \HorseStories\Models\Palmares\Palmares $palmares
+     * @param \EQM\Models\Palmares\Palmares $palmares
      * @param array $values
      */
     public function update(Palmares $palmares, $values)

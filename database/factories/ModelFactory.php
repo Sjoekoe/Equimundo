@@ -9,9 +9,9 @@
 | database. Just tell the factory how a default model should look.
 |
 */
-$factory->define(HorseStories\Models\Users\User::class, function (Faker\Generator $faker) {
+$factory->define(EQM\Models\Users\User::class, function (Faker\Generator $faker) {
     return [
-        'username' => $faker->name,
+        'last_name' => $faker->name,
         'first_name' => $faker->name,
         'email' => $faker->email,
         'password' => bcrypt('password'),
@@ -19,7 +19,7 @@ $factory->define(HorseStories\Models\Users\User::class, function (Faker\Generato
     ];
 });
 
-$factory->define(HorseStories\Models\Settings\Setting::class, function (Faker\Generator $faker) {
+$factory->define(EQM\Models\Settings\Setting::class, function (Faker\Generator $faker) {
     return [
         'email_notifications' => true,
         'date_format' => 'd/m/Y',

@@ -1,4 +1,4 @@
-<?php namespace HorseStories\Providers;
+<?php namespace EQM\Providers;
 
 use Blade;
 use Illuminate\Support\ServiceProvider;
@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider {
 	{
 		$this->app->bind(
 			'Illuminate\Contracts\Auth\Registrar',
-			'HorseStories\Services\Registrar'
+			'EQM\Services\Registrar'
 		);
 	}
 

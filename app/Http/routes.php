@@ -5,6 +5,11 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'admin'], function() {
     require __DIR__ . '/Routes/Admin/users.php';
 });
 
+Route::group(['namespace' => 'Albums'], function() {
+    require __DIR__ . '/Routes/Albums/albums.php';
+    require __DIR__ . '/Routes/Albums/pictures.php';
+});
+
 Route::group(['namespace' => 'Auth'], function() {
     require __DIR__ . '/Routes/Auth/auth.php';
 });

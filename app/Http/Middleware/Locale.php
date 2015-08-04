@@ -1,5 +1,5 @@
 <?php
-namespace HorseStories\Http\Middleware;
+namespace EQM\Http\Middleware;
 
 use Illuminate\Auth\AuthManager;
 use Illuminate\Foundation\Application;

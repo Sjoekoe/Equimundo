@@ -1,5 +1,5 @@
 suites:
     main:
-        namespace: HorseStories
-        psr4_prefix: HorseStories
+        namespace: EQM
+        psr4_prefix: EQM
         src_path: app

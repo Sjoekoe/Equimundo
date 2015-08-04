@@ -1,7 +1,7 @@
 <?php
-namespace HorseStories\Core\Files;
+namespace EQM\Core\Files;
 
-use HorseStories\Models\Pictures\Picture;
+use EQM\Models\Pictures\Picture;
 use Illuminate\Contracts\Filesystem\Factory as Filesystem;
 use Intervention\Image\ImageManager;
 
@@ -29,9 +29,9 @@ class Uploader
 
     /**
      * @param \Symfony\Component\HttpFoundation\File\UploadedFile $file
-     * @param \HorseStories\Models\Horses\Horse $horse
+     * @param \EQM\Models\Horses\Horse $horse
      * @param bool $profile
-     * @return \HorseStories\Models\Pictures\Picture
+     * @return \EQM\Models\Pictures\Picture
      */
     public function uploadPicture($file, $horse, $profile = false)
     {

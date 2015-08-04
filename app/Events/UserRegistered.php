@@ -1,6 +1,6 @@
-<?php namespace HorseStories\Events;
+<?php namespace EQM\Events;
 
-use HorseStories\Models\Users\User;
+use EQM\Models\Users\User;
 use Illuminate\Queue\SerializesModels;
 
 class UserRegistered extends Event {
@@ -8,12 +8,12 @@ class UserRegistered extends Event {
     use SerializesModels;
 
     /**
-     * @var \HorseStories\Events\User
+     * @var \EQM\Events\User
      */
     public $user;
 
     /**
-     * @param \HorseStories\Models\Users\User $user
+     * @param \EQM\Models\Users\User $user
      */
     public function __construct(User $user)
     {

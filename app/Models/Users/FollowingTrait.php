@@ -1,6 +1,6 @@
-<?php namespace HorseStories\Models\Users;
+<?php namespace EQM\Models\Users;
 
-use HorseStories\Models\Horses\Horse;
+use EQM\Models\Horses\Horse;
 
 trait FollowingTrait
 {
@@ -13,7 +13,7 @@ trait FollowingTrait
     }
 
     /**
-     * @param \HorseStories\Models\Horses\Horse $horse
+     * @param \EQM\Models\Horses\Horse $horse
      */
     public function follow(Horse $horse)
     {
@@ -21,7 +21,7 @@ trait FollowingTrait
     }
 
     /**
-     * @param \HorseStories\Models\Horses\Horse $horse
+     * @param \EQM\Models\Horses\Horse $horse
      * @return int
      */
     public function unFollow(Horse $horse)
@@ -30,7 +30,7 @@ trait FollowingTrait
     }
 
     /**
-     * @param \HorseStories\Models\Horses\Horse $horse
+     * @param \EQM\Models\Horses\Horse $horse
      * @return bool
      */
     public function isFollowing(Horse $horse)

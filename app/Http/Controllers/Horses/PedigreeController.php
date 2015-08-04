@@ -1,41 +1,41 @@
 <?php
-namespace HorseStories\Http\Controllers\Horses;
+namespace EQM\Http\Controllers\Horses;
 
 use Auth;
-use HorseStories\Http\Requests\CreateFamilyMember;
-use HorseStories\Models\Horses\HorseRepository;
-use HorseStories\Models\Pedigrees\PedigreeCreator;
-use HorseStories\Models\Pedigrees\PedigreeRepository;
-use HorseStories\Models\Pedigrees\PedigreeUpdater;
+use EQM\Http\Requests\CreateFamilyMember;
+use EQM\Models\Horses\HorseRepository;
+use EQM\Models\Pedigrees\PedigreeCreator;
+use EQM\Models\Pedigrees\PedigreeRepository;
+use EQM\Models\Pedigrees\PedigreeUpdater;
 use Illuminate\Routing\Controller;
 
 class PedigreeController extends Controller
 {
     /**
-     * @var \HorseStories\Models\Pedigrees\PedigreeCreator
+     * @var \EQM\Models\Pedigrees\PedigreeCreator
      */
     private $pedigreeCreator;
 
     /**
-     * @var \HorseStories\Models\Pedigrees\PedigreeRepository
+     * @var \EQM\Models\Pedigrees\PedigreeRepository
      */
     private $pedigrees;
 
     /**
-     * @var \HorseStories\Models\Horses\HorseRepository
+     * @var \EQM\Models\Horses\HorseRepository
      */
     private $horses;
 
     /**
-     * @var \HorseStories\Models\Pedigrees\PedigreeUpdater
+     * @var \EQM\Models\Pedigrees\PedigreeUpdater
      */
     private $updater;
 
     /**
-     * @param \HorseStories\Models\Pedigrees\PedigreeCreator $pedigreeCreator
-     * @param \HorseStories\Models\Pedigrees\PedigreeRepository $pedigrees
-     * @param \HorseStories\Models\Horses\HorseRepository $horses
-     * @param \HorseStories\Models\Pedigrees\PedigreeUpdater $updater
+     * @param \EQM\Models\Pedigrees\PedigreeCreator $pedigreeCreator
+     * @param \EQM\Models\Pedigrees\PedigreeRepository $pedigrees
+     * @param \EQM\Models\Horses\HorseRepository $horses
+     * @param \EQM\Models\Pedigrees\PedigreeUpdater $updater
      */
     public function __construct(
         PedigreeCreator $pedigreeCreator,
@@ -73,7 +73,7 @@ class PedigreeController extends Controller
 
     /**
      * @param string $horseSlug
-     * @param \HorseStories\Http\Requests\CreateFamilyMember $request
+     * @param \EQM\Http\Requests\CreateFamilyMember $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store($horseSlug, CreateFamilyMember $request)
@@ -108,7 +108,7 @@ class PedigreeController extends Controller
 
     /**
      * @param int $pedigreeId
-     * @param \HorseStories\Http\Requests\CreateFamilyMember $request
+     * @param \EQM\Http\Requests\CreateFamilyMember $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update($pedigreeId, CreateFamilyMember $request)
@@ -153,7 +153,7 @@ class PedigreeController extends Controller
 
     /**
      * @param int $pedigreeId
-     * @return \HorseStories\Models\Pedigrees\Pedigree
+     * @return \EQM\Models\Pedigrees\Pedigree
      */
     private function initPedigree($pedigreeId)
     {

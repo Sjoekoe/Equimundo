@@ -1,18 +1,18 @@
 <?php
-namespace HorseStories\Models\Horses;
+namespace EQM\Models\Horses;
 
 use DateTime;
-use HorseStories\Models\Disciplines\DisciplineRepository;
+use EQM\Models\Disciplines\DisciplineRepository;
 
 class HorseUpdater
 {
     /**
-     * @var \HorseStories\Models\Disciplines\DisciplineRepository
+     * @var \EQM\Models\Disciplines\DisciplineRepository
      */
     private $disciplines;
 
     /**
-     * @param \HorseStories\Models\Disciplines\DisciplineRepository $disciplines
+     * @param \EQM\Models\Disciplines\DisciplineRepository $disciplines
      */
     public function __construct(DisciplineRepository $disciplines)
     {
@@ -20,7 +20,7 @@ class HorseUpdater
     }
 
     /**
-     * @param \HorseStories\Models\Horses\Horse $horse
+     * @param \EQM\Models\Horses\Horse $horse
      * @param array $values
      */
     public function update(Horse $horse, array $values = [])

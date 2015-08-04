@@ -1,15 +1,15 @@
 <?php
-namespace HorseStories\Models\Events;
+namespace EQM\Models\Events;
 
 class EventRepository
 {
     /**
-     * @var \HorseStories\Models\Events\Event
+     * @var \EQM\Models\Events\Event
      */
     private $event;
 
     /**
-     * @param \HorseStories\Models\Events\Event $event
+     * @param \EQM\Models\Events\Event $event
      */
     public function __construct(Event $event)
     {
@@ -18,7 +18,7 @@ class EventRepository
 
     /**
      * @param int $id
-     * @return \HorseStories\Models\Events\Event
+     * @return \EQM\Models\Events\Event
      */
     public function findById($id)
     {

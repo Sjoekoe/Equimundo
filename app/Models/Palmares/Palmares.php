@@ -1,5 +1,5 @@
 <?php
-namespace HorseStories\Models\Palmares;
+namespace EQM\Models\Palmares;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,7 +15,7 @@ class Palmares extends Model
      */
     public function horse()
     {
-        return $this->belongsTo('HorseStories\Models\Horses\Horse');
+        return $this->belongsTo('EQM\Models\Horses\Horse');
     }
 
     /**
@@ -23,7 +23,7 @@ class Palmares extends Model
      */
     public function event()
     {
-        return $this->belongsTo('HorseStories\Models\Events\Event');
+        return $this->belongsTo('EQM\Models\Events\Event');
     }
 
     /**
@@ -31,6 +31,6 @@ class Palmares extends Model
      */
     public function status()
     {
-        return $this->belongsTo('HorseStories\Models\Statuses\Status');
+        return $this->belongsTo('EQM\Models\Statuses\Status');
     }
 }

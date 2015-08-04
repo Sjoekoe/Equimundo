@@ -1,5 +1,5 @@
 <?php
-namespace HorseStories\Models\Events;
+namespace EQM\Models\Events;
 
 use Illuminate\Auth\AuthManager;
 
@@ -20,7 +20,7 @@ class EventCreator
 
     /**
      * @param array $data
-     * @return \HorseStories\Models\Events\Event
+     * @return \EQM\Models\Events\Event
      */
     public function create($data = [])
     {

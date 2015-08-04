@@ -14,7 +14,7 @@ return [
         'settings' => 'Instellingen',
         'sons' => 'Zonen',
         'users' => 'Gebruikers',
-        'welcome_message' => 'Welkom bij Horse Stories',
+        'welcome_message' => 'Welkom bij Equimundo',
     ],
 
     'p' => [
@@ -48,8 +48,12 @@ return [
         'add_mother_mother' => 'Moeders moeder toevoegen',
         'contact_owner' => 'Contacteer de eigenaar',
         'create_a_horse' => 'Maak een paard aan',
+        'create_album' => 'Creëer een album',
         'delete' => 'Verwijderen',
+        'delete_album' => 'Album verwijderen',
+        'delete_picture' => 'Foto Verwijderen',
         'edit' => 'Wijzigen',
+        'edit_album' => 'Album wijzigen',
         'edit_profile' => 'Profiel aanpassen',
         'follow' => 'Volg',
         'followers' => 'Volgers',

@@ -1,13 +1,13 @@
 <?php
-namespace HorseStories\Models\Conversations;
+namespace EQM\Models\Conversations;
 
-use HorseStories\Models\Users\User;
+use EQM\Models\Users\User;
 
 class MessageCreator
 {
     /**
-     * @param \HorseStories\Models\Conversations\Conversation $conversation
-     * @param \HorseStories\Models\Users\User $user
+     * @param \EQM\Models\Conversations\Conversation $conversation
+     * @param \EQM\Models\Users\User $user
      * @param array $values
      */
     public function create(Conversation $conversation, User $user, $values)

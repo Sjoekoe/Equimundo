@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         @foreach($users as $user)
-            <p>{{ $user->username }}</p>
+            <p>{{ $user->fullName() }}</p>
         @endforeach
     </div>
 @stop

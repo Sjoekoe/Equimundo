@@ -1,13 +1,14 @@
 <?php
-namespace HorseStories\Models\Horses;
+namespace EQM\Models\Horses;
 
 use DateTime;
-use HorseStories\Models\Disciplines\Discipline;
-use HorseStories\Models\Palmares\Palmares;
-use HorseStories\Models\Pedigrees\Pedigree;
-use HorseStories\Models\Pictures\Picture;
-use HorseStories\Models\Statuses\Status;
-use HorseStories\Models\Users\User;
+use EQM\Models\Albums\Album;
+use EQM\Models\Disciplines\Discipline;
+use EQM\Models\Palmares\Palmares;
+use EQM\Models\Pedigrees\Pedigree;
+use EQM\Models\Pictures\Picture;
+use EQM\Models\Statuses\Status;
+use EQM\Models\Users\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Horse extends Model
@@ -103,7 +104,15 @@ class Horse extends Model
     }
 
     /**
-     * @return \HorseStories\Models\Horses\Horse
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function albums()
+    {
+        return $this->hasMany(Album::class);
+    }
+
+    /**
+     * @return \EQM\Models\Horses\Horse
      */
     public function father()
     {
@@ -123,7 +132,7 @@ class Horse extends Model
     }
 
     /**
-     * @return \HorseStories\Models\Horses\Horse
+     * @return \EQM\Models\Horses\Horse
      */
     public function fathersFather()
     {
@@ -131,7 +140,7 @@ class Horse extends Model
     }
 
     /**
-     * @return \HorseStories\Models\Horses\Horse
+     * @return \EQM\Models\Horses\Horse
      */
     public function fathersMother()
     {
@@ -139,7 +148,7 @@ class Horse extends Model
     }
 
     /**
-     * @return \HorseStories\Models\Horses\Horse
+     * @return \EQM\Models\Horses\Horse
      */
     public function mother()
     {
@@ -159,7 +168,7 @@ class Horse extends Model
     }
 
     /**
-     * @return \HorseStories\Models\Horses\Horse
+     * @return \EQM\Models\Horses\Horse
      */
     public function mothersFather()
     {
@@ -167,7 +176,7 @@ class Horse extends Model
     }
 
     /**
-     * @return \HorseStories\Models\Horses\Horse
+     * @return \EQM\Models\Horses\Horse
      */
     public function mothersMother()
     {
@@ -175,7 +184,7 @@ class Horse extends Model
     }
 
     /**
-     * @return \HorseStories\Models\Pictures\Picture
+     * @return \EQM\Models\Pictures\Picture
      */
     public function getProfilePicture()
     {
@@ -195,7 +204,7 @@ class Horse extends Model
     }
 
     /**
-     * @return \HorseStories\Models\Pedigrees\Pedigree
+     * @return \EQM\Models\Pedigrees\Pedigree
      */
     public function sons()
     {
@@ -205,7 +214,7 @@ class Horse extends Model
     }
 
     /**
-     * @return \HorseStories\Models\Pedigrees\Pedigree
+     * @return \EQM\Models\Pedigrees\Pedigree
      */
     public function Daughters()
     {
@@ -231,5 +240,18 @@ class Horse extends Model
     public function isFemale()
     {
         return $this->gender == self::FEMALE;
+    }
+
+    /**
+     * @param int $type
+     * @return \EQM\Models\Albums\Album
+     */
+    public function getStandardAlbum($type)
+    {
+        foreach($this->albums as $album) {
+            if ($album->type == $type) {
+                return $album->id;
+            }
+        }
     }
 }

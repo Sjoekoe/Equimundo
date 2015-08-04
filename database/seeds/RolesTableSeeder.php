@@ -1,6 +1,6 @@
 <?php
 
-use HorseStories\Models\Roles\Role;
+use EQM\Models\Roles\Role;
 use Illuminate\Database\Seeder;
 
 class RolesTableSeeder extends Seeder

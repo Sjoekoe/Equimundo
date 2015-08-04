@@ -20,34 +20,26 @@
                 </div>
             </div>
             <div class="row">
-                <div class="input-field col s6 file-field">
-                    <input class="file-path validate" type="text"/>
-                    {{ Form::label(null, trans('forms.labels.profile_picture'), ['style' => 'left:115px;']) }}
-                    <div class="btn waves-effect waves-light">
-                        <span>{{ trans('copy.span.file') }}</span>
-                        {{ Form::file('profile_pic') }}
-                    </div>
-                </div>
                 <div class="input-field col s6">
                     {{ Form::label('height', trans('forms.labels.height')) }}
                     {{ Form::text('height', $horse->height) }}
                 </div>
-            </div>
-            <div class="row">
                 <div class="input-field col s6">
                     {{ Form::select('gender', trans('horses.genders'), $horse->gender, ['class' => 'gender-select']) }}
                     {{ Form::label('gender', trans('forms.labels.gender')) }}
                 </div>
+            </div>
+            <div class="row">
                 <div class="input-field col s6">
                     {{ Form::select('breed', trans('horses.breeds'), $horse->breed, ['class' => 'breed-select']) }}
                     {{ Form::label('breed', trans('forms.labels.breed')) }}
                 </div>
-            </div>
-            <div class="row">
                 <div class="input-field col s6">
                     {{ Form::select('color', trans('horses.colors'), $horse->color, ['class' => 'color-select']) }}
                     {{ Form::label('color', trans('forms.labels.color')) }}
                 </div>
+            </div>
+            <div class="row">
                 <div class="input-field col s6">
                     {{ Form::label('life_number', trans('forms.labels.life_number')) }}
                     {{ Form::text('life_number', $horse->life_number) }}

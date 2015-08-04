@@ -1,18 +1,21 @@
 <?php
-namespace HorseStories\Core\Mailers;
+namespace EQM\Core\Mailers;
 
-use HorseStories\Models\Users\User;
+use EQM\Models\Users\User;
 
 class UserMailer extends Mailer
 {
     /**
-     * @param \HorseStories\Models\Users\User $user
+     * @param \EQM\Models\Users\User $user
      */
     public function sendWelcomeMessageTo(User $user)
     {
         $subject = 'Welcome to Horse Stories';
         $view = 'emails.registration.confirm';
+        $data = [
+            'activationLink' => route('activate', ['token' => $user->getRememberToken(), 'email' => $user->email]),
+        ];
 
-        return $this->sendTo($user, $subject, $view);
+        return $this->sendTo($user, $subject, $view, $data);
     }
 }

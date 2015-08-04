@@ -1,8 +1,8 @@
 <?php
-namespace HorseStories\Events;
+namespace EQM\Events;
 
-use HorseStories\Models\Statuses\Status;
-use HorseStories\Models\Users\User;
+use EQM\Models\Statuses\Status;
+use EQM\Models\Users\User;
 use Illuminate\Queue\SerializesModels;
 
 class CommentWasPosted extends Event
@@ -10,12 +10,12 @@ class CommentWasPosted extends Event
     use SerializesModels;
 
     /**
-     * @var \HorseStories\Models\Statuses\Status
+     * @var \EQM\Models\Statuses\Status
      */
     public $status;
 
     /**
-     * @var \HorseStories\Models\Users\User
+     * @var \EQM\Models\Users\User
      */
     public $sender;
 
@@ -30,8 +30,8 @@ class CommentWasPosted extends Event
     public $data;
 
     /**
-     * @param \HorseStories\Models\Statuses\Status $status
-     * @param \HorseStories\Models\Users\User $sender
+     * @param \EQM\Models\Statuses\Status $status
+     * @param \EQM\Models\Users\User $sender
      * @param int $notification
      * @param array $data
      */

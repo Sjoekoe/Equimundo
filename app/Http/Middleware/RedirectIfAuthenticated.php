@@ -1,4 +1,4 @@
-<?php namespace HorseStories\Http\Middleware;
+<?php namespace EQM\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;

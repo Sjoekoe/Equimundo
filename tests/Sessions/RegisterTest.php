@@ -1,7 +1,7 @@
 <?php
 namespace Sessions;
 
-use HorseStories\Events\UserRegistered;
+use EQM\Events\UserRegistered;
 
 class RegisterTest extends \TestCase
 {
@@ -11,7 +11,7 @@ class RegisterTest extends \TestCase
         $this->expectsEvents(UserRegistered::class);
 
         $this->visit('/register')
-            ->type('JohnDoe', 'username')
+            ->type('John', 'first_name')
             ->type('john@example.com', 'email')
             ->type('password', 'password')
             ->type('password', 'password_confirmation')
@@ -19,7 +19,7 @@ class RegisterTest extends \TestCase
             ->seePageIs('/');
 
         $this->seeInDatabase('users', [
-            'username' => 'JohnDoe',
+            'first_name' => 'John',
             'email' => 'john@example.com'
         ]);
     }

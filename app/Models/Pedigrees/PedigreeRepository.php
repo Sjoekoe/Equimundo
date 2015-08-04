@@ -1,17 +1,17 @@
 <?php
-namespace HorseStories\Models\Pedigrees;
+namespace EQM\Models\Pedigrees;
 
-use HorseStories\Models\Horses\Horse;
+use EQM\Models\Horses\Horse;
 
 class PedigreeRepository
 {
     /**
-     * @var \HorseStories\Models\Pedigrees\Pedigree
+     * @var \EQM\Models\Pedigrees\Pedigree
      */
     private $pedigree;
 
     /**
-     * @param \HorseStories\Models\Pedigrees\Pedigree $pedigree
+     * @param \EQM\Models\Pedigrees\Pedigree $pedigree
      */
     public function __construct(Pedigree $pedigree)
     {
@@ -20,7 +20,7 @@ class PedigreeRepository
 
     /**
      * @param int $id
-     * @return \HorseStories\Models\Pedigrees\Pedigree
+     * @return \EQM\Models\Pedigrees\Pedigree
      */
     public function findById($id)
     {
@@ -28,9 +28,9 @@ class PedigreeRepository
     }
 
     /**
-     * @param \HorseStories\Models\Horses\Horse $horse
+     * @param \EQM\Models\Horses\Horse $horse
      * @param int $type
-     * @return \HorseStories\Models\Pedigrees\Pedigree|null
+     * @return \EQM\Models\Pedigrees\Pedigree|null
      */
     public function findExistingPedigree(Horse $horse, $type)
     {

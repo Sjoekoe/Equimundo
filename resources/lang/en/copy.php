@@ -14,7 +14,7 @@ return [
         'settings' => 'Settings',
         'sons' => 'Sons',
         'users' => 'Users',
-        'welcome_message' => 'Welcome to Horse Stories',
+        'welcome_message' => 'Welcome to Equimundo',
     ],
 
     'p' => [
@@ -48,8 +48,12 @@ return [
         'add_mother_mother' => 'Add Mothers Mother',
         'contact_owner' => 'Contact the owner',
         'create_a_horse' => 'Create a horse',
+        'create_album' => 'Create Album',
         'delete' => 'Delete',
+        'delete_album' => 'Delete Album',
+        'delete_picture' => 'Delete Picture',
         'edit' => 'Edit',
+        'edit_album' => 'Edit Album',
         'edit_profile' => 'Edit Profile',
         'follow' => 'Follow ',
         'followers' => 'Followers',

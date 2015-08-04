@@ -1,17 +1,17 @@
 <?php
-namespace HorseStories\Listeners\Events;
+namespace EQM\Listeners\Events;
 
-use HorseStories\Models\Notifications\NotificationCreator;
+use EQM\Models\Notifications\NotificationCreator;
 
 class NotifyStatusPoster
 {
     /**
-     * @var \HorseStories\Models\Notifications\NotificationCreator
+     * @var \EQM\Models\Notifications\NotificationCreator
      */
     private $creator;
 
     /**
-     * @param \HorseStories\Models\Notifications\NotificationCreator $creator
+     * @param \EQM\Models\Notifications\NotificationCreator $creator
      */
     public function __construct(NotificationCreator $creator)
     {

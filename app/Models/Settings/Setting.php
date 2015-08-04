@@ -1,7 +1,7 @@
 <?php
-namespace HorseStories\Models\Settings;
+namespace EQM\Models\Settings;
 
-use HorseStories\Models\Users\User;
+use EQM\Models\Users\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Setting extends Model

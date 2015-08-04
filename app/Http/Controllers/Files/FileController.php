@@ -1,7 +1,7 @@
 <?php
-namespace HorseStories\Http\Controllers\Files;
+namespace EQM\Http\Controllers\Files;
 
-use HorseStories\Models\Pictures\Picture;
+use EQM\Models\Pictures\Picture;
 use Illuminate\Routing\Controller;
 use Storage;
 

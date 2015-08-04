@@ -1,17 +1,17 @@
 <?php
-namespace HorseStories\Models\Palmares;
+namespace EQM\Models\Palmares;
 
-use HorseStories\Models\Horses\Horse;
+use EQM\Models\Horses\Horse;
 
 class PalmaresRepository
 {
     /**
-     * @var \HorseStories\Models\Palmares\Palmares
+     * @var \EQM\Models\Palmares\Palmares
      */
     private $palmares;
 
     /**
-     * @param \HorseStories\Models\Palmares\Palmares $palmares
+     * @param \EQM\Models\Palmares\Palmares $palmares
      */
     public function __construct(Palmares $palmares)
     {
@@ -20,7 +20,7 @@ class PalmaresRepository
 
     /**
      * @param int $id
-     * @return \HorseStories\Models\Palmares\Palmares
+     * @return \EQM\Models\Palmares\Palmares
      */
     public function findById($id)
     {
@@ -28,8 +28,8 @@ class PalmaresRepository
     }
 
     /**
-     * @param \HorseStories\Models\Horses\Horse $horse
-     * @return \HorseStories\Models\Palmares\Palmares[]
+     * @param \EQM\Models\Horses\Horse $horse
+     * @return \EQM\Models\Palmares\Palmares[]
      */
     public function getPalmaresForHorse(Horse $horse)
     {

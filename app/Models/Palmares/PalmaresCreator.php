@@ -1,25 +1,25 @@
 <?php
-namespace HorseStories\Models\Palmares;
+namespace EQM\Models\Palmares;
 
 use DateTime;
-use HorseStories\Models\Events\EventCreator;
-use HorseStories\Models\Horses\Horse;
-use HorseStories\Models\Statuses\StatusCreator;
+use EQM\Models\Events\EventCreator;
+use EQM\Models\Horses\Horse;
+use EQM\Models\Statuses\StatusCreator;
 
 class PalmaresCreator
 {
     /**
-     * @var \HorseStories\Models\Statuses\StatusCreator
+     * @var \EQM\Models\Statuses\StatusCreator
      */
     private $statusCreator;
     /**
-     * @var \HorseStories\Models\Events\EventCreator
+     * @var \EQM\Models\Events\EventCreator
      */
     private $eventCreator;
 
     /**
-     * @param \HorseStories\Models\Statuses\StatusCreator $statusCreator
-     * @param \HorseStories\Models\Events\EventCreator $eventCreator
+     * @param \EQM\Models\Statuses\StatusCreator $statusCreator
+     * @param \EQM\Models\Events\EventCreator $eventCreator
      */
     public function __construct(StatusCreator $statusCreator, EventCreator $eventCreator)
     {
@@ -28,7 +28,7 @@ class PalmaresCreator
     }
 
     /**
-     * @param \HorseStories\Models\Horses\Horse $horse
+     * @param \EQM\Models\Horses\Horse $horse
      * @param array $values
      */
     public function create(Horse $horse, array $values)

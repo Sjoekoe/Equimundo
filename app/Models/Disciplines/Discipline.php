@@ -1,7 +1,7 @@
 <?php
-namespace HorseStories\Models\Disciplines;
+namespace EQM\Models\Disciplines;
 
-use HorseStories\Models\Horses\Horse;
+use EQM\Models\Horses\Horse;
 use Illuminate\Database\Eloquent\Model;
 
 class Discipline extends Model

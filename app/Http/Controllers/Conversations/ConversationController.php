@@ -1,42 +1,42 @@
 <?php
-namespace HorseStories\Http\Controllers\Conversations;
+namespace EQM\Http\Controllers\Conversations;
 
 use Auth;
-use HorseStories\Http\Controllers\Controller;
-use HorseStories\Http\Requests\ConversationRequest;
-use HorseStories\Models\Conversations\ConversationCreator;
-use HorseStories\Models\Conversations\ConversationRepository;
-use HorseStories\Models\Conversations\MessageCreator;
-use HorseStories\Models\Users\UserRepository;
+use EQM\Http\Controllers\Controller;
+use EQM\Http\Requests\ConversationRequest;
+use EQM\Models\Conversations\ConversationCreator;
+use EQM\Models\Conversations\ConversationRepository;
+use EQM\Models\Conversations\MessageCreator;
+use EQM\Models\Users\UserRepository;
 use Input;
 
 class ConversationController extends Controller
 {
     /**
-     * @var \HorseStories\Models\Users\UserRepository
+     * @var \EQM\Models\Users\UserRepository
      */
     private $users;
 
     /**
-     * @var \HorseStories\Models\Conversations\ConversationCreator
+     * @var \EQM\Models\Conversations\ConversationCreator
      */
     private $conversationCreator;
 
     /**
-     * @var \HorseStories\Models\Conversations\MessageCreator
+     * @var \EQM\Models\Conversations\MessageCreator
      */
     private $messageCreator;
 
     /**
-     * @var \HorseStories\Models\Conversations\ConversationRepository
+     * @var \EQM\Models\Conversations\ConversationRepository
      */
     private $conversations;
 
     /**
-     * @param \HorseStories\Models\Users\UserRepository $users
-     * @param \HorseStories\Models\Conversations\ConversationCreator $conversationCreator
-     * @param \HorseStories\Models\Conversations\MessageCreator $messageCreator
-     * @param \HorseStories\Models\Conversations\ConversationRepository $conversations
+     * @param \EQM\Models\Users\UserRepository $users
+     * @param \EQM\Models\Conversations\ConversationCreator $conversationCreator
+     * @param \EQM\Models\Conversations\MessageCreator $messageCreator
+     * @param \EQM\Models\Conversations\ConversationRepository $conversations
      */
     public function __construct(
         UserRepository $users,
@@ -75,7 +75,7 @@ class ConversationController extends Controller
     }
 
     /**
-     * @param \HorseStories\Http\Requests\ConversationRequest $request
+     * @param \EQM\Http\Requests\ConversationRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(ConversationRequest $request)

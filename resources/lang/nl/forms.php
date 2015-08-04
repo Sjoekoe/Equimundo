@@ -3,6 +3,7 @@
 return [
     'labels' => [
         'about_you' => 'Over jezelf:',
+        'add_pictures' => 'Fotos toevoegen',
         'breed' => 'Ras:',
         'category' => 'Categorie:',
         'color' => 'Kleur:',
@@ -10,6 +11,7 @@ return [
         'date' => 'Datum:',
         'date_of_birth' => 'Geboortedatum:',
         'date_of_death' => 'Overlijdensdatum:',
+        'description' => 'Omschrijving:',
         'discipline' => 'Discipline:',
         'email' => 'Email:',
         'email_notifications' => 'Email notificaties:',
@@ -52,5 +54,6 @@ return [
     'placeholders' => [
         'what_you_been_doing' => 'Wat heb je gedaan ...',
         'write_a_comment' => 'Geef een reactie ...',
+        'search' => 'Zoeken',
     ],
 ];

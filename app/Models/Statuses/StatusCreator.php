@@ -1,25 +1,26 @@
 <?php
-namespace HorseStories\Models\Statuses;
+namespace EQM\Models\Statuses;
 
-use HorseStories\Core\Files\Uploader;
-use HorseStories\Models\Horses\Horse;
-use HorseStories\Models\Horses\HorseRepository;
+use EQM\Core\Files\Uploader;
+use EQM\Models\Albums\Album;
+use EQM\Models\Horses\Horse;
+use EQM\Models\Horses\HorseRepository;
 
 class StatusCreator
 {
     /**
-     * @var \HorseStories\Core\Files\Uploader
+     * @var \EQM\Core\Files\Uploader
      */
     private $uploader;
 
     /**
-     * @var \HorseStories\Models\Horses\HorseRepository
+     * @var \EQM\Models\Horses\HorseRepository
      */
     private $horses;
 
     /**
-     * @param \HorseStories\Core\Files\Uploader $uploader
-     * @param \HorseStories\Models\Horses\HorseRepository $horses
+     * @param \EQM\Core\Files\Uploader $uploader
+     * @param \EQM\Models\Horses\HorseRepository $horses
      */
     public function __construct(Uploader $uploader, HorseRepository $horses)
     {
@@ -29,7 +30,7 @@ class StatusCreator
 
     /**
      * @param array $data
-     * @return \HorseStories\Models\Statuses\Status
+     * @return \EQM\Models\Statuses\Status
      */
     public function create($data = [])
     {
@@ -43,6 +44,7 @@ class StatusCreator
             $horse = $this->horses->findById($data['horse']);
             $picture = $this->uploader->uploadPicture($data['picture'], $horse);
 
+            $picture->addToAlbum($horse->getStandardAlbum(Album::TIMELINEPICTURES));
             $status->setPicture($picture);
         }
 
@@ -50,7 +52,7 @@ class StatusCreator
     }
 
     /**
-     * @param \HorseStories\Models\Horses\Horse $horse
+     * @param \EQM\Models\Horses\Horse $horse
      * @param array $data
      * @return array
      */

@@ -1,18 +1,18 @@
 <?php 
-namespace HorseStories\Core\Slugs;
+namespace EQM\Core\Slugs;
   
-use HorseStories\Models\Horses\Horse;
+use EQM\Models\Horses\Horse;
 use Illuminate\Support\Str;
 
 class SlugCreator
 {
     /**
-     * @var \HorseStories\Models\Horses\Horse
+     * @var \EQM\Models\Horses\Horse
      */
     private $horse;
 
     /**
-     * @param \HorseStories\Models\Horses\Horse $horse
+     * @param \EQM\Models\Horses\Horse $horse
      */
     function __construct(Horse $horse)
     {

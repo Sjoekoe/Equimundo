@@ -1,17 +1,17 @@
 <?php
-namespace HorseStories\Models\Notifications;
+namespace EQM\Models\Notifications;
 
-use HorseStories\Models\Users\User;
+use EQM\Models\Users\User;
 
 class NotificationCreator
 {
     /**
-     * @var \HorseStories\Models\Notifications\Notification
+     * @var \EQM\Models\Notifications\Notification
      */
     private $notification;
 
     /**
-     * @param \HorseStories\Models\Notifications\Notification $notification
+     * @param \EQM\Models\Notifications\Notification $notification
      */
     public function __construct(Notification $notification)
     {
@@ -19,9 +19,9 @@ class NotificationCreator
     }
 
     /**
-     * @param \HorseStories\Models\Users\User $sender
-     * @param \HorseStories\Models\Users\User $receiver
-     * @param \HorseStories\Models\Notifications\Notification|int $type
+     * @param \EQM\Models\Users\User $sender
+     * @param \EQM\Models\Users\User $receiver
+     * @param \EQM\Models\Notifications\Notification|int $type
      * @param $entity
      * @param array $data
      */

@@ -1,5 +1,5 @@
 <?php
-namespace HorseStories\Models\Addresses;
+namespace EQM\Models\Addresses;
 
 use Illuminate\Database\Eloquent\Model;
 

@@ -1,7 +1,7 @@
 <?php
-namespace HorseStories\Models\Pedigrees;
+namespace EQM\Models\Pedigrees;
 
-use HorseStories\Models\Horses\Horse;
+use EQM\Models\Horses\Horse;
 use Illuminate\Database\Eloquent\Model;
 
 class Pedigree extends Model
@@ -45,7 +45,7 @@ class Pedigree extends Model
     }
 
     /**
-     * @return \HorseStories\Models\Pedigrees\Pedigree
+     * @return \EQM\Models\Pedigrees\Pedigree
      */
     public function father()
     {
