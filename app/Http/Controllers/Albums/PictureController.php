@@ -8,6 +8,7 @@ use Illuminate\Auth\AuthManager;
 use Illuminate\Routing\Controller;
 use Input;
 use Session;
+use Storage;
 
 class PictureController extends Controller
 {
@@ -82,6 +83,8 @@ class PictureController extends Controller
 
             Session::put('success', 'Picture removed from album');
         } else {
+            Storage::delete('/uploads/pictures/' . $picture->horse->id . '/' . $picture->path);
+
             $picture->delete();
 
             Session::put('succes', 'Picture deleted');

@@ -11,6 +11,7 @@ use EQM\Models\Horses\HorseRepository;
 use Illuminate\Auth\AuthManager;
 use Input;
 use Session;
+use Storage;
 
 class AlbumController extends Controller
 {
@@ -151,6 +152,16 @@ class AlbumController extends Controller
     public function delete($albumId)
     {
         $album = $this->initAlbum($albumId);
+
+        foreach ($album->pictures as $picture) {
+            if (count($picture->albums) > 1) {
+                $picture->removeFromAlbum($album->id);
+            } else {
+                Storage::delete('/uploads/pictures/' . $picture->horse->id . '/' . $picture->path);
+
+                $picture->delete();
+            }
+        }
 
         $album->delete();
 

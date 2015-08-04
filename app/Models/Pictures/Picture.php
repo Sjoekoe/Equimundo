@@ -2,6 +2,7 @@
 namespace EQM\Models\Pictures;
 
 use EQM\Models\Albums\Album;
+use EQM\Models\Horses\Horse;
 use Illuminate\Database\Eloquent\Model;
 
 class Picture extends Model
@@ -21,7 +22,7 @@ class Picture extends Model
      */
     public function horse()
     {
-        return $this->belongsTo('BeatSwitch\Models\Horses\Horse');
+        return $this->belongsTo(Horse::class);
     }
 
     /**
