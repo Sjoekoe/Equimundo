@@ -1,7 +1,6 @@
-<?php 
+<?php
 namespace EQM\Http\Middleware;
 
-use App;
 use Closure;
 use Illuminate\Auth\Guard;
 
@@ -27,7 +26,7 @@ class Admin
         }
 
         if ($this->auth->check() && ! $this->auth->user()->isAdmin()) {
-            App::abort('403');
+            abort('403');
         }
 
         return $next($request);
