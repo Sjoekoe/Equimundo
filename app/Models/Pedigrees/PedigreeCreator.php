@@ -46,11 +46,11 @@ class PedigreeCreator
         if ($values['type'] == 5 || $values['type'] ==  6) {
             $horse = $horse->father();
 
-            $values['type'] == 5 ? $values['type'] = 1 : $values['type'] = 2;
+            $values['type'] == 5 ? $values['type'] = Pedigree::FATHER : $values['type'] = Pedigree::MOTHER;
         } elseif ($values['type'] == 7 || $values['type'] == 8 ) {
             $horse = $horse->mother();
 
-            $values['type'] == 7 ? $values['type'] = 1 : $values['type'] = 2;
+            $values['type'] == 7 ? $values['type'] = Pedigree::FATHER : $values['type'] = Pedigree::MOTHER;
         }
 
         $family = $this->createFamilyConnection($horse, $values);

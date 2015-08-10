@@ -24,7 +24,6 @@ class CreateHorse extends Request {
 		return [
 			'name' => 'required',
             'date_of_birth' => 'date_format:d/m/Y',
-            'life_number' => 'unique:horses',
             'profile_pic' => 'image'
 		];
 	}

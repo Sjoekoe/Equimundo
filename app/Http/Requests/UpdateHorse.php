@@ -14,7 +14,6 @@ class UpdateHorse extends Request {
      */
     public function __construct(Horse $horse)
     {
-
         $this->horse = $horse;
     }
 

@@ -22,6 +22,7 @@ class HorseUpdater
     /**
      * @param \EQM\Models\Horses\Horse $horse
      * @param array $values
+     * @return \EQM\Models\Horses\Horse
      */
     public function update(Horse $horse, array $values = [])
     {
@@ -34,21 +35,27 @@ class HorseUpdater
         $horse->life_number = $values['life_number'];
 
         $initialDisciplines = [];
+        $unwantedDisciplines = [];
 
         foreach ($horse->disciplines as $initialDiscipline) {
             $initialDisciplines[$initialDiscipline->id] = $initialDiscipline->discipline;
         }
 
-        foreach($values['disciplines'] as $discipline) {
-            $horse->disciplines()->updateOrCreate(['discipline' => $discipline, 'horse_id' => $horse->id]);
+        if (array_key_exists('disciplines', $values)) {
+            foreach($values['disciplines'] as $discipline) {
+                $horse->disciplines()->updateOrCreate(['discipline' => $discipline, 'horse_id' => $horse->id]);
+            }
+
+            $unwantedDisciplines = array_diff($initialDisciplines, $values['disciplines']);
         }
 
-        $unwantedDisciplines = array_diff($initialDisciplines, $values['disciplines']);
 
-        foreach($unwantedDisciplines as $key => $values) {
+        foreach ($unwantedDisciplines as $key => $values) {
             $this->disciplines->removeById($key);
         }
 
         $horse->save();
+
+        return $horse;
     }
 }

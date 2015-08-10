@@ -13,6 +13,7 @@ use EQM\Models\Horses\HorseRepository;
 use EQM\Models\Horses\HorseUpdater;
 use EQM\Models\Statuses\StatusRepository;
 use EQM\Models\Users\User;
+use Illuminate\Auth\AuthManager;
 use Illuminate\Routing\Controller;
 use Request;
 use Session;
@@ -45,24 +46,32 @@ class HorseController extends Controller
     private $statuses;
 
     /**
+     * @var \EQM\Http\Controllers\Horses\AuthManager
+     */
+    private $auth;
+
+    /**
      * @param \EQM\Models\Horses\HorseCreator $horseCreator
      * @param \EQM\Core\Files\Uploader $uploader
      * @param \EQM\Models\Horses\HorseUpdater $horseUpdater
      * @param \EQM\Models\Horses\HorseRepository $horses
      * @param \EQM\Models\Statuses\StatusRepository $statuses
+     * @param \Illuminate\Auth\AuthManager $auth
      */
     public function __construct(
         HorseCreator $horseCreator,
         Uploader $uploader,
         HorseUpdater $horseUpdater,
         HorseRepository $horses,
-        StatusRepository $statuses
+        StatusRepository $statuses,
+        AuthManager $auth
     ) {
         $this->horseCreator = $horseCreator;
         $this->uploader = $uploader;
         $this->horseUpdater = $horseUpdater;
         $this->horses = $horses;
         $this->statuses = $statuses;
+        $this->auth = $auth;
     }
 
     /**
@@ -92,7 +101,20 @@ class HorseController extends Controller
      */
     public function store(CreateHorse $request)
     {
-        $horse = $this->horseCreator->create($request->all());
+        if ($request->has('life_number') && $horse = $this->horses->findByLifeNumber($request->get('life_number'))) {
+            if ($horse->hasOwner()) {
+                session(['error', 'This horse already has an owner. If you are the rightful owner, please contact us.']);
+
+                return redirect()->back();
+            }
+
+            $horse = $this->horseUpdater->update($horse, $request->all());
+            $horse->user_id = $this->auth->user()->id;
+
+            $horse->save();
+        } else {
+            $horse = $this->horseCreator->create($request->all());
+        }
 
         event(new HorseWasCreated($horse));
 
@@ -146,23 +168,38 @@ class HorseController extends Controller
 
         $this->horseUpdater->update($horse, $request->all());
 
-        Session::put('success', $horse->name . ' was updated');
+        session(['success', $horse->name . ' was updated']);
 
         return redirect()->route('horses.show', $horse->slug);
     }
 
     /**
-     * @param int $horseId
+     * @param string $slug
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function delete($slug)
+    {
+        $horse = $this->initHorse($slug);
+
+        session(['success', $horse->name . ' was deleted']);
+
+        $horse->delete();
+
+        return redirect()->route('home');
+    }
+
+    /**
+     * @param string $slug
      * @return \EQM\Models\Horses\Horse
      */
-    private function initHorse($horseId)
+    private function initHorse($slug)
     {
-        $horse = $this->horses->findBySlug($horseId);
+        $horse = $this->horses->findBySlug($slug);
 
-        if ($horse->owner()->first()->id !== Auth::user()->id) {
-            abort(403);
+        if ($this->auth->user()->isHorseOwner($horse)) {
+            return $horse;
         }
 
-        return $horse;
+        abort(403);
     }
 }
