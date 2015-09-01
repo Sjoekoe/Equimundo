@@ -13,6 +13,11 @@ interface Album
     public function id();
 
     /**
+     * @return string
+     */
+    public function name();
+
+    /**
      * @return \EQM\Models\Horses\Horse
      */
     public function horse();

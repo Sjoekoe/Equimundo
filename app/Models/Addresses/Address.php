@@ -1,12 +1,40 @@
 <?php
 namespace EQM\Models\Addresses;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Address extends Model
+interface Address
 {
     /**
-     * @var array
+     * @return int
      */
-    protected $fillable = ['addres_line_1', 'address_line_2', 'city', 'state', 'zip', 'country'];
+    public function id();
+
+    /**
+     * @return string
+     */
+    public function street();
+
+    /**
+     * @return string
+     */
+    public function addressLine2();
+
+    /**
+     * @return string
+     */
+    public function city();
+
+    /**
+     * @return string
+     */
+    public function state();
+
+    /**
+     * @return string
+     */
+    public function zip();
+
+    /**
+     * @return string
+     */
+    public function country();
 }

@@ -145,6 +145,7 @@ return [
         /*
          * Model Service Providers
          */
+        EQM\Models\Addresses\AddressServiceProvider::class,
         EQM\Models\Albums\AlbumServiceProvider::class,
 
     ],

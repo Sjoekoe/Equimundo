@@ -26,6 +26,14 @@ class EloquentAlbum extends Model implements Album
     }
 
     /**
+     * @return string
+     */
+    public function name()
+    {
+        return $this->name;
+    }
+
+    /**
      * @return \EQM\Models\Horses\Horse
      */
     public function horse()
