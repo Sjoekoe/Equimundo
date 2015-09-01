@@ -5,10 +5,11 @@
         </div>
 
         <div class="heading-button right">
-            @if ($horse->owner()->first()->id !== Auth::user()->id)
-                @include('horses.partials.follow-form')
-            @else
+            @if (auth()->user()->isHorseOwner($horse))
+
                 <a href="{{ route('horses.edit', $horse->slug) }}" class="btn">{{ trans('copy.a.edit') . ' ' . $horse->name }}</a>
+            @else
+                @include('horses.partials.follow-form')
             @endif
         </div>
     </div>

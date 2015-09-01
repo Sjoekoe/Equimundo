@@ -36,9 +36,17 @@ class EloquentAlbum extends Model implements Album
     /**
      * @return \EQM\Models\Horses\Horse
      */
+    private function horseRelation()
+    {
+        return $this->belongsTo(Horse::class, 'horse_id', 'id');
+    }
+
+    /**
+     * @return \EQM\Models\Horses\Horse
+     */
     public function horse()
     {
-        return $this->belongsTo(Horse::class);
+        return $this->horseRelation()->first();
     }
 
     /**
@@ -62,21 +70,14 @@ class EloquentAlbum extends Model implements Album
      */
     public function pictures()
     {
+        return $this->picturesRelation()->get();
+    }
+
+    /**
+     * @return \EQM\Models\Pictures\Picture[]
+     */
+    private function picturesRelation()
+    {
         return $this->belongsToMany(Picture::class, 'album_picture', 'album_id', 'id');
-    }
-
-    public function setProfileAlbum()
-    {
-        $this->type = self::PROFILEPICTURES;
-    }
-
-    public function setCoverAlbum()
-    {
-        $this->type = self::COVERPICTURES;
-    }
-
-    public function setTimeLineAlbum()
-    {
-        $this->type = self::TIMELINEPICTURES;
     }
 }

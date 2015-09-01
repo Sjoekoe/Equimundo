@@ -57,7 +57,7 @@ class AlbumController extends Controller
     {
         $album = $this->albums->findById($albumId);
 
-        $horse = $album->horse;
+        $horse = $album->horse();
 
         return view('albums.show', compact('album', 'horse'));
     }
@@ -122,7 +122,7 @@ class AlbumController extends Controller
 
         session()->put('succes', 'Album updated');
 
-        return redirect()->route('album.show', $album->id);
+        return redirect()->route('album.show', $album->id());
     }
 
     /**
@@ -133,9 +133,9 @@ class AlbumController extends Controller
     {
         $album = $this->initAlbum($albumId);
 
-        foreach ($album->pictures as $picture) {
+        foreach ($album->pictures() as $picture) {
             if (count($picture->albums) > 1) {
-                $picture->removeFromAlbum($album->id);
+                $picture->removeFromAlbum($album->id());
             } else {
                 Storage::delete('/uploads/pictures/' . $picture->horse->id . '/' . $picture->path);
 
@@ -145,7 +145,7 @@ class AlbumController extends Controller
 
         $this->albums->delete($album);
 
-        return redirect()->route('horses.pictures.index', $album->horse->slug);
+        return redirect()->route('horses.pictures.index', $album->horse()->slug);
     }
 
     /**
@@ -171,7 +171,7 @@ class AlbumController extends Controller
     {
         $album = $this->albums->findById($albumId);
 
-        if ($this->auth->user()->isHorseOwner($album->horse)) {
+        if ($this->auth->user()->isHorseOwner($album->horse())) {
             return $album;
         }
 

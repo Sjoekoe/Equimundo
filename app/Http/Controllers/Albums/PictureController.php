@@ -57,7 +57,7 @@ class PictureController extends Controller
         $pictures = Input::file('pictures');
 
         foreach ($pictures as $picture) {
-            $picture = $this->uploader->uploadPicture($picture, $album->horse);
+            $picture = $this->uploader->uploadPicture($picture, $album->horse());
 
             $picture->addToAlbum($album->id);
         }
@@ -79,7 +79,7 @@ class PictureController extends Controller
         $picture = $this->pictures->findById($pictureId);
 
         if (count($picture->albums) > 1) {
-            $picture->removeFromAlbum($album->id);
+            $picture->removeFromAlbum($album->id());
 
             Session::put('success', 'Picture removed from album');
         } else {
@@ -101,7 +101,7 @@ class PictureController extends Controller
     {
         $album = $this->albums->findById($albumId);
 
-        if ($this->auth->user()->isHorseOwner($album->horse)) {
+        if ($this->auth->user()->isHorseOwner($album->horse())) {
             return $album;
         }
 

@@ -36,10 +36,4 @@ interface Album
      * @return \EQM\Models\Pictures\Picture[]
      */
     public function pictures();
-
-    public function setProfileAlbum();
-
-    public function setCoverAlbum();
-
-    public function setTimeLineAlbum();
 }
