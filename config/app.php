@@ -142,6 +142,11 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         HieuLe\Active\ActiveServiceProvider::class,
 
+        /*
+         * Model Service Providers
+         */
+        EQM\Models\Albums\AlbumServiceProvider::class,
+
     ],
     /*
     |--------------------------------------------------------------------------

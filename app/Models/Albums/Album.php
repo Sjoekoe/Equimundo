@@ -1,49 +1,40 @@
 <?php
 namespace EQM\Models\Albums;
 
-use EQM\Models\Horses\Horse;
-use EQM\Models\Pictures\Picture;
-use Illuminate\Database\Eloquent\Model;
-
-class Album extends Model
+interface Album
 {
     const PROFILEPICTURES = 1;
     const COVERPICTURES = 2;
     const TIMELINEPICTURES = 3;
 
     /**
-     * @var array
+     * @return int
      */
-    protected $fillable = ['name', 'horse_id', 'description', 'type'];
+    public function id();
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \EQM\Models\Horses\Horse
      */
-    public function horse()
-    {
-        return $this->belongsTo(Horse::class);
-    }
+    public function horse();
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return string
      */
-    public function pictures()
-    {
-        return $this->belongsToMany(Picture::class);
-    }
+    public function description();
 
-    public function setProfileAlbum()
-    {
-        $this->type = self::PROFILEPICTURES;
-    }
+    /**
+     * @return int
+     */
+    public function type();
 
-    public function setCoverAlbum()
-    {
-        $this->type = self::COVERPICTURES;
-    }
+    /**
+     * @return \EQM\Models\Pictures\Picture[]
+     */
+    public function pictures();
 
-    public function setTimeLineAlbum()
-    {
-        $this->type = self::TIMELINEPICTURES;
-    }
+    public function setProfileAlbum();
+
+    public function setCoverAlbum();
+
+    public function setTimeLineAlbum();
 }

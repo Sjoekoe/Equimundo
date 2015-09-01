@@ -3,14 +3,10 @@ namespace EQM\Http\Controllers\Albums;
 
 use EQM\Core\Files\Uploader;
 use EQM\Http\Controllers\Controller;
-use EQM\Http\Requests\AlbumRequest;
-use EQM\Models\Albums\AlbumCreator;
 use EQM\Models\Albums\AlbumRepository;
-use EQM\Models\Albums\AlbumUpdater;
+use EQM\Models\Albums\AlbumRequest;
 use EQM\Models\Horses\HorseRepository;
 use Illuminate\Auth\AuthManager;
-use Input;
-use Session;
 use Storage;
 
 class AlbumController extends Controller
@@ -31,42 +27,26 @@ class AlbumController extends Controller
     private $auth;
 
     /**
-     * @var \EQM\Models\Albums\AlbumCreator
-     */
-    private $creator;
-
-    /**
      * @var \EQM\Core\Files\Uploader
      */
     private $uploader;
 
     /**
-     * @var \EQM\Models\Albums\AlbumUpdater
-     */
-    private $updater;
-
-    /**
      * @param \EQM\Models\Albums\AlbumRepository $albums
      * @param \EQM\Models\Horses\HorseRepository $horses
      * @param \Illuminate\Auth\AuthManager $auth
-     * @param \EQM\Models\Albums\AlbumCreator $creator
      * @param \EQM\Core\Files\Uploader $uploader
-     * @param \EQM\Models\Albums\AlbumUpdater $updater
      */
     public function __construct(
         AlbumRepository $albums,
         HorseRepository $horses,
         AuthManager $auth,
-        AlbumCreator $creator,
-        Uploader $uploader,
-        AlbumUpdater $updater
+        Uploader $uploader
     ) {
         $this->albums = $albums;
         $this->horses = $horses;
         $this->auth = $auth;
-        $this->creator = $creator;
         $this->uploader = $uploader;
-        $this->updater = $updater;
     }
 
     /**
@@ -94,7 +74,7 @@ class AlbumController extends Controller
     }
 
     /**
-     * @param \EQM\Http\Requests\AlbumRequest $request
+     * @param \EQM\Models\Albums\AlbumRequest $request
      * @param string $horseSlug
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -102,10 +82,10 @@ class AlbumController extends Controller
     {
         $horse = $this->initHorse($horseSlug);
 
-        $album = $this->creator->create($horse, $request->all());
+        $album = $this->albums->create($horse, $request->all());
 
-        if (array_key_exists('pictures', Input::all())) {
-            $pictures = Input::file('pictures');
+        if (array_key_exists('pictures', $request->all())) {
+            $pictures = $request->file('pictures');
 
             foreach ($pictures as $picture) {
                 $picture = $this->uploader->uploadPicture($picture, $horse);
@@ -113,7 +93,7 @@ class AlbumController extends Controller
             }
         }
 
-        Session::put('success', 'Album Created');
+        session()->put('success', 'Album Created');
 
         return redirect()->route('horses.pictures.index', $horse->slug);
     }
@@ -130,7 +110,7 @@ class AlbumController extends Controller
     }
 
     /**
-     * @param \EQM\Http\Requests\AlbumRequest $request
+     * @param \EQM\Models\Albums\AlbumRequest $request
      * @param $albumId
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -138,9 +118,9 @@ class AlbumController extends Controller
     {
         $album = $this->initAlbum($albumId);
 
-        $this->updater->update($album, $request->all());
+        $this->albums->update($album, $request->all());
 
-        Session::put('succes', 'Album updated');
+        session()->put('succes', 'Album updated');
 
         return redirect()->route('album.show', $album->id);
     }
@@ -163,7 +143,7 @@ class AlbumController extends Controller
             }
         }
 
-        $album->delete();
+        $this->albums->delete($album);
 
         return redirect()->route('horses.pictures.index', $album->horse->slug);
     }
@@ -180,7 +160,7 @@ class AlbumController extends Controller
             return $horse;
         }
 
-        App::abort(403);
+        abort(403);
     }
 
     /**
@@ -195,6 +175,6 @@ class AlbumController extends Controller
             return $album;
         }
 
-        App::abort(403);
+        abort(403);
     }
 }
