@@ -1,28 +1,41 @@
 <?php
 namespace EQM\Http\Controllers\Statuses;
 
-use Auth;
 use EQM\Events\CommentWasPosted;
-use EQM\Models\Comments\CommentCreator;
+use EQM\Models\Comments\CommentRepository;
 use EQM\Models\Notifications\Notification;
-use EQM\Models\Statuses\Status;
+use EQM\Models\Statuses\StatusRepository;
+use Illuminate\Auth\AuthManager;
 use Illuminate\Routing\Controller;
 use Input;
-use Session;
 
 class CommentController extends Controller
 {
     /**
-     * @var \EQM\Models\Comments\CommentCreator
+     * @var \EQM\Models\Comments\CommentRepository
      */
-    private $commentCreator;
+    private $comments;
 
     /**
-     * @param \EQM\Models\Comments\CommentCreator $commentCreator
+     * @var \Illuminate\Auth\AuthManager
      */
-    public function __construct(CommentCreator $commentCreator)
+    private $auth;
+
+    /**
+     * @var \EQM\Models\Statuses\StatusRepository
+     */
+    private $statuses;
+
+    /**
+     * @param \EQM\Models\Comments\CommentRepository $comments
+     * @param \Illuminate\Auth\AuthManager $auth
+     * @param \EQM\Models\Statuses\StatusRepository $statuses
+     */
+    public function __construct(CommentRepository $comments, AuthManager $auth, StatusRepository $statuses)
     {
-        $this->commentCreator = $commentCreator;
+        $this->comments = $comments;
+        $this->auth = $auth;
+        $this->statuses = $statuses;
     }
 
     /**
@@ -31,15 +44,15 @@ class CommentController extends Controller
      */
     public function store($status)
     {
-        $status = Status::findOrFail($status);
+        $status = $this->statuses->findById($status);
 
-        $comment = $this->commentCreator->create($status, Input::get('body'));
+        $comment = $this->comments->create($status, $this->auth->user(), Input::get('body'));
 
-        $data = ['sender' => Auth::user()->fullName(), 'horse' => $status->horse->name];
+        $data = ['sender' => $this->auth->user()->fullName(), 'horse' => $status->horse->name];
 
-        event(new CommentWasPosted($comment->status, Auth::user(), Notification::COMMENT_POSTED, $data));
+        event(new CommentWasPosted($comment->status(), $this->auth->user(), Notification::COMMENT_POSTED, $data));
 
-        Session::put('success', 'Your comment was posted');
+        session()->put('success', 'Your comment was posted');
 
         return response()->json('success', 200);
     }

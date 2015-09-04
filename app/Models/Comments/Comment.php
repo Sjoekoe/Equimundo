@@ -1,29 +1,25 @@
 <?php
 namespace EQM\Models\Comments;
 
-use EQM\Models\Statuses\Status;
-use Illuminate\Database\Eloquent\Model;
-
-class Comment extends Model
+interface Comment
 {
     /**
-     * @var array
+     * @return int
      */
-    protected $fillable = ['user_id', 'status_id', 'body'];
+    public function id();
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return string
      */
-    public function poster()
-    {
-        return $this->belongsTo('\EQM\Models\Users\User', 'user_id');
-    }
+    public function body();
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \EQM\Models\Users\User
      */
-    public function status()
-    {
-        return $this->belongsTo(Status::class);
-    }
+    public function poster();
+
+    /**
+     * @return \EQM\Models\Statuses\Status
+     */
+    public function status();
 }

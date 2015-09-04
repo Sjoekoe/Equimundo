@@ -147,6 +147,7 @@ return [
          */
         EQM\Models\Addresses\AddressServiceProvider::class,
         EQM\Models\Albums\AlbumServiceProvider::class,
+        EQM\Models\Comments\CommentServiceProvider::class,
 
     ],
     /*

@@ -1,7 +1,7 @@
 <?php
 namespace EQM\Models\Statuses;
 
-use EQM\Models\Comments\Comment;
+use EQM\Models\Comments\EloquentComment;
 use EQM\Models\Horses\Horse;
 use EQM\Models\Palmares\Palmares;
 use EQM\Models\Pictures\Picture;
@@ -41,7 +41,7 @@ class Status extends Model
      */
     public function comments()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(EloquentComment::class);
     }
 
     /**

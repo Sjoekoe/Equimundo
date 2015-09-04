@@ -2,7 +2,7 @@
 namespace EQM\Models\Users;
 
 use EQM\Events\Event;
-use EQM\Models\Comments\Comment;
+use EQM\Models\Comments\EloquentComment;
 use EQM\Models\Conversations\Conversation;
 use EQM\Models\Horses\Horse;
 use EQM\Models\Notifications\Notification;
@@ -74,7 +74,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      */
     public function comments()
     {
-        return $this->hasMany(Comment::class, 'user_id', 'id');
+        return $this->hasMany(EloquentComment::class, 'user_id', 'id');
     }
 
     /**
