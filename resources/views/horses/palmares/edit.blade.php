@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col s6 input-field">
                     {{ Form::label('event_name', trans('forms.labels.venue')) }}
-                    {{ Form::text('event_name', $palmares->event->name) }}
+                    {{ Form::text('event_name', $palmares->event->name()) }}
                 </div>
                 <div class="col s6 input-field">
                     {{ Form::label('date', trans('forms.labels.date')) }}

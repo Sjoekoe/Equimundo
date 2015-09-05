@@ -7,9 +7,9 @@
             <ul>
                 @foreach ($conversations as $conversation)
                     <li>
-                        <a href="{{ route('conversation.delete', $conversation->id) }}">[X]</a>
-                        <a href="{{ route('conversation.show', $conversation->id) }}">
-                            {{ $conversation->subject }} ({{ $conversation->contactPerson(Auth::user())->fullName() }})
+                        <a href="{{ route('conversation.delete', $conversation->id()) }}">[X]</a>
+                        <a href="{{ route('conversation.show', $conversation->id()) }}">
+                            {{ $conversation->subject() }} ({{ $conversation->contactPerson(Auth::user())->fullName() }})
                         </a>
                     </li>
                 @endforeach

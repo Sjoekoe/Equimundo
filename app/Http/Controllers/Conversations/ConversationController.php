@@ -1,13 +1,12 @@
 <?php
 namespace EQM\Http\Controllers\Conversations;
 
-use Auth;
 use EQM\Http\Controllers\Controller;
 use EQM\Http\Requests\ConversationRequest;
-use EQM\Models\Conversations\ConversationCreator;
 use EQM\Models\Conversations\ConversationRepository;
-use EQM\Models\Conversations\MessageCreator;
+use EQM\Models\Conversations\MessageRepository;
 use EQM\Models\Users\UserRepository;
+use Illuminate\Auth\AuthManager;
 use Input;
 
 class ConversationController extends Controller
@@ -18,36 +17,36 @@ class ConversationController extends Controller
     private $users;
 
     /**
-     * @var \EQM\Models\Conversations\ConversationCreator
-     */
-    private $conversationCreator;
-
-    /**
-     * @var \EQM\Models\Conversations\MessageCreator
-     */
-    private $messageCreator;
-
-    /**
      * @var \EQM\Models\Conversations\ConversationRepository
      */
     private $conversations;
 
     /**
+     * @var \EQM\Models\Conversations\MessageRepository
+     */
+    private $messages;
+
+    /**
+     * @var \Illuminate\Auth\AuthManager
+     */
+    private $auth;
+
+    /**
      * @param \EQM\Models\Users\UserRepository $users
-     * @param \EQM\Models\Conversations\ConversationCreator $conversationCreator
-     * @param \EQM\Models\Conversations\MessageCreator $messageCreator
      * @param \EQM\Models\Conversations\ConversationRepository $conversations
+     * @param \EQM\Models\Conversations\MessageRepository $messages
+     * @param \Illuminate\Auth\AuthManager $auth
      */
     public function __construct(
         UserRepository $users,
-        ConversationCreator $conversationCreator,
-        MessageCreator $messageCreator,
-        ConversationRepository $conversations
+        ConversationRepository $conversations,
+        MessageRepository $messages,
+        AuthManager $auth
     ) {
         $this->users = $users;
-        $this->conversationCreator = $conversationCreator;
-        $this->messageCreator = $messageCreator;
         $this->conversations = $conversations;
+        $this->auth = $auth;
+        $this->messages = $messages;
     }
 
     /**
@@ -55,7 +54,7 @@ class ConversationController extends Controller
      */
     public function index()
     {
-        $conversations = $this->users->findConversations(Auth::user());
+        $conversations = $this->users->findConversations($this->auth->user());
 
         return view('conversations.index', compact('conversations'));
     }
@@ -80,11 +79,11 @@ class ConversationController extends Controller
      */
     public function store(ConversationRequest $request)
     {
-        $conversation = $this->conversationCreator->create($request->all());
+        $conversation = $this->conversations->create($request->all());
 
-        $this->messageCreator->create($conversation, Auth::user(), $request->all());
+        $this->messages->create($conversation, $this->auth->user(), $request->all());
 
-        Auth::user()->addConversation($conversation);
+        $this->auth->user()->addConversation($conversation);
 
         $recipientId = $request->get('contact_id');
 
@@ -95,22 +94,30 @@ class ConversationController extends Controller
         return redirect()->route('conversation.index');
     }
 
+    /**
+     * @param int $conversationId
+     * @return \Illuminate\View\View
+     */
     public function show($conversationId)
     {
         $conversation = $this->conversations->findById($conversationId);
 
-        $conversation->setRead(Auth::user());
+        $conversation->markAsRead($this->auth->user());
 
         $messages = $this->conversations->findMessages($conversation);
 
         return view('conversations.show', compact('conversation', 'messages'));
     }
 
+    /**
+     * @param int $conversationId
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function delete($conversationId)
     {
         $conversation = $this->conversations->findById($conversationId);
 
-        $conversation->deleteForUser(Auth::user());
+        $conversation->deleteForUser($this->auth->user());
 
         return redirect()->back();
     }

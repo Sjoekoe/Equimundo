@@ -1,7 +1,7 @@
 <?php
 namespace EQM\Models\Pictures;
 
-use EQM\Models\Albums\Album;
+use EQM\Models\Albums\EloquentAlbum;
 use EQM\Models\Horses\Horse;
 use Illuminate\Database\Eloquent\Model;
 
@@ -30,7 +30,7 @@ class Picture extends Model
      */
     public function albums()
     {
-        return $this->belongsToMany(Album::class, 'album_picture', 'picture_id', 'album_id')->withTimestamps();
+        return $this->belongsToMany(EloquentAlbum::class, 'album_picture', 'picture_id', 'album_id')->withTimestamps();
     }
 
     /**

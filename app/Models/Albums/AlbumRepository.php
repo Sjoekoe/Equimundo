@@ -3,36 +3,41 @@ namespace EQM\Models\Albums;
 
 use EQM\Models\Horses\Horse;
 
-class AlbumRepository
+interface AlbumRepository
 {
-    /**
-     * @var \EQM\Models\Albums\Album
-     */
-    private $album;
-
-    /**
-     * @param \EQM\Models\Albums\Album $album
-     */
-    public function __construct(Album $album)
-    {
-        $this->album = $album;
-    }
-
     /**
      * @param int $id
      * @return \EQM\Models\Albums\Album
      */
-    public function findById($id)
-    {
-        return $this->album->where('id', $id)->firstOrFail();
-    }
+    public function findById($id);
 
     /**
      * @param \EQM\Models\Horses\Horse $horse
      * @return \EQM\Models\Albums\Album[]
      */
-    public function findForHorse(Horse $horse)
-    {
-        return $this->album->where('horse_id', $horse->id)->where('type', 0)->get();
-    }
+    public function findForHorse(Horse $horse);
+
+    /**
+     * @param \EQM\Models\Horses\Horse $horse
+     * @param array $values
+     * @return \EQM\Models\Albums\Album
+     */
+    public function create(Horse $horse, $values);
+
+    /**
+     * @param \EQM\Models\Albums\Album $album
+     * @param array $values
+     * @return \EQM\Models\Albums\Album
+     */
+    public function update(Album $album, $values);
+
+    /**
+     * @param \EQM\Models\Albums\Album $album
+     */
+    public function delete(Album $album);
+
+    /**
+     * @param \EQM\Models\Horses\Horse $horse
+     */
+    public function createStandardAlbums(Horse $horse);
 }

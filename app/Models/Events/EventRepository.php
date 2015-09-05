@@ -1,27 +1,20 @@
 <?php
 namespace EQM\Models\Events;
 
-class EventRepository
+use EQM\Models\Users\User;
+
+interface EventRepository
 {
-    /**
-     * @var \EQM\Models\Events\Event
-     */
-    private $event;
-
-    /**
-     * @param \EQM\Models\Events\Event $event
-     */
-    public function __construct(Event $event)
-    {
-        $this->event = $event;
-    }
-
     /**
      * @param int $id
      * @return \EQM\Models\Events\Event
      */
-    public function findById($id)
-    {
-        return $this->event->findOrFail($id);
-    }
+    public function findById($id);
+
+    /**
+     * @param \EQM\Models\Users\User $user
+     * @param array $values
+     * @return \EQM\Models\Events\Event
+     */
+    public function create(User $user, $values);
 }

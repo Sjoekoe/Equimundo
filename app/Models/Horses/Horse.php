@@ -2,8 +2,8 @@
 namespace EQM\Models\Horses;
 
 use DateTime;
-use EQM\Models\Albums\Album;
-use EQM\Models\Disciplines\Discipline;
+use EQM\Models\Albums\EloquentAlbum;
+use EQM\Models\Disciplines\EloquentDiscipline;
 use EQM\Models\Palmares\Palmares;
 use EQM\Models\Pedigrees\Pedigree;
 use EQM\Models\Pictures\Picture;
@@ -13,6 +13,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Horse extends Model
 {
+    protected $id;
+
     const FEMALE = 2;
 
     /**
@@ -30,6 +32,14 @@ class Horse extends Model
     protected $fillable = [
         'name', 'gender', 'breed', 'height', 'date_of_birth', 'color', 'life_number', 'user_id'
     ];
+
+    /**
+     * @return int
+     */
+    public function id()
+    {
+        return $this->id;
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -100,7 +110,7 @@ class Horse extends Model
      */
     public function disciplines()
     {
-        return $this->hasMany(Discipline::class);
+        return $this->hasMany(EloquentDiscipline::class, 'horse_id', 'id');
     }
 
     /**
@@ -108,7 +118,7 @@ class Horse extends Model
      */
     public function albums()
     {
-        return $this->hasMany(Album::class);
+        return $this->hasMany(EloquentAlbum::class);
     }
 
     /**

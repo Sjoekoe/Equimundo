@@ -4,6 +4,7 @@ namespace EQM\Http\Controllers\Users;
 use Auth;
 use EQM\Http\Controllers\Controller;
 use EQM\Http\Requests\UpdateUserProfile;
+use EQM\Models\Users\User;
 use EQM\Models\Users\UserRepository;
 use Session;
 
@@ -46,13 +47,11 @@ class ProfileController extends  Controller
     }
 
     /**
-     * @param int $userId
+     * @param \EQM\Models\Users\User $user
      * @return \Illuminate\View\View
      */
-    public function show($userId)
+    public function show(User $user)
     {
-        $user = $this->users->findById($userId);
-
         return view('users.profiles.show', compact('user'));
     }
 }

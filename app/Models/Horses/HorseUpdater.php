@@ -2,19 +2,19 @@
 namespace EQM\Models\Horses;
 
 use DateTime;
-use EQM\Models\Disciplines\DisciplineRepository;
+use EQM\Models\Disciplines\EloquentDisciplineRepository;
 
 class HorseUpdater
 {
     /**
-     * @var \EQM\Models\Disciplines\DisciplineRepository
+     * @var \EQM\Models\Disciplines\EloquentDisciplineRepository
      */
     private $disciplines;
 
     /**
-     * @param \EQM\Models\Disciplines\DisciplineRepository $disciplines
+     * @param \EQM\Models\Disciplines\EloquentDisciplineRepository $disciplines
      */
-    public function __construct(DisciplineRepository $disciplines)
+    public function __construct(EloquentDisciplineRepository $disciplines)
     {
         $this->disciplines = $disciplines;
     }

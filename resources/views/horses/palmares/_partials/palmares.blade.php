@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col s12 palmares">
         <div class="col s5">
-            <p>{{ trans('copy.p.event') }} {{ $palmares->event->name }}</p>
+            <p>{{ trans('copy.p.event') }} {{ $palmares->event->name() }}</p>
             <p>{{ trans('copy.p.date') }} {{ date('d F Y', strtotime($palmares->date)) }}</p>
         </div>
         <div class="col s5">

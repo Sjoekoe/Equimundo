@@ -1,6 +1,5 @@
 <?php
-
-namespace EQM\Http\Requests;
+namespace EQM\Models\Albums;
 
 use EQM\Http\Requests\Request;
 

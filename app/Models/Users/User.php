@@ -2,8 +2,8 @@
 namespace EQM\Models\Users;
 
 use EQM\Events\Event;
-use EQM\Models\Comments\Comment;
-use EQM\Models\Conversations\Conversation;
+use EQM\Models\Comments\EloquentComment;
+use EQM\Models\Conversations\EloquentConversation;
 use EQM\Models\Horses\Horse;
 use EQM\Models\Notifications\Notification;
 use EQM\Models\Roles\Role;
@@ -13,11 +13,13 @@ use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Foundation\Auth\Access\Authorizable;
 
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract
+class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
-    use Authenticatable, CanResetPassword, FollowingTrait;
+    use Authenticatable, Authorizable, CanResetPassword, FollowingTrait;
 
     /**
      * The database table used by the model.
@@ -72,7 +74,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function comments()
     {
-        return $this->hasMany(Comment::class, 'user_id', 'id');
+        return $this->hasMany(EloquentComment::class, 'user_id', 'id');
     }
 
     /**
@@ -104,7 +106,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function conversations()
     {
-        return $this->belongsToMany(Conversation::class)->withPivot('last_view', 'deleted_at')->withTimestamps();
+        return $this->belongsToMany(EloquentConversation::class, 'conversation_user', 'user_id', 'conversation_id')->withPivot('last_view', 'deleted_at')->withTimestamps();
     }
 
     /**
@@ -162,9 +164,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
-     * @param \EQM\Models\Conversations\Conversation $conversation
+     * @param \EQM\Models\Conversations\EloquentConversation $conversation
      */
-    public function addConversation(Conversation $conversation)
+    public function addConversation(EloquentConversation $conversation)
     {
         $this->conversations()->attach($conversation);
     }
