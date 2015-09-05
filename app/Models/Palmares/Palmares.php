@@ -1,6 +1,7 @@
 <?php
 namespace EQM\Models\Palmares;
 
+use EQM\Models\Events\EloquentEvent;
 use Illuminate\Database\Eloquent\Model;
 
 class Palmares extends Model
@@ -23,7 +24,7 @@ class Palmares extends Model
      */
     public function event()
     {
-        return $this->belongsTo('EQM\Models\Events\Event');
+        return $this->belongsTo(EloquentEvent::class, 'event_id', 'id');
     }
 
     /**

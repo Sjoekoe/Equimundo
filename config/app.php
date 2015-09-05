@@ -150,7 +150,7 @@ return [
         EQM\Models\Comments\CommentServiceProvider::class,
         EQM\Models\Conversations\ConversationServiceProvider::class,
         EQM\Models\Disciplines\DisciplineServiceProvider::class,
-
+        EQM\Models\Events\EventServiceProvider::class,
     ],
     /*
     |--------------------------------------------------------------------------

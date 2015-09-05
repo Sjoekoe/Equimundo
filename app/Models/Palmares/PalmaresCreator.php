@@ -2,7 +2,7 @@
 namespace EQM\Models\Palmares;
 
 use DateTime;
-use EQM\Models\Events\EventCreator;
+use EQM\Models\Events\EventRepository;
 use EQM\Models\Horses\Horse;
 use EQM\Models\Statuses\StatusCreator;
 
@@ -12,19 +12,20 @@ class PalmaresCreator
      * @var \EQM\Models\Statuses\StatusCreator
      */
     private $statusCreator;
+
     /**
-     * @var \EQM\Models\Events\EventCreator
+     * @var \EQM\Models\Events\EventRepository
      */
-    private $eventCreator;
+    private $events;
 
     /**
      * @param \EQM\Models\Statuses\StatusCreator $statusCreator
-     * @param \EQM\Models\Events\EventCreator $eventCreator
+     * @param \EQM\Models\Events\EventRepository $events
      */
-    public function __construct(StatusCreator $statusCreator, EventCreator $eventCreator)
+    public function __construct(StatusCreator $statusCreator, EventRepository $events)
     {
         $this->statusCreator = $statusCreator;
-        $this->eventCreator = $eventCreator;
+        $this->events = $events;
     }
 
     /**
@@ -34,7 +35,8 @@ class PalmaresCreator
     public function create(Horse $horse, array $values)
     {
         $values = $this->statusCreator->createForPalmares($horse, $values);
-        $event = $this->eventCreator->create($values);
+
+        $event = $this->events->create(auth()->user(), $values);
 
         $palmares = new Palmares();
         $palmares->horse_id = $horse->id;
