@@ -3,7 +3,7 @@ namespace EQM\Models\Users;
 
 use EQM\Events\Event;
 use EQM\Models\Comments\EloquentComment;
-use EQM\Models\Conversations\Conversation;
+use EQM\Models\Conversations\EloquentConversation;
 use EQM\Models\Horses\Horse;
 use EQM\Models\Notifications\Notification;
 use EQM\Models\Roles\Role;
@@ -106,7 +106,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      */
     public function conversations()
     {
-        return $this->belongsToMany(Conversation::class)->withPivot('last_view', 'deleted_at')->withTimestamps();
+        return $this->belongsToMany(EloquentConversation::class, 'conversation_user', 'user_id', 'conversation_id')->withPivot('last_view', 'deleted_at')->withTimestamps();
     }
 
     /**
@@ -164,9 +164,9 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     }
 
     /**
-     * @param \EQM\Models\Conversations\Conversation $conversation
+     * @param \EQM\Models\Conversations\EloquentConversation $conversation
      */
-    public function addConversation(Conversation $conversation)
+    public function addConversation(EloquentConversation $conversation)
     {
         $this->conversations()->attach($conversation);
     }

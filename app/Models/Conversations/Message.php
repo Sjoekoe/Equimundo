@@ -1,28 +1,35 @@
 <?php
 namespace EQM\Models\Conversations;
 
-use EQM\Models\Users\User;
-use Illuminate\Database\Eloquent\Model;
-
-class Message extends Model
+interface Message
 {
-    protected $table = 'conversation_messages';
-
-    protected $fillable = ['body'];
+    /**
+     * @return string
+     */
+    public function id();
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return string
      */
-    public function conversation()
-    {
-        return $this->belongsTo(Conversation::class);
-    }
+    public function body();
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \DateTime
      */
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+    public function createdAt();
+
+    /**
+     * @return \DateTime
+     */
+    public function updatedAt();
+
+    /**
+     * @return \EQM\Models\Conversations\Conversation
+     */
+    public function conversation();
+
+    /**
+     * @return \EQM\Models\Users\User
+     */
+    public function user();
 }

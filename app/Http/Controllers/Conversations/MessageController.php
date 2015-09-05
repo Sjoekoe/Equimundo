@@ -4,7 +4,8 @@ namespace EQM\Http\Controllers\Conversations;
 use Auth;
 use EQM\Http\Controllers\Controller;
 use EQM\Models\Conversations\ConversationRepository;
-use EQM\Models\Conversations\MessageCreator;
+use EQM\Models\Conversations\MessageRepository;
+use Illuminate\Auth\AuthManager;
 use Input;
 
 class MessageController extends Controller
@@ -13,20 +14,26 @@ class MessageController extends Controller
      * @var \EQM\Models\Conversations\ConversationRepository
      */
     private $conversations;
+    /**
+     * @var \EQM\Models\Conversations\MessageRepository
+     */
+    private $messages;
 
     /**
-     * @var \EQM\Models\Conversations\MessageCreator
+     * @var \Illuminate\Auth\AuthManager
      */
-    private $creator;
+    private $auth;
 
     /**
      * @param \EQM\Models\Conversations\ConversationRepository $conversations
-     * @param \EQM\Models\Conversations\MessageCreator $creator
+     * @param \EQM\Models\Conversations\MessageRepository $messages
+     * @param \Illuminate\Auth\AuthManager $auth
      */
-    public function __construct(ConversationRepository $conversations, MessageCreator $creator)
+    public function __construct(ConversationRepository $conversations, MessageRepository $messages, AuthManager $auth)
     {
         $this->conversations = $conversations;
-        $this->creator = $creator;
+        $this->messages = $messages;
+        $this->auth = $auth;
     }
 
     /**
@@ -37,11 +44,12 @@ class MessageController extends Controller
     {
         $conversation = $this->conversations->findById($conversationId);
 
-        $this->creator->create($conversation, Auth::user(), Input::all());
+        $this->messages->create($conversation, $this->auth->user(), Input::all());
 
-        $conversation->setUnread($conversation->contactPerson(Auth::user()));
-        if ($conversation->isDeletedForContactPerson(Auth::user())) {
-            $conversation->unDeleteForContactPerson(Auth::user());
+        $conversation->markAsUnread($conversation->contactPerson($this->auth->user()));
+
+        if ($conversation->isDeletedForContactPerson($this->auth->user())) {
+            $conversation->unDeleteForContactPerson($this->auth->user());
         }
 
         return redirect()->back();

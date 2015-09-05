@@ -1,84 +1,58 @@
 <?php
 namespace EQM\Models\Conversations;
 
-use Carbon\Carbon;
 use EQM\Models\Users\User;
-use Illuminate\Database\Eloquent\Model;
 
-class Conversation extends Model
+interface Conversation
 {
     /**
-     * @var array
+     * @return string
      */
-    protected $fillable = ['subject'];
+    public function id();
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return string
      */
-    public function user()
-    {
-        return $this->belongsToMany(User::class, 'conversation_user')->withPivot('last_view', 'deleted_at')->withTimestamps();
-    }
+    public function subject();
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function messages()
-    {
-        return $this->hasMany(Message::class);
-    }
-
-    /**
-     * @param \EQM\Models\Users\User $user
-     */
-    public function setRead(User $user)
-    {
-        $this->user()->updateExistingPivot($user->id, ['last_view' => Carbon::now()]);
-    }
-
-    /**
-     * @param \EQM\Models\Users\User $user
-     */
-    public function setUnread(User $user)
-    {
-        $this->user()->updateExistingPivot($user->id, ['last_view' => null]);
-    }
-
-    /**
-     * @param \EQM\Models\Users\User $user
-     */
-    public function deleteForUser(User $user)
-    {
-        $this->user()->updateExistingPivot($user->id, ['deleted_at' => Carbon::now()]);
-    }
-
-    /**
-     * @param \EQM\Models\Users\User $user
-     * @return bool
-     */
-    public function isDeletedForContactPerson(User $user)
-    {
-        return $this->contactPerson($user)->pivot->deleted_at !== null;
-    }
-
-    /**
-     * @param \EQM\Models\Users\User $user
-     */
-    public function unDeleteForContactPerson(User $user)
-    {
-        $this->user()->updateExistingPivot($this->contactPerson($user)->id, ['deleted_at' => null]);
-    }
-
-    /**
-     * @param \EQM\Models\Users\User $auhtenticatedUser
      * @return \EQM\Models\Users\User
      */
-    public function contactPerson(User $auhtenticatedUser)
-    {
-        foreach ($this->user as $user) {
-            if ($user->id !== $auhtenticatedUser->id) {
-                return $user;
-            }
-        }
-    }
+    public function user();
+
+    /**
+     * @return \EQM\Models\Conversations\EloquentMessage[]
+     */
+    public function messages();
+
+    /**
+     * @param \EQM\Models\Users\User $user
+     * @return \EQM\Models\Users\User
+     */
+    public function contactPerson(User $user);
+
+    /**
+     * @param \EQM\Models\Users\User $user
+     */
+    public function markAsRead(User $user);
+
+    /**
+     * @param \EQM\Models\Users\User $user
+     */
+    public function markAsUnread(User $user);
+
+    /**
+     * @param \EQM\Models\Users\User $user
+     */
+    public function deleteForUser(User $user);
+
+    /**
+     * @param \EQM\Models\Users\User $user
+     */
+    public function isDeletedForContactPerson(User $user);
+
+    /**
+     * @param \EQM\Models\Users\User $user
+     */
+    public function unDeleteForContactPerson(User $user);
 }
