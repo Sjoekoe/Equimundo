@@ -1,18 +1,30 @@
 <?php
 namespace EQM\Models\Disciplines;
 
-use EQM\Models\Horses\Horse;
-use Illuminate\Database\Eloquent\Model;
-
-class Discipline extends Model
+interface Discipline
 {
-    protected $fillable = ['discipline'];
+    /**
+     * @return int
+     */
+    public function id();
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return int
      */
-    public function horse()
-    {
-        return $this->belongsTo(Horse::class);
-    }
+    public function discipline();
+
+    /**
+     * @return \EQM\Models\Horses\Horse
+     */
+    public function horse();
+
+    /**
+     * @return \DateTime
+     */
+    public function createdAt();
+
+    /**
+     * @return \DateTime
+     */
+    public function updatedAt();
 }

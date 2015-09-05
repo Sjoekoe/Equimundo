@@ -3,7 +3,7 @@ namespace EQM\Models\Horses;
 
 use DateTime;
 use EQM\Models\Albums\EloquentAlbum;
-use EQM\Models\Disciplines\Discipline;
+use EQM\Models\Disciplines\EloquentDiscipline;
 use EQM\Models\Palmares\Palmares;
 use EQM\Models\Pedigrees\Pedigree;
 use EQM\Models\Pictures\Picture;
@@ -13,6 +13,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Horse extends Model
 {
+    protected $id;
+
     const FEMALE = 2;
 
     /**
@@ -108,7 +110,7 @@ class Horse extends Model
      */
     public function disciplines()
     {
-        return $this->hasMany(Discipline::class);
+        return $this->hasMany(EloquentDiscipline::class, 'horse_id', 'id');
     }
 
     /**

@@ -1,26 +1,16 @@
 <?php
 namespace EQM\Models\Disciplines;
 
-class DisciplineRepository
+interface DisciplineRepository
 {
     /**
-     * @var \EQM\Models\Disciplines\Discipline
+     * @param int $id
+     * @return \EQM\Models\Disciplines\Discipline
      */
-    private $discipline;
-
-    /**
-     * @param \EQM\Models\Disciplines\Discipline $discipline
-     */
-    public function __construct(Discipline $discipline)
-    {
-        $this->discipline = $discipline;
-    }
+    public function findById($id);
 
     /**
      * @param int $id
      */
-    public function removeById($id)
-    {
-        $this->discipline->find($id)->delete();
-    }
+    public function removeById($id);
 }
