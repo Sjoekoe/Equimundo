@@ -153,6 +153,7 @@ return [
         EQM\Models\Events\EventServiceProvider::class,
         EQM\Models\Follows\FollowsServiceProvider::class,
         EQM\Models\Notifications\NotificationServiceProvider::class,
+        EQM\Models\Palmares\PalmaresServiceProvider::class,
     ],
     /*
     |--------------------------------------------------------------------------

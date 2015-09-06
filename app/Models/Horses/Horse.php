@@ -4,7 +4,7 @@ namespace EQM\Models\Horses;
 use DateTime;
 use EQM\Models\Albums\EloquentAlbum;
 use EQM\Models\Disciplines\EloquentDiscipline;
-use EQM\Models\Palmares\Palmares;
+use EQM\Models\Palmares\EloquentPalmares;
 use EQM\Models\Pedigrees\Pedigree;
 use EQM\Models\Pictures\Picture;
 use EQM\Models\Statuses\Status;
@@ -86,7 +86,7 @@ class Horse extends Model
      */
     public function palmares()
     {
-        return $this->hasMany(Palmares::class);
+        return $this->hasMany(EloquentPalmares::class);
     }
 
     /**

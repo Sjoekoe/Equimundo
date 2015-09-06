@@ -2,9 +2,13 @@
 
 use EQM\Events\CommentWasPosted;
 use EQM\Events\HorseWasCreated;
+use EQM\Events\PalmaresWasCreated;
+use EQM\Events\PalmaresWasDeleted;
 use EQM\Events\StatusLiked;
 use EQM\Events\UserRegistered;
+use EQM\Listeners\Events\CreatePalmares;
 use EQM\Listeners\Events\CreateStandardAlbums;
+use EQM\Listeners\Events\DeletePalmares;
 use EQM\Listeners\Events\EmailRegisteredUser;
 use EQM\Listeners\Events\NotifyHorseOwner;
 use EQM\Listeners\Events\NotifyStatusPoster;
@@ -26,14 +30,20 @@ class EventServiceProvider extends ServiceProvider {
             NotifyStatusPoster::class,
         ],
         CommentWasPosted::class => [
-            NotifyStatusPoster::class
+            NotifyStatusPoster::class,
         ],
         PedigreeWasCreated::class => [
-            NotifyHorseOwner::class
+            NotifyHorseOwner::class,
         ],
 		HorseWasCreated::class => [
-            CreateStandardAlbums::class
+            CreateStandardAlbums::class,
         ],
+		PalmaresWasCreated::class => [
+			CreatePalmares::class,
+		],
+		PalmaresWasDeleted::class => [
+            DeletePalmares::class,
+        ]
 	];
 
 	/**

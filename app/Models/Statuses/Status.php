@@ -3,7 +3,7 @@ namespace EQM\Models\Statuses;
 
 use EQM\Models\Comments\EloquentComment;
 use EQM\Models\Horses\Horse;
-use EQM\Models\Palmares\Palmares;
+use EQM\Models\Palmares\EloquentPalmares;
 use EQM\Models\Pictures\Picture;
 use EQM\Models\Users\User;
 use Illuminate\Database\Eloquent\Model;
@@ -57,7 +57,7 @@ class Status extends Model
      */
     public function palmares()
     {
-        return $this->hasOne(Palmares::class);
+        return $this->hasOne(EloquentPalmares::class);
     }
 
     /**

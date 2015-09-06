@@ -1,38 +1,40 @@
 <?php
 namespace EQM\Models\Palmares;
 
+use EQM\Models\Events\Event;
 use EQM\Models\Horses\Horse;
 
-class PalmaresRepository
+interface PalmaresRepository
 {
-    /**
-     * @var \EQM\Models\Palmares\Palmares
-     */
-    private $palmares;
-
-    /**
-     * @param \EQM\Models\Palmares\Palmares $palmares
-     */
-    public function __construct(Palmares $palmares)
-    {
-        $this->palmares = $palmares;
-    }
-
     /**
      * @param int $id
      * @return \EQM\Models\Palmares\Palmares
      */
-    public function findById($id)
-    {
-        return $this->palmares->findOrFail($id);
-    }
+    public function findById($id);
 
     /**
      * @param \EQM\Models\Horses\Horse $horse
      * @return \EQM\Models\Palmares\Palmares[]
      */
-    public function getPalmaresForHorse(Horse $horse)
-    {
-        return $this->palmares->with('event')->where('horse_id', $horse->id)->orderBy('date', 'desc')->get();
-    }
+    public function findPalmaresForHorse(Horse $horse);
+
+    /**
+     * @param \EQM\Models\Horses\Horse $horse
+     * @param \EQM\Models\Events\Event $event
+     * @param array $values
+     * @return \EQM\Models\Palmares\Palmares
+     */
+    public function create(Horse $horse, Event $event, array $values);
+
+    /**
+     * @param \EQM\Models\Palmares\Palmares $palmares
+     * @param array $values
+     * @return \EQM\Models\Palmares\Palmares
+     */
+    public function update(Palmares $palmares, array $values);
+
+    /**
+     * @param \EQM\Models\Palmares\Palmares $palmares
+     */
+    public function delete(Palmares $palmares);
 }

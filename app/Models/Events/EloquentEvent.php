@@ -1,7 +1,7 @@
 <?php
 namespace EQM\Models\Events;
 
-use EQM\Models\Palmares\Palmares;
+use EQM\Models\Palmares\EloquentPalmares;
 use EQM\Models\Users\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,11 +26,11 @@ class EloquentEvent extends Model implements Event
     }
 
     /**
-     * @return \EQM\Models\Palmares\Palmares
+     * @return \EQM\Models\Palmares\EloquentPalmares
      */
     public function palmares()
     {
-        return $this->hasMany(Palmares::class, 'palmares_id', 'id')->get();
+        return $this->hasMany(EloquentPalmares::class, 'palmares_id', 'id')->get();
     }
 
     /**

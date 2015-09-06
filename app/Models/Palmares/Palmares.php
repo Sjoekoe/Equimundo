@@ -1,37 +1,45 @@
 <?php
 namespace EQM\Models\Palmares;
 
-use EQM\Models\Events\EloquentEvent;
-use Illuminate\Database\Eloquent\Model;
-
-class Palmares extends Model
+interface Palmares
 {
     /**
-     * @var array
+     * @return int
      */
-    protected $fillable = ['horse_id', 'event_id', 'discipline', 'ranking', 'level'];
+    public function id();
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \EQM\Models\Horses\Horse
      */
-    public function horse()
-    {
-        return $this->belongsTo('EQM\Models\Horses\Horse');
-    }
+    public function horse();
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \EQM\Models\Events\Event
      */
-    public function event()
-    {
-        return $this->belongsTo(EloquentEvent::class, 'event_id', 'id');
-    }
+    public function event();
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \EQM\Models\Statuses\Status
      */
-    public function status()
-    {
-        return $this->belongsTo('EQM\Models\Statuses\Status');
-    }
+    public function status();
+
+    /**
+     * @return int
+     */
+    public function discipline();
+
+    /**
+     * @return string
+     */
+    public function ranking();
+
+    /**
+     * @return string
+     */
+    public function level();
+
+    /**
+     * @return \dateTime
+     */
+    public function date();
 }
