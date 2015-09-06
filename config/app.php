@@ -151,6 +151,7 @@ return [
         EQM\Models\Conversations\ConversationServiceProvider::class,
         EQM\Models\Disciplines\DisciplineServiceProvider::class,
         EQM\Models\Events\EventServiceProvider::class,
+        EQM\Models\Follows\FollowsServiceProvider::class,
     ],
     /*
     |--------------------------------------------------------------------------

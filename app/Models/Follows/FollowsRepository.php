@@ -3,14 +3,11 @@ namespace EQM\Models\Follows;
 
 use EQM\Models\Horses\Horse;
 
-class FollowsRepository
+interface FollowsRepository
 {
     /**
      * @param \EQM\Models\Horses\Horse $horse
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return mixed
      */
-    public function findForHorse(Horse $horse)
-    {
-        return $horse->followers()->get();
-    }
+    public function findForHorse(Horse $horse);
 }

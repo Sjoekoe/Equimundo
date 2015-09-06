@@ -1,42 +1,42 @@
 <?php
 namespace EQM\Http\Controllers\Horses;
 
-use Auth;
 use EQM\Models\Follows\FollowsRepository;
-use EQM\Models\Horses\Horse;
 use EQM\Models\Horses\HorseRepository;
 use Illuminate\Routing\Controller;
 use Input;
-use Redirect;
-use Session;
 
 class FollowsController extends Controller
 {
     /**
      * @var \EQM\Models\Horses\HorseRepository
      */
-    private $horseRepository;
+    private $horses;
 
     /**
      * @var \EQM\Models\Follows\FollowsRepository
      */
-    private $followsRepository;
+    private $follows;
 
     /**
-     * @param \EQM\Models\Horses\HorseRepository $horseRepository
-     * @param \EQM\Models\Follows\FollowsRepository $followsRepository
+     * @param \EQM\Models\Horses\HorseRepository $horses
+     * @param \EQM\Models\Follows\FollowsRepository $follows
      */
-    public function __construct(HorseRepository $horseRepository, FollowsRepository $followsRepository)
+    public function __construct(HorseRepository $horses, FollowsRepository $follows)
     {
-        $this->horseRepository = $horseRepository;
-        $this->followsRepository = $followsRepository;
+        $this->horses = $horses;
+        $this->follows = $follows;
     }
 
+    /**
+     * @param string $horseSlug
+     * @return \Illuminate\View\View
+     */
     public function index($horseSlug)
     {
-        $horse = Horse::where('slug', $horseSlug)->firstOrFail();
+        $horse = $this->horses->findBySlug($horseSlug);
 
-        $followers = $this->followsRepository->findForHorse($horse);
+        $followers = $this->follows->findForHorse($horse);
 
         return view('follows.index', compact('horse', 'followers'));
     }
@@ -46,11 +46,11 @@ class FollowsController extends Controller
      */
     public function store()
     {
-        $horse = $this->horseRepository->findById(Input::get('horseIdToFollow'));
+        $horse = $this->horses->findById(Input::get('horseIdToFollow'));
 
-        Auth::user()->follow($horse);
+        auth()->user()->follow($horse);
 
-        Session::put('success', 'You are now following ' . $horse->name);
+        session()->put('success', 'You are now following ' . $horse->name);
 
         return redirect()->back();
     }
@@ -63,10 +63,10 @@ class FollowsController extends Controller
     {
         $horse = $this->horseRepository->findById($id);
 
-        Auth::user()->unFollow($horse);
+        auth()->user()->unFollow($horse);
 
-        Session::put('succes', 'You are no longer following ' . $horse->name);
+        session()->put('succes', 'You are no longer following ' . $horse->name);
 
-        return Redirect::back();
+        return redirect()->back();
     }
 }
