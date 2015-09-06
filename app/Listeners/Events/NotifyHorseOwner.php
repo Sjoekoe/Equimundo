@@ -2,21 +2,22 @@
 namespace EQM\Listeners\Events;
 
 use EQM\Events\PedigreeWasCreated;
-use EQM\Models\Notifications\NotificationCreator;
+use EQM\Models\Notifications\NotificationRepository;
 
 class NotifyHorseOwner
 {
     /**
-     * @var \EQM\Models\Notifications\NotificationCreator
+     * @var \EQM\Models\Notifications\NotificationRepository
      */
-    private $creator;
+    private $notifications;
 
     /**
-     * @param \EQM\Models\Notifications\NotificationCreator $creator
+     * @param \EQM\Models\Notifications\NotificationRepository $notifications
      */
-    public function __construct(NotificationCreator $creator)
+    public function __construct(NotificationRepository $notifications)
     {
-        $this->creator = $creator;
+
+        $this->notifications = $notifications;
     }
 
     /**
@@ -25,7 +26,7 @@ class NotifyHorseOwner
     public function handle(PedigreeWasCreated $event)
     {
         if ($event->family->hasOwner()) {
-            $this->creator->create($event->horse->owner()->id, $event->horse->owner()->id, $event->notification, $event->horse, $event->data);
+            $this->notifications->create($event->horse->owner()->id, $event->horse->owner()->id, $event->notification, $event->horse, $event->data);
         }
     }
 }

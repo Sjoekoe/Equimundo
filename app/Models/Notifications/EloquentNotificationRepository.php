@@ -3,7 +3,7 @@ namespace EQM\Models\Notifications;
 
 use EQM\Models\Users\User;
 
-class NotificationCreator
+class EloquentNotificationRepository implements NotificationRepository
 {
     /**
      * @var \EQM\Models\Notifications\EloquentNotification
@@ -16,6 +16,15 @@ class NotificationCreator
     public function __construct(EloquentNotification $notification)
     {
         $this->notification = $notification;
+    }
+
+    /**
+     * @param \EQM\Models\Users\User $user
+     * @return \EQM\Models\Notifications\EloquentNotification[]
+     */
+    public function findForUser(User $user)
+    {
+        return $this->notification->where('receiver_id', $user->id)->get();
     }
 
     /**

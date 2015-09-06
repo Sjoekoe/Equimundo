@@ -5,7 +5,7 @@ use EQM\Events\Event;
 use EQM\Models\Comments\EloquentComment;
 use EQM\Models\Conversations\EloquentConversation;
 use EQM\Models\Horses\Horse;
-use EQM\Models\Notifications\Notification;
+use EQM\Models\Notifications\EloquentNotification;
 use EQM\Models\Roles\Role;
 use EQM\Models\Settings\Setting;
 use EQM\Models\Statuses\Status;
@@ -122,7 +122,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      */
     public function notifications()
     {
-        return $this->hasMany(Notification::class, 'receiver_id', 'id');
+        return $this->hasMany(EloquentNotification::class, 'receiver_id', 'id');
     }
 
     /**

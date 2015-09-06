@@ -1,25 +1,25 @@
 <?php
 namespace EQM\Listeners\Events;
 
-use EQM\Models\Notifications\NotificationCreator;
+use EQM\Models\Notifications\NotificationRepository;
 
 class NotifyStatusPoster
 {
     /**
-     * @var \EQM\Models\Notifications\NotificationCreator
+     * @var \EQM\Models\Notifications\NotificationRepository
      */
-    private $creator;
+    private $notifications;
 
     /**
-     * @param \EQM\Models\Notifications\NotificationCreator $creator
+     * @param \EQM\Models\Notifications\NotificationRepository $notifications
      */
-    public function __construct(NotificationCreator $creator)
+    public function __construct(NotificationRepository $notifications)
     {
-        $this->creator = $creator;
+        $this->notifications = $notifications;
     }
 
     public function handle($event)
     {
-        $this->creator->create($event->sender, $event->status->user(), $event->notification, $event->status, $event->data);
+        $this->notifications->create($event->sender, $event->status->user(), $event->notification, $event->status, $event->data);
     }
 }
