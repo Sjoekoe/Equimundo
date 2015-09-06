@@ -1,7 +1,7 @@
 <?php
 namespace EQM\Models\Palmares;
 
-use EQM\Models\Events\EloquentEventRepository;
+use EQM\Models\Events\EventRepository;
 use EQM\Models\Statuses\StatusRepository;
 
 class PalmaresDeleter
@@ -10,16 +10,17 @@ class PalmaresDeleter
      * @var \EQM\Models\Statuses\StatusRepository
      */
     private $statuses;
+
     /**
-     * @var \EQM\Models\Events\EloquentEventRepository
+     * @var \EQM\Models\Events\EventRepository
      */
     private $events;
 
     /**
      * @param \EQM\Models\Statuses\StatusRepository $statuses
-     * @param \EQM\Models\Events\EloquentEventRepository $events
+     * @param \EQM\Models\Events\EventRepository $events
      */
-    public function __construct(StatusRepository $statuses, EloquentEventRepository $events)
+    public function __construct(StatusRepository $statuses, EventRepository $events)
     {
         $this->statuses = $statuses;
         $this->events = $events;
