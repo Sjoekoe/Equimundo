@@ -154,6 +154,7 @@ return [
         EQM\Models\Follows\FollowsServiceProvider::class,
         EQM\Models\Notifications\NotificationServiceProvider::class,
         EQM\Models\Palmares\PalmaresServiceProvider::class,
+        EQM\Models\Pictures\PictureServiceProvider::class,
     ],
     /*
     |--------------------------------------------------------------------------

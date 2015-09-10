@@ -1,7 +1,7 @@
 <?php
 namespace EQM\Core\Files;
 
-use EQM\Models\Pictures\Picture;
+use EQM\Models\Pictures\PictureRepository;
 use Illuminate\Contracts\Filesystem\Factory as Filesystem;
 use Intervention\Image\ImageManager;
 
@@ -18,13 +18,20 @@ class Uploader
     private $image;
 
     /**
+     * @var \EQM\Models\Pictures\PictureRepository
+     */
+    private $pictures;
+
+    /**
      * @param \Illuminate\Contracts\Filesystem\Factory $file
      * @param \Intervention\Image\ImageManager $image
+     * @param \EQM\Models\Pictures\PictureRepository $pictures
      */
-    public function __construct(Filesystem $file, ImageManager $image)
+    public function __construct(Filesystem $file, ImageManager $image, PictureRepository $pictures)
     {
         $this->file = $file;
         $this->image = $image;
+        $this->pictures = $pictures;
     }
 
     /**
@@ -40,14 +47,7 @@ class Uploader
         $fileName   = str_random(12);
         $pathToFile = storage_path() . '/app' . $path . '/' . $fileName . '.' . $extension;
 
-        $picture = new Picture();
-        $picture->path = $fileName . '.' . $extension;
-        $picture->horse_id = $horse->id;
-        $picture->mime = $file->getClientMimeType();
-        $picture->original_name = $file->getClientOriginalName();
-        $picture->profile_pic = $profile;
-
-        $picture->save();
+        $picture = $this->pictures->create($file, $horse, $profile, $fileName, $extension);
 
         if ( ! file_exists(storage_path() . $path) ) {
             $this->file->makeDirectory($path);

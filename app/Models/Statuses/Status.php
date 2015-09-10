@@ -4,6 +4,7 @@ namespace EQM\Models\Statuses;
 use EQM\Models\Comments\EloquentComment;
 use EQM\Models\Horses\Horse;
 use EQM\Models\Palmares\EloquentPalmares;
+use EQM\Models\Pictures\EloquentPicture;
 use EQM\Models\Pictures\Picture;
 use EQM\Models\Users\User;
 use Illuminate\Database\Eloquent\Model;
@@ -65,13 +66,13 @@ class Status extends Model
      */
     public function pictures()
     {
-        return $this->belongsToMany(Picture::class)->withTimestamps();
+        return $this->belongsToMany(EloquentPicture::class, 'picture_status', 'status_id', 'picture_id')->withTimestamps();
     }
 
     /**
      * @param \EQM\Models\Pictures\Picture $picture
      */
-    public function setPicture($picture)
+    public function setPicture(Picture $picture)
     {
         $this->pictures()->attach($picture);
     }

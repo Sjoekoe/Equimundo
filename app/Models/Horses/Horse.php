@@ -6,7 +6,7 @@ use EQM\Models\Albums\EloquentAlbum;
 use EQM\Models\Disciplines\EloquentDiscipline;
 use EQM\Models\Palmares\EloquentPalmares;
 use EQM\Models\Pedigrees\Pedigree;
-use EQM\Models\Pictures\Picture;
+use EQM\Models\Pictures\EloquentPicture;
 use EQM\Models\Statuses\Status;
 use EQM\Models\Users\User;
 use Illuminate\Database\Eloquent\Model;
@@ -70,7 +70,7 @@ class Horse extends Model
      */
     public function pictures()
     {
-        return $this->hasMany(Picture::class);
+        return $this->hasMany(EloquentPicture::class);
     }
 
     /**
@@ -260,7 +260,7 @@ class Horse extends Model
     {
         foreach($this->albums as $album) {
             if ($album->type == $type) {
-                return $album->id;
+                return $album;
             }
         }
     }
