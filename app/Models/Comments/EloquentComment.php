@@ -1,7 +1,7 @@
 <?php
 namespace EQM\Models\Comments;
 
-use EQM\Models\Statuses\Status;
+use EQM\Models\Statuses\EloquentStatus;
 use EQM\Models\Users\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -46,6 +46,6 @@ class EloquentComment extends Model implements Comment
      */
     public function status()
     {
-        return $this->belongsTo(Status::class, 'status_id', 'id')->first();
+        return $this->belongsTo(EloquentStatus::class, 'status_id', 'id')->first();
     }
 }

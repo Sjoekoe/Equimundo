@@ -3,7 +3,7 @@ namespace EQM\Models\Palmares;
 
 use EQM\Models\Events\EloquentEvent;
 use EQM\Models\Horses\Horse;
-use EQM\Models\Statuses\Status;
+use EQM\Models\Statuses\EloquentStatus;
 use Illuminate\Database\Eloquent\Model;
 
 class EloquentPalmares extends Model implements Palmares
@@ -47,7 +47,7 @@ class EloquentPalmares extends Model implements Palmares
      */
     public function status()
     {
-        return $this->belongsTo(Status::class)->first();
+        return $this->belongsTo(EloquentStatus::class)->first();
     }
 
     /**

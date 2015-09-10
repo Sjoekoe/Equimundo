@@ -7,7 +7,7 @@ use EQM\Models\Disciplines\EloquentDiscipline;
 use EQM\Models\Palmares\EloquentPalmares;
 use EQM\Models\Pedigrees\Pedigree;
 use EQM\Models\Pictures\EloquentPicture;
-use EQM\Models\Statuses\Status;
+use EQM\Models\Statuses\EloquentStatus;
 use EQM\Models\Users\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -62,7 +62,7 @@ class Horse extends Model
      */
     public function statuses()
     {
-        return $this->hasMany(Status::class);
+        return $this->hasMany(EloquentStatus::class);
     }
 
     /**

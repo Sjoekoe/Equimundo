@@ -137,7 +137,7 @@ class HorseController extends Controller
     {
         $horse = $this->horses->findBySlug($slug);
 
-        $statuses = $this->statuses->getFeedForHorse($horse);
+        $statuses = $this->statuses->findFeedForHorse($horse);
 
         $likes = DB::table('likes')->whereUserId(Auth::user()->id)->lists('status_id');
 

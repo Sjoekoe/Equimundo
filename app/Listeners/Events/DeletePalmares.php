@@ -19,7 +19,7 @@ class DeletePalmares
     private $events;
 
     /**
-     * @var \EQM\Models\Palmares\PalmaresRepository
+     * @var \EQM\Models\Palmares\Repository
      */
     private $palmares;
 

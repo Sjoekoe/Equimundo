@@ -4,16 +4,11 @@ namespace EQM\Listeners\Events;
 use EQM\Events\PalmaresWasCreated;
 use EQM\Models\Events\EventRepository;
 use EQM\Models\Palmares\PalmaresRepository;
-use EQM\Models\Statuses\StatusCreator;
+use EQM\Models\Statuses\StatusRepository;
 use Illuminate\Auth\AuthManager;
 
 class CreatePalmares
 {
-    /**
-     * @var \EQM\Models\Statuses\StatusCreator
-     */
-    private $statusCreator;
-
     /**
      * @var \EQM\Models\Events\EventRepository
      */
@@ -30,17 +25,23 @@ class CreatePalmares
     private $palmares;
 
     /**
+     * @var \EQM\Models\Statuses\StatusRepository
+     */
+    private $statuses;
+
+    /**
      * @param \EQM\Models\Statuses\StatusCreator $statusCreator
      * @param \EQM\Models\Events\EventRepository $events
      * @param \Illuminate\Auth\AuthManager $auth
      * @param \EQM\Models\Palmares\PalmaresRepository $palmares
+     * @param \EQM\Models\Statuses\StatusRepository $statuses
      */
-    public function __construct(StatusCreator $statusCreator, EventRepository $events, AuthManager $auth, PalmaresRepository $palmares)
+    public function __construct(EventRepository $events, AuthManager $auth, PalmaresRepository $palmares, StatusRepository $statuses)
     {
-        $this->statusCreator = $statusCreator;
         $this->events = $events;
         $this->auth = $auth;
         $this->palmares = $palmares;
+        $this->statuses = $statuses;
     }
 
     /**
@@ -50,7 +51,7 @@ class CreatePalmares
     {
         $values = $event->values;
 
-        $values = $this->statusCreator->createForPalmares($event->horse, $values);
+        $values = $this->statuses->createForPalmares($event->horse, $values);
         $palmaresEvent = $this->events->create($this->auth->user(), $values);
         $this->palmares->create($event->horse, $palmaresEvent, $values);
     }

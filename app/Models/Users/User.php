@@ -8,7 +8,7 @@ use EQM\Models\Horses\Horse;
 use EQM\Models\Notifications\EloquentNotification;
 use EQM\Models\Roles\Role;
 use EQM\Models\Settings\Setting;
-use EQM\Models\Statuses\Status;
+use EQM\Models\Statuses\EloquentStatus;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -66,7 +66,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      */
     public function statuses()
     {
-        return $this->hasManyThrough(Status::class, Horse::class, 'user_id', 'horse_id');
+        return $this->hasManyThrough(EloquentStatus::class, Horse::class, 'user_id', 'horse_id');
     }
 
     /**
@@ -82,7 +82,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      */
     public function likes()
     {
-        return $this->belongsToMany(Status::class, 'likes')->withTimestamps();
+        return $this->belongsToMany(EloquentStatus::class, 'likes', 'user_id', 'status_id')->withTimestamps();
     }
 
     /**
