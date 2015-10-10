@@ -1,7 +1,7 @@
 <?php
 namespace EQM\Models\Albums;
 
-use EQM\Models\Horses\Horse;
+use EQM\Models\Horses\EloquentHorse;
 use EQM\Models\Pictures\EloquentPicture;
 use Illuminate\Database\Eloquent\Model;
 
@@ -38,7 +38,7 @@ class EloquentAlbum extends Model implements Album
      */
     public function horse()
     {
-        return $this->belongsTo(Horse::class, 'horse_id', 'id')->first();
+        return $this->belongsTo(EloquentHorse::class, 'horse_id', 'id')->first();
     }
 
     /**

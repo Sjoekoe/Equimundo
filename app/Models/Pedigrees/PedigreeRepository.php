@@ -34,6 +34,6 @@ class PedigreeRepository
      */
     public function findExistingPedigree(Horse $horse, $type)
     {
-        return $this->pedigree->where('horse_id', $horse->id)->where('type', $type)->first();
+        return $this->pedigree->where('horse_id', $horse->id())->where('type', $type)->first();
     }
 }

@@ -7,21 +7,21 @@ use EQM\Models\Users\User;
 class HorseRepository
 {
     /**
-     * @var \EQM\Models\Horses\Horse
+     * @var \EQM\Models\Horses\EloquentHorse
      */
     private $horse;
 
     /**
-     * @param \EQM\Models\Horses\Horse $horse
+     * @param \EQM\Models\Horses\EloquentHorse $horse
      */
-    public function __construct(Horse $horse)
+    public function __construct(EloquentHorse $horse)
     {
         $this->horse = $horse;
     }
 
     /**
      * @param $id
-     * @return \EQM\Models\Horses\Horse
+     * @return \EQM\Models\Horses\EloquentHorse
      */
     public function findById($id)
     {
@@ -30,7 +30,7 @@ class HorseRepository
 
     /**
      * @param string $lifeNumber
-     * @return \EQM\Models\Horses\Horse|null
+     * @return \EQM\Models\Horses\EloquentHorse|null
      */
     public function findByLifeNumber($lifeNumber)
     {
@@ -39,7 +39,7 @@ class HorseRepository
 
     /**
      * @param string $slug
-     * @return \EQM\Models\Horses\Horse
+     * @return \EQM\Models\Horses\EloquentHorse
      */
     public function findBySlug($slug)
     {
@@ -48,7 +48,7 @@ class HorseRepository
 
     /**
      * @param string $value
-     * @return \EQM\Models\Horses\Horse[]
+     * @return \EQM\Models\Horses\EloquentHorse[]
      */
     public function search($value)
     {

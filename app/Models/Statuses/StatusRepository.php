@@ -26,7 +26,7 @@ interface StatusRepository
 
     /**
      * @param \EQM\Models\Horses\Horse $horse
-     * @return \EQM\Models\Horses\Horse
+     * @return \EQM\Models\Statuses\Status[]
      */
     public function findFeedForHorse(Horse $horse);
 

@@ -32,11 +32,11 @@ class HorseCreator
     /**
      * @param array $values
      * @param bool $pedigree
-     * @return \EQM\Models\Horses\Horse
+     * @return \EQM\Models\Horses\EloquentHorse
      */
     public function create($values = [], $pedigree = false)
     {
-        $horse = new Horse();
+        $horse = new EloquentHorse();
 
         $horse->name = $values['name'];
 

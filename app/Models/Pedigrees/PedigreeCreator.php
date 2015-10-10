@@ -1,7 +1,6 @@
 <?php
 namespace EQM\Models\Pedigrees;
 
-use DateTime;
 use EQM\Events\PedigreeWasCreated;
 use EQM\Models\Horses\Horse;
 use EQM\Models\Horses\HorseCreator;
@@ -57,7 +56,7 @@ class PedigreeCreator
 
         $this->createPedigree($horse, $family, $values['type']);
 
-        $data = ['family' => $horse->name, 'horse' => $family->name];
+        $data = ['family' => $horse->name(), 'horse' => $family->name()];
 
         event(new PedigreeWasCreated($horse, $family, Notification::PEDIGREE_CREATED, $data));
     }
@@ -92,9 +91,9 @@ class PedigreeCreator
     {
         $pedigree = new Pedigree();
 
-        $pedigree->horse_id = $horse->id;
+        $pedigree->horse_id = $horse->id();
         $pedigree->type = $type;
-        $pedigree->family_id = $family->id;
+        $pedigree->family_id = $family->id();
 
         $pedigree->save();
     }

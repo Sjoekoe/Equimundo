@@ -1,7 +1,7 @@
 <?php
 namespace EQM\Models\Pedigrees;
 
-use EQM\Models\Horses\Horse;
+use EQM\Models\Horses\EloquentHorse;
 use Illuminate\Database\Eloquent\Model;
 
 class Pedigree extends Model
@@ -21,7 +21,7 @@ class Pedigree extends Model
      */
     public function horse()
     {
-        return $this->belongsTo(Horse::class);
+        return $this->belongsTo(EloquentHorse::class);
     }
 
     /**
@@ -29,7 +29,7 @@ class Pedigree extends Model
      */
     public function originalHorse()
     {
-        return $this->hasOne(Horse::class, 'id', 'family_id');
+        return $this->hasOne(EloquentHorse::class, 'id', 'family_id');
     }
 
     /**

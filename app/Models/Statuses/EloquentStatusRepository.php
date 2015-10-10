@@ -93,11 +93,11 @@ class EloquentStatusRepository implements StatusRepository
      */
     public function createForPalmares(Horse $horse, array $data = [])
     {
-        $data['status'] = $horse->name  . ' has added an achievement.<br>';
+        $data['status'] = $horse->name()  . ' has added an achievement.<br>';
         $data['status'] .= 'She finished ' . $data['ranking'] . ' at ' . $data['event_name']  . ' in the ' . $data['level'] . ' category<br><hr>';
         $data['status'] .= nl2br($data['body']);
 
-        $data['horse'] = $horse->id;
+        $data['horse'] = $horse->id();
 
         $data['status'] = $this->create($data);
 

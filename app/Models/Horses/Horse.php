@@ -1,267 +1,173 @@
 <?php
 namespace EQM\Models\Horses;
 
-use DateTime;
-use EQM\Models\Albums\EloquentAlbum;
-use EQM\Models\Disciplines\EloquentDiscipline;
-use EQM\Models\Palmares\EloquentPalmares;
-use EQM\Models\Pedigrees\Pedigree;
-use EQM\Models\Pictures\EloquentPicture;
-use EQM\Models\Statuses\EloquentStatus;
-use EQM\Models\Users\User;
-use Illuminate\Database\Eloquent\Model;
-
-class Horse extends Model
+interface Horse
 {
-    protected $id;
-
     const FEMALE = 2;
+    /**
+     * @return int
+     */
+    public function id();
 
     /**
-     * The table name used by the entity
-     *
-     * @var string
+     * @return string
      */
-    protected $table = 'horses';
-
-    /**
-     * The fillable fields in the database
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'gender', 'breed', 'height', 'date_of_birth', 'color', 'life_number', 'user_id'
-    ];
+    public function name();
 
     /**
      * @return int
      */
-    public function id()
-    {
-        return $this->id;
-    }
+    public function gender();
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return int
      */
-    public function owner()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
+    public function breed();
 
     /**
-     * @return bool
+     * @return string
      */
-    public function hasOwner()
-    {
-        return $this->user_id !== null;
-    }
+    public function height();
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Carbon\Carbon
      */
-    public function statuses()
-    {
-        return $this->hasMany(EloquentStatus::class);
-    }
+    public function dateOfBirth();
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return int
      */
-    public function pictures()
-    {
-        return $this->hasMany(EloquentPicture::class);
-    }
+    public function color();
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return string
      */
-    public function followers()
-    {
-        return $this->belongsToMany(User::class, 'follows', 'horse_id', 'user_id')->withTimestamps();
-    }
+    public function lifeNumber();
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \EQM\Models\Users\User
      */
-    public function palmares()
-    {
-        return $this->hasMany(EloquentPalmares::class);
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function pedigree()
-    {
-        return $this->hasMany(Pedigree::class);
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
-     */
-    public function family()
-    {
-        return $this->hasManyThrough(Horse::class, Pedigree::class, 'family_id', 'id');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function disciplines()
-    {
-        return $this->hasMany(EloquentDiscipline::class, 'horse_id', 'id');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function albums()
-    {
-        return $this->hasMany(EloquentAlbum::class);
-    }
-
-    /**
-     * @return \EQM\Models\Horses\Horse
-     */
-    public function father()
-    {
-        $pedigree =  $this->pedigree->filter(function ($family) {
-            return $family->type == 1;
-        })->first();
-
-        return $pedigree ? $pedigree->originalHorse : null;
-    }
+    public function owner();
 
     /**
      * @return bool
      */
-    public function hasFather()
-    {
-        return $this->father() !== null;
-    }
+    public function hasOwner();
+
+    /**
+     * @return \EQM\Models\Statuses\Status[]
+     */
+    public function statuses();
+
+    /**
+     * @return \EQM\Models\Pictures\Picture[]
+     */
+    public function pictures();
+
+    /**
+     * @return \EQM\Models\Users\User[]
+     */
+    public function followers();
+
+    /**
+     * @return \EQM\Models\Palmares\Palmares[]
+     */
+    public function palmares();
+
+    /**
+     * @return \EQM\Models\Pedigrees\Pedigree[]
+     */
+    public function pedigree();
+
+    /**
+     * @return \EQM\Models\Horses\Horse[]
+     */
+    public function family();
+
+    /**
+     * @return \EQM\Models\Disciplines\Discipline[]
+     */
+    public function disciplines();
+
+    /**
+     * @return \EQM\Models\Albums\Album[]
+     */
+    public function albums();
 
     /**
      * @return \EQM\Models\Horses\Horse
      */
-    public function fathersFather()
-    {
-        return $this->father()->father();
-    }
+    public function father();
 
     /**
      * @return \EQM\Models\Horses\Horse
      */
-    public function fathersMother()
-    {
-        return $this->father()->mother();
-    }
-
-    /**
-     * @return \EQM\Models\Horses\Horse
-     */
-    public function mother()
-    {
-        $pedigree =  $this->pedigree->filter(function ($family) {
-            return $family->type == 2;
-        })->first();
-
-        return $pedigree ? $pedigree->originalHorse : null;
-    }
+    public function mother();
 
     /**
      * @return bool
      */
-    public function hasMother()
-    {
-        return $this->mother() !== null;
-    }
+    public function hasFather();
+
+    /**
+     * @return bool
+     */
+    public function hasMother();
 
     /**
      * @return \EQM\Models\Horses\Horse
      */
-    public function mothersFather()
-    {
-        return $this->mother()->father();
-    }
+    public function fathersFather();
 
     /**
      * @return \EQM\Models\Horses\Horse
      */
-    public function mothersMother()
-    {
-        return $this->mother()->mother();
-    }
+    public function fathersMother();
+
+    /**
+     * @return \EQM\Models\Horses\Horse
+     */
+    public function mothersFather();
+
+    /**
+     * @return \EQM\Models\Horses\Horse
+     */
+    public function mothersMother();
 
     /**
      * @return \EQM\Models\Pictures\Picture
      */
-    public function getProfilePicture()
-    {
-        return $this->pictures->filter(function ($picture) {
-            return $picture->profile_pic == true;
-        })->first();
-    }
+    public function getProfilePicture();
 
     /**
-     * @return DateTime
+     * @return \Carbon\Carbon
      */
-    public function getBirthDay()
-    {
-        $result = new DateTime($this->date_of_birth);
-
-        return $result->format('d/m/Y');
-    }
+    public function getBirthDay();
 
     /**
-     * @return \EQM\Models\Pedigrees\Pedigree
+     * @return \EQM\Models\Horses\Horse
      */
-    public function sons()
-    {
-        return $this->pedigree->filter(function($family) {
-            return $family->type == 3;
-        })->all();
-    }
+    public function sons();
 
     /**
-     * @return \EQM\Models\Pedigrees\Pedigree
+     * @return \EQM\Models\Horses\Horse
      */
-    public function Daughters()
-    {
-        return $this->pedigree->filter(function($family) {
-            return $family->type == 4;
-        })->all();
-    }
+    public function daughters();
 
     /**
      * @param int $disciplineId
      * @return bool
      */
-    public function performsDiscipline($disciplineId)
-    {
-        return $this->disciplines->filter(function($discipline) use ($disciplineId) {
-           return $discipline->discipline === $disciplineId;
-        })->first();
-    }
+    public function performsDiscipline($disciplineId);
 
     /**
      * @return bool
      */
-    public function isFemale()
-    {
-        return $this->gender == self::FEMALE;
-    }
+    public function isFemale();
 
     /**
      * @param int $type
      * @return \EQM\Models\Albums\Album
      */
-    public function getStandardAlbum($type)
-    {
-        foreach($this->albums as $album) {
-            if ($album->type == $type) {
-                return $album;
-            }
-        }
-    }
+    public function getStandardAlbum($type);
 }

@@ -1,5 +1,6 @@
 <?php namespace EQM\Models\Users;
 
+use EQM\Models\Horses\EloquentHorse;
 use EQM\Models\Horses\Horse;
 
 trait FollowingTrait
@@ -9,7 +10,7 @@ trait FollowingTrait
      */
     public function follows()
     {
-        return $this->belongsToMany(Horse::class, 'follows', 'user_id', 'horse_id')->withTimestamps();
+        return $this->belongsToMany(EloquentHorse::class, 'follows', 'user_id', 'horse_id')->withTimestamps();
     }
 
     /**
@@ -37,6 +38,6 @@ trait FollowingTrait
     {
         $followedHorses = $this->follows()->lists('horse_id')->all();
 
-        return in_array($horse->id, $followedHorses);
+        return in_array($horse->id(), $followedHorses);
     }
 }

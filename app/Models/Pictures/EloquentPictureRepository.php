@@ -50,7 +50,7 @@ class EloquentPictureRepository implements PictureRepository
     {
         $picture = new EloquentPicture();
         $picture->path = $fileName . '.' . $extension;
-        $picture->horse_id = $horse->id;
+        $picture->horse_id = $horse->id();
         $picture->mime = $file->getClientMimeType();
         $picture->original_name = $file->getClientOriginalName();
         $picture->profile_pic = $profile;

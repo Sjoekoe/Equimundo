@@ -20,11 +20,11 @@ class HorseUpdater
     }
 
     /**
-     * @param \EQM\Models\Horses\Horse $horse
+     * @param \EQM\Models\Horses\EloquentHorse $horse
      * @param array $values
-     * @return \EQM\Models\Horses\Horse
+     * @return \EQM\Models\Horses\EloquentHorse
      */
-    public function update(Horse $horse, array $values = [])
+    public function update(EloquentHorse $horse, array $values = [])
     {
         $horse->name = $values['name'];
         $horse->gender = $values['gender'];

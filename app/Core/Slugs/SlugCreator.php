@@ -1,6 +1,6 @@
-<?php 
+<?php
 namespace EQM\Core\Slugs;
-  
+
 use EQM\Models\Horses\Horse;
 use Illuminate\Support\Str;
 

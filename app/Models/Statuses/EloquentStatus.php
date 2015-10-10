@@ -2,7 +2,7 @@
 namespace EQM\Models\Statuses;
 
 use EQM\Models\Comments\EloquentComment;
-use EQM\Models\Horses\Horse;
+use EQM\Models\Horses\EloquentHorse;
 use EQM\Models\Palmares\EloquentPalmares;
 use EQM\Models\Pictures\EloquentPicture;
 use EQM\Models\Pictures\Picture;
@@ -26,7 +26,7 @@ class EloquentStatus extends Model implements Status
      */
     public function horse()
     {
-        return $this->belongsTo(Horse::class)->first();
+        return $this->belongsTo(EloquentHorse::class)->first();
     }
 
     /**

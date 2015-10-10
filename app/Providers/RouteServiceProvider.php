@@ -1,6 +1,6 @@
 <?php namespace EQM\Providers;
 
-use EQM\Models\Horses\Horse;
+use EQM\Models\Horses\EloquentHorse;
 use EQM\Models\Users\User;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -26,9 +26,8 @@ class RouteServiceProvider extends ServiceProvider {
 	{
 		parent::boot($router);
 
-        $router->model('horse', Horse::class);
+        $router->model('horse', EloquentHorse::class);
 		$router->model('user', User::class);
-		//
 	}
 
 	/**

@@ -3,7 +3,7 @@ namespace EQM\Models\Pictures;
 
 use EQM\Models\Albums\Album;
 use EQM\Models\Albums\EloquentAlbum;
-use EQM\Models\Horses\Horse;
+use EQM\Models\Horses\EloquentHorse;
 use Illuminate\Database\Eloquent\Model;
 
 class EloquentPicture extends Model implements Picture
@@ -23,7 +23,7 @@ class EloquentPicture extends Model implements Picture
      */
     public function horse()
     {
-        return $this->belongsTo(Horse::class);
+        return $this->belongsTo(EloquentHorse::class);
     }
 
     /**

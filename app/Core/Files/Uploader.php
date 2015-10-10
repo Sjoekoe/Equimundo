@@ -1,6 +1,7 @@
 <?php
 namespace EQM\Core\Files;
 
+use EQM\Models\Horses\Horse;
 use EQM\Models\Pictures\PictureRepository;
 use Illuminate\Contracts\Filesystem\Factory as Filesystem;
 use Intervention\Image\ImageManager;
@@ -40,7 +41,7 @@ class Uploader
      * @param bool $profile
      * @return \EQM\Models\Pictures\Picture
      */
-    public function uploadPicture($file, $horse, $profile = false)
+    public function uploadPicture($file, Horse $horse, $profile = false)
     {
         $extension  = $file->getClientOriginalExtension();
         $path       = '/uploads/pictures/' . $horse->id;

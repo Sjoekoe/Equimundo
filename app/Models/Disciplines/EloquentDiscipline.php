@@ -1,7 +1,7 @@
 <?php
 namespace EQM\Models\Disciplines;
 
-use EQM\Models\Horses\Horse;
+use EQM\Models\Horses\EloquentHorse;
 use Illuminate\Database\Eloquent\Model;
 
 class EloquentDiscipline extends Model implements Discipline
@@ -37,7 +37,7 @@ class EloquentDiscipline extends Model implements Discipline
      */
     public function horse()
     {
-        return $this->belongsTo(Horse::class, 'horse_id');
+        return $this->belongsTo(EloquentHorse::class, 'horse_id');
     }
 
     /**

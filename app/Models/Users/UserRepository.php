@@ -1,8 +1,6 @@
 <?php
 namespace EQM\Models\Users;
 
-use EQM\Models\Horses\Horse;
-
 class UserRepository
 {
     /**

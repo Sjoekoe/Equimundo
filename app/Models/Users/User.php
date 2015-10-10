@@ -4,7 +4,7 @@ namespace EQM\Models\Users;
 use EQM\Events\Event;
 use EQM\Models\Comments\EloquentComment;
 use EQM\Models\Conversations\EloquentConversation;
-use EQM\Models\Horses\Horse;
+use EQM\Models\Horses\EloquentHorse;
 use EQM\Models\Notifications\EloquentNotification;
 use EQM\Models\Roles\Role;
 use EQM\Models\Settings\Setting;
@@ -58,7 +58,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      */
     public function horses()
     {
-        return $this->hasMany(Horse::class, 'user_id', 'id');
+        return $this->hasMany(EloquentHorse::class, 'user_id', 'id');
     }
 
     /**
@@ -66,7 +66,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      */
     public function statuses()
     {
-        return $this->hasManyThrough(EloquentStatus::class, Horse::class, 'user_id', 'horse_id');
+        return $this->hasManyThrough(EloquentStatus::class, EloquentHorse::class, 'user_id', 'horse_id');
     }
 
     /**
@@ -202,10 +202,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     }
 
     /**
-     * @param \EQM\Models\Horses\Horse $horse
+     * @param \EQM\Models\Horses\EloquentHorse $horse
      * @return bool
      */
-    public function isHorseOwner(Horse $horse)
+    public function isHorseOwner(EloquentHorse $horse)
     {
         return $this->id == $horse->owner->id;
     }

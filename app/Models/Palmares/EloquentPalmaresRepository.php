@@ -35,7 +35,7 @@ class EloquentPalmaresRepository implements PalmaresRepository
      */
     public function findPalmaresForHorse(Horse $horse)
     {
-        return $this->palmares->where('horse_id', $horse->id)->orderBy('date', 'desc')->get();
+        return $this->palmares->where('horse_id', $horse->id())->orderBy('date', 'desc')->get();
     }
 
     /**
