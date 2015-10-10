@@ -1,0 +1,125 @@
+<?php
+namespace EQM\Models\Horses;
+
+use DateTime;
+use EQM\Core\Slugs\SlugCreator;
+use EQM\Models\Users\User;
+
+class EloquentHorseRepository implements HorseRepository
+{
+    /**
+     * @var \EQM\Models\Horses\EloquentHorse
+     */
+    private $horse;
+
+    /**
+     * @param \EQM\Models\Horses\EloquentHorse $horse
+     * @param \EQM\Core\Slugs\SlugCreator $slugCreator
+     */
+    public function __construct(EloquentHorse $horse)
+    {
+        $this->horse = $horse;
+    }
+
+    /**
+     * @param $id
+     * @return \EQM\Models\Horses\EloquentHorse
+     */
+    public function findById($id)
+    {
+           return $this->horse->findOrFail($id);
+    }
+
+    /**
+     * @param string $lifeNumber
+     * @return \EQM\Models\Horses\EloquentHorse|null
+     */
+    public function findByLifeNumber($lifeNumber)
+    {
+        return $this->horse->where('life_number', $lifeNumber)->first();
+    }
+
+    /**
+     * @param string $slug
+     * @return \EQM\Models\Horses\EloquentHorse
+     */
+    public function findBySlug($slug)
+    {
+        return $this->horse->where('slug', $slug)->whereNotNull('user_id')->firstOrFail();
+    }
+
+    /**
+     * @param string $value
+     * @return \EQM\Models\Horses\EloquentHorse[]
+     */
+    public function search($value)
+    {
+        return $this->horse->where('name', 'like', '%' . $value . '%')->get();
+    }
+
+    /**
+     * @param \EQM\Models\Users\User $user
+     * @return array
+     */
+    public function findHorsesForSelect(User $user)
+    {
+        return $this->horse->with('statuses')->where('user_id', $user->id)->lists('name', 'id')->all();
+    }
+
+    /**
+     * @param \EQM\Models\Users\User $user
+     * @param array $values
+     * @param bool $pedigree
+     * @return \EQM\Models\Horses\Horse
+     */
+    public function create(User $user, array $values = [], $pedigree = false)
+    {
+        $horse = new EloquentHorse();
+
+        $horse->name = $values['name'];
+
+        if (! $pedigree) {
+            $horse->user_id = $user->id;
+        }
+
+        $horse->gender = $values['gender'];
+        $horse->breed = $values['breed'];
+        $horse->life_number = $values['life_number'];
+        $horse->color = $values['color'];
+        $horse->date_of_birth = DateTime::createFromFormat('d/m/Y', $values['date_of_birth']);
+        $horse->height = $values['height'];
+
+        $horse->save();
+
+        $slugCreator = new SlugCreator($horse);
+        $horse->slug = $slugCreator->createForHorse($values['name']);
+
+        if (array_key_exists('disciplines', $values)) {
+            foreach($values['disciplines'] as $discipline) {
+                $horse->disciplines()->updateOrCreate(['discipline' => $discipline, 'horse_id' => $horse->id]);
+            }
+        }
+
+        return $horse;
+    }
+
+    /**
+     * @param \EQM\Models\Horses\Horse $horse
+     * @param array $values
+     * @return \EQM\Models\Horses\Horse
+     */
+    public function update(Horse $horse, array $values = [])
+    {
+        $horse->name = $values['name'];
+        $horse->gender = $values['gender'];
+        $horse->breed = $values['breed'];
+        $horse->height = $values['height'];
+        $horse->color = $values['color'];
+        $horse->date_of_birth = DateTime::createFromFormat('d/m/Y', $values['date_of_birth']);
+        $horse->life_number = $values['life_number'];
+
+        $horse->save();
+
+        return $horse;
+    }
+}

@@ -1,66 +1,52 @@
 <?php
-
 namespace EQM\Models\Horses;
 
 use EQM\Models\Users\User;
 
-class HorseRepository
+interface HorseRepository
 {
     /**
-     * @var \EQM\Models\Horses\EloquentHorse
+     * @param \EQM\Models\Users\User $user
+     * @param array $values
+     * @param bool $pedigree
+     * @return \EQM\Models\Horses\Horse
      */
-    private $horse;
+    public function create(User $user, array $values = [], $pedigree = false);
 
     /**
-     * @param \EQM\Models\Horses\EloquentHorse $horse
+     * @param \EQM\Models\Horses\Horse $horse
+     * @param array $values
+     * @return \EQM\Models\Horses\Horse
      */
-    public function __construct(EloquentHorse $horse)
-    {
-        $this->horse = $horse;
-    }
+    public function update(Horse $horse, array $values = []);
 
     /**
-     * @param $id
-     * @return \EQM\Models\Horses\EloquentHorse
+     * @param int $id
+     * @return \EQM\Models\Horses\Horse
      */
-    public function findById($id)
-    {
-           return $this->horse->findOrFail($id);
-    }
+    public function findById($id);
 
     /**
      * @param string $lifeNumber
-     * @return \EQM\Models\Horses\EloquentHorse|null
+     * @return \EQM\Models\Horses\Horse
      */
-    public function findByLifeNumber($lifeNumber)
-    {
-        return $this->horse->where('life_number', $lifeNumber)->first();
-    }
+    public function findByLifeNumber($lifeNumber);
 
     /**
      * @param string $slug
-     * @return \EQM\Models\Horses\EloquentHorse
+     * @return \EQM\Models\Horses\Horse
      */
-    public function findBySlug($slug)
-    {
-        return $this->horse->where('slug', $slug)->whereNotNull('user_id')->firstOrFail();
-    }
+    public function findBySlug($slug);
 
     /**
      * @param string $value
-     * @return \EQM\Models\Horses\EloquentHorse[]
+     * @return \EQM\Models\Horses\Horse[]
      */
-    public function search($value)
-    {
-        return $this->horse->where('name', 'like', '%' . $value . '%')->get();
-    }
+    public function search($value);
 
     /**
      * @param \EQM\Models\Users\User $user
      * @return array
      */
-    public function findHorsesForSelect(User $user)
-    {
-        return $this->horse->with('statuses')->where('user_id', $user->id)->lists('name', 'id')->all();
-    }
+    public function findHorsesForSelect(User $user);
 }

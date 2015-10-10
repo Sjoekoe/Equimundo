@@ -46,6 +46,14 @@ class EloquentHorse extends Model implements Horse
     }
 
     /**
+     * @return string
+     */
+    public function slug()
+    {
+        return $this->slug;
+    }
+
+    /**
      * @return int
      */
     public function gender()
@@ -114,7 +122,7 @@ class EloquentHorse extends Model implements Horse
      */
     public function statuses()
     {
-        return $this->hasMany(EloquentStatus::class);
+        return $this->hasMany(EloquentStatus::class, 'horse_id', 'id');
     }
 
     /**
@@ -122,7 +130,7 @@ class EloquentHorse extends Model implements Horse
      */
     public function pictures()
     {
-        return $this->hasMany(EloquentPicture::class);
+        return $this->hasMany(EloquentPicture::class, 'horse_id', 'id');
     }
 
     /**
@@ -138,7 +146,7 @@ class EloquentHorse extends Model implements Horse
      */
     public function palmares()
     {
-        return $this->hasMany(EloquentPalmares::class);
+        return $this->hasMany(EloquentPalmares::class, 'horse_id', 'id');
     }
 
     /**

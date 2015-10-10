@@ -134,10 +134,10 @@ class AlbumController extends Controller
         $album = $this->initAlbum($albumId);
 
         foreach ($album->pictures() as $picture) {
-            if (count($picture->albums) > 1) {
+            if (count($picture->albums()) > 1) {
                 $picture->removeFromAlbum($album);
             } else {
-                Storage::delete('/uploads/pictures/' . $picture->horse->id . '/' . $picture->path);
+                Storage::delete('/uploads/pictures/' . $picture->horse()->id() . '/' . $picture->path());
 
                 $picture->delete();
             }

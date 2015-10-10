@@ -15,6 +15,11 @@ interface Horse
     public function name();
 
     /**
+     * @return string
+     */
+    public function slug();
+
+    /**
      * @return int
      */
     public function gender();
