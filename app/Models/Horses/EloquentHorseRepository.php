@@ -49,6 +49,15 @@ class EloquentHorseRepository implements HorseRepository
     }
 
     /**
+     * @param string $slug
+     * @return int
+     */
+    public function findSlugCounts($slug)
+    {
+        return count($this->horse->whereRaw("slug REGEXP '^{$slug}(-[0-9]*)?$'")->get());
+    }
+
+    /**
      * @param string $value
      * @return \EQM\Models\Horses\EloquentHorse[]
      */

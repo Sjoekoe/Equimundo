@@ -1,22 +1,22 @@
 <?php
 namespace EQM\Core\Slugs;
 
-use EQM\Models\Horses\Horse;
+use EQM\Models\Horses\HorseRepository;
 use Illuminate\Support\Str;
 
 class SlugCreator
 {
     /**
-     * @var \EQM\Models\Horses\Horse
+     * @var \EQM\Models\Horses\HorseRepository
      */
-    private $horse;
+    private $horses;
 
     /**
-     * @param \EQM\Models\Horses\Horse $horse
+     * @param \EQM\Models\Horses\HorseRepository $horses
      */
-    function __construct(Horse $horse)
+    function __construct(HorseRepository $horses)
     {
-        $this->horse = $horse;
+        $this->horses = $horses;
     }
 
     /**
@@ -26,7 +26,7 @@ class SlugCreator
     public function createForHorse($title)
     {
         $slug = Str::slug($title);
-        $slugCount = count( $this->horse->whereRaw("slug REGEXP '^{$slug}(-[0-9]*)?$'")->get() );
+        $slugCount = $this->horses->findSlugCounts($slug);
 
         return ($slugCount > 0) ? "{$slug}-{$slugCount}" : $slug;
     }

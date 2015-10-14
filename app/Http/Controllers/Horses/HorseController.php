@@ -155,7 +155,7 @@ class HorseController extends Controller
 
         session(['success', $horse->name() . ' was updated']);
 
-        return redirect()->route('horses.show', $horse->slug());
+        return redirect()->route('horses.edit', $horse->slug());
     }
 
     /**

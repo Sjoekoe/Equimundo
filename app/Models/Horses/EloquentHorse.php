@@ -82,7 +82,7 @@ class EloquentHorse extends Model implements Horse
      */
     public function dateOfBirth()
     {
-        return Carbon::instance($this->date_of_birth);
+        return Carbon::createFromTimestamp(strtotime($this->date_of_birth));
     }
 
     /**
@@ -268,7 +268,7 @@ class EloquentHorse extends Model implements Horse
      */
     public function getBirthDay()
     {
-        return Carbon::instance($this->date_of_birth)->format('d/m/Y');
+        return $this->dateOfBirth()->format('d/m/Y');
     }
 
     /**

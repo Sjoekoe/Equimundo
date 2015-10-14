@@ -39,6 +39,12 @@ interface HorseRepository
     public function findBySlug($slug);
 
     /**
+     * @param string $slug
+     * @return int
+     */
+    public function findSlugCounts($slug);
+
+    /**
      * @param string $value
      * @return \EQM\Models\Horses\Horse[]
      */
