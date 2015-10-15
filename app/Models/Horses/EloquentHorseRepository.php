@@ -98,11 +98,11 @@ class EloquentHorseRepository implements HorseRepository
         $horse->date_of_birth = DateTime::createFromFormat('d/m/Y', $values['date_of_birth']);
         $horse->height = $values['height'];
 
-        $horse->save();
-
-        $slugCreator = new SlugCreator($horse);
+        $slugCreator = new SlugCreator($this);
         $horse->slug = $slugCreator->createForHorse($values['name']);
 
+        $horse->save();
+        
         if (array_key_exists('disciplines', $values)) {
             foreach($values['disciplines'] as $discipline) {
                 $horse->disciplines()->updateOrCreate(['discipline' => $discipline, 'horse_id' => $horse->id]);

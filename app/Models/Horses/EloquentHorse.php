@@ -154,7 +154,7 @@ class EloquentHorse extends Model implements Horse
      */
     public function pedigree()
     {
-        return $this->hasMany(EloquentPedigree::class);
+        return $this->hasMany(EloquentPedigree::class, 'horse_id', 'id')->get();
     }
 
     /**
@@ -178,7 +178,7 @@ class EloquentHorse extends Model implements Horse
      */
     public function albums()
     {
-        return $this->hasMany(EloquentAlbum::class);
+        return $this->hasMany(EloquentAlbum::class, 'horse_id', 'id')->get();
     }
 
     /**
@@ -186,7 +186,7 @@ class EloquentHorse extends Model implements Horse
      */
     public function father()
     {
-        $pedigree =  $this->pedigree->filter(function ($family) {
+        $pedigree =  $this->pedigree()->filter(function ($family) {
             return $family->type == 1;
         })->first();
 
@@ -222,7 +222,7 @@ class EloquentHorse extends Model implements Horse
      */
     public function mother()
     {
-        $pedigree =  $this->pedigree->filter(function ($family) {
+        $pedigree =  $this->pedigree()->filter(function ($family) {
             return $family->type == 2;
         })->first();
 
@@ -276,7 +276,7 @@ class EloquentHorse extends Model implements Horse
      */
     public function sons()
     {
-        return $this->pedigree->filter(function($family) {
+        return $this->pedigree()->filter(function($family) {
             return $family->type == 3;
         })->all();
     }
@@ -286,7 +286,7 @@ class EloquentHorse extends Model implements Horse
      */
     public function daughters()
     {
-        return $this->pedigree->filter(function($family) {
+        return $this->pedigree()->filter(function($family) {
             return $family->type == 4;
         })->all();
     }
@@ -316,7 +316,7 @@ class EloquentHorse extends Model implements Horse
      */
     public function getStandardAlbum($type)
     {
-        foreach($this->albums as $album) {
+        foreach($this->albums() as $album) {
             if ($album->type == $type) {
                 return $album;
             }

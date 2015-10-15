@@ -4,7 +4,7 @@
     @include('layout.partials.heading')
     @if (Auth::user()->isHorseOwner($horse))
         <div class="row">
-            <a href="{{ route('pedigree.create', $horse->slug) }}" class="btn">{{ trans('copy.a.add_family') }}</a>
+            <a href="{{ route('pedigree.create', $horse->slug()) }}" class="btn">{{ trans('copy.a.add_family') }}</a>
         </div>
     @endif
     <div class="row pedigree">

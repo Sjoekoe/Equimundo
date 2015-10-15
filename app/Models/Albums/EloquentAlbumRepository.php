@@ -33,7 +33,7 @@ class EloquentAlbumRepository implements AlbumRepository
      */
     public function findForHorse(Horse $horse)
     {
-        return $this->album->where('horse_id', $horse->id)->where('type', 0)->get();
+        return $this->album->where('horse_id', $horse->id())->where('type', 0)->get();
     }
 
     /**
@@ -44,7 +44,7 @@ class EloquentAlbumRepository implements AlbumRepository
     public function create(Horse $horse, $values)
     {
         $album = new EloquentAlbum();
-        $album->horse_id = $horse->id;
+        $album->horse_id = $horse->id();
         $album->name = $values['name'];
 
         if (array_key_exists('description', $values)) {
