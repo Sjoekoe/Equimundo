@@ -155,6 +155,7 @@ return [
         EQM\Models\Horses\HorseServiceProvider::class,
         EQM\Models\Notifications\NotificationServiceProvider::class,
         EQM\Models\Palmares\PalmaresServiceProvider::class,
+        EQM\Models\Pedigrees\PedigreeServiceProvider::class,
         EQM\Models\Pictures\PictureServiceProvider::class,
         EQM\Models\Statuses\StatusServiceProvider::class,
     ],

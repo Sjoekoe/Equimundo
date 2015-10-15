@@ -6,7 +6,6 @@ use EQM\Http\Requests\CreateFamilyMember;
 use EQM\Models\Horses\HorseRepository;
 use EQM\Models\Pedigrees\PedigreeCreator;
 use EQM\Models\Pedigrees\PedigreeRepository;
-use EQM\Models\Pedigrees\PedigreeUpdater;
 use Illuminate\Routing\Controller;
 
 class PedigreeController extends Controller
@@ -27,26 +26,18 @@ class PedigreeController extends Controller
     private $horses;
 
     /**
-     * @var \EQM\Models\Pedigrees\PedigreeUpdater
-     */
-    private $updater;
-
-    /**
      * @param \EQM\Models\Pedigrees\PedigreeCreator $pedigreeCreator
      * @param \EQM\Models\Pedigrees\PedigreeRepository $pedigrees
      * @param \EQM\Models\Horses\HorseRepository $horses
-     * @param \EQM\Models\Pedigrees\PedigreeUpdater $updater
      */
     public function __construct(
         PedigreeCreator $pedigreeCreator,
         PedigreeRepository $pedigrees,
-        HorseRepository $horses,
-        PedigreeUpdater $updater
+        HorseRepository $horses
     ) {
         $this->pedigreeCreator = $pedigreeCreator;
         $this->pedigrees = $pedigrees;
         $this->horses = $horses;
-        $this->updater = $updater;
     }
 
     /**
@@ -101,7 +92,7 @@ class PedigreeController extends Controller
     {
         $pedigree = $this->initPedigree($pedigreeId);
 
-        $horse = $pedigree->horse;
+        $horse = $pedigree->horse();
 
         return view('horses.pedigree.edit', compact('pedigree', 'horse'));
     }
@@ -115,7 +106,7 @@ class PedigreeController extends Controller
     {
         $pedigree = $this->initPedigree($pedigreeId);
 
-        $this->updater->update($pedigree, $request->all());
+        $this->pedigrees->update($pedigree, $request->all());
 
         return redirect()->route('pedigree.index', $pedigree->horse->slug);
     }
@@ -128,9 +119,9 @@ class PedigreeController extends Controller
     {
         $pedigree = $this->initPedigree($pedigreeId);
 
-        $horse = $pedigree->horse;
+        $horse = $pedigree->horse();
 
-        $pedigree->delete();
+        $this->pedigrees->delete($pedigree);
 
         return redirect()->route('pedigree.index', $horse->slug);
     }

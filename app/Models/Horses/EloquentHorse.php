@@ -5,7 +5,7 @@ use Carbon\Carbon;
 use EQM\Models\Albums\EloquentAlbum;
 use EQM\Models\Disciplines\EloquentDiscipline;
 use EQM\Models\Palmares\EloquentPalmares;
-use EQM\Models\Pedigrees\Pedigree;
+use EQM\Models\Pedigrees\EloquentPedigree;
 use EQM\Models\Pictures\EloquentPicture;
 use EQM\Models\Statuses\EloquentStatus;
 use EQM\Models\Users\User;
@@ -154,7 +154,7 @@ class EloquentHorse extends Model implements Horse
      */
     public function pedigree()
     {
-        return $this->hasMany(Pedigree::class);
+        return $this->hasMany(EloquentPedigree::class);
     }
 
     /**
@@ -162,7 +162,7 @@ class EloquentHorse extends Model implements Horse
      */
     public function family()
     {
-        return $this->hasManyThrough(EloquentHorse::class, Pedigree::class, 'family_id', 'id');
+        return $this->hasManyThrough(EloquentHorse::class, EloquentPedigree::class, 'family_id', 'id');
     }
 
     /**
