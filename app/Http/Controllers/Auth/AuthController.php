@@ -4,7 +4,6 @@ namespace EQM\Http\Controllers\Auth;
 use Auth;
 use EQM\Events\UserRegistered;
 use EQM\Http\Controllers\Controller;
-use EQM\Models\Settings\Setting;
 use EQM\Models\Users\User;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
@@ -54,21 +53,18 @@ class AuthController extends Controller {
     public function create(array $data)
     {
         $activationCode = bcrypt(str_random(30));
-        $user =  User::create([
+        $user = User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['lastname'],
             'email' => $data['email'],
+            'language' => 'en',
+            'email_notifications' => true,
+            'date_format' =>'d/m/Y',
             'password' => bcrypt($data['password']),
             'remember_token' => $activationCode,
         ]);
 
         $user->assignRole(1);
-
-        $settings = new Setting();
-        $settings->user_id = $user->id;
-        $settings->date_format = 'd/m/Y';
-        $settings->language = 'en';
-        $settings->save();
 
         event(new UserRegistered($user));
 

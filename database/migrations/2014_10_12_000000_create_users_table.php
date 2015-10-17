@@ -24,6 +24,9 @@ class CreateUsersTable extends Migration {
 			$table->text('about');
 			$table->string('password', 60);
             $table->boolean('activated');
+			$table->boolean('email_notifications')->default(true);
+			$table->string('date_format')->default('d/m/Y');
+			$table->string('language')->default('en');
 			$table->rememberToken();
 			$table->timestamps();
 		});

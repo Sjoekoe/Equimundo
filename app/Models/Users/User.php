@@ -1,13 +1,13 @@
 <?php
 namespace EQM\Models\Users;
 
-use EQM\Events\Event;
 use EQM\Models\Comments\EloquentComment;
 use EQM\Models\Conversations\EloquentConversation;
+use EQM\Models\Events\EloquentEvent;
 use EQM\Models\Horses\EloquentHorse;
+use EQM\Models\Horses\Horse;
 use EQM\Models\Notifications\EloquentNotification;
 use EQM\Models\Roles\Role;
-use EQM\Models\Settings\Setting;
 use EQM\Models\Statuses\EloquentStatus;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -19,7 +19,7 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 
 class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
-    use Authenticatable, Authorizable, CanResetPassword, FollowingTrait;
+    use Authenticatable, Authorizable, CanResetPassword;
 
     /**
      * The database table used by the model.
@@ -43,7 +43,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'country',
         'gender',
         'about',
-        'remember_token'
+        'remember_token',
+        'date_format',
+        'email_notifications',
+        'language'
     ];
 
     /**
@@ -90,7 +93,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      */
     public function events()
     {
-        return $this->hasMany(Event::class, 'creator_id', 'id');
+        return $this->hasMany(EloquentEvent::class, 'creator_id', 'id');
     }
 
     /**
@@ -110,19 +113,19 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function settings()
-    {
-        return $this->hasOne(Setting::class);
-    }
-
-    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function notifications()
     {
         return $this->hasMany(EloquentNotification::class, 'receiver_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function follows()
+    {
+        return $this->belongsToMany(EloquentHorse::class, 'follows', 'user_id', 'horse_id')->withTimestamps();
     }
 
     /**
@@ -160,7 +163,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      */
     public function isAdmin()
     {
-        return $this->hasRole('administrator') ? true : false;
+        return $this->hasRole('administrator');
     }
 
     /**
@@ -215,7 +218,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      */
     public function getLocale()
     {
-        return $this->settings->language ?: 'en';
+        return $this->language ?: 'en';
     }
 
     /**
@@ -261,5 +264,33 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         }
 
         return $name;
+    }
+
+    /**
+     * @param \EQM\Models\Horses\Horse $horse
+     */
+    public function follow(Horse $horse)
+    {
+        return $this->follows()->attach($horse);
+    }
+
+    /**
+     * @param \EQM\Models\Horses\Horse $horse
+     * @return int
+     */
+    public function unFollow(Horse $horse)
+    {
+        return $this->follows()->detach($horse);
+    }
+
+    /**
+     * @param \EQM\Models\Horses\Horse $horse
+     * @return bool
+     */
+    public function isFollowing(Horse $horse)
+    {
+        $followedHorses = $this->follows()->lists('horse_id')->all();
+
+        return in_array($horse->id(), $followedHorses);
     }
 }

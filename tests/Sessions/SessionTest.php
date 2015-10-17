@@ -14,10 +14,6 @@ class SessionTest extends \TestCase
             'activated' => true
         ]);
 
-        factory(Setting::class)->create([
-            'user_id' => $user->id
-        ]);
-
         $this->visit('/login')
             ->type($user->email, 'email')
             ->type('password', 'password')
@@ -30,10 +26,6 @@ class SessionTest extends \TestCase
     public function logout()
     {
         $user = factory(User::class)->create();
-
-        factory(Setting::class)->create([
-            'user_id' => $user->id
-        ]);
 
         $this->actingAs($user)
             ->withSession(['foo' => 'bar'])
