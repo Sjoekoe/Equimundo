@@ -4,7 +4,7 @@ namespace EQM\Models\Horses;
 interface Horse
 {
     const FEMALE = 2;
-    
+
     /**
      * @return int
      */
