@@ -1,7 +1,5 @@
 <?php namespace EQM\Http\Requests;
 
-use EQM\Http\Requests\Request;
-
 class UpdateUserProfile extends Request {
 
 	/**
@@ -22,7 +20,7 @@ class UpdateUserProfile extends Request {
 	public function rules()
 	{
 		return [
-			'dob' => 'date|date_format:d/m/Y'
+			'date_of_birth' => 'date|date_format:d/m/Y'
 		];
 	}
 

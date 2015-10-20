@@ -1,12 +1,10 @@
 <?php
 namespace EQM\Http\Controllers\Users;
 
-use Auth;
 use EQM\Http\Controllers\Controller;
 use EQM\Http\Requests\UpdateUserProfile;
 use EQM\Models\Users\User;
 use EQM\Models\Users\UserRepository;
-use Session;
 
 class ProfileController extends  Controller
 {
@@ -37,13 +35,13 @@ class ProfileController extends  Controller
      */
     public function update(UpdateUserProfile $request)
     {
-        $user = $this->users->findById(Auth::user()->id);
+        $user = $this->users->findById(auth()->user()->id);
 
         $user->update($request->all());
 
-        Session::put('success', 'Profile was updated');
+        session()->put('success', 'Profile was updated');
 
-        return back();
+        return route('users.profiles.edit');
     }
 
     /**
