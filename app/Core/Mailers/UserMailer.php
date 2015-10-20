@@ -10,7 +10,7 @@ class UserMailer extends Mailer
      */
     public function sendWelcomeMessageTo(User $user)
     {
-        $subject = 'Welcome to Horse Stories';
+        $subject = 'Welcome to Equimundo';
         $view = 'emails.registration.confirm';
         $data = [
             'activationLink' => route('activate', ['token' => $user->getRememberToken(), 'email' => $user->email]),

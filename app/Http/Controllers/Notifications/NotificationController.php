@@ -1,7 +1,6 @@
 <?php
 namespace EQM\Http\Controllers\Notifications;
 
-use Auth;
 use EQM\Models\Notifications\NotificationRepository;
 use Illuminate\Routing\Controller;
 
@@ -25,7 +24,7 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        $notifications = $this->notifications->findForUser(Auth::user());
+        $notifications = $this->notifications->findForUser(auth()->user());
 
         return view('notifications.index', compact('notifications'));
     }
@@ -36,7 +35,7 @@ class NotificationController extends Controller
      */
     public function markRead($notification = null)
     {
-        Auth::user()->markNotificationsAsRead();
+        auth()->user()->markNotificationsAsRead();
 
         return redirect()->back();
     }

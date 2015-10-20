@@ -1,12 +1,11 @@
 <?php
 namespace EQM\Models\Pedigrees;
 
-use DateTime;
 use EQM\Events\PedigreeWasCreated;
 use EQM\Models\Horses\Horse;
-use EQM\Models\Horses\HorseCreator;
 use EQM\Models\Horses\HorseRepository;
 use EQM\Models\Notifications\Notification;
+use Illuminate\Auth\AuthManager;
 
 class PedigreeCreator
 {
@@ -16,25 +15,36 @@ class PedigreeCreator
     private $horses;
 
     /**
-     * @var \EQM\Models\Horses\HorseCreator
-     */
-    private $horseCreator;
-
-    /**
      * @var \EQM\Models\Pedigrees\PedigreeConnector
      */
     private $pedigreeConnector;
 
     /**
-     * @param \EQM\Models\Horses\HorseRepository $horses
-     * @param \EQM\Models\Horses\HorseCreator $horseCreator
-     * @param \EQM\Models\Pedigrees\PedigreeConnector $pedigreeConnector
+     * @var \Illuminate\Auth\AuthManager
      */
-    public function __construct(HorseRepository $horses, HorseCreator $horseCreator, PedigreeConnector $pedigreeConnector)
-    {
+    private $auth;
+
+    /**
+     * @var \EQM\Models\Pedigrees\PedigreeRepository
+     */
+    private $pedigrees;
+
+    /**
+     * @param \EQM\Models\Horses\HorseRepository $horses
+     * @param \EQM\Models\Pedigrees\PedigreeConnector $pedigreeConnector
+     * @param \Illuminate\Auth\AuthManager $auth
+     * @param \EQM\Models\Pedigrees\PedigreeRepository $pedigrees
+     */
+    public function __construct(
+        HorseRepository $horses,
+        PedigreeConnector $pedigreeConnector,
+        AuthManager $auth,
+        PedigreeRepository $pedigrees
+    ) {
         $this->horses = $horses;
-        $this->horseCreator = $horseCreator;
         $this->pedigreeConnector = $pedigreeConnector;
+        $this->auth = $auth;
+        $this->pedigrees = $pedigrees;
     }
 
     /**
@@ -57,7 +67,7 @@ class PedigreeCreator
 
         $this->createPedigree($horse, $family, $values['type']);
 
-        $data = ['family' => $horse->name, 'horse' => $family->name];
+        $data = ['family' => $horse->name(), 'horse' => $family->name()];
 
         event(new PedigreeWasCreated($horse, $family, Notification::PEDIGREE_CREATED, $data));
     }
@@ -73,7 +83,7 @@ class PedigreeCreator
             $family = $family;
         } else {
             $values ['gender'] = $this->pedigreeConnector->getGender($values['type']);
-            $family = $this->horseCreator->create($values, true);
+            $family = $this->horses->create($this->auth->user(), $values, true);
         }
 
         $values['type'] = $this->pedigreeConnector->getConnection($horse, $values['type']);
@@ -86,16 +96,11 @@ class PedigreeCreator
     /**
      * @param \EQM\Models\Horses\Horse $horse
      * @param \EQM\Models\Horses\Horse $family
-     * @param $type
+     * @param int $type
+     * @return \EQM\Models\Pedigrees\Pedigree
      */
     private function createPedigree(Horse $horse, Horse $family, $type)
     {
-        $pedigree = new Pedigree();
-
-        $pedigree->horse_id = $horse->id;
-        $pedigree->type = $type;
-        $pedigree->family_id = $family->id;
-
-        $pedigree->save();
+        return $this->pedigrees->create($horse, $family, $type);
     }
 }

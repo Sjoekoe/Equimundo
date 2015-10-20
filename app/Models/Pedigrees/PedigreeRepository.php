@@ -3,37 +3,38 @@ namespace EQM\Models\Pedigrees;
 
 use EQM\Models\Horses\Horse;
 
-class PedigreeRepository
+interface PedigreeRepository
 {
     /**
-     * @var \EQM\Models\Pedigrees\Pedigree
+     * @param \EQM\Models\Horses\Horse $horse
+     * @param \EQM\Models\Horses\Horse $family
+     * @param int $type
+     * @return \EQM\Models\Pedigrees\Pedigree
      */
-    private $pedigree;
+    public function create(Horse $horse, Horse $family, $type);
+
+    /**
+     * @param \EQM\Models\Pedigrees\Pedigree $pedigree
+     * @param array $values
+     * @return \EQM\Models\Pedigrees\Pedigree
+     */
+    public function update(Pedigree $pedigree, array $values);
 
     /**
      * @param \EQM\Models\Pedigrees\Pedigree $pedigree
      */
-    public function __construct(Pedigree $pedigree)
-    {
-        $this->pedigree = $pedigree;
-    }
+    public function delete(Pedigree $pedigree);
 
     /**
      * @param int $id
      * @return \EQM\Models\Pedigrees\Pedigree
      */
-    public function findById($id)
-    {
-        return $this->pedigree->findOrFail($id);
-    }
+    public function findById($id);
 
     /**
      * @param \EQM\Models\Horses\Horse $horse
      * @param int $type
      * @return \EQM\Models\Pedigrees\Pedigree|null
      */
-    public function findExistingPedigree(Horse $horse, $type)
-    {
-        return $this->pedigree->where('horse_id', $horse->id)->where('type', $type)->first();
-    }
+    public function findExistingPedigree(Horse $horse, $type);
 }

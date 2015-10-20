@@ -1,7 +1,6 @@
 <?php
 namespace EQM\Events;
 
-use EQM\Models\Notifications\Notification;
 use EQM\Models\Statuses\Status;
 use EQM\Models\Users\User;
 use Illuminate\Queue\SerializesModels;

@@ -5,7 +5,7 @@
 
     @if (Auth::user()->isHorseOwner($horse))
         <div class="row">
-            <a href="{{ route('album.create', $horse->slug) }}">{{ trans('copy.a.create_album') }}</a>
+            <a href="{{ route('album.create', $horse->slug()) }}">{{ trans('copy.a.create_album') }}</a>
         </div>
     @endif
 

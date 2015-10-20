@@ -2,30 +2,19 @@
 namespace EQM\Http\Controllers\Horses;
 
 use Auth;
+use EQM\Events\PalmaresWasCreated;
+use EQM\Events\PalmaresWasDeleted;
 use EQM\Http\Controllers\Controller;
 use EQM\Models\Horses\HorseRepository;
-use EQM\Models\Palmares\PalmaresCreator;
-use EQM\Models\Palmares\PalmaresDeleter;
 use EQM\Models\Palmares\PalmaresRepository;
-use EQM\Models\Palmares\PalmaresUpdater;
 use Input;
 
 class PalmaresController extends Controller
 {
     /**
-     * @var \EQM\Models\Palmares\PalmaresCreator
-     */
-    private $palmaresCreator;
-
-    /**
      * @var \EQM\Models\Palmares\PalmaresRepository
      */
     private $palmaresRepository;
-
-    /**
-     * @var \EQM\Models\Palmares\PalmaresUpdater
-     */
-    private $updater;
 
     /**
      * @var \EQM\Models\Horses\HorseRepository
@@ -33,29 +22,15 @@ class PalmaresController extends Controller
     private $horses;
 
     /**
-     * @var \EQM\Models\Palmares\PalmaresDeleter
-     */
-    private $deleter;
-
-    /**
-     * @param \EQM\Models\Palmares\PalmaresCreator $palmaresCreator
      * @param \EQM\Models\Palmares\PalmaresRepository $palmaresRepository
-     * @param \EQM\Models\Palmares\PalmaresUpdater $updater
      * @param \EQM\Models\Horses\HorseRepository $horses
-     * @param \EQM\Models\Palmares\PalmaresDeleter $deleter
      */
     public function __construct(
-        PalmaresCreator $palmaresCreator,
         PalmaresRepository $palmaresRepository,
-        PalmaresUpdater $updater,
-        HorseRepository $horses,
-        PalmaresDeleter $deleter
+        HorseRepository $horses
     ) {
-        $this->palmaresCreator = $palmaresCreator;
         $this->palmaresRepository = $palmaresRepository;
-        $this->updater = $updater;
         $this->horses = $horses;
-        $this->deleter = $deleter;
     }
 
     /**
@@ -66,7 +41,7 @@ class PalmaresController extends Controller
     {
         $horse = $this->initHorse($horseSlug);
 
-        $palmaresResults = $this->palmaresRepository->getPalmaresForHorse($horse);
+        $palmaresResults = $this->palmaresRepository->findPalmaresForHorse($horse);
 
         return view('horses.palmares.index', compact('horse', 'palmaresResults'));
     }
@@ -90,7 +65,7 @@ class PalmaresController extends Controller
     {
         $horse = $this->initHorse($horseSlug);
 
-        $this->palmaresCreator->create($horse, Input::all());
+        event(new PalmaresWasCreated($horse, Input::all()));
 
         return redirect()->route('palmares.index', $horse->slug);
     }
@@ -114,9 +89,9 @@ class PalmaresController extends Controller
     {
         $palmares = $this->initPalmares($palmaresId);
 
-        $this->updater->update($palmares, Input::all());
+        $this->palmaresRepository->update($palmares, Input::all());
 
-        $horse = $palmares->horse;
+        $horse = $palmares->horse();
 
         return redirect()->route('palmares.index', $horse->slug);
     }
@@ -129,9 +104,9 @@ class PalmaresController extends Controller
     {
         $palmares = $this->initPalmares($palmaresId);
 
-        $horse = $palmares->horse;
+        $horse = $palmares->horse();
 
-        $this->deleter->delete($palmares);
+        event(new PalmaresWasDeleted($palmares));
 
         return redirect()->route('palmares.index', $horse->slug);
     }
@@ -155,7 +130,7 @@ class PalmaresController extends Controller
     {
         $palmares = $this->palmaresRepository->findById($palmaresId);
 
-        $horse = $palmares->horse;
+        $horse = $palmares->horse();
 
         if (! Auth::user()->isHorseOwner($horse)) {
             abort(403);

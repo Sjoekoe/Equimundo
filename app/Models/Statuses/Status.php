@@ -1,94 +1,72 @@
 <?php
 namespace EQM\Models\Statuses;
 
-use EQM\Models\Comments\EloquentComment;
-use EQM\Models\Horses\Horse;
-use EQM\Models\Palmares\Palmares;
 use EQM\Models\Pictures\Picture;
-use EQM\Models\Users\User;
-use Illuminate\Database\Eloquent\Model;
 
-class Status extends Model
+interface Status
 {
     /**
-     * @var string
+     * @return int
      */
-    protected $table = 'statuses';
+    public function id();
 
     /**
-     * @var array
+     * @return string
      */
-    protected $fillable = ['body', 'prefix'];
+    public function body();
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return int
      */
-    public function horse()
-    {
-        return $this->belongsTo(Horse::class);
-    }
+    public function prefix();
+
+    /**
+     * @return \EQM\Models\Horses\Horse
+     */
+    public function horse();
 
     /**
      * @return \EQM\Models\Users\User
      */
-    public function user()
-    {
-        return $this->horse->owner;
-    }
+    public function user();
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \EQM\Models\Comments\Comment[]
      */
-    public function comments()
-    {
-        return $this->hasMany(EloquentComment::class);
-    }
+    public function comments();
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \EQM\Models\Users\User[]
      */
-    public function likes()
-    {
-        return $this->belongsToMany(User::class, 'likes');
-    }
+    public function likes();
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \EQM\Models\Palmares\Palmares
      */
-    public function palmares()
-    {
-        return $this->hasOne(Palmares::class);
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function pictures()
-    {
-        return $this->belongsToMany(Picture::class)->withTimestamps();
-    }
-
-    /**
-     * @param \EQM\Models\Pictures\Picture $picture
-     */
-    public function setPicture($picture)
-    {
-        $this->pictures()->attach($picture);
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasPicture()
-    {
-        return count($this->pictures) !== 0;
-    }
+    public function palmares();
 
     /**
      * @return \EQM\Models\Pictures\Picture
      */
-    public function getPicture()
-    {
-        return $this->pictures()->first();
-    }
+    public function pictures();
+
+    /**
+     * @param \EQM\Models\Pictures\Picture $picture
+     */
+    public function setPicture(Picture $picture);
+
+    /**
+     * @return bool
+     */
+    public function hasPicture();
+
+    /**
+     * @return \EQM\Models\Pictures\Picture
+     */
+    public function getPicture();
+
+    /**
+     * @return \DateTime
+     */
+    public function createdAt();
 }

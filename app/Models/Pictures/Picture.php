@@ -1,51 +1,42 @@
 <?php
 namespace EQM\Models\Pictures;
 
-use EQM\Models\Albums\EloquentAlbum;
-use EQM\Models\Horses\Horse;
-use Illuminate\Database\Eloquent\Model;
+use EQM\Models\Albums\Album;
 
-class Picture extends Model
+interface Picture
 {
     /**
-     * @var string
+     * @return int
      */
-    protected $table = 'pictures';
+    public function id();
 
     /**
-     * @var array
+     * @return \EQM\Models\Horses\Horse
      */
-    protected $fillable = ['horse_id', 'path', 'profile_pic'];
+    public function horse();
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \EQM\Models\Albums\Album[]
      */
-    public function horse()
-    {
-        return $this->belongsTo(Horse::class);
-    }
+    public function albums();
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return string
      */
-    public function albums()
-    {
-        return $this->belongsToMany(EloquentAlbum::class, 'album_picture', 'picture_id', 'album_id')->withTimestamps();
-    }
+    public function path();
 
     /**
-     * @param int $albumId
+     * @return bool
      */
-    public function addToAlbum($albumId)
-    {
-        $this->albums()->attach($albumId);
-    }
+    public function profilePicture();
 
     /**
-     * @param int $albumId
+     * @param \EQM\Models\Albums\Album $album
      */
-    public function removeFromAlbum($albumId)
-    {
-        $this->albums()->detach($albumId);
-    }
+    public function addToAlbum(Album $album);
+
+    /**
+     * @param \EQM\Models\Albums\Album $album
+     */
+    public function removeFromAlbum(Album $album);
 }

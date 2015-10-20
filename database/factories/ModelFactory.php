@@ -14,15 +14,8 @@ $factory->define(EQM\Models\Users\User::class, function (Faker\Generator $faker)
         'last_name' => $faker->name,
         'first_name' => $faker->name,
         'email' => $faker->email,
+        'language' => 'en',
         'password' => bcrypt('password'),
         'remember_token' => str_random(10),
-    ];
-});
-
-$factory->define(EQM\Models\Settings\Setting::class, function (Faker\Generator $faker) {
-    return [
-        'email_notifications' => true,
-        'date_format' => 'd/m/Y',
-        'language' => 'en',
     ];
 });

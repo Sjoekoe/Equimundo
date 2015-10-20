@@ -1,39 +1,25 @@
 <?php
 namespace EQM\Http\Controllers\Horses;
 
-use Auth;
 use DB;
 use EQM\Core\Files\Uploader;
 use EQM\Events\HorseWasCreated;
 use EQM\Http\Requests\CreateHorse;
 use EQM\Http\Requests\UpdateHorse;
 use EQM\Models\Albums\Album;
-use EQM\Models\Horses\HorseCreator;
+use EQM\Models\Disciplines\DisciplineRepository;
+use EQM\Models\Horses\Horse;
 use EQM\Models\Horses\HorseRepository;
-use EQM\Models\Horses\HorseUpdater;
 use EQM\Models\Statuses\StatusRepository;
 use EQM\Models\Users\User;
-use Illuminate\Auth\AuthManager;
 use Illuminate\Routing\Controller;
-use Request;
-use Session;
 
 class HorseController extends Controller
 {
     /**
-     * @var \EQM\Models\Horses\HorseCreator
-     */
-    private $horseCreator;
-
-    /**
      * @var \EQM\Core\Files\Uploader
      */
     private $uploader;
-
-    /**
-     * @var \EQM\Models\Horses\HorseUpdater
-     */
-    private $horseUpdater;
 
     /**
      * @var \EQM\Models\Horses\HorseRepository
@@ -46,32 +32,26 @@ class HorseController extends Controller
     private $statuses;
 
     /**
-     * @var \EQM\Http\Controllers\Horses\AuthManager
+     * @var \EQM\Models\Disciplines\DisciplineRepository
      */
-    private $auth;
+    private $disciplines;
 
     /**
-     * @param \EQM\Models\Horses\HorseCreator $horseCreator
      * @param \EQM\Core\Files\Uploader $uploader
-     * @param \EQM\Models\Horses\HorseUpdater $horseUpdater
      * @param \EQM\Models\Horses\HorseRepository $horses
      * @param \EQM\Models\Statuses\StatusRepository $statuses
-     * @param \Illuminate\Auth\AuthManager $auth
+     * @param \EQM\Models\Disciplines\DisciplineRepository $disciplines
      */
     public function __construct(
-        HorseCreator $horseCreator,
         Uploader $uploader,
-        HorseUpdater $horseUpdater,
         HorseRepository $horses,
         StatusRepository $statuses,
-        AuthManager $auth
+        DisciplineRepository $disciplines
     ) {
-        $this->horseCreator = $horseCreator;
         $this->uploader = $uploader;
-        $this->horseUpdater = $horseUpdater;
         $this->horses = $horses;
         $this->statuses = $statuses;
-        $this->auth = $auth;
+        $this->disciplines = $disciplines;
     }
 
     /**
@@ -108,25 +88,28 @@ class HorseController extends Controller
                 return redirect()->back();
             }
 
-            $horse = $this->horseUpdater->update($horse, $request->all());
-            $horse->user_id = $this->auth->user()->id;
+            $horse = $this->horses->update($horse, $request->all());
+
+            $this->resolveDisciplines($horse, $request->all());
+
+            $horse->user_id = auth()->user()->id;
 
             $horse->save();
         } else {
-            $horse = $this->horseCreator->create($request->all());
+            $horse = $this->horses->create(auth()->user(), $request->all());
         }
 
         event(new HorseWasCreated($horse));
 
-        if (Request::hasFile('profile_pic')) {
-            $picture = $this->uploader->uploadPicture(Request::file('profile_pic'), $horse, true);
+        if ($request->hasFile('profile_pic')) {
+            $picture = $this->uploader->uploadPicture($request->file('profile_pic'), $horse, true);
 
             $picture->addToAlbum($horse->getStandardAlbum(Album::PROFILEPICTURES));
         }
 
-        Session::put('success', $horse->name . ' was successfully created.');
+        session()->put('success', $horse->name . ' was successfully created.');
 
-        return redirect()->route('horses.index', Auth::user()->id);
+        return redirect()->route('horses.index', auth()->user()->id);
     }
 
     /**
@@ -137,9 +120,9 @@ class HorseController extends Controller
     {
         $horse = $this->horses->findBySlug($slug);
 
-        $statuses = $this->statuses->getFeedForHorse($horse);
+        $statuses = $this->statuses->findFeedForHorse($horse);
 
-        $likes = DB::table('likes')->whereUserId(Auth::user()->id)->lists('status_id');
+        $likes = DB::table('likes')->whereUserId(auth()->user()->id)->lists('status_id');
 
         return view('horses.show', compact('horse', 'likes', 'statuses'));
     }
@@ -166,11 +149,13 @@ class HorseController extends Controller
     {
         $horse = $this->initHorse($slug);
 
-        $this->horseUpdater->update($horse, $request->all());
+        $horse = $this->horses->update($horse, $request->all());
 
-        session(['success', $horse->name . ' was updated']);
+        $this->resolveDisciplines($horse, $request->all());
 
-        return redirect()->route('horses.show', $horse->slug);
+        session(['success', $horse->name() . ' was updated']);
+
+        return redirect()->route('horses.edit', $horse->slug());
     }
 
     /**
@@ -196,10 +181,36 @@ class HorseController extends Controller
     {
         $horse = $this->horses->findBySlug($slug);
 
-        if ($this->auth->user()->isHorseOwner($horse)) {
+        if (auth()->user()->isHorseOwner($horse)) {
             return $horse;
         }
 
         abort(403);
+    }
+
+    /**
+     * @param \EQM\Models\Horses\Horse $horse
+     * @param array $values
+     */
+    private function resolveDisciplines(Horse $horse, $values = [])
+    {
+        $initialDisciplines = [];
+        $unwantedDisciplines = [];
+
+        foreach ($horse->disciplines as $initialDiscipline) {
+            $initialDisciplines[$initialDiscipline->id] = $initialDiscipline->discipline;
+        }
+
+        if (array_key_exists('disciplines', $values)) {
+            foreach ($values['disciplines'] as $discipline) {
+                $horse->disciplines()->updateOrCreate(['discipline' => $discipline, 'horse_id' => $horse->id]);
+            }
+
+            $unwantedDisciplines = array_diff($initialDisciplines, $values['disciplines']);
+        }
+
+        foreach ($unwantedDisciplines as $key => $values) {
+            $this->disciplines->removeById($key);
+        }
     }
 }

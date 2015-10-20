@@ -20,7 +20,6 @@ class PagesController extends Controller
     private $horses;
 
     /**
-     * @param \EQM\Models\Users\UserRepository $users
      * @param \EQM\Models\Statuses\StatusRepository $statuses
      * @param \EQM\Models\Horses\HorseRepository $horses
      */
@@ -38,7 +37,7 @@ class PagesController extends Controller
         if (Auth::check()) {
             $horses = $this->horses->findHorsesForSelect(Auth::user());
             if (count($horses)) {
-                $statuses = $this->statuses->getFeedForUser(Auth::user());
+                $statuses = $this->statuses->findFeedForUser(Auth::user());
                 $likes = DB::table('likes')->whereUserId(Auth::user()->id)->lists('status_id');
             } else {
                 $statuses = [];

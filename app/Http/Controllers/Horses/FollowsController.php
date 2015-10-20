@@ -61,7 +61,7 @@ class FollowsController extends Controller
      */
     public function destroy($id)
     {
-        $horse = $this->horseRepository->findById($id);
+        $horse = $this->horses->findById($id);
 
         auth()->user()->unFollow($horse);
 

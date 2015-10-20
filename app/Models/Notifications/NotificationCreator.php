@@ -6,14 +6,14 @@ use EQM\Models\Users\User;
 class NotificationCreator
 {
     /**
-     * @var \EQM\Models\Notifications\Notification
+     * @var \EQM\Models\Notifications\EloquentNotification
      */
     private $notification;
 
     /**
-     * @param \EQM\Models\Notifications\Notification $notification
+     * @param \EQM\Models\Notifications\EloquentNotification $notification
      */
-    public function __construct(Notification $notification)
+    public function __construct(EloquentNotification $notification)
     {
         $this->notification = $notification;
     }
@@ -24,10 +24,11 @@ class NotificationCreator
      * @param \EQM\Models\Notifications\Notification|int $type
      * @param $entity
      * @param array $data
+     * @return \EQM\Models\Notifications\Notification
      */
     public function create(User $sender, User $receiver, $type, $entity, $data)
     {
-        $notification = new Notification();
+        $notification = new EloquentNotification();
 
         $notification->type = $type;
         $notification->sender_id = $sender->id;
@@ -36,5 +37,7 @@ class NotificationCreator
         $notification->data = json_encode($data);
 
         $notification->save();
+
+        return $notification;
     }
 }

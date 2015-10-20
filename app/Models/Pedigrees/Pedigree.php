@@ -1,10 +1,7 @@
 <?php
 namespace EQM\Models\Pedigrees;
 
-use EQM\Models\Horses\Horse;
-use Illuminate\Database\Eloquent\Model;
-
-class Pedigree extends Model
+interface Pedigree
 {
     const FATHER = 1;
     const MOTHER = 2;
@@ -12,43 +9,27 @@ class Pedigree extends Model
     const DAUGHTER = 4;
 
     /**
-     * @var array
+     * @return \EQM\Models\Horses\Horse
      */
-    protected $fillable = ['horse_id', 'type', 'family_id'];
+    public function horse();
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return int
      */
-    public function horse()
-    {
-        return $this->belongsTo(Horse::class);
-    }
+    public function type();
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \EQM\Models\Horses\Horse
      */
-    public function originalHorse()
-    {
-        return $this->hasOne(Horse::class, 'id', 'family_id');
-    }
+    public function originalHorse();
 
     /**
      * @return bool
      */
-    public function hasFather()
-    {
-        if ($this->originalHorse()->first()) {
-            return true;
-        }
-
-        return false;
-    }
+    public function hasFather();
 
     /**
      * @return \EQM\Models\Pedigrees\Pedigree
      */
-    public function father()
-    {
-        return $this->originalHorse()->first()->father();
-    }
+    public function father();
 }

@@ -7,7 +7,6 @@ use EQM\Models\Pictures\PictureRepository;
 use Illuminate\Auth\AuthManager;
 use Illuminate\Routing\Controller;
 use Input;
-use Session;
 use Storage;
 
 class PictureController extends Controller
@@ -28,7 +27,7 @@ class PictureController extends Controller
     private $uploader;
 
     /**
-     * @var \EQM\Models\Pictures\PictureRepository
+     * @var \EQM\Models\Pictures\EloquentPictureRepository
      */
     private $pictures;
 
@@ -59,10 +58,10 @@ class PictureController extends Controller
         foreach ($pictures as $picture) {
             $picture = $this->uploader->uploadPicture($picture, $album->horse());
 
-            $picture->addToAlbum($album->id);
+            $picture->addToAlbum($album);
         }
 
-        Session::put('success', 'Pictures uploaded');
+        session()->put('success', 'Pictures uploaded');
 
         return redirect()->back();
     }
@@ -78,16 +77,16 @@ class PictureController extends Controller
 
         $picture = $this->pictures->findById($pictureId);
 
-        if (count($picture->albums) > 1) {
-            $picture->removeFromAlbum($album->id());
+        if (count($picture->albums()) > 1) {
+            $picture->removeFromAlbum($album);
 
-            Session::put('success', 'Picture removed from album');
+            session()->put('success', 'Picture removed from album');
         } else {
-            Storage::delete('/uploads/pictures/' . $picture->horse->id . '/' . $picture->path);
+            Storage::delete('/uploads/pictures/' . $picture->horse->id . '/' . $picture->path());
 
             $picture->delete();
 
-            Session::put('succes', 'Picture deleted');
+            session()->put('succes', 'Picture deleted');
         }
 
         return redirect()->route('album.show', $album->id);
@@ -105,6 +104,6 @@ class PictureController extends Controller
             return $album;
         }
 
-        App::abort(403);
+        abort(403);
     }
 }

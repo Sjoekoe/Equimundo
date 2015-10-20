@@ -3,27 +3,21 @@ namespace EQM\Models\Notifications;
 
 use EQM\Models\Users\User;
 
-class NotificationRepository
+interface NotificationRepository
 {
     /**
-     * @var \EQM\Models\Notifications\Notification
-     */
-    private $notification;
-
-    /**
-     * @param \EQM\Models\Notifications\Notification $notification
-     */
-    public function __construct(Notification $notification)
-    {
-        $this->notification = $notification;
-    }
-
-    /**
      * @param \EQM\Models\Users\User $user
-     * @return \EQM\Models\Notifications\Notification[]
+     * @return \EQM\Models\Notifications\Notification
      */
-    public function findForUser(User $user)
-    {
-        return $this->notification->where('receiver_id', $user->id)->get();
-    }
+    public function findForUser(User $user);
+
+    /**
+     * @param \EQM\Models\Users\User $sender
+     * @param \EQM\Models\Users\User $receiver
+     * @param \EQM\Models\Notifications\Notification|int $type
+     * @param $entity
+     * @param array $data
+     * @return \EQM\Models\Notifications\Notification
+     */
+    public function create(User $sender, User $receiver, $type, $entity, $data);
 }

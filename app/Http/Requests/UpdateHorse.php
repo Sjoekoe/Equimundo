@@ -1,20 +1,19 @@
 <?php namespace EQM\Http\Requests;
 
-use EQM\Http\Requests\Request;
-use EQM\Models\Horses\Horse;
+use EQM\Models\Horses\HorseRepository;
 
 class UpdateHorse extends Request {
     /**
-     * @var \EQM\Models\Horses\Horse
+     * @var \EQM\Models\Horses\HorseRepository
      */
-    private $horse;
+    private $horses;
 
     /**
-     * @param \EQM\Models\Horses\Horse $horse
+     * @param \EQM\Models\Horses\HorseRepository $horses
      */
-    public function __construct(Horse $horse)
+    public function __construct(HorseRepository $horses)
     {
-        $this->horse = $horse;
+        $this->horses = $horses;
     }
 
     /**
@@ -34,10 +33,12 @@ class UpdateHorse extends Request {
      */
     public function rules()
     {
+        $horse = $this->horses->findBySlug($this->route('slug'));
+
         return [
             'name' => 'required',
             'date_of_birth' => 'date_format:d/m/Y',
-            'life_number' => 'unique:horses,id,' . $this->horse->id(),
+            'life_number' => 'unique:horses,id,' . $horse->id(),
         ];
     }
 

@@ -2,10 +2,11 @@
 namespace EQM\Http\Controllers\Statuses;
 
 use Auth;
+use EQM\Core\Files\Uploader;
 use EQM\Http\Requests\PostStatus;
-use EQM\Models\Statuses\StatusCreator;
+use EQM\Models\Albums\Album;
+use EQM\Models\Horses\HorseRepository;
 use EQM\Models\Statuses\StatusRepository;
-use EQM\Models\Statuses\StatusUpdater;
 use Illuminate\Routing\Controller;
 use Input;
 use Session;
@@ -13,30 +14,30 @@ use Session;
 class StatusController extends Controller
 {
     /**
-     * @var \EQM\Models\Statuses\StatusCreator
-     */
-    private $statusCreator;
-
-    /**
      * @var \EQM\Models\Statuses\StatusRepository
      */
     private $statuses;
 
     /**
-     * @var \EQM\Models\Statuses\StatusUpdater
+     * @var \EQM\Models\Horses\HorseRepository
      */
-    private $updater;
+    private $horses;
 
     /**
-     * @param \EQM\Models\Statuses\StatusCreator $statusCreator
-     * @param \EQM\Models\Statuses\StatusRepository $statuses
-     * @param \EQM\Models\Statuses\StatusUpdater $updater
+     * @var \EQM\Core\Files\Uploader
      */
-    public function __construct(StatusCreator $statusCreator, StatusRepository $statuses, StatusUpdater $updater)
+    private $uploader;
+
+    /**
+     * @param \EQM\Models\Statuses\StatusRepository $statuses
+     * @param \EQM\Models\Horses\HorseRepository $horses
+     * @param \EQM\Core\Files\Uploader $uploader
+     */
+    public function __construct(StatusRepository $statuses, HorseRepository $horses, Uploader $uploader)
     {
-        $this->statusCreator = $statusCreator;
         $this->statuses = $statuses;
-        $this->updater = $updater;
+        $this->horses = $horses;
+        $this->uploader = $uploader;
     }
 
     /**
@@ -45,7 +46,17 @@ class StatusController extends Controller
      */
     public function store(PostStatus $request)
     {
-        $this->statusCreator->create($request->all());
+        $status = $this->statuses->create($request->all());
+
+        if (array_key_exists('picture', $request->all())) {
+            $horse = $this->horses->findById($request->get('horse'));
+            $picture = $this->uploader->uploadPicture($request->get('picture'), $horse);
+
+            $picture->addToAlbum($horse->getStandardAlbum(Album::TIMELINEPICTURES));
+            $status->setPicture($picture);
+
+            $status->save();
+        }
 
         Session::put('success', 'Status has been posted');
 
@@ -79,7 +90,7 @@ class StatusController extends Controller
     {
         $status = $this->initStatus($statusId);
 
-        $this->updater->update($status, $request->all());
+        $this->statuses->update($status, $request->all());
 
         return redirect()->route('home');
     }

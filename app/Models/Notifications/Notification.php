@@ -1,74 +1,53 @@
 <?php
 namespace EQM\Models\Notifications;
 
-use EQM\Models\Users\User;
-use Illuminate\Database\Eloquent\Model;
-
-class Notification extends Model
+interface Notification
 {
     const STATUS_LIKED = 1;
     const COMMENT_POSTED = 2;
     const PEDIGREE_CREATED = 3;
 
     /**
-     * @var array
+     * @return int
      */
-    protected $fillable = ['type', 'link'];
+    public function id();
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return int
      */
-    public function sender()
-    {
-        return $this->hasOne(User::class, 'id', 'sender_id');
-    }
+    public function type();
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return string
      */
-    public function receiver()
-    {
-        return $this->hasOne(User::class, 'id', 'receiver_id');
-    }
+    public function link();
 
     /**
-     * @return mixed
+     * @return \EQM\Models\Users\User
      */
-    public function isRead()
-    {
-        return $this->read;
-    }
+    public function sender();
+
+    /**
+     * @return \EQM\Models\Users\User
+     */
+    public function receiver();
 
     /**
      * @return bool
      */
-    public function isUnread()
-    {
-        return ! $this->isRead();
-    }
+    public function isRead();
+
+    /**
+     * @return bool
+     */
+    public function isUnread();
+
+    public function markAsRead();
 
     /**
      * @param static $type
      * @param $entity
      * @return string
      */
-    public function getRoute($type, $entity)
-    {
-        switch ($type) {
-            case self::STATUS_LIKED:
-                return route('statuses.show', $entity->id);
-
-            case self::COMMENT_POSTED;
-                return route('statuses.show', $entity->id);
-
-            case self::PEDIGREE_CREATED:
-                return route('horses.show', $entity->slug);
-        }
-    }
-
-    public function markAsRead()
-    {
-        $this->read = true;
-        $this->save();
-    }
+    public function getRoute($type, $entity);
 }
