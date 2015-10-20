@@ -1,7 +1,6 @@
 <?php
 namespace Sessions;
 
-use EQM\Models\Settings\Setting;
 use EQM\Models\Users\User;
 
 class SessionTest extends \TestCase
@@ -18,7 +17,7 @@ class SessionTest extends \TestCase
             ->type($user->email, 'email')
             ->type('password', 'password')
             ->press('Sign In')
-            ->onPage('/')
+            ->seePageIs('/')
             ->dontSee('Welcome to Equimundo');
     }
 
@@ -31,7 +30,7 @@ class SessionTest extends \TestCase
             ->withSession(['foo' => 'bar'])
             ->visit('/')
             ->click('Sign Out')
-            ->onPage('/')
+            ->seePageIs('/')
             ->see('Welcome to Equimundo');
     }
 }

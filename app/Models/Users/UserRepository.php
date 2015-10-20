@@ -48,6 +48,7 @@ class UserRepository
      */
     public function all()
     {
+        //comment
         return $this->user->all();
     }
 

@@ -54,7 +54,7 @@
                 @endforeach
             </div>
             <br/>
-            {{ Form::submit(trans('forms.labels.save'), ['class' => 'btn']) }}
+            {{ Form::submit(trans('forms.buttons.save'), ['class' => 'btn']) }}
         {{ Form::close() }}
     </div>
 @stop

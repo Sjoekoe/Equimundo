@@ -64,9 +64,7 @@ class Handler extends ExceptionHandler {
         $whoops->pushHandler(new PrettyPageHandler());
 
         return new Response(
-            $whoops->handleException($e),
-            $e->getStatusCode(),
-            $e->getHeaders()
+            $whoops->handleException($e)
         );
     }
 
