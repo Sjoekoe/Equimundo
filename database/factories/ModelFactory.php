@@ -9,7 +9,12 @@
 | database. Just tell the factory how a default model should look.
 |
 */
-$factory->define(EQM\Models\Users\User::class, function (Faker\Generator $faker) {
+use Carbon\Carbon;
+use EQM\Models\Horses\EloquentHorse;
+use EQM\Models\Users\User;
+use Faker\Generator;
+
+$factory->define(User::class, function (Generator $faker) {
     return [
         'last_name' => $faker->name,
         'first_name' => $faker->name,
@@ -17,5 +22,18 @@ $factory->define(EQM\Models\Users\User::class, function (Faker\Generator $faker)
         'language' => 'en',
         'password' => bcrypt('password'),
         'remember_token' => str_random(10),
+    ];
+});
+
+$factory->define(EloquentHorse::class, function (Generator $faker) {
+    return [
+        'name' => 'test horse',
+        'life_number' => $faker->randomNumber(),
+        'date_of_birth' => Carbon::now(),
+        'slug' => 'test-horse',
+        'gender' => 1,
+        'color' => 1,
+        'height' => '1m70',
+        'breed' => 1,
     ];
 });
