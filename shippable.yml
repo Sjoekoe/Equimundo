@@ -28,7 +28,6 @@ before_script:
   - php artisan migrate --seed
 
 script:
-  - php artisan serve
   - ./vendor/bin/phpspec run --no-code-generation
   - ./vendor/bin/phpunit --configuration phpunit.xml
 
