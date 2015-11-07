@@ -76,21 +76,15 @@ class EloquentHorseRepository implements HorseRepository
     }
 
     /**
-     * @param \EQM\Models\Users\User $user
      * @param array $values
      * @param bool $pedigree
      * @return \EQM\Models\Horses\Horse
      */
-    public function create(User $user, array $values = [], $pedigree = false)
+    public function create(array $values = [], $pedigree = false)
     {
         $horse = new EloquentHorse();
 
         $horse->name = $values['name'];
-
-        if (! $pedigree) {
-            $horse->user_id = $user->id;
-        }
-
         $horse->gender = $values['gender'];
         $horse->breed = $values['breed'];
         $horse->life_number = $values['life_number'];
@@ -98,16 +92,7 @@ class EloquentHorseRepository implements HorseRepository
         $horse->date_of_birth = DateTime::createFromFormat('d/m/Y', $values['date_of_birth']);
         $horse->height = $values['height'];
 
-        $slugCreator = new SlugCreator($this);
-        $horse->slug = $slugCreator->createForHorse($values['name']);
-
         $horse->save();
-        
-        if (array_key_exists('disciplines', $values)) {
-            foreach($values['disciplines'] as $discipline) {
-                $horse->disciplines()->updateOrCreate(['discipline' => $discipline, 'horse_id' => $horse->id]);
-            }
-        }
 
         return $horse;
     }

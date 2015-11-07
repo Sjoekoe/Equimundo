@@ -16,7 +16,8 @@
 	  	"fzaninotto/faker": "~1.4",
 		"phpunit/phpunit": "~4.0",
 		"phpspec/phpspec": "~2.1",
-        "mockery/mockery": "dev-master"
+        "mockery/mockery": "dev-master",
+		"laravel/homestead": "^2.1"
 	},
 	"autoload": {
 		"classmap": [

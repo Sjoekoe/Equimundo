@@ -18,10 +18,10 @@ class CreateEventsTable extends Migration {
             $table->integer('creator_id')->unsigned();
             $table->foreign('creator_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('name');
-            $table->text('description');
-            $table->string('place');
-            $table->timestamp('start_date');
-            $table->timestamp('end_date');
+            $table->text('description')->nullable();
+            $table->string('place')->nullable();
+            $table->datetime('start_date')->nullable();
+            $table->datetime('end_date')->nullable();
             $table->timestamps();
         });
     }

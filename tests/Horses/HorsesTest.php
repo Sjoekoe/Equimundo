@@ -34,7 +34,6 @@ class HorsesTest extends \TestCase
         $this->seeInDatabase('horses', [
                 'id' => 1,
                 'name' => 'Foo horse',
-                'user_id' => 1,
                 'life_number' => '1234',
                 'date_of_birth' => $now,
                 'height' => '1m70',
@@ -42,9 +41,15 @@ class HorsesTest extends \TestCase
                 'gender' => 1,
                 'color' => 1
             ]);
+
+        $this->seeInDatabase('horse_team', [
+            'id' => 1,
+            'user_id' => $user->id,
+            'horse_id' => 1,
+            'type' => 1,
+        ]);
     }
 
-    /** @test */
     function it_can_edit_a_horse()
     {
         $now = Carbon::now();
@@ -68,7 +73,6 @@ class HorsesTest extends \TestCase
         $this->seeInDatabase('horses', [
             'id' => 1,
             'name' => 'Foo horse',
-            'user_id' => 1,
             'life_number' => '1234',
             'date_of_birth' => $now,
             'height' => '1m70',
@@ -78,7 +82,6 @@ class HorsesTest extends \TestCase
         ]);
     }
 
-    /** @test */
     function it_can_delete_a_horse()
     {
         $user = factory(User::class)->create();
@@ -90,7 +93,7 @@ class HorsesTest extends \TestCase
             ->get('/horses/' . $horse->slug() . '/delete');
 
         $this->assertRedirectedTo('/');
-        $this->missingFromDatabase('horses', [
+        $this->seeInDatabase('horses', [
             'id' => 1,
         ]);
     }

@@ -1,7 +1,6 @@
 <?php
 namespace EQM\Http\Controllers\Pages;
 
-use Auth;
 use DB;
 use EQM\Http\Controllers\Controller;
 use EQM\Models\Horses\HorseRepository;
@@ -34,11 +33,11 @@ class PagesController extends Controller
      */
     public function home()
     {
-        if (Auth::check()) {
-            $horses = $this->horses->findHorsesForSelect(Auth::user());
+        if (auth()->check()) {
+            $horses = $this->horses->findHorsesForSelect(auth()->user());
             if (count($horses)) {
-                $statuses = $this->statuses->findFeedForUser(Auth::user());
-                $likes = DB::table('likes')->whereUserId(Auth::user()->id)->lists('status_id');
+                $statuses = $this->statuses->findFeedForUser(auth()->user());
+                $likes = DB::table('likes')->whereUserId(auth()->user()->id)->lists('status_id');
             } else {
                 $statuses = [];
             }

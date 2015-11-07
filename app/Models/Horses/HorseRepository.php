@@ -6,12 +6,11 @@ use EQM\Models\Users\User;
 interface HorseRepository
 {
     /**
-     * @param \EQM\Models\Users\User $user
      * @param array $values
      * @param bool $pedigree
      * @return \EQM\Models\Horses\Horse
      */
-    public function create(User $user, array $values = [], $pedigree = false);
+    public function create(array $values = [], $pedigree = false);
 
     /**
      * @param \EQM\Models\Horses\Horse $horse

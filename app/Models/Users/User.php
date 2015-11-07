@@ -6,6 +6,7 @@ use EQM\Models\Conversations\EloquentConversation;
 use EQM\Models\Events\EloquentEvent;
 use EQM\Models\Horses\EloquentHorse;
 use EQM\Models\Horses\Horse;
+use EQM\Models\HorseTeams\EloquentHorseTeam;
 use EQM\Models\Notifications\EloquentNotification;
 use EQM\Models\Roles\Role;
 use EQM\Models\Statuses\EloquentStatus;
@@ -61,7 +62,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      */
     public function horses()
     {
-        return $this->hasMany(EloquentHorse::class, 'user_id', 'id');
+        return $this->hasManyThrough(EloquentHorse::class, EloquentHorseTeam::class, 'user_id', 'id', 'id');
     }
 
     /**

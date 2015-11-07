@@ -9,7 +9,9 @@ use EQM\Http\Requests\UpdateHorse;
 use EQM\Models\Albums\Album;
 use EQM\Models\Disciplines\DisciplineRepository;
 use EQM\Models\Horses\Horse;
+use EQM\Models\Horses\HorseCreator;
 use EQM\Models\Horses\HorseRepository;
+use EQM\Models\HorseTeams\HorseTeamRepository;
 use EQM\Models\Statuses\StatusRepository;
 use EQM\Models\Users\User;
 use Illuminate\Routing\Controller;
@@ -37,21 +39,29 @@ class HorseController extends Controller
     private $disciplines;
 
     /**
+     * @var \EQM\Models\HorseTeams\HorseTeamRepository
+     */
+    private $horseTeams;
+
+    /**
      * @param \EQM\Core\Files\Uploader $uploader
      * @param \EQM\Models\Horses\HorseRepository $horses
      * @param \EQM\Models\Statuses\StatusRepository $statuses
      * @param \EQM\Models\Disciplines\DisciplineRepository $disciplines
+     * @param \EQM\Models\HorseTeams\HorseTeamRepository $horseTeams
      */
     public function __construct(
         Uploader $uploader,
         HorseRepository $horses,
         StatusRepository $statuses,
-        DisciplineRepository $disciplines
+        DisciplineRepository $disciplines,
+        HorseTeamRepository $horseTeams
     ) {
         $this->uploader = $uploader;
         $this->horses = $horses;
         $this->statuses = $statuses;
         $this->disciplines = $disciplines;
+        $this->horseTeams = $horseTeams;
     }
 
     /**
@@ -77,35 +87,12 @@ class HorseController extends Controller
 
     /**
      * @param \EQM\Http\Requests\CreateHorse $request
+     * @param \EQM\Models\Horses\HorseCreator $creator
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(CreateHorse $request)
+    public function store(CreateHorse $request, HorseCreator $creator)
     {
-        if ($request->has('life_number') && $horse = $this->horses->findByLifeNumber($request->get('life_number'))) {
-            if ($horse->hasOwner()) {
-                session(['error', 'This horse already has an owner. If you are the rightful owner, please contact us.']);
-
-                return redirect()->back();
-            }
-
-            $horse = $this->horses->update($horse, $request->all());
-
-            $this->resolveDisciplines($horse, $request->all());
-
-            $horse->user_id = auth()->user()->id;
-
-            $horse->save();
-        } else {
-            $horse = $this->horses->create(auth()->user(), $request->all());
-        }
-
-        event(new HorseWasCreated($horse));
-
-        if ($request->hasFile('profile_pic')) {
-            $picture = $this->uploader->uploadPicture($request->file('profile_pic'), $horse, true);
-
-            $picture->addToAlbum($horse->getStandardAlbum(Album::PROFILEPICTURES));
-        }
+        $horse = $creator->create(auth()->user(), $request->all());
 
         session()->put('success', $horse->name . ' was successfully created.');
 
@@ -141,11 +128,11 @@ class HorseController extends Controller
     }
 
     /**
-     * @param string $slug
      * @param \EQM\Http\Requests\UpdateHorse $request
+     * @param string $slug
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update($slug, UpdateHorse $request)
+    public function update(UpdateHorse $request, $slug)
     {
         $horse = $this->initHorse($slug);
 
@@ -166,9 +153,9 @@ class HorseController extends Controller
     {
         $horse = $this->initHorse($slug);
 
-        session(['success', $horse->name . ' was deleted']);
+        $this->horseTeams->delete();
 
-        $horse->delete();
+        session()->put('success', 'The horse was removed from your list');
 
         return redirect()->route('home');
     }
@@ -186,31 +173,5 @@ class HorseController extends Controller
         }
 
         abort(403);
-    }
-
-    /**
-     * @param \EQM\Models\Horses\Horse $horse
-     * @param array $values
-     */
-    private function resolveDisciplines(Horse $horse, $values = [])
-    {
-        $initialDisciplines = [];
-        $unwantedDisciplines = [];
-
-        foreach ($horse->disciplines as $initialDiscipline) {
-            $initialDisciplines[$initialDiscipline->id] = $initialDiscipline->discipline;
-        }
-
-        if (array_key_exists('disciplines', $values)) {
-            foreach ($values['disciplines'] as $discipline) {
-                $horse->disciplines()->updateOrCreate(['discipline' => $discipline, 'horse_id' => $horse->id]);
-            }
-
-            $unwantedDisciplines = array_diff($initialDisciplines, $values['disciplines']);
-        }
-
-        foreach ($unwantedDisciplines as $key => $values) {
-            $this->disciplines->removeById($key);
-        }
     }
 }

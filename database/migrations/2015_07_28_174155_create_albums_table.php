@@ -17,8 +17,8 @@ class CreateAlbumsTable extends Migration
             $table->integer('horse_id')->unsigned();
             $table->foreign('horse_id')->references('id')->on('horses')->onDelete('cascade');
             $table->string('name');
-            $table->text('description');
-            $table->integer('type');
+            $table->text('description')->nullable();
+            $table->integer('type')->nullable();
             $table->timestamps();
         });
     }

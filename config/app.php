@@ -152,6 +152,7 @@ return [
         EQM\Models\Disciplines\DisciplineServiceProvider::class,
         EQM\Models\Events\EventServiceProvider::class,
         EQM\Models\Follows\FollowsServiceProvider::class,
+        EQM\Models\HorseTeams\HorseTeamServiceProvider::class,
         EQM\Models\Horses\HorseServiceProvider::class,
         EQM\Models\Notifications\NotificationServiceProvider::class,
         EQM\Models\Palmares\PalmaresServiceProvider::class,

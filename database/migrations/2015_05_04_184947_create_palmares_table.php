@@ -24,7 +24,7 @@ class CreatePalmaresTable extends Migration {
             $table->integer('discipline');
             $table->string('level');
             $table->integer('ranking');
-            $table->timestamp('date');
+            $table->datetime('date');
             $table->timestamps();
         });
     }
