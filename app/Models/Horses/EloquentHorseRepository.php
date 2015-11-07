@@ -1,8 +1,8 @@
 <?php
 namespace EQM\Models\Horses;
 
+use DB;
 use DateTime;
-use EQM\Core\Slugs\SlugCreator;
 use EQM\Models\Users\User;
 
 class EloquentHorseRepository implements HorseRepository
@@ -67,15 +67,6 @@ class EloquentHorseRepository implements HorseRepository
     }
 
     /**
-     * @param \EQM\Models\Users\User $user
-     * @return array
-     */
-    public function findHorsesForSelect(User $user)
-    {
-        return $this->horse->with('statuses')->where('user_id', $user->id)->lists('name', 'id')->all();
-    }
-
-    /**
      * @param array $values
      * @param bool $pedigree
      * @return \EQM\Models\Horses\Horse
@@ -115,5 +106,18 @@ class EloquentHorseRepository implements HorseRepository
         $horse->save();
 
         return $horse;
+    }
+
+    /**
+     * @param \EQM\Models\Users\User $user
+     * @return \EQM\Models\Horses\Horse[]
+     */
+    public function findForUser(User $user)
+    {
+        return DB::table('horses')
+            ->select('horses.id', 'horses.name')
+            ->join('horse_team', 'horses.id', '=', 'horse_team.horse_id')
+            ->where('horse_team.user_id', $user->id)
+            ->get();
     }
 }

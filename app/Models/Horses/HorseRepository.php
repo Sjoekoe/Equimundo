@@ -51,7 +51,7 @@ interface HorseRepository
 
     /**
      * @param \EQM\Models\Users\User $user
-     * @return array
+     * @return \EQM\Models\Horses\Horse[]
      */
-    public function findHorsesForSelect(User $user);
+    public function findForUser(User $user);
 }
