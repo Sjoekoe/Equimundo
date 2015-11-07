@@ -31,10 +31,10 @@ interface HorseTeam
     /**
      * @return \Carbon\Carbon
      */
-    public function created();
+    public function createdAt();
 
     /**
      * @return \Carbon\Carbon
      */
-    public function updated();
+    public function updatedAt();
 }
