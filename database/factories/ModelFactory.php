@@ -11,6 +11,7 @@
 */
 use Carbon\Carbon;
 use EQM\Models\Horses\EloquentHorse;
+use EQM\Models\HorseTeams\EloquentHorseTeam;
 use EQM\Models\Users\User;
 use Faker\Generator;
 
@@ -35,5 +36,11 @@ $factory->define(EloquentHorse::class, function (Generator $faker) {
         'color' => 1,
         'height' => '1m70',
         'breed' => 1,
+    ];
+});
+
+$factory->define(EloquentHorseTeam::class, function (Generator $faker) {
+    return [
+        'type' => 1,
     ];
 });

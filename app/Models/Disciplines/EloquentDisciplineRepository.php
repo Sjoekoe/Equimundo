@@ -1,12 +1,30 @@
 <?php
 namespace EQM\Models\Disciplines;
 
+use EQM\Models\Horses\Horse;
+
 class EloquentDisciplineRepository implements DisciplineRepository
 {
     /**
      * @var \EQM\Models\Disciplines\EloquentDiscipline
      */
     private $discipline;
+
+    /**
+     * @param \EQM\Models\Horses\Horse $horse
+     * @param int $disciplineId
+     * @return \EQM\Models\Disciplines\Discipline
+     */
+    public function create(Horse $horse, $disciplineId)
+    {
+        $discipline = new EloquentDiscipline();
+        $discipline->discipline = $disciplineId;
+        $discipline->horse_id = $horse->id();
+
+        $discipline->save();
+
+        return $discipline;
+    }
 
     /**
      * @param \EQM\Models\Disciplines\EloquentDiscipline $discipline

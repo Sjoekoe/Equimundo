@@ -1,7 +1,6 @@
 <?php
 namespace EQM\Http\Controllers\Horses;
 
-use Auth;
 use EQM\Http\Requests\CreateFamilyMember;
 use EQM\Models\Horses\HorseRepository;
 use EQM\Models\Pedigrees\PedigreeCreator;
@@ -163,6 +162,6 @@ class PedigreeController extends Controller
      */
     private function userHasPermission($horse)
     {
-        return Auth::user()->isHorseOwner($horse);
+        return auth()->user()->isInHorseTeam($horse);
     }
 }

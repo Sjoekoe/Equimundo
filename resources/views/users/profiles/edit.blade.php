@@ -13,7 +13,7 @@
             {{ Form::text('last_name', Auth::user()->last_name) }}
 
             {{ Form::label('date_of_birth', trans('forms.labels.date_of_birth')) }}
-            {{ Form::text('date_of_birth', Auth::user()->date_of_birth, ['placeholder' => 'dd/mm/YYYY']) }}
+            {{ Form::text('date_of_birth', Auth::user()->dateOfBirth()->format('d/m/Y'), ['placeholder' => 'dd/mm/YYYY']) }}
 
             {{ Form::label('country', trans('forms.labels.country')) }}
             {{ Form::select('country', Lang::get('countries'), Auth::user()->country) }}

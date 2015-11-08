@@ -53,5 +53,4 @@ class CreateHorse extends Request {
             'life_number.unique' => 'This horse already exists. If you are the rightful owner, or part of its team please contact the current owner or us.'
         ];
     }
-
 }

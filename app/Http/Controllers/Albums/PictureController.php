@@ -100,7 +100,7 @@ class PictureController extends Controller
     {
         $album = $this->albums->findById($albumId);
 
-        if ($this->auth->user()->isHorseOwner($album->horse())) {
+        if ($this->auth->user()->isInHorseTeam($album->horse())) {
             return $album;
         }
 

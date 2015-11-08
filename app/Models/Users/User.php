@@ -1,12 +1,14 @@
 <?php
 namespace EQM\Models\Users;
 
+use Carbon\Carbon;
 use EQM\Models\Comments\EloquentComment;
 use EQM\Models\Conversations\EloquentConversation;
 use EQM\Models\Events\EloquentEvent;
 use EQM\Models\Horses\EloquentHorse;
 use EQM\Models\Horses\Horse;
 use EQM\Models\HorseTeams\EloquentHorseTeam;
+use EQM\Models\HorseTeams\HorseTeam;
 use EQM\Models\Notifications\EloquentNotification;
 use EQM\Models\Roles\Role;
 use EQM\Models\Statuses\EloquentStatus;
@@ -57,12 +59,39 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      */
     protected $hidden = ['password', 'remember_token'];
 
+    public function dateOfBirth()
+    {
+        return Carbon::parse($this->date_of_birth);
+    }
+
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \EQM\Models\Horses\Horse[]
      */
     public function horses()
     {
-        return $this->hasManyThrough(EloquentHorse::class, EloquentHorseTeam::class, 'user_id', 'id', 'id');
+        $horses = [];
+
+        foreach ($this->horseTeams() as $team) {
+            array_push($horses, $team->horse()->first());
+        }
+
+        return $horses;
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    private function horseTeamsRelation()
+    {
+        return $this->hasMany(EloquentHorseTeam::class, 'user_id', 'id');
+    }
+
+    /**
+     * @return \EQM\Models\HorseTeams\HorseTeam
+     */
+    public function horseTeams()
+    {
+        return $this->horseTeamsRelation()->get();
     }
 
     /**
@@ -206,12 +235,18 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     }
 
     /**
-     * @param \EQM\Models\Horses\EloquentHorse $horse
+     * @param \EQM\Models\Horses\Horse $horse
      * @return bool
      */
-    public function isHorseOwner(EloquentHorse $horse)
+    public function isInHorseTeam(Horse $horse)
     {
-        return $this->id == $horse->owner->id;
+        foreach ($this->horses() as $userHorse) {
+            if ($userHorse->id() == $horse->id()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

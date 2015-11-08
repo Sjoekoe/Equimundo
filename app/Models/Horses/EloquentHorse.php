@@ -4,6 +4,8 @@ namespace EQM\Models\Horses;
 use Carbon\Carbon;
 use EQM\Models\Albums\EloquentAlbum;
 use EQM\Models\Disciplines\EloquentDiscipline;
+use EQM\Models\HorseTeams\EloquentHorseTeam;
+use EQM\Models\HorseTeams\HorseTeam;
 use EQM\Models\Palmares\EloquentPalmares;
 use EQM\Models\Pedigrees\EloquentPedigree;
 use EQM\Models\Pictures\EloquentPicture;
@@ -104,9 +106,23 @@ class EloquentHorse extends Model implements Horse
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function owner()
+    public function userTeams()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->hasMany(EloquentHorseTeam::class, 'horse_id', 'id');
+    }
+
+    /**
+     * @return \EQM\Models\Users\User[]
+     */
+    public function users()
+    {
+        $users = [];
+
+        foreach($this->userTeams as $team) {
+            array_push($users, $team->user()->first());
+        }
+
+        return $users;
     }
 
     /**
@@ -166,9 +182,14 @@ class EloquentHorse extends Model implements Horse
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \EQM\Models\Disciplines\Discipline[]
      */
     public function disciplines()
+    {
+        return $this->disciplineRelation()->get();
+    }
+
+    private function disciplineRelation()
     {
         return $this->hasMany(EloquentDiscipline::class, 'horse_id', 'id');
     }
@@ -297,7 +318,7 @@ class EloquentHorse extends Model implements Horse
      */
     public function performsDiscipline($disciplineId)
     {
-        return $this->disciplines->filter(function($discipline) use ($disciplineId) {
+        return $this->disciplines()->filter(function($discipline) use ($disciplineId) {
            return $discipline->discipline === $disciplineId;
         })->first();
     }

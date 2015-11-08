@@ -8,10 +8,10 @@
             </div>
 
             <div class="heading-button right">
-                @if ($horse->owner()->first()->id !== Auth::user()->id)
-                    @include('horses.partials.follow-form')
-                @else
+                @if (auth()->user()->isInHorseTeam($horse))
                     <a href="{{ route('pedigree.create', $horse->slug) }}" class="btn">{{ trans('copy.a.add_family') }}</a>
+                @else
+                    @include('horses.partials.follow-form')
                 @endif
             </div>
         </div>
@@ -43,8 +43,8 @@
             </div>
             <div class="row">
                 <div class="col s6 input-field">
-                    {{ Form::label('height') }}
-                    {{ Form::text('height', trans('forms.labels.height')) }}
+                    {{ Form::label('height', trans('forms.labels.height')) }}
+                    {{ Form::text('height') }}
                 </div>
                 <div class="col s6 input-field">
                     {{ Form::label('life_number', trans('forms.labels.life_number')) }}

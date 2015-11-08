@@ -2,7 +2,7 @@
 
 @section('content')
     @include('layout.partials.heading')
-    @if (Auth::user()->isHorseOwner($horse))
+    @if (auth()->user()->isInHorseTeam($horse))
         <div class="row">
             <a href="{{ route('palmares.create', $horse->slug) }}" class="btn">{{ trans('copy.a.add_achievement') }}</a>
         </div>

@@ -141,6 +141,7 @@ return [
         EQM\Providers\RouteServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         HieuLe\Active\ActiveServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
 
         /*
          * Model Service Providers

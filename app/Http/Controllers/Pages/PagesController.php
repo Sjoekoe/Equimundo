@@ -3,8 +3,8 @@ namespace EQM\Http\Controllers\Pages;
 
 use DB;
 use EQM\Http\Controllers\Controller;
+use EQM\Http\Controllers\Horses\HorseCollection;
 use EQM\Models\Horses\HorseRepository;
-use EQM\Models\HorseTeams\HorseTeamRepository;
 use EQM\Models\Statuses\StatusRepository;
 
 class PagesController extends Controller
@@ -15,24 +15,25 @@ class PagesController extends Controller
     private $statuses;
 
     /**
-     * @var \EQM\Models\HorseTeams\HorseTeamRepository
-     */
-    private $horseTeams;
-    /**
      * @var \EQM\Models\Horses\HorseRepository
      */
     private $horses;
 
     /**
-     * @param \EQM\Models\Statuses\StatusRepository $statuses
-     * @param \EQM\Models\HorseTeams\HorseTeamRepository $horseTeams
-     * @param \EQM\Models\Horses\HorseRepository $horses
+     * @var \EQM\Http\Controllers\Horses\HorseCollection
      */
-    public function __construct(StatusRepository $statuses, HorseTeamRepository $horseTeams, HorseRepository $horses)
+    private $collection;
+
+    /**
+     * @param \EQM\Models\Statuses\StatusRepository $statuses
+     * @param \EQM\Models\Horses\HorseRepository $horses
+     * @param \EQM\Http\Controllers\Horses\HorseCollection $collection
+     */
+    public function __construct(StatusRepository $statuses, HorseRepository $horses, HorseCollection $collection)
     {
         $this->statuses = $statuses;
-        $this->horseTeams = $horseTeams;
         $this->horses = $horses;
+        $this->collection = $collection;
     }
 
     /**
@@ -41,7 +42,7 @@ class PagesController extends Controller
     public function home()
     {
         if (auth()->check()) {
-            $horses = $this->horses->findForUser(auth()->user());
+            $horses = $this->collection->getIdAndNamePairs($this->horses->findForUser(auth()->user()));
             if (count($horses)) {
                 $statuses = $this->statuses->findFeedForUser(auth()->user());
                 $likes = DB::table('likes')->whereUserId(auth()->user()->id)->lists('status_id');

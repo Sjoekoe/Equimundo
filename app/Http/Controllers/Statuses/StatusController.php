@@ -1,15 +1,13 @@
 <?php
 namespace EQM\Http\Controllers\Statuses;
 
-use Auth;
 use EQM\Core\Files\Uploader;
 use EQM\Http\Requests\PostStatus;
 use EQM\Models\Albums\Album;
 use EQM\Models\Horses\HorseRepository;
+use EQM\Models\Statuses\StatusCreator;
 use EQM\Models\Statuses\StatusRepository;
 use Illuminate\Routing\Controller;
-use Input;
-use Session;
 
 class StatusController extends Controller
 {
@@ -42,23 +40,14 @@ class StatusController extends Controller
 
     /**
      * @param \EQM\Http\Requests\PostStatus $request
+     * @param \EQM\Models\Statuses\StatusCreator $creator
      * @return string
      */
-    public function store(PostStatus $request)
+    public function store(PostStatus $request, StatusCreator $creator)
     {
-        $status = $this->statuses->create($request->all());
+        $creator->create($request->all());
 
-        if (array_key_exists('picture', $request->all())) {
-            $horse = $this->horses->findById($request->get('horse'));
-            $picture = $this->uploader->uploadPicture($request->get('picture'), $horse);
-
-            $picture->addToAlbum($horse->getStandardAlbum(Album::TIMELINEPICTURES));
-            $status->setPicture($picture);
-
-            $status->save();
-        }
-
-        Session::put('success', 'Status has been posted');
+        session()->put('success', 'Status has been posted');
 
         return redirect()->refresh();
     }
@@ -116,7 +105,7 @@ class StatusController extends Controller
     {
         $status = $this->statuses->findById($statusId);
 
-        if ($status->user()->id == Auth::user()->id) {
+        if (auth()->user()->isInHorseTeam($status->horse())) {
             return $status;
         }
 

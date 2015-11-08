@@ -45,7 +45,7 @@ class EloquentHorseRepository implements HorseRepository
      */
     public function findBySlug($slug)
     {
-        return $this->horse->where('slug', $slug)->whereNotNull('user_id')->firstOrFail();
+        return $this->horse->where('slug', $slug)->firstOrFail();
     }
 
     /**
@@ -80,7 +80,11 @@ class EloquentHorseRepository implements HorseRepository
         $horse->breed = $values['breed'];
         $horse->life_number = $values['life_number'];
         $horse->color = $values['color'];
-        $horse->date_of_birth = DateTime::createFromFormat('d/m/Y', $values['date_of_birth']);
+
+        if (array_key_exists('date_of_birth', $values)) {
+            $horse->date_of_birth = DateTime::createFromFormat('d/m/Y', $values['date_of_birth']);
+        }
+
         $horse->height = $values['height'];
 
         $horse->save();
@@ -114,8 +118,7 @@ class EloquentHorseRepository implements HorseRepository
      */
     public function findForUser(User $user)
     {
-        return DB::table('horses')
-            ->select('horses.id', 'horses.name')
+        return $this->horse
             ->join('horse_team', 'horses.id', '=', 'horse_team.horse_id')
             ->where('horse_team.user_id', $user->id)
             ->get();

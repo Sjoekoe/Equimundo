@@ -156,7 +156,7 @@ class AlbumController extends Controller
     {
         $horse = $this->horses->findBySlug($horseslug);
 
-        if ($this->auth->user()->isHorseOwner($horse)) {
+        if ($this->auth->user()->isInHorseTeam($horse)) {
             return $horse;
         }
 
@@ -171,7 +171,7 @@ class AlbumController extends Controller
     {
         $album = $this->albums->findById($albumId);
 
-        if ($this->auth->user()->isHorseOwner($album->horse())) {
+        if ($this->auth->user()->isInHorseTeam($album->horse())) {
             return $album;
         }
 

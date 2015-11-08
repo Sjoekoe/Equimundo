@@ -8,7 +8,7 @@
     </div>
 
     <div class="row">
-        @foreach ($user->horses as $horse)
+        @foreach ($user->horses() as $horse)
             <div class="col s6 horse-overview">
                 <div class="card">
                     @if ($horse->getProfilePicture())
@@ -18,8 +18,8 @@
                     @endif
                     </div>
                     <div class="card-action teal lighten-5">
-                        <a href="{{ route('horses.show', $horse->slug) }}" class="teal-text">
-                            <h5>{{ $horse->name }}</h5>
+                        <a href="{{ route('horses.show', $horse->slug()) }}" class="teal-text">
+                            <h5>{{ $horse->name() }}</h5>
                         </a>
                     </div>
                     <div class="card-content">

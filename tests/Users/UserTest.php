@@ -24,14 +24,14 @@ class UserTest extends \TestCase
                 'date_of_birth' => '08/06/1982',
             ]);
 
-        $this->assertResponseOk();
+        $this->assertRedirectedTo('/edit-profile');
 
         $this->seeInDatabase('users', [
             'id' => 1,
             'first_name' => 'Foo',
             'last_name' => 'Bar',
             'gender' => 'M',
-            'date_of_birth' => '08/06/1982',
+            'date_of_birth' => '1982-06-08 00:00:0000',
             'about' => 'test info',
             'country' => 'BE'
         ]);
