@@ -6,7 +6,6 @@ use EQM\Http\Requests\ConversationRequest;
 use EQM\Models\Conversations\ConversationRepository;
 use EQM\Models\Conversations\MessageRepository;
 use EQM\Models\Users\UserRepository;
-use Illuminate\Auth\AuthManager;
 use Input;
 
 class ConversationController extends Controller
@@ -27,25 +26,17 @@ class ConversationController extends Controller
     private $messages;
 
     /**
-     * @var \Illuminate\Auth\AuthManager
-     */
-    private $auth;
-
-    /**
      * @param \EQM\Models\Users\UserRepository $users
      * @param \EQM\Models\Conversations\ConversationRepository $conversations
      * @param \EQM\Models\Conversations\MessageRepository $messages
-     * @param \Illuminate\Auth\AuthManager $auth
      */
     public function __construct(
         UserRepository $users,
         ConversationRepository $conversations,
-        MessageRepository $messages,
-        AuthManager $auth
+        MessageRepository $messages
     ) {
         $this->users = $users;
         $this->conversations = $conversations;
-        $this->auth = $auth;
         $this->messages = $messages;
     }
 
@@ -54,7 +45,7 @@ class ConversationController extends Controller
      */
     public function index()
     {
-        $conversations = $this->users->findConversations($this->auth->user());
+        $conversations = $this->users->findConversations(auth()->user());
 
         return view('conversations.index', compact('conversations'));
     }
@@ -81,9 +72,9 @@ class ConversationController extends Controller
     {
         $conversation = $this->conversations->create($request->all());
 
-        $this->messages->create($conversation, $this->auth->user(), $request->all());
+        $this->messages->create($conversation, auth()->user(), $request->all());
 
-        $this->auth->user()->addConversation($conversation);
+        auth()->user()->addConversation($conversation);
 
         $recipientId = $request->get('contact_id');
 
@@ -102,7 +93,7 @@ class ConversationController extends Controller
     {
         $conversation = $this->conversations->findById($conversationId);
 
-        $conversation->markAsRead($this->auth->user());
+        $conversation->markAsRead(auth()->user());
 
         $messages = $this->conversations->findMessages($conversation);
 
@@ -117,7 +108,7 @@ class ConversationController extends Controller
     {
         $conversation = $this->conversations->findById($conversationId);
 
-        $conversation->deleteForUser($this->auth->user());
+        $conversation->deleteForUser(auth()->user());
 
         return redirect()->back();
     }

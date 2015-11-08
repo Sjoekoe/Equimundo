@@ -42,7 +42,7 @@ class EloquentConversationRepository implements ConversationRepository
      */
     public function findMessages(Conversation $conversation)
     {
-        return $this->conversation->find($conversation->id())->messages()->orderBy('created_at', 'ASC')->limit(10)->get();
+        return $this->conversation->find($conversation->id())->messages()->orderBy('created_at', 'DESC')->limit(10)->get();
     }
 
     /**
