@@ -2,7 +2,6 @@
 namespace EQM\Http\Controllers\Horses;
 
 use DB;
-use EQM\Core\Files\Uploader;
 use EQM\Models\Horses\HorseCreator;
 use EQM\Models\Horses\HorseRepository;
 use EQM\Models\Horses\HorseUpdater;
@@ -15,10 +14,6 @@ use Illuminate\Routing\Controller;
 
 class HorseController extends Controller
 {
-    /**
-     * @var \EQM\Core\Files\Uploader
-     */
-    private $uploader;
 
     /**
      * @var \EQM\Models\Horses\HorseRepository
@@ -34,26 +29,24 @@ class HorseController extends Controller
      * @var \EQM\Models\HorseTeams\HorseTeamRepository
      */
     private $horseTeams;
+
     /**
      * @var \EQM\Models\Users\UserRepository
      */
     private $users;
 
     /**
-     * @param \EQM\Core\Files\Uploader $uploader
      * @param \EQM\Models\Horses\HorseRepository $horses
      * @param \EQM\Models\Statuses\StatusRepository $statuses
      * @param \EQM\Models\HorseTeams\HorseTeamRepository $horseTeams
      * @param \EQM\Models\Users\UserRepository $users
      */
     public function __construct(
-        Uploader $uploader,
         HorseRepository $horses,
         StatusRepository $statuses,
         HorseTeamRepository $horseTeams,
         UserRepository $users
     ) {
-        $this->uploader = $uploader;
         $this->horses = $horses;
         $this->statuses = $statuses;
         $this->horseTeams = $horseTeams;

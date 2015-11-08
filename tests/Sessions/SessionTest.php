@@ -10,7 +10,6 @@ class SessionTest extends \TestCase
     {
         $user = factory(User::class)->create([
             'email' => 'foo@bar.com',
-            'activated' => true
         ]);
 
         $this->visit('/login')

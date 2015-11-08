@@ -18,7 +18,7 @@ class HorsesTest extends \TestCase
         $now = Carbon::now();
         $user = factory(User::class)->create();
 
-        $this->expectsEvents([HorseWasCreated::class]);
+        $this->expectsEvents(HorseWasCreated::class);
 
         $this->actingAs($user)
             ->post('/horses/create', [

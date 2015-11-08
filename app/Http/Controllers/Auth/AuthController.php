@@ -1,44 +1,41 @@
 <?php
 namespace EQM\Http\Controllers\Auth;
 
-use Auth;
 use EQM\Events\UserRegistered;
 use EQM\Http\Controllers\Controller;
 use EQM\Models\Users\User;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
-use Lang;
-use Session;
 use Validator;
 
 class AuthController extends Controller {
 
 	use AuthenticatesAndRegistersUsers;
 
+    /**
+     * @var string
+     */
     public $redirectTo = '/';
 
+    /**
+     * @var string
+     */
     public $loginPath = '/login';
 
-	/**
-	 * Create a new authentication controller instance.
-	 *
-	 * @return void
-	 */
-	public function __construct()
-	{
-		$this->middleware('guest', ['except' => 'getLogout']);
-	}
+    public function __construct()
+    {
+        $this->middleware('guest', ['except' => 'getLogout']);
+    }
 
     /**
-     * Get a validator for an incoming registration request.
-     *
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     public function validator(array $data)
     {
         return Validator::make($data, [
-            'first_name' => 'required|max:255|unique:users',
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
         ]);
@@ -92,7 +89,7 @@ class AuthController extends Controller {
             return $this->sendLockoutResponse($request);
         }
 
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'activated' => true], $request->has('remember'))) {
+        if (auth()->attempt(['email' => $request->email, 'password' => $request->password, 'activated' => true], $request->has('remember'))) {
             return $this->handleUserWasAuthenticated($request, $throttles);
         }
 
@@ -117,8 +114,8 @@ class AuthController extends Controller {
      */
     protected function getFailedLoginMessage()
     {
-        return Lang::has('auth.failed')
-            ? Lang::get('auth.failed')
+        return trans()->has('auth.failed')
+            ? trans('auth.failed')
             : 'These credentials do not match our records, or your account has not been activated.';
     }
 }

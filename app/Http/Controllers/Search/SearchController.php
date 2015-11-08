@@ -28,6 +28,9 @@ class SearchController extends Controller
         $this->users = $users;
     }
 
+    /**
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
         $horses = $this->horses->search(Input::get('search'));
@@ -37,6 +40,9 @@ class SearchController extends Controller
         return view('searches.index', compact('horses', 'profiles'));
     }
 
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function search()
     {
         return redirect()->route('search.index', ['search' => Input::get('search')]);

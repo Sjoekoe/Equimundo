@@ -4,7 +4,6 @@ namespace EQM\Http\Controllers\Auth;
 use EQM\Http\Controllers\Controller;
 use EQM\Models\Users\UserRepository;
 use Input;
-use Session;
 
 class ActivationController extends Controller
 {
@@ -32,12 +31,12 @@ class ActivationController extends Controller
             $user->activated = true;
             $user->save();
 
-            Session::put('succes', 'Account activated. You can now login');
+            session()->put('succes', 'Account activated. You can now login');
 
             return redirect()->route('login');
         }
 
-        Session::put('error', 'The token does not match.');
+        session()->put('error', 'The token does not match.');
 
         return redirect()->route('home');
     }

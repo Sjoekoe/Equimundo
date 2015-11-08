@@ -1,5 +1,5 @@
 <?php
-namespace EQM\Http\Controllers\Horses;
+namespace EQM\Models\Horses;
 
 use Illuminate\Support\Collection;
 
