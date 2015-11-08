@@ -1,30 +1,43 @@
 <?php namespace EQM\Http\Requests;
 
 use EQM\Http\Requests\Request;
+use Illuminate\Auth\AuthManager;
 
 class ConversationRequest extends Request {
+    /**
+     * @var \Illuminate\Auth\AuthManager
+     */
+    private $auth;
 
-	/**
-	 * Determine if the user is authorized to make this request.
-	 *
-	 * @return bool
-	 */
-	public function authorize()
-	{
-		return true;
-	}
+    /**
+     * @param \Illuminate\Auth\AuthManager $auth
+     */
+    public function __construct(AuthManager $auth)
+    {
+        $this->auth = $auth;
+    }
 
-	/**
-	 * Get the validation rules that apply to the request.
-	 *
-	 * @return array
-	 */
-	public function rules()
-	{
-		return [
-			'subject' => 'required',
+    /**
+     * @return bool
+     */
+    public function authorize()
+    {
+        if ($this->auth->user()->id == $this->get('contact_id')) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'subject' => 'required',
             'message' => 'required',
-		];
-	}
+        ];
+    }
 
 }

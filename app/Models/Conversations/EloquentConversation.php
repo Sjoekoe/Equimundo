@@ -109,7 +109,5 @@ class EloquentConversation extends Model implements Conversation
                 return $user;
             }
         }
-
-        return $auhtenticatedUser;
     }
 }
