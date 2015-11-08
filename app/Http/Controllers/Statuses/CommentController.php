@@ -5,7 +5,6 @@ use EQM\Events\CommentWasPosted;
 use EQM\Models\Comments\CommentRepository;
 use EQM\Models\Notifications\Notification;
 use EQM\Models\Statuses\StatusRepository;
-use Illuminate\Auth\AuthManager;
 use Illuminate\Routing\Controller;
 use Input;
 
@@ -17,24 +16,17 @@ class CommentController extends Controller
     private $comments;
 
     /**
-     * @var \Illuminate\Auth\AuthManager
-     */
-    private $auth;
-
-    /**
      * @var \EQM\Models\Statuses\StatusRepository
      */
     private $statuses;
 
     /**
      * @param \EQM\Models\Comments\CommentRepository $comments
-     * @param \Illuminate\Auth\AuthManager $auth
      * @param \EQM\Models\Statuses\StatusRepository $statuses
      */
-    public function __construct(CommentRepository $comments, AuthManager $auth, StatusRepository $statuses)
+    public function __construct(CommentRepository $comments, StatusRepository $statuses)
     {
         $this->comments = $comments;
-        $this->auth = $auth;
         $this->statuses = $statuses;
     }
 
@@ -46,11 +38,11 @@ class CommentController extends Controller
     {
         $status = $this->statuses->findById($status);
 
-        $comment = $this->comments->create($status, $this->auth->user(), Input::get('body'));
+        $comment = $this->comments->create($status, auth()->user(), Input::get('body'));
 
-        $data = ['sender' => $this->auth->user()->fullName(), 'horse' => $status->horse->name];
+        $data = ['sender' => auth()->user()->fullName(), 'horse' => $status->horse()->name];
 
-        event(new CommentWasPosted($comment->status(), $this->auth->user(), Notification::COMMENT_POSTED, $data));
+        event(new CommentWasPosted($comment->status(), auth()->user(), Notification::COMMENT_POSTED, $data));
 
         session()->put('success', 'Your comment was posted');
 

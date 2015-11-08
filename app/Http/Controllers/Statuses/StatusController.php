@@ -2,7 +2,6 @@
 namespace EQM\Http\Controllers\Statuses;
 
 use EQM\Core\Files\Uploader;
-use EQM\Models\Horses\HorseRepository;
 use EQM\Models\Statuses\Requests\PostStatus;
 use EQM\Models\Statuses\StatusCreator;
 use EQM\Models\Statuses\StatusRepository;
@@ -16,24 +15,17 @@ class StatusController extends Controller
     private $statuses;
 
     /**
-     * @var \EQM\Models\Horses\HorseRepository
-     */
-    private $horses;
-
-    /**
      * @var \EQM\Core\Files\Uploader
      */
     private $uploader;
 
     /**
      * @param \EQM\Models\Statuses\StatusRepository $statuses
-     * @param \EQM\Models\Horses\HorseRepository $horses
      * @param \EQM\Core\Files\Uploader $uploader
      */
-    public function __construct(StatusRepository $statuses, HorseRepository $horses, Uploader $uploader)
+    public function __construct(StatusRepository $statuses, Uploader $uploader)
     {
         $this->statuses = $statuses;
-        $this->horses = $horses;
         $this->uploader = $uploader;
     }
 
@@ -51,6 +43,10 @@ class StatusController extends Controller
         return redirect()->refresh();
     }
 
+    /**
+     * @param int $statusId
+     * @return \Illuminate\View\View
+     */
     public function show($statusId)
     {
         $status = $this->statuses->findById($statusId);
@@ -104,10 +100,10 @@ class StatusController extends Controller
     {
         $status = $this->statuses->findById($statusId);
 
-        if (auth()->user()->isInHorseTeam($status->horse())) {
-            return $status;
+        if (! auth()->user()->isInHorseTeam($status->horse())) {
+            abort(403);
         }
 
-        abort(403);
+        return $status;
     }
 }

@@ -19,6 +19,9 @@ class UserController extends Controller
         $this->users = $users;
     }
 
+    /**
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
         $users = $this->users->all();

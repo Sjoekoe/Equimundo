@@ -1,3 +1,3 @@
 <?php
 
-Route::get('admin/users', ['as' => 'admin.users', 'uses' => 'UserController@index']);
+get('admin/users', ['as' => 'admin.users', 'uses' => 'UserController@index']);

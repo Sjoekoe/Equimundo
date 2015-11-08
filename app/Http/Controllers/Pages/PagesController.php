@@ -3,7 +3,7 @@ namespace EQM\Http\Controllers\Pages;
 
 use DB;
 use EQM\Http\Controllers\Controller;
-use EQM\Http\Controllers\Horses\HorseCollection;
+use EQM\Models\Horses\HorseCollection;
 use EQM\Models\Horses\HorseRepository;
 use EQM\Models\Statuses\StatusRepository;
 
@@ -20,14 +20,14 @@ class PagesController extends Controller
     private $horses;
 
     /**
-     * @var \EQM\Http\Controllers\Horses\HorseCollection
+     * @var \EQM\Models\Horses\HorseCollection
      */
     private $collection;
 
     /**
      * @param \EQM\Models\Statuses\StatusRepository $statuses
      * @param \EQM\Models\Horses\HorseRepository $horses
-     * @param \EQM\Http\Controllers\Horses\HorseCollection $collection
+     * @param \EQM\Models\Horses\HorseCollection $collection
      */
     public function __construct(StatusRepository $statuses, HorseRepository $horses, HorseCollection $collection)
     {

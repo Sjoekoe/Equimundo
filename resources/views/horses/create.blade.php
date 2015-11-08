@@ -8,7 +8,7 @@
                 <h3>{{ trans('copy.titles.create_horse') }}</h3>
             </div>
         </div>
-        {{ Form::open(['route' => 'horses.create', 'class' => 'form-horizontal col s12', 'files' => 'true']) }}
+        {{ Form::open(['route' => 'horses.store', 'class' => 'form-horizontal col s12', 'files' => 'true']) }}
 
             <div class="row">
                 <div class="input-field col s6">
