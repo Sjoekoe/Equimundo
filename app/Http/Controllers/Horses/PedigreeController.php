@@ -1,10 +1,10 @@
 <?php
 namespace EQM\Http\Controllers\Horses;
 
-use EQM\Http\Requests\CreateFamilyMember;
 use EQM\Models\Horses\HorseRepository;
 use EQM\Models\Pedigrees\PedigreeCreator;
 use EQM\Models\Pedigrees\PedigreeRepository;
+use EQM\Models\Pedigrees\Requests\CreateFamilyMember;
 use Illuminate\Routing\Controller;
 
 class PedigreeController extends Controller
@@ -62,11 +62,11 @@ class PedigreeController extends Controller
     }
 
     /**
+     * @param \EQM\Models\Pedigrees\Requests\CreateFamilyMember $request
      * @param string $horseSlug
-     * @param \EQM\Http\Requests\CreateFamilyMember $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store($horseSlug, CreateFamilyMember $request)
+    public function store(CreateFamilyMember $request, $horseSlug)
     {
         $horse = $this->initHorse($horseSlug);
 
@@ -97,11 +97,11 @@ class PedigreeController extends Controller
     }
 
     /**
+     * @param \EQM\Models\Pedigrees\Requests\CreateFamilyMember $request
      * @param int $pedigreeId
-     * @param \EQM\Http\Requests\CreateFamilyMember $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update($pedigreeId, CreateFamilyMember $request)
+    public function update(CreateFamilyMember $request, $pedigreeId)
     {
         $pedigree = $this->initPedigree($pedigreeId);
 

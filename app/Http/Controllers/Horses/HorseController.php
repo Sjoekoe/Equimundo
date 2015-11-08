@@ -3,11 +3,11 @@ namespace EQM\Http\Controllers\Horses;
 
 use DB;
 use EQM\Core\Files\Uploader;
-use EQM\Http\Requests\CreateHorse;
-use EQM\Http\Requests\UpdateHorse;
 use EQM\Models\Horses\HorseCreator;
 use EQM\Models\Horses\HorseRepository;
 use EQM\Models\Horses\HorseUpdater;
+use EQM\Models\Horses\Requests\CreateHorse;
+use EQM\Models\Horses\Requests\UpdateHorse;
 use EQM\Models\HorseTeams\HorseTeamRepository;
 use EQM\Models\Statuses\StatusRepository;
 use EQM\Models\Users\UserRepository;
@@ -84,7 +84,7 @@ class HorseController extends Controller
     }
 
     /**
-     * @param \EQM\Http\Requests\CreateHorse $request
+     * @param \EQM\Models\Horses\Requests\CreateHorse $request
      * @param \EQM\Models\Horses\HorseCreator $creator
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -126,7 +126,7 @@ class HorseController extends Controller
     }
 
     /**
-     * @param \EQM\Http\Requests\UpdateHorse $request
+     * @param \EQM\Models\Horses\Requests\UpdateHorse $request
      * @param \EQM\Models\Horses\HorseUpdater $updater
      * @param string $slug
      * @return \Illuminate\Http\RedirectResponse

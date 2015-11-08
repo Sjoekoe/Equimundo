@@ -1,4 +1,4 @@
-<?php namespace EQM\Http\Requests;
+<?php namespace EQM\Models\Pedigrees\Requests;
 
 use EQM\Http\Requests\Request;
 

@@ -1,4 +1,4 @@
-<?php namespace EQM\Http\Requests;
+<?php namespace EQM\Models\Conversations\Requests;
 
 use EQM\Http\Requests\Request;
 use Illuminate\Auth\AuthManager;

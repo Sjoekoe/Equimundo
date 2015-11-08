@@ -1,4 +1,6 @@
-<?php namespace EQM\Http\Requests;
+<?php namespace EQM\Models\Users\Requests;
+
+use EQM\Http\Requests\Request;
 
 class UpdateUserProfile extends Request {
 

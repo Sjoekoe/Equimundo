@@ -2,9 +2,9 @@
 namespace EQM\Http\Controllers\Conversations;
 
 use EQM\Http\Controllers\Controller;
-use EQM\Http\Requests\ConversationRequest;
 use EQM\Models\Conversations\ConversationRepository;
 use EQM\Models\Conversations\MessageRepository;
+use EQM\Models\Conversations\Requests\ConversationRequest;
 use EQM\Models\Users\UserRepository;
 use Input;
 
@@ -65,7 +65,7 @@ class ConversationController extends Controller
     }
 
     /**
-     * @param \EQM\Http\Requests\ConversationRequest $request
+     * @param \EQM\Models\Conversations\Requests\ConversationRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(ConversationRequest $request)
