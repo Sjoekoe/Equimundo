@@ -2,7 +2,7 @@
 namespace EQM\Http\Controllers\Users;
 
 use EQM\Http\Controllers\Controller;
-use EQM\Http\Requests\UpdateUserProfile;
+use EQM\Models\Users\Requests\UpdateUserProfile;
 use EQM\Models\Users\User;
 use EQM\Models\Users\UserRepository;
 
@@ -30,7 +30,7 @@ class ProfileController extends  Controller
     }
 
     /**
-     * @param \EQM\Http\Requests\UpdateUserProfile $request
+     * @param \EQM\Models\Users\Requests\UpdateUserProfile $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UpdateUserProfile $request)

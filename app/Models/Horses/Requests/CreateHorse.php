@@ -1,5 +1,6 @@
-<?php namespace EQM\Http\Requests;
+<?php namespace EQM\Models\Horses\Requests;
 
+use EQM\Http\Requests\Request;
 use EQM\Models\Horses\HorseRepository;
 
 class CreateHorse extends Request {

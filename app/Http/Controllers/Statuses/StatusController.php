@@ -2,9 +2,8 @@
 namespace EQM\Http\Controllers\Statuses;
 
 use EQM\Core\Files\Uploader;
-use EQM\Http\Requests\PostStatus;
-use EQM\Models\Albums\Album;
 use EQM\Models\Horses\HorseRepository;
+use EQM\Models\Statuses\Requests\PostStatus;
 use EQM\Models\Statuses\StatusCreator;
 use EQM\Models\Statuses\StatusRepository;
 use Illuminate\Routing\Controller;
@@ -39,7 +38,7 @@ class StatusController extends Controller
     }
 
     /**
-     * @param \EQM\Http\Requests\PostStatus $request
+     * @param \EQM\Models\Statuses\Requests\PostStatus $request
      * @param \EQM\Models\Statuses\StatusCreator $creator
      * @return string
      */
@@ -71,11 +70,11 @@ class StatusController extends Controller
     }
 
     /**
+     * @param \EQM\Models\Statuses\Requests\PostStatus $request
      * @param int $statusId
-     * @param \EQM\Http\Requests\PostStatus $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update($statusId, PostStatus $request)
+    public function update(PostStatus $request, $statusId)
     {
         $status = $this->initStatus($statusId);
 
