@@ -1,7 +1,6 @@
 <?php
 namespace EQM\Http\Controllers\Horses;
 
-use Auth;
 use EQM\Events\PalmaresWasCreated;
 use EQM\Events\PalmaresWasDeleted;
 use EQM\Http\Controllers\Controller;
@@ -132,7 +131,7 @@ class PalmaresController extends Controller
 
         $horse = $palmares->horse();
 
-        if (! Auth::user()->isHorseOwner($horse)) {
+        if (! auth()->user()->isInHorseTeam($horse)) {
             abort(403);
         }
 

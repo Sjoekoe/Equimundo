@@ -3,8 +3,6 @@
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Response;
-use Whoops\Handler\PrettyPageHandler;
-use Whoops\Run;
 
 class Handler extends ExceptionHandler {
 
@@ -44,28 +42,7 @@ class Handler extends ExceptionHandler {
             return $this->renderHttpException($e);
         }
 
-        if (config('app.debug'))
-        {
-            return $this->renderExceptionWithWhoops($e);
-        }
-
 		return parent::render($request, $e);
 	}
-
-    /**
-     * Render an exception using Whoops.
-     *
-     * @param  \Exception $e
-     * @return Response
-     */
-    protected function renderExceptionWithWhoops(Exception $e)
-    {
-        $whoops = new Run;
-        $whoops->pushHandler(new PrettyPageHandler());
-
-        return new Response(
-            $whoops->handleException($e)
-        );
-    }
 
 }

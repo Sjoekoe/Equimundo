@@ -51,9 +51,14 @@ interface Horse
     public function lifeNumber();
 
     /**
-     * @return \EQM\Models\Users\User
+     * @return \EQM\Models\HorseTeams\HorseTeam[]
      */
-    public function owner();
+    public function userTeams();
+
+    /**
+     * @return \EQM\Models\Users\User[]
+     */
+    public function users();
 
     /**
      * @return bool

@@ -5,7 +5,7 @@
 
     <h3>{{ $album->name() }}</h3>
     <p>{{ $album->description() }}</p>
-    @if (Auth::user()->isHorseOwner($horse))
+    @if (auth()->user()->isInHorseTeam($horse))
         <div class="row">
             {{ Form::open(['route' => ['album.picture.create', $album->id()], 'files' => true]) }}
                 {{ Form::label('pictures[]', trans('forms.labels.add_pictures')) }}

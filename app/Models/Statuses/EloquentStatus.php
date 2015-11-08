@@ -19,7 +19,7 @@ class EloquentStatus extends Model implements Status
     /**
      * @var array
      */
-    protected $fillable = ['body', 'prefix'];
+    protected $fillable = ['body', 'prefix', 'horse_id'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

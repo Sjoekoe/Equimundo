@@ -1,6 +1,9 @@
 <?php
 namespace EQM\Models\Users;
 
+use Carbon\Carbon;
+use DateTime;
+
 class UserRepository
 {
     /**
@@ -14,6 +17,24 @@ class UserRepository
     public function __construct(User $user)
     {
         $this->user = $user;
+    }
+
+    /**
+     * @param \EQM\Models\Users\User $user
+     * @param array $values
+     * @return \EQM\Models\Users\User
+     */
+    public function update(User $user, $values)
+    {
+        $user->first_name = $values['first_name'];
+        $user->last_name = $values['last_name'];
+        $user->country = $values['country'];
+        $user->gender = $values['gender'];
+        $user->date_of_birth = Carbon::createFromFormat('d/m/Y', $values['date_of_birth'])->startOfDay();
+        $user->about = $values['about'];
+        $user->save();
+
+        return $user;
     }
 
     /**

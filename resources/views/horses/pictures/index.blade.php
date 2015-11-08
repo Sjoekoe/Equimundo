@@ -3,7 +3,7 @@
 @section('content')
     @include('layout.partials.heading')
 
-    @if (Auth::user()->isHorseOwner($horse))
+    @if (auth()->user()->isInHorseTeam($horse))
         <div class="row">
             <a href="{{ route('album.create', $horse->slug()) }}">{{ trans('copy.a.create_album') }}</a>
         </div>
@@ -22,7 +22,7 @@
 
         @if (count($albums))
             @foreach ($albums as $album)
-                <a href="{{ route('album.show', $album->id) }}">{{ $album->name }}</a>
+                <a href="{{ route('album.show', $album->id()) }}">{{ $album->name() }}</a>
             @endforeach
         @endif
 

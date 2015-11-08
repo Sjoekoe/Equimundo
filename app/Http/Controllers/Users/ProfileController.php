@@ -37,11 +37,11 @@ class ProfileController extends  Controller
     {
         $user = $this->users->findById(auth()->user()->id);
 
-        $user->update($request->all());
+        $this->users->update($user, $request->all());
 
         session()->put('success', 'Profile was updated');
 
-        return route('users.profiles.edit');
+        return redirect()->route('users.profiles.edit');
     }
 
     /**

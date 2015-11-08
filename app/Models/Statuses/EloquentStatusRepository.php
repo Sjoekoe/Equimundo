@@ -43,9 +43,13 @@ class EloquentStatusRepository implements StatusRepository
      */
     public function findFeedForUser(User $user)
     {
-        $horseIds = $user->follows()->lists('horse_id');
+        $followIds = $user->follows()->lists('horse_id');
 
-        $horseIds[] = $user->horses()->lists('id')->all();
+        $horseIds = $followIds->toArray();
+
+        foreach ($user->horses() as $horse) {
+            array_push($horseIds, $horse->id());
+        }
 
         return $this->status->whereIn('horse_id', array_flatten($horseIds))->latest()->get();
     }

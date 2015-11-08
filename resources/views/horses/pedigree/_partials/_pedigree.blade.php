@@ -1,15 +1,15 @@
 @if ($family->user_id)
-    <h4><a href="{{ route('horses.show', $family->slug) }}" class="white-text">{{ $family->name }}</a></h4>
+    <h4><a href="{{ route('horses.show', $family->slug()) }}" class="white-text">{{ $family->name() }}</a></h4>
 @else
     <h4>{{ $family->name }}</h4>
 @endif
-<p>{{ trans('copy.p.born') . ' ' . date('Y', strtotime($family->date_of_birth)) }}</p>
-<p>{{ trans('copy.p.passed_away') . ' ' . $family->date_of_death ? date('Y', strtotime($family->date_of_death)) : '-' }}</p>
-<p>{{ trans('copy.p.life_number') . ' ' . $family->life_number ? : '-' }}</p>
+<p>{{ trans('copy.p.born') . ' ' . date('Y', strtotime($family->dateOfBirth())) }}</p>
+{{--<p>{{ trans('copy.p.passed_away') . ' ' . $family->dateOfDeath() ? date('Y', strtotime($family->dateOfDeath())) : '-' }}</p>--}}
+<p>{{ trans('copy.p.life_number') . ' ' . $family->lifeNumber() ? : '-' }}</p>
 
-@if (Auth::user()->isHorseOwner($horse))
+@if (auth()->user()->isInHorseTeam($horse))
     <p>
-        <a href="{{ route('pedigree.edit', $family->id) }}">{{ trans('copy.a.edit') }}</a> /
-        <a href="{{ route('pedigree.delete', $family->id) }}">{{ trans('copy.a.delete') }}</a>
+        <a href="{{ route('pedigree.edit', $family->id()) }}">{{ trans('copy.a.edit') }}</a> /
+        <a href="{{ route('pedigree.delete', $family->id()) }}">{{ trans('copy.a.delete') }}</a>
     </p>
 @endif

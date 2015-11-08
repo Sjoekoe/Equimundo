@@ -4,6 +4,7 @@ namespace Horses;
 use Carbon\Carbon;
 use EQM\Events\HorseWasCreated;
 use EQM\Models\Horses\EloquentHorse;
+use EQM\Models\HorseTeams\EloquentHorseTeam;
 use EQM\Models\Users\User;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 
@@ -50,12 +51,15 @@ class HorsesTest extends \TestCase
         ]);
     }
 
+    /** @test */
     function it_can_edit_a_horse()
     {
         $now = Carbon::now();
         $user = factory(User::class)->create();
-        $horse = factory(EloquentHorse::class)->create([
+        $horse = factory(EloquentHorse::class)->create();
+        factory(EloquentHorseTeam::class)->create([
             'user_id' => $user->id,
+            'horse_id' => $horse->id(),
         ]);
 
         $this->actingAs($user)
@@ -74,7 +78,7 @@ class HorsesTest extends \TestCase
             'id' => 1,
             'name' => 'Foo horse',
             'life_number' => '1234',
-            'date_of_birth' => $now,
+            'date_of_birth' => $now->toIso8601String(),
             'height' => '1m70',
             'breed' => 1,
             'gender' => 1,
@@ -85,16 +89,18 @@ class HorsesTest extends \TestCase
     function it_can_delete_a_horse()
     {
         $user = factory(User::class)->create();
-        $horse = factory(EloquentHorse::class)->create([
+        $horse = factory(EloquentHorse::class)->create();
+        $horseTeam = factory(EloquentHorseTeam::class)->create([
             'user_id' => $user->id,
+            'horse_id' => $horse->id()
         ]);
 
         $this->actingAs($user)
             ->get('/horses/' . $horse->slug() . '/delete');
 
         $this->assertRedirectedTo('/');
-        $this->seeInDatabase('horses', [
-            'id' => 1,
+        $this->notSeeInDatabase('horse_team', [
+            'id' => $horseTeam->id(),
         ]);
     }
 }

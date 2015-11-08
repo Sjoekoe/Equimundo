@@ -1,6 +1,7 @@
 <?php
 namespace EQM\Models\Pedigrees;
 
+use Carbon\Carbon;
 use EQM\Events\PedigreeWasCreated;
 use EQM\Models\Horses\Horse;
 use EQM\Models\Horses\HorseRepository;
@@ -83,7 +84,12 @@ class PedigreeCreator
             $family = $family;
         } else {
             $values ['gender'] = $this->pedigreeConnector->getGender($values['type']);
-            $family = $this->horses->create($this->auth->user(), $values, true);
+
+            if (array_key_exists('date_of_birth', $values)) {
+                $values['date_of_birth'] = Carbon::createFromDate($values['date_of_birth'], 0, 0)->format('d/m/Y');
+            }
+
+            $family = $this->horses->create($values, true);
         }
 
         $values['type'] = $this->pedigreeConnector->getConnection($horse, $values['type']);

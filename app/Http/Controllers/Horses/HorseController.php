@@ -3,17 +3,14 @@ namespace EQM\Http\Controllers\Horses;
 
 use DB;
 use EQM\Core\Files\Uploader;
-use EQM\Events\HorseWasCreated;
 use EQM\Http\Requests\CreateHorse;
 use EQM\Http\Requests\UpdateHorse;
-use EQM\Models\Albums\Album;
-use EQM\Models\Disciplines\DisciplineRepository;
-use EQM\Models\Horses\Horse;
 use EQM\Models\Horses\HorseCreator;
 use EQM\Models\Horses\HorseRepository;
+use EQM\Models\Horses\HorseUpdater;
 use EQM\Models\HorseTeams\HorseTeamRepository;
 use EQM\Models\Statuses\StatusRepository;
-use EQM\Models\Users\User;
+use EQM\Models\Users\UserRepository;
 use Illuminate\Routing\Controller;
 
 class HorseController extends Controller
@@ -34,34 +31,33 @@ class HorseController extends Controller
     private $statuses;
 
     /**
-     * @var \EQM\Models\Disciplines\DisciplineRepository
-     */
-    private $disciplines;
-
-    /**
      * @var \EQM\Models\HorseTeams\HorseTeamRepository
      */
     private $horseTeams;
+    /**
+     * @var \EQM\Models\Users\UserRepository
+     */
+    private $users;
 
     /**
      * @param \EQM\Core\Files\Uploader $uploader
      * @param \EQM\Models\Horses\HorseRepository $horses
      * @param \EQM\Models\Statuses\StatusRepository $statuses
-     * @param \EQM\Models\Disciplines\DisciplineRepository $disciplines
      * @param \EQM\Models\HorseTeams\HorseTeamRepository $horseTeams
+     * @param \EQM\Models\Users\UserRepository $users
      */
     public function __construct(
         Uploader $uploader,
         HorseRepository $horses,
         StatusRepository $statuses,
-        DisciplineRepository $disciplines,
-        HorseTeamRepository $horseTeams
+        HorseTeamRepository $horseTeams,
+        UserRepository $users
     ) {
         $this->uploader = $uploader;
         $this->horses = $horses;
         $this->statuses = $statuses;
-        $this->disciplines = $disciplines;
         $this->horseTeams = $horseTeams;
+        $this->users = $users;
     }
 
     /**
@@ -70,9 +66,11 @@ class HorseController extends Controller
      */
     public function index($userId)
     {
-        $user = User::with('horses')->where('id', $userId)->firstOrFail();
+        $user = $this->users->findById($userId);
 
-        return view('horses.index', compact('user'));
+        $horses = $this->horses->findForUser($user);
+
+        return view('horses.index', compact('user', 'horses'));
     }
 
     /**
@@ -129,16 +127,15 @@ class HorseController extends Controller
 
     /**
      * @param \EQM\Http\Requests\UpdateHorse $request
+     * @param \EQM\Models\Horses\HorseUpdater $updater
      * @param string $slug
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(UpdateHorse $request, $slug)
+    public function update(UpdateHorse $request, HorseUpdater $updater, $slug)
     {
         $horse = $this->initHorse($slug);
 
-        $horse = $this->horses->update($horse, $request->all());
-
-        $this->resolveDisciplines($horse, $request->all());
+        $updater->update($horse, $request->all());
 
         session(['success', $horse->name() . ' was updated']);
 
@@ -168,7 +165,7 @@ class HorseController extends Controller
     {
         $horse = $this->horses->findBySlug($slug);
 
-        if (auth()->user()->isHorseOwner($horse)) {
+        if (auth()->user()->isInHorseTeam($horse)) {
             return $horse;
         }
 

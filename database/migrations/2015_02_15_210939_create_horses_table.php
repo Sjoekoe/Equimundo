@@ -18,9 +18,9 @@ class CreateHorsesTable extends Migration {
 			$table->string('gender');
 			$table->integer('breed');
 			$table->string('height');
-            $table->date('date_of_birth')->nullable();
+            $table->dateTime('date_of_birth')->nullable();
 			$table->string('color');
-			$table->string('life_number')->unique();
+			$table->string('life_number')->nullable();
             $table->string('slug');
             $table->timestamps();
 		});

@@ -24,8 +24,8 @@
             {{ trans('copy.a.create_a_horse') }} <span class="badge"><i class="fa fa-plus-square-o"></i></span>
         </a>
         <a href="{{ route('horses.index', Auth::user()->id) }}" class="collection-item grey lighten-3">{{ trans('copy.a.my_horses') }}</a>
-        @foreach(Auth::user()->horses as $horse)
-            <a href="{{ route('horses.show', $horse->slug) }}" class="collection-item grey lighten-3">{{ $horse->name }}</a>
+        @foreach(Auth::user()->horses() as $horse)
+            <a href="{{ route('horses.show', $horse->slug()) }}" class="collection-item grey lighten-3">{{ $horse->name }}</a>
         @endforeach
     </div>
 </ul>

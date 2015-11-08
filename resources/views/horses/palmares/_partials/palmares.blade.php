@@ -10,7 +10,7 @@
         </div>
         <div class="col s2">
             <h4>{{ $palmares->ranking }} {{ trans('copy.p.ranked') }}</h4>
-            @if (Auth::user()->isHorseOwner($horse))
+            @if (auth()->user()->isInHorseTeam($horse))
                 <p><a href="{{ route('palmares.edit', $palmares->id()) }}">{{ trans('copy.a.edit') }}</a></p>
                 <p><a href="{{ route('palmares.delete', $palmares->id()) }}">{{ trans('copy.a.delete') }}</a></p>
             @endif

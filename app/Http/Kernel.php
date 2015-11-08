@@ -1,7 +1,13 @@
 <?php namespace EQM\Http;
 
 use EQM\Http\Middleware\Locale;
+use EQM\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode;
+use Illuminate\Session\Middleware\StartSession;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class Kernel extends HttpKernel {
 
@@ -11,12 +17,12 @@ class Kernel extends HttpKernel {
 	 * @var array
 	 */
 	protected $middleware = [
-		'Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode',
-		'Illuminate\Cookie\Middleware\EncryptCookies',
-		'Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse',
-		'Illuminate\Session\Middleware\StartSession',
-		'Illuminate\View\Middleware\ShareErrorsFromSession',
-		'EQM\Http\Middleware\VerifyCsrfToken',
+		CheckForMaintenanceMode::class,
+		EncryptCookies::class,
+		AddQueuedCookiesToResponse::class,
+		StartSession::class,
+		ShareErrorsFromSession::class,
+		VerifyCsrfToken::class,
         Locale::class
 	];
 

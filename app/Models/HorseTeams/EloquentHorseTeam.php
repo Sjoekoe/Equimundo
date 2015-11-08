@@ -1,6 +1,7 @@
 <?php
 namespace EQM\Models\HorseTeams;
 
+use EQM\Models\Horses\EloquentHorse;
 use EQM\Models\Users\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -53,7 +54,7 @@ class EloquentHorseTeam extends Model implements HorseTeam
      */
     private function horseRelation()
     {
-        return $this->belongsTo(Horse::class, 'horse_id', 'id');
+        return $this->belongsTo(EloquentHorse::class, 'horse_id', 'id');
     }
 
     /**

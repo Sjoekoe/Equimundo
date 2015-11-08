@@ -8,7 +8,7 @@
             </div>
 
             <div class="heading-button right">
-                @if (Auth::user()->isHorseOwner($horse))
+                @if (auth()->user()->isInHorseTeam($horse))
                     <a href="{{ route('pedigree.create', $horse->slug) }}" class="btn">{{ trans('copy.a.add_family') }}</a>
                 @else
                     @include('horses.partials.follow-form')

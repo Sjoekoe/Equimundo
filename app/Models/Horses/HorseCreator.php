@@ -6,6 +6,7 @@ use EQM\Core\Slugs\SlugCreator;
 use EQM\Events\HorseWasCreated;
 use EQM\Models\Albums\Album;
 use EQM\Models\Disciplines\DisciplineRepository;
+use EQM\Models\Disciplines\DisciplineResolver;
 use EQM\Models\HorseTeams\HorseTeamRepository;
 use EQM\Models\Users\User;
 use Illuminate\Events\Dispatcher;
@@ -43,12 +44,18 @@ class HorseCreator
     private $dispatcher;
 
     /**
+     * @var \EQM\Models\Disciplines\DisciplineResolver
+     */
+    private $disciplineResolver;
+
+    /**
      * @param \EQM\Models\Horses\HorseRepository $horses
      * @param \EQM\Models\Disciplines\DisciplineRepository $disciplines
      * @param \EQM\Core\Files\Uploader $uploader
      * @param \EQM\Core\Slugs\SlugCreator $slugCreator
      * @param \EQM\Models\HorseTeams\HorseTeamRepository $horseTeams
      * @param \Illuminate\Events\Dispatcher $dispatcher
+     * @param \EQM\Models\Disciplines\DisciplineResolver $disciplineResolver
      */
     public function __construct(
         HorseRepository $horses,
@@ -56,7 +63,8 @@ class HorseCreator
         Uploader $uploader,
         SlugCreator $slugCreator,
         HorseTeamRepository $horseTeams,
-        Dispatcher $dispatcher
+        Dispatcher $dispatcher,
+        DisciplineResolver $disciplineResolver
     ) {
         $this->horses = $horses;
         $this->disciplines = $disciplines;
@@ -64,6 +72,7 @@ class HorseCreator
         $this->slugCreator = $slugCreator;
         $this->horseTeams = $horseTeams;
         $this->dispatcher = $dispatcher;
+        $this->disciplineResolver = $disciplineResolver;
     }
 
     /**
@@ -76,18 +85,20 @@ class HorseCreator
         if ($values['life_number'] && $horse = $this->horses->findByLifeNumber($values['life_number'])) {
             $horse = $this->horses->update($horse, $values);
 
-            $this->resolveDisciplines($horse, $values);
+            $this->disciplineResolver->resolve($horse, $values);
         } else {
             $horse = $this->horses->create($values);
 
             $horse->slug = $this->slugCreator->createForHorse($values['name']);
 
             if (array_key_exists('disciplines', $values)) {
-                $this->addDisciplines($horse, $values);
+                $this->disciplineResolver->addDisciplines($horse, $values);
             }
         }
 
-        if ($values['profile_pic']) {
+        $this->dispatcher->fire(new HorseWasCreated($horse));
+
+        if (array_key_exists('profile_pic', $values)) {
             $picture = $this->uploader->uploadPicture($values['profile_pic'], $horse, true);
 
             $picture->addToAlbum($horse->getStandardAlbum(Album::PROFILEPICTURES));
@@ -96,43 +107,6 @@ class HorseCreator
         $this->horseTeams->createOwner($user, $horse);
         $horse->save();
 
-        $this->dispatcher->fire(new HorseWasCreated($horse));
-
         return $horse;
-    }
-
-    /**
-     * @param \EQM\Models\Horses\Horse $horse
-     * @param array $values
-     */
-    private function resolveDisciplines(Horse $horse, $values = [])
-    {
-        $initialDisciplines = [];
-        $unwantedDisciplines = [];
-
-        foreach ($horse->disciplines as $initialDiscipline) {
-            $initialDisciplines[$initialDiscipline->id] = $initialDiscipline->discipline;
-        }
-
-        if (array_key_exists('disciplines', $values)) {
-            $this->addDisciplines($horse, $values);
-
-            $unwantedDisciplines = array_diff($initialDisciplines, $values['disciplines']);
-        }
-
-        foreach ($unwantedDisciplines as $key => $values) {
-            $this->disciplines->removeById($key);
-        }
-    }
-
-    /**
-     * @param \EQM\Models\Horses\Horse $horse
-     * @param array $values
-     */
-    private function addDisciplines(Horse $horse, array $values)
-    {
-        foreach ($values['disciplines'] as $discipline) {
-            $horse->disciplines()->updateOrCreate(['discipline' => $discipline, 'horse_id' => $horse->id]);
-        }
     }
 }
