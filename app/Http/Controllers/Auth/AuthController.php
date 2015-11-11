@@ -52,7 +52,7 @@ class AuthController extends Controller {
         $activationCode = bcrypt(str_random(30));
         $user = User::create([
             'first_name' => $data['first_name'],
-            'last_name' => $data['lastname'],
+            'last_name' => $data['last_name'],
             'email' => $data['email'],
             'language' => 'en',
             'email_notifications' => true,

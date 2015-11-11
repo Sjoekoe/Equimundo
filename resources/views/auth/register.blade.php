@@ -13,8 +13,8 @@
     </div>
 
     <div class="form-group">
-        {{ Form::label('lastname', trans('forms.labels.last_name'), ['class' => 'col-md-4 control-label']) }}
-        {{ Form::text('lastname', null, ['class' => 'form-control']) }}
+        {{ Form::label('last_name', trans('forms.labels.last_name'), ['class' => 'col-md-4 control-label']) }}
+        {{ Form::text('last_name', null, ['class' => 'form-control']) }}
     </div>
 
     <!-- Email Form input -->
