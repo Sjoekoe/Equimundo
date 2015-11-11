@@ -33,7 +33,7 @@ class Locale
     public function handle($request, \Closure $next)
     {
         if ($this->auth->check()) {
-            $this->app->setLocale($this->auth->user()->getLocale());
+            $this->app->setLocale(eqm_locale());
         }
 
         return $next($request);

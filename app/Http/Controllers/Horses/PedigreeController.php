@@ -1,7 +1,9 @@
 <?php
 namespace EQM\Http\Controllers\Horses;
 
+use EQM\Models\Horses\Horse;
 use EQM\Models\Horses\HorseRepository;
+use EQM\Models\Pedigrees\Pedigree;
 use EQM\Models\Pedigrees\PedigreeCreator;
 use EQM\Models\Pedigrees\PedigreeRepository;
 use EQM\Models\Pedigrees\Requests\CreateFamilyMember;
@@ -40,36 +42,30 @@ class PedigreeController extends Controller
     }
 
     /**
-     * @param string $horseSlug
+     * @param \EQM\Models\Horses\Horse $horse
      * @return \Illuminate\View\View
      */
-    public function index($horseSlug)
+    public function index(Horse $horse)
     {
-        $horse = $this->horses->findBySlug($horseSlug);
-
         return view('horses.pedigree.index', compact('horse'));
     }
 
     /**
-     * @param string $horseSlug
+     * @param \EQM\Models\Horses\Horse $horse
      * @return \Illuminate\View\View
      */
-    public function create($horseSlug)
+    public function create(Horse $horse)
     {
-        $horse = $this->initHorse($horseSlug);
-
         return view('horses.pedigree.create', compact('horse'));
     }
 
     /**
      * @param \EQM\Models\Pedigrees\Requests\CreateFamilyMember $request
-     * @param string $horseSlug
+     * @param \EQM\Models\Horses\Horse $horse
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(CreateFamilyMember $request, $horseSlug)
+    public function store(CreateFamilyMember $request, Horse $horse)
     {
-        $horse = $this->initHorse($horseSlug);
-
         if ($request->get('type') < 7) {
             $pedigree = $this->pedigrees->findExistingPedigree($horse, $request->get('type'));
 
@@ -84,13 +80,11 @@ class PedigreeController extends Controller
     }
 
     /**
-     * @param int $pedigreeId
+     * @param \EQM\Models\Pedigrees\Pedigree $pedigree
      * @return \Illuminate\View\View
      */
-    public function edit($pedigreeId)
+    public function edit(Pedigree $pedigree)
     {
-        $pedigree = $this->initPedigree($pedigreeId);
-
         $horse = $pedigree->horse();
 
         return view('horses.pedigree.edit', compact('pedigree', 'horse'));
@@ -98,70 +92,26 @@ class PedigreeController extends Controller
 
     /**
      * @param \EQM\Models\Pedigrees\Requests\CreateFamilyMember $request
-     * @param int $pedigreeId
+     * @param \EQM\Models\Pedigrees\Pedigree $pedigree
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(CreateFamilyMember $request, $pedigreeId)
+    public function update(CreateFamilyMember $request, Pedigree $pedigree)
     {
-        $pedigree = $this->initPedigree($pedigreeId);
-
         $this->pedigrees->update($pedigree, $request->all());
 
-        return redirect()->route('pedigree.index', $pedigree->horse->slug);
+        return redirect()->route('pedigree.index', $pedigree->horse()->slug());
     }
 
     /**
-     * @param int $pedigreeId
+     * @param \EQM\Models\Pedigrees\Pedigree $pedigree
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function delete($pedigreeId)
+    public function delete(Pedigree $pedigree)
     {
-        $pedigree = $this->initPedigree($pedigreeId);
-
         $horse = $pedigree->horse();
 
         $this->pedigrees->delete($pedigree);
 
-        return redirect()->route('pedigree.index', $horse->slug);
-    }
-
-    /**
-     * @param $horseSlug
-     * @return \Illuminate\Database\Eloquent\Model
-     */
-    private function initHorse($horseSlug)
-    {
-        $horse = $this->horses->findBySlug($horseSlug);
-
-        if ($this->userHasPermission($horse)) {
-            return $horse;
-        }
-
-        abort(403);
-
-    }
-
-    /**
-     * @param int $pedigreeId
-     * @return \EQM\Models\Pedigrees\Pedigree
-     */
-    private function initPedigree($pedigreeId)
-    {
-        $pedigree = $this->pedigrees->findById($pedigreeId);
-
-        if ($this->userHasPermission($pedigree->horse)) {
-            return $pedigree;
-        }
-
-        abort(403);
-    }
-
-    /**
-     * @param int $horse
-     * @return bool
-     */
-    private function userHasPermission($horse)
-    {
-        return auth()->user()->isInHorseTeam($horse);
+        return redirect()->route('pedigree.index', $horse->slug());
     }
 }

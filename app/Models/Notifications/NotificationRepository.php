@@ -6,6 +6,12 @@ use EQM\Models\Users\User;
 interface NotificationRepository
 {
     /**
+     * @param int $id
+     * @return \EQM\Models\Notifications\Notification
+     */
+    public function findById($id);
+
+    /**
      * @param \EQM\Models\Users\User $user
      * @return \EQM\Models\Notifications\Notification
      */

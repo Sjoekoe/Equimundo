@@ -2,6 +2,7 @@
 namespace EQM\Http\Controllers\Horses;
 
 use EQM\Models\Follows\FollowsRepository;
+use EQM\Models\Horses\Horse;
 use EQM\Models\Horses\HorseRepository;
 use Illuminate\Routing\Controller;
 use Input;
@@ -29,13 +30,11 @@ class FollowsController extends Controller
     }
 
     /**
-     * @param string $horseSlug
+     * @param \EQM\Models\Horses\Horse $horse
      * @return \Illuminate\View\View
      */
-    public function index($horseSlug)
+    public function index(Horse $horse)
     {
-        $horse = $this->horses->findBySlug($horseSlug);
-
         $followers = $this->follows->findForHorse($horse);
 
         return view('follows.index', compact('horse', 'followers'));
@@ -56,16 +55,14 @@ class FollowsController extends Controller
     }
 
     /**
-     * @param int $id
+     * @param \EQM\Models\Horses\Horse $horse
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(Horse $horse)
     {
-        $horse = $this->horses->findById($id);
-
         auth()->user()->unFollow($horse);
 
-        session()->put('succes', 'You are no longer following ' . $horse->name);
+        session()->put('succes', 'You are no longer following ' . $horse->name());
 
         return redirect()->back();
     }

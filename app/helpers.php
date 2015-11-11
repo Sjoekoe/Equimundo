@@ -1,11 +1,20 @@
 <?php
 
+use Carbon\Carbon;
+
 if (! function_exists('locale')) {
     /**
      * @return string
      */
-    function locale()
+    function eqm_locale()
     {
-        return Auth::check() ? Auth::user()->getLocale() : 'en';
+        return auth()->check() ? auth()->user()->getLocale() : 'en';
+    }
+}
+
+if (! function_exists('eqm_date')) {
+    function eqm_date(Carbon $date)
+    {
+        return $date->format(auth()->user()->date_format);
     }
 }

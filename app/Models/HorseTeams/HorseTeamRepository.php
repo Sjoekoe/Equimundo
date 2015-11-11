@@ -27,8 +27,8 @@ interface HorseTeamRepository
     public function createOwner(User $user, Horse $horse);
 
     /**
-     * @param \EQM\Models\HorseTeams\HorseTeam $horseTeam
+     * @param int $id
      * @return \EQM\Models\HorseTeams\HorseTeam
      */
-    public function find(HorseTeam $horseTeam);
+    public function findById($id);
 }

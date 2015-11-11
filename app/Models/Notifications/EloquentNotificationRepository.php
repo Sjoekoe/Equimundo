@@ -19,6 +19,15 @@ class EloquentNotificationRepository implements NotificationRepository
     }
 
     /**
+     * @param int $id
+     * @return \EQM\Models\Notifications\Notification
+     */
+    public function findById($id)
+    {
+        return $this->notification->where('id', $id)->first();
+    }
+
+    /**
      * @param \EQM\Models\Users\User $user
      * @return \EQM\Models\Notifications\EloquentNotification[]
      */

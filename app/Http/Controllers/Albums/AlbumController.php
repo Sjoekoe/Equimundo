@@ -3,6 +3,7 @@ namespace EQM\Http\Controllers\Albums;
 
 use EQM\Core\Files\Uploader;
 use EQM\Http\Controllers\Controller;
+use EQM\Models\Albums\Album;
 use EQM\Models\Albums\AlbumRepository;
 use EQM\Models\Albums\AlbumRequest;
 use EQM\Models\Horses\HorseRepository;
@@ -50,13 +51,11 @@ class AlbumController extends Controller
     }
 
     /**
-     * @param int $albumId
+     * @param \EQM\Models\Albums\Album $album
      * @return \Illuminate\View\View
      */
-    public function show($albumId)
+    public function show(Album $album)
     {
-        $album = $this->albums->findById($albumId);
-
         $horse = $album->horse();
 
         return view('albums.show', compact('album', 'horse'));
@@ -99,25 +98,21 @@ class AlbumController extends Controller
     }
 
     /**
-     * @param int $albumId
+     * @param \EQM\Models\Albums\Album $album
      * @return \Illuminate\View\View
      */
-    public function edit($albumId)
+    public function edit(Album $album)
     {
-        $album = $this->initAlbum($albumId);
-
         return view('albums.edit', compact('album'));
     }
 
     /**
      * @param \EQM\Models\Albums\AlbumRequest $request
-     * @param $albumId
+     * @param \EQM\Models\Albums\Album $album
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(AlbumRequest $request, $albumId)
+    public function update(AlbumRequest $request, Album $album)
     {
-        $album = $this->initAlbum($albumId);
-
         $this->albums->update($album, $request->all());
 
         session()->put('succes', 'Album updated');
@@ -126,13 +121,11 @@ class AlbumController extends Controller
     }
 
     /**
-     * @param int $albumId
+     * @param \EQM\Models\Albums\Album $album
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function delete($albumId)
+    public function delete(Album $album)
     {
-        $album = $this->initAlbum($albumId);
-
         foreach ($album->pictures() as $picture) {
             if (count($picture->albums()) > 1) {
                 $picture->removeFromAlbum($album);
@@ -158,21 +151,6 @@ class AlbumController extends Controller
 
         if ($this->auth->user()->isInHorseTeam($horse)) {
             return $horse;
-        }
-
-        abort(403);
-    }
-
-    /**
-     * @param int $albumId
-     * @return \EQM\Models\Albums\Album
-     */
-    private function initAlbum($albumId)
-    {
-        $album = $this->albums->findById($albumId);
-
-        if ($this->auth->user()->isInHorseTeam($album->horse())) {
-            return $album;
         }
 
         abort(403);

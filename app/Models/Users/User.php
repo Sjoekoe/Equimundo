@@ -254,7 +254,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      */
     public function getLocale()
     {
-        return $this->language ?: 'en';
+        return $this->language;
     }
 
     /**
