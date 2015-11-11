@@ -3,7 +3,8 @@ namespace EQM\Http\Controllers\Auth;
 
 use EQM\Events\UserRegistered;
 use EQM\Http\Controllers\Controller;
-use EQM\Models\Users\User;
+use EQM\Models\Users\EloquentUser;
+use EQM\Models\Users\UserRepository;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
 use Validator;
@@ -22,9 +23,18 @@ class AuthController extends Controller {
      */
     public $loginPath = '/login';
 
-    public function __construct()
+    /**
+     * @var \EQM\Models\Users\UserRepository
+     */
+    private $users;
+
+    /**
+     * @param \EQM\Models\Users\UserRepository $users
+     */
+    public function __construct(UserRepository $users)
     {
         $this->middleware('guest', ['except' => 'getLogout']);
+        $this->users = $users;
     }
 
     /**
@@ -45,23 +55,13 @@ class AuthController extends Controller {
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return User
+     * @return EloquentUser
      */
     public function create(array $data)
     {
-        $activationCode = bcrypt(str_random(30));
-        $user = User::create([
-            'first_name' => $data['first_name'],
-            'last_name' => $data['last_name'],
-            'email' => $data['email'],
-            'language' => 'en',
-            'email_notifications' => true,
-            'date_format' =>'d/m/Y',
-            'password' => bcrypt($data['password']),
-            'remember_token' => $activationCode,
-        ]);
+        $data['activationCode'] = bcrypt(str_random(30));
 
-        $user->assignRole(1);
+        $user = $this->users->create($data);
 
         event(new UserRegistered($user));
 

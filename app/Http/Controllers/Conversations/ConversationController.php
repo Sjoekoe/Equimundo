@@ -46,7 +46,7 @@ class ConversationController extends Controller
      */
     public function index()
     {
-        $conversations = $this->users->findConversations(auth()->user());
+        $conversations = $this->conversations->findByUser(auth()->user());
 
         return view('conversations.index', compact('conversations'));
     }

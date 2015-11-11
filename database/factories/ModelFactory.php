@@ -12,10 +12,10 @@
 use Carbon\Carbon;
 use EQM\Models\Horses\EloquentHorse;
 use EQM\Models\HorseTeams\EloquentHorseTeam;
-use EQM\Models\Users\User;
+use EQM\Models\Users\EloquentUser;
 use Faker\Generator;
 
-$factory->define(User::class, function (Generator $faker) {
+$factory->define(EloquentUser::class, function (Generator $faker) {
     return [
         'last_name' => $faker->name,
         'first_name' => $faker->name,

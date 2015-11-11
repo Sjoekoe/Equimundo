@@ -10,7 +10,7 @@ use EQM\Models\Palmares\EloquentPalmares;
 use EQM\Models\Pedigrees\EloquentPedigree;
 use EQM\Models\Pictures\EloquentPicture;
 use EQM\Models\Statuses\EloquentStatus;
-use EQM\Models\Users\User;
+use EQM\Models\Users\EloquentUser;
 use Illuminate\Database\Eloquent\Model;
 
 class EloquentHorse extends Model implements Horse
@@ -126,14 +126,6 @@ class EloquentHorse extends Model implements Horse
     }
 
     /**
-     * @return bool
-     */
-    public function hasOwner()
-    {
-        return $this->user_id !== null;
-    }
-
-    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function statuses()
@@ -154,7 +146,7 @@ class EloquentHorse extends Model implements Horse
      */
     public function followers()
     {
-        return $this->belongsToMany(User::class, 'follows', 'horse_id', 'user_id')->withTimestamps();
+        return $this->belongsToMany(EloquentUser::class, 'follows', 'horse_id', 'user_id')->withTimestamps();
     }
 
     /**

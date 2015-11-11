@@ -37,7 +37,7 @@ class EloquentCommentRepository implements CommentRepository
     public function create(Status $status, User $user, $body)
     {
         $comment = new EloquentComment();
-        $comment->status_id = $status->id;
+        $comment->status_id = $status->id();
         $comment->body = $body;
         $comment->user_id = $user->id;
 

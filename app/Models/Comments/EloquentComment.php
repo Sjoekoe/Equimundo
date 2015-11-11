@@ -2,7 +2,7 @@
 namespace EQM\Models\Comments;
 
 use EQM\Models\Statuses\EloquentStatus;
-use EQM\Models\Users\User;
+use EQM\Models\Users\EloquentUser;
 use Illuminate\Database\Eloquent\Model;
 
 class EloquentComment extends Model implements Comment
@@ -38,7 +38,7 @@ class EloquentComment extends Model implements Comment
      */
     public function poster()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id')->first();
+        return $this->belongsTo(EloquentUser::class, 'user_id', 'id')->first();
     }
 
     /**

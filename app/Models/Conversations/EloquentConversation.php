@@ -2,6 +2,7 @@
 namespace EQM\Models\Conversations;
 
 use Carbon\Carbon;
+use EQM\Models\Users\EloquentUser;
 use EQM\Models\Users\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -38,7 +39,7 @@ class EloquentConversation extends Model implements Conversation
      */
     private function userRelation()
     {
-        return $this->belongsToMany(User::class, 'conversation_user', 'conversation_id', 'user_id')->withPivot('last_view', 'deleted_at')->withTimestamps();
+        return $this->belongsToMany(EloquentUser::class, 'conversation_user', 'conversation_id', 'user_id')->withPivot('last_view', 'deleted_at')->withTimestamps();
     }
 
     /**
@@ -100,7 +101,7 @@ class EloquentConversation extends Model implements Conversation
 
     /**
      * @param \EQM\Models\Users\User $auhtenticatedUser
-     * @return \EQM\Models\Users\User
+     * @return \EQM\Models\Users\EloquentUser
      */
     public function contactPerson(User $auhtenticatedUser)
     {

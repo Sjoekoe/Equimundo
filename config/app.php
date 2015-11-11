@@ -160,6 +160,8 @@ return [
         EQM\Models\Pedigrees\PedigreeServiceProvider::class,
         EQM\Models\Pictures\PictureServiceProvider::class,
         EQM\Models\Statuses\StatusServiceProvider::class,
+        EQM\Models\Users\AuthServiceProvider::class,
+        EQM\Models\Users\UserServiceProvider::class,
     ],
     /*
     |--------------------------------------------------------------------------

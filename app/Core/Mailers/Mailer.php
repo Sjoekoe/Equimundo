@@ -28,7 +28,7 @@ abstract class Mailer
     public function sendTo(User $user, $subject, $view, $data = [])
     {
         $this->mail->queue($view, $data, function($message) use ($user, $subject) {
-            $message->to($user->email)->subject($subject);
+            $message->to($user->email())->subject($subject);
         });
     }
 }

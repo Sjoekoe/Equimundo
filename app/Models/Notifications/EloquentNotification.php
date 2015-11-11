@@ -1,7 +1,7 @@
 <?php
 namespace EQM\Models\Notifications;
 
-use EQM\Models\Users\User;
+use EQM\Models\Users\EloquentUser;
 use Illuminate\Database\Eloquent\Model;
 
 class EloquentNotification extends Model implements Notification
@@ -41,19 +41,19 @@ class EloquentNotification extends Model implements Notification
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \EQM\Models\Users\User
      */
     public function sender()
     {
-        return $this->hasOne(User::class, 'id', 'sender_id')->first();
+        return $this->hasOne(EloquentUser::class, 'id', 'sender_id')->first();
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
+    * @return \EQM\Models\Users\User
+    */
     public function receiver()
     {
-        return $this->hasOne(User::class, 'id', 'receiver_id')->first();
+        return $this->hasOne(EloquentUser::class, 'id', 'receiver_id')->first();
     }
 
     /**

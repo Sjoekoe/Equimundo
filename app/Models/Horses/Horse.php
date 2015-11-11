@@ -61,11 +61,6 @@ interface Horse
     public function users();
 
     /**
-     * @return bool
-     */
-    public function hasOwner();
-
-    /**
      * @return \EQM\Models\Statuses\Status[]
      */
     public function statuses();

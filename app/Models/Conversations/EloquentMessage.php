@@ -1,7 +1,7 @@
 <?php
 namespace EQM\Models\Conversations;
 
-use EQM\Models\Users\User;
+use EQM\Models\Users\EloquentUser;
 use Illuminate\Database\Eloquent\Model;
 
 class EloquentMessage extends Model implements Message
@@ -49,7 +49,7 @@ class EloquentMessage extends Model implements Message
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \EQM\Models\Conversations\Conversation
      */
     public function conversation()
     {
@@ -57,10 +57,10 @@ class EloquentMessage extends Model implements Message
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \EQM\Models\Users\User
      */
     public function user()
     {
-        return $this->belongsTo(User::class)->first();
+        return $this->belongsTo(EloquentUser::class)->first();
     }
 }
