@@ -5,7 +5,7 @@ use Carbon\Carbon;
 use EQM\Events\HorseWasCreated;
 use EQM\Models\Horses\EloquentHorse;
 use EQM\Models\HorseTeams\EloquentHorseTeam;
-use EQM\Models\Users\User;
+use EQM\Models\Users\EloquentUser;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class HorsesTest extends \TestCase
@@ -16,7 +16,7 @@ class HorsesTest extends \TestCase
     function it_can_create_a_horse()
     {
         $now = Carbon::now();
-        $user = factory(User::class)->create();
+        $user = factory(EloquentUser::class)->create();
 
         $this->expectsEvents(HorseWasCreated::class);
 
@@ -55,7 +55,7 @@ class HorsesTest extends \TestCase
     function it_can_edit_a_horse()
     {
         $now = Carbon::now();
-        $user = factory(User::class)->create();
+        $user = factory(EloquentUser::class)->create();
         $horse = factory(EloquentHorse::class)->create();
         factory(EloquentHorseTeam::class)->create([
             'user_id' => $user->id,
@@ -88,7 +88,7 @@ class HorsesTest extends \TestCase
 
     function it_can_delete_a_horse()
     {
-        $user = factory(User::class)->create();
+        $user = factory(EloquentUser::class)->create();
         $horse = factory(EloquentHorse::class)->create();
         $horseTeam = factory(EloquentHorseTeam::class)->create([
             'user_id' => $user->id,

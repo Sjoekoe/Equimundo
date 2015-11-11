@@ -2,7 +2,7 @@
 namespace EQM\Models\Events;
 
 use EQM\Models\Palmares\EloquentPalmares;
-use EQM\Models\Users\User;
+use EQM\Models\Users\EloquentUser;
 use Illuminate\Database\Eloquent\Model;
 
 class EloquentEvent extends Model implements Event
@@ -22,11 +22,11 @@ class EloquentEvent extends Model implements Event
      */
     public function creator()
     {
-        return $this->belongsTo(User::class, 'id', 'creator_id')->first();
+        return $this->belongsTo(EloquentUser::class, 'id', 'creator_id')->first();
     }
 
     /**
-     * @return \EQM\Models\Palmares\EloquentPalmares
+     * @return \EQM\Models\Palmares\Palmares
      */
     public function palmares()
     {

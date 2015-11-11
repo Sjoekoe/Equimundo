@@ -1,7 +1,7 @@
 <?php
 namespace Users;
 
-use EQM\Models\Users\User;
+use EQM\Models\Users\EloquentUser;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class UserTest extends \TestCase
@@ -10,7 +10,7 @@ class UserTest extends \TestCase
 
     /** @test */
     function add_user_details() {
-        $user = factory(User::class)->create([
+        $user = factory(EloquentUser::class)->create([
             'activated' => true,
         ]);
 

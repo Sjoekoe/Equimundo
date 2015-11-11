@@ -28,7 +28,7 @@ class EloquentHorseTeamRepository implements HorseTeamRepository
     public function create(User $user, Horse $horse, $type)
     {
         $horseTeam = new EloquentHorseTeam();
-        $horseTeam->user_id = $user->id;
+        $horseTeam->user_id = $user->id();
         $horseTeam->horse_id = $horse->id();
         $horseTeam->type = $type;
         $horseTeam->save();

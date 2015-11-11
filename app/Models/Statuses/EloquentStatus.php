@@ -6,7 +6,7 @@ use EQM\Models\Horses\EloquentHorse;
 use EQM\Models\Palmares\EloquentPalmares;
 use EQM\Models\Pictures\EloquentPicture;
 use EQM\Models\Pictures\Picture;
-use EQM\Models\Users\User;
+use EQM\Models\Users\EloquentUser;
 use Illuminate\Database\Eloquent\Model;
 
 class EloquentStatus extends Model implements Status
@@ -50,7 +50,7 @@ class EloquentStatus extends Model implements Status
      */
     public function likes()
     {
-        return $this->belongsToMany(User::class, 'likes', 'status_id', 'user_id')->get();
+        return $this->belongsToMany(EloquentUser::class, 'likes', 'status_id', 'user_id')->get();
     }
 
     /**

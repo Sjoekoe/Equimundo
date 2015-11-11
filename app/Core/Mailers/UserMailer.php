@@ -13,7 +13,7 @@ class UserMailer extends Mailer
         $subject = 'Welcome to Equimundo';
         $view = 'emails.registration.confirm';
         $data = [
-            'activationLink' => route('activate', ['token' => $user->getRememberToken(), 'email' => $user->email]),
+            'activationLink' => route('activate', ['token' => $user->getRememberToken(), 'email' => $user->email()]),
         ];
 
         return $this->sendTo($user, $subject, $view, $data);

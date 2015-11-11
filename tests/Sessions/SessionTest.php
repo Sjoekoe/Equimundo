@@ -1,14 +1,14 @@
 <?php
 namespace Sessions;
 
-use EQM\Models\Users\User;
+use EQM\Models\Users\EloquentUser;
 
 class SessionTest extends \TestCase
 {
     /** @test */
     public function login()
     {
-        $user = factory(User::class)->create([
+        $user = factory(EloquentUser::class)->create([
             'email' => 'foo@bar.com',
         ]);
 
@@ -23,7 +23,7 @@ class SessionTest extends \TestCase
     /** @test */
     public function logout()
     {
-        $user = factory(User::class)->create();
+        $user = factory(EloquentUser::class)->create();
 
         $this->actingAs($user)
             ->withSession(['foo' => 'bar'])

@@ -8,7 +8,7 @@ class UserRegistered extends Event {
     use SerializesModels;
 
     /**
-     * @var \EQM\Events\User
+     * @var \EQM\Models\Users\User
      */
     public $user;
 

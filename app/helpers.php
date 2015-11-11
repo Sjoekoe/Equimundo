@@ -8,13 +8,13 @@ if (! function_exists('locale')) {
      */
     function eqm_locale()
     {
-        return auth()->check() ? auth()->user()->getLocale() : 'en';
+        return auth()->check() ? auth()->user()->language() : 'en';
     }
 }
 
 if (! function_exists('eqm_date')) {
     function eqm_date(Carbon $date)
     {
-        return $date->format(auth()->user()->date_format);
+        return $date->format(auth()->user()->dateFormat());
     }
 }

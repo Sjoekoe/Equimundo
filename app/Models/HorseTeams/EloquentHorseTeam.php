@@ -2,7 +2,7 @@
 namespace EQM\Models\HorseTeams;
 
 use EQM\Models\Horses\EloquentHorse;
-use EQM\Models\Users\User;
+use EQM\Models\Users\EloquentUser;
 use Illuminate\Database\Eloquent\Model;
 
 class EloquentHorseTeam extends Model implements HorseTeam
@@ -38,7 +38,7 @@ class EloquentHorseTeam extends Model implements HorseTeam
      */
     private function userRelation()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(EloquentUser::class, 'user_id', 'id');
     }
 
     /**

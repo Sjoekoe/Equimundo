@@ -33,7 +33,9 @@ class EloquentConversationRepository implements ConversationRepository
      */
     public function findByUser(User $user)
     {
-        return $this->conversation->whereUser('user_id', $user->id)->get();
+        return $this->conversation
+            ->join('conversation_user', 'conversations.id', '=', 'conversation_user.conversation_id')
+            ->where('conversation_user.user_id', $user->id())->get();
     }
 
     /**
