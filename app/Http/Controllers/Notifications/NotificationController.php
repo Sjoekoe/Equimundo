@@ -1,6 +1,7 @@
 <?php
 namespace EQM\Http\Controllers\Notifications;
 
+use EQM\Models\Notifications\Notification;
 use EQM\Models\Notifications\NotificationRepository;
 use Illuminate\Routing\Controller;
 
@@ -30,10 +31,10 @@ class NotificationController extends Controller
     }
 
     /**
-     * @param int|null $notification
+     * @param \EQM\Models\Notifications\Notification $notification
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function markRead($notification = null)
+    public function markRead(Notification $notification = null)
     {
         auth()->user()->markNotificationsAsRead();
 

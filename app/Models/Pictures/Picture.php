@@ -26,6 +26,16 @@ interface Picture
     public function path();
 
     /**
+     * @return string
+     */
+    public function mime();
+
+    /**
+     * @return string
+     */
+    public function originalName();
+
+    /**
      * @return bool
      */
     public function profilePicture();

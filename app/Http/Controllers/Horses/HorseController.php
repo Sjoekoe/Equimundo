@@ -2,6 +2,7 @@
 namespace EQM\Http\Controllers\Horses;
 
 use DB;
+use EQM\Models\Horses\Horse;
 use EQM\Models\Horses\HorseCreator;
 use EQM\Models\Horses\HorseRepository;
 use EQM\Models\Horses\HorseUpdater;
@@ -9,6 +10,7 @@ use EQM\Models\Horses\Requests\CreateHorse;
 use EQM\Models\Horses\Requests\UpdateHorse;
 use EQM\Models\HorseTeams\HorseTeamRepository;
 use EQM\Models\Statuses\StatusRepository;
+use EQM\Models\Users\User;
 use EQM\Models\Users\UserRepository;
 use Illuminate\Routing\Controller;
 
@@ -54,13 +56,11 @@ class HorseController extends Controller
     }
 
     /**
-     * @param int $userId
+     * @param \EQM\Models\Users\User $user
      * @return \Illuminate\View\View
      */
-    public function index($userId)
+    public function index(User $user)
     {
-        $user = $this->users->findById($userId);
-
         $horses = $this->horses->findForUser($user);
 
         return view('horses.index', compact('user', 'horses'));
@@ -85,19 +85,17 @@ class HorseController extends Controller
     {
         $horse = $creator->create(auth()->user(), $request->all());
 
-        session()->put('success', $horse->name . ' was successfully created.');
+        session()->put('success', $horse->name() . ' was successfully created.');
 
         return redirect()->route('horses.index', auth()->user()->id);
     }
 
     /**
-     * @param string $slug
+     * @param \EQM\Models\Horses\Horse $horse
      * @return \Illuminate\View\View
      */
-    public function show($slug)
+    public function show(Horse $horse)
     {
-        $horse = $this->horses->findBySlug($slug);
-
         $statuses = $this->statuses->findFeedForHorse($horse);
 
         $likes = DB::table('likes')->whereUserId(auth()->user()->id)->lists('status_id');
@@ -106,13 +104,11 @@ class HorseController extends Controller
     }
 
     /**
-     * @param string $slug
+     * @param \EQM\Models\Horses\Horse $horse
      * @return \Illuminate\View\View
      */
-    public function edit($slug)
+    public function edit(Horse $horse)
     {
-        $horse = $this->initHorse($slug);
-
         $disciplines = trans('disciplines.list');
 
         return view('horses.edit', compact('horse', 'disciplines'));
@@ -121,13 +117,11 @@ class HorseController extends Controller
     /**
      * @param \EQM\Models\Horses\Requests\UpdateHorse $request
      * @param \EQM\Models\Horses\HorseUpdater $updater
-     * @param string $slug
+     * @param \EQM\Models\Horses\Horse $horse
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(UpdateHorse $request, HorseUpdater $updater, $slug)
+    public function update(UpdateHorse $request, HorseUpdater $updater, Horse $horse)
     {
-        $horse = $this->initHorse($slug);
-
         $updater->update($horse, $request->all());
 
         session(['success', $horse->name() . ' was updated']);
@@ -136,32 +130,15 @@ class HorseController extends Controller
     }
 
     /**
-     * @param string $slug
+     * @param \EQM\Models\Horses\Horse $horse
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function delete($slug)
+    public function delete(Horse $horse)
     {
-        $horse = $this->initHorse($slug);
-
         $this->horseTeams->delete();
 
         session()->put('success', 'The horse was removed from your list');
 
         return redirect()->route('home');
-    }
-
-    /**
-     * @param string $slug
-     * @return \EQM\Models\Horses\Horse
-     */
-    private function initHorse($slug)
-    {
-        $horse = $this->horses->findBySlug($slug);
-
-        if (auth()->user()->isInHorseTeam($horse)) {
-            return $horse;
-        }
-
-        abort(403);
     }
 }

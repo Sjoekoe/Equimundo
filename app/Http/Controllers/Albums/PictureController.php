@@ -2,7 +2,9 @@
 namespace EQM\Http\Controllers\Albums;
 
 use EQM\Core\Files\Uploader;
+use EQM\Models\Albums\Album;
 use EQM\Models\Albums\AlbumRepository;
+use EQM\Models\Pictures\Picture;
 use EQM\Models\Pictures\PictureRepository;
 use Illuminate\Auth\AuthManager;
 use Illuminate\Routing\Controller;
@@ -46,13 +48,11 @@ class PictureController extends Controller
     }
 
     /**
-     * @param int $albumId
+     * @param \EQM\Models\Albums\Album $album
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function create($albumId)
+    public function store(Album $album)
     {
-        $album = $this->initAlbum($albumId);
-
         $pictures = Input::file('pictures');
 
         foreach ($pictures as $picture) {
@@ -67,16 +67,12 @@ class PictureController extends Controller
     }
 
     /**
-     * @param int $albumId
-     * @param int $pictureId
+     * @param \EQM\Models\Albums\Album $album
+     * @param \EQM\Models\Pictures\Picture $picture
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function delete($albumId, $pictureId)
+    public function delete(Album $album, Picture $picture)
     {
-        $album = $this->initAlbum($albumId);
-
-        $picture = $this->pictures->findById($pictureId);
-
         if (count($picture->albums()) > 1) {
             $picture->removeFromAlbum($album);
 
@@ -90,20 +86,5 @@ class PictureController extends Controller
         }
 
         return redirect()->route('album.show', $album->id);
-    }
-
-    /**
-     * @param int $albumId
-     * @return \EQM\Models\Albums\Album
-     */
-    private function initAlbum($albumId)
-    {
-        $album = $this->albums->findById($albumId);
-
-        if ($this->auth->user()->isInHorseTeam($album->horse())) {
-            return $album;
-        }
-
-        abort(403);
     }
 }

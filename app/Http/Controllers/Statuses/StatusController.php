@@ -3,6 +3,7 @@ namespace EQM\Http\Controllers\Statuses;
 
 use EQM\Core\Files\Uploader;
 use EQM\Models\Statuses\Requests\PostStatus;
+use EQM\Models\Statuses\Status;
 use EQM\Models\Statuses\StatusCreator;
 use EQM\Models\Statuses\StatusRepository;
 use Illuminate\Routing\Controller;
@@ -44,66 +45,43 @@ class StatusController extends Controller
     }
 
     /**
-     * @param int $statusId
+     * @param \EQM\Models\Statuses\Status $status
      * @return \Illuminate\View\View
      */
-    public function show($statusId)
+    public function show(Status $status)
     {
-        $status = $this->statuses->findById($statusId);
-
         return view('statuses.show', compact('status'));
     }
 
     /**
-     * @param int $statusId
+     * @param \EQM\Models\Statuses\Status $status
      * @return \Illuminate\View\View
      */
-    public function edit($statusId)
+    public function edit(Status $status)
     {
-        $status = $this->initStatus($statusId);
-
         return view('statuses.edit', compact('status'));
     }
 
     /**
      * @param \EQM\Models\Statuses\Requests\PostStatus $request
-     * @param int $statusId
+     * @param \EQM\Models\Statuses\Status $status
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(PostStatus $request, $statusId)
+    public function update(PostStatus $request, Status $status)
     {
-        $status = $this->initStatus($statusId);
-
         $this->statuses->update($status, $request->all());
 
         return redirect()->route('home');
     }
 
     /**
-     * @param int $statusId
+     * @param \EQM\Models\Statuses\Status $status
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function delete($statusId)
+    public function delete(Status $status)
     {
-        $status = $this->initStatus($statusId);
-
         $status->delete();
 
         return redirect()->back();
-    }
-
-    /**
-     * @param int $statusId
-     * @return \EQM\Models\Statuses\Status
-     */
-    private function initStatus($statusId)
-    {
-        $status = $this->statuses->findById($statusId);
-
-        if (! auth()->user()->isInHorseTeam($status->horse())) {
-            abort(403);
-        }
-
-        return $status;
     }
 }

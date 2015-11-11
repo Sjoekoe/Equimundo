@@ -1,6 +1,7 @@
 <?php
 namespace EQM\Http\Controllers\Files;
 
+use EQM\Models\Pictures\Picture;
 use EQM\Models\Pictures\PictureRepository;
 use Illuminate\Routing\Controller;
 use Storage;
@@ -21,16 +22,13 @@ class FileController extends Controller
     }
 
     /**
-     * @param int $horseId
-     * @param string $path
+     * @param \EQM\Models\Pictures\Picture $picture
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
-    public function getImage($horseId, $path)
+    public function getImage(Picture $picture)
     {
-        $image = $this->pictures->findByPath($path);
+        $file = Storage::disk()->get('/uploads/pictures/' . $picture->horse()->id() . '/' . $picture->path());
 
-        $file = Storage::disk()->get('/uploads/pictures/' . $horseId . '/' . $path);
-
-        return response($file, 200, ['Content-Type' => $image->mime]);
+        return response($file, 200, ['Content-Type' => $picture->mime()]);
     }
 }

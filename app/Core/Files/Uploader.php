@@ -44,7 +44,7 @@ class Uploader
     public function uploadPicture($file, Horse $horse, $profile = false)
     {
         $extension  = $file->getClientOriginalExtension();
-        $path       = '/uploads/pictures/' . $horse->id;
+        $path       = '/uploads/pictures/' . $horse->id();
         $fileName   = str_random(12);
         $pathToFile = storage_path() . '/app' . $path . '/' . $fileName . '.' . $extension;
 

@@ -1,3 +1,3 @@
 <?php
 
-get('picture/{horseId}/{path}', ['as' => 'file.picture', 'uses' => 'FileController@getImage']);
+get('picture/{picture}', ['as' => 'file.picture', 'uses' => 'FileController@getImage']);

@@ -4,6 +4,7 @@ namespace EQM\Http\Controllers\Statuses;
 use DB;
 use EQM\Events\StatusLiked;
 use EQM\Models\Notifications\Notification;
+use EQM\Models\Statuses\Status;
 use EQM\Models\Statuses\StatusRepository;
 use Illuminate\Routing\Controller;
 
@@ -23,13 +24,11 @@ class LikeController extends Controller
     }
 
     /**
-     * @param int $status
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param \EQM\Models\Statuses\Status $status
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function like($status)
+    public function like(Status $status)
     {
-        $status = $this->statuses->findById($status);
-
         $likes = DB::table('likes')->whereUserId(auth()->user()->id)->lists('status_id');
 
         if (in_array($status->id(), $likes)) {
@@ -37,7 +36,7 @@ class LikeController extends Controller
         } else {
             auth()->user()->likes()->attach($status);
 
-            $data = ['sender' => auth()->user()->fullName(), 'horse' => $status->horse()->name];
+            $data = ['sender' => auth()->user()->fullName(), 'horse' => $status->horse()->name()];
 
             event(new StatusLiked($status, auth()->user(), Notification::STATUS_LIKED, $data));
         }

@@ -2,6 +2,7 @@
 namespace EQM\Http\Controllers\Conversations;
 
 use EQM\Http\Controllers\Controller;
+use EQM\Models\Conversations\Conversation;
 use EQM\Models\Conversations\ConversationRepository;
 use EQM\Models\Conversations\MessageRepository;
 use EQM\Models\Conversations\Requests\ConversationRequest;
@@ -86,13 +87,11 @@ class ConversationController extends Controller
     }
 
     /**
-     * @param int $conversationId
+     * @param \EQM\Models\Conversations\Conversation $conversation
      * @return \Illuminate\View\View
      */
-    public function show($conversationId)
+    public function show(Conversation $conversation)
     {
-        $conversation = $this->conversations->findById($conversationId);
-
         $conversation->markAsRead(auth()->user());
 
         $messages = $this->conversations->findMessages($conversation);
@@ -101,13 +100,11 @@ class ConversationController extends Controller
     }
 
     /**
-     * @param int $conversationId
+     * @param \EQM\Models\Conversations\Conversation $conversation
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function delete($conversationId)
+    public function delete(Conversation $conversation)
     {
-        $conversation = $this->conversations->findById($conversationId);
-
         $conversation->deleteForUser(auth()->user());
 
         return redirect()->back();

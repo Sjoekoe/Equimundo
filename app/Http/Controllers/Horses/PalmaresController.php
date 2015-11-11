@@ -4,7 +4,9 @@ namespace EQM\Http\Controllers\Horses;
 use EQM\Events\PalmaresWasCreated;
 use EQM\Events\PalmaresWasDeleted;
 use EQM\Http\Controllers\Controller;
+use EQM\Models\Horses\Horse;
 use EQM\Models\Horses\HorseRepository;
+use EQM\Models\Palmares\Palmares;
 use EQM\Models\Palmares\PalmaresRepository;
 use Input;
 
@@ -33,108 +35,68 @@ class PalmaresController extends Controller
     }
 
     /**
-     * @param string $horseSlug
+     * @param \EQM\Models\Horses\Horse $horse
      * @return \Illuminate\View\View
      */
-    public function index($horseSlug)
+    public function index(Horse $horse)
     {
-        $horse = $this->initHorse($horseSlug);
-
         $palmaresResults = $this->palmaresRepository->findPalmaresForHorse($horse);
 
         return view('horses.palmares.index', compact('horse', 'palmaresResults'));
     }
 
     /**
-     * @param string $horseSlug
+     * @param \EQM\Models\Horses\Horse $horse
      * @return \Illuminate\View\View
      */
-    public function create($horseSlug)
+    public function create(Horse $horse)
     {
-        $horse = $this->initHorse($horseSlug);
-
         return view('horses.palmares.create', compact('horse'));
     }
 
     /**
-     * @param string $horseSlug
+     * @param \EQM\Models\Horses\Horse $horse
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store($horseSlug)
+    public function store(Horse $horse)
     {
-        $horse = $this->initHorse($horseSlug);
-
         event(new PalmaresWasCreated($horse, Input::all()));
 
-        return redirect()->route('palmares.index', $horse->slug);
+        return redirect()->route('palmares.index', $horse->slug());
     }
 
     /**
-     * @param int $palmaresId
+     * @param \EQM\Models\Palmares\Palmares $palmares
      * @return \Illuminate\View\View
      */
-    public function edit($palmaresId)
+    public function edit(Palmares $palmares)
     {
-        $palmares = $this->initPalmares($palmaresId);
-
         return view('horses.palmares.edit', compact('palmares'));
     }
 
     /**
-     * @param int $palmaresId
+     * @param \EQM\Models\Palmares\Palmares $palmares
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update($palmaresId)
+    public function update(Palmares $palmares)
     {
-        $palmares = $this->initPalmares($palmaresId);
-
         $this->palmaresRepository->update($palmares, Input::all());
 
         $horse = $palmares->horse();
 
-        return redirect()->route('palmares.index', $horse->slug);
+        return redirect()->route('palmares.index', $horse->slug());
     }
 
     /**
-     * @param int $palmaresId
+     * @param \EQM\Models\Palmares\Palmares $palmares
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function delete($palmaresId)
+    public function delete(Palmares $palmares)
     {
-        $palmares = $this->initPalmares($palmaresId);
-
         $horse = $palmares->horse();
 
         event(new PalmaresWasDeleted($palmares));
 
-        return redirect()->route('palmares.index', $horse->slug);
-    }
-
-    /**
-     * @param string horseSlug
-     * @return \EQM\Models\Horses\Horse
-     */
-    private function initHorse($horseSlug)
-    {
-        $horse = $this->horses->findBySlug($horseSlug);
-
-        return $horse;
-    }
-
-    /**
-     * @param int $palmaresId
-     * @return \EQM\Models\Palmares\Palmares
-     */
-    private function initPalmares($palmaresId)
-    {
-        $palmares = $this->palmaresRepository->findById($palmaresId);
-
-        $horse = $palmares->horse();
-
-        if (! auth()->user()->isInHorseTeam($horse)) {
-            abort(403);
-        }
-
-        return $palmares;
+        return redirect()->route('palmares.index', $horse->slug());
     }
 }

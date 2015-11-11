@@ -55,11 +55,11 @@ class EloquentHorseTeamRepository implements HorseTeamRepository
     }
 
     /**
-     * @param \EQM\Models\HorseTeams\HorseTeam $horseTeam
+     * @param int $id
      * @return \EQM\Models\HorseTeams\HorseTeam
      */
-    public function find(HorseTeam $horseTeam)
+    public function findById($id)
     {
-        return $this->horseTeam->find($horseTeam->id());
+        return $this->horseTeam->find($id);
     }
 }

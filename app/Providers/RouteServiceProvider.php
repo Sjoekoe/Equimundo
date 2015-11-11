@@ -1,8 +1,16 @@
 <?php namespace EQM\Providers;
 
-use EQM\Models\Horses\EloquentHorse;
-use EQM\Models\HorseTeams\HorseTeam;
-use EQM\Models\Users\User;
+use EQM\Models\Albums\AlbumRouteBinder;
+use EQM\Models\Conversations\ConversationRouteBinder;
+use EQM\Models\Horses\HorseRouteBinder;
+use EQM\Models\Horses\HorseSlugRouteBinder;
+use EQM\Models\HorseTeams\HorseTeamRouteBinder;
+use EQM\Models\Notifications\NotificationRouteBinder;
+use EQM\Models\Palmares\PalmaresRouteBinder;
+use EQM\Models\Pedigrees\PedigreeRouteBinder;
+use EQM\Models\Pictures\PictureRouteBinder;
+use EQM\Models\Statuses\StatusRouteBinder;
+use EQM\Models\Users\UserRouteBinder;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -27,9 +35,17 @@ class RouteServiceProvider extends ServiceProvider {
 	{
 		parent::boot($router);
 
-        $router->model('horse', EloquentHorse::class);
-		$router->model('user', User::class);
-		$router->model('horse_team', HorseTeam::class);
+        $router->bind('album', AlbumRouteBinder::class);
+        $router->bind('conversation', ConversationRouteBinder::class);
+        $router->bind('horse', HorseRouteBinder::class);
+        $router->bind('horse_team', HorseTeamRouteBinder::class);
+        $router->bind('horse_slug', HorseSlugRouteBinder::class);
+        $router->bind('notification', NotificationRouteBinder::class);
+        $router->bind('palmares', PalmaresRouteBinder::class);
+        $router->bind('pedigree', PedigreeRouteBinder::class);
+        $router->bind('picture', PictureRouteBinder::class);
+        $router->bind('status', StatusRouteBinder::class);
+        $router->bind('user', UserRouteBinder::class);
 	}
 
 	/**

@@ -4,7 +4,7 @@ namespace EQM\Http\Controllers\Statuses;
 use EQM\Events\CommentWasPosted;
 use EQM\Models\Comments\CommentRepository;
 use EQM\Models\Notifications\Notification;
-use EQM\Models\Statuses\StatusRepository;
+use EQM\Models\Statuses\Status;
 use Illuminate\Routing\Controller;
 use Input;
 
@@ -16,31 +16,23 @@ class CommentController extends Controller
     private $comments;
 
     /**
-     * @var \EQM\Models\Statuses\StatusRepository
-     */
-    private $statuses;
-
-    /**
      * @param \EQM\Models\Comments\CommentRepository $comments
      * @param \EQM\Models\Statuses\StatusRepository $statuses
      */
-    public function __construct(CommentRepository $comments, StatusRepository $statuses)
+    public function __construct(CommentRepository $comments)
     {
         $this->comments = $comments;
-        $this->statuses = $statuses;
     }
 
     /**
-     * @param int $status
-     * @return \Illuminate\Http\RedirectResponse
+     * @param \EQM\Models\Statuses\Status $status
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store($status)
+    public function store(Status $status)
     {
-        $status = $this->statuses->findById($status);
-
         $comment = $this->comments->create($status, auth()->user(), Input::get('body'));
 
-        $data = ['sender' => auth()->user()->fullName(), 'horse' => $status->horse()->name];
+        $data = ['sender' => auth()->user()->fullName(), 'horse' => $status->horse()->name()];
 
         event(new CommentWasPosted($comment->status(), auth()->user(), Notification::COMMENT_POSTED, $data));
 
