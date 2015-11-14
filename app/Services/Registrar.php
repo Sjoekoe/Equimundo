@@ -1,23 +1,22 @@
 <?php namespace EQM\Services;
 
-use EQM\Models\Users\EloquentUser;
-use EQM\Models\Users\UserRepository;
-use Validator;
+use EQM\Models\Users\UserCreator;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
+use Validator;
 
 class Registrar implements RegistrarContract {
-    /**
-     * @var \EQM\Models\Users\UserRepository
-     */
-    private $users;
+	/**
+	 * @var \EQM\Models\Users\UserCreator
+	 */
+	private $userCreator;
 
-    /**
-     * @param \EQM\Models\Users\UserRepository $users
-     */
-    public function __construct(UserRepository $users)
+	/**
+	 * @param \EQM\Models\Users\UserCreator $userCreator
+	 */
+    public function __construct(UserCreator $userCreator)
 	{
-        $this->users = $users;
-    }
+		$this->userCreator = $userCreator;
+	}
 
 	/**
 	 * Get a validator for an incoming registration request.
@@ -42,7 +41,7 @@ class Registrar implements RegistrarContract {
 	 */
 	public function create(array $data)
 	{
-        $user = $this->users->create($data);
+		$user = $this->userCreator->create($data);
 
         return $user;
 	}

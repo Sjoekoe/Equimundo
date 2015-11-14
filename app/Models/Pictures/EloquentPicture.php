@@ -23,7 +23,7 @@ class EloquentPicture extends Model implements Picture
      */
     public function horse()
     {
-        return $this->belongsTo(EloquentHorse::class);
+        return $this->belongsTo(EloquentHorse::class)->first();
     }
 
     /**

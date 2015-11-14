@@ -13,7 +13,7 @@
                 {{ nl2br($status->body()) }}
                 @if ($status->hasPicture())
                     <br/>
-                    <img src="{{ route('file.picture', [$status->horse()->id, $status->getPicture()->path()]) }}" alt=""/>
+                    <img src="{{ route('file.picture', [$status->getPicture()->id()]) }}" alt=""/>
                 @endif
                 <span class="right"><a href="{{ route('statuses.edit', $status->id()) }}">{{ trans('copy.a.edit') }}</a></span>
                 <span class="right"><a href="{{ route('statuses.delete', $status->id()) }}">{{ trans('copy.a.delete') }}</a></span>
@@ -38,7 +38,7 @@
             </div>
             @if (Auth::check())
                 <div class="row comment">
-                    {{ Form::open(['route' => ['comment.store', $status->id], 'class' => 'comments__create-form col s12']) }}
+                    {{ Form::open(['route' => ['comment.store', $status->id()], 'class' => 'comments__create-form col s12']) }}
                         <div class="row">
                             <div class="input-field col s12">
                                 {{ Form::textarea('body', null, ['class' => 'materialize-textarea', 'rows' => 1, 'placeholder' => trans('forms.placeholders.write_a_comment')]) }}
