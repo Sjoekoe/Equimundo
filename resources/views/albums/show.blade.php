@@ -7,7 +7,7 @@
     <p>{{ $album->description() }}</p>
     @if (auth()->user()->isInHorseTeam($horse))
         <div class="row">
-            {{ Form::open(['route' => ['album.picture.create', $album->id()], 'files' => true]) }}
+            {{ Form::open(['route' => ['album.picture.store', $album->id()], 'files' => true]) }}
                 {{ Form::label('pictures[]', trans('forms.labels.add_pictures')) }}
                 {{ Form::file('pictures[]', ['multiple' => true]) }}
                 {{ Form::submit(trans('forms.labels.add_pictures')) }}
@@ -21,8 +21,8 @@
 
     <div class="row">
         @foreach ($album->pictures() as $picture)
-            <img src="{{ route('file.picture', [$horse->id, $picture->path]) }}" alt=""/>
-            <a href="{{ route('album.picture.delete', [$album->id, $picture->id]) }}">{{ trans('copy.a.delete_picture') }}</a>
+            <img src="{{ route('file.picture', [$picture->id()]) }}" alt=""/>
+            <a href="{{ route('album.picture.delete', [$album->id(), $picture->id()]) }}">{{ trans('copy.a.delete_picture') }}</a>
         @endforeach
     </div>
 @stop

@@ -1,12 +1,13 @@
 <?php
 namespace EQM\Models\Roles;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Role extends Model
+interface Role
 {
+    const MEMBER = 'member';
+    const ADMIN = 'admin';
+
     /**
-     * @var array
+     * @return string
      */
-    protected $fillable = ['name'];
+    public function name();
 }

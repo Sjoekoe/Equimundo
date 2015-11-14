@@ -11,6 +11,7 @@ use EQM\Models\Horses\Horse;
 use EQM\Models\HorseTeams\EloquentHorseTeam;
 use EQM\Models\HorseTeams\HorseTeam;
 use EQM\Models\Notifications\EloquentNotification;
+use EQM\Models\Roles\EloquentRole;
 use EQM\Models\Roles\Role;
 use EQM\Models\Statuses\EloquentStatus;
 use Illuminate\Auth\Authenticatable;
@@ -131,7 +132,7 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
      */
     public function roles()
     {
-        return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'id')->withTimestamps();
+        return $this->hasMany(EloquentRole::class, 'user_id', 'id')->get();
     }
 
     /**
@@ -164,8 +165,8 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
      */
     public function hasRole($name)
     {
-        foreach ($this->roles as $role) {
-            if ($role->name == $name) return true;
+        foreach ($this->roles() as $role) {
+            if ($role->name() == $name) return true;
         }
 
         return false;
@@ -193,7 +194,7 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
      */
     public function isAdmin()
     {
-        return $this->hasRole('administrator');
+        return $this->hasRole(Role::ADMIN);
     }
 
     /**

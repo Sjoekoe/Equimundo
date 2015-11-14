@@ -25,14 +25,12 @@ class EloquentUserRepository implements UserRepository
     public function create(array $values)
     {
         $user = EloquentUser::create([
-            'first_name' => $values['username'],
+            'first_name' => $values['first_name'],
             'last_name' => $values['last_name'],
             'email' => $values['email'],
             'password' => bcrypt($values['password']),
             'remember_token' => $values['activationCode'],
         ]);
-
-        $user->assignRole(1);
 
         $user->save();
 

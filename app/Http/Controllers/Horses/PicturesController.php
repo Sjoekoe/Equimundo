@@ -3,6 +3,7 @@ namespace EQM\Http\Controllers\Horses;
 
 use EQM\Http\Controllers\Controller;
 use EQM\Models\Albums\AlbumRepository;
+use EQM\Models\Horses\Horse;
 use EQM\Models\Horses\HorseRepository;
 
 class PicturesController extends Controller
@@ -28,13 +29,11 @@ class PicturesController extends Controller
     }
 
     /**
-     * @param string $horseSlug
+     * @param \EQM\Models\Horses\Horse $horse
      * @return \Illuminate\View\View
      */
-    public function index($horseSlug)
+    public function index(Horse $horse)
     {
-        $horse = $this->horses->findBySlug($horseSlug);
-
         $albums = $this->albums->findForHorse($horse);
 
         return view('horses.pictures.index', compact('horse', 'albums'));

@@ -1,1 +1,1 @@
-<div class="picture-block" style="background-image: url({{ route('file.picture', [$horse->id, $picture->path]) }})"></div>
+<div class="picture-block" style="background-image: url({{ route('file.picture', [$picture->id()]) }})"></div>
