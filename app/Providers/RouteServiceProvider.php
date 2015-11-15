@@ -1,6 +1,8 @@
-<?php namespace EQM\Providers;
+<?php
+namespace EQM\Providers;
 
 use EQM\Models\Albums\AlbumRouteBinder;
+use EQM\Models\Comments\CommentRouteBinder;
 use EQM\Models\Conversations\ConversationRouteBinder;
 use EQM\Models\Horses\HorseRouteBinder;
 use EQM\Models\Horses\HorseSlugRouteBinder;
@@ -16,26 +18,17 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 
 class RouteServiceProvider extends ServiceProvider {
 
-	/**
-	 * This namespace is applied to the controller routes in your routes file.
-	 *
-	 * In addition, it is set as the URL generator's root namespace.
-	 *
-	 * @var string
-	 */
-	protected $namespace = 'EQM\Http\Controllers';
+    /**
+     * @var string
+     */
+    protected $namespace = 'EQM\Http\Controllers';
 
-	/**
-	 * Define your route model bindings, pattern filters, etc.
-	 *
-	 * @param  \Illuminate\Routing\Router  $router
-	 * @return void
-	 */
-	public function boot(Router $router)
-	{
-		parent::boot($router);
+    public function boot(Router $router)
+    {
+        parent::boot($router);
 
         $router->bind('album', AlbumRouteBinder::class);
+        $router->bind('comment', CommentRouteBinder::class);
         $router->bind('conversation', ConversationRouteBinder::class);
         $router->bind('horse', HorseRouteBinder::class);
         $router->bind('horse_team', HorseTeamRouteBinder::class);
@@ -46,20 +39,14 @@ class RouteServiceProvider extends ServiceProvider {
         $router->bind('picture', PictureRouteBinder::class);
         $router->bind('status', StatusRouteBinder::class);
         $router->bind('user', UserRouteBinder::class);
-	}
+    }
 
-	/**
-	 * Define the routes for the application.
-	 *
-	 * @param  \Illuminate\Routing\Router  $router
-	 * @return void
-	 */
-	public function map(Router $router)
-	{
-		$router->group(['namespace' => $this->namespace], function($router)
-		{
-			require app_path('Http/routes.php');
-		});
-	}
+    public function map(Router $router)
+    {
+        $router->group(['namespace' => $this->namespace], function($router)
+        {
+            require app_path('Http/routes.php');
+        });
+    }
 
 }

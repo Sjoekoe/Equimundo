@@ -2,6 +2,7 @@
 namespace EQM\Http\Controllers\Statuses;
 
 use EQM\Events\CommentWasPosted;
+use EQM\Models\Comments\Comment;
 use EQM\Models\Comments\CommentRepository;
 use EQM\Models\Notifications\Notification;
 use EQM\Models\Statuses\Status;
@@ -39,5 +40,18 @@ class CommentController extends Controller
         session()->put('success', 'Your comment was posted');
 
         return response()->json('success', 200);
+    }
+
+    /**
+     * @param \EQM\Models\Comments\Comment $comment
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function delete(Comment $comment)
+    {
+        $this->comments->delete($comment);
+
+        session()->put('success', 'comment deleted');
+
+        return back();
     }
 }

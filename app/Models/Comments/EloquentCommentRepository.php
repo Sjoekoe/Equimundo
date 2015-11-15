@@ -45,4 +45,12 @@ class EloquentCommentRepository implements CommentRepository
 
         return $comment;
     }
+
+    /**
+     * @param \EQM\Models\Comments\Comment $comment
+     */
+    public function delete(Comment $comment)
+    {
+        $comment->delete();
+    }
 }

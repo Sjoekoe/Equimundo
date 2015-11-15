@@ -19,4 +19,9 @@ interface CommentRepository
      * @return \EQM\Models\Comments\Comment
      */
     public function create(Status $status, User $user, $body);
+
+    /**
+     * @param \EQM\Models\Comments\Comment $comment
+     */
+    public function delete(Comment $comment);
 }
