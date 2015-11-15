@@ -13,41 +13,25 @@ class ProfileController extends  Controller
      */
     private $users;
 
-    /**
-     * @param \EQM\Models\Users\UserRepository $users
-     */
     public function __construct(UserRepository $users)
     {
         $this->users = $users;
     }
 
-    /**
-     * @return \Illuminate\View\View
-     */
     public function edit()
     {
         return view('users.profiles.edit');
     }
 
-    /**
-     * @param \EQM\Models\Users\Requests\UpdateUserProfile $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function update(UpdateUserProfile $request)
     {
-        $user = $this->users->findById(auth()->user()->id);
-
-        $this->users->update($user, $request->all());
+        $this->users->update(auth()->user(), $request->all());
 
         session()->put('success', 'Profile was updated');
 
         return redirect()->route('users.profiles.edit');
     }
 
-    /**
-     * @param \EQM\Models\Users\User $user
-     * @return \Illuminate\View\View
-     */
     public function show(User $user)
     {
         return view('users.profiles.show', compact('user'));

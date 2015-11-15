@@ -2,12 +2,12 @@
 namespace EQM\Http\Controllers\Conversations;
 
 use EQM\Http\Controllers\Controller;
+use EQM\Http\Requests\Request;
 use EQM\Models\Conversations\Conversation;
+use EQM\Models\Conversations\ConversationCreator;
 use EQM\Models\Conversations\ConversationRepository;
-use EQM\Models\Conversations\MessageRepository;
 use EQM\Models\Conversations\Requests\ConversationRequest;
 use EQM\Models\Users\UserRepository;
-use Input;
 
 class ConversationController extends Controller
 {
@@ -21,73 +21,39 @@ class ConversationController extends Controller
      */
     private $conversations;
 
-    /**
-     * @var \EQM\Models\Conversations\MessageRepository
-     */
-    private $messages;
-
-    /**
-     * @param \EQM\Models\Users\UserRepository $users
-     * @param \EQM\Models\Conversations\ConversationRepository $conversations
-     * @param \EQM\Models\Conversations\MessageRepository $messages
-     */
     public function __construct(
         UserRepository $users,
-        ConversationRepository $conversations,
-        MessageRepository $messages
+        ConversationRepository $conversations
     ) {
         $this->users = $users;
         $this->conversations = $conversations;
-        $this->messages = $messages;
     }
 
-    /**
-     * @return \Illuminate\View\View
-     */
     public function index()
     {
         return view('conversations.index');
     }
 
-    /**
-     * @return \Illuminate\View\View
-     */
-    public function create()
+    public function create(Request $request)
     {
-        if (! Input::has('contact')) {
+        if (! $request->has('contact')) {
             return redirect()->back();
         }
 
-        $owner = $this->users->findById(Input::get('contact'));
+        $owner = $this->users->findById($request->get('contact'));
 
         return view('conversations.create', compact('owner'));
     }
 
-    /**
-     * @param \EQM\Models\Conversations\Requests\ConversationRequest $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function store(ConversationRequest $request)
+    public function store(ConversationRequest $request, ConversationCreator $creator)
     {
-        $conversation = $this->conversations->create($request->all());
+        $creator->create(auth()->user(), $request);
 
-        $this->messages->create($conversation, auth()->user(), $request->all());
-
-        auth()->user()->addConversation($conversation);
-
-        $recipientId = $request->get('contact_id');
-
-        $recipient = $this->users->findById($recipientId);
-
-        $recipient->addConversation($conversation);
+        session()->put('success', 'Message sent');
 
         return redirect()->route('conversation.index');
     }
 
-    /**
-     * @param \EQM\Models\Conversations\Conversation $conversation
-     * @return \Illuminate\View\View
-     */
     public function show(Conversation $conversation)
     {
         $this->authorize('read-conversation', $conversation);
@@ -99,10 +65,6 @@ class ConversationController extends Controller
         return view('conversations.show', compact('conversation', 'messages'));
     }
 
-    /**
-     * @param \EQM\Models\Conversations\Conversation $conversation
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function delete(Conversation $conversation)
     {
         $this->authorize('delete-conversation', $conversation);

@@ -161,6 +161,7 @@ return [
         EQM\Models\Pictures\PictureServiceProvider::class,
         EQM\Models\Roles\RoleServiceProvider::class,
         EQM\Models\Statuses\StatusServiceProvider::class,
+        EQM\Models\Statuses\Likes\LikeServiceProvider::class,
         EQM\Models\Users\AuthServiceProvider::class,
         EQM\Models\Users\UserServiceProvider::class,
     ],

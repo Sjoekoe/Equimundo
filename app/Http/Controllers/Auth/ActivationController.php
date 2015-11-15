@@ -2,8 +2,8 @@
 namespace EQM\Http\Controllers\Auth;
 
 use EQM\Http\Controllers\Controller;
+use EQM\Http\Requests\Request;
 use EQM\Models\Users\UserRepository;
-use Input;
 
 class ActivationController extends Controller
 {
@@ -12,26 +12,19 @@ class ActivationController extends Controller
      */
     private $users;
 
-    /**
-     * @param \EQM\Models\Users\UserRepository $users
-     */
     function __construct(UserRepository $users)
     {
         $this->users = $users;
     }
 
-    /**
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function activate()
+    public function activate(Request $request)
     {
-        $user = $this->users->findByEmail(Input::get('email'));
+        $user = $this->users->findByEmail($request->get('email'));
 
-        if (Input::get('token') == $user->remember_token) {
-            $user->activated = true;
-            $user->save();
+        if ($request->get('token') == $user->rememberToken()) {
+            $this->users->activate($user);
 
-            session()->put('succes', 'Account activated. You can now login');
+            session()->put('success', 'Account activated. You can now login');
 
             return redirect()->route('login');
         }

@@ -12,17 +12,11 @@ class NotificationController extends Controller
      */
     private $notifications;
 
-    /**
-     * @param \EQM\Models\Notifications\NotificationRepository $notifications
-     */
     public function __construct(NotificationRepository $notifications)
     {
         $this->notifications = $notifications;
     }
 
-    /**
-     * @return \Illuminate\View\View
-     */
     public function index()
     {
         $notifications = $this->notifications->findForUser(auth()->user());
@@ -30,10 +24,6 @@ class NotificationController extends Controller
         return view('notifications.index', compact('notifications'));
     }
 
-    /**
-     * @param \EQM\Models\Notifications\Notification $notification
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function markRead(Notification $notification = null)
     {
         $this->authorize('mark-as-read', $notification);

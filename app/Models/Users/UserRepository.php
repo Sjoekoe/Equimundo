@@ -11,6 +11,12 @@ interface UserRepository
 
     /**
      * @param \EQM\Models\Users\User $user
+     * @return mixed
+     */
+    public function activate(User $user);
+
+    /**
+     * @param \EQM\Models\Users\User $user
      * @param array $values
      * @return \EQM\Models\Users\User
      */

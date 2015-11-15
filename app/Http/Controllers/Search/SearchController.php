@@ -3,6 +3,7 @@ namespace EQM\Http\Controllers\Search;
 
 use EQM\Models\Horses\HorseRepository;
 use EQM\Models\Users\UserRepository;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Input;
 
@@ -18,31 +19,21 @@ class SearchController extends Controller
      */
     private $users;
 
-    /**
-     * @param \EQM\Models\Horses\HorseRepository $horses
-     * @param \EQM\Models\Users\UserRepository $users
-     */
     public function __construct(HorseRepository $horses, UserRepository $users)
     {
         $this->horses = $horses;
         $this->users = $users;
     }
 
-    /**
-     * @return \Illuminate\View\View
-     */
-    public function index()
+    // todo add validation
+    public function index(Request $request)
     {
-        $horses = $this->horses->search(Input::get('search'));
-
-        $profiles = $this->users->search(Input::get('search'));
+        $horses = $this->horses->search($request->get('search'));
+        $profiles = $this->users->search($request->get('search'));
 
         return view('searches.index', compact('horses', 'profiles'));
     }
 
-    /**
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function search()
     {
         return redirect()->route('search.index', ['search' => Input::get('search')]);

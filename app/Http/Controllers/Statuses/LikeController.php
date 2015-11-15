@@ -1,45 +1,15 @@
 <?php
 namespace EQM\Http\Controllers\Statuses;
 
-use DB;
-use EQM\Events\StatusLiked;
-use EQM\Models\Notifications\Notification;
+use EQM\Http\Controllers\Controller;
+use EQM\Models\Statuses\Likes\LikeHandler;
 use EQM\Models\Statuses\Status;
-use EQM\Models\Statuses\StatusRepository;
-use Illuminate\Routing\Controller;
 
 class LikeController extends Controller
 {
-    /**
-     * @var \EQM\Models\Statuses\StatusRepository
-     */
-    private $statuses;
-
-    /**
-     * @param \EQM\Models\Statuses\StatusRepository $statuses
-     */
-    public function __construct(StatusRepository $statuses)
+    public function like(LikeHandler $handler, Status $status)
     {
-        $this->statuses = $statuses;
-    }
-
-    /**
-     * @param \EQM\Models\Statuses\Status $status
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function like(Status $status)
-    {
-        $likes = DB::table('likes')->whereUserId(auth()->user()->id)->lists('status_id');
-
-        if (in_array($status->id(), $likes)) {
-            auth()->user()->likes()->detach($status);
-        } else {
-            auth()->user()->likes()->attach($status);
-
-            $data = ['sender' => auth()->user()->fullName(), 'horse' => $status->horse()->name()];
-
-            event(new StatusLiked($status, auth()->user(), Notification::STATUS_LIKED, $data));
-        }
+        $handler->handle($status, auth()->user());
 
         return response()->json('success', 200);
     }
