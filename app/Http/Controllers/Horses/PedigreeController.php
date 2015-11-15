@@ -1,13 +1,13 @@
 <?php
 namespace EQM\Http\Controllers\Horses;
 
+use EQM\Http\Controllers\Controller;
 use EQM\Models\Horses\Horse;
 use EQM\Models\Horses\HorseRepository;
 use EQM\Models\Pedigrees\Pedigree;
 use EQM\Models\Pedigrees\PedigreeCreator;
 use EQM\Models\Pedigrees\PedigreeRepository;
 use EQM\Models\Pedigrees\Requests\CreateFamilyMember;
-use Illuminate\Routing\Controller;
 
 class PedigreeController extends Controller
 {
@@ -56,6 +56,8 @@ class PedigreeController extends Controller
      */
     public function create(Horse $horse)
     {
+        $this->authorize('create-pedigree', $horse);
+
         return view('horses.pedigree.create', compact('horse'));
     }
 
@@ -66,6 +68,8 @@ class PedigreeController extends Controller
      */
     public function store(CreateFamilyMember $request, Horse $horse)
     {
+        $this->authorize('create-pedigree', $horse);
+
         if ($request->get('type') < 7) {
             $pedigree = $this->pedigrees->findExistingPedigree($horse, $request->get('type'));
 
@@ -87,6 +91,8 @@ class PedigreeController extends Controller
     {
         $horse = $pedigree->horse();
 
+        $this->authorize('edit-pedigree', $horse);
+
         return view('horses.pedigree.edit', compact('pedigree', 'horse'));
     }
 
@@ -97,6 +103,8 @@ class PedigreeController extends Controller
      */
     public function update(CreateFamilyMember $request, Pedigree $pedigree)
     {
+        $this->authorize('edit-pedigree', $pedigree->horse());
+
         $this->pedigrees->update($pedigree, $request->all());
 
         return redirect()->route('pedigree.index', $pedigree->horse()->slug());
@@ -109,6 +117,8 @@ class PedigreeController extends Controller
     public function delete(Pedigree $pedigree)
     {
         $horse = $pedigree->horse();
+
+        $this->authorize('delete-pedigree', $horse);
 
         $this->pedigrees->delete($pedigree);
 

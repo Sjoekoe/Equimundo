@@ -46,9 +46,7 @@ class ConversationController extends Controller
      */
     public function index()
     {
-        $conversations = $this->conversations->findByUser(auth()->user());
-
-        return view('conversations.index', compact('conversations'));
+        return view('conversations.index');
     }
 
     /**
@@ -92,6 +90,8 @@ class ConversationController extends Controller
      */
     public function show(Conversation $conversation)
     {
+        $this->authorize('read-conversation', $conversation);
+
         $conversation->markAsRead(auth()->user());
 
         $messages = $this->conversations->findMessages($conversation);
@@ -105,6 +105,8 @@ class ConversationController extends Controller
      */
     public function delete(Conversation $conversation)
     {
+        $this->authorize('delete-conversation', $conversation);
+
         $conversation->deleteForUser(auth()->user());
 
         return redirect()->back();

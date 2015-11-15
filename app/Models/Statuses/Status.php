@@ -5,6 +5,10 @@ use EQM\Models\Pictures\Picture;
 
 interface Status
 {
+    const POLICIES = [
+        'edit-status', 'delete-status',
+    ];
+
     /**
      * @return int
      */

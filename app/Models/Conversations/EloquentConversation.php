@@ -43,9 +43,9 @@ class EloquentConversation extends Model implements Conversation
     }
 
     /**
-     * @return \EQM\Models\Users\User
+     * @return \EQM\Models\Users\User[]
      */
-    public function user()
+    public function users()
     {
         return $this->userRelation()->get();
     }
@@ -86,6 +86,15 @@ class EloquentConversation extends Model implements Conversation
      * @param \EQM\Models\Users\User $user
      * @return bool
      */
+    public function isDeletedForUser(User $user)
+    {
+        return $this->pivot->deleted_at !== null;
+    }
+
+    /**
+     * @param \EQM\Models\Users\User $user
+     * @return bool
+     */
     public function isDeletedForContactPerson(User $user)
     {
         return $this->contactPerson($user)->pivot->deleted_at !== null;
@@ -100,13 +109,13 @@ class EloquentConversation extends Model implements Conversation
     }
 
     /**
-     * @param \EQM\Models\Users\User $auhtenticatedUser
-     * @return \EQM\Models\Users\EloquentUser
+     * @param \EQM\Models\Users\User $authenticatedUser
+     * @return \EQM\Models\Users\User
      */
-    public function contactPerson(User $auhtenticatedUser)
+    public function contactPerson(User $authenticatedUser)
     {
-        foreach ($this->user() as $user) {
-            if ($user->id !== $auhtenticatedUser->id) {
+        foreach ($this->users() as $user) {
+            if ($user->id() !== $authenticatedUser->id()) {
                 return $user;
             }
         }

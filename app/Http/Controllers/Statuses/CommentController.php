@@ -2,11 +2,11 @@
 namespace EQM\Http\Controllers\Statuses;
 
 use EQM\Events\CommentWasPosted;
+use EQM\Http\Controllers\Controller;
 use EQM\Models\Comments\Comment;
 use EQM\Models\Comments\CommentRepository;
 use EQM\Models\Notifications\Notification;
 use EQM\Models\Statuses\Status;
-use Illuminate\Routing\Controller;
 use Input;
 
 class CommentController extends Controller
@@ -48,6 +48,8 @@ class CommentController extends Controller
      */
     public function delete(Comment $comment)
     {
+        $this->authorize('delete-comment', $comment);
+
         $this->comments->delete($comment);
 
         session()->put('success', 'comment deleted');

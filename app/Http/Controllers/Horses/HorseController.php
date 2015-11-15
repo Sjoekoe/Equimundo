@@ -2,6 +2,7 @@
 namespace EQM\Http\Controllers\Horses;
 
 use DB;
+use EQM\Http\Controllers\Controller;
 use EQM\Models\Horses\Horse;
 use EQM\Models\Horses\HorseCreator;
 use EQM\Models\Horses\HorseRepository;
@@ -11,8 +12,6 @@ use EQM\Models\Horses\Requests\UpdateHorse;
 use EQM\Models\HorseTeams\HorseTeamRepository;
 use EQM\Models\Statuses\StatusRepository;
 use EQM\Models\Users\User;
-use EQM\Models\Users\UserRepository;
-use Illuminate\Routing\Controller;
 
 class HorseController extends Controller
 {
@@ -33,26 +32,18 @@ class HorseController extends Controller
     private $horseTeams;
 
     /**
-     * @var \EQM\Models\Users\UserRepository
-     */
-    private $users;
-
-    /**
      * @param \EQM\Models\Horses\HorseRepository $horses
      * @param \EQM\Models\Statuses\StatusRepository $statuses
      * @param \EQM\Models\HorseTeams\HorseTeamRepository $horseTeams
-     * @param \EQM\Models\Users\UserRepository $users
      */
     public function __construct(
         HorseRepository $horses,
         StatusRepository $statuses,
-        HorseTeamRepository $horseTeams,
-        UserRepository $users
+        HorseTeamRepository $horseTeams
     ) {
         $this->horses = $horses;
         $this->statuses = $statuses;
         $this->horseTeams = $horseTeams;
-        $this->users = $users;
     }
 
     /**
@@ -109,6 +100,8 @@ class HorseController extends Controller
      */
     public function edit(Horse $horse)
     {
+        $this->authorize('edit-horse', $horse);
+
         $disciplines = trans('disciplines.list');
 
         return view('horses.edit', compact('horse', 'disciplines'));
@@ -122,6 +115,8 @@ class HorseController extends Controller
      */
     public function update(UpdateHorse $request, HorseUpdater $updater, Horse $horse)
     {
+        $this->authorize('edit-horse', $horse);
+
         $updater->update($horse, $request->all());
 
         session(['success', $horse->name() . ' was updated']);
@@ -135,6 +130,8 @@ class HorseController extends Controller
      */
     public function delete(Horse $horse)
     {
+        $this->authorize('delete-horse', $horse);
+
         $this->horseTeams->delete();
 
         session()->put('success', 'The horse was removed from your list');

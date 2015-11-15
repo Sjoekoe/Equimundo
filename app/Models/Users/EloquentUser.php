@@ -140,7 +140,7 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
      */
     public function conversations()
     {
-        return $this->belongsToMany(EloquentConversation::class, 'conversation_user', 'user_id', 'conversation_id')->withPivot('last_view', 'deleted_at')->withTimestamps();
+        return $this->belongsToMany(EloquentConversation::class, 'conversation_user', 'user_id', 'conversation_id')->withPivot('last_view', 'deleted_at')->withTimestamps()->get();
     }
 
     /**
@@ -210,7 +210,7 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
      */
     public function hasUnreadMessages()
     {
-        foreach ($this->conversations as $conversation) {
+        foreach ($this->conversations() as $conversation) {
             if ($conversation->pivot->last_view == null) {
                 return true;
             }

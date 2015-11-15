@@ -3,6 +3,10 @@ namespace EQM\Models\Comments;
 
 interface Comment
 {
+    const POLICIES = [
+        'delete-comment'
+    ];
+
     /**
      * @return int
      */

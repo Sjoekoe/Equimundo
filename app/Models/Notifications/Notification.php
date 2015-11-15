@@ -7,6 +7,10 @@ interface Notification
     const COMMENT_POSTED = 2;
     const PEDIGREE_CREATED = 3;
 
+    const POLICIES = [
+        'mark-as-read',
+    ];
+
     /**
      * @return int
      */
