@@ -12,6 +12,6 @@ class EloquentLikeRepository implements LikeRepository
      */
     public function findForUser(User $user)
     {
-        return DB::table('likes')->whereUserId(user()->id())->lists('status_id');
+        return DB::table('likes')->whereUserId($user->id())->lists('status_id');
     }
 }
