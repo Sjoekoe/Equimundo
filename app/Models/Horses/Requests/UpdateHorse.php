@@ -1,22 +1,8 @@
 <?php namespace EQM\Models\Horses\Requests;
 
 use EQM\Http\Requests\Request;
-use EQM\Models\Horses\HorseRepository;
 
 class UpdateHorse extends Request {
-    /**
-     * @var \EQM\Models\Horses\HorseRepository
-     */
-    private $horses;
-
-    /**
-     * @param \EQM\Models\Horses\HorseRepository $horses
-     */
-    public function __construct(HorseRepository $horses)
-    {
-        $this->horses = $horses;
-    }
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -34,7 +20,7 @@ class UpdateHorse extends Request {
      */
     public function rules()
     {
-        $horse = $this->horses->findBySlug($this->route('slug'));
+        $horse = $this->route('horse_slug');
 
         return [
             'name' => 'required',
