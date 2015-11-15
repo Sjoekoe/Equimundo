@@ -12,6 +12,7 @@ class RegisterTest extends \TestCase
 
         $this->visit('/register')
             ->type('John', 'first_name')
+            ->type('Doe', 'last_name')
             ->type('john@example.com', 'email')
             ->type('password', 'password')
             ->type('password', 'password_confirmation')
@@ -20,6 +21,7 @@ class RegisterTest extends \TestCase
 
         $this->seeInDatabase('users', [
             'first_name' => 'John',
+            'last_name' => 'Doe',
             'email' => 'john@example.com'
         ]);
     }
