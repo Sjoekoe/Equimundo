@@ -34,6 +34,11 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
     protected $table = 'users';
 
     /**
+     * @var string
+     */
+    protected $language;
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -60,9 +65,12 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
      */
     protected $hidden = ['password', 'remember_token'];
 
+    /**
+     * @return Carbon|null
+     */
     public function dateOfBirth()
     {
-        return Carbon::parse($this->date_of_birth);
+        return $this->date_of_birth ? Carbon::parse($this->date_of_birth) : null;
     }
 
     /**

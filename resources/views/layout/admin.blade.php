@@ -23,10 +23,8 @@
 @include('layout.partials.nav')
 
 <div class="row">
-    @include('flash::message')
-
     <div class="col s2">
-        @if (Auth::check())
+        @if (auth()->check())
             <div class="">
                 <a href="{{ route('admin.users') }}">Users</a>
             </div>
@@ -38,7 +36,7 @@
     </div>
 
 
-    @if (Auth::check())
+    @if (auth()->check())
         <div class="col s2">
             Other Things
         </div>
