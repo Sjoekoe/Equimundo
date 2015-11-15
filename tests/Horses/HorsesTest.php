@@ -18,8 +18,6 @@ class HorsesTest extends \TestCase
         $now = Carbon::now();
         $user = factory(EloquentUser::class)->create();
 
-        $this->expectsEvents(HorseWasCreated::class);
-
         $this->actingAs($user)
             ->post('/horses/create', [
                 'name' => 'Foo horse',
@@ -31,7 +29,7 @@ class HorsesTest extends \TestCase
                 'life_number' => '1234'
             ]);
 
-        $this->assertRedirectedTo('/horses/index/' . $user->id);
+        $this->assertRedirectedTo('/horses/index/' . $user->id());
         $this->seeInDatabase('horses', [
                 'id' => 1,
                 'name' => 'Foo horse',
@@ -45,7 +43,7 @@ class HorsesTest extends \TestCase
 
         $this->seeInDatabase('horse_team', [
             'id' => 1,
-            'user_id' => $user->id,
+            'user_id' => $user->id(),
             'horse_id' => 1,
             'type' => 1,
         ]);
