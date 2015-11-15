@@ -1,13 +1,12 @@
 <?php
 namespace EQM\Http\Controllers\Statuses;
 
-use EQM\Events\CommentWasPosted;
 use EQM\Http\Controllers\Controller;
 use EQM\Models\Comments\Comment;
+use EQM\Models\Comments\CommentCreator;
 use EQM\Models\Comments\CommentRepository;
-use EQM\Models\Notifications\Notification;
 use EQM\Models\Statuses\Status;
-use Input;
+use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
@@ -16,36 +15,21 @@ class CommentController extends Controller
      */
     private $comments;
 
-    /**
-     * @param \EQM\Models\Comments\CommentRepository $comments
-     * @param \EQM\Models\Statuses\StatusRepository $statuses
-     */
     public function __construct(CommentRepository $comments)
     {
         $this->comments = $comments;
     }
 
-    /**
-     * @param \EQM\Models\Statuses\Status $status
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function store(Status $status)
+    //todo add validation
+    public function store(Request $request, CommentCreator $creator, Status $status)
     {
-        $comment = $this->comments->create($status, auth()->user(), Input::get('body'));
-
-        $data = ['sender' => auth()->user()->fullName(), 'horse' => $status->horse()->name()];
-
-        event(new CommentWasPosted($comment->status(), auth()->user(), Notification::COMMENT_POSTED, $data));
+        $creator->create($status, auth()->user(), $request);
 
         session()->put('success', 'Your comment was posted');
 
         return response()->json('success', 200);
     }
 
-    /**
-     * @param \EQM\Models\Comments\Comment $comment
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function delete(Comment $comment)
     {
         $this->authorize('delete-comment', $comment);

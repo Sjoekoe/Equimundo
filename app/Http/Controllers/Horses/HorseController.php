@@ -1,7 +1,6 @@
 <?php
 namespace EQM\Http\Controllers\Horses;
 
-use DB;
 use EQM\Http\Controllers\Controller;
 use EQM\Models\Horses\Horse;
 use EQM\Models\Horses\HorseCreator;
@@ -10,6 +9,7 @@ use EQM\Models\Horses\HorseUpdater;
 use EQM\Models\Horses\Requests\CreateHorse;
 use EQM\Models\Horses\Requests\UpdateHorse;
 use EQM\Models\HorseTeams\HorseTeamRepository;
+use EQM\Models\Statuses\Likes\LikeRepository;
 use EQM\Models\Statuses\StatusRepository;
 use EQM\Models\Users\User;
 
@@ -32,24 +32,22 @@ class HorseController extends Controller
     private $horseTeams;
 
     /**
-     * @param \EQM\Models\Horses\HorseRepository $horses
-     * @param \EQM\Models\Statuses\StatusRepository $statuses
-     * @param \EQM\Models\HorseTeams\HorseTeamRepository $horseTeams
+     * @var \EQM\Models\Statuses\Likes\LikeRepository
      */
+    private $likes;
+
     public function __construct(
         HorseRepository $horses,
         StatusRepository $statuses,
-        HorseTeamRepository $horseTeams
+        HorseTeamRepository $horseTeams,
+        LikeRepository $likes
     ) {
         $this->horses = $horses;
         $this->statuses = $statuses;
         $this->horseTeams = $horseTeams;
+        $this->likes = $likes;
     }
 
-    /**
-     * @param \EQM\Models\Users\User $user
-     * @return \Illuminate\View\View
-     */
     public function index(User $user)
     {
         $horses = $this->horses->findForUser($user);
@@ -57,9 +55,6 @@ class HorseController extends Controller
         return view('horses.index', compact('user', 'horses'));
     }
 
-    /**
-     * @return \Illuminate\View\View
-     */
     public function create()
     {
         $disciplines = trans('disciplines.list');
@@ -67,11 +62,6 @@ class HorseController extends Controller
         return view('horses.create', compact('disciplines'));
     }
 
-    /**
-     * @param \EQM\Models\Horses\Requests\CreateHorse $request
-     * @param \EQM\Models\Horses\HorseCreator $creator
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function store(CreateHorse $request, HorseCreator $creator)
     {
         $horse = $creator->create(auth()->user(), $request->all());
@@ -81,23 +71,15 @@ class HorseController extends Controller
         return redirect()->route('horses.index', auth()->user()->id);
     }
 
-    /**
-     * @param \EQM\Models\Horses\Horse $horse
-     * @return \Illuminate\View\View
-     */
     public function show(Horse $horse)
     {
         $statuses = $this->statuses->findFeedForHorse($horse);
 
-        $likes = DB::table('likes')->whereUserId(auth()->user()->id)->lists('status_id');
+        $likes = $this->likes->findForUser(auth()->user());
 
         return view('horses.show', compact('horse', 'likes', 'statuses'));
     }
 
-    /**
-     * @param \EQM\Models\Horses\Horse $horse
-     * @return \Illuminate\View\View
-     */
     public function edit(Horse $horse)
     {
         $this->authorize('edit-horse', $horse);
@@ -107,12 +89,6 @@ class HorseController extends Controller
         return view('horses.edit', compact('horse', 'disciplines'));
     }
 
-    /**
-     * @param \EQM\Models\Horses\Requests\UpdateHorse $request
-     * @param \EQM\Models\Horses\HorseUpdater $updater
-     * @param \EQM\Models\Horses\Horse $horse
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function update(UpdateHorse $request, HorseUpdater $updater, Horse $horse)
     {
         $this->authorize('edit-horse', $horse);
@@ -124,10 +100,6 @@ class HorseController extends Controller
         return redirect()->route('horses.edit', $horse->slug());
     }
 
-    /**
-     * @param \EQM\Models\Horses\Horse $horse
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function delete(Horse $horse)
     {
         $this->authorize('delete-horse', $horse);

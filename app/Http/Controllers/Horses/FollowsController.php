@@ -4,35 +4,19 @@ namespace EQM\Http\Controllers\Horses;
 use EQM\Http\Controllers\Controller;
 use EQM\Models\Follows\FollowsRepository;
 use EQM\Models\Horses\Horse;
-use EQM\Models\Horses\HorseRepository;
-use Input;
 
 class FollowsController extends Controller
 {
-    /**
-     * @var \EQM\Models\Horses\HorseRepository
-     */
-    private $horses;
-
     /**
      * @var \EQM\Models\Follows\FollowsRepository
      */
     private $follows;
 
-    /**
-     * @param \EQM\Models\Horses\HorseRepository $horses
-     * @param \EQM\Models\Follows\FollowsRepository $follows
-     */
-    public function __construct(HorseRepository $horses, FollowsRepository $follows)
+    public function __construct(FollowsRepository $follows)
     {
-        $this->horses = $horses;
         $this->follows = $follows;
     }
 
-    /**
-     * @param \EQM\Models\Horses\Horse $horse
-     * @return \Illuminate\View\View
-     */
     public function index(Horse $horse)
     {
         $followers = $this->follows->findForHorse($horse);
@@ -40,13 +24,8 @@ class FollowsController extends Controller
         return view('follows.index', compact('horse', 'followers'));
     }
 
-    /**
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function store()
+    public function store(Horse $horse)
     {
-        $horse = $this->horses->findById(Input::get('horseIdToFollow'));
-
         $this->authorize('follow-horse', $horse);
 
         auth()->user()->follow($horse);
@@ -56,10 +35,6 @@ class FollowsController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * @param \EQM\Models\Horses\Horse $horse
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function destroy(Horse $horse)
     {
         $this->authorize('unfollow-horse', $horse);

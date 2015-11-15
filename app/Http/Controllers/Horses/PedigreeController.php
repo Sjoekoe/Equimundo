@@ -26,11 +26,6 @@ class PedigreeController extends Controller
      */
     private $horses;
 
-    /**
-     * @param \EQM\Models\Pedigrees\PedigreeCreator $pedigreeCreator
-     * @param \EQM\Models\Pedigrees\PedigreeRepository $pedigrees
-     * @param \EQM\Models\Horses\HorseRepository $horses
-     */
     public function __construct(
         PedigreeCreator $pedigreeCreator,
         PedigreeRepository $pedigrees,
@@ -41,19 +36,11 @@ class PedigreeController extends Controller
         $this->horses = $horses;
     }
 
-    /**
-     * @param \EQM\Models\Horses\Horse $horse
-     * @return \Illuminate\View\View
-     */
     public function index(Horse $horse)
     {
         return view('horses.pedigree.index', compact('horse'));
     }
 
-    /**
-     * @param \EQM\Models\Horses\Horse $horse
-     * @return \Illuminate\View\View
-     */
     public function create(Horse $horse)
     {
         $this->authorize('create-pedigree', $horse);
@@ -61,11 +48,6 @@ class PedigreeController extends Controller
         return view('horses.pedigree.create', compact('horse'));
     }
 
-    /**
-     * @param \EQM\Models\Pedigrees\Requests\CreateFamilyMember $request
-     * @param \EQM\Models\Horses\Horse $horse
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function store(CreateFamilyMember $request, Horse $horse)
     {
         $this->authorize('create-pedigree', $horse);
@@ -83,10 +65,6 @@ class PedigreeController extends Controller
         return redirect()->route('pedigree.index', $horse->slug);
     }
 
-    /**
-     * @param \EQM\Models\Pedigrees\Pedigree $pedigree
-     * @return \Illuminate\View\View
-     */
     public function edit(Pedigree $pedigree)
     {
         $horse = $pedigree->horse();
@@ -96,11 +74,6 @@ class PedigreeController extends Controller
         return view('horses.pedigree.edit', compact('pedigree', 'horse'));
     }
 
-    /**
-     * @param \EQM\Models\Pedigrees\Requests\CreateFamilyMember $request
-     * @param \EQM\Models\Pedigrees\Pedigree $pedigree
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function update(CreateFamilyMember $request, Pedigree $pedigree)
     {
         $this->authorize('edit-pedigree', $pedigree->horse());
@@ -110,10 +83,6 @@ class PedigreeController extends Controller
         return redirect()->route('pedigree.index', $pedigree->horse()->slug());
     }
 
-    /**
-     * @param \EQM\Models\Pedigrees\Pedigree $pedigree
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function delete(Pedigree $pedigree)
     {
         $horse = $pedigree->horse();

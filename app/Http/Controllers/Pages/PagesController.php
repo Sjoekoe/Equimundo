@@ -1,10 +1,10 @@
 <?php
 namespace EQM\Http\Controllers\Pages;
 
-use DB;
 use EQM\Http\Controllers\Controller;
 use EQM\Models\Horses\HorseCollection;
 use EQM\Models\Horses\HorseRepository;
+use EQM\Models\Statuses\Likes\LikeRepository;
 use EQM\Models\Statuses\StatusRepository;
 
 class PagesController extends Controller
@@ -25,27 +25,30 @@ class PagesController extends Controller
     private $collection;
 
     /**
-     * @param \EQM\Models\Statuses\StatusRepository $statuses
-     * @param \EQM\Models\Horses\HorseRepository $horses
-     * @param \EQM\Models\Horses\HorseCollection $collection
+     * @var \EQM\Models\Statuses\Likes\LikeRepository
      */
-    public function __construct(StatusRepository $statuses, HorseRepository $horses, HorseCollection $collection)
-    {
+    private $likes;
+
+    public function __construct(
+        StatusRepository $statuses,
+        HorseRepository $horses,
+        HorseCollection $collection,
+        LikeRepository $likes
+    ) {
         $this->statuses = $statuses;
         $this->horses = $horses;
         $this->collection = $collection;
+        $this->likes = $likes;
     }
 
-    /**
-     * @return \Illuminate\View\View
-     */
     public function home()
     {
         if (auth()->check()) {
             $horses = $this->collection->getIdAndNamePairs($this->horses->findForUser(auth()->user()));
+
             if (count($horses)) {
                 $statuses = $this->statuses->findFeedForUser(auth()->user());
-                $likes = DB::table('likes')->whereUserId(auth()->user()->id)->lists('status_id');
+                $likes = $this->likes->findForUser(auth()->user());
             } else {
                 $statuses = [];
             }

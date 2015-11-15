@@ -8,6 +8,7 @@ use EQM\Models\Horses\Horse;
 use EQM\Models\Horses\HorseRepository;
 use EQM\Models\Palmares\Palmares;
 use EQM\Models\Palmares\PalmaresRepository;
+use Illuminate\Support\Facades\Request;
 use Input;
 
 class PalmaresController extends Controller
@@ -22,22 +23,11 @@ class PalmaresController extends Controller
      */
     private $horses;
 
-    /**
-     * @param \EQM\Models\Palmares\PalmaresRepository $palmaresRepository
-     * @param \EQM\Models\Horses\HorseRepository $horses
-     */
-    public function __construct(
-        PalmaresRepository $palmaresRepository,
-        HorseRepository $horses
-    ) {
+    public function __construct(PalmaresRepository $palmaresRepository, HorseRepository $horses) {
         $this->palmaresRepository = $palmaresRepository;
         $this->horses = $horses;
     }
 
-    /**
-     * @param \EQM\Models\Horses\Horse $horse
-     * @return \Illuminate\View\View
-     */
     public function index(Horse $horse)
     {
         $palmaresResults = $this->palmaresRepository->findPalmaresForHorse($horse);
@@ -45,10 +35,6 @@ class PalmaresController extends Controller
         return view('horses.palmares.index', compact('horse', 'palmaresResults'));
     }
 
-    /**
-     * @param \EQM\Models\Horses\Horse $horse
-     * @return \Illuminate\View\View
-     */
     public function create(Horse $horse)
     {
         $this->authorize('create-palmares', $horse);
@@ -56,23 +42,17 @@ class PalmaresController extends Controller
         return view('horses.palmares.create', compact('horse'));
     }
 
-    /**
-     * @param \EQM\Models\Horses\Horse $horse
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function store(Horse $horse)
+    // todo add validation
+    public function store(Request $request, Horse $horse)
     {
         $this->authorize('create-palmares', $horse);
 
-        event(new PalmaresWasCreated($horse, Input::all()));
+        // todo refactor this
+        event(new PalmaresWasCreated($horse, $request->all()));
 
         return redirect()->route('palmares.index', $horse->slug());
     }
 
-    /**
-     * @param \EQM\Models\Palmares\Palmares $palmares
-     * @return \Illuminate\View\View
-     */
     public function edit(Palmares $palmares)
     {
         $this->authorize('edit-palmares', $palmares->horse());
@@ -80,10 +60,6 @@ class PalmaresController extends Controller
         return view('horses.palmares.edit', compact('palmares'));
     }
 
-    /**
-     * @param \EQM\Models\Palmares\Palmares $palmares
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function update(Palmares $palmares)
     {
         $this->authorize('edit-palmares', $palmares->horse());
@@ -95,10 +71,6 @@ class PalmaresController extends Controller
         return redirect()->route('palmares.index', $horse->slug());
     }
 
-    /**
-     * @param \EQM\Models\Palmares\Palmares $palmares
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function delete(Palmares $palmares)
     {
         $horse = $palmares->horse();
