@@ -1,10 +1,10 @@
 <?php
 namespace EQM\Http\Controllers\Horses;
 
+use EQM\Http\Controllers\Controller;
 use EQM\Models\Follows\FollowsRepository;
 use EQM\Models\Horses\Horse;
 use EQM\Models\Horses\HorseRepository;
-use Illuminate\Routing\Controller;
 use Input;
 
 class FollowsController extends Controller
@@ -47,9 +47,11 @@ class FollowsController extends Controller
     {
         $horse = $this->horses->findById(Input::get('horseIdToFollow'));
 
+        $this->authorize('follow-horse', $horse);
+
         auth()->user()->follow($horse);
 
-        session()->put('success', 'You are now following ' . $horse->name);
+        session()->put('success', 'You are now following ' . $horse->name());
 
         return redirect()->back();
     }
@@ -60,6 +62,8 @@ class FollowsController extends Controller
      */
     public function destroy(Horse $horse)
     {
+        $this->authorize('unfollow-horse', $horse);
+
         auth()->user()->unFollow($horse);
 
         session()->put('succes', 'You are no longer following ' . $horse->name());

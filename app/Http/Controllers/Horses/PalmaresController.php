@@ -51,6 +51,8 @@ class PalmaresController extends Controller
      */
     public function create(Horse $horse)
     {
+        $this->authorize('create-palmares', $horse);
+
         return view('horses.palmares.create', compact('horse'));
     }
 
@@ -60,6 +62,8 @@ class PalmaresController extends Controller
      */
     public function store(Horse $horse)
     {
+        $this->authorize('create-palmares', $horse);
+
         event(new PalmaresWasCreated($horse, Input::all()));
 
         return redirect()->route('palmares.index', $horse->slug());
@@ -71,6 +75,8 @@ class PalmaresController extends Controller
      */
     public function edit(Palmares $palmares)
     {
+        $this->authorize('edit-palmares', $palmares->horse());
+
         return view('horses.palmares.edit', compact('palmares'));
     }
 
@@ -80,6 +86,8 @@ class PalmaresController extends Controller
      */
     public function update(Palmares $palmares)
     {
+        $this->authorize('edit-palmares', $palmares->horse());
+
         $this->palmaresRepository->update($palmares, Input::all());
 
         $horse = $palmares->horse();
@@ -94,6 +102,8 @@ class PalmaresController extends Controller
     public function delete(Palmares $palmares)
     {
         $horse = $palmares->horse();
+
+        $this->authorize('delete-palmares', $horse);
 
         event(new PalmaresWasDeleted($palmares));
 

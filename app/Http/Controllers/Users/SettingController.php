@@ -7,33 +7,14 @@ use Input;
 
 class SettingController extends Controller
 {
-    /**
-     * @var \EQM\Models\Users\Settings\SettingsUpdater
-     */
-    private $updater;
-
-    /**
-     * @param \EQM\Models\Users\Settings\SettingsUpdater $updater
-     */
-    public function __construct(SettingsUpdater $updater)
-    {
-        $this->updater = $updater;
-    }
-
-    /**
-     * @return \Illuminate\View\View
-     */
     public function index()
     {
         return view('users.settings.index');
     }
 
-    /**
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function update()
+    public function update(SettingsUpdater $updater)
     {
-        $this->updater->update(auth()->user(), Input::all());
+        $updater->update(auth()->user(), Input::all());
 
         return back();
     }

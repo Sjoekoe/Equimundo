@@ -15,8 +15,14 @@
                     <br/>
                     <img src="{{ route('file.picture', [$status->getPicture()->id()]) }}" alt=""/>
                 @endif
-                <span class="right"><a href="{{ route('statuses.edit', $status->id()) }}">{{ trans('copy.a.edit') }}</a></span>
-                <span class="right"><a href="{{ route('statuses.delete', $status->id()) }}">{{ trans('copy.a.delete') }}</a></span>
+
+                @can('edit-status', $status)
+                    <span class="right"><a href="{{ route('statuses.edit', $status->id()) }}">{{ trans('copy.a.edit') }}</a></span>
+                @endcan
+
+                @can('delete-status', $status)
+                    <span class="right"><a href="{{ route('statuses.delete', $status->id()) }}">{{ trans('copy.a.delete') }}</a></span>
+                @endcan
             </div>
             <div class="card-divider">
                 {{ Form::open(['route' => ['status.like', $status->id()], 'class' => 'like-button pull-left', 'data-remote']) }}

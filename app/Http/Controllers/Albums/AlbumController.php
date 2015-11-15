@@ -6,7 +6,7 @@ use EQM\Http\Controllers\Controller;
 use EQM\Models\Albums\Album;
 use EQM\Models\Albums\AlbumRepository;
 use EQM\Models\Albums\AlbumRequest;
-use EQM\Models\Horses\HorseRepository;
+use EQM\Models\Horses\Horse;
 use Illuminate\Auth\AuthManager;
 use Storage;
 
@@ -18,11 +18,6 @@ class AlbumController extends Controller
     private $albums;
 
     /**
-     * @var \EQM\Models\Horses\HorseRepository
-     */
-    private $horses;
-
-    /**
      * @var \Illuminate\Auth\AuthManager
      */
     private $auth;
@@ -32,28 +27,12 @@ class AlbumController extends Controller
      */
     private $uploader;
 
-    /**
-     * @param \EQM\Models\Albums\AlbumRepository $albums
-     * @param \EQM\Models\Horses\HorseRepository $horses
-     * @param \Illuminate\Auth\AuthManager $auth
-     * @param \EQM\Core\Files\Uploader $uploader
-     */
-    public function __construct(
-        AlbumRepository $albums,
-        HorseRepository $horses,
-        AuthManager $auth,
-        Uploader $uploader
-    ) {
+    public function __construct(AlbumRepository $albums, AuthManager $auth, Uploader $uploader) {
         $this->albums = $albums;
-        $this->horses = $horses;
         $this->auth = $auth;
         $this->uploader = $uploader;
     }
 
-    /**
-     * @param \EQM\Models\Albums\Album $album
-     * @return \Illuminate\View\View
-     */
     public function show(Album $album)
     {
         $horse = $album->horse();
@@ -61,25 +40,16 @@ class AlbumController extends Controller
         return view('albums.show', compact('album', 'horse'));
     }
 
-    /**
-     * @param string $horseslug
-     * @return \Illuminate\View\View
-     */
-    public function create($horseslug)
+    public function create(Horse $horse)
     {
-        $horse = $this->initHorse($horseslug);
+        $this->authorize('create-album', $horse);
 
         return view('albums.create', compact('horse'));
     }
 
-    /**
-     * @param \EQM\Models\Albums\AlbumRequest $request
-     * @param string $horseSlug
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function store(AlbumRequest $request, $horseSlug)
+    public function store(AlbumRequest $request, Horse $horse)
     {
-        $horse = $this->initHorse($horseSlug);
+        $this->authorize('create-album', $horse);
 
         $album = $this->albums->create($horse, $request->all());
 
@@ -103,6 +73,8 @@ class AlbumController extends Controller
      */
     public function edit(Album $album)
     {
+        $this->authorize('edit-album', $album->horse());
+
         return view('albums.edit', compact('album'));
     }
 
@@ -113,6 +85,8 @@ class AlbumController extends Controller
      */
     public function update(AlbumRequest $request, Album $album)
     {
+        $this->authorize('edit-album', $album->horse());
+
         $this->albums->update($album, $request->all());
 
         session()->put('succes', 'Album updated');
@@ -126,6 +100,8 @@ class AlbumController extends Controller
      */
     public function delete(Album $album)
     {
+        $this->authorize('delete-album', $album->horse());
+
         foreach ($album->pictures() as $picture) {
             if (count($picture->albums()) > 1) {
                 $picture->removeFromAlbum($album);
@@ -139,20 +115,5 @@ class AlbumController extends Controller
         $this->albums->delete($album);
 
         return redirect()->route('horses.pictures.index', $album->horse()->slug);
-    }
-
-    /**
-     * @param string $horseslug
-     * @return \EQM\Models\Horses\Horse
-     */
-    private function initHorse($horseslug)
-    {
-        $horse = $this->horses->findBySlug($horseslug);
-
-        if ($this->auth->user()->isInHorseTeam($horse)) {
-            return $horse;
-        }
-
-        abort(403);
     }
 }

@@ -5,6 +5,10 @@ use EQM\Models\Users\User;
 
 interface Conversation
 {
+    const POLICIES = [
+        'read-conversation', 'delete-conversation', 'reply-to',
+    ];
+
     /**
      * @return string
      */
@@ -16,9 +20,9 @@ interface Conversation
     public function subject();
 
     /**
-     * @return \EQM\Models\Users\User
+     * @return \EQM\Models\Users\User[]
      */
-    public function user();
+    public function users();
 
     /**
      * @return \EQM\Models\Conversations\EloquentMessage[]
@@ -45,6 +49,12 @@ interface Conversation
      * @param \EQM\Models\Users\User $user
      */
     public function deleteForUser(User $user);
+
+    /**
+     * @param \EQM\Models\Users\User $user
+     * @return bool
+     */
+    public function isDeletedForUser(User $user);
 
     /**
      * @param \EQM\Models\Users\User $user

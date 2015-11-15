@@ -27,6 +27,8 @@ class MessageController extends Controller
      */
     public function store(Conversation $conversation)
     {
+        $this->authorize('reply-to', $conversation);
+
         $this->messages->create($conversation, auth()->user(), Input::all());
 
         $conversation->markAsUnread($conversation->contactPerson(auth()->user()));

@@ -2,12 +2,12 @@
 namespace EQM\Http\Controllers\Albums;
 
 use EQM\Core\Files\Uploader;
+use EQM\Http\Controllers\Controller;
 use EQM\Models\Albums\Album;
 use EQM\Models\Albums\AlbumRepository;
 use EQM\Models\Pictures\Picture;
 use EQM\Models\Pictures\PictureRepository;
 use Illuminate\Auth\AuthManager;
-use Illuminate\Routing\Controller;
 use Input;
 use Storage;
 
@@ -53,6 +53,8 @@ class PictureController extends Controller
      */
     public function store(Album $album)
     {
+        $this->authorize('upload-picture', $album->horse());
+
         $pictures = Input::file('pictures');
 
         foreach ($pictures as $picture) {
@@ -73,6 +75,8 @@ class PictureController extends Controller
      */
     public function delete(Album $album, Picture $picture)
     {
+        $this->authorize('delete-picture', $picture->horse());
+
         if (count($picture->albums()) > 1) {
             $picture->removeFromAlbum($album);
 
