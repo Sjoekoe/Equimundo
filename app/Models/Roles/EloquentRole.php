@@ -15,6 +15,6 @@ class EloquentRole extends Model implements Role
      */
     public function name()
     {
-        $this->role;
+        return $this->role;
     }
 }

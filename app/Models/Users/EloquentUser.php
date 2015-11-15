@@ -394,7 +394,7 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
      */
     public function emailNotifications()
     {
-        $this->email_notifications;
+        return $this->email_notifications;
     }
 
     /**
@@ -402,6 +402,6 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
      */
     public function language()
     {
-        $this->language;
+        return $this->language;
     }
 }

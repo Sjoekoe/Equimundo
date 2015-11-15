@@ -10,6 +10,7 @@ class Locale
      * @var \Illuminate\Auth\AuthManager
      */
     private $auth;
+
     /**
      * @var \Illuminate\Foundation\Application
      */
