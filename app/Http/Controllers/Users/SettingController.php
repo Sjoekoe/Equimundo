@@ -1,8 +1,8 @@
 <?php
 namespace EQM\Http\Controllers\Users;
 
-use EQM\Http\Requests\Request;
 use EQM\Models\Users\Settings\SettingsUpdater;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Input;
 

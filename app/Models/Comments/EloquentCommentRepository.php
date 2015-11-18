@@ -48,6 +48,19 @@ class EloquentCommentRepository implements CommentRepository
 
     /**
      * @param \EQM\Models\Comments\Comment $comment
+     * @param string $body
+     * @return \EQM\Models\Comments\Comment
+     */
+    public function update(Comment $comment, $body)
+    {
+        $comment->body = $body;
+        $comment->save();
+
+        return $comment;
+    }
+
+    /**
+     * @param \EQM\Models\Comments\Comment $comment
      */
     public function delete(Comment $comment)
     {

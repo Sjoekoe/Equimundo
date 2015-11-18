@@ -1,16 +1,16 @@
 <?php
 namespace EQM\Models\Users\Settings;
 
-use EQM\Http\Requests\Request;
 use EQM\Models\Users\User;
+use Illuminate\Http\Request;
 
 class SettingsUpdater
 {
     /**
      * todo move this to the user repository
+     *
      * @param \EQM\Models\Users\User $user
-     * @param \EQM\Http\Requests\Request $request
-     * @internal param $values
+     * @param \Illuminate\Http\Request $request
      */
     public function update(User $user, Request $request)
     {

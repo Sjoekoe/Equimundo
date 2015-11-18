@@ -4,7 +4,7 @@ namespace EQM\Models\Comments;
 interface Comment
 {
     const POLICIES = [
-        'delete-comment'
+        'delete-comment', 'edit-comment',
     ];
 
     /**

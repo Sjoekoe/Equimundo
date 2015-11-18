@@ -30,6 +30,24 @@ class CommentController extends Controller
         return response()->json('success', 200);
     }
 
+    public function edit(Comment $comment)
+    {
+        $this->authorize('edit-comment', $comment);
+
+        return view('comments.edit', compact('comment'));
+    }
+
+    public function update(Request $request, Comment $comment)
+    {
+        $this->authorize('edit-comment', $comment);
+
+        $this->comments->update($comment, $request->get('body'));
+
+        session()->put('success', 'Your comment was edited.');
+
+        return redirect()->route('home');
+    }
+
     public function delete(Comment $comment)
     {
         $this->authorize('delete-comment', $comment);

@@ -22,6 +22,13 @@ interface CommentRepository
 
     /**
      * @param \EQM\Models\Comments\Comment $comment
+     * @param string $body
+     * @return \EQM\Models\Comments\Comment
+     */
+    public function update(Comment $comment, $body);
+
+    /**
+     * @param \EQM\Models\Comments\Comment $comment
      */
     public function delete(Comment $comment);
 }

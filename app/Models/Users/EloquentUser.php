@@ -34,11 +34,6 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
     protected $table = 'users';
 
     /**
-     * @var string
-     */
-    protected $language;
-
-    /**
      * The attributes that are mass assignable.
      *
      * @var array
