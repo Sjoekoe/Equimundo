@@ -8,7 +8,7 @@ interface Notification
     const PEDIGREE_CREATED = 3;
 
     const POLICIES = [
-        'mark-as-read',
+        'mark-as-read', 'delete-notification'
     ];
 
     /**
@@ -35,6 +35,11 @@ interface Notification
      * @return \EQM\Models\Users\User
      */
     public function receiver();
+
+    /**
+     * @return string
+     */
+    public function data();
 
     /**
      * @return bool

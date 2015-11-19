@@ -53,8 +53,10 @@ class AlbumCreator
         $pictures = $request->file('pictures');
 
         foreach ($pictures as $picture) {
-            $picture = $this->uploader->uploadPicture($picture, $horse);
-            $picture->addToAlbum($album);
+            if ($picture) {
+                $picture = $this->uploader->uploadPicture($picture, $horse);
+                $picture->addToAlbum($album);
+            }
         }
     }
 }

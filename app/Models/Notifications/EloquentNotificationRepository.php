@@ -58,4 +58,12 @@ class EloquentNotificationRepository implements NotificationRepository
 
         return $notification;
     }
+
+    /**
+     * @param \EQM\Models\Notifications\Notification $notification
+     */
+    public function delete(Notification $notification)
+    {
+        $notification->delete();
+    }
 }
