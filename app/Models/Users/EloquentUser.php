@@ -27,6 +27,11 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
     use Authenticatable, Authorizable, CanResetPassword;
 
     /**
+     * @var string
+     */
+    protected $language;
+
+    /**
      * The database table used by the model.
      *
      * @var string
@@ -143,7 +148,10 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
      */
     public function conversations()
     {
-        return $this->belongsToMany(EloquentConversation::class, 'conversation_user', 'user_id', 'conversation_id')->withPivot('last_view', 'deleted_at')->withTimestamps()->get();
+        return $this->belongsToMany(EloquentConversation::class, 'conversation_user', 'user_id', 'conversation_id')
+            ->withPivot('last_view', 'deleted_at')
+            ->withTimestamps()
+            ->get();
     }
 
     /**
