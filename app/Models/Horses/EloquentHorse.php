@@ -8,6 +8,7 @@ use EQM\Models\HorseTeams\EloquentHorseTeam;
 use EQM\Models\HorseTeams\HorseTeam;
 use EQM\Models\Palmares\EloquentPalmares;
 use EQM\Models\Pedigrees\EloquentPedigree;
+use EQM\Models\Pedigrees\Pedigree;
 use EQM\Models\Pictures\EloquentPicture;
 use EQM\Models\Statuses\EloquentStatus;
 use EQM\Models\Users\EloquentUser;
@@ -290,7 +291,7 @@ class EloquentHorse extends Model implements Horse
     public function sons()
     {
         return $this->pedigree()->filter(function($family) {
-            return $family->type == 3;
+            return $family->type == Pedigree::SON;
         })->all();
     }
 
@@ -300,7 +301,7 @@ class EloquentHorse extends Model implements Horse
     public function daughters()
     {
         return $this->pedigree()->filter(function($family) {
-            return $family->type == 4;
+            return $family->type == Pedigree::DAUGHTER;
         })->all();
     }
 

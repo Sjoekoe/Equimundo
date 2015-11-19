@@ -37,7 +37,9 @@ class CreateHorse extends Request {
         ];
 
         if ($this->has('life_number') && $horse = $this->horses->findByLifeNumber($this->get('life_number'))) {
-            $rules['life_number'] = 'unique:horses,life_number';
+            if (count($horse->users()) > 0) {
+                $rules['life_number'] = 'unique:horses,life_number';
+            }
         }
 
         return $rules;

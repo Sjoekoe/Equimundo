@@ -98,7 +98,7 @@
                 {{ trans('copy.titles.daughters') }}
                 <hr/>
                 @foreach ($horse->daughters() as $daughter)
-                    {{ $daughter->name() }}
+                    {{ $daughter->originalHorse->name() }}
                 @endforeach
             </div>
         </div>
