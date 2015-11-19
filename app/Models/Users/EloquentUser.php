@@ -269,7 +269,7 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
         $count = 0;
 
         foreach ($this->notifications() as $notification) {
-            if ($notification->read() == false) {
+            if ($notification->isRead() == false) {
                 $count++;
             }
         }
