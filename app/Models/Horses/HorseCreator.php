@@ -78,9 +78,10 @@ class HorseCreator
     /**
      * @param \EQM\Models\Users\User $user
      * @param array $values
+     * @param bool $pedigree
      * @return \EQM\Models\Horses\Horse
      */
-    public function create(User $user, $values)
+    public function create(User $user, $values, $pedigree = false)
     {
         if ($values['life_number'] && $horse = $this->horses->findByLifeNumber($values['life_number'])) {
             $horse = $this->horses->update($horse, $values);
@@ -96,7 +97,12 @@ class HorseCreator
             }
         }
 
-        $this->dispatcher->fire(new HorseWasCreated($horse));
+        if (! $pedigree) {
+            $this->dispatcher->fire(new HorseWasCreated($horse));
+
+            $this->horseTeams->createOwner($user, $horse);
+        }
+
 
         if (array_key_exists('profile_pic', $values)) {
             $picture = $this->uploader->uploadPicture($values['profile_pic'], $horse, true);
@@ -104,7 +110,6 @@ class HorseCreator
             $picture->addToAlbum($horse->getStandardAlbum(Album::PROFILEPICTURES));
         }
 
-        $this->horseTeams->createOwner($user, $horse);
         $horse->save();
 
         return $horse;

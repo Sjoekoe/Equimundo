@@ -17,7 +17,7 @@
                 @else
                     @if (Auth::user()->hasUnreadNotifications())
                         <li>
-                            <a href="#">
+                            <a href="{{ route('notifications.index') }}">
                                 {{ Auth::user()->countUnreadNotifications() }} {{trans('copy.a.notifications')}}
                             </a>
                         </li>

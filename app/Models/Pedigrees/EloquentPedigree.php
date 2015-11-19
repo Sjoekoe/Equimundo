@@ -21,7 +21,7 @@ class EloquentPedigree extends Model implements Pedigree
      */
     public function horse()
     {
-        return $this->belongsTo(EloquentHorse::class, 'horse_id', 'id');
+        return $this->belongsTo(EloquentHorse::class, 'horse_id', 'id')->first();
     }
 
     /**

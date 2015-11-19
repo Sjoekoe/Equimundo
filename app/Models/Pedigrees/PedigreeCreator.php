@@ -2,8 +2,10 @@
 namespace EQM\Models\Pedigrees;
 
 use Carbon\Carbon;
+use EQM\Core\Slugs\SlugCreator;
 use EQM\Events\PedigreeWasCreated;
 use EQM\Models\Horses\Horse;
+use EQM\Models\Horses\HorseCreator;
 use EQM\Models\Horses\HorseRepository;
 use EQM\Models\Notifications\Notification;
 use Illuminate\Auth\AuthManager;
@@ -31,21 +33,23 @@ class PedigreeCreator
     private $pedigrees;
 
     /**
-     * @param \EQM\Models\Horses\HorseRepository $horses
-     * @param \EQM\Models\Pedigrees\PedigreeConnector $pedigreeConnector
-     * @param \Illuminate\Auth\AuthManager $auth
-     * @param \EQM\Models\Pedigrees\PedigreeRepository $pedigrees
+     * @var \EQM\Models\Horses\HorseCreator
      */
+    private $horseCreator;
+
     public function __construct(
         HorseRepository $horses,
         PedigreeConnector $pedigreeConnector,
         AuthManager $auth,
-        PedigreeRepository $pedigrees
+        PedigreeRepository $pedigrees,
+        SlugCreator $slugCreator,
+        HorseCreator $horseCreator
     ) {
         $this->horses = $horses;
         $this->pedigreeConnector = $pedigreeConnector;
         $this->auth = $auth;
         $this->pedigrees = $pedigrees;
+        $this->horseCreator = $horseCreator;
     }
 
     /**
@@ -85,11 +89,11 @@ class PedigreeCreator
         } else {
             $values ['gender'] = $this->pedigreeConnector->getGender($values['type']);
 
-            if (array_key_exists('date_of_birth', $values)) {
+            if (array_key_exists('date_of_birth', $values) && $values['date_of_birth'] !== '') {
                 $values['date_of_birth'] = Carbon::createFromDate($values['date_of_birth'], 0, 0)->format('d/m/Y');
             }
 
-            $family = $this->horses->create($values, true);
+            $family = $this->horseCreator->create(auth()->user(), $values, true);
         }
 
         $values['type'] = $this->pedigreeConnector->getConnection($horse, $values['type']);
