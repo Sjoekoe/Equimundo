@@ -2,7 +2,7 @@
 
 @section('content')
     @include('layout.partials.heading')
-            @foreach ($horse->followers as $follower)
-                {{ $follower->fullName() }}
-            @endforeach
+    @foreach ($horse->followers as $follower)
+        <a href="{{ route('users.profiles.show', $follower->id()) }}">{{ $follower->fullName() }}</a>
+    @endforeach
 @stop

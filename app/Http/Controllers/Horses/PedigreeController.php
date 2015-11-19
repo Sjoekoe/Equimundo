@@ -8,6 +8,7 @@ use EQM\Models\Pedigrees\Pedigree;
 use EQM\Models\Pedigrees\PedigreeCreator;
 use EQM\Models\Pedigrees\PedigreeRepository;
 use EQM\Models\Pedigrees\Requests\CreateFamilyMember;
+use Illuminate\Http\Request;
 
 class PedigreeController extends Controller
 {
@@ -52,12 +53,8 @@ class PedigreeController extends Controller
     {
         $this->authorize('create-pedigree', $horse);
 
-        if ($request->get('type') < 7) {
-            $pedigree = $this->pedigrees->findExistingPedigree($horse, $request->get('type'));
-
-            if ($pedigree) {
-                return redirect()->back();
-            }
+        if ($this->alReadyHasFamilyConnection($horse, $request)) {
+            return back();
         }
 
         $this->pedigreeCreator->create($horse, $request->all());
@@ -69,7 +66,6 @@ class PedigreeController extends Controller
     {
         $horse = $pedigree->horse();
 
-        $this->authorize('edit-pedigree', $horse);
 
         return view('horses.pedigree.edit', compact('pedigree', 'horse'));
     }
@@ -92,5 +88,32 @@ class PedigreeController extends Controller
         $this->pedigrees->delete($pedigree);
 
         return redirect()->route('pedigree.index', $horse->slug());
+    }
+
+    /**
+     * @param \EQM\Models\Horses\Horse $horse
+     * @param \Illuminate\Http\Request $request
+     * @return bool
+     */
+    private function alReadyHasFamilyConnection(Horse $horse, Request $request)
+    {
+        $type = $request->get('type');
+        $message = '';
+
+        if ($type == Pedigree::FATHER && $horse->hasFather()) {
+            $message = $horse->name() . ' already has a father defined.';
+        }
+
+        if ($type == Pedigree::MOTHER && $horse->hasMother()) {
+            $message = $horse->name() . ' already has a mother defined.';
+        }
+
+        if ($message !== '') {
+            session()->put('error', $message);
+
+            return true;
+        }
+
+        return false;
     }
 }
