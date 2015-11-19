@@ -39,11 +39,14 @@ class EloquentUserRepository implements UserRepository
 
     /**
      * @param \EQM\Models\Users\User $user
-     * @return mixed
+     * @return \EQM\Models\Users\User
      */
     public function activate(User $user)
     {
-        // TODO: Implement activate() method.
+        $user->actived = true;
+        $user->save();
+
+        return $user;
     }
 
     /**
@@ -57,7 +60,11 @@ class EloquentUserRepository implements UserRepository
         $user->last_name = $values['last_name'];
         $user->country = $values['country'];
         $user->gender = $values['gender'];
-        $user->date_of_birth = Carbon::createFromFormat('d/m/Y', $values['date_of_birth'])->startOfDay();
+
+        if (array_key_exists('date_of_birth', $values) && $values['date_of_birth'] !== '') {
+            $user->date_of_birth = Carbon::createFromFormat('d/m/Y', $values['date_of_birth'])->startOfDay();
+        }
+
         $user->about = $values['about'];
         $user->save();
 

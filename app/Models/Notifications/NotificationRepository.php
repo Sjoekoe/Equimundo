@@ -26,4 +26,9 @@ interface NotificationRepository
      * @return \EQM\Models\Notifications\Notification
      */
     public function create(User $sender, User $receiver, $type, $entity, $data);
+
+    /**
+     * @param \EQM\Models\Notifications\Notification $notification
+     */
+    public function delete(Notification $notification);
 }

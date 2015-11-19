@@ -11,7 +11,7 @@ interface UserRepository
 
     /**
      * @param \EQM\Models\Users\User $user
-     * @return mixed
+     * @return \EQM\Models\Users\User
      */
     public function activate(User $user);
 

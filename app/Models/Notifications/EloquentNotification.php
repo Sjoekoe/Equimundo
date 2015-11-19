@@ -96,4 +96,12 @@ class EloquentNotification extends Model implements Notification
                 return route('horses.show', $entity->slug);
         }
     }
+
+    /**
+     * @return string
+     */
+    public function data()
+    {
+        return $this->data;
+    }
 }

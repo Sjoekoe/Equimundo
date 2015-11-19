@@ -24,10 +24,26 @@ class NotificationController extends Controller
         return view('notifications.index', compact('notifications'));
     }
 
-    public function markRead(Notification $notification = null)
+    public function show(Notification $notification)
     {
         $this->authorize('mark-as-read', $notification);
 
+        $notification->markAsRead();
+
+        return redirect()->to($notification->link());
+    }
+
+    public function delete(Notification $notification)
+    {
+        $this->authorize('delete-notification', $notification);
+
+        $this->notifications->delete($notification);
+
+        return back();
+    }
+
+    public function markRead()
+    {
         auth()->user()->markNotificationsAsRead();
 
         return redirect()->back();
