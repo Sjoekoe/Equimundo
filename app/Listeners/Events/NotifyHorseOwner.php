@@ -25,9 +25,9 @@ class NotifyHorseOwner
      */
     public function handle(PedigreeWasCreated $event)
     {
-        if ($event->family->users()) {
-            foreach ($event->family->users() as $user) {
-                $this->notifications->create($event->horse->owner()->id, $user->id(), $event->notification, $event->horse, $event->data);
+        if ($event->family->userTeams()) {
+            foreach ($event->family->userTeams() as $userTeam) {
+                $this->notifications->create($event->horse->owner()->id, $userTeam->user()->id(), $event->notification, $event->horse, $event->data);
             }
         }
     }
