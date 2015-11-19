@@ -20,6 +20,8 @@ class NotifyStatusPoster
 
     public function handle($event)
     {
-        $this->notifications->create($event->sender, $event->status->user(), $event->notification, $event->status, $event->data);
+        foreach ($event->status->horse()->userTeams() as $userTeam) {
+            $this->notifications->create($event->sender, $userTeam->user(), $event->notification, $event->status, $event->data);
+        }
     }
 }
