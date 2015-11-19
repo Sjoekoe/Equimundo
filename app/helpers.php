@@ -1,6 +1,7 @@
 <?php
 
 use Carbon\Carbon;
+use EQM\Core\Dates\DateTranslator;
 
 if (! function_exists('locale')) {
     /**
@@ -13,8 +14,23 @@ if (! function_exists('locale')) {
 }
 
 if (! function_exists('eqm_date')) {
+    /**
+     * @param \Carbon\Carbon $date
+     * @return string
+     */
     function eqm_date(Carbon $date)
     {
-        return $date->format(auth()->user()->dateFormat());
+        return eqm_translated_date($date)->format(auth()->user()->dateFormat());
+    }
+}
+
+if (! function_exists('eqm_translated_date')) {
+    /**
+     * @param \Carbon\Carbon $date
+     * @return \Carbon\Carbon|\Jenssegers\Date\Date
+     */
+    function eqm_translated_date(Carbon $date)
+    {
+        return (new DateTranslator())->translate($date);
     }
 }

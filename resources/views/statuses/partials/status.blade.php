@@ -6,7 +6,7 @@
                     <a href="{{ route('horses.show', $status->horse()->slug) }}">
                         {{ $status->horse()->name }}
                     </a>
-                    <span class="badge">{{ $status->createdAt()->diffForHumans() }}</span>
+                    <span class="badge">{{ eqm_translated_date($status->createdAt())->diffForHumans() }}</span>
                 </div>
             </div>
             <div class="card-content">
