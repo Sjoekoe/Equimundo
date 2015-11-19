@@ -15,7 +15,6 @@ class HorsesTest extends \TestCase
     /** @test */
     function it_can_create_a_horse()
     {
-        $now = Carbon::now();
         $user = factory(EloquentUser::class)->create();
 
         $this->actingAs($user)
@@ -23,7 +22,7 @@ class HorsesTest extends \TestCase
                 'name' => 'Foo horse',
                 'gender' => 1,
                 'color' => 1,
-                'date_of_birth' => $now->format('d/m/Y'),
+                'date_of_birth' => '08/06/1982',
                 'height' => '1m70',
                 'breed' => 1,
                 'life_number' => '1234'
@@ -34,7 +33,7 @@ class HorsesTest extends \TestCase
                 'id' => 1,
                 'name' => 'Foo horse',
                 'life_number' => '1234',
-                'date_of_birth' => $now,
+                'date_of_birth' => '1982-06-08 00:00:00',
                 'height' => '1m70',
                 'breed' => 1,
                 'gender' => 1,

@@ -1,6 +1,7 @@
 <?php
 namespace EQM\Models\Horses;
 
+use Carbon\Carbon;
 use DB;
 use DateTime;
 use EQM\Models\Users\User;
@@ -82,7 +83,7 @@ class EloquentHorseRepository implements HorseRepository
         $horse->color = $values['color'];
 
         if (array_key_exists('date_of_birth', $values)) {
-            $horse->date_of_birth = DateTime::createFromFormat('d/m/Y', $values['date_of_birth']);
+            $horse->date_of_birth = Carbon::createFromFormat('d/m/Y', $values['date_of_birth'])->startOfDay();
         }
 
         $horse->height = $values['height'];
