@@ -1,7 +1,6 @@
 <?php namespace EQM\Providers;
 
 use EQM\Events\CommentWasPosted;
-use EQM\Events\HorseWasCreated;
 use EQM\Events\PalmaresWasCreated;
 use EQM\Events\PalmaresWasDeleted;
 use EQM\Events\StatusLiked;
@@ -34,9 +33,6 @@ class EventServiceProvider extends ServiceProvider {
         ],
         PedigreeWasCreated::class => [
             NotifyHorseOwner::class,
-        ],
-		HorseWasCreated::class => [
-            CreateStandardAlbums::class,
         ],
 		PalmaresWasCreated::class => [
 			CreatePalmares::class,

@@ -2,7 +2,6 @@
 namespace Horses;
 
 use Carbon\Carbon;
-use EQM\Events\HorseWasCreated;
 use EQM\Models\Horses\EloquentHorse;
 use EQM\Models\HorseTeams\EloquentHorseTeam;
 use EQM\Models\Users\EloquentUser;
