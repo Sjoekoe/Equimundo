@@ -3,8 +3,8 @@ namespace EQM\Models\Horses;
 
 use EQM\Core\Files\Uploader;
 use EQM\Core\Slugs\SlugCreator;
-use EQM\Events\HorseWasCreated;
 use EQM\Models\Albums\Album;
+use EQM\Models\Albums\AlbumRepository;
 use EQM\Models\Disciplines\DisciplineRepository;
 use EQM\Models\Disciplines\DisciplineResolver;
 use EQM\Models\HorseTeams\HorseTeamRepository;
@@ -49,14 +49,10 @@ class HorseCreator
     private $disciplineResolver;
 
     /**
-     * @param \EQM\Models\Horses\HorseRepository $horses
-     * @param \EQM\Models\Disciplines\DisciplineRepository $disciplines
-     * @param \EQM\Core\Files\Uploader $uploader
-     * @param \EQM\Core\Slugs\SlugCreator $slugCreator
-     * @param \EQM\Models\HorseTeams\HorseTeamRepository $horseTeams
-     * @param \Illuminate\Events\Dispatcher $dispatcher
-     * @param \EQM\Models\Disciplines\DisciplineResolver $disciplineResolver
+     * @var \EQM\Models\Albums\AlbumRepository
      */
+    private $albums;
+
     public function __construct(
         HorseRepository $horses,
         DisciplineRepository $disciplines,
@@ -64,7 +60,8 @@ class HorseCreator
         SlugCreator $slugCreator,
         HorseTeamRepository $horseTeams,
         Dispatcher $dispatcher,
-        DisciplineResolver $disciplineResolver
+        DisciplineResolver $disciplineResolver,
+        AlbumRepository $albums
     ) {
         $this->horses = $horses;
         $this->disciplines = $disciplines;
@@ -73,6 +70,7 @@ class HorseCreator
         $this->horseTeams = $horseTeams;
         $this->dispatcher = $dispatcher;
         $this->disciplineResolver = $disciplineResolver;
+        $this->albums = $albums;
     }
 
     /**
@@ -98,7 +96,7 @@ class HorseCreator
         }
 
         if (! $pedigree) {
-            $this->dispatcher->fire(new HorseWasCreated($horse));
+            $this->albums->createStandardAlbums($horse);
 
             $this->horseTeams->createOwner($user, $horse);
         }
