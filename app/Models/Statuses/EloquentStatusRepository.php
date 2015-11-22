@@ -107,4 +107,12 @@ class EloquentStatusRepository implements StatusRepository
 
         return $data;
     }
+
+    /**
+     * @param \EQM\Models\Statuses\Status $status
+     */
+    public function delete(Status $status)
+    {
+        $status->delete();
+    }
 }

@@ -43,4 +43,12 @@ class EloquentEventRepository implements EventRepository
 
         return $event;
     }
+
+    /**
+     * @param \EQM\Models\Events\Event $event
+     */
+    public function delete(Event $event)
+    {
+        $event->delete();
+    }
 }

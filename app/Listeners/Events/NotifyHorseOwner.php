@@ -16,7 +16,6 @@ class NotifyHorseOwner
      */
     public function __construct(NotificationRepository $notifications)
     {
-
         $this->notifications = $notifications;
     }
 
@@ -27,7 +26,7 @@ class NotifyHorseOwner
     {
         if ($event->family->userTeams()) {
             foreach ($event->family->userTeams() as $userTeam) {
-                $this->notifications->create($event->horse->owner()->id, $userTeam->user()->id(), $event->notification, $event->horse, $event->data);
+                $this->notifications->create($event->horse->owner()->id(), $userTeam->user()->id(), $event->notification, $event->horse, $event->data);
             }
         }
     }

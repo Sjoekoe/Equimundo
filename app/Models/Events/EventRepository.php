@@ -17,4 +17,9 @@ interface EventRepository
      * @return \EQM\Models\Events\Event
      */
     public function create(User $user, $values);
+
+    /**
+     * @param \EQM\Models\Events\Event $event
+     */
+    public function delete(Event $event);
 }
