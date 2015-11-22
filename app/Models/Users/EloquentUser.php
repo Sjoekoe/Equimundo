@@ -27,11 +27,6 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
     use Authenticatable, Authorizable, CanResetPassword;
 
     /**
-     * @var string
-     */
-    protected $language;
-
-    /**
      * The database table used by the model.
      *
      * @var string

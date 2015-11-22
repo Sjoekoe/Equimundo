@@ -5,6 +5,7 @@ return [
         'about_you' => 'About You',
         'create_horse' => 'Create a Horse',
         'daughters' => 'Daughters',
+        'disciplines' => 'Disciplines',
         'edit' => 'Edit',
         'following' => 'Following',
         'horses' => 'Horses',

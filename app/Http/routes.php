@@ -24,6 +24,7 @@ Route::group(['namespace' => 'Files'], function() {
 });
 
 Route::group(['namespace' => 'Horses'], function() {
+    require __DIR__ . '/Routes/Horses/disciplines.php';
     require __DIR__ . '/Routes/Horses/follows.php';
     require __DIR__ . '/Routes/Horses/horses.php';
     require __DIR__ . '/Routes/Horses/infos.php';

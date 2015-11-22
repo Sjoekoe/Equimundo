@@ -20,7 +20,7 @@ if (! function_exists('eqm_date')) {
      */
     function eqm_date(Carbon $date)
     {
-        return eqm_translated_date($date)->format(auth()->user()->dateFormat());
+        return $date->format(auth()->user()->dateFormat());
     }
 }
 

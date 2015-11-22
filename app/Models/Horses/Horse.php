@@ -7,7 +7,7 @@ interface Horse
     const TEAM_POLICIES = [
         'edit-horse', 'delete-horse', 'create-album', 'edit-album', 'delete-album', 'upload-picture', 'delete-picture',
         'create-palmares', 'edit-palmares', 'delete-palmares', 'create-pedigree', 'edit-pedigree', 'delete-pedigree',
-
+        'create-disciplines',
     ];
 
     const POLICIES = [

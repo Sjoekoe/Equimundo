@@ -45,14 +45,6 @@
                     {{ Form::text('life_number', $horse->life_number) }}
                 </div>
             </div>
-            <div class="row">
-                @foreach ($disciplines as $key => $value)
-                    <div class="input-field col s3">
-                        {{ Form::checkbox('disciplines[]', $key, $horse->performsDiscipline($key), ['id' => $key]) }}
-                        {{ Form::label($key, $value) }}
-                    </div>
-                @endforeach
-            </div>
             <br/>
             {{ Form::submit(trans('forms.buttons.save'), ['class' => 'btn']) }}
         {{ Form::close() }}

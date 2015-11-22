@@ -6,10 +6,8 @@ use EQM\Core\Slugs\SlugCreator;
 use EQM\Models\Albums\Album;
 use EQM\Models\Albums\AlbumRepository;
 use EQM\Models\Disciplines\DisciplineRepository;
-use EQM\Models\Disciplines\DisciplineResolver;
 use EQM\Models\HorseTeams\HorseTeamRepository;
 use EQM\Models\Users\User;
-use Illuminate\Events\Dispatcher;
 
 class HorseCreator
 {
@@ -39,16 +37,6 @@ class HorseCreator
     private $horseTeams;
 
     /**
-     * @var \Illuminate\Events\Dispatcher
-     */
-    private $dispatcher;
-
-    /**
-     * @var \EQM\Models\Disciplines\DisciplineResolver
-     */
-    private $disciplineResolver;
-
-    /**
      * @var \EQM\Models\Albums\AlbumRepository
      */
     private $albums;
@@ -59,8 +47,6 @@ class HorseCreator
         Uploader $uploader,
         SlugCreator $slugCreator,
         HorseTeamRepository $horseTeams,
-        Dispatcher $dispatcher,
-        DisciplineResolver $disciplineResolver,
         AlbumRepository $albums
     ) {
         $this->horses = $horses;
@@ -68,8 +54,6 @@ class HorseCreator
         $this->uploader = $uploader;
         $this->slugCreator = $slugCreator;
         $this->horseTeams = $horseTeams;
-        $this->dispatcher = $dispatcher;
-        $this->disciplineResolver = $disciplineResolver;
         $this->albums = $albums;
     }
 
@@ -83,16 +67,10 @@ class HorseCreator
     {
         if ($values['life_number'] && $horse = $this->horses->findByLifeNumber($values['life_number'])) {
             $horse = $this->horses->update($horse, $values);
-
-            $this->disciplineResolver->resolve($horse, $values);
         } else {
             $horse = $this->horses->create($values);
 
             $horse->slug = $this->slugCreator->createForHorse($values['name']);
-
-            if (array_key_exists('disciplines', $values)) {
-                $this->disciplineResolver->addDisciplines($horse, $values);
-            }
         }
 
         if (! $pedigree) {
@@ -100,7 +78,6 @@ class HorseCreator
 
             $this->horseTeams->createOwner($user, $horse);
         }
-
 
         if (array_key_exists('profile_pic', $values)) {
             $picture = $this->uploader->uploadPicture($values['profile_pic'], $horse, true);
