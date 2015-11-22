@@ -49,4 +49,9 @@ interface StatusRepository
      * @return \EQM\Models\Statuses\Status
      */
     public function update(Status $status, array $values = []);
+
+    /**
+     * @param \EQM\Models\Statuses\Status $status
+     */
+    public function delete(Status $status);
 }

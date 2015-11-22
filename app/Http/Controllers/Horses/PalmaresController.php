@@ -1,15 +1,15 @@
 <?php
 namespace EQM\Http\Controllers\Horses;
 
-use EQM\Events\PalmaresWasCreated;
 use EQM\Events\PalmaresWasDeleted;
 use EQM\Http\Controllers\Controller;
 use EQM\Models\Horses\Horse;
 use EQM\Models\Horses\HorseRepository;
 use EQM\Models\Palmares\Palmares;
+use EQM\Models\Palmares\PalmaresCreator;
+use EQM\Models\Palmares\PalmaresDeleter;
 use EQM\Models\Palmares\PalmaresRepository;
-use Illuminate\Support\Facades\Request;
-use Input;
+use Illuminate\Http\Request;
 
 class PalmaresController extends Controller
 {
@@ -43,12 +43,11 @@ class PalmaresController extends Controller
     }
 
     // todo add validation
-    public function store(Request $request, Horse $horse)
+    public function store(Request $request, PalmaresCreator $creator, Horse $horse)
     {
         $this->authorize('create-palmares', $horse);
 
-        // todo refactor this
-        event(new PalmaresWasCreated($horse, $request->all()));
+        $creator->create($horse, auth()->user(), $request->all());
 
         return redirect()->route('palmares.index', $horse->slug());
     }
@@ -60,24 +59,22 @@ class PalmaresController extends Controller
         return view('horses.palmares.edit', compact('palmares'));
     }
 
-    public function update(Palmares $palmares)
+    public function update(Request $request, Palmares $palmares)
     {
         $this->authorize('edit-palmares', $palmares->horse());
 
-        $this->palmaresRepository->update($palmares, Input::all());
+        $this->palmaresRepository->update($palmares, $request->all());
 
-        $horse = $palmares->horse();
-
-        return redirect()->route('palmares.index', $horse->slug());
+        return redirect()->route('palmares.index', $palmares->horse()->slug());
     }
 
-    public function delete(Palmares $palmares)
+    public function delete(PalmaresDeleter $deleter, Palmares $palmares)
     {
         $horse = $palmares->horse();
 
         $this->authorize('delete-palmares', $horse);
 
-        event(new PalmaresWasDeleted($palmares));
+        $deleter->delete($palmares);
 
         return redirect()->route('palmares.index', $horse->slug());
     }

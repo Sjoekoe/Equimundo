@@ -34,12 +34,6 @@ class EventServiceProvider extends ServiceProvider {
         PedigreeWasCreated::class => [
             NotifyHorseOwner::class,
         ],
-		PalmaresWasCreated::class => [
-			CreatePalmares::class,
-		],
-		PalmaresWasDeleted::class => [
-            DeletePalmares::class,
-        ]
 	];
 
 	/**
