@@ -5,6 +5,7 @@ return [
         'about_you' => 'Over Uzelf',
         'create_horse' => 'Creëer een paard',
         'daughters' => 'Dochters',
+        'disciplines' => 'Disciplines',
         'edit' => 'Wijzig',
         'following' => 'Volgend',
         'horses' => 'Paarden',

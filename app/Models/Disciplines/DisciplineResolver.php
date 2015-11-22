@@ -35,6 +35,8 @@ class DisciplineResolver
             $this->addDisciplines($horse, $values);
 
             $unwantedDisciplines = array_diff($initialDisciplines, $values['disciplines']);
+        } else {
+            $this->removeAllDisciplines($horse);
         }
 
         foreach ($unwantedDisciplines as $key => $values) {
@@ -50,6 +52,16 @@ class DisciplineResolver
     {
         foreach ($values['disciplines'] as $discipline) {
             $this->disciplines->create($horse, $discipline);
+        }
+    }
+
+    /**
+     * @param \EQM\Models\Horses\Horse $horse
+     */
+    private function removeAllDisciplines(Horse $horse)
+    {
+        foreach ($horse->disciplines() as $discipline) {
+            $this->disciplines->removeById($discipline->id());
         }
     }
 }

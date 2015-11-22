@@ -57,9 +57,7 @@ class HorseController extends Controller
 
     public function create()
     {
-        $disciplines = trans('disciplines.list');
-
-        return view('horses.create', compact('disciplines'));
+        return view('horses.create');
     }
 
     public function store(CreateHorse $request, HorseCreator $creator)
@@ -68,7 +66,7 @@ class HorseController extends Controller
 
         session()->put('success', $horse->name() . ' was successfully created.');
 
-        return redirect()->route('horses.index', auth()->user()->id);
+        return redirect()->route('horses.index', auth()->user()->id());
     }
 
     public function show(Horse $horse)
@@ -84,9 +82,7 @@ class HorseController extends Controller
     {
         $this->authorize('edit-horse', $horse);
 
-        $disciplines = trans('disciplines.list');
-
-        return view('horses.edit', compact('horse', 'disciplines'));
+        return view('horses.edit', compact('horse'));
     }
 
     public function update(UpdateHorse $request, HorseUpdater $updater, Horse $horse)
