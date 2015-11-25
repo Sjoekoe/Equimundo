@@ -143,6 +143,7 @@ return [
         HieuLe\Active\ActiveServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Jenssegers\Date\DateServiceProvider::class,
+        EQM\Core\Dates\DateServiceProvider::class,
 
         /*
          * Model Service Providers
