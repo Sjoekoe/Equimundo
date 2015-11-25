@@ -31,6 +31,6 @@ if (! function_exists('eqm_translated_date')) {
      */
     function eqm_translated_date(Carbon $date)
     {
-        return (new DateTranslator())->translate($date);
+        return app(DateTranslator::class)->translate($date);
     }
 }

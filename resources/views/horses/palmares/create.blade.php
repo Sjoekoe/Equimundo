@@ -17,8 +17,8 @@
                 </div>
                 <div class="row">
                     <div class="col s6 input-field">
-                        {{ Form::select('discipline', trans('disciplines.list'), null, ['class' => 'discipline-select']) }}
-                        {{ Form::label('discipline', trans('forms.labels.dicipline')) }}
+                        {{ Form::select('discipline', [], null, ['class' => 'discipline-select']) }}
+                        {{ Form::label('discipline', trans('forms.labels.discipline')) }}
                     </div>
                     <div class="col s6 input-field">
                         {{ Form::label('level', trans('forms.labels.category')) }}

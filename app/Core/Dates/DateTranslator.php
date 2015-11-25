@@ -2,19 +2,12 @@
 namespace EQM\Core\Dates;
 
 use DateTime;
-use Jenssegers\Date\Date;
 
-class DateTranslator
+interface DateTranslator
 {
     /**
      * @param \DateTime $dateTime
-     * @return \Jenssegers\Date\Date
+     * @return \DateTime
      */
-    public function translate(DateTime $dateTime)
-    {
-        $date = Date::parse($dateTime);
-        $date->setLocale(eqm_locale());
-
-        return $date;
-    }
+    public function translate(DateTime $dateTime);
 }
