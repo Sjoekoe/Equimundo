@@ -16,11 +16,14 @@ if (! function_exists('locale')) {
 if (! function_exists('eqm_date')) {
     /**
      * @param \Carbon\Carbon $date
+     * @param string|null $format
      * @return string
      */
-    function eqm_date($date = null)
+    function eqm_date($date = null, $format = null)
     {
-        return $date && $date !== '' ? $date->format(auth()->user()->dateFormat()) : '';
+        $format = $format ?: auth()->user()->dateFormat();
+
+        return $date && $date !== '' ? $date->format($format) : '';
     }
 }
 
