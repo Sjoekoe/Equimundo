@@ -12,70 +12,70 @@
             <div class="row">
             <fieldset>
                 <legend>Various</legend>
-                @foreach (trans('disciplines.various') as $key => $value)
+                @foreach (\EQM\Models\Disciplines\Discipline::VARIOUS as $discipline)
                     <div class="input-field col s3">
-                        {{ Form::checkbox('disciplines[]', $key, $horse->performsDiscipline($key), ['id' => $key]) }}
-                        {{ Form::label($key, $value) }}
+                        {{ Form::checkbox('disciplines[]', $discipline, $horse->performsDiscipline($discipline), ['id' => $discipline]) }}
+                        {{ Form::label($discipline, trans('disciplines.' . $discipline)) }}
                     </div>
                 @endforeach
             </fieldset>
             <br>
             <fieldset>
                 <legend>Racing</legend>
-                @foreach (trans('disciplines.racing') as $key => $value)
+                @foreach (\EQM\Models\Disciplines\Discipline::RACING as $discipline)
                     <div class="input-field col s3">
-                        {{ Form::checkbox('disciplines[]', $key, $horse->performsDiscipline($key), ['id' => $key]) }}
-                        {{ Form::label($key, $value) }}
+                        {{ Form::checkbox('disciplines[]', $discipline, $horse->performsDiscipline($discipline), ['id' => $discipline]) }}
+                        {{ Form::label($discipline, trans('disciplines.' . $discipline)) }}
                     </div>
                 @endforeach
             </fieldset>
             <br>
             <fieldset>
                 <legend>Classic</legend>
-                @foreach (trans('disciplines.classic') as $key => $value)
+                @foreach (\EQM\Models\Disciplines\Discipline::CLASSIC as $discipline)
                     <div class="input-field col s3">
-                        {{ Form::checkbox('disciplines[]', $key, $horse->performsDiscipline($key), ['id' => $key]) }}
-                        {{ Form::label($key, $value) }}
+                        {{ Form::checkbox('disciplines[]', $discipline, $horse->performsDiscipline($discipline), ['id' => $discipline]) }}
+                        {{ Form::label($discipline, trans('disciplines.' . $discipline)) }}
                     </div>
                 @endforeach
             </fieldset>
             <br>
             <fieldset>
                 <legend>Western</legend>
-                @foreach (trans('disciplines.western') as $key => $value)
+                @foreach (\EQM\Models\Disciplines\Discipline::WESTERN_SPORTS as $discipline)
                     <div class="input-field col s3">
-                        {{ Form::checkbox('disciplines[]', $key, $horse->performsDiscipline($key), ['id' => $key]) }}
-                        {{ Form::label($key, $value) }}
+                        {{ Form::checkbox('disciplines[]', $discipline, $horse->performsDiscipline($discipline), ['id' => $discipline]) }}
+                        {{ Form::label($discipline, trans('disciplines.' . $discipline)) }}
                     </div>
                 @endforeach
             </fieldset>
             <br>
             <fieldset>
                 <legend>Harness</legend>
-                @foreach (trans('disciplines.harness') as $key => $value)
+                @foreach (\EQM\Models\Disciplines\Discipline::HARNESS as $discipline)
                     <div class="input-field col s3">
-                        {{ Form::checkbox('disciplines[]', $key, $horse->performsDiscipline($key), ['id' => $key]) }}
-                        {{ Form::label($key, $value) }}
+                        {{ Form::checkbox('disciplines[]', $discipline, $horse->performsDiscipline($discipline), ['id' => $discipline]) }}
+                        {{ Form::label($discipline, trans('disciplines.' . $discipline)) }}
                     </div>
                 @endforeach
             </fieldset>
             <br>
             <fieldset>
                 <legend>Team sports</legend>
-                @foreach (trans('disciplines.team') as $key => $value)
+                @foreach (\EQM\Models\Disciplines\Discipline::TEAM as $discipline)
                     <div class="input-field col s3">
-                        {{ Form::checkbox('disciplines[]', $key, $horse->performsDiscipline($key), ['id' => $key]) }}
-                        {{ Form::label($key, $value) }}
+                        {{ Form::checkbox('disciplines[]', $discipline, $horse->performsDiscipline($discipline), ['id' => $discipline]) }}
+                        {{ Form::label($discipline, trans('disciplines.' . $discipline)) }}
                     </div>
                 @endforeach
             </fieldset>
             <br>
             <fieldset>
                 <legend>Ancient</legend>
-                @foreach (trans('disciplines.ancient') as $key => $value)
+                @foreach (\EQM\Models\Disciplines\Discipline::ANCIENT as $discipline)
                     <div class="input-field col s3">
-                        {{ Form::checkbox('disciplines[]', $key, $horse->performsDiscipline($key), ['id' => $key]) }}
-                        {{ Form::label($key, $value) }}
+                        {{ Form::checkbox('disciplines[]', $discipline, $horse->performsDiscipline($discipline), ['id' => $discipline]) }}
+                        {{ Form::label($discipline, trans('disciplines.' . $discipline)) }}
                     </div>
                 @endforeach
             </fieldset>

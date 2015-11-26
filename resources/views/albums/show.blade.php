@@ -3,7 +3,7 @@
 @section('content')
     @include('layout.partials.heading')
 
-    <h3>{{ $album->name() }}</h3>
+    <h3>{{ $album->type() ? trans('albums.names.' . $album->type()) : $album->name() }}</h3>
     <p>{{ $album->description() }}</p>
     @if (auth()->user()->isInHorseTeam($horse))
         <div class="row">
