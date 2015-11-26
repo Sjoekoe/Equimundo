@@ -18,9 +18,9 @@ if (! function_exists('eqm_date')) {
      * @param \Carbon\Carbon $date
      * @return string
      */
-    function eqm_date(Carbon $date)
+    function eqm_date($date = null)
     {
-        return $date->format(auth()->user()->dateFormat());
+        return $date && $date !== '' ? $date->format(auth()->user()->dateFormat()) : '';
     }
 }
 

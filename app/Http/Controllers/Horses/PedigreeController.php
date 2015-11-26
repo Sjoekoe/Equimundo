@@ -62,21 +62,18 @@ class PedigreeController extends Controller
         return redirect()->route('pedigree.index', $horse->slug);
     }
 
-    public function edit(Pedigree $pedigree)
+    public function edit(Horse $horse)
     {
-        $horse = $pedigree->horse();
-
-
         return view('horses.pedigree.edit', compact('pedigree', 'horse'));
     }
 
-    public function update(CreateFamilyMember $request, Pedigree $pedigree)
+    public function update(CreateFamilyMember $request, Horse $horse)
     {
-        $this->authorize('edit-pedigree', $pedigree->horse());
+        $this->authorize('edit-pedigree', $horse);
 
-        $this->pedigrees->update($pedigree, $request->all());
+        $this->horses->update($horse, $request->all());
 
-        return redirect()->route('pedigree.index', $pedigree->horse()->slug());
+        return redirect()->route('pedigree.index', $horse->slug());
     }
 
     public function delete(Pedigree $pedigree)

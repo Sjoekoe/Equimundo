@@ -85,7 +85,7 @@ class EloquentHorse extends Model implements Horse
      */
     public function dateOfBirth()
     {
-        return Carbon::createFromTimestamp(strtotime($this->date_of_birth));
+        return $this->date_of_birth ? Carbon::createFromTimestamp(strtotime($this->date_of_birth)) : '';
     }
 
     /**

@@ -75,10 +75,6 @@ class EloquentPedigreeRepository implements PedigreeRepository
             $pedigree->date_of_birth = new DateTime($values['date_of_birth']);
         }
 
-        if ($values['date_of_death']) {
-            $pedigree->date_of_death = new DateTime($values['date_of_death']);
-        }
-
         $pedigree->save();
 
         return $pedigree;
