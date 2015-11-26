@@ -138,7 +138,6 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
         return $this->hasMany(EloquentRole::class, 'user_id', 'id')->get();
     }
 
-
     /**
      * @return \EQM\Models\Conversations\Conversation[]
      */

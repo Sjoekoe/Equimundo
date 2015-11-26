@@ -16,7 +16,7 @@
                 </div>
                 <div class="input-field col s6">
                     {{ Form::label('date_of_birth', trans('forms.labels.date_of_birth')) }}
-                    {{ Form::text('date_of_birth', $horse->getBirthDay(), ['placeholder' => 'dd/mm/yyyy']) }}
+                    {{ Form::text('date_of_birth', eqm_date($horse->dateOfBirth()), ['placeholder' => 'dd/mm/yyyy']) }}
                 </div>
             </div>
             <div class="row">
@@ -25,24 +25,24 @@
                     {{ Form::text('height', $horse->height) }}
                 </div>
                 <div class="input-field col s6">
-                    {{ Form::select('gender', trans('horses.genders'), $horse->gender, ['class' => 'gender-select']) }}
+                    {{ Form::select('gender', trans('horses.genders'), $horse->gender(), ['class' => 'gender-select']) }}
                     {{ Form::label('gender', trans('forms.labels.gender')) }}
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s6">
-                    {{ Form::select('breed', trans('horses.breeds'), $horse->breed, ['class' => 'breed-select']) }}
+                    {{ Form::select('breed', trans('horses.breeds'), $horse->breed(), ['class' => 'breed-select']) }}
                     {{ Form::label('breed', trans('forms.labels.breed')) }}
                 </div>
                 <div class="input-field col s6">
-                    {{ Form::select('color', trans('horses.colors'), $horse->color, ['class' => 'color-select']) }}
+                    {{ Form::select('color', trans('horses.colors'), $horse->color(), ['class' => 'color-select']) }}
                     {{ Form::label('color', trans('forms.labels.color')) }}
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s6">
                     {{ Form::label('life_number', trans('forms.labels.life_number')) }}
-                    {{ Form::text('life_number', $horse->life_number) }}
+                    {{ Form::text('life_number', $horse->lifeNumber()) }}
                 </div>
             </div>
             <br/>
