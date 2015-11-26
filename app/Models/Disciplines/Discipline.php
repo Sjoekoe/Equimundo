@@ -10,7 +10,7 @@ interface Discipline
     const DOMA_VAQUERA = 5;
     const DZHIGITOVKA = 6;
     const EQUITATION = 7;
-    const GYMKHANA = 8;
+    const VOLTIGE = 8;
     const HORSE_SHOW = 9;
     const ORIENTEERING = 10;
     const PLEASURE = 11;
@@ -117,7 +117,7 @@ interface Discipline
         self::EVENTING ,
         self::FIELD_HUNTER ,
         self::FOX_HUNTING ,
-        self::GYMKHANA ,
+        self::VOLTIGE ,
         self::HUNT_SEAT ,
         self::SADDLE_SEAT ,
         self::SHOW_HUNTER ,

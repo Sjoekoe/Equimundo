@@ -5,7 +5,7 @@
             <p>{{ trans('copy.p.date') }} {{ date('d F Y', strtotime($palmares->date())) }}</p>
         </div>
         <div class="col s5">
-            <p>{{ trans('copy.p.discipline') }} {{ array_flatten(trans('disciplines.list'))[$palmares->discipline() - 1] }}</p>
+            <p>{{ trans('copy.p.discipline') }} {{ trans('disciplines.' . $palmares->discipline()) }}</p>
             <p>{{ trans('copy.p.category') }} {{ $palmares->level() }}</p>
         </div>
         <div class="col s2">
