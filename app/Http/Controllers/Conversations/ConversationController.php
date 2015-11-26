@@ -2,12 +2,12 @@
 namespace EQM\Http\Controllers\Conversations;
 
 use EQM\Http\Controllers\Controller;
-use EQM\Http\Requests\Request;
 use EQM\Models\Conversations\Conversation;
 use EQM\Models\Conversations\ConversationCreator;
 use EQM\Models\Conversations\ConversationRepository;
 use EQM\Models\Conversations\Requests\ConversationRequest;
 use EQM\Models\Users\UserRepository;
+use Illuminate\Http\Request;
 
 class ConversationController extends Controller
 {

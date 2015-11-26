@@ -138,15 +138,23 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
         return $this->hasMany(EloquentRole::class, 'user_id', 'id')->get();
     }
 
+
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \EQM\Models\Conversations\Conversation[]
      */
     public function conversations()
     {
+        return $this->conversationRelation()->get();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    private function conversationRelation()
+    {
         return $this->belongsToMany(EloquentConversation::class, 'conversation_user', 'user_id', 'conversation_id')
             ->withPivot('last_view', 'deleted_at')
-            ->withTimestamps()
-            ->get();
+            ->withTimestamps();
     }
 
     /**
@@ -208,7 +216,7 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
      */
     public function addConversation(Conversation $conversation)
     {
-        $this->conversations()->attach($conversation);
+        $this->conversationRelation()->attach($conversation->id());
     }
 
     /**
@@ -232,7 +240,7 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
     {
         $count = 0;
 
-        foreach ($this->conversations as $conversation) {
+        foreach ($this->conversations() as $conversation) {
             if ($conversation->pivot->last_view == null) {
                 $count++;
             }
