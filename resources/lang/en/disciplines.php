@@ -33,7 +33,7 @@ return [
     Discipline::EVENTING => 'Eventing',
     Discipline::FIELD_HUNTER => 'Field hunter',
     Discipline::FOX_HUNTING => 'Foxhunting',
-    Discipline::GYMKHANA => 'Gymkhana',
+    Discipline::VOLTIGE => 'Voltige',
     Discipline::HUNT_SEAT => 'Hunt seat',
     Discipline::SADDLE_SEAT => 'Saddle seat',
     Discipline::SHOW_HUNTER => 'Show hunter',
