@@ -80,7 +80,7 @@
                 <a href="{{ route('horses.show', $horse->slug()) }}">
                     <h4>{{ $horse->name() }}</h4>
                 </a>
-                <p>{{ trans('copy.p.born') . ' ' . date('Y', strtotime($horse->date_of_birth)) }}</p>
+                <p>{{ trans('copy.p.born') . ' ' . eqm_date($horse->dateOfBirth(), 'Y') }}</p>
                 <p>{{ trans('copy.p.life_number') . ' ' . $horse->life_number ? : '-' }}</p>
             </div>
         </div>
@@ -91,7 +91,7 @@
                 {{ trans('copy.titles.sons') }}
                 <hr/>
                 @foreach ($horse->sons() as $son)
-                    {{ $son->name() }}
+                    {{ $son->originalHorse->name() }}
                 @endforeach
             </div>
             <div class="col s6 offspring female">
