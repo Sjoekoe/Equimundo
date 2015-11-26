@@ -23,7 +23,7 @@
 
         <h5>{{ trans('copy.titles.disciplines') }}</h5>
         @foreach($horse->disciplines() as $discipline)
-            {{ trans('discipline.' . $discipline->discipline()) }}
+            {{ trans('disciplines.' . $discipline->discipline()) }}
         @endforeach
     </div>
 @stop
