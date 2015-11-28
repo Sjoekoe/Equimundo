@@ -1,17 +1,14 @@
 .status-form {
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  margin: 1em;
-  margin-bottom: 0;
-  border-radius: 2px;
-  form {
+    border: 1px solid grey;
     padding: 1em;
+    border-radius: 2px;
+    margin: 0 1em;
 
-    .row {
-      margin-bottom: 0;
+    form {
+        padding: 1em;
     }
-  }
 
-  .btn {
-    margin-bottom: 1em;
-  }
+    .btn {
+        margin-bottom: 1em;
+    }
 }

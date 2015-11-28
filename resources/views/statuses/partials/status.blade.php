@@ -1,4 +1,52 @@
-<div class="row">
+
+<dd class="pos-right clearfix">
+    <div class="circ"></div>
+    <div class="time">
+        {{ eqm_translated_date($status->createdAt())->diffForHumans() }} <br>
+        <div class="pull-right">
+            <a href="{{ route('statuses.show', $status->id()) }}">
+                <i class="fa fa-search fa-lg"></i>
+            </a>
+            <i class="fa fa-share-alt fa-lg"></i>
+            <i class="fa fa-comments-o fa-lg"></i>
+            {{--<p class="muted like-counter pull-right">
+                {{ count($status->likes()) }}
+            </p>--}}
+            {{ Form::open(['route' => ['status.like', $status->id()], 'class' => 'like-button pull-right', 'data-remote']) }}
+                {{ Form::hidden('status_id', $status->id()) }}
+                <button type="submit" class="btn-naked">
+                    <i class="fa {{ in_array($status->id(), $likes) ? 'fa-heart fa-lg' : 'fa-heart-o fa-lg' }}"></i>
+                </button>
+            {{ Form::close() }}
+        </div>
+    </div>
+    <div class="events">
+        <div class="pull-left">
+            @if ($status->horse()->getProfilePicture())
+                <img class="events-object img-rounded"
+                    src="{{ route('file.picture', $status->horse()->getProfilePicture()->id()) }}">
+            @else
+                <img class="events-object img-rounded"
+                     src="{{ asset('images/eqm.png')  }}">
+            @endif
+        </div>
+        <div class="events-body">
+            <h4 class="events-heading">
+                <a href="{{ route('horses.show', $status->horse()->slug()) }}">{{ $status->horse()->name() }}</a>
+                <i class="fa fa-info-circle fa"></i>
+            </h4>
+            <p>{{ $status->body() }}</p>
+            @if ($status->hasPicture())
+                <br/>
+                <div class="thumbnail">
+                    <img class="img-rounded" src="{{ route('file.picture', [$status->getPicture()->id()]) }}" alt=""/>
+                </div>
+            @endif
+        </div>
+    </div>
+</dd>
+
+{{--<div class="row">
     <div class="col s12">
         <div class="card status">
             <div class="card-header">
@@ -55,4 +103,4 @@
             @endif
         </div>
     </div>
-</div>
+</div>--}}

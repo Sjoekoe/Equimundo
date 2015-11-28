@@ -14,7 +14,7 @@ class HorseCollection
         $result = [];
 
         foreach ($horses as $horse) {
-            $result[$horse->id()] = $horse->name();
+            $result[$horse->horse_id] = $horse->name();
         }
 
         return $result;

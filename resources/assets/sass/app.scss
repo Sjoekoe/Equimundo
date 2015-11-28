@@ -1,10 +1,14 @@
-@import "materialize";
+@import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "../../../node_modules/bootflat/bootflat/scss/bootflat";
+@import "hs/general";
 @import "hs/user-sidebar";
 @import "hs/cards";
 @import "hs/heading";
 @import "hs/helpers";
 @import "hs/buttons";
 @import "hs/icons";
+@import "hs/navigation";
 @import "hs/status";
+@import "hs/timeline";
 @import "hs/pedigree";
 @import "hs/palmares";

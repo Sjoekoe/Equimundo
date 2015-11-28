@@ -6,9 +6,13 @@
         @if (! count($horse->statuses))
             <p>{{ trans('copy.p.no_statuses') }}</p>
         @else
-            @foreach($statuses as $status)
-                @include('statuses.partials.status')
-            @endforeach
+            <div class="timeline">
+                <dl class="pull-left">
+                    @foreach($statuses as $status)
+                        @include('statuses.partials.status')
+                    @endforeach
+                </dl>
+            </div>
         @endif
     </div>
 @stop

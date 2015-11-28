@@ -22,28 +22,27 @@
 <body>
 
 	@include('layout.partials.nav')
+    @include('layout.partials._flash_messages')
 
-    <div class="row">
-
-        <div class="col s2">
-            @if (Auth::check())
-                <div class="">
-                    @include('users.partials.user_sidebar_left')
+    <div class="container-fluid">
+        @if (auth()->check())
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    @yield('content')
                 </div>
-            @endif
-        </div>
 
-        <div class="col s8 offset-s2">
-            @yield('content')
-        </div>
-
-
-        @if (Auth::check())
-            <div class="col s2">
-                Other Things
+                <div class="col-md-2">
+                    <div class="row">
+                        Other Things
+                    </div>
+                </div>
             </div>
+        @else
+            @yield('content')
         @endif
     </div>
+
+
 
     <!-- Scripts -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>

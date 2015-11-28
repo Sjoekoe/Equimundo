@@ -96,7 +96,7 @@ class EloquentUserRepository implements UserRepository
      */
     public function findByIdAndToken($id, $token)
     {
-        return $this->user->where('id', $id)->where('token', $token)->firstOrFail();
+        return $this->user->where('id', $id)->where('remember_token', $token)->firstOrFail();
     }
 
     /**
