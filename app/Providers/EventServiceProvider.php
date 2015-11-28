@@ -11,6 +11,7 @@ use EQM\Listeners\Events\DeletePalmares;
 use EQM\Listeners\Events\EmailRegisteredUser;
 use EQM\Listeners\Events\NotifyHorseOwner;
 use EQM\Listeners\Events\NotifyStatusPoster;
+use EQM\Listeners\Events\Statuses\Likes\EmailHorseOwner;
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -27,6 +28,7 @@ class EventServiceProvider extends ServiceProvider {
 		],
         StatusLiked::class => [
             NotifyStatusPoster::class,
+            EmailHorseOwner::class,
         ],
         CommentWasPosted::class => [
             NotifyStatusPoster::class,
