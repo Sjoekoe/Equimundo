@@ -7,7 +7,7 @@
             <li>{{ $horse->name() }}</li>
             <li>{{ trans('horses.breeds.' . $horse->breed()) }}</li>
             <li>{{ trans('horses.genders.' . $horse->gender()) }}</li>
-            <li>{{ $horse->dateOfBirth() }}</li>
+            <li>{{ eqm_date($horse->dateOfBirth()) }}</li>
             <li>{{ $horse->height() }}</li>
             <li>{{ trans('horses.colors.' . $horse->color()) }}</li>
         </ul>

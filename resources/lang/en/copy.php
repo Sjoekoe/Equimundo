@@ -54,6 +54,7 @@ return [
         'delete_album' => 'Delete Album',
         'delete_picture' => 'Delete Picture',
         'edit' => 'Edit',
+        'edit_horse' => 'Edit :horse',
         'edit_album' => 'Edit Album',
         'edit_profile' => 'Edit Profile',
         'follow' => 'Follow ',
