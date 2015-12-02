@@ -36,3 +36,9 @@ $factory->define(EloquentHorseTeam::class, function (Generator $faker) {
         'type' => 1,
     ];
 });
+
+$factory->define(\EQM\Models\Statuses\EloquentStatus::class, function (Generator $faker) {
+    return [
+        'body' => $faker->text,
+    ];
+});
