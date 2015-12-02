@@ -25,7 +25,7 @@ class StatusController extends Controller
 
         session()->put('success', 'Status has been posted');
 
-        return redirect()->refresh();
+        return redirect()->route('home');
     }
 
     public function show(Status $status)

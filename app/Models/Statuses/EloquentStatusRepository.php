@@ -25,7 +25,7 @@ class EloquentStatusRepository implements StatusRepository
      */
     public function findById($id)
     {
-        return $this->status->findOrFail($id);
+        return $this->status->find($id);
     }
 
     /**
@@ -60,7 +60,7 @@ class EloquentStatusRepository implements StatusRepository
      */
     public function findFeedForHorse(Horse $horse)
     {
-        return $this->status->where('horse_id', $horse->id)->orderBy('created_at', 'DESC')->get();
+        return $this->status->where('horse_id', $horse->id())->orderBy('created_at', 'DESC')->get();
     }
 
     /**
@@ -69,6 +69,7 @@ class EloquentStatusRepository implements StatusRepository
      */
     public function create(array $data = [])
     {
+        // todo refactor this
         $status = new EloquentStatus();
         $status->body = $data['status'];
         $status->horse_id = $data['horse'];
@@ -97,6 +98,7 @@ class EloquentStatusRepository implements StatusRepository
      */
     public function createForPalmares(Horse $horse, array $data = [])
     {
+        // todo refactor this
         $data['status'] = $horse->name()  . ' has added an achievement.<br>';
         $data['status'] .= 'She finished ' . $data['ranking'] . ' at ' . $data['event_name']  . ' in the ' . $data['level'] . ' category<br><hr>';
         $data['status'] .= nl2br($data['body']);

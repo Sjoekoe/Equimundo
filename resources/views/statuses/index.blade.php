@@ -9,7 +9,7 @@
                         @include('layout.partials.errors')
                         <div class="row">
                             <div class="col-md-7 col-md-offset-1">
-                                {{ Form::open(['route' => 'statuses.store', 'class' => 'status_form', 'files' => 'true']) }}
+                                {{ Form::open(['route' => 'statuses.store', 'method' => 'POST', 'class' => 'status_form', 'files' => 'true']) }}
                                     <div class="row">
                                         {{ Form::select('horse', $horses, null, ['class' => 'form-control']) }}
                                     </div>
