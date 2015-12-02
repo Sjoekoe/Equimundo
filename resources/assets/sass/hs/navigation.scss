@@ -14,3 +14,22 @@
 ul.nav.navbar-nav li > a{
     color: white !important;
 }
+
+.nav-pills {
+    border: 1px solid #37BC9B;
+    border-top: none;
+
+    li > a {
+        border-radius: 0;
+        color: #37BC9B;
+    }
+
+    li.active > a {
+        background-color: #37BC9B;
+        color: white;
+
+        &:hover {
+            background-color: #48CFAD;
+        }
+    }
+}

@@ -11,6 +11,6 @@ class EloquentFollowsRepository implements FollowsRepository
      */
     public function findForHorse(Horse $horse)
     {
-        return $horse->followers()->get();
+        return $horse->followers();
     }
 }

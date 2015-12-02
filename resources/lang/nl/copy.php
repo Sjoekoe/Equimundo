@@ -54,6 +54,7 @@ return [
         'delete_album' => 'Album verwijderen',
         'delete_picture' => 'Foto Verwijderen',
         'edit' => 'Wijzigen',
+        'edit_horse' => ':horse wijzigen',
         'edit_album' => 'Album wijzigen',
         'edit_profile' => 'Profiel aanpassen',
         'follow' => 'Volg',

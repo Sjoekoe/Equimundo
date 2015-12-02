@@ -147,7 +147,7 @@ class EloquentHorse extends Model implements Horse
      */
     public function followers()
     {
-        return $this->belongsToMany(EloquentUser::class, 'follows', 'horse_id', 'user_id')->withTimestamps();
+        return $this->belongsToMany(EloquentUser::class, 'follows', 'horse_id', 'user_id')->withTimestamps()->get();
     }
 
     /**
