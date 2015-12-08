@@ -64,15 +64,17 @@ class EloquentStatusRepository implements StatusRepository
     }
 
     /**
-     * @param array $data
+     * @param \EQM\Models\Horses\Horse $horse
+     * @param string $body
+     * @param int|null $prefix
      * @return \EQM\Models\Statuses\Status
      */
-    public function create(array $data = [])
+    public function create(Horse $horse, $body, $prefix = null)
     {
-        // todo refactor this
         $status = new EloquentStatus();
-        $status->body = $data['status'];
-        $status->horse_id = $data['horse'];
+        $status->body = $body;
+        $status->horse_id = $horse->id();
+        $status->prefix = $prefix;
 
         $status->save();
 
@@ -93,21 +95,14 @@ class EloquentStatusRepository implements StatusRepository
 
     /**
      * @param \EQM\Models\Horses\Horse $horse
-     * @param array $data
+     * @param string $body
      * @return \EQM\Models\Statuses\Status
      */
-    public function createForPalmares(Horse $horse, array $data = [])
+    public function createForPalmares(Horse $horse, $body)
     {
-        // todo refactor this
-        $data['status'] = $horse->name()  . ' has added an achievement.<br>';
-        $data['status'] .= 'She finished ' . $data['ranking'] . ' at ' . $data['event_name']  . ' in the ' . $data['level'] . ' category<br><hr>';
-        $data['status'] .= nl2br($data['body']);
+        $status = $this->create($horse, $body, Status::PREFIX_PALMARES);
 
-        $data['horse'] = $horse->id();
-
-        $data['status'] = $this->create($data);
-
-        return $data;
+        return $status;
     }
 
     /**

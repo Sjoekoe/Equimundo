@@ -52,10 +52,11 @@ class StatusesTest extends \TestCase
         $this->seeInDatabase('statuses', [
             'horse_id' => $horse->id,
             'body' => 'some status',
+            'prefix' => null,
         ]);
     }
 
-    // todo ask for advise
+    /** @test */
     function it_can_edit_a_status()
     {
         $user = factory(EloquentUser::class)->create([
@@ -71,13 +72,15 @@ class StatusesTest extends \TestCase
         ]);
 
         $this->actingAs($user)
-            ->put('/status/' . $status->id  .'/edit', [
+            ->put('/status/' . $status->id()  .'/edit', [
+                'horse' => $horse->id(),
                 'status' => 'Some status',
             ]);
 
-        $status = $this->statuses->findById($status->id);
-
-        $this->assertEquals('Some status', $status->body());
+        $this->seeInDatabase('statuses', [
+            'id' => $status->id(),
+            'body' => 'Some status'
+        ]);
     }
 
     /** @test */

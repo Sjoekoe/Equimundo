@@ -32,8 +32,8 @@ class PalmaresCreator
 
     public function create(Horse $horse, User $user, array $values)
     {
-        $values = $this->statuses->createForPalmares($horse, $values);
+        $status = $this->statuses->createForPalmares($horse, $values['body']);
         $palmaresEvent = $this->events->create($user, $values);
-        $this->palmares->create($horse, $palmaresEvent, $values);
+        $this->palmares->create($horse, $palmaresEvent, $status, $values);
     }
 }

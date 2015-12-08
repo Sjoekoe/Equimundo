@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col s12">
-            {{ Form::open(['route' => ['palmares.update', $palmares->id()], 'class' => 'grid-content medium-12']) }}
+            {{ Form::open(['route' => ['palmares.update', $palmares->id()], 'method' => 'PUT', 'class' => 'grid-content medium-12']) }}
             <div class="row">
                 <div class="col s6 input-field">
                     {{ Form::label('event_name', trans('forms.labels.venue')) }}
@@ -16,7 +16,7 @@
             </div>
             <div class="row">
                 <div class="col s6 input-field">
-                    {{ Form::select('discipline', trans('disciplines.list'), $palmares->discipline(), ['class' => 'discipline-select']) }}
+                    {{ Form::select('discipline', trans('disciplines'), $palmares->discipline(), ['class' => 'discipline-select']) }}
                     {{ Form::label('discipline', trans('forms.labels.discipline')) }}
                 </div>
                 <div class="col s6 input-field">

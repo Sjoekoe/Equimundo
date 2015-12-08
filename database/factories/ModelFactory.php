@@ -1,8 +1,11 @@
 <?php
 
 use Carbon\Carbon;
+use EQM\Models\Events\EloquentEvent;
 use EQM\Models\Horses\EloquentHorse;
 use EQM\Models\HorseTeams\EloquentHorseTeam;
+use EQM\Models\Palmares\EloquentPalmares;
+use EQM\Models\Statuses\EloquentStatus;
 use EQM\Models\Users\EloquentUser;
 use Faker\Generator;
 
@@ -37,8 +40,23 @@ $factory->define(EloquentHorseTeam::class, function (Generator $faker) {
     ];
 });
 
-$factory->define(\EQM\Models\Statuses\EloquentStatus::class, function (Generator $faker) {
+$factory->define(EloquentStatus::class, function (Generator $faker) {
     return [
         'body' => $faker->text,
+    ];
+});
+
+$factory->define(EloquentPalmares::class, function(Generator $faker) {
+    return [
+        'discipline' => $faker->randomDigitNotNull,
+        'level' => 'zz',
+        'ranking' => $faker->randomDigitNotNull,
+        'date' => $faker->dateTime,
+    ];
+});
+
+$factory->define(EloquentEvent::class, function(Generator $faker) {
+    return [
+        'name' => $faker->name,
     ];
 });

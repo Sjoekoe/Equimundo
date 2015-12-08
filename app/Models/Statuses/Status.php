@@ -9,6 +9,8 @@ interface Status
         'edit-status', 'delete-status',
     ];
 
+    const PREFIX_PALMARES = 1;
+
     /**
      * @return int
      */

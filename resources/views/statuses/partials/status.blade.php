@@ -34,6 +34,9 @@
             <h4 class="events-heading">
                 <a href="{{ route('horses.show', $status->horse()->slug()) }}">{{ $status->horse()->name() }}</a>
                 <i class="fa fa-info-circle fa"></i>
+                @if ($status->prefix())
+                    - {{ trans('statuses.prefixes.' . $status->prefix()) }}
+                @endif
             </h4>
             <p>{{ $status->body() }}</p>
             @if ($status->hasPicture())
