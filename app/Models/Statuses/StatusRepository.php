@@ -31,17 +31,19 @@ interface StatusRepository
     public function findFeedForHorse(Horse $horse);
 
     /**
-     * @param array $data
+     * @param \EQM\Models\Horses\Horse $horse
+     * @param string $body
+     * @param int|null $prefix
      * @return \EQM\Models\Statuses\Status
      */
-    public function create(array $data = []);
+    public function create(Horse $horse, $body, $prefix = null);
 
     /**
      * @param \EQM\Models\Horses\Horse $horse
-     * @param array $data
+     * @param string $body
      * @return \EQM\Models\Statuses\Status
      */
-    public function createForPalmares(Horse $horse, array $data = []);
+    public function createForPalmares(Horse $horse, $body);
 
     /**
      * @param \EQM\Models\Statuses\Status $status

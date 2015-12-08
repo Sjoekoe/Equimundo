@@ -25,6 +25,8 @@ class HorseSlugRouteBinder extends AbstractRouteBinding implements RouteBinding
      */
     public function find($slug)
     {
+        $horse = $this->horses->findBySlug($slug);
+
         return $this->horses->findBySlug($slug);
     }
 }
