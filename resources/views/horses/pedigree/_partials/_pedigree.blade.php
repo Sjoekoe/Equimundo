@@ -4,7 +4,6 @@
     <h4>{{ $family->name() }}</h4>
 @endif
 <p>{{ trans('copy.p.born') . ' ' . eqm_date($family->dateOfBirth()) }}</p>
-{{--<p>{{ trans('copy.p.passed_away') . ' ' . $family->dateOfDeath() ? date('Y', strtotime($family->dateOfDeath())) : '-' }}</p>--}}
 <p>{{ trans('copy.p.life_number') . ' ' . $family->lifeNumber() ? : '-' }}</p>
 
 @if (auth()->user()->isInHorseTeam($horse))

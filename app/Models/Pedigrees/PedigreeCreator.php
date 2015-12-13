@@ -84,10 +84,14 @@ class PedigreeCreator
      */
     private function createFamilyConnection(Horse $horse, $values)
     {
-        if ($values['life_number'] && $family = $this->horses->findByLifeNumber($values['life_number'])) {
-            $family = $family;
+        if (array_key_exists('life_number', $values)) {
+            if ($this->horses->findByLifeNumber($values['life_number'])) {
+                $family = $this->horses->findByLifeNumber($values['life_number']);
+            } else {
+                $family = $this->horseCreator->create(auth()->user(), $values, true);
+            }
         } else {
-            $values ['gender'] = $this->pedigreeConnector->getGender($values['type']);
+            $values['gender'] = $this->pedigreeConnector->getGender($values['type']);
 
             if (array_key_exists('date_of_birth', $values) && $values['date_of_birth'] !== '') {
                 $values['date_of_birth'] = Carbon::createFromDate($values['date_of_birth'], 0, 0)->format('d/m/Y');
