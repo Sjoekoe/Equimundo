@@ -18,7 +18,7 @@ class PedigreeTest extends \TestCase
     {
         $user = factory(EloquentUser::class)->create();
         $horse = factory(EloquentHorse::class)->create([
-            'gender' => Horse::FEMALE,
+            'gender' => Horse::MARE,
         ]);
         factory(EloquentHorseTeam::class)->create([
             'user_id' => $user->id(),
@@ -35,7 +35,7 @@ class PedigreeTest extends \TestCase
     {
         $user = factory(EloquentUser::class)->create();
         $horse = factory(EloquentHorse::class)->create([
-            'gender' => Horse::FEMALE,
+            'gender' => Horse::MARE,
         ]);
         factory(EloquentHorseTeam::class)->create([
             'user_id' => $user->id(),
@@ -77,7 +77,7 @@ class PedigreeTest extends \TestCase
     {
         $user = factory(EloquentUser::class)->create();
         $horse = factory(EloquentHorse::class)->create([
-            'gender' => Horse::FEMALE,
+            'gender' => Horse::MARE,
         ]);
         factory(EloquentHorseTeam::class)->create([
             'user_id' => $user->id(),
@@ -119,7 +119,7 @@ class PedigreeTest extends \TestCase
     {
         $user = factory(EloquentUser::class)->create();
         $horse = factory(EloquentHorse::class)->create([
-            'gender' => Horse::FEMALE,
+            'gender' => Horse::MARE,
         ]);
         factory(EloquentHorseTeam::class)->create([
             'user_id' => $user->id(),
@@ -161,7 +161,7 @@ class PedigreeTest extends \TestCase
     {
         $user = factory(EloquentUser::class)->create();
         $horse = factory(EloquentHorse::class)->create([
-            'gender' => Horse::FEMALE,
+            'gender' => Horse::MARE,
         ]);
         factory(EloquentHorseTeam::class)->create([
             'user_id' => $user->id(),
@@ -203,7 +203,7 @@ class PedigreeTest extends \TestCase
     {
         $user = factory(EloquentUser::class)->create();
         $horse = factory(EloquentHorse::class)->create([
-            'gender' => Horse::FEMALE,
+            'gender' => Horse::MARE,
         ]);
         $relative = factory(EloquentHorse::class)->create([
             'life_number' => '1234',
@@ -234,7 +234,7 @@ class PedigreeTest extends \TestCase
     {
         $user = factory(EloquentUser::class)->create();
         $horse = factory(EloquentHorse::class)->create([
-            'gender' => Horse::FEMALE,
+            'gender' => Horse::MARE,
         ]);
         $relative = factory(EloquentHorse::class)->create([
             'life_number' => '1234',
@@ -274,10 +274,10 @@ class PedigreeTest extends \TestCase
     {
         $user = factory(EloquentUser::class)->create();
         $horse = factory(EloquentHorse::class)->create([
-            'gender' => Horse::FEMALE,
+            'gender' => Horse::MARE,
         ]);
         $relative = factory(EloquentHorse::class)->create([
-            'gender' => Horse::FEMALE,
+            'gender' => Horse::MARE,
             'life_number' => '1234',
         ]);
         factory(EloquentHorseTeam::class)->create([
