@@ -52,9 +52,9 @@ class PedigreeConnector
     public function getGender($type)
     {
         if ($type == Pedigree::MOTHER || $type == Pedigree::DAUGHTER) {
-            return Horse::FEMALE;
+            return Horse::MARE;
         }
 
-        return Horse::MALE;
+        return Horse::STALLION;
     }
 }
