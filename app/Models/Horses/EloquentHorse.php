@@ -321,7 +321,7 @@ class EloquentHorse extends Model implements Horse
      */
     public function isFemale()
     {
-        return $this->gender == self::FEMALE;
+        return $this->gender == self::MARE;
     }
 
     /**
