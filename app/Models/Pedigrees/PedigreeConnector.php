@@ -17,31 +17,31 @@ class PedigreeConnector
         switch ($type) {
             case Pedigree::MOTHER:
                 if ($female) {
-                    return 4;
+                    return Pedigree::DAUGHTER;
                 }
 
-                return 3;
+                return Pedigree::SON;
 
             case Pedigree::FATHER:
                 if ($female) {
-                    return 4;
+                    return Pedigree::DAUGHTER;
                 }
 
-                return 3;
+                return Pedigree::SON;
 
             case Pedigree::SON:
                 if ($female) {
-                    return 2;
+                    return Pedigree::MOTHER;
                 }
 
-                return 1;
+                return Pedigree::FATHER;
 
             case Pedigree::DAUGHTER:
                 if ($female) {
-                    return 2;
+                    return Pedigree::MOTHER;
                 }
 
-                return 1;
+                return Pedigree::FATHER;
         }
     }
 
@@ -51,10 +51,10 @@ class PedigreeConnector
      */
     public function getGender($type)
     {
-        if ($type == 2 || $type == 4) {
-            return 2;
+        if ($type == Pedigree::MOTHER || $type == Pedigree::DAUGHTER) {
+            return Horse::FEMALE;
         }
 
-        return 1;
+        return Horse::MALE;
     }
 }

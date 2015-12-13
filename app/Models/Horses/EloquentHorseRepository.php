@@ -79,14 +79,22 @@ class EloquentHorseRepository implements HorseRepository
         $horse->name = $values['name'];
         $horse->gender = $values['gender'];
         $horse->breed = $values['breed'];
-        $horse->life_number = $values['life_number'];
-        $horse->color = $values['color'];
+
+        if (array_key_exists('life_number', $values)) {
+            $horse->life_number = $values['life_number'];
+        }
+
+        if (array_key_exists('color', $values)) {
+            $horse->color = $values['color'];
+        }
 
         if (array_key_exists('date_of_birth', $values) && ! $values['date_of_birth'] == '') {
             $horse->date_of_birth = Carbon::createFromFormat('d/m/Y', $values['date_of_birth'])->startOfDay();
         }
 
-        $horse->height = $values['height'];
+        if (array_key_exists('height', $values)) {
+            $horse->height = $values['height'];
+        }
 
         $horse->save();
 

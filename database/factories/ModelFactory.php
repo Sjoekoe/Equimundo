@@ -5,6 +5,7 @@ use EQM\Models\Events\EloquentEvent;
 use EQM\Models\Horses\EloquentHorse;
 use EQM\Models\HorseTeams\EloquentHorseTeam;
 use EQM\Models\Palmares\EloquentPalmares;
+use EQM\Models\Pedigrees\EloquentPedigree;
 use EQM\Models\Statuses\EloquentStatus;
 use EQM\Models\Users\EloquentUser;
 use Faker\Generator;
@@ -59,4 +60,8 @@ $factory->define(EloquentEvent::class, function(Generator $faker) {
     return [
         'name' => $faker->name,
     ];
+});
+
+$factory->define(EloquentPedigree::class, function(Generator $faker) {
+    return [];
 });

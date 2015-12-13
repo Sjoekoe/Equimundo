@@ -36,7 +36,7 @@
                         @include('horses.pedigree._partials._pedigree')
                     @else
                         @can ('create-pedigree', $horse)
-                            <a href="{{ route('pedigree.create', [$horse->slug, 'type=7']) }}" class="black-text">{{ trans('copy.a.add_mother_father') }}</a>
+                            <a href="{{ route('pedigree.create', [$horse->slug(), 'type=7']) }}" class="black-text">{{ trans('copy.a.add_mother_father') }}</a>
                         @endcan
                     @endif
                 </div>
@@ -45,7 +45,7 @@
                         @include('horses.pedigree._partials._pedigree')
                     @else
                         @can('create-pedigree', $horse)
-                            <a href="{{ route('pedigree.create', [$horse->slug, 'type=8']) }}" class="black-text">{{ trans('copy.a.add_mother_mother') }}</a>
+                            <a href="{{ route('pedigree.create', [$horse->slug(), 'type=8']) }}" class="black-text">{{ trans('copy.a.add_mother_mother') }}</a>
                         @endcan
                     @endif
                 </div>
@@ -81,7 +81,7 @@
                     <h4>{{ $horse->name() }}</h4>
                 </a>
                 <p>{{ trans('copy.p.born') . ' ' . eqm_date($horse->dateOfBirth(), 'Y') }}</p>
-                <p>{{ trans('copy.p.life_number') . ' ' . $horse->life_number ? : '-' }}</p>
+                <p>{{ trans('copy.p.life_number') . ' ' . $horse->lifeNumber() ? : '-' }}</p>
             </div>
         </div>
     </div>

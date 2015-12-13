@@ -65,12 +65,15 @@ class HorseCreator
      */
     public function create(User $user, $values, $pedigree = false)
     {
-        if ($values['life_number'] && $horse = $this->horses->findByLifeNumber($values['life_number'])) {
-            $horse = $this->horses->update($horse, $values);
+        if (array_key_exists('life_number', $values)) {
+            if ($this->horses->findByLifeNumber($values['life_number'])) {
+                $horse = $this->horses->findByLifeNumber($values['life_number']);
+                $horse = $this->horses->update($horse, $values);
+            } else {
+                $horse = $this->createNewHorse($values);
+            }
         } else {
-            $horse = $this->horses->create($values);
-
-            $horse->slug = $this->slugCreator->createForHorse($values['name']);
+            $horse = $this->createNewHorse($values);
         }
 
         if (! $pedigree) {
@@ -86,6 +89,15 @@ class HorseCreator
         }
 
         $horse->save();
+
+        return $horse;
+    }
+
+    private function createNewHorse(array $values)
+    {
+        $horse = $this->horses->create($values);
+
+        $horse->slug = $this->slugCreator->createForHorse($values['name']);
 
         return $horse;
     }

@@ -53,8 +53,14 @@ class PedigreeController extends Controller
     {
         $this->authorize('create-pedigree', $horse);
 
-        if ($this->alReadyHasFamilyConnection($horse, $request)) {
+        if ($this->alReadyHasSpecificFamilyConnection($horse, $request)) {
             return back();
+        }
+
+        if ($request->has('life_number')) {
+            if ($this->isIncorrectGender($request->get('life_number'), $request->get('type'))) {
+                return back();
+            }
         }
 
         $this->pedigreeCreator->create($horse, $request->all());
@@ -92,7 +98,7 @@ class PedigreeController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return bool
      */
-    private function alReadyHasFamilyConnection(Horse $horse, Request $request)
+    private function alReadyHasSpecificFamilyConnection(Horse $horse, Request $request)
     {
         $type = $request->get('type');
         $message = '';
@@ -109,6 +115,31 @@ class PedigreeController extends Controller
             session()->put('error', $message);
 
             return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param string $lifeNumber
+     * @param int $type
+     * @return bool
+     */
+    private function isIncorrectGender($lifeNumber, $type)
+    {
+        if ($this->horses->findByLifeNumber($lifeNumber) !== null) {
+            $horse = $this->horses->findByLifeNumber($lifeNumber);
+            if (($type == Pedigree::MOTHER || $type == Pedigree::DAUGHTER) && ! $horse->isFemale()) {
+                session()->put('error', 'The family you wanted to enter is not female in our records');
+
+                return true;
+            }
+
+            if (($type == Pedigree::FATHER || Pedigree::SON) && $horse->isFemale()) {
+                session()->put('error', 'The family you wanted to enter is not a male in our records');
+
+                return true;
+            }
         }
 
         return false;
