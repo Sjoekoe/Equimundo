@@ -7,3 +7,10 @@
     background: none;
   }
 }
+
+.btn-primary {
+  background-color: $green-brand !important;
+  &:hover {
+    background-color: $green-brand !important;
+  }
+}

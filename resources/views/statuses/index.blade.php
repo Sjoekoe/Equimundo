@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-9 col-md-offset-1">
+        <div class="col-md-9 col-md-offset-1 border">
             @if (count($horses))
                 <div class="row">
                     <div class="status-form">
