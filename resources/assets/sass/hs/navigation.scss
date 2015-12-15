@@ -1,3 +1,35 @@
+$navbar-inverse-bg: $green-brand;
+
+.navbar-inverse {
+    background-color: $navbar-inverse-bg !important;
+    border-bottom: 0px !important;
+}
+
+#navbar li a {
+    color: white !important;
+}
+
+.navbar-nav li a {
+    text-transform: uppercase !important;
+    font-size: 11px !important;
+    letter-spacing: 1px !important;
+}
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus, .navbar-inverse .navbar-nav>.open>a:hover {
+    background-color: $green !important;
+}
+
+.dropdown a ul.dropdown-menu {
+    background-color: $gray-dark !important;
+}
+
+.navbar-brand {
+    color: white !important;
+}
+
+ul.nav .active {
+    background-color: $green-dark !important;
+}
+
 .navbar-brand-centered {
     position: absolute;
     left: 50%;
@@ -16,20 +48,17 @@ ul.nav.navbar-nav li > a{
 }
 
 .nav-pills {
-    border: 1px solid #37BC9B;
-    border-top: none;
-
     li > a {
         border-radius: 0;
-        color: #37BC9B;
+        color: $green-brand;
     }
 
     li.active > a {
-        background-color: #37BC9B;
-        color: white;
+        background-color: $green-brand;
+        color: $color-white;
 
         &:hover {
-            background-color: #48CFAD;
+            background-color: $green-dark;
         }
     }
 }

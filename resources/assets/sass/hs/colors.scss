@@ -1,0 +1,57 @@
+$green-brand: #1ABC9C !default;
+$green: #16a085 !default;
+$green-dark: #1f705d !default;
+$gray-light: #e9f0f4 !important;
+$gray-brand: #9eb2c0 !important;
+$gray-dark: #2e3641 !important;
+$color-success: #2ecc71;
+$color-info: #3498db;
+$color-warning: #e67e22;
+$color-error: #bc1a3a;
+$color-white: #fdffff;
+
+$border-color: $gray-brand;
+
+.green-brand {
+    background-color: $green-brand;
+}
+.green {
+    background-color: $green;
+}
+.green-dark {
+    background-color: $green-dark;
+}
+.gray-light {
+    background-color: $gray-light;
+    color: $gray-dark;
+    border: 1px solid $gray-brand;
+}
+.gray {
+    background-color: $gray-brand;
+}
+
+.gray-dark {
+    background-color: $gray-dark;
+}
+
+.success {
+    background-color: $color-success;
+}
+
+.info {
+    background-color: $color-info;
+}
+
+.warning {
+    background-color: $color-warning;
+}
+
+.error {
+    background-color: $color-error;
+}
+
+.white {
+    background-color: $color-white;
+    color: $gray-dark;
+    border: 1px solid $gray-brand;
+}

@@ -21,10 +21,7 @@
   .card-title {
     padding: 1em;
     top: 1em;
-    border-bottom: 1px solid #808080;
-    a {
-      color: teal;
-    }
+    border-bottom: 1px solid $border-color;
   }
 
   .card-content {
@@ -49,12 +46,12 @@
   }
 
   .comments {
-    border-top: 1px solid grey;
+    border-top: 1px solid $border-color;
     background-color: lighten(teal, 65%);
   }
 
   .comment {
-    border-top: 1px solid #808080;
+    border-top: 1px solid $border-color;
 
     .input-field {
       margin-top: 0;
