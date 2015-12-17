@@ -77,7 +77,7 @@ class EloquentUserRepository implements UserRepository
      */
     public function findById($id)
     {
-        return $this->user->where('id', $id)->firstOrFail();
+        return $this->user->where('id', $id)->first();
     }
 
     /**
@@ -86,7 +86,7 @@ class EloquentUserRepository implements UserRepository
      */
     public function findByEmail($email)
     {
-        return $this->user->where('email', $email)->firstOrFail();
+        return $this->user->where('email', $email)->first();
     }
 
     /**
@@ -96,7 +96,7 @@ class EloquentUserRepository implements UserRepository
      */
     public function findByIdAndToken($id, $token)
     {
-        return $this->user->where('id', $id)->where('remember_token', $token)->firstOrFail();
+        return $this->user->where('id', $id)->where('remember_token', $token)->first();
     }
 
     /**
