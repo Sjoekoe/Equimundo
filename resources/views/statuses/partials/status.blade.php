@@ -9,9 +9,9 @@
             </a>
             <i class="fa fa-share-alt fa-lg"></i>
             <i class="fa fa-comments-o fa-lg"></i>
-            {{--<p class="muted like-counter pull-right">
+            <p class="muted like-counter pull-right">
                 {{ count($status->likes()) }}
-            </p>--}}
+            </p>
             {{ Form::open(['route' => ['status.like', $status->id()], 'class' => 'like-button pull-right', 'data-remote']) }}
                 {{ Form::hidden('status_id', $status->id()) }}
                 <button type="submit" class="btn-naked">
