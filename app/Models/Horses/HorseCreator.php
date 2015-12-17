@@ -65,7 +65,7 @@ class HorseCreator
      */
     public function create(User $user, $values, $pedigree = false)
     {
-        if (array_key_exists('life_number', $values)) {
+        if (array_key_exists('life_number', $values) && ($values['life_number'] !== '')) {
             if ($this->horses->findByLifeNumber($values['life_number'])) {
                 $horse = $this->horses->findByLifeNumber($values['life_number']);
                 $horse = $this->horses->update($horse, $values);

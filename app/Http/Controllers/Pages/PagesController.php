@@ -45,13 +45,8 @@ class PagesController extends Controller
     {
         if (auth()->check()) {
             $horses = $this->collection->getIdAndNamePairs($this->horses->findForUser(auth()->user()));
-
-            if (count($horses)) {
-                $statuses = $this->statuses->findFeedForUser(auth()->user());
-                $likes = $this->likes->findForUser(auth()->user());
-            } else {
-                $statuses = [];
-            }
+            $statuses = $this->statuses->findFeedForUser(auth()->user());
+            $likes = $this->likes->findForUser(auth()->user());
         }
 
         return view('pages.home', compact('horses', 'statuses', 'likes'));
