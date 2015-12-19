@@ -1,6 +1,7 @@
 <?php
 namespace Pedigrees;
 
+use Carbon\Carbon;
 use EQM\Models\Horses\EloquentHorse;
 use EQM\Models\Horses\Horse;
 use EQM\Models\HorseTeams\EloquentHorseTeam;
@@ -291,6 +292,72 @@ class PedigreeTest extends \TestCase
                 'gender' => 1,
                 'breed' => 5,
                 'type' => Pedigree::FATHER,
+                'life_number' => $relative->lifeNumber(),
+            ]);
+
+        $this->assertResponseStatus(302);
+
+        $this->notSeeInDatabase('pedigrees', [
+            'id' => 1,
+        ]);
+    }
+
+    /** @test */
+    function it_can_not_add_a_younger_horse_as_a_parent()
+    {
+        $user = factory(EloquentUser::class)->create();
+        $horse = factory(EloquentHorse::class)->create([
+            'gender' => Horse::MARE,
+        ]);
+        $relative = factory(EloquentHorse::class)->create([
+            'gender' => Horse::STALLION,
+            'date_of_birth' => '08/06/1980',
+            'life_number' => '1234',
+        ]);
+        factory(EloquentHorseTeam::class)->create([
+            'user_id' => $user->id(),
+            'horse_id' => $horse->id(),
+        ]);
+
+        $this->actingAs($user)
+            ->post('/horses/' . $horse->slug() . '/pedigree/create', [
+                'name' => 'Foo horse',
+                'gender' => 1,
+                'breed' => 5,
+                'type' => Pedigree::FATHER,
+                'life_number' => $relative->lifeNumber(),
+            ]);
+
+        $this->assertResponseStatus(302);
+
+        $this->notSeeInDatabase('pedigrees', [
+            'id' => 1,
+        ]);
+    }
+
+    /** @test */
+    function it_can_not_add_an_older_horse_as_offspring()
+    {
+        $user = factory(EloquentUser::class)->create();
+        $horse = factory(EloquentHorse::class)->create([
+            'gender' => Horse::MARE,
+        ]);
+        $relative = factory(EloquentHorse::class)->create([
+            'gender' => Horse::STALLION,
+            'date_of_birth' => Carbon::now()->addYear(),
+            'life_number' => '1234',
+        ]);
+        factory(EloquentHorseTeam::class)->create([
+            'user_id' => $user->id(),
+            'horse_id' => $horse->id(),
+        ]);
+
+        $this->actingAs($user)
+            ->post('/horses/' . $horse->slug() . '/pedigree/create', [
+                'name' => 'Foo horse',
+                'gender' => 1,
+                'breed' => 5,
+                'type' => Pedigree::SON,
                 'life_number' => $relative->lifeNumber(),
             ]);
 

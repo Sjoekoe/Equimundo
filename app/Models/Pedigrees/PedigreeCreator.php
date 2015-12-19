@@ -85,7 +85,7 @@ class PedigreeCreator
     private function createFamilyConnection(Horse $horse, $values)
     {
         if (array_key_exists('life_number', $values)) {
-            if ($this->horses->findByLifeNumber($values['life_number'])) {
+            if (($values['life_number'] !== '') && $this->horses->findByLifeNumber($values['life_number'])) {
                 $family = $this->horses->findByLifeNumber($values['life_number']);
             } else {
                 $family = $this->horseCreator->create(auth()->user(), $values, true);
