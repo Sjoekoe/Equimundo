@@ -1,6 +1,7 @@
 <?php
 namespace EQM\Http\Controllers\Horses;
 
+use Carbon\Carbon;
 use EQM\Http\Controllers\Controller;
 use EQM\Models\Horses\Horse;
 use EQM\Models\Horses\HorseRepository;
@@ -61,6 +62,10 @@ class PedigreeController extends Controller
             if ($this->isIncorrectGender($request->get('life_number'), $request->get('type'))) {
                 return back();
             }
+        }
+
+        if ($this->hasIncorrectAges($horse, $request)) {
+            return back();
         }
 
         $this->pedigreeCreator->create($horse, $request->all());
@@ -143,5 +148,45 @@ class PedigreeController extends Controller
         }
 
         return false;
+    }
+
+    /**
+     * @param \EQM\Models\Horses\Horse $horse
+     * @param \Illuminate\Http\Request $request
+     * @return bool
+     */
+    private function hasIncorrectAges(Horse $horse, Request $request)
+    {
+        $dateOfBirth = null;
+
+        if ($request->has('life_number')) {
+            if ($this->horses->findByLifeNumber($request->get('life_number')) !== null) {
+                $relative = $this->horses->findByLifeNumber($request->get('life_number'));
+                $dateOfBirth = $relative->dateOfBirth();
+            }
+        }
+
+        if (! $dateOfBirth && $request->has('date_of_birth')) {
+            $dateOfBirth = Carbon::createFromFormat('d/m/Y', $request->get('date_of_birth'));
+        }
+
+        if ($dateOfBirth) {
+            return $this->ageDifference($horse, $request, $dateOfBirth);
+        }
+
+        return false;
+    }
+
+    /**
+     * @param \EQM\Models\Horses\Horse $horse
+     * @param \Illuminate\Http\Request $request
+     * @param \DateTime $dateOfBirth
+     * @return bool
+     */
+    private function ageDifference(Horse $horse, Request $request, $dateOfBirth)
+    {
+        return ($request->get('type') == Pedigree::DAUGHTER) || ($request->get('type') == Pedigree::SON)
+            ? $dateOfBirth > $horse->dateOfBirth()
+            : $dateOfBirth < $horse->dateOfBirth();
     }
 }
