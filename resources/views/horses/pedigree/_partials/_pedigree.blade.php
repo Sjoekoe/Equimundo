@@ -8,7 +8,6 @@
 
 @if (auth()->user()->isInHorseTeam($horse))
     <p>
-        <a href="{{ route('pedigree.edit', $family->slug()) }}">{{ trans('copy.a.edit') }}</a> /
         <a href="{{ route('pedigree.delete', $family->id()) }}">{{ trans('copy.a.delete') }}</a>
     </p>
 @endif
