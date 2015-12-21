@@ -16,15 +16,13 @@ Below are the required tools which need to be installed before you can install a
 3. Inside the homestead.yaml file, create 2 databases, one called equimundo and the other equimundo_testing
 4. Run `vagrant up`
 5. Run `vagrant ssh` and cd into the directory
-6 Run `php artisan migrate`
-7 Run `php artisan db:seed`
-8. Add the corresponding ip from your homestead.yaml file in the /etc/hosts file and name it appropiately
-9. Go to that url
+6. Run `php artisan migrate`
+7. Add the corresponding ip from your homestead.yaml file in the /etc/hosts file and name it appropiately (should be the same as in the homestead.yaml file)
+8. Go to the url you just defined in your hosts file
 
 ## Frontend Development
 
-Run these tools outside the Vagrant box in the root of the project. **Never run these tools with `sudo`.**
+Run these tools outside the Vagrant box in the root of the project.
 
 1. `npm install`
-2. `bower install`
-3. `gulp`
+2. `gulp`

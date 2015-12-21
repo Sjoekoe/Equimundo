@@ -1,7 +1,16 @@
 @extends('layout.app')
 
 @section('content')
-    <h3>{{ $user->fullName() }}</h3>
+    <div class="row">
+        <h3 class="pull-left">
+            {{ $user->fullName() }}
+            @if (auth()->user()->id() == $user->id())
+                <a href="{{ route('users.profiles.edit') }}"><i class="fa fa-pencil"></i></a>
+            @endif
+        </h3>
+    </div>
+
+
     <div class="row">
         <h5>{{ trans('copy.titles.horses') }}</h5>
         <ul>
