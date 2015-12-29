@@ -68,7 +68,9 @@ class PedigreeController extends Controller
             return back();
         }
 
-        $this->pedigreeCreator->create($horse, $request->all());
+        $values = $this->generateGender($request->all());
+
+        $this->pedigreeCreator->create($horse, $values);
 
         return redirect()->route('pedigree.index', $horse->slug);
     }
@@ -120,13 +122,14 @@ class PedigreeController extends Controller
     {
         if ($this->horses->findByLifeNumber($lifeNumber) !== null) {
             $horse = $this->horses->findByLifeNumber($lifeNumber);
+
             if (($type == Pedigree::MOTHER || $type == Pedigree::DAUGHTER) && ! $horse->isFemale()) {
                 session()->put('error', 'The family you wanted to enter is not female in our records');
 
                 return true;
             }
 
-            if (($type == Pedigree::FATHER || Pedigree::SON) && $horse->isFemale()) {
+            if (($type == Pedigree::FATHER || $type == Pedigree::SON) && $horse->isFemale()) {
                 session()->put('error', 'The family you wanted to enter is not a male in our records');
 
                 return true;
@@ -174,5 +177,39 @@ class PedigreeController extends Controller
         return ($request->get('type') == Pedigree::DAUGHTER) || ($request->get('type') == Pedigree::SON)
             ? $dateOfBirth > $horse->dateOfBirth()
             : $dateOfBirth < $horse->dateOfBirth();
+    }
+
+    /**
+     * @param array $values
+     * @return array
+     */
+    private function generateGender(array $values)
+    {
+        if (array_key_exists('life_number', $values) && $values['life_number'] !== '') {
+            if ($horse = $this->horses->findByLifeNumber($values['life_number'])) {
+                $values['gender'] = $horse->gender();
+            } else {
+                $values = $this->generateGenderByType($values);
+            }
+        } else {
+            $values = $this->generateGenderByType($values);
+        }
+
+        return $values;
+    }
+
+    /**
+     * @param array $values
+     * @return array
+     */
+    private function generateGenderByType(array $values)
+    {
+        if ($values['type'] == Pedigree::MOTHER || $values['type'] == Pedigree::DAUGHTER) {
+            $values['gender'] = Horse::MARE;
+        } else {
+            $values['gender'] = Horse::STALLION;
+        }
+
+        return $values;
     }
 }
