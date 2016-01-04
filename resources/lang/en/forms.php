@@ -23,6 +23,7 @@ return [
         'life_number' => 'Life Number:',
         'message' => 'Message:',
         'name' => 'Name:',
+        'old_password' => 'Current Password:',
         'password' => 'Password:',
         'password_confirmation' => 'Confirm Password:',
         'profile_picture' => 'Profile Picture:',

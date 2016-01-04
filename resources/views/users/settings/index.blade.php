@@ -3,6 +3,7 @@
 @section('content')
     <h3>{{ trans('copy.titles.settings') }}</h3>
     <div class="row">
+        <a href="{{ route('password.edit') }}">{{ trans('copy.a.change_password') }}</a>
         {{ Form::open(['route', 'settings.update', 'method' => 'PUT']) }}
             <div class="input-field col s12">
                 {{ Form::checkbox('email_notifications', 'email_notifications', Auth::user()->email_notifications, ['id' => 'email_notifications']) }}
@@ -16,12 +17,4 @@
         {{ Form::close() }}
     </div>
 
-@stop
-
-@section('footer')
-    <script>
-        $(document).ready(function() {
-            $('select').material_select();
-        });
-    </script>
 @stop

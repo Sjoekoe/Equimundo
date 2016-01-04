@@ -5,7 +5,7 @@
         </div>
         <div class="nav navbar-nav navbar-left">
             @if (auth()->check())
-                {{ Form::open(['route' => 'search', 'class' => 'navbar-form']) }}
+                {{ Form::open(['route' => 'search']) }}
                     {{ Form::text('search', null, ['placeholder' => trans('forms.placeholders.search') . '...', 'class' => 'form-control']) }}
                 {{ Form::close() }}
             @endif

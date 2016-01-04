@@ -1,16 +1,47 @@
-$green-brand: #1ABC9C !default;
-$green: #16a085 !default;
-$green-dark: #1f705d !default;
-$gray-light: #e9f0f4 !important;
-$gray-brand: #9eb2c0 !important;
-$gray-dark: #2e3641 !important;
+/* HUES */
+$dark: 8%;
+$darker: 15%;
+$light: 7%;
+$lighter: 25%;
+
+/* COLORS */
+$green: #16a085;
+$green-brand: lighten($green, $light);
+$green-dark: darken($green, $dark);
+$gray-brand: #9eb2c0;
+$gray-light: lighten($gray-brand, $lighter);
+$gray-dark: darken($gray-brand, $dark);
 $color-success: #2ecc71;
 $color-info: #3498db;
 $color-warning: #e67e22;
 $color-error: #bc1a3a;
 $color-white: #fdffff;
+$color-black: #2f2f2f;
 
 $border-color: $gray-brand;
+
+/* HOVERS */
+$color-error-hover: darken($color-error, $dark);
+
+/* SWATCHES IN UI KIT */
+.swatch-container {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    justify-content: left;
+}
+
+.swatch {
+    width: 150px;
+    height: 150px;
+    color: $color-white;
+    border: 1px solid $color-white;
+    margin: 10px;
+    padding: 20px;
+}
 
 .green-brand {
     background-color: $green-brand;

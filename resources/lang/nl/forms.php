@@ -23,6 +23,7 @@ return [
         'life_number' => 'Levensnummer:',
         'message' => 'Bericht:',
         'name' => 'Naam:',
+        'old_password' => 'Huidig Wachtwoord:',
         'password' => 'Wachtwoord:',
         'password_confirmation' => 'Confirmeer Wachtwoord:',
         'profile_picture' => 'Profielfoto:',

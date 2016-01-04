@@ -1,5 +1,61 @@
 .btn {
-  text-transform: uppercase;
+  background-color: $green-brand;
+  color: white;
+  border-radius: 0px !important;
+  &:hover {
+    background-color: $green;
+  }
+  &:focus {
+    outline: 0px !important;
+  }
+  &:active {
+    background-color: $green-brand !important;
+  }
+}
+.btn-primary {
+  padding: 15px 20px;
+  border: 0px;
+  &:hover {
+    background-color: $green;
+    border-color: 0px !important;
+  }
+}
+.btn-hg {
+  position: relative;
+  padding: 13px 20px;
+  font-size: 22px;
+  line-height: 1.227;
+  border-radius: 6px;
+  background-color: $green-brand !important;
+  border: 0px !important;
+  overflow: hidden;
+  &:hover {
+    background-color: $green;
+  }
+}
+.btn-hg:hover {
+  background-color: $green !important;
+}
+.btn-embossed {
+  box-shadow: inset 0 -2px 0 rgba(0,0,0,.15) !important;
+}
+.btn-embossed:hover {
+  background-color: $green !important;
+  box-shadow: inset 0 -2px 0 rgba(0,0,0,.90);
+}
+.btn-small {
+  padding: 10px 40px 10px 40px;
+  &:hover {
+    background-color: $green;
+    color: white;
+  }
+}
+.btn-cancel {
+  background-color: $color-error;
+  color: white;
+  &:hover {
+    background-color: $color-error-hover;
+  }
 }
 
 .btn-naked {
@@ -9,12 +65,5 @@
   &:focus {
     outline: none;
     background: none;
-  }
-}
-
-.btn-primary {
-  background-color: $green-brand !important;
-  &:hover {
-    background-color: $green-brand !important;
   }
 }
