@@ -47,6 +47,7 @@ return [
         'add_mother' => 'Moeder toevoegen',
         'add_mother_father' => 'Moeders vader toevoegen',
         'add_mother_mother' => 'Moeders moeder toevoegen',
+        'change_password' => 'Wachtwoord wijzigen',
         'contact_message' => 'Verzend bericht',
         'create_a_horse' => 'Maak een paard aan',
         'create_album' => 'Creëer een album',

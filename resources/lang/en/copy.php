@@ -47,6 +47,7 @@ return [
         'add_mother' => 'Add Mother',
         'add_mother_father' => 'Add Mothers Father',
         'add_mother_mother' => 'Add Mothers Mother',
+        'change_password' => 'Change password',
         'contact_message' => 'Send Message',
         'create_a_horse' => 'Create a horse',
         'create_album' => 'Create Album',

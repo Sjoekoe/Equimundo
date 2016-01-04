@@ -37,7 +37,7 @@
         <div class="col-md-6 col-md-offset-4">
             {{ Form::submit(trans('forms.buttons.login'), ['class' => 'btn btn-default', 'style' => 'margin-right:
             15px;']) }}
-            <a href="/password/email">Forgot Your Password?</a>
+            <a href="{{ route('password.forgot') }}">Forgot Your Password?</a>
         </div>
     </div>
 

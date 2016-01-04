@@ -1,17 +1,22 @@
 $navbar-inverse-bg: $green-brand;
 
+.container-fluid {
+    width: 82%;
+    box-sizing: border-box;
+}
+
 .navbar-inverse {
     background-color: $navbar-inverse-bg !important;
     border-bottom: 0px !important;
 }
 
 #navbar li a {
-    color: white !important;
+    color: $color-white !important;
 }
 
 .navbar-nav li a {
     text-transform: uppercase !important;
-    font-size: 11px !important;
+    font-size: 10px !important;
     letter-spacing: 1px !important;
 }
 .navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus, .navbar-inverse .navbar-nav>.open>a:hover {
@@ -23,42 +28,10 @@ $navbar-inverse-bg: $green-brand;
 }
 
 .navbar-brand {
-    color: white !important;
+    color: $color-white !important;
+    font-size: 16px;
 }
 
 ul.nav .active {
     background-color: $green-dark !important;
-}
-
-.navbar-brand-centered {
-    position: absolute;
-    left: 50%;
-    display: block;
-    width: 160px;
-    text-align: center;
-    color: white !important;
-}
-.navbar>.container .navbar-brand-centered,
-.navbar>.container-fluid .navbar-brand-centered {
-    margin-left: -80px;
-}
-
-ul.nav.navbar-nav li > a{
-    color: white !important;
-}
-
-.nav-pills {
-    li > a {
-        border-radius: 0;
-        color: $green-brand;
-    }
-
-    li.active > a {
-        background-color: $green-brand;
-        color: $color-white;
-
-        &:hover {
-            background-color: $green-dark;
-        }
-    }
 }
