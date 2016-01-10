@@ -1,5 +1,5 @@
 <?php
-namespace Palmares;
+namespace Controllers\Palmares;
 
 use Carbon\Carbon;
 use EQM\Models\Disciplines\Discipline;

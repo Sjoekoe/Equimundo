@@ -93,6 +93,11 @@ interface User
     public function likes();
 
     /**
+     * @return \EQM\Models\Comments\Comment
+     */
+    public function commentLikes();
+
+    /**
      * @return \EQM\Models\Events\Event[]
      */
     public function events();

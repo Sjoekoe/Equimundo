@@ -1,6 +1,7 @@
 <?php
 
 use Carbon\Carbon;
+use EQM\Models\Comments\EloquentComment;
 use EQM\Models\Events\EloquentEvent;
 use EQM\Models\Horses\EloquentHorse;
 use EQM\Models\HorseTeams\EloquentHorseTeam;
@@ -64,4 +65,10 @@ $factory->define(EloquentEvent::class, function(Generator $faker) {
 
 $factory->define(EloquentPedigree::class, function(Generator $faker) {
     return [];
+});
+
+$factory->define(EloquentComment::class, function (Generator $faker) {
+    return [
+        'body' => $faker->text,
+    ];
 });

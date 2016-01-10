@@ -10,5 +10,14 @@
         @can('delete-comment', $comment)
             <a href="{{ route('comment.delete', $comment->id()) }}" class="pul-right">Delete</a>
         @endcan
+
+        @if (auth()->check())
+            {{ Form::open(['route' => ['comment.like', $comment->id()], 'class' => 'like-button pull-right', 'data-remote']) }}
+                {{ Form::hidden('comment_id', $comment->id()) }}
+                <button type="submit" class="btn-naked">
+                    <i class="fa {{ $comment->isLikedByUser(auth()->user()) ? 'fa-heart fa-lg' : 'fa-heart-o fa-lg' }}"></i>
+                </button>
+            {{ Form::close() }}
+        @endif
     </div>
 </article>

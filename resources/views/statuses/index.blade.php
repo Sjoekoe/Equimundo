@@ -11,7 +11,7 @@
                             <div class="col-md-7 col-md-offset-1">
                                 {{ Form::open(['route' => 'statuses.store', 'method' => 'POST', 'class' => 'status_form', 'files' => 'true']) }}
                                     <div class="row">
-                                        {{ Form::select('horse', $horses, null, ['class' => 'form-control']) }}
+                                        {{ Form::select('horse', $horses, null, ['class' => 'form-control', 'id' => 'js-status-select']) }}
                                     </div>
                                     <br>
                                     <div class="row">
@@ -26,7 +26,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="thumbnail">
-                                    <img src="{{ asset('images/eqm.png') }}" alt="">
+                                    <img src="{{ $initialPicture }}" alt="" id="js-status-avatar">
                                 </div>
                             </div>
                         </div>

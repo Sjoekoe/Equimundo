@@ -58,4 +58,9 @@ class CommentController extends Controller
 
         return back();
     }
+
+    public function like(Comment $comment)
+    {
+
+    }
 }

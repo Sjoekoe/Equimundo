@@ -1,5 +1,5 @@
 <?php
-namespace Horses;
+namespace Controllers\Horses;
 
 use Carbon\Carbon;
 use EQM\Models\Horses\EloquentHorse;
