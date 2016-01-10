@@ -6,6 +6,7 @@ interface Notification
     const STATUS_LIKED = 1;
     const COMMENT_POSTED = 2;
     const PEDIGREE_CREATED = 3;
+    const COMMENT_LIKED = 4;
 
     const POLICIES = [
         'mark-as-read', 'delete-notification'

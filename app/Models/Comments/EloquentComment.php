@@ -3,6 +3,7 @@ namespace EQM\Models\Comments;
 
 use EQM\Models\Statuses\EloquentStatus;
 use EQM\Models\Users\EloquentUser;
+use EQM\Models\Users\User;
 use Illuminate\Database\Eloquent\Model;
 
 class EloquentComment extends Model implements Comment
@@ -47,5 +48,28 @@ class EloquentComment extends Model implements Comment
     public function status()
     {
         return $this->belongsTo(EloquentStatus::class, 'status_id', 'id')->first();
+    }
+
+    /**
+     * @return \EQM\Models\Users\User[]
+     */
+    public function likes()
+    {
+        return $this->belongsToMany(EloquentUser::class, 'comment_likes', 'comment_id', 'user_id')->get();
+    }
+
+    /**
+     * @param \EQM\Models\Users\User $user
+     * @return bool
+     */
+    public function isLikedByUser(User $user)
+    {
+        foreach ($this->likes() as $liker) {
+            if ($liker->id() == $user->id()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

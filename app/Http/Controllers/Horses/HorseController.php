@@ -15,7 +15,6 @@ use EQM\Models\Users\User;
 
 class HorseController extends Controller
 {
-
     /**
      * @var \EQM\Models\Horses\HorseRepository
      */
@@ -105,5 +104,12 @@ class HorseController extends Controller
         session()->put('success', 'The horse was removed from your list');
 
         return redirect()->route('home');
+    }
+
+    public function data(Horse $horse)
+    {
+        $profilePicturePath = $horse->getProfilePicture() ? route('file.picture', $horse->getProfilePicture()->id()) : asset('images/eqm.png');
+
+        return response()->json($profilePicturePath);
     }
 }

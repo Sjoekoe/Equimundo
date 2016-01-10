@@ -27,6 +27,10 @@ class AuthServiceProvider extends ServiceProvider
             $gate->define($policy, CommentPolicy::class . '@authorize');
         }
 
+        foreach (Comment::PRIVILEGE_POLICIES as $policy) {
+            $gate->define($policy, CommentPolicy::class . '@privilege');
+        }
+
         foreach (Conversation::POLICIES as $policy) {
             $gate->define($policy, ConversationPolicy::class . '@authorize');
         }

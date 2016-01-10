@@ -123,6 +123,14 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function commentLikes()
+    {
+        return $this->belongsToMany(EloquentComment::class, 'comment_likes', 'user_id', 'comment_id')->withTimestamps();
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function events()

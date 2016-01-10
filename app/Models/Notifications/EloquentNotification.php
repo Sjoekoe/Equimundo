@@ -87,13 +87,16 @@ class EloquentNotification extends Model implements Notification
     {
         switch ($type) {
             case self::STATUS_LIKED:
-                return route('statuses.show', $entity->id);
+                return route('statuses.show', $entity->id());
 
             case self::COMMENT_POSTED;
-                return route('statuses.show', $entity->id);
+                return route('statuses.show', $entity->id());
 
             case self::PEDIGREE_CREATED:
                 return route('horses.show', $entity->slug);
+
+            case self::COMMENT_LIKED:
+                return route('statuses.show', $entity->id());
         }
     }
 

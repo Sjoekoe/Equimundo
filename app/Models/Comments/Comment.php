@@ -1,10 +1,16 @@
 <?php
 namespace EQM\Models\Comments;
 
+use EQM\Models\Users\User;
+
 interface Comment
 {
     const POLICIES = [
-        'delete-comment', 'edit-comment',
+        'edit-comment',
+    ];
+
+    const PRIVILEGE_POLICIES = [
+        'delete-comment',
     ];
 
     /**
@@ -26,4 +32,12 @@ interface Comment
      * @return \EQM\Models\Statuses\Status
      */
     public function status();
+
+    public function likes();
+
+    /**
+     * @param \EQM\Models\Users\User $user
+     * @return bool
+     */
+    public function isLikedByUser(User $user);
 }

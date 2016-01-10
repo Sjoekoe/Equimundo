@@ -1,5 +1,5 @@
 <?php
-namespace Statuses;
+namespace Controllers\Statuses;
 
 use EQM\Models\Horses\EloquentHorse;
 use EQM\Models\HorseTeams\EloquentHorseTeam;

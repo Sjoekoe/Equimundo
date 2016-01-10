@@ -1,7 +1,10 @@
 <?php
 
+use EQM\Models\Notifications\Notification;
+
 return [
-    1 => ':sender has liked the status of :horse',
-    2 => ':sender has commented on a status of :horse',
-    3 => ':family horse was added to the pedigree of :horse',
+    Notification::STATUS_LIKED => ':sender has liked the status of :horse.',
+    Notification::COMMENT_POSTED => ':sender has commented on a status of :horse.',
+    Notification::PEDIGREE_CREATED => ':family horse was added to the pedigree of :horse.',
+    Notification::COMMENT_LIKED => ':liker has liked your comment.'
 ];

@@ -1,5 +1,5 @@
 <?php
-namespace Pages;
+namespace Controllers\Pages;
 
 class PagesTest extends \TestCase
 {

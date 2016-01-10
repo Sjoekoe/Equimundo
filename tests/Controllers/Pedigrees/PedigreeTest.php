@@ -1,5 +1,5 @@
 <?php
-namespace Pedigrees;
+namespace Controllers\Pedigrees;
 
 use Carbon\Carbon;
 use EQM\Models\Horses\EloquentHorse;

@@ -1,5 +1,5 @@
 <?php
-namespace Sessions;
+namespace Controllers\Sessions;
 
 use EQM\Events\UserRegistered;
 

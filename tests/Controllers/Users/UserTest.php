@@ -1,5 +1,5 @@
 <?php
-namespace Users;
+namespace Controllers\Users;
 
 use EQM\Models\Users\EloquentUser;
 use Illuminate\Foundation\Testing\WithoutMiddleware;

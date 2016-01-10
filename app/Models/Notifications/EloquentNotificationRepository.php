@@ -49,8 +49,8 @@ class EloquentNotificationRepository implements NotificationRepository
         $notification = new EloquentNotification();
 
         $notification->type = $type;
-        $notification->sender_id = $sender->id;
-        $notification->receiver_id = $receiver->id;
+        $notification->sender_id = $sender->id();
+        $notification->receiver_id = $receiver->id();
         $notification->link = $this->notification->getRoute($type, $entity);
         $notification->data = json_encode($data);
 
