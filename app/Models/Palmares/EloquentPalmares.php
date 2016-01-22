@@ -1,6 +1,7 @@
 <?php
 namespace EQM\Models\Palmares;
 
+use Carbon\Carbon;
 use EQM\Models\Events\EloquentEvent;
 use EQM\Models\Horses\EloquentHorse;
 use EQM\Models\Statuses\EloquentStatus;
@@ -79,6 +80,6 @@ class EloquentPalmares extends Model implements Palmares
      */
     public function date()
     {
-        return $this->date;
+        return Carbon::parse($this->date);
     }
 }

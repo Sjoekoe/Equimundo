@@ -82,7 +82,7 @@ class HorseCreator
             $this->horseTeams->createOwner($user, $horse);
         }
 
-        if (array_key_exists('profile_pic', $values)) {
+        if (array_key_exists('profile_pic', $values) && $values['profile_pic'] !== '') {
             $picture = $this->uploader->uploadPicture($values['profile_pic'], $horse, true);
 
             $picture->addToAlbum($horse->getStandardAlbum(Album::PROFILEPICTURES));

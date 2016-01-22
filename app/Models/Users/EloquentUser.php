@@ -9,7 +9,6 @@ use EQM\Models\Events\EloquentEvent;
 use EQM\Models\Horses\EloquentHorse;
 use EQM\Models\Horses\Horse;
 use EQM\Models\HorseTeams\EloquentHorseTeam;
-use EQM\Models\HorseTeams\HorseTeam;
 use EQM\Models\Notifications\EloquentNotification;
 use EQM\Models\Roles\EloquentRole;
 use EQM\Models\Roles\Role;
@@ -169,7 +168,7 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
      */
     public function notifications()
     {
-        return $this->hasMany(EloquentNotification::class, 'receiver_id', 'id')->get();
+        return $this->hasMany(EloquentNotification::class, 'receiver_id', 'id')->latest()->get();
     }
 
     /**
@@ -177,7 +176,7 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
      */
     public function follows()
     {
-        return $this->belongsToMany(EloquentHorse::class, 'follows', 'user_id', 'horse_id')->withTimestamps();
+        return $this->belongsToMany(EloquentHorse::class, 'follows', 'user_id', 'horse_id')->withTimestamps()->get();
     }
 
     /**
@@ -333,9 +332,13 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
      */
     public function isFollowing(Horse $horse)
     {
-        $followedHorses = $this->follows()->lists('horse_id')->all();
+        foreach ($this->follows() as $follow) {
+            if ($horse->id() == $follow->id()) {
+                return true;
+            }
+        }
 
-        return in_array($horse->id(), $followedHorses);
+        return false;
     }
 
     /**
