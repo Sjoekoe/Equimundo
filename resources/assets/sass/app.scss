@@ -1,16 +1,8 @@
 @import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
-@import "../../../node_modules/bootflat/bootflat/scss/bootflat";
-@import "hs/colors";
-@import "hs/typography";
-@import "hs/helpers";
+@import "../../../node_modules/bootstrap-select/sass/variables";
+@import "../../../node_modules/bootstrap-select/sass/bootstrap-select";
+@import "hs/datepicker";
 @import "hs/general";
-@import "hs/cards";
-@import "hs/heading";
-@import "hs/buttons";
-@import "hs/forms";
-@import "hs/icons";
-@import "hs/navigation";
-@import "hs/timeline";
-@import "hs/pedigree";
+@import "hs/nifty";
 
 

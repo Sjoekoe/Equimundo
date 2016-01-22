@@ -1,45 +1,50 @@
-@extends('layout.app')
+@extends('layout.outer-app')
 
 @section('content')
-    @include('layout.partials.errors')
+<div id="container" class="cls-container">
+    <div id="bg-overlay" class="bg-img" style="background-image: url({{ asset('images/horses.jpg') }})"></div>
 
-    {{ Form::open(['route' => 'login', 'class' => 'form-horizontal']) }}
+    @include('layout.partials._outer_app_header')
 
-    <!-- Email Form input -->
-    <div class="form-group">
-        {{ Form::label('email', trans('forms.labels.email'), ['class' => 'col-md-4 control-label']) }}
-        <div class="col-md-6">
-            {{ Form::text('email', null, ['class' => 'form-control']) }}
-        </div>
-    </div>
 
-    <!-- Password Form input -->
-    <div class="form-group">
-        {{ Form::label('password', trans('forms.labels.password'), ['class' => 'col-md-4 control-label']) }}
-        <div class="col-md-6">
-            {{ Form::password('password', ['class' => 'form-control']) }}
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-md-6 col-md-offset-4">
-            <div class="checkbox">
-                <label>
-                    {{ Form::checkbox('remember', 'Remember Me') }}
-                    {{ trans('forms.copy.remember') }}
-                </label>
+    <div class="cls-content">
+        <div class="cls-content-sm panel">
+            <div class="panel-body">
+                <p class="pad-btm">Sign In to your account</p>
+                {{ Form::open(['route' => 'login', 'class' => 'form-horizontal']) }}
+                    <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
+                            {{ Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'email']) }}
+                        </div>
+                        @include('layout.partials._error_message', ['field' => 'email'])
+                    </div>
+                    <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
+                            {{ Form::password('password', ['class' => 'form-control', 'placeholder' => 'password']) }}
+                        </div>
+                        @include('layout.partials._error_message', ['field' => 'password'])
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-8 text-left checkbox">
+                            <label class="form-checkbox form-icon">
+                                <input type="checkbox" name="remember"> Remember me
+                            </label>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group text-right">
+                                {{ Form::submit(trans('forms.buttons.login'), ['class' => 'btn btn-mint text-uppercase']) }}
+                            </div>
+                        </div>
+                    </div>
+                {{ Form::close() }}
             </div>
         </div>
-    </div>
-
-    <!-- Submit button -->
-    <div class="form-group">
-        <div class="col-md-6 col-md-offset-4">
-            {{ Form::submit(trans('forms.buttons.login'), ['class' => 'btn btn-default', 'style' => 'margin-right:
-            15px;']) }}
-            <a href="{{ route('password.forgot') }}">Forgot Your Password?</a>
+        <div class="pad-ver">
+            <a href="{{ route('password.forgot') }}" class="btn-link mar-rgt">Forgot password ?</a>
+            <a href="{{ route('register') }}" class="btn-link mar-lft">Create a new account</a>
         </div>
     </div>
-
-    {{ Form::close() }}
+</div>
 @endsection

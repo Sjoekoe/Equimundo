@@ -1,54 +1,75 @@
-@extends('layout.app')
+@extends('layout.outer-app')
 
 @section('content')
-    @include('layout.partials.errors')
 
-    {{ Form::open(['class' => 'form-horizontal']) }}
-    <!-- Name Form input -->
-    <div class="form-group">
-        {{ Form::label('first_name', trans('forms.labels.first_name'), ['class' => 'col-md-4 control-label']) }}
-        <div class="col-md-6">
-            {{ Form::text('first_name', null, ['class' => 'form-control']) }}
+<div id="container" class="cls-container">
+    <div id="bg-overlay" class="bg-img" style="background-image: url({{ asset('images/horses.jpg') }})"></div>
+
+    @include('layout.partials._outer_app_header')
+
+    <div class="cls-content">
+        <div class="cls-content-lg panel">
+            <div class="panel-body">
+                <p class="pad-btm">Create an account</p>
+                {{ Form::open(['class' => 'form-horizontal']) }}
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="input-group {{ $errors->has('first_name') ? 'has-error' : '' }}">
+                                    <div class="input-group-addon"><i class="fa fa-male"></i></div>
+                                    {{ Form::text('first_name', null, ['class' => 'form-control', 'placeholder' => 'First name']) }}
+                                </div>
+                                @include('layout.partials._error_message', ['field' => 'first_name'])
+                            </div>
+                            <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
+                                    {{ Form::password('password', ['class' => 'form-control', 'placeholder' => 'Password']) }}
+                                </div>
+                                @include('layout.partials._error_message', ['field' => 'password'])
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
+                                    {{ Form::password('password_confirmation', ['class' => 'form-control', 'placeholder' => 'Confirm Password']) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group {{ $errors->has('last_name') ? 'has-error' : '' }}">
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-male"></i></div>
+                                    {{ Form::text('last_name', null, ['class' => 'form-control', 'placeholder' => 'Last name']) }}
+                                </div>
+                                @include('layout.partials._error_message', ['field' => 'last_name'])
+                            </div>
+                            <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
+                                    {{ Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'E-mail']) }}
+                                </div>
+                                @include('layout.partials._error_message', ['field' => 'email'])
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-8 text-left checkbox">
+                            <label class="form-checkbox form-icon">
+                                <input type="checkbox"> I agree with the Terms and Conditions
+                            </label>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group text-right">
+                                <button class="btn btn-mint text-uppercase" type="submit">Register</button>
+                            </div>
+                        </div>
+                    </div>
+                {{ Form::close() }}
+            </div>
+        </div>
+        <div class="pad-ver">
+            Already have an account ? <a href="{{ route('login') }}" class="btn-link mar-rgt">Sign In</a>
         </div>
     </div>
-
-    <div class="form-group">
-        {{ Form::label('last_name', trans('forms.labels.last_name'), ['class' => 'col-md-4 control-label']) }}
-        {{ Form::text('last_name', null, ['class' => 'form-control']) }}
-    </div>
-
-    <!-- Email Form input -->
-    <div class="form-group">
-        {{ Form::label('email', trans('forms.labels.email'), ['class' => 'col-md-4 control-label']) }}
-        <div class="col-md-6">
-            {{ Form::text('email', null, ['class' => 'form-control']) }}
-        </div>
-    </div>
-
-    <!-- Password Form input -->
-    <div class="form-group">
-        {{ Form::label('password', trans('forms.labels.password'), ['class' => 'col-md-4 control-label']) }}
-        <div class="col-md-6">
-            {{ Form::password('password', ['class' => 'form-control']) }}
-        </div>
-    </div>
-
-    <!-- Password_confirmation Form input -->
-    <div class="form-group">
-        {{ Form::label('password_confirmation', trans('forms.labels.password_confirmation'), ['class' => 'col-md-4
-        control-label']) }}
-        <div class="col-md-6">
-            {{ Form::password('password_confirmation', ['class' => 'form-control']) }}
-        </div>
-    </div>
-
-    <!-- Submit button -->
-    <div class="form-group">
-        <div class="col-md-6 col-md-offset-4">
-            {{ Form::submit(trans('forms.buttons.signup'), ['class' => 'btn btn-default']) }}
-        </div>
-    </div>
-
-    {{ Form::close() }}
-
+</div>
 @endsection

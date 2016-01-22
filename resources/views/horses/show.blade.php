@@ -1,18 +1,17 @@
 @extends('layout.app')
 
 @section('content')
-    @include('layout.partials.heading')
-    <div class="row">
-        @if (! count($horse->statuses))
-            <p>{{ trans('copy.p.no_statuses') }}</p>
-        @else
-            <div class="timeline">
-                <dl class="pull-left">
-                    @foreach($statuses as $status)
-                        @include('statuses.partials.status')
-                    @endforeach
-                </dl>
-            </div>
-        @endif
+    <div class="page-content">
+        @include('layout.partials.heading')
+
+        <div class="col-lg-7 col-lg-offset-2">
+            @if (! count($horse->statuses()))
+                <p>{{ trans('copy.p.no_statuses') }}</p>
+            @else
+                @foreach($horse->statuses() as $status)
+                    @include('statuses.partials.status')
+                @endforeach
+            @endif
+        </div>
     </div>
 @stop

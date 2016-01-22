@@ -1,18 +1,45 @@
-<div class="row border margin padding">
-    <div class="col-md-5">
-        <p>{{ trans('copy.p.event') }} {{ $palmares->event()->name() }}</p>
-        <p>{{ trans('copy.p.date') }} {{ date('d F Y', strtotime($palmares->date())) }}</p>
-    </div>
-    <div class="col-md-5">
-        <p>{{ trans('copy.p.discipline') }} {{ trans('disciplines.' . $palmares->discipline()) }}</p>
-        <p>{{ trans('copy.p.category') }} {{ $palmares->level() }}</p>
-    </div>
-    <div class="col-md-2">
-        <h4>{{ $palmares->ranking() }} {{ trans('copy.p.ranked') }}</h4>
-        @if (auth()->user()->isInHorseTeam($horse))
-            <p><a href="{{ route('palmares.edit', $palmares->id()) }}">{{ trans('copy.a.edit') }}</a></p>
-            <p><a href="{{ route('palmares.delete', $palmares->id()) }}">{{ trans('copy.a.delete') }}</a></p>
-        @endif
-        <p class="palmares-link"><a href="{{ route('statuses.show', $palmares->status()->id()) }}">{{ trans('copy.a.show_story') }}</a></p>
+<div class="panel panel-mint panel-colorful text-center">
+    <div class="panel-body">
+        <div class="media">
+            <div class="media-left">
+                <i class="fa fa-map-marker fa-3x"></i>
+            </div>
+            <div class="media-body">
+                <h4 class="mar-no text-left">{{ $palmares->event()->name() }}</h4>
+                <p class="text-left">{{ eqm_translated_date($palmares->date())->format('d F Y') }}</p>
+            </div>
+            <div class="media-body">
+                <p class="text-right">
+                    <a href="{{ route('statuses.show', $palmares->status()->id()) }}" class="text-light">{{ trans('copy.a.show_story') }}</a>
+                </p>
+            </div>
+            <hr>
+            <div class="row-pad-top">
+                <div class="col-xs-4">
+                    <p>
+                        {{ trans('copy.p.discipline') }}
+                    </p>
+                    <p class="text-3x">
+                        {{ trans('disciplines.' . $palmares->discipline()) }}
+                    </p>
+                </div>
+                <div class="col-xs-4">
+                    <p>
+                        {{ trans('copy.p.ranked') }}
+                    </p>
+                    <p class="text-3x">
+                        {{ $palmares->ranking() }}
+                    </p>
+                </div>
+                <div class="col-xs-4">
+                    <p>
+                        {{ trans('copy.p.category') }}
+                    </p>
+                    <p class="text-3x">
+                        {{ $palmares->level() }}
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

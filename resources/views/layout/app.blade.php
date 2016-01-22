@@ -20,21 +20,16 @@
 	<![endif]-->
 </head>
 <body>
-
-	@include('layout.partials.nav')
-    @include('layout.partials._flash_messages')
-
-    <div class="container-fluid">
+    <div id="container" class="effect mainnav-out">
+        @include('layout.partials.nav')
+        @include('layout.partials._flash_messages')
         @if (auth()->check())
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                    @yield('content')
-                </div>
+            <div class="boxed">
 
-                <div class="col-md-2">
-                    <div class="row">
-                        Other Things
-                    </div>
+                <!--CONTENT CONTAINER-->
+                <!--===================================================-->
+                <div id="content-container">
+                    @yield('content')
                 </div>
             </div>
         @else

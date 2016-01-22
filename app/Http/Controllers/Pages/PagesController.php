@@ -43,17 +43,15 @@ class PagesController extends Controller
 
     public function home()
     {
-        if (auth()->check()) {
-            $horses = $this->collection->getIdAndNamePairs($this->horses->findForUser(auth()->user()));
-            $statuses = $this->statuses->findFeedForUser(auth()->user());
-            $likes = $this->likes->findForUser(auth()->user());
+        $horses = $this->collection->getIdAndNamePairs($this->horses->findForUser(auth()->user()));
+        $statuses = $this->statuses->findFeedForUser(auth()->user());
+        $likes = $this->likes->findForUser(auth()->user());
 
-            if (count($horses)) {
-                $firstHorse = $this->horses->findById(key($horses));
-                $initialPicture = $firstHorse->getProfilePicture() ? route('file.picture', $firstHorse->getProfilePicture()->id()) : asset('images/eqm.png');
-            } else {
-                $initialPicture = asset('images/eqm.png');
-            }
+        if (count($horses)) {
+            $firstHorse = $this->horses->findById(key($horses));
+            $initialPicture = $firstHorse->getProfilePicture() ? route('file.picture', $firstHorse->getProfilePicture()->id()) : asset('images/eqm.png');
+        } else {
+            $initialPicture = asset('images/eqm.png');
         }
 
         return view('pages.home', compact('horses', 'statuses', 'likes', 'initialPicture'));

@@ -1,6 +1,6 @@
-<div class="row">
+<div class="row mar-btm">
     <div class="col-md-12">
-        <ul class="nav nav-pills nav-justified border no-border-top">
+        <ul class="nav nav-pills nav-justified bord-all bg-primary">
             <li class="{{ Active::route('horses.show') }}">
                 <a href="{{ route('horses.show', $horse->slug()) }}">
                     {{ trans('copy.a.statuses') }}

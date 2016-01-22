@@ -1,50 +1,33 @@
-@extends('layout.app')
+@extends('layout.outer-app')
 
 @section('content')
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
-			<div class="panel panel-default">
-				<div class="panel-heading">Reset Password</div>
-				<div class="panel-body">
-					@if (session('status'))
-						<div class="alert alert-success">
-							{{ session('status') }}
-						</div>
-					@endif
 
-					@if (count($errors) > 0)
-						<div class="alert alert-danger">
-							<strong>Whoops!</strong> There were some problems with your input.<br><br>
-							<ul>
-								@foreach ($errors->all() as $error)
-									<li>{{ $error }}</li>
-								@endforeach
-							</ul>
-						</div>
-					@endif
+<div id="container" class="cls-container">
+    <div id="bg-overlay" class="bg-img" style="background-image: url({{ asset('images/horses.jpg') }})"></div>
 
-					<form class="form-horizontal" role="form" method="POST" action="{{ route('password.post_forgot') }}">
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+    @include('layout.partials._outer_app_header')
 
-						<div class="form-group">
-							<label class="col-md-4 control-label">E-Mail Address</label>
-							<div class="col-md-6">
-								<input type="email" class="form-control" name="email" value="{{ old('email') }}">
-							</div>
-						</div>
-
-						<div class="form-group">
-							<div class="col-md-6 col-md-offset-4">
-								<button type="submit" class="btn btn-primary">
-									Send Password Reset Link
-								</button>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="cls-content">
+        <div class="cls-content-sm panel">
+            <div class="panel-body">
+                <p class="pad-btm">Enter your email address to recover your password.</p>
+                {{ Form::open(['route' => 'password.post_forgot', 'class' => 'form-horizontal']) }}
+                <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
+                        <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="email">
+                    </div>
+                    @include('layout.partials._error_message', ['field' => 'email'])
+                </div>
+                <div class="form-group text-right">
+                    {{ Form::submit('Send Password Reset Link', ['class' => 'btn btn-mint text-uppercase']) }}
+                </div>
+                {{ Form::close() }}
+            </div>
+        </div>
+        <div class="pad-ver">
+            <a href="{{ route('login') }}" class="btn-link mar-rgt">Back to Login</a>
+        </div>
+    </div>
 </div>
 @endsection
