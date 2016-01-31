@@ -56,4 +56,9 @@ interface StatusRepository
      * @param \EQM\Models\Statuses\Status $status
      */
     public function delete(Status $status);
+
+    /**
+     * @return int
+     */
+    public function count();
 }

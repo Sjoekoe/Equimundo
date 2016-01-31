@@ -4,9 +4,11 @@ return [
     'titles' => [
         'about_you' => 'Over Uzelf',
         'create_horse' => 'Creëer een paard',
+        'create_palmares' => 'Palmares toevoegen',
         'daughters' => 'Dochters',
         'disciplines' => 'Disciplines',
         'edit' => 'Wijzig',
+        'edit_profile' => 'Wijzig profiel',
         'following' => 'Volgend',
         'horses' => 'Paarden',
         'horses_of' => 'Paarden van',

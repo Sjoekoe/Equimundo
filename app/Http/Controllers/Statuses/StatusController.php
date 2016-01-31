@@ -2,6 +2,7 @@
 namespace EQM\Http\Controllers\Statuses;
 
 use EQM\Http\Controllers\Controller;
+use EQM\Models\Statuses\Likes\LikeRepository;
 use EQM\Models\Statuses\Requests\PostStatus;
 use EQM\Models\Statuses\Status;
 use EQM\Models\Statuses\StatusCreator;
@@ -14,9 +15,15 @@ class StatusController extends Controller
      */
     private $statuses;
 
-    public function __construct(StatusRepository $statuses)
+    /**
+     * @var \EQM\Models\Statuses\Likes\LikeRepository
+     */
+    private $likes;
+
+    public function __construct(StatusRepository $statuses, LikeRepository $likes)
     {
         $this->statuses = $statuses;
+        $this->likes = $likes;
     }
 
     public function store(PostStatus $request, StatusCreator $creator)
@@ -30,7 +37,9 @@ class StatusController extends Controller
 
     public function show(Status $status)
     {
-        return view('statuses.show', compact('status'));
+        $likes = $this->likes->findForUser(auth()->user());
+
+        return view('statuses.show', compact('status', 'likes'));
     }
 
     public function edit(Status $status)

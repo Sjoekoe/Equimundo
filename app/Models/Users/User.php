@@ -197,4 +197,9 @@ interface User
      * @return bool
      */
     public function isFollowing(Horse $horse);
+
+    /**
+     * @return bool
+     */
+    public function activated();
 }

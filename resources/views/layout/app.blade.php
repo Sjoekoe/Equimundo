@@ -22,13 +22,14 @@
 <body>
     <div id="container" class="effect mainnav-out">
         @include('layout.partials.nav')
-        @include('layout.partials._flash_messages')
         @if (auth()->check())
             <div class="boxed">
 
                 <!--CONTENT CONTAINER-->
                 <!--===================================================-->
                 <div id="content-container">
+                    @include('layout.partials._search_bar')
+                    @include('layout.partials._flash_messages')
                     @yield('content')
                 </div>
             </div>

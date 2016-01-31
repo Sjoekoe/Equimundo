@@ -150,7 +150,7 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
      */
     public function conversations()
     {
-        return $this->conversationRelation()->get();
+        return $this->conversationRelation()->latest()->get();
     }
 
     /**
@@ -427,5 +427,13 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
     public function language()
     {
         return $this->language;
+    }
+
+    /**
+     * @return bool
+     */
+    public function activated()
+    {
+        return $this->activated;
     }
 }

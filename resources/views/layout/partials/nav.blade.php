@@ -6,6 +6,7 @@
             <a href="{{ route('home') }}" class="navbar-brand">
                 <div class="brand-title">
                     <span class="brand-text">Equimundo</span>
+                    <button class="text-muted" type="button"><i class="fa fa-search"></i></button>
                 </div>
             </a>
         </div>
@@ -16,16 +17,11 @@
         <!--================================-->
         <div class="navbar-content clearfix">
             <ul class="nav navbar-top-links pull-left">
-                <div class="searchbox padding-large-top">
-                    <div class="input-group custom-search-form mar-top">
-                        {{ Form::open(['route' => 'search']) }}
-                            {{ Form::text('search', null, ['placeholder' => trans('forms.placeholders.search') . '...', 'class' => 'form-control text-light']) }}
-                        {{ Form::close() }}
-                        <span class="input-group-btn">
-                            <button class="text-muted" type="button"><i class="fa fa-search"></i></button>
-                        </span>
-                    </div>
-                </div>
+                <li class="dropdown">
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle" id="js-toggle-search">
+                        <i class="fa fa-search fa-lg"></i>
+                    </a>
+                </li>
             </ul>
             <ul class="nav navbar-top-links pull-right">
                 <li class="dropdown">
@@ -68,104 +64,41 @@
                 <li class="dropdown">
                     <a href="#" data-toggle="dropdown" class="dropdown-toggle">
                         <i class="fa fa-envelope fa-lg"></i>
-                        @if (Auth::user()->countUnreadNotifications())
-                            <span class="badge badge-header badge-dark">{{ Auth::user()->countUnreadNotifications() }}</span>
+                        @if (auth()->user()->countUnreadMessages())
+                            <span class="badge badge-header badge-dark">{{ auth()->user()->countUnreadMessages() }}</span>
                         @endif
                     </a>
 
                     <!--Message dropdown menu-->
                     <div class="dropdown-menu dropdown-menu-md dropdown-menu-right with-arrow">
                         <div class="pad-all bord-btm">
-                            <p class="text-lg text-muted text-thin mar-no">You have 3 messages.</p>
+                            <p class="text-lg text-muted text-thin mar-no">You have {{ count(auth()->user()->conversations()) }} messages.</p>
                         </div>
                         <div class="nano scrollable">
                             <div class="nano-content">
                                 <ul class="head-list">
-
-                                    <!-- Dropdown list-->
-                                    <li>
-                                        <a href="#" class="media">
-                                            <div class="media-left">
-                                                <img src="img/av2.png" alt="Profile Picture" class="img-circle img-sm">
-                                            </div>
-                                            <div class="media-body">
-                                                <div class="text-nowrap">Andy sent you a message</div>
-                                                <small class="text-muted">15 minutes ago</small>
-                                            </div>
-                                        </a>
-                                    </li>
-
-                                    <!-- Dropdown list-->
-                                    <li>
-                                        <a href="#" class="media">
-                                            <div class="media-left">
-                                                <img src="img/av4.png" alt="Profile Picture" class="img-circle img-sm">
-                                            </div>
-                                            <div class="media-body">
-                                                <div class="text-nowrap">Lucy sent you a message</div>
-                                                <small class="text-muted">30 minutes ago</small>
-                                            </div>
-                                        </a>
-                                    </li>
-
-                                    <!-- Dropdown list-->
-                                    <li>
-                                        <a href="#" class="media">
-                                            <div class="media-left">
-                                                <img src="img/av3.png" alt="Profile Picture" class="img-circle img-sm">
-                                            </div>
-                                            <div class="media-body">
-                                                <div class="text-nowrap">Jackson sent you a message</div>
-                                                <small class="text-muted">40 minutes ago</small>
-                                            </div>
-                                        </a>
-                                    </li>
-
-                                    <!-- Dropdown list-->
-                                    <li>
-                                        <a href="#" class="media">
-                                            <div class="media-left">
-                                                <img src="img/av6.png" alt="Profile Picture" class="img-circle img-sm">
-                                            </div>
-                                            <div class="media-body">
-                                                <div class="text-nowrap">Donna sent you a message</div>
-                                                <small class="text-muted">5 hours ago</small>
-                                            </div>
-                                        </a>
-                                    </li>
-
-                                    <!-- Dropdown list-->
-                                    <li>
-                                        <a href="#" class="media">
-                                            <div class="media-left">
-                                                <img src="img/av4.png" alt="Profile Picture" class="img-circle img-sm">
-                                            </div>
-                                            <div class="media-body">
-                                                <div class="text-nowrap">Lucy sent you a message</div>
-                                                <small class="text-muted">Yesterday</small>
-                                            </div>
-                                        </a>
-                                    </li>
-
-                                    <!-- Dropdown list-->
-                                    <li>
-                                        <a href="#" class="media">
-                                            <div class="media-left">
-                                                <img src="img/av3.png" alt="Profile Picture" class="img-circle img-sm">
-                                            </div>
-                                            <div class="media-body">
-                                                <div class="text-nowrap">Jackson sent you a message</div>
-                                                <small class="text-muted">Yesterday</small>
-                                            </div>
-                                        </a>
-                                    </li>
-                                </ul>
+                                    @foreach(auth()->user()->conversations() as $conversation)
+                                        @if (! $conversation->isDeletedForUser(auth()->user()))
+                                            <li>
+                                                <a href="{{ route('conversation.show', $conversation->id()) }}" class="media">
+                                                    <div class="media-left">
+                                                        <p>{{ substr($conversation->contactPerson(auth()->user())->fullName(), 0, 1) }}</p>
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <div class="text-nowrap">{{ $conversation->subject() }}</div>
+                                                        <small class="text-muted">{{ eqm_translated_date($conversation->updated_at)->diffForHumans() }}</small>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        @endif
+                                    @endforeach
+                                </ul    >
                             </div>
                         </div>
 
                         <!--Dropdown footer-->
                         <div class="pad-all bord-top">
-                            <a href="#" class="btn-link text-dark box-block">
+                            <a href="{{ route('conversation.index') }}" class="btn-link text-dark box-block">
                                 <i class="fa fa-angle-right fa-lg pull-right"></i>Show All Messages
                             </a>
                         </div>
@@ -229,6 +162,13 @@
                     <div class="dropdown-menu dropdown-menu-md dropdown-menu-right with-arrow panel-default">
                         <!-- User dropdown menu -->
                         <ul class="head-list">
+                            @if (auth()->user()->isAdmin())
+                                <li>
+                                    <a href="{{ route('admin.dashboard') }}">
+                                        <i class="fa fa-shield fa-fw fa-lg"></i> Admin Panel
+                                    </a>
+                                </li>
+                            @endif
                             <li>
                                 <a href="{{ route('users.profiles.show', Auth::user()->id) }}">
                                     <i class="fa fa-user fa-fw fa-lg"></i> Profile
@@ -344,6 +284,7 @@
                             @if (Auth::user()->isAdmin())
                                 <li>
                                     <a href="{{ route('admin.dashboard') }}">
+
                                         Admin Panel
                                     </a>
                                 </li>

@@ -87,4 +87,12 @@ class EloquentPedigreeRepository implements PedigreeRepository
     {
         $pedigree->delete();
     }
+
+    /**
+     * @return int
+     */
+    public function count()
+    {
+        return count($this->pedigree->all());
+    }
 }

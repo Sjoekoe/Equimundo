@@ -112,4 +112,12 @@ class EloquentStatusRepository implements StatusRepository
     {
         $status->delete();
     }
+
+    /**
+     * @return int
+     */
+    public function count()
+    {
+        return count($this->status->all());
+    }
 }
