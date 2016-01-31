@@ -54,4 +54,9 @@ interface HorseRepository
      * @return \EQM\Models\Horses\Horse[]
      */
     public function findForUser(User $user);
+
+    /**
+     * @return int
+     */
+    public function count();
 }

@@ -1,62 +1,84 @@
 @extends('layout.app')
 
 @section('content')
-    <div class="row">
+    <div id="page-title">
+        <h1 class="page-header text-overflow">
+            {{ trans('copy.titles.edit') }} {{ $horse->name() }}
+        </h1>
+    </div>
+    <div id="page-content">
         <div class="row">
-            <div class="col s6">
-                <h3>{{ trans('copy.titles.edit') }} {{ $horse->name }}</h3>
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        {{ Form::open(['route' => ['horses.edit', $horse->slug()], 'class' => 'col s12', 'files' => 'true', 'method' => 'put']) }}
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        {{ Form::label('name', trans('forms.labels.name'), ['class' => 'control-label']) }}
+                                        {{ Form::text('name', $horse->name(), ['class' => 'form-control']) }}
+                                        @include('layout.partials._error_message', ['field' => 'name'])
+                                    </div>
+                                    <div class="form-group">
+                                        {{ Form::label('date_of_birth', trans('forms.labels.date_of_birth'), ['class' => 'control-label']) }}
+                                        <div class="input-group date">
+                                            {{ Form::text('date_of_birth', eqm_date($horse->dateOfBirth()), ['placeholder' => 'dd/mm/yyyy', 'class' => 'form-control']) }}
+                                            <span class="input-group-addon"><i class="fa fa-calendar fa-lg"></i></span>
+                                            @include('layout.partials._error_message', ['field' => 'date_of_birth'])
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        {{ Form::label('height', trans('forms.labels.height'), ['class' => 'control-label']) }}
+                                        {{ Form::text('height', $horse->height(), ['class' => 'form-control']) }}
+                                        @include('layout.partials._error_message', ['field' => 'height'])
+                                    </div>
+                                    <div class="form-group">
+                                        {{ Form::label('life_number', trans('forms.labels.life_number'), ['class' => 'control-label']) }}
+                                        {{ Form::text('life_number', $horse->lifeNumber(), ['class' => 'form-control']) }}
+                                        @include('layout.partials._error_message', ['field' => 'life_number'])
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        {{ Form::label('gender', trans('forms.labels.gender'), ['class' => 'control-label']) }}
+                                        {{ Form::select('gender', trans('horses.genders'), $horse->gender(), ['class' => 'form-control selectPicker']) }}
+                                        @include('layout.partials._error_message', ['field' => 'gender'])
+                                    </div>
+                                    <div class="form-group">
+                                        {{ Form::label('breed', trans('forms.labels.breed'), ['class' => 'control-label']) }}
+                                        {{ Form::select('breed', trans('horses.breeds'), $horse->breed(), ['class' => 'form-control selectPicker', 'data-live-search' => true]) }}
+                                        @include('layout.partials._error_message', ['field' => 'breed'])
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        {{ Form::label('color', trans('forms.labels.color'), ['class' => 'control-label']) }}
+                                        {{ Form::select('color', trans('horses.colors'), $horse->color(), ['class' => 'form-control selectPicker']) }}
+                                        @include('layout.partials._error_message', ['field' => 'color'])
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    {{ Form::submit(trans('forms.buttons.save'), ['class' => 'btn btn-mint']) }}
+                                </div>
+                            </div>
+                        {{ Form::close() }}
+                    </div>
+                </div>
             </div>
         </div>
-        {{ Form::open(['route' => ['horses.edit', $horse->slug], 'class' => 'col s12', 'files' => 'true', 'method' => 'put']) }}
-
-            <div class="row">
-                <div class="input-field col s6">
-                    {{ Form::text('name', $horse->name) }}
-                    {{ Form::label('name', trans('forms.labels.name')) }}
-                </div>
-                <div class="input-field col s6">
-                    {{ Form::label('date_of_birth', trans('forms.labels.date_of_birth')) }}
-                    {{ Form::text('date_of_birth', eqm_date($horse->dateOfBirth()), ['placeholder' => 'dd/mm/yyyy']) }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s6">
-                    {{ Form::label('height', trans('forms.labels.height')) }}
-                    {{ Form::text('height', $horse->height) }}
-                </div>
-                <div class="input-field col s6">
-                    {{ Form::select('gender', trans('horses.genders'), $horse->gender(), ['class' => 'gender-select']) }}
-                    {{ Form::label('gender', trans('forms.labels.gender')) }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s6">
-                    {{ Form::select('breed', trans('horses.breeds'), $horse->breed(), ['class' => 'breed-select']) }}
-                    {{ Form::label('breed', trans('forms.labels.breed')) }}
-                </div>
-                <div class="input-field col s6">
-                    {{ Form::select('color', trans('horses.colors'), $horse->color(), ['class' => 'color-select']) }}
-                    {{ Form::label('color', trans('forms.labels.color')) }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s6">
-                    {{ Form::label('life_number', trans('forms.labels.life_number')) }}
-                    {{ Form::text('life_number', $horse->lifeNumber()) }}
-                </div>
-            </div>
-            <br/>
-            {{ Form::submit(trans('forms.buttons.save'), ['class' => 'btn']) }}
-        {{ Form::close() }}
     </div>
 @stop
 
 @section('footer')
     <script>
-        $(document).ready(function() {
-            $('.gender-select').material_select();
-            $('.breed-select').material_select();
-            $('.color-select').material_select();
+        $('.input-group.date').datepicker({
+            format: 'dd/mm/yyyy',
+            autoclose:true
         });
     </script>
 @stop

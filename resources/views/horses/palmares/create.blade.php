@@ -2,51 +2,73 @@
 
 @section('content')
     @include('layout.partials.heading')
-    <div class="row">
-        <div class="col s12">
-            {{ Form::open(['route' => ['palmares.store', $horse->slug], 'class' => 'grid-content medium-12']) }}
-                <div class="row">
-                    <div class="col s6 input-field">
-                        {{ Form::label('event_name', trans('forms.labels.venue')) }}
-                        {{ Form::text('event_name') }}
-                    </div>
-                    <div class="col s6 input-field">
-                        {{ Form::label('date', trans('forms.labels.date')) }}
-                        {{ Form::text('date', null, ['placeholder' => 'dd/mm/YYYY']) }}
-                    </div>
+    <div id="page-title">
+        <h1 class="page-header text-overflow">{{ trans('copy.titles.create_palmares') }}</h1>
+    </div>
+    <div id="page-content">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    {{ Form::open(['route' => ['palmares.store', $horse->slug], 'class' => 'grid-content medium-12']) }}
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        {{ Form::label('event_name', trans('forms.labels.venue'), ['class' => 'control-label']) }}
+                                        {{ Form::text('event_name', null, ['class' => 'form-control']) }}
+                                        @include('layout.partials._error_message', ['field' => 'event_name'])
+                                    </div>
+                                    <div class="form-group">
+                                        {{ Form::label('date', trans('forms.labels.date'), ['class' => 'control-label']) }}
+                                        <div class="input-group date">
+                                            {{ Form::text('date', null, ['placeholder' => 'dd/mm/YYYY', 'class' => 'form-control']) }}
+                                            <span class="input-group-addon"><i class="fa fa-calendar fa-lg"></i></span>
+                                        </div>
+                                        @include('layout.partials._error_message', ['field' => 'date'])
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        {{ Form::label('discipline', trans('forms.labels.discipline'), ['class' => 'control-label']) }}
+                                        {{ Form::select('discipline', trans('disciplines'), null, ['class' => 'form-control selectPicker', 'data-live-search' => true]) }}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ Form::label('level', trans('forms.labels.category'), ['class' => 'control-label']) }}
+                                        {{ Form::text('level', null, ['class' => 'form-control']) }}
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        {{ Form::label('ranking', trans('forms.labels.ranking'), ['class' => 'control-label']) }}
+                                        {{ Form::text('ranking', null, ['class' => 'form-control']) }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        {{ Form::label('body', trans('forms.labels.story'), ['class' => 'control-label']) }}
+                                        {{ Form::textarea('body', null, ['class' => 'form-control']) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer text-right">
+                            {{ Form::submit(trans('forms.buttons.save'), ['class' => 'btn btn-mint']) }}
+                        </div>
+                    {{ Form::close() }}
                 </div>
-                <div class="row">
-                    <div class="col s6 input-field">
-                        {{ Form::select('discipline', trans('disciplines'), null, ['class' => 'discipline-select']) }}
-                        {{ Form::label('discipline', trans('forms.labels.discipline')) }}
-                    </div>
-                    <div class="col s6 input-field">
-                        {{ Form::label('level', trans('forms.labels.category')) }}
-                        {{ Form::text('level') }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s6 input-field">
-                        {{ Form::label('ranking', trans('forms.labels.ranking')) }}
-                        {{ Form::text('ranking') }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s12 input-field">
-                        {{ Form::label('body', trans('forms.labels.story')) }}
-                        {{ Form::textarea('body', null, ['class' => 'materialize-textarea']) }}
-                    </div>
-                </div>
-                {{ Form::submit(trans('forms.buttons.save'), ['class' => 'btn']) }}
-            {{ Form::close() }}
+            </div>
         </div>
     </div>
 @stop
 
 @section('footer')
     <script>
-        $(document).ready(function() {
-            $('.discipline-select').material_select();
+        $('.input-group.date').datepicker({
+            format: 'dd/mm/yyyy',
+            autoclose:true
         });
     </script>
 @stop

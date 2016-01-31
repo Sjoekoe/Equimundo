@@ -2,7 +2,6 @@
 
 @section('content')
     <div id="page-content">
-
         <div class="row">
             <div class="col-sm-12">
                 <div class="panel panel-info">
@@ -44,14 +43,16 @@
                                                             </p>
                                                         </li>
                                                         <li class="col-sm-4">
-                                                            @if (Auth::user()->isFollowing($horse))
-                                                                {{ Form::open(['route' => ['follows.destroy', $horse->id()], 'method' => 'DELETE']) }}
-                                                                <button type="submit" class="btn btn-mint">{{ trans('copy.a.unfollow') . $horse->name() }}</button>
-                                                                {{ Form::close() }}
-                                                            @else
-                                                                {{ Form::open(['route' => ['follows.store', $horse->id()]]) }}
-                                                                <button type="submit" class="btn btn-mint">{{ trans('copy.a.follow') . $horse->name() }}</button>
-                                                                {{ Form::close() }}
+                                                            @if (! auth()->user()->isInHorseTeam($horse))
+                                                                @if (Auth::user()->isFollowing($horse))
+                                                                    {{ Form::open(['route' => ['follows.destroy', $horse->id()], 'method' => 'DELETE']) }}
+                                                                    <button type="submit" class="btn btn-mint">{{ trans('copy.a.unfollow') . $horse->name() }}</button>
+                                                                    {{ Form::close() }}
+                                                                @else
+                                                                    {{ Form::open(['route' => ['follows.store', $horse->id()]]) }}
+                                                                    <button type="submit" class="btn btn-mint">{{ trans('copy.a.follow') . $horse->name() }}</button>
+                                                                    {{ Form::close() }}
+                                                                @endif
                                                             @endif
                                                         </li>
                                                         <li class="col-sm-4">
@@ -73,46 +74,50 @@
                                 </div>
                                 @foreach($user->follows() as $follow)
                                     <div class="col-sm-4">
-                                        <div class="panel widget panel-bordered-mint">
-                                            <div class="widget-header bg-purple">
-                                                <img class="widget-bg img-responsive" src="{{ asset('/images/header.jpg') }}" alt="Image">
-                                            </div>
-                                            <div class="widget-body text-center">
-                                                @if ($horse->getProfilePicture())
-                                                    <img alt="Profile Picture" class="widget-img img-circle img-border-light" src="{{ route('file.picture', $follow->getProfilePicture()->id()) }}">
-                                                @else
-                                                    <img alt="Profile Picture" class="widget-img img-circle img-border-light" src="{{ asset('images/eqm.png') }}">
-                                                @endif
-                                                <h4 class="mar-no">{{ $follow->name() }}</h4>
-                                                <p class="text-muted mar-btm">{{ trans('horses.breeds.' . $follow->breed()) }}</p>
+                                        <a href="{{ route('horses.show', $follow->slug()) }}">
+                                            <div class="panel widget panel-bordered-mint">
+                                                <div class="widget-header bg-purple">
+                                                    <img class="widget-bg img-responsive" src="{{ asset('/images/header.jpg') }}" alt="Image">
+                                                </div>
+                                                <div class="widget-body text-center">
+                                                    @if ($horse->getProfilePicture())
+                                                        <img alt="Profile Picture" class="widget-img img-circle img-border-light" src="{{ route('file.picture', $follow->getProfilePicture()->id()) }}">
+                                                    @else
+                                                        <img alt="Profile Picture" class="widget-img img-circle img-border-light" src="{{ asset('images/eqm.png') }}">
+                                                    @endif
+                                                    <h4 class="mar-no">{{ $follow->name() }}</h4>
+                                                    <p class="text-muted mar-btm">{{ trans('horses.breeds.' . $follow->breed()) }}</p>
 
-                                                <ul class="list-unstyled text-center pad-top mar-no clearfix">
-                                                    <li class="col-sm-4">
-                                                        <span class="text-lg">{{ count($follow->statuses()) }}</span>
-                                                        <p class="text-muted text-uppercase">
-                                                            <small>{{ trans('copy.a.statuses') }}</small>
-                                                        </p>
-                                                    </li>
-                                                    <li class="col-sm-4">
-                                                        @if (auth()->user()->isFollowing($follow))
-                                                            {{ Form::open(['route' => ['follows.destroy', $follow->id()], 'method' => 'DELETE']) }}
-                                                            <button type="submit" class="btn btn-mint">{{ trans('copy.a.unfollow') . $horse->name() }}</button>
-                                                            {{ Form::close() }}
-                                                        @else
-                                                            {{ Form::open(['route' => ['follows.store', $follow->id()]]) }}
-                                                            <button type="submit" class="btn btn-mint">{{ trans('copy.a.follow') . $follow->name() }}</button>
-                                                            {{ Form::close() }}
-                                                        @endif
-                                                    </li>
-                                                    <li class="col-sm-4">
-                                                        <span class="text-lg">{{ count($follow->followers()) }}</span>
-                                                        <p class="text-muted text-uppercase">
-                                                            <small>{{ trans('copy.a.followers') }}</small>
-                                                        </p>
-                                                    </li>
-                                                </ul>
+                                                    <ul class="list-unstyled text-center pad-top mar-no clearfix">
+                                                        <li class="col-sm-4">
+                                                            <span class="text-lg">{{ count($follow->statuses()) }}</span>
+                                                            <p class="text-muted text-uppercase">
+                                                                <small>{{ trans('copy.a.statuses') }}</small>
+                                                            </p>
+                                                        </li>
+                                                        <li class="col-sm-4">
+                                                            @if (! auth()->user()->isInHorseTeam($follow))
+                                                                @if (auth()->user()->isFollowing($follow))
+                                                                    {{ Form::open(['route' => ['follows.destroy', $follow->id()], 'method' => 'DELETE']) }}
+                                                                    <button type="submit" class="btn btn-mint">{{ trans('copy.a.unfollow') . $horse->name() }}</button>
+                                                                    {{ Form::close() }}
+                                                                @else
+                                                                    {{ Form::open(['route' => ['follows.store', $follow->id()]]) }}
+                                                                    <button type="submit" class="btn btn-mint">{{ trans('copy.a.follow') . $follow->name() }}</button>
+                                                                    {{ Form::close() }}
+                                                                @endif
+                                                            @endif
+                                                        </li>
+                                                        <li class="col-sm-4">
+                                                            <span class="text-lg">{{ count($follow->followers()) }}</span>
+                                                            <p class="text-muted text-uppercase">
+                                                                <small>{{ trans('copy.a.followers') }}</small>
+                                                            </p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </a>
                                     </div>
                                 @endforeach
                             </div>

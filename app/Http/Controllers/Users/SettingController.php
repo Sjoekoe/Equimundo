@@ -17,6 +17,8 @@ class SettingController extends Controller
     {
         $updater->update(auth()->user(), $request);
 
+        session()->put('success', 'Settings saved');
+
         return back();
     }
 }

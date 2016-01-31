@@ -4,9 +4,11 @@ return [
     'titles' => [
         'about_you' => 'About You',
         'create_horse' => 'Create a Horse',
+        'create_palmares' => 'Create palmares',
         'daughters' => 'Daughters',
         'disciplines' => 'Disciplines',
         'edit' => 'Edit',
+        'edit_profile' => 'Edit profile',
         'following' => 'Following',
         'horses' => 'Horses',
         'horses_of' => 'Horses of',

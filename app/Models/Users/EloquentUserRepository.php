@@ -2,6 +2,7 @@
 namespace EQM\Models\Users;
 
 use Carbon\Carbon;
+use DB;
 
 class EloquentUserRepository implements UserRepository
 {
@@ -116,5 +117,41 @@ class EloquentUserRepository implements UserRepository
         return $this->user->where('first_name', 'like', '%' . $input . '%')
             ->orWhere('last_name', 'like', '%' . $input . '%')
             ->get();
+    }
+
+    /**
+     * @return int
+     */
+    public function count()
+    {
+        return (count($this->user->all()));
+    }
+
+    /**
+     * @param int $limit
+     * @return \EQM\Models\Users\User[]
+     */
+    public function paginated($limit = 20)
+    {
+        return $this->user->paginate($limit);
+    }
+
+    /**
+     * @param \Carbon\Carbon $start
+     * @param \Carbon\Carbon $end
+     * @return int
+     */
+    public function findCountByDate(Carbon $start, Carbon $end)
+    {
+        return count($this->user->where('created_at', '>', $start)->where('created_at', '<', $end)->get());
+    }
+
+    /**
+     * @param \Carbon\Carbon $date
+     * @return int
+     */
+    public function findRegisteredUsersBeforeDate(Carbon $date)
+    {
+        return count($this->user->where('created_at', '<=', $date)->get());
     }
 }

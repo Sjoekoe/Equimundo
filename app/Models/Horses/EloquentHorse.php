@@ -131,7 +131,7 @@ class EloquentHorse extends Model implements Horse
      */
     public function statuses()
     {
-        return $this->hasMany(EloquentStatus::class, 'horse_id', 'id')->get();
+        return $this->hasMany(EloquentStatus::class, 'horse_id', 'id')->latest()->get();
     }
 
     /**

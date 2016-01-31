@@ -132,4 +132,12 @@ class EloquentHorseRepository implements HorseRepository
             ->where('horse_team.user_id', $user->id)
             ->get();
     }
+
+    /**
+     * @return int
+     */
+    public function count()
+    {
+        return count($this->horse->all());
+    }
 }

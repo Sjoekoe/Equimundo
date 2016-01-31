@@ -28,10 +28,13 @@ class SearchController extends Controller
     // todo add validation
     public function index(Request $request)
     {
-        $horses = $this->horses->search($request->get('search'));
-        $profiles = $this->users->search($request->get('search'));
+        $searchWord = $request->get('search');
+        $horses = $this->horses->search($searchWord);
+        $profiles = $this->users->search($searchWord);
 
-        return view('searches.index', compact('horses', 'profiles'));
+        $count = count($horses) + count($profiles);
+
+        return view('searches.index', compact('horses', 'profiles', 'searchWord', 'count'));
     }
 
     public function search()

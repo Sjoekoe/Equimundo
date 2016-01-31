@@ -37,4 +37,9 @@ interface PedigreeRepository
      * @return \EQM\Models\Pedigrees\Pedigree|null
      */
     public function findExistingPedigree(Horse $horse, $type);
+
+    /**
+     * @return int
+     */
+    public function count();
 }

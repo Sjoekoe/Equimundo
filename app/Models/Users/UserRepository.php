@@ -1,6 +1,8 @@
 <?php
 namespace EQM\Models\Users;
 
+use Carbon\Carbon;
+
 interface UserRepository
 {
     /**
@@ -51,4 +53,28 @@ interface UserRepository
      * @return \EQM\Models\Users\User[]
      */
     public function search($input);
+
+    /**
+     * @return int
+     */
+    public function count();
+
+    /**
+     * @param int $limit
+     * @return \EQM\Models\Users\User[]
+     */
+    public function paginated($limit = 20);
+
+    /**
+     * @param \Carbon\Carbon $start
+     * @param \Carbon\Carbon $end
+     * @return int
+     */
+    public function findCountByDate(Carbon $start, Carbon $end);
+
+    /**
+     * @param \Carbon\Carbon $date
+     * @return int
+     */
+    public function findRegisteredUsersBeforeDate(Carbon $date);
 }
