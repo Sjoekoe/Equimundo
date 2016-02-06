@@ -1,6 +1,7 @@
 <?php
 namespace EQM\Models\Horses;
 
+use Carbon\Carbon;
 use EQM\Models\Users\User;
 
 interface HorseRepository
@@ -59,4 +60,23 @@ interface HorseRepository
      * @return int
      */
     public function count();
+
+    /**
+     * @param int $limit
+     * @return \Eqm\Models\Horses\Horse[]
+     */
+    public function paginated($limit = 10);
+
+    /**
+     * @param \Carbon\Carbon $start
+     * @param \Carbon\Carbon $end
+     * @return int
+     */
+    public function findCountByDate(Carbon $start, Carbon $end);
+
+    /**
+     * @param \Carbon\Carbon $date
+     * @return int
+     */
+    public function findCreatedHorsesBeforeDate(Carbon $date);
 }

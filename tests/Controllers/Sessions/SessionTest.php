@@ -28,8 +28,8 @@ class SessionTest extends \TestCase
         $this->actingAs($user)
             ->withSession(['foo' => 'bar'])
             ->visit('/')
-            ->click('Sign Out')
-            ->seePageIs('/')
-            ->see('Welcome to Equimundo');
+            ->click('Logout')
+            ->seePageIs('/login')
+            ->see('The social network for horses.');
     }
 }

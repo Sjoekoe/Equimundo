@@ -176,6 +176,7 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
      */
     public function follows()
     {
+        // todo make a relation for the attach methods
         return $this->belongsToMany(EloquentHorse::class, 'follows', 'user_id', 'horse_id')->withTimestamps()->get();
     }
 
