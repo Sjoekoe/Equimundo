@@ -16,7 +16,7 @@ class RegisterTest extends \TestCase
             ->type('john@example.com', 'email')
             ->type('password', 'password')
             ->type('password', 'password_confirmation')
-            ->press('Sign Up')
+            ->press('Register')
             ->seePageIs('/');
 
         $this->seeInDatabase('users', [

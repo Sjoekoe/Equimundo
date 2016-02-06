@@ -3,6 +3,7 @@
 Route::group(['namespace' => 'Admin', 'middleware' => 'admin'], function() {
     require __DIR__ . '/Routes/Admin/dashboards.php';
     require __DIR__ . '/Routes/Admin/users.php';
+    require __DIR__ . '/Routes/Admin/horses.php';
 });
 
 Route::group(['namespace' => 'Albums'], function() {

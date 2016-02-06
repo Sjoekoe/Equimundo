@@ -1,69 +1,72 @@
 @extends('layout.app')
 
 @section('content')
-    <div class="row no-bottom-margin">
-        <div class="col s12 heading" style="background-image: url(https://scontent-ams.xx.fbcdn.net/hphotos-xfp1/v/t1.0-9/10553388_10203915881569093_2920146316036226222_n.jpg?oh=6e110c44b513925b9e16c0d59d68b92e&oe=55DD955F)">
-            <div class="heading-name left">
-                <h1 class="teal-text">{{ $horse->name() }}</h1>
-            </div>
-
-            <div class="heading-button right">
-                @if (auth()->user()->isInHorseTeam($horse))
-                    <a href="{{ route('pedigree.create', $horse->slug()) }}" class="btn">{{ trans('copy.a.add_family') }}</a>
-                @else
-                    @include('horses.partials.follow-form')
-                @endif
+    @include('layout.partials.heading')
+    <div class="col-lg-7 col-lg-offset-2">
+        <div id="page-title">
+            <h1 class="page-header text-overflow">
+                {{ trans('copy.a.add_family') }}
+            </h1>
+        </div>
+        <div id="page-content">
+            <div class="panel">
+                {{ Form::open(['route' => ['pedigree.store', $horse->slug()]]) }}
+                    {{ Form::hidden('type', Input::get('type')) }}
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    {{ Form::label('name', trans('forms.labels.name'), ['class' => 'control-label']) }}
+                                    {{ Form::text('name', null, ['class' => 'form-control']) }}
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    {{ Form::label('color', trans('forms.labels.color'), ['class' => 'control-label']) }}
+                                    {{ Form::select('color', trans('horses.colors'), null, ['class' => 'form-control selectPicker']) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    {{ Form::label('breed', trans('forms.labels.breed'), ['class' => 'control-label']) }}
+                                    {{ Form::select('breed', trans('horses.breeds'), null, ['class' => 'form-control selectPicker']) }}
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                {{ Form::label('height', trans('forms.labels.height'), ['class' => 'control-label']) }}
+                                {{ Form::text('height', null, ['class' => 'form-control']) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                {{ Form::label('date_of_birth', trans('forms.labels.date_of_birth'), ['class' => 'control-label']) }}
+                                <div class="input-group date">
+                                    {{ Form::text('date_of_birth', null, ['placeholder' => 'yyyy', 'class' => 'form-control']) }}
+                                    <span class="input-group-addon"><i class="fa fa-calendar fa-lg"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                {{ Form::label('life_number', trans('forms.labels.life_number'), ['class' => 'control-label']) }}
+                                {{ Form::text('life_number', null, ['class' => 'form-control']) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer text-right">
+                        {{ Form::submit(trans('forms.buttons.save'), ['class' => 'btn btn-info']) }}
+                    </div>
+                {{ Form::close() }}
             </div>
         </div>
     </div>
-    <div class="row">
-        @include('horses.partials.menu-bar')
-    </div>
-    <div class="row">
-        {{ Form::open(['route' => ['pedigree.store', $horse->slug()]]) }}
-            <div class="row">
-                <div class="col s6 input-field">
-                    {{ Form::select('type', trans('pedigree.types'), Input::get('type'), ['class' => 'type-select']) }}
-                    {{ Form::label('type', trans('forms.labels.relation')) }}
-                </div>
-                <div class="col s6 input-field">
-                    {{ Form::text('name') }}
-                    {{ Form::label('name', trans('forms.labels.name')) }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s6 input-field">
-                    {{ Form::select('color', trans('horses.colors'), null, ['class' => 'color-select']) }}
-                    {{ Form::label('color', trans('forms.labels.color')) }}
-                </div>
-                <div class="col s6 input-field">
-                    {{ Form::select('breed', trans('horses.breeds'), null, ['class' => 'breed-select']) }}
-                    {{ Form::label('breed', trans('forms.labels.breed')) }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s6 input-field">
-                    {{ Form::label('height', trans('forms.labels.height')) }}
-                    {{ Form::text('height') }}
-                </div>
-                <div class="col s6 input-field">
-                    {{ Form::label('life_number', trans('forms.labels.life_number')) }}
-                    {{ Form::text('life_number') }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s6 input-field">
-                    {{ Form::label('date_of_birth', trans('forms.labels.date_of_birth')) }}
-                    {{ Form::text('date_of_birth', null, ['placeholder' => 'yyyy']) }}
-                </div>
-                <div class="col s6 input-field">
-                    {{ Form::label('date_of_death', trans('forms.labels.date_of_death')) }}
-                    {{ Form::text('date_of_death', null, ['placeholder' => 'yyyy']) }}
-                </div>
-            </div>
-            <div class="row">
-                {{ Form::submit(trans('forms.buttons.save'), ['class' => 'btn']) }}
-            </div>
-        {{ Form::close() }}
-    </div>
+@stop
+
+@section('footer')
+    <script>
+        $('.input-group.date').datepicker({
+            format: 'yyyy',
+            autoclose:true
+        });
+    </script>
 @stop

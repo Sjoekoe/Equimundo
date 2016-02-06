@@ -12,3 +12,4 @@ Homestead.yaml
 .vagrant
 public/js/app.js
 public/js/app.js.map
+.DS_Store

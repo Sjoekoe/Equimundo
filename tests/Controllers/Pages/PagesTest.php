@@ -7,14 +7,14 @@ class PagesTest extends \TestCase
     public function viewHomepage()
     {
         $this->visit('/')
-            ->see('Welcome to Equimundo');
+            ->see('The social network for horses.');
     }
 
     /** @test */
     public function visitRegisterPage()
     {
         $this->visit('/')
-            ->click('Sign Up')
+            ->click('Create a new account')
             ->seePageIs('/register');
     }
 
@@ -22,7 +22,6 @@ class PagesTest extends \TestCase
     public function visitLoginPage()
     {
         $this->visit('/')
-            ->click('Sign In')
             ->seePageIs('/login');
     }
 }

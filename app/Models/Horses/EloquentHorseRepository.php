@@ -140,4 +140,32 @@ class EloquentHorseRepository implements HorseRepository
     {
         return count($this->horse->all());
     }
+
+    /**
+     * @param int $limit
+     * @return \Eqm\Models\Horses\Horse[]
+     */
+    public function paginated($limit = 10)
+    {
+        return $this->horse->paginate($limit);
+    }
+
+    /**
+     * @param \Carbon\Carbon $start
+     * @param \Carbon\Carbon $end
+     * @return int
+     */
+    public function findCountByDate(Carbon $start, Carbon $end)
+    {
+        return count($this->horse->where('created_at', '>', $start)->where('created_at', '<', $end)->get());
+    }
+
+    /**
+     * @param \Carbon\Carbon $date
+     * @return int
+     */
+    public function findCreatedHorsesBeforeDate(Carbon $date)
+    {
+        return count($this->horse->where('created_at', '<=', $date)->get());
+    }
 }
