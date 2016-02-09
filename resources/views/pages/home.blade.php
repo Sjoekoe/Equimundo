@@ -39,7 +39,15 @@
                         </div>
                     </div>
                 @else
-                    <p>{{ trans('copy.p.please_create_horse') }}</p>
+                    <div class="panel">
+                        <div class="panel-body text-center">
+                            <p>
+                                <a href="{{ route('horses.create') }}" class="text-mint">
+                                    {{ trans('copy.p.please_create_horse') }}
+                                </a>
+                            </p>
+                        </div>
+                    </div>
                 @endif
                 @foreach($statuses as $status)
                     @include('statuses.partials.status')

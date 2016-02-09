@@ -3,10 +3,7 @@
 @section('content')
 <div id="container" class="cls-container">
     <div id="bg-overlay" class="bg-img" style="background-image: url({{ asset('images/horses.jpg') }})"></div>
-
     @include('layout.partials._outer_app_header')
-
-
     <div class="cls-content">
         <div class="cls-content-sm panel">
             <div class="panel-body">

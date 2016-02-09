@@ -59,4 +59,12 @@ class EloquentPictureRepository implements PictureRepository
 
         return $picture;
     }
+
+    /**
+     * @param \EQM\Models\Pictures\Picture $picture
+     */
+    public function delete(Picture $picture)
+    {
+        $picture->delete();
+    }
 }

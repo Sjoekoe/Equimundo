@@ -47,9 +47,10 @@ class AlbumController extends Controller
 
     public function edit(Album $album)
     {
-        $this->authorize('edit-album', $album->horse());
+        $horse = $album->horse();
+        $this->authorize('edit-album', $horse);
 
-        return view('albums.edit', compact('album'));
+        return view('albums.edit', compact('album', 'horse'));
     }
 
     public function update(AlbumRequest $request, Album $album)

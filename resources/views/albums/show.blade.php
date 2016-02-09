@@ -2,10 +2,46 @@
 
 @section('content')
     @include('layout.partials.heading')
+    <div id="page-content">
+        <div class="col-sm-12 col-lg-8 col-lg-offset-2">
+            <div class="panel">
+                <div class="panel-heading">
+                    @if (auth()->user()->isInHorseTeam($horse))
+                        <div class="panel-control">
+                            <a href="{{ route('album.edit', $album->id()) }}" class="btn btn-default">
+                                <i class="fa fa-pencil fa-lg fa-fw"></i>
+                            </a>
+                            <a href="{{ route('album.delete', $album->id()) }}" class="btn btn-default">
+                                <i class="fa fa-trash fa-lg fa-fw"></i>
+                            </a>
+                        </div>
+                    @endif
+                    <h3 class="panel-title">
+                        {{ $album->type() ? trans('albums.names.' . $album->type()) : $album->name() }}
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <p>{{ $album->description() }}</p>
+                    @foreach ($album->pictures() as $picture)
+                        <div class="col-md-4">
+                            <div class="thumbnail">
+                                <img src="{{ route('file.picture', [$picture->id()]) }}" alt="" class="img-responsive" style="height: 240px;">
+                                @if (auth()->user()->isInHorseTeam($horse))
+                                    <div class="caption text-right">
+                                        <a href="{{ route('album.picture.delete', [$album->id(), $picture->id()]) }}" class="btn btn-info">
+                                            <i class="fa fa-trash fa-lg fa-fw"></i>
+                                        </a>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <h3>{{ $album->type() ? trans('albums.names.' . $album->type()) : $album->name() }}</h3>
-    <p>{{ $album->description() }}</p>
-    @if (auth()->user()->isInHorseTeam($horse))
+    {{--@if (auth()->user()->isInHorseTeam($horse))
         <div class="row">
             {{ Form::open(['route' => ['album.picture.store', $album->id()], 'files' => true]) }}
                 {{ Form::label('pictures[]', trans('forms.labels.add_pictures')) }}
@@ -16,13 +52,5 @@
             <a href="{{ route('album.delete', $album->id()) }}">{{ trans('copy.a.delete_album') }}</a>
             <a href="{{ route('album.edit', $album->id()) }}">{{ trans('copy.a.edit_album') }}</a>
         </div>
-    @endif
-
-
-    <div class="row">
-        @foreach ($album->pictures() as $picture)
-            <img src="{{ route('file.picture', [$picture->id()]) }}" alt=""/>
-            <a href="{{ route('album.picture.delete', [$album->id(), $picture->id()]) }}">{{ trans('copy.a.delete_picture') }}</a>
-        @endforeach
-    </div>
+    @endif--}}
 @stop

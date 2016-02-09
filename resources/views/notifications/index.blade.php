@@ -19,7 +19,7 @@
                 <div class="panel-body">
                     <ul class="list-group list-group-striped">
                         @foreach ($notifications as $notification)
-                            <li class="list-group-item list-item-lg">
+                            <li class="list-group-item list-item-lg {{ $notification->isUnread() ? 'text-bold text-warning' : '' }}">
                                 <a href="{{ route('notifications.show', $notification->id()) }}">
                                     {{ trans('notifications.' . $notification->type(), json_decode($notification->data(), true)) }}
                                 </a>

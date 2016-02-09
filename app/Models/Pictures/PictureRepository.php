@@ -27,4 +27,9 @@ interface PictureRepository
      * @return \EQM\Models\Pictures\Picture
      */
     public function create(UploadedFile $file, Horse $horse, $profile, $filename, $extension);
+
+    /**
+     * @param \EQM\Models\Pictures\Picture $picture
+     */
+    public function delete(Picture $picture);
 }

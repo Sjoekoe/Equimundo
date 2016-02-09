@@ -11,31 +11,31 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class Kernel extends HttpKernel {
 
-	/**
-	 * The application's global HTTP middleware stack.
-	 *
-	 * @var array
-	 */
-	protected $middleware = [
-		CheckForMaintenanceMode::class,
-		EncryptCookies::class,
-		AddQueuedCookiesToResponse::class,
-		StartSession::class,
-		ShareErrorsFromSession::class,
-		VerifyCsrfToken::class,
+    /**
+     * The application's global HTTP middleware stack.
+     *
+     * @var array
+     */
+    protected $middleware = [
+        CheckForMaintenanceMode::class,
+        EncryptCookies::class,
+        AddQueuedCookiesToResponse::class,
+        StartSession::class,
+        ShareErrorsFromSession::class,
+        VerifyCsrfToken::class,
         Locale::class
-	];
+    ];
 
-	/**
-	 * The application's route middleware.
-	 *
-	 * @var array
-	 */
-	protected $routeMiddleware = [
-		'auth' => 'EQM\Http\Middleware\Authenticate',
-		'auth.basic' => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
-		'guest' => 'EQM\Http\Middleware\RedirectIfAuthenticated',
+    /**
+     * The application's route middleware.
+     *
+     * @var array
+     */
+    protected $routeMiddleware = [
+        'auth' => 'EQM\Http\Middleware\Authenticate',
+        'auth.basic' => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
+        'guest' => 'EQM\Http\Middleware\RedirectIfAuthenticated',
         'admin' => 'EQM\Http\MiddleWare\Admin',
-	];
+    ];
 
 }
