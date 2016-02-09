@@ -3,6 +3,7 @@ namespace EQM\Http\Controllers\Auth;
 
 use EQM\Http\Controllers\Controller;
 use EQM\Models\Users\UserCreator;
+use EQM\Models\Users\UserRepository;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
 use Validator;
@@ -27,12 +28,18 @@ class AuthController extends Controller {
     private $userCreator;
 
     /**
+     * @var \EQM\Models\Users\UserRepository
+     */
+    private $users;
+
+    /**
      * @param \EQM\Models\Users\UserCreator $userCreator
      */
-    public function __construct(UserCreator $userCreator)
+    public function __construct(UserCreator $userCreator, UserRepository $users)
     {
         $this->middleware('guest', ['except' => 'getLogout']);
         $this->userCreator = $userCreator;
+        $this->users = $users;
     }
 
     /**
@@ -79,6 +86,16 @@ class AuthController extends Controller {
 
         if ($throttles && $this->hasTooManyLoginAttempts($request)) {
             return $this->sendLockoutResponse($request);
+        }
+
+        $user = $this->users->findByEmail($request->get('email'));
+
+        if ($user && ! $user->activated()) {
+            return redirect($this->loginPath())
+                ->withInput($request->only($this->loginUsername(), 'remember'))
+                ->withErrors([
+                    $this->loginUsername() => $this->getFailedLoginMessage(),
+                ]);
         }
 
         if (auth()->attempt(['email' => $request->email, 'password' => $request->password, 'activated' => true], $request->has('remember'))) {

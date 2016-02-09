@@ -65,7 +65,7 @@
                     <a href="#" data-toggle="dropdown" class="dropdown-toggle">
                         <i class="fa fa-envelope fa-lg"></i>
                         @if (auth()->user()->countUnreadMessages())
-                            <span class="badge badge-header badge-dark">{{ auth()->user()->countUnreadMessages() }}</span>
+                            <span class="badge badge-header badge-danger">{{ auth()->user()->countUnreadMessages() }}</span>
                         @endif
                     </a>
 
@@ -124,12 +124,12 @@
                                 <ul class="head-list">
                                     <!-- Dropdown list-->
                                     @foreach (auth()->user()->notifications() as $notification)
-                                        <li>
+                                        <li class="{{ $notification->isUnread() ? 'bg-warning' : '' }}">
                                             <a href="{{ route('notifications.show', $notification->id()) }}" class="media">
                                                 <div class="media-left">
-														<span class="icon-wrap icon-circle bg-primary">
-															<i class="fa {{ \EQM\Models\Notifications\Notification::ICONS[$notification->type()] }} fa-lg"></i>
-														</span>
+                                                        <span class="icon-wrap icon-circle bg-primary">
+                                                            <i class="fa {{ \EQM\Models\Notifications\Notification::ICONS[$notification->type()] }} fa-lg"></i>
+                                                        </span>
                                                 </div>
                                                 <div class="media-body">
                                                     <div>{{ trans('notifications.' . $notification->type(), json_decode($notification->data(), true)) }}</div>
@@ -177,7 +177,7 @@
                             <li>
                                 <a href="{{ route('conversation.index') }}">
                                     @if (Auth::user()->countUnreadNotifications())
-                                        <span class="badge badge-mint pull-right">{{ Auth::user()->countUnreadNotifications() }}</span>
+                                        <span class="badge badge-mint pull-right">{{ Auth::user()->countUnreadMessages() }}</span>
                                     @endif
                                     <i class="fa fa-envelope fa-fw fa-lg"></i> Messages
                                 </a>

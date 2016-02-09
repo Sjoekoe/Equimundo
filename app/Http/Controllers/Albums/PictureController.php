@@ -6,9 +6,29 @@ use EQM\Http\Requests\Request;
 use EQM\Models\Albums\Album;
 use EQM\Models\Pictures\Picture;
 use EQM\Models\Pictures\PictureCreator;
+use EQM\Models\Pictures\PictureRepository;
+use Illuminate\Filesystem\Filesystem;
+use Storage;
 
 class PictureController extends Controller
 {
+
+    /**
+     * @var \Illuminate\Filesystem\Filesystem
+     */
+    private $files;
+
+    /**
+     * @var \EQM\Models\Pictures\PictureRepository
+     */
+    private $pictures;
+
+    public function __construct(Filesystem $files, PictureRepository $pictures)
+    {
+        $this->files = $files;
+        $this->pictures = $pictures;
+    }
+
     // todo add validation
     public function store(Request $request, PictureCreator $creator, Album $album)
     {
@@ -25,7 +45,15 @@ class PictureController extends Controller
     {
         $this->authorize('delete-picture', $picture->horse());
 
-        $message = count($picture->albums()) > 1 ? 'Picture removed from album' : 'Picture removed from album';
+        if (count($picture->albums()) > 1) {
+            $picture->removeFromAlbum($album);
+            $message = 'Picture removed from album';
+        } else {
+            Storage::disk()->delete('/uploads/pictures/' . $picture->horse()->id() . '/' . $picture->path());
+            $message = 'Picture removed.';
+
+            $this->pictures->delete($picture);
+        }
 
         session()->put('success', $message);
 

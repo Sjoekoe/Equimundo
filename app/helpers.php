@@ -9,7 +9,7 @@ if (! function_exists('locale')) {
      */
     function eqm_locale()
     {
-        return auth()->check() ? auth()->user()->language() : 'en';
+        return auth()->guest() ? 'en' : auth()->user()->language();
     }
 }
 

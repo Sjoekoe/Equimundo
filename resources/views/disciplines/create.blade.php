@@ -5,6 +5,13 @@
         <h1 class="page-header text-overflow">{{ trans('copy.titles.disciplines') }}</h1>
     </div>
     <div id="page-content">
+        <div class="row">
+            <div class="col-xs-4 pull-right">
+                <div class="form-group text-right pull-right">
+                    <a href="{{ route('horse.info', $horse->slug()) }}" class="btn btn-info">Back To {{ $horse->name() }}</a>
+                </div>
+            </div>
+        </div>
         {{ Form::open(['route' => ['disciplines.store', $horse->slug()], 'class' => 'form-inline']) }}
             <div class="panel">
                 <div class="panel-heading">

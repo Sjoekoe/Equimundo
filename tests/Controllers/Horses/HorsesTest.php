@@ -50,7 +50,7 @@ class HorsesTest extends \TestCase
     /** @test */
     function it_can_edit_a_horse()
     {
-        $now = Carbon::now();
+        $now = Carbon::createFromDate(2000, 10, 5)->startOfDay();
         $user = factory(EloquentUser::class)->create();
         $horse = factory(EloquentHorse::class)->create();
         factory(EloquentHorseTeam::class)->create([
