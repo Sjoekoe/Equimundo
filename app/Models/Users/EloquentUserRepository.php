@@ -31,6 +31,7 @@ class EloquentUserRepository implements UserRepository
             'email' => $values['email'],
             'password' => bcrypt($values['password']),
             'remember_token' => $values['activationCode'],
+            'language' => 'en',
         ]);
 
         $user->save();

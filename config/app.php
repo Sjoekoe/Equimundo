@@ -88,7 +88,7 @@ return [
     |
     */
 
-    'log'             => 'daily',
+    'log'             => 'single',
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
