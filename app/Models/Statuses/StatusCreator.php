@@ -42,13 +42,21 @@ class StatusCreator
     {
         $horse = $this->horses->findById($values['horse']);
         $status = $this->statuses->create($horse, $values['status']);
+        $horse = $this->horses->findById($values['horse']);
 
         if (array_key_exists('picture', $values)) {
-            $horse = $this->horses->findById($values['horse']);
             $picture = $this->uploader->uploadPicture($values['picture'], $horse);
 
             $picture->addToAlbum($horse->getStandardAlbum(Album::TIMELINEPICTURES));
             $status->setPicture($picture);
+
+            $status->save();
+        }
+
+        if (array_key_exists('movie', $values)) {
+            $movie = $this->uploader->uploadMovie($values['movie'], $horse);
+
+            $status->setPicture($movie);
 
             $status->save();
         }

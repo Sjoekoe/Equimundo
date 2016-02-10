@@ -22,8 +22,13 @@
                 </div>
                 <p>{{ $status->body() }}</p>
                 @if ($status->hasPicture())
-                    <img src="{{ route('file.picture', [$status->getPicture()->id()]) }}" alt=""
-                         class="img-responsive thumbnail">
+                    @if ($status->getPicture()->isImage())
+                        <img src="{{ route('file.picture', [$status->getPicture()->id()]) }}" alt="" class="img-responsive thumbnail">
+                    @elseif ($status->getPicture()->isMovie())
+                        <video width="600" controls>
+                            <source src="{{ route('file.movie', $status->getPicture()->id()) }}">
+                        </video>
+                    @endif
                 @endif
                 <div class="pad-ver">
                     <span class="tag tag-sm">
@@ -98,3 +103,4 @@
         </div>
     </div>
 </div>
+

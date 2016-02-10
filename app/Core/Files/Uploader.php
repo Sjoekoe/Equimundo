@@ -58,4 +58,22 @@ class Uploader
 
         return $picture;
     }
+
+    public function uploadMovie($file, Horse $horse)
+    {
+        $extension  = $file->getClientOriginalExtension();
+        $path       = '/uploads/pictures/' . $horse->id();
+        $fileName   = str_random(12);
+        $pathToFile = $path . '/' . $fileName . '.' . $extension;
+
+        $movie = $this->pictures->create($file, $horse, false, $fileName, $extension);
+
+        if ( ! file_exists(storage_path() . $path) ) {
+            $this->file->makeDirectory($path);
+        }
+
+        $this->file->disk()->put($pathToFile, file_get_contents($file));
+
+        return $movie;
+    }
 }

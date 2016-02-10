@@ -24,4 +24,11 @@ class FileController extends Controller
 
         return response($file, 200, ['Content-Type' => $picture->mime()]);
     }
+
+    public function getMovie(Picture $picture)
+    {
+        $file = Storage::disk()->get('/uploads/pictures/' . $picture->horse()->id() . '/' . $picture->path());
+
+        return response($file, 200, ['Content-Type' => $picture->mime()]);
+    }
 }

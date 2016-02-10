@@ -28,6 +28,9 @@ class StatusController extends Controller
 
     public function store(PostStatus $request, StatusCreator $creator)
     {
+        ini_set('upload_max_filesize', '350MB');
+        ini_set('post_max_size', '10M');
+
         $creator->create($request->all());
 
         session()->put('success', 'Status has been posted');
