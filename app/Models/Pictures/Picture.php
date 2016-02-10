@@ -54,4 +54,14 @@ interface Picture
      * @param \EQM\Models\Albums\Album $album
      */
     public function removeFromAlbum(Album $album);
+
+    /**
+     * @return bool
+     */
+    public function isImage();
+
+    /**
+     * @return bool
+     */
+    public function isMovie();
 }

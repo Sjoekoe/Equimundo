@@ -97,4 +97,20 @@ class EloquentPicture extends Model implements Picture
     {
         return $this->original_name;
     }
+
+    /**
+     * @return bool
+     */
+    public function isImage()
+    {
+        return $this->mime == 'image/jpeg';
+    }
+
+    /**
+     * @return bool
+     */
+    public function isMovie()
+    {
+        return $this->mime == 'video/mp4';
+    }
 }
