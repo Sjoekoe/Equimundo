@@ -16,7 +16,7 @@ class EloquentPicture extends Model implements Picture
     /**
      * @var array
      */
-    protected $fillable = ['horse_id', 'path', 'profile_pic', 'mime', 'original_name'];
+    protected $fillable = ['horse_id', 'path', 'profile_pic', 'mime', 'original_name', 'header_image'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -72,6 +72,14 @@ class EloquentPicture extends Model implements Picture
     public function profilePicture()
     {
         return $this->profile_pic;
+    }
+
+    /**
+     * @return bool
+     */
+    public function headerImage()
+    {
+        return $this->header_image;
     }
 
     /**

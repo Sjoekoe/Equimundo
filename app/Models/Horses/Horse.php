@@ -528,6 +528,11 @@ interface Horse
     public function getProfilePicture();
 
     /**
+     * @return \EQM\Models\Pictures\Picture
+     */
+    public function getHeaderImage();
+
+    /**
      * @return \Carbon\Carbon
      */
     public function getBirthDay();

@@ -54,9 +54,7 @@ class Uploader
             $this->file->makeDirectory($path);
         }
 
-        $this->image->make($file->getrealpath())->resize(null, 350, function ($constraints) {
-            $constraints->aspectRatio();
-        })->save($pathToFile);
+        $this->image->make($file->getrealpath())->save($pathToFile);
 
         return $picture;
     }
