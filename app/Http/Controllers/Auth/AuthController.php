@@ -10,7 +10,7 @@ use Validator;
 
 class AuthController extends Controller {
 
-	use AuthenticatesAndRegistersUsers;
+    use AuthenticatesAndRegistersUsers;
 
     /**
      * @var string
@@ -32,9 +32,6 @@ class AuthController extends Controller {
      */
     private $users;
 
-    /**
-     * @param \EQM\Models\Users\UserCreator $userCreator
-     */
     public function __construct(UserCreator $userCreator, UserRepository $users)
     {
         $this->middleware('guest', ['except' => 'getLogout']);
@@ -53,6 +50,7 @@ class AuthController extends Controller {
             'last_name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
+            'terms' => 'accepted',
         ]);
     }
 

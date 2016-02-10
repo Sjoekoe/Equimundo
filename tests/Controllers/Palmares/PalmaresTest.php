@@ -107,9 +107,13 @@ class PalmaresTest extends \TestCase
         $status = factory(EloquentStatus::class)->create([
             'horse_id' => $horse->id(),
         ]);
+        $event = factory(EloquentEvent::class)->create([
+            'creator_id' => $user->id()
+        ]);
         $palmares = factory(EloquentPalmares::class)->create([
             'horse_id' => $horse->id(),
             'status_id' => $status->id(),
+            'event_id' => $event->id(),
         ]);
 
         $this->actingAs($user)
