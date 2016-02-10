@@ -56,4 +56,9 @@ class PagesController extends Controller
 
         return view('pages.home', compact('horses', 'statuses', 'likes', 'initialPicture'));
     }
+
+    public function terms()
+    {
+        return view('pages.tos');
+    }
 }
