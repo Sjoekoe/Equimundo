@@ -1,6 +1,21 @@
 <div class="panel mar-no">
-    <div class="panel-bg-cover">
-        <img src="{{ asset('images/header.jpg') }}" alt="{{ $horse->name() }}" class="img-responsive">
+    <div class="panel-bg-cover" style="height: 40em; background-image: url({{ $horse->getHeaderImage() ? route('file.picture', $horse->getHeaderImage()->id()) : asset('images/header.jpg') }})">
+        @if (auth()->user()->isInHorseTeam($horse))
+            <div class="pull-right">
+                {{ Form::open(['route' => ['horses.pictures.header', $horse->id()], 'files' => 'true']) }}
+                    <div class="image-upload pull-right">
+                        <label for="header_picture">
+                            <i class="btn btn-trans btn-icon fa fa-camera fa-2x add-tooltip"></i>
+                        </label>
+                        {{ Form::file('header_picture', ['id' => 'header_picture']) }}
+                    </div>
+                    <div class="confirmation-buttons pull-right" style="display: none;">
+                        <button type="submit" class="btn btn-trans fa fa-check fa-2x" id="heading-confirm-button"></button>
+                        <i class="btn btn-trans fa fa-remove fa-2x" id="heading-cancel-button"></i>
+                    </div>
+                {{ Form::close() }}
+            </div>
+        @endif
     </div>
     <div class="panel-media mar-btm pad-no" style="padding-bottom: 0px;">
         @if ($horse->getProfilePicture())
@@ -12,7 +27,7 @@
             <div class="col-lg-7">
                 <h3 class="panel-media-heading text-mint">{{ $horse->name() }}</h3>
                 <p>{{ trans('horses.breeds.' . $horse->breed()) }}</p>
-                <p>{{ $horse->father() ? $horse->father()->name() : '' }} <bold>X</bold> {{ $horse->father() && $horse->mothersFather() ? $horse->mothersFather()->name() : '' }}</p>
+                <p>{{ $horse->father() ? $horse->father()->name() : '' }} <span class="text-bold">X</span> {{ $horse->father() && $horse->mothersFather() ? $horse->mothersFather()->name() : '' }}</p>
             </div>
             <div class="col-lg-5 text-lg-right">
                 <div class="heading-button pull-right">

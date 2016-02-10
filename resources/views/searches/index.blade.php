@@ -40,8 +40,7 @@
                                                 <div class="col-sm-3">
                                                     <a href="{{ route('horses.show', $horse->slug()) }}">
                                                         <div class="panel widget panel-bordered-mint">
-                                                            <div class="widget-header bg-purple">
-                                                                <img class="widget-bg img-responsive" src="{{ asset('/images/header.jpg') }}" alt="Image">
+                                                            <div class="widget-header" style="background-image: url({{ $horse->getHeaderImage() ? route('file.picture', $horse->getHeaderImage()->id()) : asset('images/header.jpg') }})">
                                                             </div>
                                                             <div class="widget-body text-center">
                                                                 @if ($horse->getProfilePicture())

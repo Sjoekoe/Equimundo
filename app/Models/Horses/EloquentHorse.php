@@ -273,7 +273,17 @@ class EloquentHorse extends Model implements Horse
     public function getProfilePicture()
     {
         return $this->pictures->filter(function ($picture) {
-            return $picture->profile_pic == true;
+            return $picture->profilePicture() == true;
+        })->first();
+    }
+
+    /**
+     * @return \EQM\Models\Pictures\Picture
+     */
+    public function getHeaderImage()
+    {
+        return $this->pictures->filter(function ($picture) {
+            return $picture->headerImage() == true;
         })->first();
     }
 

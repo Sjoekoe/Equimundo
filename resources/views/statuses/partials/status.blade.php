@@ -50,12 +50,8 @@
                                     {{ $comment->poster()->fullName() }}
                                 </a>
                                 <div class="pull-right">
-                                    @can('edit-comment', $comment)
-                                    <a href="{{ route('comment.edit', $comment->id()) }}">Edit</a>
-                                    @endcan
-
                                     @can('delete-comment', $comment)
-                                    <a href="{{ route('comment.delete', $comment->id()) }}">Delete</a>
+                                        <a href="{{ route('comment.delete', $comment->id()) }}">Delete</a>
                                     @endcan
                                 </div>
                                 <p class="text-muted text-sm">

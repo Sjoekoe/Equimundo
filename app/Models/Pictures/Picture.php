@@ -41,6 +41,11 @@ interface Picture
     public function profilePicture();
 
     /**
+     * @return bool
+     */
+    public function headerImage();
+
+    /**
      * @param \EQM\Models\Albums\Album $album
      */
     public function addToAlbum(Album $album);

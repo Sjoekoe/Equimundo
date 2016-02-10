@@ -2404,7 +2404,9 @@ a.disabled-link, a.disabled-link:visited, a.disabled-link:active, a.disabled-lin
     padding: 15px 15px 50px 15px;
     min-height: 125px;
     position: relative;
-    overflow: hidden
+    overflow: hidden;
+    background-position: center;
+    background-size: cover;
 }
 
 .widget-bg {
@@ -2412,7 +2414,9 @@ a.disabled-link, a.disabled-link:visited, a.disabled-link:active, a.disabled-lin
     top: 0;
     left: 0;
     min-width: 100%;
-    min-height: 100%
+    min-height: 100%;
+    background-position: center;
+    background-size: cover;
 }
 
 .widget-title {
@@ -6054,7 +6058,7 @@ a.list-group-item-dark:hover, a.list-group-item-dark:focus {
 }
 
 .panel .panel-bg-cover {
-    max-height: 25em;
+    max-height: 40em;
     overflow: hidden;
     background-position: center;
     background-size: cover;
@@ -6063,7 +6067,8 @@ a.list-group-item-dark:hover, a.list-group-item-dark:focus {
 .panel .panel-bg-cover img {
     min-width: 100%;
     min-height: 100%;
-    background-size: cover
+    background-position: center;
+    background-size: cover;
 }
 
 .panel.remove {
