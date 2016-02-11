@@ -130,7 +130,7 @@
                                                 <a href="{{ route('notifications.show', $notification->id()) }}" class="media">
                                                     <div class="media-left">
                                                             <span class="icon-wrap icon-circle bg-primary">
-                                                                <i class="fa {{ \EQM\Models\Notifications\Notification::ICONS[$notification->type()] }} fa-lg"></i>
+                                                                <i class="fa {{ config('notifications.' . $notification->type()) }} fa-lg"></i>
                                                             </span>
                                                     </div>
                                                     <div class="media-body">

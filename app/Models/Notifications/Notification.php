@@ -8,17 +8,6 @@ interface Notification
     const PEDIGREE_CREATED = 3;
     const COMMENT_LIKED = 4;
 
-    const POLICIES = [
-        'mark-as-read', 'delete-notification'
-    ];
-
-    const ICONS = [
-        self::STATUS_LIKED => 'fa-thumbs-o-up',
-        self::COMMENT_LIKED => 'fa-thumbs-o-up',
-        self::COMMENT_POSTED => 'fa-comment',
-        self::PEDIGREE_CREATED => 'fa-share-alt',
-    ];
-
     /**
      * @return int
      */

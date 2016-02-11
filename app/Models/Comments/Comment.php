@@ -5,14 +5,6 @@ use EQM\Models\Users\User;
 
 interface Comment
 {
-    const POLICIES = [
-        'edit-comment',
-    ];
-
-    const PRIVILEGE_POLICIES = [
-        'delete-comment',
-    ];
-
     /**
      * @return int
      */
@@ -33,6 +25,9 @@ interface Comment
      */
     public function status();
 
+    /**
+     * @return \EQM\Models\Users\User[]
+     */
     public function likes();
 
     /**

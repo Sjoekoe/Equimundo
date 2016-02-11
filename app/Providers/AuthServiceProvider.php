@@ -1,21 +1,19 @@
 <?php
 namespace EQM\Providers;
 
-use EQM\Models\Comments\Comment;
 use EQM\Models\Comments\CommentPolicy;
-use EQM\Models\Conversations\Conversation;
 use EQM\Models\Conversations\ConversationPolicy;
-use EQM\Models\Horses\Horse;
 use EQM\Models\Horses\HorsePolicy;
-use EQM\Models\Notifications\Notification;
 use EQM\Models\Notifications\NotificationPolicy;
-use EQM\Models\Statuses\Status;
 use EQM\Models\Statuses\StatusPolicy;
+use EQM\Policies\Policies;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {
+    use Policies;
+
     /**
      * @param \Illuminate\Contracts\Auth\Access\Gate $gate
      */
@@ -23,31 +21,31 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies($gate);
 
-        foreach (Comment::POLICIES as $policy) {
+        foreach ($this->commentPolicies as $policy) {
             $gate->define($policy, CommentPolicy::class . '@authorize');
         }
 
-        foreach (Comment::PRIVILEGE_POLICIES as $policy) {
+        foreach ($this->commentPrivilegePolicies as $policy) {
             $gate->define($policy, CommentPolicy::class . '@privilege');
         }
 
-        foreach (Conversation::POLICIES as $policy) {
+        foreach ($this->conversationPolicies as $policy) {
             $gate->define($policy, ConversationPolicy::class . '@authorize');
         }
 
-        foreach (Horse::TEAM_POLICIES as $policy) {
+        foreach ($this->horseTeamPolicies as $policy) {
             $gate->define($policy, HorsePolicy::class . '@horseOwner');
         }
 
-        foreach (Horse::POLICIES as $policy) {
+        foreach ($this->horsePolicies as $policy) {
             $gate->define($policy, HorsePolicy::class . '@otherUsers');
         }
 
-        foreach (Notification::POLICIES as $policy) {
+        foreach ($this->notificationPolicies as $policy) {
             $gate->define($policy, NotificationPolicy::class . '@authorize');
         }
 
-        foreach (Status::POLICIES as $policy) {
+        foreach ($this->statusPolicies as $policy) {
             $gate->define($policy, StatusPolicy::class . '@authorize');
         }
     }

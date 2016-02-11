@@ -1,0 +1,102 @@
+<?php
+
+use EQM\Models\Disciplines\Discipline;
+
+return [
+    'various' => [
+        Discipline::BANEI ,
+        Discipline::CAMARGUE ,
+        Discipline::CHARRERIA ,
+        Discipline::COLEO_DE_TOROS ,
+        Discipline::DOMA_VAQUERA ,
+        Discipline::DZHIGITOVKA ,
+        Discipline::EQUITATION ,
+        Discipline::HORSE_SHOW ,
+        Discipline::ORIENTEERING ,
+        Discipline::PLEASURE ,
+        Discipline::PONY_CLUB ,
+        Discipline::SIDESADDLE ,
+        Discipline::TRAIL_RIDING ,
+        Discipline::WORKING_EQUITATION ,
+        Discipline::CORRIDA_DE_SORTIJA ,
+        Discipline::JINETAEDA ,
+        Discipline::DEPORTE_DE_LAZO ,
+        Discipline::ICELANDIC ,
+        Discipline::DOMA_MENORQUINA ,
+    ],
+
+    'racing' => [
+        Discipline::FLAT_RACING ,
+        Discipline::HARNESS_RACING ,
+        Discipline::POINT_TO_POINT ,
+        Discipline::STEEPLECHASE ,
+        Discipline::THOROUGHBRED_RACING ,
+    ],
+
+    'classic' => [
+        Discipline::CLASSICAL_DRESSAGE ,
+        Discipline::DRESSAGE ,
+        Discipline::ENGLISH_PLEASURE ,
+        Discipline::EVENTING ,
+        Discipline::FIELD_HUNTER ,
+        Discipline::FOX_HUNTING ,
+        Discipline::VOLTIGE ,
+        Discipline::HUNT_SEAT ,
+        Discipline::SADDLE_SEAT ,
+        Discipline::SHOW_HUNTER ,
+        Discipline::SHOW_JUMPING ,
+        Discipline::SHOW_HACK ,
+        Discipline::TEAM_CHASING ,
+        Discipline::QUADRILLE ,
+    ],
+
+    'western_sports' => [
+        Discipline::MOUNTED_SHOOTING ,
+        Discipline::COWBOY_POLO ,
+        Discipline::O_MOK_SEE ,
+        Discipline::REINING ,
+        Discipline::TRAIL ,
+        Discipline::WESTERN_PlEASURE ,
+        Discipline::WESTERN ,
+        Discipline::CAMPDRAFTING ,
+        Discipline::CUTTING ,
+        Discipline::RANCH_SORTING ,
+        Discipline::TEAM_PENNING ,
+        Discipline::WORKING_COW ,
+        Discipline::AUSTRAILIAN_RODEO ,
+        Discipline::BARREL_RACING ,
+        Discipline::BREAKAWAY_ROPING ,
+        Discipline::CALF_ROPING ,
+        Discipline::CHARREADA ,
+        Discipline::CHILEAN_RODEO ,
+        Discipline::GOAT_TYING ,
+        Discipline::POLE_BENDING ,
+        Discipline::SADDLE_BRONC ,
+        Discipline::STEER_WRESTLING ,
+        Discipline::TEAM_ROPING ,
+    ],
+
+    'harness' => [
+        Discipline::COMBINED_DRIVING ,
+        Discipline::DRAFT_HORSE ,
+        Discipline::FINE_HARNESS ,
+        Discipline::PLEASURE_DRIVING ,
+        Discipline::ROADSTER ,
+        Discipline::SCURRY_DRIVING ,
+    ],
+
+    'team' => [
+        Discipline::HORSEBALL,
+        Discipline::PATO,
+        Discipline::POLO,
+        Discipline::POLOCROSSE,
+    ],
+
+    'ancient' => [
+        Discipline::BUZKASHI,
+        Discipline::JOUSTING,
+        Discipline::MOUNTED_ARCHERY,
+        Discipline::MOUNTED_GAMES,
+        Discipline::TENT_PEGGING,
+    ],
+];

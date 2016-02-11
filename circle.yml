@@ -1,0 +1,28 @@
+machine:
+  php:
+    version: 5.5.21
+  environment:
+    APP_ENV: testing
+    DB_HOST: 127.0.0.1
+    DB_USERNAME: ubuntu
+    DB_PASSWORD:
+    DB_DATABASE: circle_test
+dependencies:
+  pre:
+    - echo "memory_limit = 3000M" >> ~/.phpenv/versions/$(phpenv global)/etc/conf.d/memory.ini
+    - echo "upload_max_filesize = 50M" >> ~/.phpenv/versions/$(phpenv global)/etc/conf.d/memory.ini
+    - echo "post_max_size = 52M" >> ~/.phpenv/versions/$(phpenv global)/etc/conf.d/memory.ini
+    - sudo service apache2 restart
+  override:
+    - composer install --prefer-dist --no-interaction
+  cache_directories:
+    - "vendor"
+database:
+  post:
+    - yes | php artisan migrate
+test:
+  override:
+    - ./vendor/bin/phpspec run
+    - ./vendor/bin/phpunit --configuration phpunit.xml --log-json storage/logs/phpunit-unit.log
+  post:
+    - rsync -r --exclude='.gitignore' ./storage/logs ${CIRCLE_ARTIFACTS}

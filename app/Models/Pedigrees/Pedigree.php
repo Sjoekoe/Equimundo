@@ -3,10 +3,6 @@ namespace EQM\Models\Pedigrees;
 
 interface Pedigree
 {
-    const POLICIES = [
-        'edit-pedigree',
-    ];
-
     const FATHER = 1;
     const MOTHER = 2;
     const SON = 3;
