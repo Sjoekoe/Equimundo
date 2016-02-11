@@ -20,7 +20,7 @@
                     </h3>
                 </div>
                 <div class="panel-body">
-                    @foreach (\EQM\Models\Disciplines\Discipline::VARIOUS as $discipline)
+                    @foreach (config('disciplines.various') as $discipline)
                         <div>
                             <div class="col-xs-3 text-left checkbox">
                                 <label class="form-checkbox form-icon" for="{{ $discipline }}">
@@ -39,7 +39,7 @@
                     </h3>
                 </div>
                 <div class="panel-body">
-                    @foreach (\EQM\Models\Disciplines\Discipline::RACING as $discipline)
+                    @foreach (config('disciplines.racing') as $discipline)
                         <div>
                             <div class="col-xs-3 text-left checkbox">
                                 <label class="form-checkbox form-icon" for="{{ $discipline }}">
@@ -58,7 +58,7 @@
                     </h3>
                 </div>
                 <div class="panel-body">
-                    @foreach (\EQM\Models\Disciplines\Discipline::CLASSIC as $discipline)
+                    @foreach (config('disciplines.classic') as $discipline)
                         <div>
                             <div class="col-xs-3 text-left checkbox {{ $horse->performsDiscipline($discipline) ? 'active' : '' }}">
                                 <label class="form-checkbox form-icon" for="{{ $discipline }}">
@@ -77,7 +77,7 @@
                     </h3>
                 </div>
                 <div class="panel-body">
-                    @foreach (\EQM\Models\Disciplines\Discipline::WESTERN_SPORTS as $discipline)
+                    @foreach (config('disciplines.western_sports') as $discipline)
                         <div>
                             <div class="col-xs-3 text-left checkbox">
                                 <label class="form-checkbox form-icon" for="{{ $discipline }}">
@@ -96,7 +96,7 @@
                     </h3>
                 </div>
                 <div class="panel-body">
-                    @foreach (\EQM\Models\Disciplines\Discipline::HARNESS as $discipline)
+                    @foreach (config('disciplines.harness') as $discipline)
                         <div>
                             <div class="col-xs-3 text-left checkbox">
                                 <label class="form-checkbox form-icon" for="{{ $discipline }}">
@@ -115,7 +115,7 @@
                     </h3>
                 </div>
                 <div class="panel-body">
-                    @foreach (\EQM\Models\Disciplines\Discipline::TEAM as $discipline)
+                    @foreach (config('disciplines.team') as $discipline)
                         <div>
                             <div class="col-xs-3 text-left checkbox">
                                 <label class="form-checkbox form-icon" for="{{ $discipline }}">
@@ -134,7 +134,7 @@
                     </h3>
                 </div>
                 <div class="panel-body">
-                    @foreach (\EQM\Models\Disciplines\Discipline::ANCIENT as $discipline)
+                    @foreach (config('disciplines.ancient') as $discipline)
                         <div>
                             <div class="col-xs-3 text-left checkbox">
                                 <label class="form-checkbox form-icon" for="{{ $discipline }}">

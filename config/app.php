@@ -217,5 +217,4 @@ return [
         'Image'     => Intervention\Image\Facades\Image::class,
         'Active'    => HieuLe\Active\Facades\Active::class,
     ],
-
 ];

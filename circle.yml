@@ -2,6 +2,7 @@ machine:
   php:
     version: 5.5.21
   environment:
+    APP_ENV: testing
     DB_HOST: 127.0.0.1
     DB_USERNAME: ubuntu
     DB_PASSWORD:
@@ -18,9 +19,10 @@ dependencies:
     - "vendor"
 database:
   post:
-    - php artisan migrate
+    - yes | php artisan migrate
 test:
   override:
+    - ./vendor/bin/phpspec run
     - ./vendor/bin/phpunit --configuration phpunit.xml --log-json storage/logs/phpunit-unit.log
   post:
     - rsync -r --exclude='.gitignore' ./storage/logs ${CIRCLE_ARTIFACTS}

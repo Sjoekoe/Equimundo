@@ -5,10 +5,6 @@ use EQM\Models\Users\User;
 
 interface Conversation
 {
-    const POLICIES = [
-        'read-conversation', 'delete-conversation', 'reply-to',
-    ];
-
     /**
      * @return string
      */
