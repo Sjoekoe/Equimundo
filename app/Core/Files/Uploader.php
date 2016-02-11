@@ -54,7 +54,7 @@ class Uploader
             $this->file->makeDirectory($path);
         }
 
-        $this->image->make($file->getrealpath())->save($pathToFile);
+        $this->image->make($file->getrealpath())->orientate()->save($pathToFile);
 
         return $picture;
     }
