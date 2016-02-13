@@ -54,7 +54,7 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-8 text-left checkbox">
-                            <label for="terms" class="form-checkbox form-icon">
+                            <label class="form-checkbox form-icon">
                                 <input type="checkbox" name="terms"> I agree with the Terms and Conditions
                             </label>
                         </div>
