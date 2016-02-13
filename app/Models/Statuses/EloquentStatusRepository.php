@@ -1,6 +1,7 @@
 <?php
 namespace EQM\Models\Statuses;
 
+use EQM\Core\Helpers\StatusConvertor;
 use EQM\Models\Horses\Horse;
 use EQM\Models\Users\User;
 
@@ -72,7 +73,7 @@ class EloquentStatusRepository implements StatusRepository
     public function create(Horse $horse, $body, $prefix = null)
     {
         $status = new EloquentStatus();
-        $status->body = $body;
+        $status->body = (new StatusConvertor())->convert($body);
         $status->horse_id = $horse->id();
         $status->prefix = $prefix;
 
@@ -88,7 +89,7 @@ class EloquentStatusRepository implements StatusRepository
      */
     public function update(Status $status, array $values = [])
     {
-        $status->body = $values['status'];
+        $status->body = (new StatusConvertor())->convert($values['status']);
 
         $status->save();
     }
