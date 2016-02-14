@@ -28,20 +28,4 @@ class PagesTest extends \TestCase
         $this->visit('/')
             ->seePageIs('/login');
     }
-
-    /** @test */
-    public function visitDisciplinesPage()
-    {
-        $user = factory(EloquentUser::class)->create([]);
-        $horse = factory(EloquentHorse::class)->create([]);
-        factory(EloquentHorseTeam::class)->create([
-            'user_id' => $user->id(),
-            'horse_id' => $horse->id(),
-        ]);
-
-        $this->withoutMiddleware()
-            ->actingAs($user)
-            ->visit('/horses/' . $horse->slug() . '/disciplines')
-            ->assertResponseStatus(200);
-    }
 }

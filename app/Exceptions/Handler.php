@@ -37,6 +37,10 @@ class Handler extends ExceptionHandler {
      */
     public function render($request, Exception $e)
     {
+        if (app()->runningUnitTests()) {
+            throw $e;
+        }
+        
         if ($this->isHttpException($e))
         {
             return $this->renderHttpException($e);

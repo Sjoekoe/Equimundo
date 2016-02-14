@@ -32,7 +32,7 @@ class DisciplineResolver
         }
 
         if (array_key_exists('disciplines', $values)) {
-            $this->addDisciplines($horse, $values);
+            $this->addDisciplines($horse, $values, $initialDisciplines);
 
             $unwantedDisciplines = array_diff($initialDisciplines, $values['disciplines']);
         } else {
@@ -47,11 +47,14 @@ class DisciplineResolver
     /**
      * @param \EQM\Models\Horses\Horse $horse
      * @param array $values
+     * @param array $initialDisciplines
      */
-    public function addDisciplines(Horse $horse, array $values)
+    public function addDisciplines(Horse $horse, array $values, array $initialDisciplines)
     {
         foreach ($values['disciplines'] as $discipline) {
-            $this->disciplines->create($horse, $discipline);
+            if (! in_array($discipline, $initialDisciplines)) {
+                $this->disciplines->create($horse, $discipline);
+            }
         }
     }
 
