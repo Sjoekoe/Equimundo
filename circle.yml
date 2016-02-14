@@ -23,6 +23,7 @@ database:
 test:
   override:
     - ./vendor/bin/phpspec run
-    - ./vendor/bin/phpunit --configuration phpunit.xml --log-json storage/logs/phpunit-unit.log
+    - ./vendor/bin/phpunit --configuration phpunit.xml --testsuite "Controller Test Suite" --log-json storage/logs/phpunit-unit.log
+    - ./vendor/bin/phpunit --configuration phpunit.xml --testsuite "Functional Test Suite" --log-json storage/logs/phpunit-unit.log
   post:
     - rsync -r --exclude='.gitignore' ./storage/logs ${CIRCLE_ARTIFACTS}
