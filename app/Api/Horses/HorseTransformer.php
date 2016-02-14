@@ -19,7 +19,7 @@ class HorseTransformer extends TransformerAbstract
             'id' => $horse->id(),
             'name' => $horse->name(),
             'life_number' => $horse->lifeNumber(),
-            'date_of_birth' => $horse->dateOfBirth()->toIso8601String(),
+            'date_of_birth' => $horse->dateOfBirth() ? $horse->dateOfBirth()->toIso8601String() : null,
             'gender' => (int) $horse->gender(),
             'height' => $horse->height(),
             'breed' => (int) $horse->breed(),

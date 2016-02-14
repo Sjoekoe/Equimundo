@@ -15,7 +15,7 @@ class UserTransformer extends TransformerAbstract
             'last_name' => $user->lastName(),
             'language' => $user->language(),
             'email' => $user->email(),
-            'date_of_birth' => $user->dateOfBirth()->toIso8601String(),
+            'date_of_birth' => $user->dateOfBirth() ? $user->dateOfBirth()->toIso8601String() : null,
             'country' => $user->country(),
             'gender' => $user->gender(),
         ];
