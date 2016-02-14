@@ -1,6 +1,7 @@
 <?php
 
 use Carbon\Carbon;
+use EQM\Models\Albums\EloquentAlbum;
 use EQM\Models\Comments\EloquentComment;
 use EQM\Models\Disciplines\EloquentDiscipline;
 use EQM\Models\Events\EloquentEvent;
@@ -87,5 +88,14 @@ $factory->define(EloquentPicture::class, function (Generator $faker) {
         'mime' => $faker->mimeType,
         'original_name' => $faker->name,
         'header_image' => false
+    ];
+});
+
+$factory->define(EloquentAlbum::class, function(Generator $faker) {
+    return [
+        'horse_id' => $faker->randomDigit,
+        'name' => $faker->name,
+        'description' => $faker->text(),
+        'type' => null
     ];
 });
