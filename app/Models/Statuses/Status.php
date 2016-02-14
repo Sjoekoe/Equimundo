@@ -68,7 +68,7 @@ interface Status
     public function getPicture();
 
     /**
-     * @return \DateTime
+     * @return \Carbon\Carbon
      */
     public function createdAt();
 }

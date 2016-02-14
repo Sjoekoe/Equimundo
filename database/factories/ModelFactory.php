@@ -8,6 +8,7 @@ use EQM\Models\Horses\EloquentHorse;
 use EQM\Models\HorseTeams\EloquentHorseTeam;
 use EQM\Models\Palmares\EloquentPalmares;
 use EQM\Models\Pedigrees\EloquentPedigree;
+use EQM\Models\Pictures\EloquentPicture;
 use EQM\Models\Statuses\EloquentStatus;
 use EQM\Models\Users\EloquentUser;
 use Faker\Generator;
@@ -27,7 +28,7 @@ $factory->define(EloquentUser::class, function (Generator $faker) {
 $factory->define(EloquentHorse::class, function (Generator $faker) {
     return [
         'name' => 'test horse',
-        'life_number' => $faker->randomNumber(),
+        'life_number' => $faker->sentence,
         'date_of_birth' => Carbon::now(),
         'slug' => 'test-horse',
         'gender' => 1,
@@ -46,6 +47,7 @@ $factory->define(EloquentHorseTeam::class, function (Generator $faker) {
 $factory->define(EloquentStatus::class, function (Generator $faker) {
     return [
         'body' => $faker->text,
+        'prefix' => 1
     ];
 });
 
@@ -76,4 +78,14 @@ $factory->define(EloquentComment::class, function (Generator $faker) {
 
 $factory->define(EloquentDiscipline::class, function (Generator $faker) {
     return [];
+});
+
+$factory->define(EloquentPicture::class, function (Generator $faker) {
+    return [
+        'path' => $faker->word . '.' . $faker->fileExtension,
+        'profile_pic' => false,
+        'mime' => $faker->mimeType,
+        'original_name' => $faker->name,
+        'header_image' => false
+    ];
 });

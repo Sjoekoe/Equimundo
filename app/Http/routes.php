@@ -6,6 +6,10 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'admin'], function() {
     require __DIR__ . '/Routes/Admin/horses.php';
 });
 
+Route::group(['namespace' => 'Api'], function() {
+    require __DIR__ . '/Routes/Api/api.php';
+});
+
 Route::group(['namespace' => 'Albums'], function() {
     require __DIR__ . '/Routes/Albums/albums.php';
     require __DIR__ . '/Routes/Albums/pictures.php';

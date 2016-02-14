@@ -40,7 +40,7 @@ class Handler extends ExceptionHandler {
         if (app()->runningUnitTests()) {
             throw $e;
         }
-        
+
         if ($this->isHttpException($e))
         {
             return $this->renderHttpException($e);
