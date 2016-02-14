@@ -2,6 +2,7 @@
 
 use Carbon\Carbon;
 use EQM\Models\Comments\EloquentComment;
+use EQM\Models\Disciplines\EloquentDiscipline;
 use EQM\Models\Events\EloquentEvent;
 use EQM\Models\Horses\EloquentHorse;
 use EQM\Models\HorseTeams\EloquentHorseTeam;
@@ -71,4 +72,8 @@ $factory->define(EloquentComment::class, function (Generator $faker) {
     return [
         'body' => $faker->text,
     ];
+});
+
+$factory->define(EloquentDiscipline::class, function (Generator $faker) {
+    return [];
 });
