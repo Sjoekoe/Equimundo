@@ -1,41 +1,24 @@
-<html>
-<head>
-    <link href='http://fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
+@extends('layout.outer-app')
 
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            color: #B0BEC5;
-            display: table;
-            font-weight: 100;
-            font-family: 'Lato';
-        }
+@section('content')
+    <div id="container" class="cls-container">
+        <div id="bg-overlay" class="bg-img" style="background-image: url({{ asset('images/horses.jpg') }})"></div>
 
-        .container {
-            text-align: center;
-            display: table-cell;
-            vertical-align: middle;
-        }
+        @include('layout.partials._outer_app_header')
 
-        .content {
-            text-align: center;
-            display: inline-block;
-        }
-
-        .title {
-            font-size: 72px;
-            margin-bottom: 40px;
-        }
-    </style>
-</head>
-<body>
-<div class="container">
-    <div class="content">
-        <div class="title">This page has gone missing.</div>
+        <div class="cls-content">
+            <h1 class="error-code text-mint">404</h1>
+            <p class="h4 text-thin pad-btm mar-btm">
+                <i class="fa fa-exclamation-circle fa-fw text-danger"></i>
+                Sorry, but the page you are looking for has not been found on our server.
+            </p>
+            <div class="row mar-btm">
+                {{ Form::open(['route' => 'search', 'class' => 'col-xs-12 col-sm-10 col-sm-offset-1']) }}
+                    {{ Form::text('search', null, ['placeholder' => trans('forms.placeholders.search') . '...', 'class' => 'form-control input-lg error-search']) }}
+                {{ Form::close() }}
+            </div>
+            <br>
+            <div class="pad-top"><a class="btn-link" href="{{ route('home') }}">Back to Homepage</a></div>
+        </div>
     </div>
-</div>
-</body>
-</html>
+@stop
