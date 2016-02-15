@@ -7,3 +7,8 @@ Route::post('/api/statuses', ['as' => 'api.statuses.store', 'uses' => 'StatusCon
 Route::get('/api/statuses/{status}', ['as' => 'api.statuses.show', 'uses' => 'StatusController@show']);
 Route::put('/api/statuses/{status}', ['as' => 'api.statuses.update', 'uses' => 'StatusController@update']);
 Route::delete('/api/statuses/{status}', ['as' => 'api.statuses.delete', 'uses' => 'StatusController@delete']);
+
+Route::get('/api/statuses/{status}/comments', ['as' => 'api.comments.index', 'uses' => 'CommentController@index']);
+Route::post('/api/statuses/{status}/comments', ['as' => 'api.comments.store', 'uses' => 'CommentController@store']);
+Route::get('/api/statuses/{status}/comments/{comment}', ['as' => 'api.comments.show', 'uses' => 'CommentController@show']);
+Route::delete('/api/statuses/{status}/comments/{comment}', ['as' => 'api.comments.delete', 'uses' => 'CommentController@delete']);

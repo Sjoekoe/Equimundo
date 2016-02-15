@@ -23,6 +23,8 @@ $factory->define(EloquentUser::class, function (Generator $faker) {
         'activated' => true,
         'password' => bcrypt('password'),
         'remember_token' => str_random(10),
+        'country' => 'BE',
+        'gender' => 'M',
     ];
 });
 
