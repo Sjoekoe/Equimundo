@@ -124,6 +124,42 @@ class CommentsTest extends \TestCase
     }
 
     /** @test */
+    function it_can_update_a_comment()
+    {
+        $user = factory(EloquentUser::class)->create();
+        $horse = factory(EloquentHorse::class)->create();
+        $status = factory(EloquentStatus::class)->create([
+            'horse_id' => $horse->id(),
+        ]);
+        $comment = factory(EloquentComment::class)->create([
+            'status_id' => $status->id(),
+            'user_id' => $user->id(),
+        ]);
+
+        $this->put('/api/statuses/' . $status->id() . '/comments/' . $comment->id(), [
+            'body' => 'Foo',
+        ])->seeJsonEquals([
+                'data' => [
+                    'id' => $comment->id(),
+                    'body' => 'Foo',
+                    'user' => [
+                        'data' => [
+                            'id' => $user->id(),
+                            'first_name' => $user->firstName(),
+                            'last_name' => $user->lastName(),
+                            'email' => $user->email(),
+                            'date_of_birth' => null,
+                            'gender' => $user->gender(),
+                            'country' => $user->country(),
+                            'is_admin' => $user->isAdmin(),
+                            'language' => $user->language(),
+                        ],
+                    ],
+                ],
+            ]);
+    }
+
+    /** @test */
     function it_can_delete_a_comment()
     {
         $user = factory(EloquentUser::class)->create();

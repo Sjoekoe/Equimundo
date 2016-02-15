@@ -11,4 +11,5 @@ Route::delete('/api/statuses/{status}', ['as' => 'api.statuses.delete', 'uses' =
 Route::get('/api/statuses/{status}/comments', ['as' => 'api.comments.index', 'uses' => 'CommentController@index']);
 Route::post('/api/statuses/{status}/comments', ['as' => 'api.comments.store', 'uses' => 'CommentController@store']);
 Route::get('/api/statuses/{status}/comments/{comment}', ['as' => 'api.comments.show', 'uses' => 'CommentController@show']);
+Route::put('/api/statuses/{status}/comments/{comment}', ['as' => 'api.comments.update', 'uses' => 'CommentController@update']);
 Route::delete('/api/statuses/{status}/comments/{comment}', ['as' => 'api.comments.delete', 'uses' => 'CommentController@delete']);
