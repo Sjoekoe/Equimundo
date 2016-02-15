@@ -222,11 +222,11 @@ class PedigreeController extends Controller
         if ($this->horses->findByLifeNumber($lifeNumber) !== null) {
             $family = $this->horses->findByLifeNumber($lifeNumber);
 
-            if (($horse->gender() == Horse::MARE) && $family->hasMother() && ($request->get('type') == Pedigree::DAUGHTER)) {
+            if (($horse->gender() == Horse::MARE) && $family->hasMother() && ($request->get('type') == Pedigree::DAUGHTER || ($request->get('type') == Pedigree::SON))) {
                 return true;
             }
 
-            if (($horse->gender() !== Horse::MARE) && $family->hasFather() && $request->get('type') == Pedigree::SON) {
+            if (($horse->gender() !== Horse::MARE) && $family->hasFather() && ($request->get('type') == Pedigree::DAUGHTER || ($request->get('type') == Pedigree::SON))) {
                 return true;
             }
         }

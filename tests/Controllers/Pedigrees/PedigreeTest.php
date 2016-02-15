@@ -438,6 +438,7 @@ class PedigreeTest extends \TestCase
         ]);
     }
 
+    /** @test */
     function it_can_not_add_offspring_with_a_parent_of_the_same_gender()
     {
         $user = factory(EloquentUser::class)->create();
@@ -460,12 +461,12 @@ class PedigreeTest extends \TestCase
         ]);
         factory(EloquentPedigree::class)->create([
             'horse_id' => $relativesParent->id(),
-            'type' => Pedigree::MOTHER,
+            'type' => Pedigree::SON,
             'family_id' => $relative->id(),
         ]);
         factory(EloquentPedigree::class)->create([
             'horse_id' => $relative->id(),
-            'type' => Pedigree::SON,
+            'type' => Pedigree::MOTHER,
             'family_id' => $relativesParent->id(),
         ]);
 
