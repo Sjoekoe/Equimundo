@@ -60,6 +60,17 @@ class CommentController extends Controller
         return response($result);
     }
 
+    public function update(PostCommentRequest $request, Status $status, Comment $comment)
+    {
+        $comment = $this->comments->update($comment, $request->get('body'));
+        $manager = new Manager();
+        $manager->setSerializer(new DataArraySerializer());
+        $collection  = new Item($comment, new CommentTransformer());
+        $result = $manager->createData($collection)->toArray();
+
+        return response($result);
+    }
+
     public function delete(Status $status, Comment $comment)
     {
         $this->comments->delete($comment);
