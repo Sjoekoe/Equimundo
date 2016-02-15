@@ -1,6 +1,7 @@
 <?php namespace EQM\Exceptions;
 
 use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Response;
 
@@ -39,6 +40,10 @@ class Handler extends ExceptionHandler {
     {
         if (app()->runningUnitTests()) {
             throw $e;
+        }
+
+        if ($e instanceof ModelNotFoundException) {
+            return response()->view('errors.404');
         }
 
         if ($this->isHttpException($e))
