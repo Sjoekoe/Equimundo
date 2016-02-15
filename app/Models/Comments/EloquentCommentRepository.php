@@ -28,6 +28,11 @@ class EloquentCommentRepository implements CommentRepository
         return $this->comment->where('id', $id)->firstOrFail();
     }
 
+    public function findForStatusPaginated(Status $status, $limit = 10)
+    {
+        return $this->comment->where('status_id', $status->id())->latest()->paginate($limit);
+    }
+
     /**
      * @param \EQM\Models\Statuses\Status $status
      * @param \EQM\Models\Users\User $user
