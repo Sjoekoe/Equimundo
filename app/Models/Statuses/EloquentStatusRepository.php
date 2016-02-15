@@ -56,6 +56,24 @@ class EloquentStatusRepository implements StatusRepository
     }
 
     /**
+     * @param \EQM\Models\Users\User $user
+     * @param int $limit
+     * @return mixed
+     */
+    public function findFeedForUserPaginated(User $user, $limit = 10)
+    {
+        $followIds = $user->follows()->lists('id');
+
+        $horseIds = $followIds->toArray();
+
+        foreach ($user->horses() as $horse) {
+            array_push($horseIds, $horse->id());
+        }
+
+        return $this->status->whereIn('horse_id', array_flatten($horseIds))->latest()->paginate($limit);
+    }
+
+    /**
      * @param \EQM\Models\Horses\Horse $horse
      * @return \EQM\Models\Statuses\Status[]
      */
@@ -89,9 +107,11 @@ class EloquentStatusRepository implements StatusRepository
      */
     public function update(Status $status, array $values = [])
     {
-        $status->body = (new StatusConvertor())->convert($values['status']);
+        $status->body = (new StatusConvertor())->convert($values['body']);
 
         $status->save();
+
+        return $status;
     }
 
     /**

@@ -41,7 +41,7 @@ class StatusCreator
     public function create($values)
     {
         $horse = $this->horses->findById($values['horse']);
-        $status = $this->statuses->create($horse, $values['status']);
+        $status = $this->statuses->create($horse, $values['body']);
         $horse = $this->horses->findById($values['horse']);
 
         if (array_key_exists('picture', $values)) {

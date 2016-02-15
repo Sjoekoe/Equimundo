@@ -13,7 +13,7 @@
                                         {{ Form::select('horse', $horses, null, ['class' => 'form-control selectPicker', 'id' => 'js-status-select']) }}
                                     </div>
                                     <div class="row mar-top">
-                                        {{ Form::textarea('status', null, ['class' => 'form-control', 'rows' => 3, 'placeholder' => trans('forms.placeholders.what_you_been_doing')]) }}
+                                        {{ Form::textarea('body', null, ['class' => 'form-control', 'rows' => 3, 'placeholder' => trans('forms.placeholders.what_you_been_doing')]) }}
                                     </div>
                                     <div class="row mar-top">
                                         <div class="col-sm-6 pad-no">

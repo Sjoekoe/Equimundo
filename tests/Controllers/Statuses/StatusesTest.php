@@ -26,7 +26,7 @@ class StatusesTest extends \TestCase
         $this->actingAs($user)
             ->post('/statuses/create', [
             'horse' => $horse->id,
-            'status' => 'some status',
+            'body' => 'some status',
         ]);
 
         $this->seeInDatabase('statuses', [
@@ -54,7 +54,7 @@ class StatusesTest extends \TestCase
         $this->actingAs($user)
             ->put('/status/' . $status->id()  .'/edit', [
                 'horse' => $horse->id(),
-                'status' => 'Some status',
+                'body' => 'Some status',
             ]);
 
         $this->seeInDatabase('statuses', [
