@@ -59,6 +59,10 @@ class PedigreeController extends Controller
         }
 
         if ($request->has('life_number')) {
+            if ($this->relativeHasSpecificFamilyConnection($horse, $request->get('life_number'), $request)) {
+                return back();
+            }
+
             if ($this->isIncorrectGender($request->get('life_number'), $request->get('type'))) {
                 return back();
             }
@@ -175,8 +179,8 @@ class PedigreeController extends Controller
     private function ageDifference(Horse $horse, Request $request, $dateOfBirth)
     {
         return ($request->get('type') == Pedigree::DAUGHTER) || ($request->get('type') == Pedigree::SON)
-            ? $dateOfBirth > $horse->dateOfBirth()
-            : $dateOfBirth < $horse->dateOfBirth();
+            ? $dateOfBirth < $horse->dateOfBirth()
+            : $dateOfBirth > $horse->dateOfBirth();
     }
 
     /**
@@ -211,5 +215,22 @@ class PedigreeController extends Controller
         }
 
         return $values;
+    }
+
+    private function relativeHasSpecificFamilyConnection(Horse $horse, $lifeNumber, $request)
+    {
+        if ($this->horses->findByLifeNumber($lifeNumber) !== null) {
+            $family = $this->horses->findByLifeNumber($lifeNumber);
+
+            if (($horse->gender() == Horse::MARE) && $family->hasMother() && ($request->get('type') == Pedigree::DAUGHTER)) {
+                return true;
+            }
+
+            if (($horse->gender() !== Horse::MARE) && $family->hasFather() && $request->get('type') == Pedigree::SON) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

@@ -63,7 +63,7 @@
                         </div>
                         <div class="panel-body">
                             <dl class="dl-horizontal">
-                                @foreach ($horse->userTeams as $team)
+                                @foreach ($horse->userTeams() as $team)
                                     <?php $user = $team->user()->first() ?>
                                     <dt>
                                         {{ trans('horse_teams.type.' . $team->type()) }}

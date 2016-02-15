@@ -2,14 +2,9 @@
 
 use EQM\Events\CommentWasLiked;
 use EQM\Events\CommentWasPosted;
-use EQM\Events\PalmaresWasCreated;
-use EQM\Events\PalmaresWasDeleted;
 use EQM\Events\PedigreeWasCreated;
 use EQM\Events\StatusLiked;
 use EQM\Events\UserRegistered;
-use EQM\Listeners\Events\CreatePalmares;
-use EQM\Listeners\Events\CreateStandardAlbums;
-use EQM\Listeners\Events\DeletePalmares;
 use EQM\Listeners\Events\EmailRegisteredUser;
 use EQM\Listeners\Events\NotifyCommentPoster;
 use EQM\Listeners\Events\NotifyHorseOwner;
