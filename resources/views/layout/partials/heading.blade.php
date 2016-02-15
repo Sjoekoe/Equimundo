@@ -42,42 +42,42 @@
         <div class="row">
             <div class="col-xs-12 col-lg-5 col-lg-offset-3">
                 <ul class="list-unstyled text-center pad-top mar-no clearfix">
-                    <li class="col-xs-2 col-lg-2 {{ Active::route('horses.show', 'bg-mint') }} pad-all">
+                    <li class="col-xs-2 col-lg-2 {{ Active::route('horses.show', 'border-mint') }} pad-all">
                         <p class="text-muted text-uppercase">
                             <a href="{{ route('horses.show', $horse->slug()) }}">
                                 <i class="fa fa-list fa-2x"></i>
                             </a>
                         </p>
                     </li>
-                    <li class="col-xs-2 col-lg-2 {{ Active::route('horse.info', 'bg-mint') }} pad-all">
+                    <li class="col-xs-2 col-lg-2 {{ Active::route('horse.info', 'border-mint') }} pad-all">
                         <p class="text-muted text-uppercase">
                             <a href="{{ route('horse.info', $horse->slug()) }}">
                                 <i class="fa fa-info-circle fa-2x"></i>
                             </a>
                         </p>
                     </li>
-                    <li class="col-xs-2 col-lg-2 {{ Active::route('follows.index', 'bg-mint') }} pad-all">
+                    <li class="col-xs-2 col-lg-2 {{ Active::route('follows.index', 'border-mint') }} pad-all">
                         <p class="text-muted text-uppercase">
                             <a href="{{ route('follows.index', $horse->slug()) }}">
                                 <i class="fa fa-users fa-2x"></i>
                             </a>
                         </p>
                     </li>
-                    <li class="col-xs-2 col-lg-2 {{ Active::route('horses.pictures.index', 'bg-mint') }} pad-all">
+                    <li class="col-xs-2 col-lg-2 {{ Active::route('horses.pictures.index', 'border-mint') }} pad-all">
                         <p class="text-muted text-uppercase">
                             <a href="{{ route('horses.pictures.index', $horse->slug()) }}">
                                 <i class="fa fa-camera fa-2x"></i>
                             </a>
                         </p>
                     </li>
-                    <li class="col-xs-2 col-lg-2 {{ Active::route('pedigree.index', 'bg-mint') }} pad-all">
+                    <li class="col-xs-2 col-lg-2 {{ Active::route('pedigree.index', 'border-mint') }} pad-all">
                         <p class="text-muted text-uppercase">
                             <a href="{{ route('pedigree.index', $horse->slug()) }}">
                                 <i class="fa fa-share-alt fa-2x"></i>
                             </a>
                         </p>
                     </li>
-                    <li class="col-xs-2 col-lg-2 {{ Active::route('palmares.index', 'bg-mint') }} pad-all">
+                    <li class="col-xs-2 col-lg-2 {{ Active::route('palmares.index', 'border-mint') }} pad-all">
                         <p class="text-muted text-uppercase">
                             <a href="{{ route('palmares.index', $horse->slug()) }}">
                                 <fa class="fa fa-trophy fa-2x"></fa>
