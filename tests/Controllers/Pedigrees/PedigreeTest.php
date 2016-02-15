@@ -308,10 +308,11 @@ class PedigreeTest extends \TestCase
         $user = factory(EloquentUser::class)->create();
         $horse = factory(EloquentHorse::class)->create([
             'gender' => Horse::MARE,
+            'date_of_birth' => Carbon::now()->subYear(5),
         ]);
         $relative = factory(EloquentHorse::class)->create([
             'gender' => Horse::STALLION,
-            'date_of_birth' => '08/06/1980',
+            'date_of_birth' => Carbon::now()->subYear(2),
             'life_number' => '1234',
         ]);
         factory(EloquentHorseTeam::class)->create([
@@ -341,10 +342,11 @@ class PedigreeTest extends \TestCase
         $user = factory(EloquentUser::class)->create();
         $horse = factory(EloquentHorse::class)->create([
             'gender' => Horse::MARE,
+            'date_of_birth' => Carbon::now()->subYear(4),
         ]);
         $relative = factory(EloquentHorse::class)->create([
             'gender' => Horse::STALLION,
-            'date_of_birth' => Carbon::now()->addYear(),
+            'date_of_birth' => Carbon::now()->subYear(5),
             'life_number' => '1234',
         ]);
         factory(EloquentHorseTeam::class)->create([
@@ -374,43 +376,11 @@ class PedigreeTest extends \TestCase
         $user = factory(EloquentUser::class)->create();
         $horse = factory(EloquentHorse::class)->create([
             'gender' => Horse::MARE,
+            'date_of_birth' => Carbon::now()->subYear(3),
         ]);
         $relative = factory(EloquentHorse::class)->create([
             'gender' => Horse::STALLION,
-            'date_of_birth' => Carbon::now()->subYear(),
-            'life_number' => '1234',
-        ]);
-        factory(EloquentHorseTeam::class)->create([
-            'user_id' => $user->id(),
-            'horse_id' => $horse->id(),
-        ]);
-
-        $this->actingAs($user)
-            ->post('/horses/' . $horse->slug() . '/pedigree/create', [
-                'name' => 'Foo horse',
-                'gender' => 1,
-                'breed' => 5,
-                'type' => Pedigree::SON,
-                'life_number' => $relative->lifeNumber(),
-            ]);
-
-        $this->assertResponseStatus(302);
-
-        $this->seeInDatabase('pedigrees', [
-            'id' => 1,
-        ]);
-    }
-
-    /** @test */
-    function it_can_add_a_younger_horse_as_offspring()
-    {
-        $user = factory(EloquentUser::class)->create();
-        $horse = factory(EloquentHorse::class)->create([
-            'gender' => Horse::MARE,
-        ]);
-        $relative = factory(EloquentHorse::class)->create([
-            'gender' => Horse::STALLION,
-            'date_of_birth' => Carbon::now()->addYear(),
+            'date_of_birth' => Carbon::now()->subYear(5),
             'life_number' => '1234',
         ]);
         factory(EloquentHorseTeam::class)->create([
@@ -435,15 +405,49 @@ class PedigreeTest extends \TestCase
     }
 
     /** @test */
+    function it_can_add_a_younger_horse_as_offspring()
+    {
+        $user = factory(EloquentUser::class)->create();
+        $horse = factory(EloquentHorse::class)->create([
+            'gender' => Horse::MARE,
+            'date_of_birth' => Carbon::now()->subYear(5)
+        ]);
+        $relative = factory(EloquentHorse::class)->create([
+            'gender' => Horse::STALLION,
+            'date_of_birth' => Carbon::now()->subYear(2),
+            'life_number' => '1234',
+        ]);
+        factory(EloquentHorseTeam::class)->create([
+            'user_id' => $user->id(),
+            'horse_id' => $horse->id(),
+        ]);
+
+        $this->actingAs($user)
+            ->post('/horses/' . $horse->slug() . '/pedigree/create', [
+                'name' => 'Foo horse',
+                'gender' => 1,
+                'breed' => 5,
+                'type' => Pedigree::SON,
+                'life_number' => $relative->lifeNumber(),
+            ]);
+
+        $this->assertResponseStatus(302);
+
+        $this->seeInDatabase('pedigrees', [
+            'id' => 1,
+        ]);
+    }
+
     function it_can_not_add_offspring_with_a_parent_of_the_same_gender()
     {
         $user = factory(EloquentUser::class)->create();
         $horse = factory(EloquentHorse::class)->create([
             'gender' => Horse::MARE,
+            'date_of_birth' => Carbon::now()->subYear(5)
         ]);
         $relative = factory(EloquentHorse::class)->create([
             'life_number' => '1234',
-            'date_of_birth' => Carbon::now()->addYear(),
+            'date_of_birth' => Carbon::now()->subYear(2),
             'gender' => Horse::STALLION
         ]);
         $relativesParent = factory(EloquentHorse::class)->create([

@@ -1,6 +1,7 @@
 <?php
 namespace EQM\Core\Mailers;
 
+use EQM\Models\Horses\Horse;
 use EQM\Models\Statuses\Status;
 use EQM\Models\Users\User;
 
@@ -32,6 +33,26 @@ class UserMailer extends Mailer
         $data = [
             'link' => route('statuses.show', $status->id()),
             'sender' => $sender,
+        ];
+
+        return $this->sendTo($user, $subject, $view, $data);
+    }
+
+    /**
+     * @param \EQM\Models\Users\User $user
+     * @param \EQM\Models\Horses\Horse $horse
+     * @param \EQM\Models\Horses\Horse $family
+     * @param \EQM\Models\Users\User $sender
+     */
+    public function sendPedigreeCreated(User $user, Horse $horse, Horse $family, User $sender)
+    {
+        $subject = 'A pedigree connection was made for ' . $horse->name();
+        $view = 'emails.horses.pedigree';
+        $data = [
+            'link' => route('horses.show', $family->slug()),
+            'sender' => $sender,
+            'family' => $family,
+            'horse' => $horse,
         ];
 
         return $this->sendTo($user, $subject, $view, $data);
