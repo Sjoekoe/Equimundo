@@ -1,9 +1,13 @@
 <?php namespace EQM\Exceptions;
 
 use Exception;
+use Illuminate\Auth\Access\UnauthorizedException;
+use Illuminate\Contracts\Validation\ValidationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Exception\HttpResponseException;
 use Illuminate\Http\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class Handler extends ExceptionHandler {
 
@@ -46,12 +50,37 @@ class Handler extends ExceptionHandler {
             return response()->view('errors.404');
         }
 
-        if ($this->isHttpException($e))
+        if (
+            $this->appIsNotInDebugMode() &&
+            ! $this->isHttpException($e) &&
+            ! $this->isResponseException($e)
+        ) {
+            return response()->view('errors.500', [], 500);
+        }
+
+        if ($this->isHttpException($e) && $this->appIsNotInDebugMode())
         {
             return $this->renderHttpException($e);
         }
 
         return parent::render($request, $e);
+    }
+
+    /**
+     * @return bool
+     */
+    private function appIsNotInDebugMode()
+    {
+        return ! config('app.debug');
+    }
+
+    /**
+     * @param \Exception $e
+     * @return bool
+     */
+    private function isResponseException(Exception $e)
+    {
+        return $e instanceof HttpResponseException || $e instanceof ValidationException;
     }
 
 }
