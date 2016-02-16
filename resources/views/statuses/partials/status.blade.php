@@ -10,6 +10,22 @@
             </a>
             <div class="media-body">
                 <div class="mar-btm">
+                    <div class="pull-right">
+                        <div class="btn-group">
+                            @if (auth()->check() && auth()->user()->isInHorseTeam($status->horse()))
+                                <i class="dropdown-toggle-icon fa fa-chevron-down" data-toggle="dropdown" aria-expanded="false"></i>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    @can('delete-status', $status)
+                                        <li>
+                                            <a href="{{ route('statuses.delete', $status->id()) }}">
+                                                {{ trans('copy.a.delete') }}
+                                            </a>
+                                        </li>
+                                    @endcan
+                                </ul>
+                            @endif
+                        </div>
+                    </div>
                     <a href="{{ route('horses.show', $status->horse()->slug()) }}" class="btn-link text-semibold media-heading box-inline text-mint">
                         {{ $status->horse()->name() }}
                     </a>
@@ -56,7 +72,16 @@
                                 </a>
                                 <div class="pull-right">
                                     @can('delete-comment', $comment)
-                                        <a href="{{ route('comment.delete', $comment->id()) }}">Delete</a>
+                                        <div class="btn-group">
+                                            <i class="dropdown-toggle-icon fa fa-chevron-down" data-toggle="dropdown" aria-expanded="false"></i>
+                                            <ul class="dropdown-menu dropdown-menu-right">
+                                                <li>
+                                                    <a href="{{ route('comment.delete', $comment->id()) }}">
+                                                        {{ trans('copy.a.delete') }}
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     @endcan
                                 </div>
                                 <p class="text-muted text-sm">
