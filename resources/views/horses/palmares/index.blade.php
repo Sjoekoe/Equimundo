@@ -13,7 +13,11 @@
                 <br>
             @endif
             @if (! count($horse->palmares))
-                <p>{{ $horse->name }} {{ trans('copy.p.no_palmares') }}</p>
+                <div class="panel">
+                    <div class="panel-body">
+                        <p class="text-center">{{ $horse->name }} {{ trans('copy.p.no_palmares') }}</p>
+                    </div>
+                </div>
             @else
                 @foreach ($palmaresResults as $palmares)
                     @include('horses.palmares._partials.palmares')
