@@ -30,7 +30,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ trans('copy.titles.horses') }} <b class="caret"></b></a>
                         <div class="dropdown-menu dropdown-menu-md dropdown-menu-right with-arrow">
                             <div class="pad-all bord-btm">
-                                <p class="text-lg text-muted text-thin mar-no">You have {{ count(auth()->user()->horses()) }} Horses</p>
+                                <p class="text-lg text-muted text-thin mar-no">{{ trans('copy.titles.horse_count', [count(auth()->user()->horses())]) }}</p>
                             </div>
                             <div class="nano scrollable">
                                 <div class="nano-content">
@@ -74,7 +74,7 @@
                         <!--Message dropdown menu-->
                         <div class="dropdown-menu dropdown-menu-md dropdown-menu-right with-arrow">
                             <div class="pad-all bord-btm">
-                                <p class="text-lg text-muted text-thin mar-no">You have {{ count(auth()->user()->conversations()) }} messages.</p>
+                                <p class="text-lg text-muted text-thin mar-no">{{ trans('copy.titles.count_messages', [auth()->user()->countUnreadMessages()]) }}</p>
                             </div>
                             <div class="nano scrollable">
                                 <div class="nano-content">
@@ -101,7 +101,7 @@
                             <!--Dropdown footer-->
                             <div class="pad-all bord-top">
                                 <a href="{{ route('conversation.index') }}" class="btn-link text-dark box-block">
-                                    <i class="fa fa-angle-right fa-lg pull-right"></i>Show All Messages
+                                    <i class="fa fa-angle-right fa-lg pull-right"></i>{{ trans('copy.titles.go_to_inbox') }}
                                 </a>
                             </div>
                         </div>
@@ -173,7 +173,7 @@
                                 @endif
                                 <li>
                                     <a href="{{ route('users.profiles.show', Auth::user()->id) }}">
-                                        <i class="fa fa-user fa-fw fa-lg"></i> Profile
+                                        <i class="fa fa-user fa-fw fa-lg"></i> {{ trans('copy.titles.profile') }}
                                     </a>
                                 </li>
                                 <li>
@@ -181,7 +181,7 @@
                                         @if (Auth::user()->countUnreadNotifications())
                                             <span class="badge badge-mint pull-right">{{ Auth::user()->countUnreadMessages() }}</span>
                                         @endif
-                                        <i class="fa fa-envelope fa-fw fa-lg"></i> Messages
+                                        <i class="fa fa-envelope fa-fw fa-lg"></i> {{ trans('copy.titles.messages') }}
                                     </a>
                                 </li>
                                 <li>

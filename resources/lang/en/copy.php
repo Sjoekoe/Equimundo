@@ -3,6 +3,7 @@
 return [
     'titles' => [
         'about_you' => 'About You',
+        'count_messages' => 'You have :0 unread messages',
         'create_horse' => 'Create a Horse',
         'create_palmares' => 'Create palmares',
         'daughters' => 'Daughters',
@@ -10,9 +11,12 @@ return [
         'edit' => 'Edit',
         'edit_profile' => 'Edit profile',
         'following' => 'Following',
+        'go_to_inbox' => 'Go to your inbox',
+        'horse_count' => 'You have :0 horses',
         'horses' => 'Horses',
         'horses_of' => 'Horses of',
         'messages' => 'Messages',
+        'profile' => 'Profile',
         'results' => 'Results',
         'settings' => 'Settings',
         'sons' => 'Sons',
