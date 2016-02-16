@@ -1,3 +1,13 @@
+<div id="fb-root"></div>
+<script>
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
 <div class="panel mar-no">
     <div class="panel-bg-cover" style="height: 40em; background-image: url({{ $horse->getHeaderImage() ? route('file.picture', $horse->getHeaderImage()->id()) : asset('images/header.jpg') }})">
         @if (auth()->user()->isInHorseTeam($horse))
@@ -28,6 +38,10 @@
                 <h3 class="panel-media-heading text-mint">{{ $horse->name() }}</h3>
                 <p>{{ trans('horses.breeds.' . $horse->breed()) }}</p>
                 <p>{{ $horse->father() ? $horse->father()->name() : '' }} <span class="text-bold">X</span> {{ $horse->father() && $horse->mothersFather() ? $horse->mothersFather()->name() : '' }}</p>
+                <div class="fb-share-button"
+                     data-href="{{ route('horses.show', $horse->slug()) }}"
+                     data-layout="icon" >
+                </div>
             </div>
             <div class="col-lg-5 text-lg-right">
                 <div class="heading-button pull-right">
