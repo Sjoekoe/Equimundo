@@ -63,13 +63,15 @@
                         </div>
                         <div class="panel-body">
                             <dl class="dl-horizontal">
-                                @foreach ($horse->userTeams() as $team)
+                                @foreach ($horse->userTeams as $team)
                                     <?php $user = $team->user()->first() ?>
                                     <dt>
                                         {{ trans('horse_teams.type.' . $team->type()) }}
                                     </dt>
                                     <dd>
-                                        {{ $user->fullName() }}
+                                        <a href="{{ route('users.profiles.show', $user->id()) }}" class="text-mint">
+                                            {{ $user->fullName() }}
+                                        </a>
                                         @if ($user->id() !== auth()->user()->id())
                                             <a href="{{ route('conversation.create', ['contact' => $user->id]) }}" class="btn btn-sm btn-mint btn-icon">
                                                 <i class="fa fa-envelope"></i>

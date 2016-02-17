@@ -77,21 +77,21 @@
                             </a>
                         </p>
                     </li>
-                    <li class="col-xs-2 col-lg-2 {{ Active::route('horses.pictures.index', 'border-mint') }} pad-all">
+                    <li class="col-xs-2 col-lg-2 {{ Active::route(['horses.pictures.index', 'album.show', 'album.create', 'album.edit'], 'border-mint') }} pad-all">
                         <p class="text-muted text-uppercase">
                             <a href="{{ route('horses.pictures.index', $horse->slug()) }}">
                                 <i class="fa fa-camera fa-2x"></i>
                             </a>
                         </p>
                     </li>
-                    <li class="col-xs-2 col-lg-2 {{ Active::route('pedigree.index', 'border-mint') }} pad-all">
+                    <li class="col-xs-2 col-lg-2 {{ Active::route(['pedigree.index', 'pedigree.create'], 'border-mint') }} pad-all">
                         <p class="text-muted text-uppercase">
                             <a href="{{ route('pedigree.index', $horse->slug()) }}">
                                 <i class="fa fa-share-alt fa-2x"></i>
                             </a>
                         </p>
                     </li>
-                    <li class="col-xs-2 col-lg-2 {{ Active::route('palmares.index', 'border-mint') }} pad-all">
+                    <li class="col-xs-2 col-lg-2 {{ Active::route(['palmares.index', 'palmares.create', 'palmares.edit'], 'border-mint') }} pad-all">
                         <p class="text-muted text-uppercase">
                             <a href="{{ route('palmares.index', $horse->slug()) }}">
                                 <fa class="fa fa-trophy fa-2x"></fa>

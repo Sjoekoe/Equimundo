@@ -2,7 +2,7 @@
     <div class="panel panel-bordered-dark">
         <div class="panel-heading">
             <h3 class="panel-title">
-                {{ $album->name() }}
+                {{ isset($name) ? $name : $album->name() }}
             </h3>
         </div>
         <div class="panel-body">
