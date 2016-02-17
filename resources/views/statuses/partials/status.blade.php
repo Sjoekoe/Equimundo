@@ -39,7 +39,9 @@
                 <p>{{ $status->body() }}</p>
                 @if ($status->hasPicture())
                     @if ($status->getPicture()->isImage())
-                        <img src="{{ route('file.picture', [$status->getPicture()->id()]) }}" alt="" class="img-responsive thumbnail">
+                        <a href="{{ route('file.picture', [$status->getPicture()->id()]) }}" data-lightbox="{{ $status->id() }}">
+                            <img src="{{ route('file.picture', [$status->getPicture()->id()]) }}" alt="" class="img-responsive thumbnail">
+                        </a>
                     @elseif ($status->getPicture()->isMovie())
                         <video width="600" controls>
                             <source src="{{ route('file.movie', $status->getPicture()->id()) }}">

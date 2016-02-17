@@ -25,7 +25,9 @@
                     @foreach ($album->pictures() as $picture)
                         <div class="col-md-4">
                             <div class="thumbnail">
-                                <img src="{{ route('file.picture', [$picture->id()]) }}" alt="" class="img-responsive" style="height: 240px;">
+                                <a href="{{ route('file.picture', [$picture->id()]) }}" data-lightbox="{{ $album->id() }}">
+                                    <img src="{{ route('file.picture', [$picture->id()]) }}" alt="" class="img-responsive" style="height: 240px;">
+                                </a>
                                 @if (auth()->user()->isInHorseTeam($horse))
                                     <div class="caption text-right">
                                         <a href="{{ route('album.picture.delete', [$album->id(), $picture->id()]) }}" class="btn btn-info">
