@@ -15,11 +15,11 @@
 
             <div class="row">
                 <?php $album = $horse->getStandardAlbum(\EQM\Models\Albums\Album::PROFILEPICTURES) ?>
-                @include('albums._partials._thumbnail')
+                @include('albums._partials._thumbnail', ['name' => trans('albums.names.' . \EQM\Models\Albums\Album::PROFILEPICTURES)])
                 <?php $album = $horse->getStandardAlbum(\EQM\Models\Albums\Album::TIMELINEPICTURES) ?>
-                @include('albums._partials._thumbnail')
+                @include('albums._partials._thumbnail', ['name' => trans('albums.names.' . \EQM\Models\Albums\Album::TIMELINEPICTURES)])
                 <?php $album = $horse->getStandardAlbum(\EQM\Models\Albums\Album::COVERPICTURES) ?>
-                @include('albums._partials._thumbnail')
+                @include('albums._partials._thumbnail', ['name' => trans('albums.names.' . \EQM\Models\Albums\Album::COVERPICTURES)])
             </div>
             <div class="row">
                 @if (count($albums))
