@@ -4,7 +4,7 @@
     @include('layout.partials.heading')
     <div id="page-content">
         <div class="col-lg-7 col-lg-offset-2">
-            @if (auth()->user()->isInHorseTeam($horse))
+            @if (auth()->check() && auth()->user()->isInHorseTeam($horse))
                 <div class="row">
                     <div class="col-sx-3 pull-right">
                         <a href="{{ route('album.create', $horse->slug()) }}" class="btn btn-info">{{ trans('copy.a.create_album') }}</a>

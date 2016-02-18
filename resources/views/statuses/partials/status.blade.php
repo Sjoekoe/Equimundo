@@ -50,17 +50,19 @@
                     <span class="tag tag-sm">
                         <i class="fa fa-heart text-danger"></i> {{ count($status->likes()) }}
                     </span>
-                    <div class="btn-group">
-                        {{ Form::open(['route' => ['status.like', $status->id()], 'class' => 'like-button', 'data-remote']) }}
-                        {{ Form::hidden('status_id', $status->id()) }}
-                        @if (in_array($status->id(), $likes))
-                            <button class="btn btn-sm btn-default btn-hover-success active" type="submit"><i class="fa fa-thumbs-up"></i> You Like it</button>
-                        @else
-                            <button class="btn btn-sm btn-default btn-hover-success" type="submit"><i class="fa fa-thumbs-up"></i></button>
-                        @endif
-                        {{ Form::close() }}
-                    </div>
-                    <a class="btn btn-sm btn-default btn-hover-primary" href="#">Comment</a>
+                    @if (auth()->check())
+                        <div class="btn-group">
+                            {{ Form::open(['route' => ['status.like', $status->id()], 'class' => 'like-button', 'data-remote']) }}
+                            {{ Form::hidden('status_id', $status->id()) }}
+                            @if (in_array($status->id(), $likes))
+                                <button class="btn btn-sm btn-default btn-hover-success active" type="submit"><i class="fa fa-thumbs-up"></i> You Like it</button>
+                            @else
+                                <button class="btn btn-sm btn-default btn-hover-success" type="submit"><i class="fa fa-thumbs-up"></i></button>
+                            @endif
+                            {{ Form::close() }}
+                        </div>
+                        <a class="btn btn-sm btn-default btn-hover-primary" href="#">Comment</a>
+                    @endif
                 </div>
                 <hr>
                 @foreach($status->comments() as $comment)

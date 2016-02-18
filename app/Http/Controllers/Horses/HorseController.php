@@ -72,7 +72,9 @@ class HorseController extends Controller
     {
         $statuses = $this->statuses->findFeedForHorse($horse);
 
-        $likes = $this->likes->findForUser(auth()->user());
+        if (auth()->check()) {
+            $likes = $this->likes->findForUser(auth()->user());
+        }
 
         return view('horses.show', compact('horse', 'likes', 'statuses'));
     }

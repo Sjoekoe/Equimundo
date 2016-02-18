@@ -10,7 +10,7 @@
 </script>
 <div class="panel mar-no">
     <div class="panel-bg-cover" style="height: 40em; background-image: url({{ $horse->getHeaderImage() ? route('file.picture', $horse->getHeaderImage()->id()) : asset('images/header.jpg') }})">
-        @if (auth()->user()->isInHorseTeam($horse))
+        @if (auth()->check() && auth()->user()->isInHorseTeam($horse))
             <div class="pull-right">
                 {{ Form::open(['route' => ['horses.pictures.header', $horse->id()], 'files' => 'true']) }}
                     <div class="image-upload pull-right">
@@ -40,18 +40,20 @@
                 <p>{{ $horse->father() ? $horse->father()->name() : '' }} <span class="text-bold">X</span> {{ $horse->father() && $horse->mothersFather() ? $horse->mothersFather()->name() : '' }}</p>
                 <div class="fb-share-button"
                      data-href="{{ route('horses.show', $horse->slug()) }}"
-                     data-layout="icon" >
+                     data-layout="button" >
                 </div>
             </div>
-            <div class="col-lg-5 text-lg-right">
-                <div class="heading-button pull-right">
-                    @if (auth()->user()->isInHorseTeam($horse))
-                        <a href="{{ route('horses.edit', $horse->slug()) }}" class="btn btn-sm btn-mint">{{ trans('copy.a.edit_horse', ['horse' => $horse->name()]) }}</a>
-                    @else
-                        @include('horses.partials.follow-form')
-                    @endif
+            @if (auth()->check())
+                <div class="col-lg-5 text-lg-right">
+                    <div class="heading-button pull-right">
+                        @if (auth()->user()->isInHorseTeam($horse))
+                            <a href="{{ route('horses.edit', $horse->slug()) }}" class="btn btn-sm btn-mint">{{ trans('copy.a.edit_horse', ['horse' => $horse->name()]) }}</a>
+                        @else
+                            @include('horses.partials.follow-form')
+                        @endif
+                    </div>
                 </div>
-            </div>
+            @endif
         </div>
         <div class="row">
             <div class="col-xs-12 col-lg-5 col-lg-offset-3">
