@@ -43,9 +43,7 @@
                             <img src="{{ route('file.picture', [$status->getPicture()->id()]) }}" alt="" class="img-responsive thumbnail">
                         </a>
                     @elseif ($status->getPicture()->isMovie())
-                        <video width="600" controls>
-                            <source src="{{ route('file.movie', $status->getPicture()->id()) }}">
-                        </video>
+                        @include('layout.partials._wistia_video', ['name' => $status->getPicture()->path()])
                     @endif
                 @endif
                 <div class="pad-ver">

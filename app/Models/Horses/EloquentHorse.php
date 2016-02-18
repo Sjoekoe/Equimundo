@@ -354,4 +354,20 @@ class EloquentHorse extends Model implements Horse
             }
         }
     }
+
+    /**
+     * @return string
+     */
+    public function wistiaKey()
+    {
+        return $this->wistia_project_id;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasWistiaKey()
+    {
+        return $this->wistiaKey() !== null;
+    }
 }

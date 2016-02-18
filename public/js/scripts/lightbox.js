@@ -61,7 +61,6 @@
     };
 
     Lightbox.prototype.init = function() {
-        console.log('init');
         this.enable();
         this.build();
     };
