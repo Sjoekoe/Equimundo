@@ -133,6 +133,7 @@ return [
         /*
          * Application Service Providers...
          */
+        EQM\Core\Factories\ModelFactoryServiceProvider::class,
         EQM\Providers\AppServiceProvider::class,
         EQM\Providers\AuthServiceProvider::class,
         EQM\Providers\BusServiceProvider::class,
