@@ -55,7 +55,7 @@
                     <div class="row">
                         <div class="col-xs-8 text-left checkbox">
                             <label class="form-checkbox form-icon">
-                                <input type="checkbox" name="terms"> I agree with the Terms and Conditions
+                                <input type="checkbox" name="terms"> I agree with the <a href="{{ route('terms_of_service') }}" target="_blank" class="mint-anchor">Terms and Conditions</a>
                             </label>
                         </div>
                         <div class="col-xs-4">
