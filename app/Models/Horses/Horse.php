@@ -553,4 +553,14 @@ interface Horse
      * @return \EQM\Models\Albums\Album
      */
     public function getStandardAlbum($type);
+
+    /**
+     * @return string
+     */
+    public function wistiaKey();
+
+    /**
+     * @return bool
+     */
+    public function hasWistiaKey();
 }

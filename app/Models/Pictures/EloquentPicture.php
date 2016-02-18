@@ -111,6 +111,6 @@ class EloquentPicture extends Model implements Picture
      */
     public function isMovie()
     {
-        return $this->mime == 'video/mp4';
+        return in_array($this->mime, ['video/quicktime', 'video/mp4']);
     }
 }

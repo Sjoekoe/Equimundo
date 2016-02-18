@@ -45,6 +45,9 @@ class PalmaresController extends Controller
     // todo add validation
     public function store(Request $request, PalmaresCreator $creator, Horse $horse)
     {
+        ini_set('upload_max_filesize', '350MB');
+        ini_set('post_max_size', '350MB');
+
         $this->authorize('create-palmares', $horse);
 
         $creator->create($horse, auth()->user(), $request->all());

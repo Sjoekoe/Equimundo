@@ -1,6 +1,7 @@
 <?php
 namespace EQM\Core\Files;
 
+use EQM\Core\Movies\EQMWistia;
 use EQM\Models\Horses\Horse;
 use EQM\Models\Pictures\PictureRepository;
 use Illuminate\Contracts\Filesystem\Factory as Filesystem;
@@ -61,18 +62,18 @@ class Uploader
 
     public function uploadMovie($file, Horse $horse)
     {
-        $extension  = $file->getClientOriginalExtension();
-        $path       = '/uploads/pictures/' . $horse->id();
-        $fileName   = str_random(12);
-        $pathToFile = $path . '/' . $fileName . '.' . $extension;
+        if (! $horse->hasWistiaKey()) {
+            $wistiaKey = (new EQMWistia(env('WISTIA_API')))->createProject(['name' => $horse->slug()]);
 
-        $movie = $this->pictures->create($file, $horse, false, $fileName, $extension);
-
-        if ( ! file_exists(storage_path() . $path) ) {
-            $this->file->makeDirectory($path);
+            $horse->wistia_project_id = $wistiaKey->hashedId;
+            $horse->save();
         }
 
-        $this->file->disk()->put($pathToFile, file_get_contents($file));
+        $extension  = $file->getClientOriginalExtension();
+        $uploadedFile = (new EQMWistia(env('WISTIA_API')))->uploadVideo($file, $horse->wistiaKey());
+        $fileName = $uploadedFile->hashed_id;
+
+        $movie = $this->pictures->createVideo($file, $horse, $fileName, $extension);
 
         return $movie;
     }

@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="panel panel-default">
-                    {{ Form::open(['route' => ['palmares.store', $horse->slug], 'class' => 'grid-content medium-12']) }}
+                    {{ Form::open(['route' => ['palmares.store', $horse->slug()], 'class' => 'grid-content medium-12', 'files' => true]) }}
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-sm-4">
@@ -52,6 +52,22 @@
                                         {{ Form::textarea('body', null, ['class' => 'form-control']) }}
                                     </div>
                                 </div>
+                                <div class="row mar-top">
+                                    <div class="col-sm-6 pad-no">
+                                        <div class="image-upload">
+                                            <label for="picture">
+                                                <i class="btn btn-trans btn-icon fa fa-camera add-tooltip"></i>
+                                            </label>
+
+                                            {{ Form::file('picture', ['class' => 'pull-left', 'id' => 'picture']) }}
+
+                                            <label for="movie">
+                                                <i class="btn btn-trans btn-icon fa fa-video-camera"></i>
+                                            </label>
+
+                                            {{ Form::file('movie', ['class' => 'pull-left', 'id' => 'movie']) }}
+                                        </div>
+                                    </div>
                             </div>
                         </div>
                         <div class="panel-footer text-right">
