@@ -6,6 +6,7 @@ use EQM\Http\Controllers\Controller;
 use EQM\Models\Albums\Album;
 use EQM\Models\Albums\AlbumRepository;
 use EQM\Models\Horses\Horse;
+use EQM\Models\Pictures\Picture;
 use Illuminate\Http\Request;
 
 class PicturesController extends Controller
@@ -47,6 +48,32 @@ class PicturesController extends Controller
         }
 
         $picture->header_image = true;
+        $picture->save();
+
+        return back();
+    }
+
+    public function setProfilePicture(Picture $picture)
+    {
+        $horse = $picture->horse();
+        $old = $horse->getProfilePicture();
+        $old->profile_pic = false;
+        $old->save();
+        $picture->profile_pic = true;
+        $picture->save();
+
+        $profileAlbum = $horse->getStandardAlbum(Album::PROFILEPICTURES);
+
+        $profilePictures = [];
+
+        foreach ($profileAlbum->pictures() as $profilePicture) {
+            array_push($profilePictures, $profilePicture->id());
+        }
+
+        if (! in_array($picture->id(), $profilePictures)) {
+            $picture->addToAlbum($profileAlbum);
+        }
+
         $picture->save();
 
         return back();

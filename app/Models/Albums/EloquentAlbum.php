@@ -62,6 +62,6 @@ class EloquentAlbum extends Model implements Album
      */
     public function pictures()
     {
-        return $this->belongsToMany(EloquentPicture::class, 'album_picture', 'album_id', 'picture_id')->get();
+        return $this->belongsToMany(EloquentPicture::class, 'album_picture', 'album_id', 'picture_id')->latest()->get();
     }
 }

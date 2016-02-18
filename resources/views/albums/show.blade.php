@@ -30,6 +30,11 @@
                                 </a>
                                 @if (auth()->check() && auth()->user()->isInHorseTeam($horse))
                                     <div class="caption text-right">
+                                        @if (! $picture->profilePicture())
+                                            <a href="{{ route('horses.pictures.profile_picture', $picture->id()) }}" class="btn btn-purple">
+                                                <i class="fa fa-bookmark-o fa-lg fa-fw"></i>
+                                            </a>
+                                        @endif
                                         <a href="{{ route('album.picture.delete', [$album->id(), $picture->id()]) }}" class="btn btn-info">
                                             <i class="fa fa-trash fa-lg fa-fw"></i>
                                         </a>
