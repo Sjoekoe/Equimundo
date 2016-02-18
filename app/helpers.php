@@ -21,7 +21,8 @@ if (! function_exists('eqm_date')) {
      */
     function eqm_date($date = null, $format = null)
     {
-        $format = $format ?: auth()->user()->dateFormat();
+        $otherFormat = auth()->check() ? auth()->user()->dateFormat() : 'd-m-Y';
+        $format = $format ?: $otherFormat;
 
         return $date && $date !== '' ? $date->format($format) : '';
     }
