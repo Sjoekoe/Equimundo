@@ -137,8 +137,17 @@
                         <h4 class="text-lg text-overflow mar-no">{{ $user->fullName() }}</h4>
 
                         <div class="pad-ver btn-group">
-                            <a title="" href="#" class="btn btn-icon btn-hover-primary fa fa-facebook icon-lg add-tooltip" data-original-title="Facebook" data-container="body"></a>
-                            <a title="" href="#" class="btn btn-icon btn-hover-info fa fa-twitter icon-lg add-tooltip" data-original-title="Twitter" data-container="body"></a>
+                            @if (auth()->user()->facebook())
+                                <a title="" href="http://www.facebook.com/{{ auth()->user()->facebook() }}" target="_blank" class="btn btn-icon btn-hover-primary fa fa-facebook icon-lg add-tooltip" data-original-title="Facebook" data-container="body"></a>
+                            @endif
+
+                            @if (auth()->user()->twitter())
+                                <a title="" href="http://www.twitter.com/{{ auth()->user()->twitter() }}" target="_blank" class="btn btn-icon btn-hover-info fa fa-twitter icon-lg add-tooltip" data-original-title="Twitter" data-container="body"></a>
+                            @endif
+
+                            @if (auth()->user()->website())
+                                <a title="" href="{{ auth()->user()->website() }}" target="_blank" class="btn btn-icon btn-hover-warning fa fa-laptop icon-lg add-tooltip" data-original-title="Website" data-container="body"></a>
+                            @endif
                         </div>
                         @if (auth()->user()->id() == $user->id())
                             <a href="{{ route('users.profiles.edit') }}" class="btn btn-block btn-mint">{{ trans('copy.a.edit') }}</a>

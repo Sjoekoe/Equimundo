@@ -67,7 +67,11 @@ class EloquentUserRepository implements UserRepository
             $user->date_of_birth = Carbon::createFromFormat('d/m/Y', $values['date_of_birth'])->startOfDay();
         }
 
-        $user->about = $values['about'];
+        $user->about = array_get($values, 'about');
+        $user->facebook = array_get($values, 'facebook');
+        $user->twitter = array_get($values, 'twitter');
+        $user->website = array_get($values, 'website');
+
         $user->save();
 
         return $user;
