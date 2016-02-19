@@ -48,7 +48,9 @@ return [
     ],
 
     'copy' => [
-        'forgot_password' => 'Wachtwoord vergeten??',
+        'female' => 'Vrouwelijk',
+        'forgot_password' => 'Wachtwoord vergeten?',
+        'male' => 'Mannelijk',
         'remember' => 'Onthou mij',
     ],
 

@@ -7,6 +7,12 @@
                     Account
                 </h5>
             </a>
+            <a href="{{ route('users.profiles.edit') }}" class="list-group-item {{ Active::route('users.profiles.edit') }}">
+                <h5>
+                    <i class="fa fa-chevron-right pull-right"></i>
+                    {{ trans('copy.titles.profile') }}
+                </h5>
+            </a>
             <a href="{{ route('password.edit') }}" class="list-group-item {{ Active::route('password.edit') }}">
                 <h5>
                     <i class="fa fa-chevron-right pull-right"></i>

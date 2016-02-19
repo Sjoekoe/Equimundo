@@ -145,6 +145,7 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Jenssegers\Date\DateServiceProvider::class,
         EQM\Core\Dates\DateServiceProvider::class,
+        EQM\Http\HttpServiceProvider::class,
 
         /*
          * Model Service Providers

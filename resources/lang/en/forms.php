@@ -48,7 +48,9 @@ return [
     ],
 
     'copy' => [
+        'female' => 'Female',
         'forgot_password' => 'Forgot Your Password?',
+        'male' => 'Male',
         'remember' => 'Remember me',
     ],
 

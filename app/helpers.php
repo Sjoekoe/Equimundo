@@ -38,3 +38,14 @@ if (! function_exists('eqm_translated_date')) {
         return app(DateTranslator::class)->translate($date);
     }
 }
+
+if (! function_exists('eqm_protocol_prepend')) {
+    /**
+     * @param string $url
+     * @return string
+     */
+    function eqm_protocol_prepend($url)
+    {
+        return (new EQM\Http\ProtocolPrepender())->prepend($url);
+    }
+}
