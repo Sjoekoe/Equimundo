@@ -13,7 +13,8 @@
 		"jenssegers/date": "^3.0",
 		"league/fractal": "^0.13.0",
 		"guzzlehttp/guzzle": "^6.1",
-		"intervention/imagecache": "^2.3"
+		"intervention/imagecache": "^2.3",
+		"bugsnag/bugsnag-laravel": "1.*"
 	},
 	"require-dev": {
 	  	"fzaninotto/faker": "~1.4",

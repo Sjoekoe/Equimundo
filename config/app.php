@@ -146,6 +146,7 @@ return [
         Jenssegers\Date\DateServiceProvider::class,
         EQM\Core\Dates\DateServiceProvider::class,
         EQM\Http\HttpServiceProvider::class,
+        Bugsnag\BugsnagLaravel\BugsnagLaravelServiceProvider::class,
 
         /*
          * Model Service Providers
@@ -218,5 +219,6 @@ return [
         'Html'      => Illuminate\Html\HtmlFacade::class,
         'Image'     => Intervention\Image\Facades\Image::class,
         'Active'    => HieuLe\Active\Facades\Active::class,
+        'Bugsnag' => Bugsnag\BugsnagLaravel\BugsnagFacade::class,
     ],
 ];
