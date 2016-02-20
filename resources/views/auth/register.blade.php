@@ -50,6 +50,18 @@
                                 </div>
                                 @include('layout.partials._error_message', ['field' => 'email'])
                             </div>
+                            <div class="form-group">
+                                <div class="radio">
+                                    <label class="form-radio form-icon form-text active">
+                                        <input type="radio" checked name="gender" value="F">
+                                        Female
+                                    </label>
+                                    <label class="form-radio form-icon form-text active">
+                                        <input type="radio" name="gender" value="M">
+                                        Male
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -57,6 +69,7 @@
                             <label class="form-checkbox form-icon">
                                 <input type="checkbox" name="terms"> I agree with the <a href="{{ route('terms_of_service') }}" target="_blank" class="mint-anchor">Terms and Conditions</a>
                             </label>
+                            @include('layout.partials._error_message', ['field' => 'terms'])
                         </div>
                         <div class="col-xs-4">
                             <div class="form-group text-right">
