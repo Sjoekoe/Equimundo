@@ -14,7 +14,8 @@
 		"league/fractal": "^0.13.0",
 		"guzzlehttp/guzzle": "^6.1",
 		"intervention/imagecache": "^2.3",
-		"bugsnag/bugsnag-laravel": "1.*"
+		"bugsnag/bugsnag-laravel": "1.*",
+		"iron-io/iron_mq": "~4.0"
 	},
 	"require-dev": {
 	  	"fzaninotto/faker": "~1.4",

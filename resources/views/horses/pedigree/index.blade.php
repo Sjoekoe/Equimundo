@@ -11,38 +11,45 @@
                         <tr>
                             <td>
                                 <div class="panel panel-bordered-mint mar-rgt">
-                                    <div class="panel-body text-center">
-                                        <h4 class="mar-btm">{{ $horse->name() }}</h4>
-                                        <p class="text-muted"><strong>{{ trans('forms.labels.breed') }}</strong> {{ trans('horses.breeds.' . $horse->breed()) }}</p>
-                                        <p class="text-muted"><strong>{{ trans('copy.p.born') }}</strong> {{ eqm_date($horse->dateOfBirth(), 'Y') }}</p>
-                                        <p class="text-muted"><strong>{{ trans('copy.p.life_number') }}</strong> {{ $horse->lifeNumber() ? : '-' }}</p>
-                                        <ul class="list-unstyled text-center pad-top mar-no clearfix">
-                                            <li class="col-sm-4">
-                                                <span class="text-lg">{{ count($horse->statuses()) }}</span>
-                                                <p class="text-muted text-uppercase">
-                                                    <small>{{ trans('copy.a.statuses') }}</small>
-                                                </p>
-                                            </li>
-                                            <li class="col-sm-4">
-                                                @if (auth()->check() && ! auth()->user()->isInHorseTeam($horse))
-                                                    @if (Auth::user()->isFollowing($horse))
-                                                        {{ Form::open(['route' => ['follows.destroy', $horse->id()], 'method' => 'DELETE']) }}
-                                                        <button type="submit" class="btn btn-mint">{{ trans('copy.a.unfollow') . $horse->name() }}</button>
-                                                        {{ Form::close() }}
-                                                    @else
-                                                        {{ Form::open(['route' => ['follows.store', $horse->id()]]) }}
-                                                        <button type="submit" class="btn btn-mint">{{ trans('copy.a.follow') . $horse->name() }}</button>
-                                                        {{ Form::close() }}
+                                    <div class="panel-heading">
+                                        <div class="panel-control">
+                                            <button class="btn btn-default collapsed" data-target="#{{ $horse->name() }}" data-toggle="collapse" aria-expanded="false"><i class="fa fa-chevron-down"></i></button>
+                                        </div>
+                                        <h3 class="panel-title">{{ $horse->name() }}</h3>
+                                    </div>
+                                    <div class="collapse" id="{{ $horse->name() }}" aria-expanded="false" style="height: 0px;">
+                                        <div class="panel-body text-center">
+                                            <p class="text-muted"><strong>{{ trans('forms.labels.breed') }}</strong> {{ trans('horses.breeds.' . $horse->breed()) }}</p>
+                                            <p class="text-muted"><strong>{{ trans('copy.p.born') }}</strong> {{ eqm_date($horse->dateOfBirth(), 'Y') }}</p>
+                                            <p class="text-muted"><strong>{{ trans('copy.p.life_number') }}</strong> {{ $horse->lifeNumber() ? : '-' }}</p>
+                                            <ul class="list-unstyled text-center pad-top mar-no clearfix">
+                                                <li class="col-sm-4">
+                                                    <span class="text-lg">{{ count($horse->statuses()) }}</span>
+                                                    <p class="text-muted text-uppercase">
+                                                        <small>{{ trans('copy.a.statuses') }}</small>
+                                                    </p>
+                                                </li>
+                                                <li class="col-sm-4">
+                                                    @if (auth()->check() && ! auth()->user()->isInHorseTeam($horse))
+                                                        @if (Auth::user()->isFollowing($horse))
+                                                            {{ Form::open(['route' => ['follows.destroy', $horse->id()], 'method' => 'DELETE']) }}
+                                                            <button type="submit" class="btn btn-mint">{{ trans('copy.a.unfollow') . $horse->name() }}</button>
+                                                            {{ Form::close() }}
+                                                        @else
+                                                            {{ Form::open(['route' => ['follows.store', $horse->id()]]) }}
+                                                            <button type="submit" class="btn btn-mint">{{ trans('copy.a.follow') . $horse->name() }}</button>
+                                                            {{ Form::close() }}
+                                                        @endif
                                                     @endif
-                                                @endif
-                                            </li>
-                                            <li class="col-sm-4">
-                                                <span class="text-lg">{{ count($horse->followers()) }}</span>
-                                                <p class="text-muted text-uppercase">
-                                                    <small>{{ trans('copy.a.followers') }}</small>
-                                                </p>
-                                            </li>
-                                        </ul>
+                                                </li>
+                                                <li class="col-sm-4">
+                                                    <span class="text-lg">{{ count($horse->followers()) }}</span>
+                                                    <p class="text-muted text-uppercase">
+                                                        <small>{{ trans('copy.a.followers') }}</small>
+                                                    </p>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </td>
