@@ -1,5 +1,11 @@
-<div class="panel-body text-center">
-    <h4 class="mar-btm">{{ $family->name() }}</h4>
+<div class="panel-heading">
+    <div class="panel-control">
+        <button class="btn btn-default collapsed" data-target="#{{ $family->id() }}" data-toggle="collapse" aria-expanded="false"><i class="fa fa-chevron-down"></i></button>
+    </div>
+    <h3 class="panel-title">{{ $family->name() }}</h3>
+</div>
+<div class="collapse" id="{{ $family->id() }}" aria-expanded="false" style="height: 0px;">
+    <div class="panel-body text-center">
     <p class="text-muted"><strong>{{ trans('forms.labels.breed') }}</strong> {{ trans('horses.breeds.' . $family->breed()) }}</p>
     <p class="text-muted"><strong>{{ trans('copy.p.born') }}</strong> {{ eqm_date($family->dateOfBirth(), 'Y') }}</p>
     <p class="text-muted"><strong>{{ trans('copy.p.life_number') }}</strong> {{ $family->lifeNumber() ? : '-' }}</p>
@@ -30,3 +36,5 @@
             </p>
         </li>
     </ul>
+</div>
+</div>
