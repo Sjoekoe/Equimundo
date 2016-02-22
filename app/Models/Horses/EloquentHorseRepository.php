@@ -89,7 +89,11 @@ class EloquentHorseRepository implements HorseRepository
         }
 
         if (array_key_exists('date_of_birth', $values) && ! $values['date_of_birth'] == '') {
-            $horse->date_of_birth = Carbon::createFromFormat('d/m/Y', $values['date_of_birth'])->startOfDay();
+            if ($pedigree) {
+                $horse->date_of_birth = Carbon::createFromFormat('Y', $values['date_of_birth'])->startOfYear();
+            } else {
+                $horse->date_of_birth = Carbon::createFromFormat('d/m/Y', $values['date_of_birth'])->startOfDay();
+            }
         }
 
         if (array_key_exists('height', $values)) {
