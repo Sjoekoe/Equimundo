@@ -13,11 +13,11 @@
                                 <div class="panel panel-bordered-mint mar-rgt">
                                     <div class="panel-heading">
                                         <div class="panel-control">
-                                            <button class="btn btn-default collapsed" data-target="#{{ $horse->name() }}" data-toggle="collapse" aria-expanded="false"><i class="fa fa-chevron-down"></i></button>
+                                            <button class="btn btn-default collapsed" data-target="#{{ $horse->id() }}" data-toggle="collapse" aria-expanded="false"><i class="fa fa-chevron-down"></i></button>
                                         </div>
                                         <h3 class="panel-title">{{ $horse->name() }}</h3>
                                     </div>
-                                    <div class="collapse" id="{{ $horse->name() }}" aria-expanded="false" style="height: 0px;">
+                                    <div class="collapse" id="{{ $horse->id() }}" aria-expanded="false" style="height: 0px;">
                                         <div class="panel-body text-center">
                                             <p class="text-muted"><strong>{{ trans('forms.labels.breed') }}</strong> {{ trans('horses.breeds.' . $horse->breed()) }}</p>
                                             <p class="text-muted"><strong>{{ trans('copy.p.born') }}</strong> {{ eqm_date($horse->dateOfBirth(), 'Y') }}</p>
@@ -80,7 +80,7 @@
                                                         @else
                                                             <div class="panel-body">
                                                                 @if (auth()->check() && auth()->user()->isInHorseTeam($horse))
-                                                                    <a href="{{ route('pedigree.create', [$horse->slug(), 'type=6']) }}" class="btn btn-mint">{{ trans('copy.a.add_father_mother') }}</a>
+                                                                    <a href="{{ route('pedigree.create', [$horse->slug(), 'type=5']) }}" class="btn btn-mint">{{ trans('copy.a.add_father_mother') }}</a>
                                                                 @endif
                                                             </div>
                                                         @endif
@@ -127,7 +127,7 @@
                                                         @else
                                                             <div class="panel-body">
                                                                 @if (auth()->check() && auth()->user()->isInHorseTeam($horse))
-                                                                    <a href="{{ route('pedigree.create', [$horse->slug(), 'type=6']) }}" class="btn btn-mint">{{ trans('copy.a.add_father_mother') }}</a>
+                                                                    <a href="{{ route('pedigree.create', [$horse->slug(), 'type=7']) }}" class="btn btn-mint">{{ trans('copy.a.add_mother_father') }}</a>
                                                                 @endif
                                                             </div>
                                                         @endif
@@ -140,7 +140,7 @@
                                                         @else
                                                             <div class="panel-body">
                                                                 @if (auth()->check() && auth()->user()->isInHorseTeam($horse))
-                                                                    <a href="{{ route('pedigree.create', [$horse->slug(), 'type=6']) }}" class="btn btn-mint">{{ trans('copy.a.add_father_mother') }}</a>
+                                                                    <a href="{{ route('pedigree.create', [$horse->slug(), 'type=8']) }}" class="btn btn-mint">{{ trans('copy.a.add_mother_mother') }}</a>
                                                                 @endif
                                                             </div>
                                                         @endif
@@ -169,7 +169,9 @@
                             </div>
                             <div class="panel-body">
                                 @foreach ($horse->sons() as $son)
-                                    {{ $son->originalHorse->name() }}
+                                    <a href="{{ route('horses.show', $son->originalHorse->slug()) }}">
+                                        {{ $son->originalHorse->name() }}
+                                    </a>
                                 @endforeach
                             </div>
                         </div>
@@ -183,7 +185,9 @@
                             </div>
                             <div class="panel-body">
                                 @foreach ($horse->daughters() as $daughter)
-                                    {{ $daughter->originalHorse->name() }}
+                                    <a href="{{ route('horses.show', $daughter->originalHorse->slug()) }}">
+                                        {{ $daughter->originalHorse->name() }}
+                                    </a>
                                 @endforeach
                             </div>
                         </div>

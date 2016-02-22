@@ -37,7 +37,7 @@
             <div class="col-lg-7">
                 <h3 class="panel-media-heading text-mint">{{ $horse->name() }}</h3>
                 <p>{{ trans('horses.breeds.' . $horse->breed()) }}</p>
-                <p>{{ $horse->father() ? $horse->father()->name() : '' }} <span class="text-bold">X</span> {{ $horse->father() && $horse->mothersFather() ? $horse->mothersFather()->name() : '' }}</p>
+                <p>{{ $horse->father() ? $horse->father()->name() : '' }} {{ $horse->father() && $horse->mothersFather() ? '<span class="text-bold">X</span> ' . $horse->mothersFather()->name() : '' }}</p>
                 <div class="fb-share-button"
                      data-href="{{ route('horses.show', $horse->slug()) }}"
                      data-layout="button" >

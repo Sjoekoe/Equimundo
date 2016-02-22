@@ -40,14 +40,16 @@ class Uploader
      * @param \Symfony\Component\HttpFoundation\File\UploadedFile $file
      * @param \EQM\Models\Horses\Horse $horse
      * @param bool $profile
+     * @param bool $headerImage
      * @return \EQM\Models\Pictures\Picture
      */
-    public function uploadPicture($file, Horse $horse, $profile = false)
+    public function uploadPicture($file, Horse $horse, $profile = false, $headerImage = false)
     {
         $extension  = $file->getClientOriginalExtension();
         $path       = '/uploads/pictures/' . $horse->id();
         $fileName   = str_random(12);
         $pathToFile = $path . '/' . $fileName. '.' . $extension;
+        $width = $headerImage ? 1500 : 460;
 
         $picture = $this->pictures->create($file, $horse, $profile, $fileName, $extension);
 
@@ -55,7 +57,7 @@ class Uploader
             $this->file->makeDirectory($path);
         }
 
-        $image = $this->image->make($file->getrealpath())->resize(null, 460, function($constraint) {
+        $image = $this->image->make($file->getrealpath())->resize(null, $width, function($constraint) {
             $constraint->aspectRatio();
         })->orientate();
 

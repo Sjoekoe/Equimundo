@@ -36,7 +36,7 @@ class PicturesController extends Controller
 
     public function uploadHeaderImage(Request $request, Horse $horse)
     {
-        $picture = $this->uploader->uploadPicture($request->file('header_picture'), $horse);
+        $picture = $this->uploader->uploadPicture($request->file('header_picture'), $horse, false, true);
 
         $album = $horse->getStandardAlbum(Album::COVERPICTURES);
         $picture->addToAlbum($album);
