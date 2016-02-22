@@ -15,8 +15,8 @@
 		"guzzlehttp/guzzle": "^6.1",
 		"intervention/imagecache": "^2.3",
 		"bugsnag/bugsnag-laravel": "1.*",
-		"barryvdh/laravel-debugbar": "^2.0",
-		"iron-io/iron_mq": "~4.0"
+		"iron-io/iron_mq": "~4.0",
+		"barryvdh/laravel-debugbar": "2.*"
 	},
 	"require-dev": {
 	  	"fzaninotto/faker": "~1.4",
