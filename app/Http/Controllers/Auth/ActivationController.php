@@ -2,8 +2,8 @@
 namespace EQM\Http\Controllers\Auth;
 
 use EQM\Http\Controllers\Controller;
-use EQM\Http\Requests\Request;
 use EQM\Models\Users\UserRepository;
+use Illuminate\Http\Request;
 
 class ActivationController extends Controller
 {
@@ -21,7 +21,7 @@ class ActivationController extends Controller
     {
         $user = $this->users->findByEmail($request->get('email'));
 
-        if ($request->get('token') == $user->rememberToken()) {
+        if ($request->get('token') == $user->activationKey()) {
             $this->users->activate($user);
 
             session()->put('success', 'Account activated. You can now login');

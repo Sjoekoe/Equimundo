@@ -30,7 +30,7 @@ class EloquentUserRepository implements UserRepository
             'last_name' => $values['last_name'],
             'email' => $values['email'],
             'password' => bcrypt($values['password']),
-            'remember_token' => $values['activationCode'],
+            'activation_key' => $values['activationCode'],
             'language' => 'en',
             'gender' => $values['gender'],
         ]);
@@ -46,7 +46,7 @@ class EloquentUserRepository implements UserRepository
      */
     public function activate(User $user)
     {
-        $user->actived = true;
+        $user->activated = true;
         $user->save();
 
         return $user;
