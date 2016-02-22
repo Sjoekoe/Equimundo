@@ -160,7 +160,7 @@ class PedigreeController extends Controller
         }
 
         if (! $dateOfBirth && $request->has('date_of_birth')) {
-            $dateOfBirth = Carbon::createFromFormat('d/m/Y', $request->get('date_of_birth'));
+            $dateOfBirth = Carbon::createFromFormat('Y', $request->get('date_of_birth'));
         }
 
         if ($dateOfBirth) {
