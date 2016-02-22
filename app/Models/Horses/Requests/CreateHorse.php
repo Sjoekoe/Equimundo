@@ -33,7 +33,7 @@ class CreateHorse extends Request {
         $rules = [
             'name' => 'required',
             'date_of_birth' => 'date_format:d/m/Y',
-            'profile_pic' => 'mimes:jpg,jpeg,JPG,JPEG',
+            'profile_pic' => 'image',
         ];
 
         if ($this->has('life_number') && $horse = $this->horses->findByLifeNumber($this->get('life_number'))) {
