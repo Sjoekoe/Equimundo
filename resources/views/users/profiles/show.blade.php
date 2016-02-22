@@ -162,7 +162,9 @@
 
                         <!-- Profile Details -->
                         <li class="list-group-item list-item-sm">
-                            <i class="fa fa-home fa-fw"></i> {{ trans('countries.' . $user->country()) }}
+                            @if ($user->country())
+                                <i class="fa fa-home fa-fw"></i> {{ trans('countries.' . $user->country()) }}
+                            @endif
                         </li>
                         <li class="list-group-item list-item-sm">
                             <i class="fa fa-clock-o fa-fw"></i> Member since {{ eqm_translated_date($user->created_at)->diffForHumans() }}
