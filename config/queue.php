@@ -62,7 +62,7 @@ return [
             'host'    => 'mq-aws-eu-west-1-1.iron.io',
             'token'   => 'mDIRGUW94WyGvcHuUarC',
             'project' => '56c87e41d2c992000600003b',
-            'queue'   => 'EQM',
+            'queue'   => 'EQM2',
             'encrypt' => true,
         ],
 
