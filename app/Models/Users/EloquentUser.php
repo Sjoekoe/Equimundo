@@ -53,6 +53,7 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
         'twitter',
         'facebook',
         'website',
+        'activation_key'
     ];
 
     /**
@@ -471,5 +472,13 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
     public function website()
     {
         return $this->website;
+    }
+
+    /**
+     * @return string
+     */
+    public function activationKey()
+    {
+        return $this->activation_key;
     }
 }

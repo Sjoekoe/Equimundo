@@ -217,4 +217,9 @@ interface User
      * @return string
      */
     public function website();
+
+    /**
+     * @return string
+     */
+    public function activationKey();
 }
