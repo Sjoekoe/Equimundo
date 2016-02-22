@@ -35,7 +35,7 @@ class Kernel extends HttpKernel {
         'auth' => 'EQM\Http\Middleware\Authenticate',
         'auth.basic' => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
         'guest' => 'EQM\Http\Middleware\RedirectIfAuthenticated',
-        'admin' => 'EQM\Http\MiddleWare\Admin',
+        'admin' => 'EQM\Http\Middleware\Admin',
     ];
 
 }
