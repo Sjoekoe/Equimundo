@@ -15,6 +15,7 @@
 		"guzzlehttp/guzzle": "^6.1",
 		"intervention/imagecache": "^2.3",
 		"bugsnag/bugsnag-laravel": "1.*",
+		"barryvdh/laravel-debugbar": "^2.0",
 		"iron-io/iron_mq": "~4.0"
 	},
 	"require-dev": {
@@ -23,7 +24,6 @@
 		"phpspec/phpspec": "~2.1",
         "mockery/mockery": "dev-master",
 		"laravel/homestead": "^2.1",
-		"barryvdh/laravel-debugbar": "^2.0",
 		"hamcrest/hamcrest-php": "^1.2"
 	},
 	"autoload": {
