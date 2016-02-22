@@ -17,21 +17,21 @@
                             <div class="form-group">
                                 <div class="input-group {{ $errors->has('first_name') ? 'has-error' : '' }}">
                                     <div class="input-group-addon"><i class="fa fa-male"></i></div>
-                                    {{ Form::text('first_name', null, ['class' => 'form-control', 'placeholder' => 'First name']) }}
+                                    {{ Form::text('first_name', null, ['class' => 'form-control', 'placeholder' => 'First name', 'tabindex' => 1]) }}
                                 </div>
                                 @include('layout.partials._error_message', ['field' => 'first_name'])
                             </div>
                             <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
-                                    {{ Form::password('password', ['class' => 'form-control', 'placeholder' => 'Password']) }}
+                                    {{ Form::password('password', ['class' => 'form-control', 'placeholder' => 'Password', 'tabindex' => 4]) }}
                                 </div>
                                 @include('layout.partials._error_message', ['field' => 'password'])
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
-                                    {{ Form::password('password_confirmation', ['class' => 'form-control', 'placeholder' => 'Confirm Password']) }}
+                                    {{ Form::password('password_confirmation', ['class' => 'form-control', 'placeholder' => 'Confirm Password', 'tabIndex' => 5]) }}
                                 </div>
                             </div>
                         </div>
@@ -39,14 +39,14 @@
                             <div class="form-group {{ $errors->has('last_name') ? 'has-error' : '' }}">
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-male"></i></div>
-                                    {{ Form::text('last_name', null, ['class' => 'form-control', 'placeholder' => 'Last name']) }}
+                                    {{ Form::text('last_name', null, ['class' => 'form-control', 'placeholder' => 'Last name', 'tabindex' => 2]) }}
                                 </div>
                                 @include('layout.partials._error_message', ['field' => 'last_name'])
                             </div>
                             <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
-                                    {{ Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'E-mail']) }}
+                                    {{ Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'E-mail', 'tabindex' => 3]) }}
                                 </div>
                                 @include('layout.partials._error_message', ['field' => 'email'])
                             </div>
