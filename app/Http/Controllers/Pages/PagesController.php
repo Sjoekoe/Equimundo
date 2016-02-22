@@ -6,6 +6,7 @@ use EQM\Models\Horses\HorseCollection;
 use EQM\Models\Horses\HorseRepository;
 use EQM\Models\Statuses\Likes\LikeRepository;
 use EQM\Models\Statuses\StatusRepository;
+use Queue;
 
 class PagesController extends Controller
 {
@@ -65,5 +66,10 @@ class PagesController extends Controller
     public function privacy()
     {
         return view('pages.privacy');
+    }
+
+    public function queue()
+    {
+        return Queue::marshal();
     }
 }
