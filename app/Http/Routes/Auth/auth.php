@@ -5,7 +5,7 @@ post('register', ['as' => 'register', 'uses' => 'AuthController@postRegister']);
 get('login', ['as' => 'login', 'uses' => 'AuthController@getLogin', 'middleware' => 'guest']);
 post('login', ['as' => 'login', 'uses' => 'AuthController@postLogin']);
 get('logout', ['as' => 'logout', 'uses' => 'AuthController@getLogout', 'middleware' => 'auth']);
-get('activate', ['as' => 'activate', 'uses' => 'ActivationController@activate', 'middleware' => 'guest']);
+get('activate', ['as' => 'activate', 'uses' => 'ActivationController@activate']);
 get('password/forgot', ['as' => 'password.forgot', 'uses' => 'PasswordController@getEmail', 'middleware' => 'guest']);
 post('password/forgot', ['as' => 'password.post_forgot', 'uses' => 'PasswordController@postEmail', 'middleware' => 'guest']);
 get('password/reset/{token}', ['as' => 'password.reset', 'uses' => 'PasswordController@getReset', 'middleware' => 'guest']);

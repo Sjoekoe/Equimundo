@@ -21,7 +21,7 @@ class ActivationController extends Controller
     {
         $user = $this->users->findByEmail($request->get('email'));
 
-        if ($request->get('token') == $user->activationKey()) {
+        if ($user && ($request->get('token') == $user->activationKey())) {
             $this->users->activate($user);
 
             session()->put('success', 'Account activated. You can now login');
