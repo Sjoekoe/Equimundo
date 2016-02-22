@@ -47,7 +47,7 @@ class Uploader
         $extension  = $file->getClientOriginalExtension();
         $path       = '/uploads/pictures/' . $horse->id();
         $fileName   = str_random(12);
-        $pathToFile = storage_path() . '/app' . $path . '/' . $fileName . '.' . $extension;
+        $pathToFile = $path . '/' . $fileName. '.' . $extension;
 
         $picture = $this->pictures->create($file, $horse, $profile, $fileName, $extension);
 
@@ -55,11 +55,11 @@ class Uploader
             $this->file->makeDirectory($path);
         }
 
-        $this->image->cache(function($image) use ($file, $pathToFile) {
-            $image->make($file->getrealpath())->resize(null, 460, function($constraint) {
-                $constraint->aspectRatio();
-            })->orientate()->save($pathToFile);
-        }, 33606);
+        $image = $this->image->make($file->getrealpath())->resize(null, 460, function($constraint) {
+            $constraint->aspectRatio();
+        })->orientate();
+
+        $this->file->disk()->put($pathToFile, $image->stream()->__toString());
 
         return $picture;
     }
