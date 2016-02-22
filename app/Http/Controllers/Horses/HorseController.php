@@ -65,7 +65,7 @@ class HorseController extends Controller
 
         session()->put('success', $horse->name() . ' was successfully created.');
 
-        return redirect()->route('horses.index', auth()->user()->id());
+        return redirect()->route('home');
     }
 
     public function show(Horse $horse)

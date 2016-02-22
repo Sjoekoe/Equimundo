@@ -76,9 +76,9 @@ class HorseCreator
             $horse = $this->createNewHorse($values);
         }
 
-        if (! $pedigree) {
-            $this->albums->createStandardAlbums($horse);
+        $this->albums->createStandardAlbums($horse);
 
+        if (! $pedigree) {
             $this->horseTeams->createOwner($user, $horse);
         }
 

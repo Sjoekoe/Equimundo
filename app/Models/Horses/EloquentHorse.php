@@ -264,7 +264,7 @@ class EloquentHorse extends Model implements Horse
      */
     public function mothersFather()
     {
-        return $this->mother()->father();
+        return $this->mother() ? $this->mother()->father() : null;
     }
 
     /**

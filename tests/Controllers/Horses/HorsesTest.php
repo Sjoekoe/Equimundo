@@ -27,7 +27,7 @@ class HorsesTest extends \TestCase
                 'life_number' => '1234'
             ]);
 
-        $this->assertRedirectedTo('/horses/index/' . $user->id());
+        $this->assertRedirectedTo('/');
         $this->seeInDatabase('horses', [
                 'id' => 1,
                 'name' => 'Foo horse',
