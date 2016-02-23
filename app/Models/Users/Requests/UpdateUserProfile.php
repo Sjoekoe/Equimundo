@@ -24,7 +24,7 @@ class UpdateUserProfile extends Request {
         return [
             'first_name' => 'required',
             'last_name' => 'required',
-            'date_of_birth' => 'date|date_format:d/m/Y',
+            'date_of_birth' => 'date_format:d/m/Y',
             'website' => 'url_host',
         ];
     }
