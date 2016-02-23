@@ -28,6 +28,14 @@
                                 </span>
                             </a>
                         </li>
+                        <li class="{{ Active::route('admin.searches.index', 'active-link') }}">
+                            <a href="{{ route('admin.searches.index') }}">
+                                <i class="fa fa-search"></i>
+                                <span class="menu-title">
+                                    <strong>Searches</strong>
+                                </span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>

@@ -1,6 +1,8 @@
 <?php
 namespace EQM\Core\Factories;
 
+use EQM\Models\Horses\EloquentHorse;
+use EQM\Models\Horses\Horse;
 use EQM\Models\Users\EloquentUser;
 use EQM\Models\Users\User;
 use Illuminate\Database\Eloquent\Factory;
@@ -17,6 +19,7 @@ class EloquentModelFactory implements ModelFactory
      */
     private $models = [
         User::class => EloquentUser::class,
+        Horse::class => EloquentHorse::class,
     ];
 
     /**

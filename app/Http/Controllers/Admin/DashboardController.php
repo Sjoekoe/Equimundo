@@ -3,6 +3,7 @@ namespace EQM\Http\Controllers\Admin;
 
 use EQM\Models\Horses\HorseRepository;
 use EQM\Models\Pedigrees\PedigreeRepository;
+use EQM\Models\Searches\SearchRepository;
 use EQM\Models\Statuses\StatusRepository;
 use EQM\Models\Users\UserRepository;
 use Illuminate\Routing\Controller;
@@ -29,16 +30,23 @@ class DashboardController extends Controller
      */
     private $horses;
 
+    /**
+     * @var \EQM\Models\Searches\SearchRepository
+     */
+    private $searches;
+
     public function __construct(
         UserRepository $users,
         StatusRepository $statuses,
         PedigreeRepository $pedigrees,
-        HorseRepository $horses
+        HorseRepository $horses,
+        SearchRepository $searches
     ) {
         $this->users = $users;
         $this->statuses = $statuses;
         $this->pedigrees = $pedigrees;
         $this->horses = $horses;
+        $this->searches = $searches;
     }
 
     /**
@@ -50,7 +58,8 @@ class DashboardController extends Controller
         $statuses = $this->statuses->count();
         $pedigrees = $this->pedigrees->count();
         $horses = $this->horses->count();
+        $searchResults = $this->searches->count();
 
-        return view('admin.dashboard', compact('users', 'statuses', 'pedigrees', 'horses'));
+        return view('admin.dashboard', compact('users', 'statuses', 'pedigrees', 'horses', 'searchResults'));
     }
 }
