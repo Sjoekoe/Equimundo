@@ -69,9 +69,11 @@
                                         {{ trans('horse_teams.type.' . $team->type()) }}
                                     </dt>
                                     <dd>
-                                        {{ $user->fullName() }}
-                                        @if ($user->id() !== auth()->user()->id())
-                                            <a href="{{ route('conversation.create', ['contact' => $user->id]) }}" class="btn btn-sm btn-mint btn-icon">
+                                        <a href="{{ route('users.profiles.show', $user->id()) }}" class="text-mint">
+                                            {{ $user->fullName() }}
+                                        </a>
+                                        @if (auth()->check() && ($user->id() !== auth()->user()->id()))
+                                            <a href="{{ route('conversation.create', ['contact' => $user->id()]) }}" class="btn btn-sm btn-mint btn-icon">
                                                 <i class="fa fa-envelope"></i>
                                             </a>
                                         @endif
@@ -97,7 +99,7 @@
                                 </div>
                             @endforeach
                         </div>
-                        @if (auth()->user()->isInHorseTeam($horse))
+                        @if (auth()->check() && auth()->user()->isInHorseTeam($horse))
                             <div class="panel-footer text-right">
                                 <a href="{{ route('disciplines.index', $horse->slug()) }}" class="btn btn-info">Add Disciplines</a>
                             </div>

@@ -67,7 +67,10 @@ class EloquentAlbumRepository implements AlbumRepository
      */
     public function update(Album $album, $values)
     {
-        $album->name = $values['name'];
+        if (array_key_exists('name', $values)) {
+            $album->name = $values['name'];
+        }
+
         $album->description = $values['description'];
         $album->save();
 

@@ -7,6 +7,7 @@ machine:
     DB_USERNAME: ubuntu
     DB_PASSWORD:
     DB_DATABASE: circle_test
+    MAIL_PRETEND: true
 dependencies:
   pre:
     - echo "memory_limit = 3000M" >> ~/.phpenv/versions/$(phpenv global)/etc/conf.d/memory.ini
@@ -23,6 +24,8 @@ database:
 test:
   override:
     - ./vendor/bin/phpspec run
-    - ./vendor/bin/phpunit --configuration phpunit.xml --log-json storage/logs/phpunit-unit.log
+    - ./vendor/bin/phpunit --configuration phpunit.xml --testsuite "Controller Test Suite" --log-json storage/logs/phpunit-unit.log
+    - ./vendor/bin/phpunit --configuration phpunit.xml --testsuite "Functional Test Suite" --log-json storage/logs/phpunit-unit.log
+    - ./vendor/bin/phpunit --configuration phpunit.xml --testsuite "Repository Test Suite" --log-json storage/logs/phpunit-unit.log
   post:
     - rsync -r --exclude='.gitignore' ./storage/logs ${CIRCLE_ARTIFACTS}

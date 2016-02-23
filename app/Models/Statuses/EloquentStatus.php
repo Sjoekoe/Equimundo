@@ -1,6 +1,7 @@
 <?php
 namespace EQM\Models\Statuses;
 
+use Carbon\Carbon;
 use EQM\Models\Comments\EloquentComment;
 use EQM\Models\Horses\EloquentHorse;
 use EQM\Models\Palmares\EloquentPalmares;
@@ -118,10 +119,10 @@ class EloquentStatus extends Model implements Status
     }
 
     /**
-     * @return \DateTime
+     * @return \Carbon\Carbon
      */
     public function createdAt()
     {
-        return $this->created_at;
+        return Carbon::instance($this->created_at);
     }
 }

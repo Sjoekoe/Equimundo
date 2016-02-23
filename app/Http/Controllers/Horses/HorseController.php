@@ -66,14 +66,16 @@ class HorseController extends Controller
 
         session()->put('success', $horse->name() . ' was successfully created.');
 
-        return redirect()->route('horses.index', auth()->user()->id());
+        return redirect()->route('home');
     }
 
     public function show(Horse $horse)
     {
         $statuses = $this->statuses->findFeedForHorse($horse);
 
-        $likes = $this->likes->findForUser(auth()->user());
+        if (auth()->check()) {
+            $likes = $this->likes->findForUser(auth()->user());
+        }
 
         JavaScript::put(compact('horse', 'likes', 'statuses'));
 

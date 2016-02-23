@@ -23,7 +23,7 @@ class PostStatus extends Request {
 	{
 		return [
             'horse' => 'required',
-			'status' => 'required|max:2000'
+			'body' => 'required|max:2000',
 		];
 	}
 

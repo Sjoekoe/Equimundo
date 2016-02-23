@@ -12,6 +12,8 @@ interface CommentRepository
      */
     public function findById($id);
 
+    public function findForStatusPaginated(Status $status, $limit = 10);
+
     /**
      * @param \EQM\Models\Statuses\Status $status
      * @param \EQM\Models\Users\User $user

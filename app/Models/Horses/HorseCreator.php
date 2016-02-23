@@ -70,15 +70,15 @@ class HorseCreator
                 $horse = $this->horses->findByLifeNumber($values['life_number']);
                 $horse = $this->horses->update($horse, $values);
             } else {
-                $horse = $this->createNewHorse($values);
+                $horse = $this->createNewHorse($values, $pedigree);
             }
         } else {
-            $horse = $this->createNewHorse($values);
+            $horse = $this->createNewHorse($values, $pedigree);
         }
 
-        if (! $pedigree) {
-            $this->albums->createStandardAlbums($horse);
+        $this->albums->createStandardAlbums($horse);
 
+        if (! $pedigree) {
             $this->horseTeams->createOwner($user, $horse);
         }
 
@@ -93,9 +93,14 @@ class HorseCreator
         return $horse;
     }
 
-    private function createNewHorse(array $values)
+    /**
+     * @param array $values
+     * @param bool $pedigree
+     * @return \EQM\Models\Horses\Horse
+     */
+    private function createNewHorse(array $values, $pedigree)
     {
-        $horse = $this->horses->create($values);
+        $horse = $this->horses->create($values, $pedigree);
 
         $horse->slug = $this->slugCreator->createForHorse($values['name']);
 

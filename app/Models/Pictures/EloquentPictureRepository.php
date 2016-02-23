@@ -61,6 +61,27 @@ class EloquentPictureRepository implements PictureRepository
     }
 
     /**
+     * @param \Symfony\Component\HttpFoundation\File\UploadedFile $file
+     * @param \EQM\Models\Horses\Horse $horse
+     * @param string $fileName
+     * @param string $extension
+     * @return \EQM\Models\Pictures\Picture
+     */
+    public function createVideo(UploadedFile $file, Horse $horse, $fileName, $extension)
+    {
+        $picture = new EloquentPicture();
+        $picture->path = $fileName;
+        $picture->horse_id = $horse->id();
+        $picture->mime = $file->getClientMimeType();
+        $picture->original_name = $file->getClientOriginalName();
+        $picture->profile_pic = false;
+
+        $picture->save();
+
+        return $picture;
+    }
+
+    /**
      * @param \EQM\Models\Pictures\Picture $picture
      */
     public function delete(Picture $picture)

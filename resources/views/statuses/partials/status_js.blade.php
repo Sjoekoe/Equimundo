@@ -16,6 +16,30 @@
 				</div>
 			</div>
 			<p>[[ status.body ]]</p>
+			<div v-for="comment in status.comments.data">
+				<div class="media-block pad-all bg-gray-light">
+                    <div class="media-body">
+                        <div class="mar-btm">
+						</div>
+						<p>[[ comment.body ]]</p>
+					</div>
+					<hr>
+				</div>
+			</div>
+			<div class="media-footer">
+				@if (Auth::check())
+					<div class="media-block pad-ver">
+						<form id="form_[[ status.id ]]" method="POST" v-on:submit= "onSubmitComment($event, status)">
+						<div class="row">
+							<div class="col-sm-12 col-md-11 col-md-offset-1">
+								<textarea id="status_[[ status.id ]]" type="text" class="form-control" name="comment" v-model="newComment.comment[status.id]"></textarea>
+								<button type="submit" class="btn btn-default">Post comment</button>
+							</div>
+						</div>
+						</form>
+					</div>
+				@endif
+			</div>
 		</div>
 	</div>
 </div>

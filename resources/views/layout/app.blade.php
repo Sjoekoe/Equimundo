@@ -4,8 +4,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>EquiMundo</title>
-
+    <meta id="token" name="token" value="{{ csrf_token() }}" />
+    <title>{{ isset($horse) ? $horse->name() . ' at ' : '' }}EquiMundo</title>
+    <meta property="og:url"           content="{{ isset($horse) ? route('horses.show', $horse->slug()) : '' }}" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="{{ isset($horse) ? $horse->name() . ' at ' : '' }}EquiMundo" />
+    <meta property="og:description"   content="The social network for horses" />
+    <meta property="og:image"         content="{{ isset($horse) && $horse->getProfilePicture() ? route('file.picture', $horse->getProfilePicture()->id()) : asset('images/eqm.png') }}" />
     <link href="/css/app.css" rel="stylesheet">
 
     <!-- Fonts -->
@@ -20,6 +25,23 @@
     <![endif]-->
 </head>
 <body>
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '177392809301238',
+                xfbml      : true,
+                version    : 'v2.5'
+            });
+        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
     <div id="container" class="effect mainnav-out">
         @include('layout.partials.nav')
         @if (auth()->check())

@@ -202,4 +202,24 @@ interface User
      * @return bool
      */
     public function activated();
+
+    /**
+     * @return string
+     */
+    public function facebook();
+
+    /**
+     * @return string
+     */
+    public function twitter();
+
+    /**
+     * @return string
+     */
+    public function website();
+
+    /**
+     * @return string
+     */
+    public function activationKey();
 }

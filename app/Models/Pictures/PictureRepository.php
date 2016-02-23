@@ -29,6 +29,15 @@ interface PictureRepository
     public function create(UploadedFile $file, Horse $horse, $profile, $filename, $extension);
 
     /**
+     * @param \Symfony\Component\HttpFoundation\File\UploadedFile $file
+     * @param \EQM\Models\Horses\Horse $horse
+     * @param string $filename
+     * @param string $extension
+     * @return \EQM\Models\Pictures\Picture
+     */
+    public function createVideo(UploadedFile $file, Horse $horse, $filename, $extension);
+
+    /**
      * @param \EQM\Models\Pictures\Picture $picture
      */
     public function delete(Picture $picture);

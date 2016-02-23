@@ -137,9 +137,17 @@ class EloquentHorse extends Model implements Horse
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function pictures()
+    protected function picturesRelation()
     {
         return $this->hasMany(EloquentPicture::class, 'horse_id', 'id');
+    }
+
+    /**
+     * @return \EQM\Models\Pictures\Picture[]
+     */
+    public function pictures()
+    {
+        return $this->picturesRelation()->get();
     }
 
     /**
@@ -256,7 +264,7 @@ class EloquentHorse extends Model implements Horse
      */
     public function mothersFather()
     {
-        return $this->mother()->father();
+        return $this->mother() ? $this->mother()->father() : null;
     }
 
     /**
@@ -272,7 +280,7 @@ class EloquentHorse extends Model implements Horse
      */
     public function getProfilePicture()
     {
-        return $this->pictures->filter(function ($picture) {
+        return $this->picturesRelation->filter(function ($picture) {
             return $picture->profilePicture() == true;
         })->first();
     }
@@ -282,7 +290,7 @@ class EloquentHorse extends Model implements Horse
      */
     public function getHeaderImage()
     {
-        return $this->pictures->filter(function ($picture) {
+        return $this->picturesRelation->filter(function ($picture) {
             return $picture->headerImage() == true;
         })->first();
     }
@@ -345,5 +353,21 @@ class EloquentHorse extends Model implements Horse
                 return $album;
             }
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function wistiaKey()
+    {
+        return $this->wistia_project_id;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasWistiaKey()
+    {
+        return $this->wistiaKey() !== null;
     }
 }

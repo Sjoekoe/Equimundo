@@ -4,8 +4,8 @@
     "laravel-elixir": "*"
   },
   "dependencies": {
-    "bootflat": "^2.0.4",
     "bootstrap-sass": "^3.3.6",
-    "bootstrap-select": "^1.9.3"
+    "bootstrap-select": "^1.9.3",
+    "lightbox2": "^2.8.2"
   }
 }

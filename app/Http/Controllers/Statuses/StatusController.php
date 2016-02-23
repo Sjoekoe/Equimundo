@@ -24,7 +24,10 @@ class StatusController extends Controller
 		$this->statuses = $statuses;
 		$this->likes = $likes;
 
-	}
+    public function store(PostStatus $request, StatusCreator $creator)
+    {
+        ini_set('upload_max_filesize', '350M');
+        ini_set('post_max_size', '350M');
 
 	public function store(PostStatus $request, StatusCreator $creator)
 	{

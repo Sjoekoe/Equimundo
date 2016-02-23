@@ -75,6 +75,8 @@ return [
     "unique"         => ":attribute is al in gebruik.",
     "url"            => ":attribute is geen geldige URL.",
 
+    'url_host' => ':attribute is geen geldige URL.',
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines

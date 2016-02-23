@@ -3,6 +3,7 @@ namespace EQM\Models\Statuses;
 
 use EQM\Core\Files\Uploader;
 use EQM\Models\Albums\Album;
+use EQM\Models\Horses\Horse;
 use EQM\Models\Horses\HorseRepository;
 
 class StatusCreator
@@ -41,9 +42,26 @@ class StatusCreator
     public function create($values)
     {
         $horse = $this->horses->findById($values['horse']);
-        $status = $this->statuses->create($horse, $values['status']);
-        $horse = $this->horses->findById($values['horse']);
+        $status = $this->statuses->create($horse, $values['body']);
 
+        $this->addPicture($horse, $status, $values);
+        $this->addMovie($horse, $status, $values);
+
+        return $status;
+    }
+
+    public function createForPalmares(Horse $horse, $values)
+    {
+        $status = $this->statuses->createForPalmares($horse, $values['body']);
+
+        $this->addPicture($horse, $status, $values);
+        $this->addMovie($horse, $status, $values);
+
+        return $status;
+    }
+
+    private function addPicture(Horse $horse, Status $status, array $values)
+    {
         if (array_key_exists('picture', $values)) {
             $picture = $this->uploader->uploadPicture($values['picture'], $horse);
 
@@ -52,7 +70,10 @@ class StatusCreator
 
             $status->save();
         }
+    }
 
+    private function addMovie(Horse $horse, Status $status, $values)
+    {
         if (array_key_exists('movie', $values)) {
             $movie = $this->uploader->uploadMovie($values['movie'], $horse);
 
@@ -60,7 +81,5 @@ class StatusCreator
 
             $status->save();
         }
-
-        return $status;
     }
 }

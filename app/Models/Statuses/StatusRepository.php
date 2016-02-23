@@ -24,6 +24,8 @@ interface StatusRepository
      */
     public function findFeedForUser(User $user);
 
+    public function findFeedForUserPaginated(User $user, $limit = 10);
+
     /**
      * @param \EQM\Models\Horses\Horse $horse
      * @return \EQM\Models\Statuses\Status[]

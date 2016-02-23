@@ -1,38 +1,38 @@
 @extends('layout.app')
 
 <?php
-	var_dump($horse->slug);
+	var_dump($horse->id());
 ?>
 
 @section('content')
-    <div class="page-content">
-        @include('layout.partials.heading')
+	<div class="page-content">
+		@include('layout.partials.heading')
 
-        <div class="col-lg-7 col-lg-offset-2" id="status-overview">
+		<div class="col-lg-7 col-lg-offset-2" id="status-overview">
 
 
-        	<div v-for="status in statuses">
-				<h2> [[ status.id ]] </h2>
+			<div v-for="status in statuses">
 				@include('statuses.partials.status_js')
-        	</div>
-        	<pre>
-        		[[ $data | json ]]
-        	</pre>
+			</div>
+			<pre>
+				[[ horse.data.statuses ]]
+				[[ $data | json ]]
+			</pre>
 
 
-            @if (! count($horse->statuses()))
-                <p>{{ trans('copy.p.no_statuses') }}</p>
-            @else
-                @foreach($horse->statuses() as $status)
-                    @include('statuses.partials.status')
-                	}
-                @endforeach
-            @endif
-        </div>
-    </div>
-    <script>
-    	var horse = {{ json_encode($horse) }};
-    	var statuses = {{ json_encode($horse->statuses()) }};
-    	console.log(horse);
-    </script>
+			@if (! count($horse->statuses()))
+				<p>{{ trans('copy.p.no_statuses') }}</p>
+			@else
+				@foreach($horse->statuses() as $status)
+					@include('statuses.partials.status')
+					}
+				@endforeach
+			@endif
+		</div>
+	</div>
+	<script>
+		var horse_id = {{ $horse->id() }};
+		var horse = {{ json_encode($horse) }};
+		var statuses = {{ json_encode($horse->statuses()) }};
+	</script>
 @stop

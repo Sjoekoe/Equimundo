@@ -30,8 +30,9 @@ class EloquentUserRepository implements UserRepository
             'last_name' => $values['last_name'],
             'email' => $values['email'],
             'password' => bcrypt($values['password']),
-            'remember_token' => $values['activationCode'],
+            'activation_key' => $values['activationCode'],
             'language' => 'en',
+            'gender' => $values['gender'],
         ]);
 
         $user->save();
@@ -45,7 +46,7 @@ class EloquentUserRepository implements UserRepository
      */
     public function activate(User $user)
     {
-        $user->actived = true;
+        $user->activated = true;
         $user->save();
 
         return $user;
@@ -67,7 +68,11 @@ class EloquentUserRepository implements UserRepository
             $user->date_of_birth = Carbon::createFromFormat('d/m/Y', $values['date_of_birth'])->startOfDay();
         }
 
-        $user->about = $values['about'];
+        $user->about = array_get($values, 'about');
+        $user->facebook = array_get($values, 'facebook');
+        $user->twitter = array_get($values, 'twitter');
+        $user->website = array_get($values, 'website');
+
         $user->save();
 
         return $user;

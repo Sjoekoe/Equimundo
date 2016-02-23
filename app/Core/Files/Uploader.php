@@ -1,6 +1,7 @@
 <?php
 namespace EQM\Core\Files;
 
+use EQM\Core\Movies\EQMWistia;
 use EQM\Models\Horses\Horse;
 use EQM\Models\Pictures\PictureRepository;
 use Illuminate\Contracts\Filesystem\Factory as Filesystem;
@@ -39,14 +40,16 @@ class Uploader
      * @param \Symfony\Component\HttpFoundation\File\UploadedFile $file
      * @param \EQM\Models\Horses\Horse $horse
      * @param bool $profile
+     * @param bool $headerImage
      * @return \EQM\Models\Pictures\Picture
      */
-    public function uploadPicture($file, Horse $horse, $profile = false)
+    public function uploadPicture($file, Horse $horse, $profile = false, $headerImage = false)
     {
         $extension  = $file->getClientOriginalExtension();
         $path       = '/uploads/pictures/' . $horse->id();
         $fileName   = str_random(12);
-        $pathToFile = storage_path() . '/app' . $path . '/' . $fileName . '.' . $extension;
+        $pathToFile = $path . '/' . $fileName. '.' . $extension;
+        $width = $headerImage ? 1500 : 460;
 
         $picture = $this->pictures->create($file, $horse, $profile, $fileName, $extension);
 
@@ -54,25 +57,29 @@ class Uploader
             $this->file->makeDirectory($path);
         }
 
-        $this->image->make($file->getrealpath())->orientate()->save($pathToFile);
+        $image = $this->image->make($file->getrealpath())->resize(null, $width, function($constraint) {
+            $constraint->aspectRatio();
+        })->orientate();
+
+        $this->file->disk()->put($pathToFile, $image->stream()->__toString());
 
         return $picture;
     }
 
     public function uploadMovie($file, Horse $horse)
     {
-        $extension  = $file->getClientOriginalExtension();
-        $path       = '/uploads/pictures/' . $horse->id();
-        $fileName   = str_random(12);
-        $pathToFile = $path . '/' . $fileName . '.' . $extension;
+        if (! $horse->hasWistiaKey()) {
+            $wistiaKey = (new EQMWistia(env('WISTIA_API')))->createProject(['name' => $horse->slug()]);
 
-        $movie = $this->pictures->create($file, $horse, false, $fileName, $extension);
-
-        if ( ! file_exists(storage_path() . $path) ) {
-            $this->file->makeDirectory($path);
+            $horse->wistia_project_id = $wistiaKey->hashedId;
+            $horse->save();
         }
 
-        $this->file->disk()->put($pathToFile, file_get_contents($file));
+        $extension  = $file->getClientOriginalExtension();
+        $uploadedFile = (new EQMWistia(env('WISTIA_API')))->uploadVideo($file, $horse->wistiaKey());
+        $fileName = $uploadedFile->hashed_id;
+
+        $movie = $this->pictures->createVideo($file, $horse, $fileName, $extension);
 
         return $movie;
     }

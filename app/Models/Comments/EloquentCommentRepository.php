@@ -1,6 +1,7 @@
 <?php
 namespace EQM\Models\Comments;
 
+use EQM\Core\Helpers\StatusConvertor;
 use EQM\Models\Statuses\Status;
 use EQM\Models\Users\User;
 
@@ -28,6 +29,11 @@ class EloquentCommentRepository implements CommentRepository
         return $this->comment->where('id', $id)->firstOrFail();
     }
 
+    public function findForStatusPaginated(Status $status, $limit = 10)
+    {
+        return $this->comment->where('status_id', $status->id())->latest()->paginate($limit);
+    }
+
     /**
      * @param \EQM\Models\Statuses\Status $status
      * @param \EQM\Models\Users\User $user
@@ -38,7 +44,7 @@ class EloquentCommentRepository implements CommentRepository
     {
         $comment = new EloquentComment();
         $comment->status_id = $status->id();
-        $comment->body = $body;
+        $comment->body = (new StatusConvertor())->convert($body);
         $comment->user_id = $user->id;
 
         $comment->save();
@@ -53,7 +59,7 @@ class EloquentCommentRepository implements CommentRepository
      */
     public function update(Comment $comment, $body)
     {
-        $comment->body = $body;
+        $comment->body = (new StatusConvertor())->convert($body);
         $comment->save();
 
         return $comment;

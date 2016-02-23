@@ -3,3 +3,4 @@ suites:
         namespace: EQM
         psr4_prefix: EQM
         src_path: app
+        spec_path: tests

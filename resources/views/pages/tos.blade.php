@@ -49,9 +49,9 @@
             </p>
             <h1><div class="small">2. Privacy</div></h1>
             <p>
-                Any information that you or other users provide to Equimundo is subject to our Privacy Policy, which governs
+                Any information that you or other users provide to Equimundo is subject to our <a href="{{ route('privacy') }}" class="text-mint">Privacy Policy</a>, which governs
                 our collection and use of your information. You understand that through your use of the Services you
-                consent to the collection and use (as set forth in the Privacy Policy) of this information, including the
+                consent to the collection and use (as set forth in the <a href="{{ route('privacy') }}" class="text-mint">Privacy Policy</a>) of this information, including the
                 transfer of this information to Belgium, and/or other countries for storage, processing
                 and use by Equimundo. As part of providing you the Services, we may need to provide you with certain communications,
                 such as service announcements and administrative messages. These communications are considered part of the
@@ -291,7 +291,7 @@
             </p>
             <h4>C. Entire Agreement</h4>
             <p>
-                These Terms, including our Privacy Policy are the entire and exclusive agreement between Equimundo and
+                These Terms, including our <a href="{{ route('privacy') }}" class="text-mint">Privacy Policy</a> are the entire and exclusive agreement between Equimundo and
                 you regarding the Services (excluding any services for which you have a separate agreement with Equimundo
                 that is explicitly in addition or in place of these Terms), and these Terms supersede and replace any
                 prior agreements between Equimundo and you regarding the Services. Other than members of the group of

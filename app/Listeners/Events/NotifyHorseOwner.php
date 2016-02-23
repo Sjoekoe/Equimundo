@@ -1,6 +1,7 @@
 <?php
 namespace EQM\Listeners\Events;
 
+use EQM\Core\Mailers\UserMailer;
 use EQM\Events\PedigreeWasCreated;
 use EQM\Models\Notifications\NotificationRepository;
 
@@ -12,11 +13,18 @@ class NotifyHorseOwner
     private $notifications;
 
     /**
-     * @param \EQM\Models\Notifications\NotificationRepository $notifications
+     * @var \EQM\Core\Mailers\UserMailer
      */
-    public function __construct(NotificationRepository $notifications)
+    private $mailer;
+
+    /**
+     * @param \EQM\Models\Notifications\NotificationRepository $notifications
+     * @param \EQM\Core\Mailers\UserMailer $mailer
+     */
+    public function __construct(NotificationRepository $notifications, UserMailer $mailer)
     {
         $this->notifications = $notifications;
+        $this->mailer = $mailer;
     }
 
     /**
@@ -24,9 +32,14 @@ class NotifyHorseOwner
      */
     public function handle(PedigreeWasCreated $event)
     {
-        if ($event->family->userTeams()) {
-            foreach ($event->family->userTeams() as $userTeam) {
-                $this->notifications->create($event->horse->owner()->id(), $userTeam->user()->id(), $event->notification, $event->horse, $event->data);
+        if (count($event->family->userTeams())) {
+            foreach ($event->family->userTeams as $userTeam) {
+                $user = $userTeam->user()->first();
+                $this->notifications->create(auth()->user(), $user, $event->notification, $event->horse, $event->data);
+
+                if ($user->emailNotifications()) {
+                    $this->mailer->sendPedigreeCreated($user, $event->family, $event->horse, auth()->user());
+                }
             }
         }
     }

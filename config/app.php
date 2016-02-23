@@ -134,6 +134,7 @@ return [
         /*
          * Application Service Providers...
          */
+        EQM\Core\Factories\ModelFactoryServiceProvider::class,
         EQM\Providers\AppServiceProvider::class,
         EQM\Providers\AuthServiceProvider::class,
         EQM\Providers\BusServiceProvider::class,
@@ -145,6 +146,8 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Jenssegers\Date\DateServiceProvider::class,
         EQM\Core\Dates\DateServiceProvider::class,
+        EQM\Http\HttpServiceProvider::class,
+        Bugsnag\BugsnagLaravel\BugsnagLaravelServiceProvider::class,
 
         /*
          * Model Service Providers
@@ -217,5 +220,6 @@ return [
         'Html'      => Illuminate\Html\HtmlFacade::class,
         'Image'     => Intervention\Image\Facades\Image::class,
         'Active'    => HieuLe\Active\Facades\Active::class,
+        'Bugsnag' => Bugsnag\BugsnagLaravel\BugsnagFacade::class,
     ],
 ];

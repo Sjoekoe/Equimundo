@@ -9,7 +9,7 @@
             <div class="col-sm-12">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        {{ Form::open() }}
+                        {{ Form::open(['files' => true]) }}
                             <div class="row">
                                 <div class="col-sm-3">
                                     <div class="form-group">
@@ -60,7 +60,7 @@
                                         {{ Form::label('profile_pic', trans('forms.labels.profile_picture'), ['class' => 'control-label']) }}
                                         <br>
                                         <span class="pull-left btn btn-mint btn-file">
-                                            {{ trans('copy.span.file') }} {{ Form::file('profile_pic', ['class' => 'form-control']) }}
+                                            {{ trans('copy.span.file') }} <input type="file" name="profile_pic">
                                         </span>
                                         @include('layout.partials._error_message', ['field' => 'profile_pic'])
                                     </div>

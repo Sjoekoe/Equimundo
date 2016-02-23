@@ -7,18 +7,27 @@
 	"require": {
 		"laravel/framework": "5.1.*",
 		"illuminate/html": "~5.0",
-        "intervention/image": "2.1.*",
+        "intervention/image": "~2.1",
         "hieu-le/active": "~2.0",
 		"pusher/pusher-php-server": "~2.0",
 		"jenssegers/date": "^3.0",
-		"laracasts/utilities" : "~2.0"
+		"laracasts/utilities" : "~2.0",
+		"league/fractal": "^0.13.0",
+		"guzzlehttp/guzzle": "^6.1",
+		"intervention/imagecache": "^2.3",
+		"bugsnag/bugsnag-laravel": "1.*",
+		"iron-io/iron_mq": "~4.0",
+		"barryvdh/laravel-debugbar": "2.*",
+		"aws/aws-sdk-php": "^3.15",
+		"league/flysystem-aws-s3-v3": "~1.0",
+		"pda/pheanstalk": "~3.0"
 	},
 	"require-dev": {
 	  	"fzaninotto/faker": "~1.4",
 		"phpunit/phpunit": "~4.0",
 		"phpspec/phpspec": "~2.1",
 		"laravel/homestead": "^2.1",
-		"barryvdh/laravel-debugbar": "^2.0"
+		"hamcrest/hamcrest-php": "^1.2"
 	},
 	"autoload": {
 		"classmap": [

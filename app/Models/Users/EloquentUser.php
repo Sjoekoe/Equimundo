@@ -49,7 +49,11 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
         'remember_token',
         'date_format',
         'email_notifications',
-        'language'
+        'language',
+        'twitter',
+        'facebook',
+        'website',
+        'activation_key'
     ];
 
     /**
@@ -444,5 +448,37 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
     public function activated()
     {
         return $this->activated;
+    }
+
+    /**
+     * @return string
+     */
+    public function facebook()
+    {
+        return $this->facebook;
+    }
+
+    /**
+     * @return string
+     */
+    public function twitter()
+    {
+        return $this->twitter;
+    }
+
+    /**
+     * @return string
+     */
+    public function website()
+    {
+        return $this->website;
+    }
+
+    /**
+     * @return string
+     */
+    public function activationKey()
+    {
+        return $this->activation_key;
     }
 }

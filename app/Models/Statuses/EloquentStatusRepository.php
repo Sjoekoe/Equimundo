@@ -1,6 +1,7 @@
 <?php
 namespace EQM\Models\Statuses;
 
+use EQM\Core\Helpers\StatusConvertor;
 use EQM\Models\Horses\Horse;
 use EQM\Models\Users\User;
 
@@ -43,7 +44,7 @@ class EloquentStatusRepository implements StatusRepository
      */
     public function findFeedForUser(User $user)
     {
-        $followIds = $user->follows()->lists('horse_id');
+        $followIds = $user->follows()->lists('id');
 
         $horseIds = $followIds->toArray();
 
@@ -52,6 +53,24 @@ class EloquentStatusRepository implements StatusRepository
         }
 
         return $this->status->whereIn('horse_id', array_flatten($horseIds))->latest()->get();
+    }
+
+    /**
+     * @param \EQM\Models\Users\User $user
+     * @param int $limit
+     * @return mixed
+     */
+    public function findFeedForUserPaginated(User $user, $limit = 10)
+    {
+        $followIds = $user->follows()->lists('id');
+
+        $horseIds = $followIds->toArray();
+
+        foreach ($user->horses() as $horse) {
+            array_push($horseIds, $horse->id());
+        }
+
+        return $this->status->whereIn('horse_id', array_flatten($horseIds))->latest()->paginate($limit);
     }
 
     /**
@@ -72,7 +91,7 @@ class EloquentStatusRepository implements StatusRepository
     public function create(Horse $horse, $body, $prefix = null)
     {
         $status = new EloquentStatus();
-        $status->body = $body;
+        $status->body = (new StatusConvertor())->convert($body);
         $status->horse_id = $horse->id();
         $status->prefix = $prefix;
 
@@ -88,9 +107,11 @@ class EloquentStatusRepository implements StatusRepository
      */
     public function update(Status $status, array $values = [])
     {
-        $status->body = $values['status'];
+        $status->body = (new StatusConvertor())->convert($values['body']);
 
         $status->save();
+
+        return $status;
     }
 
     /**
