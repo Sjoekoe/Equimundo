@@ -36,7 +36,7 @@
                             </div>
                             <div class="col-sm-6">
                                 {{ Form::label('height', trans('forms.labels.height'), ['class' => 'control-label']) }}
-                                {{ Form::text('height', null, ['class' => 'form-control']) }}
+                                {{ Form::select('height', config('heights.eur'), null, ['class' => 'form-control selectPicker']) }}
                             </div>
                         </div>
                         <div class="row">
