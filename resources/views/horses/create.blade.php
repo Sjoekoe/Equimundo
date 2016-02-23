@@ -29,7 +29,7 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         {{ Form::label('height', trans('forms.labels.height'), ['class' => 'control-label']) }}
-                                        {{ Form::text('height', null, ['class' => 'form-control']) }}
+                                        {{ Form::select('height', config('heights.eur'), null, ['class' => 'form-control selectPicker']) }}
                                         @include('layout.partials._error_message', ['field' => 'height'])
                                     </div>
                                     <div class="form-group">

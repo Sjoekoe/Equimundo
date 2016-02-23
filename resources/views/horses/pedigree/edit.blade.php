@@ -40,7 +40,7 @@
         <div class="row">
             <div class="col s6 input-field">
                 {{ Form::label('height', trans('forms.labels.height')) }}
-                {{ Form::text('height', $horse->height()) }}
+                {{ Form::select('height',config('heights.eur'),  $horse->height(), ['class' => 'form-control selectPicker']) }}
             </div>
             <div class="col s6 input-field">
                 {{ Form::label('life_number', trans('forms.labels.life_number')) }}

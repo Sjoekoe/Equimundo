@@ -36,7 +36,7 @@ $factory->define(EloquentHorse::class, function (Generator $faker) {
         'slug' => 'test-horse',
         'gender' => 1,
         'color' => 1,
-        'height' => '1m70',
+        'height' => 5,
         'breed' => 1,
     ];
 });

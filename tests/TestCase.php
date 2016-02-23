@@ -28,6 +28,5 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 
         $this->artisan('migrate:reset');
         $this->artisan('migrate');
-        $this->artisan('db:seed');
     }
 }

@@ -42,7 +42,7 @@
                                     {{ trans('forms.labels.height') }}
                                 </dt>
                                 <dd>
-                                    {{ $horse->height() }}
+                                    {{ config('heights.eur.' . $horse->height()) }}
                                 </dd>
                                 <dt>
                                     {{ trans('forms.labels.color') }}
