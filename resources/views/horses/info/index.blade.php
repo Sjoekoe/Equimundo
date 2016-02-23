@@ -9,7 +9,7 @@
                     <div class="panel">
                         <div class="panel-heading">
                             <h3 class="panel-title">
-                                General info
+                                {{ trans('copy.titles.general_info') }}
                             </h3>
                         </div>
                         <div class="panel-body">
@@ -42,7 +42,7 @@
                                     {{ trans('forms.labels.height') }}
                                 </dt>
                                 <dd>
-                                    {{ $horse->height() }}
+                                    {{ config('heights.eur.' . $horse->height()) }}
                                 </dd>
                                 <dt>
                                     {{ trans('forms.labels.color') }}
@@ -58,7 +58,7 @@
                     <div class="panel">
                         <div class="panel-heading">
                             <h3 class="panel-title">
-                                Users
+                                {{ trans('copy.titles.users') }}
                             </h3>
                         </div>
                         <div class="panel-body">
@@ -69,7 +69,7 @@
                                         {{ trans('horse_teams.type.' . $team->type()) }}
                                     </dt>
                                     <dd>
-                                        <a href="{{ route('users.profiles.show', $user->id()) }}" class="text-mint">
+                                        <a href="{{ route('users.profiles.show', $user->slug()) }}" class="text-mint">
                                             {{ $user->fullName() }}
                                         </a>
                                         @if (auth()->check() && ($user->id() !== auth()->user()->id()))
@@ -101,7 +101,7 @@
                         </div>
                         @if (auth()->check() && auth()->user()->isInHorseTeam($horse))
                             <div class="panel-footer text-right">
-                                <a href="{{ route('disciplines.index', $horse->slug()) }}" class="btn btn-info">Add Disciplines</a>
+                                <a href="{{ route('disciplines.index', $horse->slug()) }}" class="btn btn-info">{{ trans('copy.a.add_disciplines') }}</a>
                             </div>
                         @endif
                     </div>

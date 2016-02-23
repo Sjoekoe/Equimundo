@@ -59,17 +59,9 @@
                                                                         </p>
                                                                     </li>
                                                                     <li class="col-sm-4">
-                                                                        @if (! auth()->user()->isInHorseTeam($horse))
-                                                                            @if (Auth::user()->isFollowing($horse))
-                                                                                {{ Form::open(['route' => ['follows.destroy', $horse->id()], 'method' => 'DELETE']) }}
-                                                                                <button type="submit" class="btn btn-mint">{{ trans('copy.a.unfollow') . $horse->name() }}</button>
-                                                                                {{ Form::close() }}
-                                                                            @else
-                                                                                {{ Form::open(['route' => ['follows.store', $horse->id()]]) }}
-                                                                                <button type="submit" class="btn btn-mint">{{ trans('copy.a.follow') . $horse->name() }}</button>
-                                                                                {{ Form::close() }}
-                                                                            @endif
-                                                                        @endif
+                                                                        <a href="{{ route('horses.show', $horse->slug()) }}" class="btn btn-mint">
+                                                                            <i class="fa fa-eye"></i>
+                                                                        </a>
                                                                     </li>
                                                                     <li class="col-sm-4">
                                                                         <span class="text-lg">{{ count($horse->followers()) }}</span>
@@ -86,7 +78,7 @@
                                         </div>
                                     @endforeach
                                     <div class="text-right">
-                                        pagination
+
                                     </div>
                                 @else
                                     <p>{{ trans('copy.p.no_horses_found') }}</p>
@@ -114,7 +106,7 @@
                                                                 {{ $profile->about() }}
                                                             </p>
                                                             <div class="pad-ver">
-                                                                <a href="{{ route('users.profiles.show', $profile->id()) }}" class="btn btn-primary">Show profile</a>
+                                                                <a href="{{ route('users.profiles.show', $profile->slug()) }}" class="btn btn-primary">Show profile</a>
                                                                 <a href="{{ route('conversation.create', ['contact' => $profile->id()]) }}" class="btn btn-mint">
                                                                     {{ trans('copy.a.contact_message') }}
                                                                 </a>

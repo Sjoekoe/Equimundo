@@ -25,6 +25,7 @@ $factory->define(EloquentUser::class, function (Generator $faker) {
         'remember_token' => str_random(10),
         'country' => 'BE',
         'gender' => 'M',
+        'slug' => $faker->slug
     ];
 });
 
@@ -36,7 +37,7 @@ $factory->define(EloquentHorse::class, function (Generator $faker) {
         'slug' => 'test-horse',
         'gender' => 1,
         'color' => 1,
-        'height' => '1m70',
+        'height' => 5,
         'breed' => 1,
     ];
 });

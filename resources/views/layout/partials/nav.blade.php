@@ -172,7 +172,7 @@
                                     </li>
                                 @endif
                                 <li>
-                                    <a href="{{ route('users.profiles.show', Auth::user()->id) }}">
+                                    <a href="{{ route('users.profiles.show', auth()->user()->slug()) }}">
                                         <i class="fa fa-user fa-fw fa-lg"></i> {{ trans('copy.titles.profile') }}
                                     </a>
                                 </li>

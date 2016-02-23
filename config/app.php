@@ -148,6 +148,7 @@ return [
         EQM\Core\Dates\DateServiceProvider::class,
         EQM\Http\HttpServiceProvider::class,
         Bugsnag\BugsnagLaravel\BugsnagLaravelServiceProvider::class,
+        Stevebauman\Location\LocationServiceProvider::class,
 
         /*
          * Model Service Providers
@@ -166,6 +167,7 @@ return [
         EQM\Models\Pedigrees\PedigreeServiceProvider::class,
         EQM\Models\Pictures\PictureServiceProvider::class,
         EQM\Models\Roles\RoleServiceProvider::class,
+        EQM\Models\Searches\SearchServiceProvider::class,
         EQM\Models\Statuses\StatusServiceProvider::class,
         EQM\Models\Statuses\Likes\LikeServiceProvider::class,
         EQM\Models\Users\AuthServiceProvider::class,
@@ -221,5 +223,6 @@ return [
         'Image'     => Intervention\Image\Facades\Image::class,
         'Active'    => HieuLe\Active\Facades\Active::class,
         'Bugsnag' => Bugsnag\BugsnagLaravel\BugsnagFacade::class,
+        'Location' => Stevebauman\Location\Facades\Location::class,
     ],
 ];

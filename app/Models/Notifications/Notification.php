@@ -7,6 +7,7 @@ interface Notification
     const COMMENT_POSTED = 2;
     const PEDIGREE_CREATED = 3;
     const COMMENT_LIKED = 4;
+    const HORSE_FOLLOWED = 5;
 
     /**
      * @return int

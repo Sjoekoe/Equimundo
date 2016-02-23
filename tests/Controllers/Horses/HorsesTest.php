@@ -22,7 +22,7 @@ class HorsesTest extends \TestCase
                 'gender' => 1,
                 'color' => 1,
                 'date_of_birth' => '08/06/1982',
-                'height' => '1m70',
+                'height' => 5,
                 'breed' => 1,
                 'life_number' => '1234'
             ]);
@@ -33,7 +33,7 @@ class HorsesTest extends \TestCase
                 'name' => 'Foo horse',
                 'life_number' => '1234',
                 'date_of_birth' => '1982-06-08 00:00:00',
-                'height' => '1m70',
+                'height' => 5,
                 'breed' => 1,
                 'gender' => 1,
                 'color' => 1
@@ -64,7 +64,7 @@ class HorsesTest extends \TestCase
                 'gender' => 1,
                 'color' => 1,
                 'date_of_birth' => $now->format('d/m/Y'),
-                'height' => '1m70',
+                'height' => 5,
                 'breed' => 1,
                 'life_number' => '1234'
             ]);
@@ -75,7 +75,7 @@ class HorsesTest extends \TestCase
             'name' => 'Foo horse',
             'life_number' => '1234',
             'date_of_birth' => $now->toIso8601String(),
-            'height' => '1m70',
+            'height' => 5,
             'breed' => 1,
             'gender' => 1,
             'color' => 1

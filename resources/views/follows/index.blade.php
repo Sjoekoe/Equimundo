@@ -23,7 +23,7 @@
                                         {{ $follower->about() }}
                                     </p>
                                     <div class="pad-ver">
-                                        <a href="{{ route('users.profiles.show', $follower->id()) }}" class="btn btn-primary">Show profile</a>
+                                        <a href="{{ route('users.profiles.show', $follower->slug()) }}" class="btn btn-primary">Show profile</a>
                                         <a href="{{ route('conversation.create', ['contact' => $follower->id()]) }}" class="btn btn-mint">
                                             {{ trans('copy.a.contact_message') }}
                                         </a>

@@ -3,6 +3,7 @@
 return [
     'titles' => [
         'about_you' => 'Over Uzelf',
+        'about_me' => 'Over Mij',
         'count_messages' => 'Je hebt :0 ongelezen berichten',
         'create_horse' => 'Creëer een paard',
         'create_palmares' => 'Palmares toevoegen',
@@ -11,10 +12,12 @@ return [
         'edit' => 'Wijzig',
         'edit_profile' => 'Profiel aanpassen',
         'following' => 'Volgend',
+        'general_info' => 'Algemene info',
         'go_to_inbox' => 'Ga naar je inbox',
         'horse_count' => 'Je hebt :0 paarden',
         'horses' => 'Paarden',
         'horses_of' => 'Paarden van',
+        'member_since' => 'Lid sinds',
         'messages' => 'Berichten',
         'profile' => 'Profiel',
         'results' => 'Resultaten',
@@ -35,6 +38,7 @@ return [
         'life_number' => 'Levensnummer',
         'no_conversations' => 'Je hebt geen conversaties',
         'no_horses_found' => 'Geen paarden gevonden',
+        'no_notifications' => 'Geen meldingen',
         'no_palmares' => 'heeft nog geen palmares',
         'no_statuses' => 'Er zijn nog geen statusen',
         'no_users_found' => 'Geen gebruikers gevonden',
@@ -46,6 +50,7 @@ return [
 
     'a' => [
         'add_achievement' => 'Voeg prestatie toe',
+        'add_disciplines' => 'Disciplines toevoegen',
         'add_family' => 'Familie toevoegen',
         'add_father' => 'Vader toevoegen',
         'add_father_father' => 'Vaders vader toevoegen',

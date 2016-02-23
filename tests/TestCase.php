@@ -1,6 +1,10 @@
 <?php
 
+use Carbon\Carbon;
 use EQM\Core\Factories\BuildModels;
+use EQM\Core\Factories\ModelFactory;
+use EQM\Models\Horses\Horse;
+use EQM\Models\Users\User;
 
 class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
@@ -18,6 +22,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
         $app = require __DIR__.'/../bootstrap/app.php';
 
         $app->make('Illuminate\Contracts\Console\Kernel')->bootstrap();
+        $this->modelFactory = $app->make(ModelFactory::class);
 
         return $app;
     }
@@ -28,6 +33,56 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 
         $this->artisan('migrate:reset');
         $this->artisan('migrate');
-        $this->artisan('db:seed');
+    }
+
+    /**
+     * @param array $attributes
+     * @return \EQM\Models\Users\User
+     */
+    public function createUser(array $attributes = [])
+    {
+        return $this->modelFactory->create(User::class, array_merge([
+            'last_name' => 'Doe',
+            'first_name' => 'John',
+            'email' => 'john.doe@email.com',
+            'language' => 'en',
+            'activated' => true,
+            'password' => bcrypt('password'),
+            'remember_token' => str_random(10),
+            'country' => 'BE',
+            'gender' => 'M',
+            'slug' => 'john.doe'
+        ], $attributes));
+    }
+
+    /**
+     * @param array $attributes
+     * @return \EQM\Models\Users\User
+     */
+    public function loginAsUser(array $attributes = [])
+    {
+        $user = $this->createUser($attributes);
+
+        $this->be($user);
+
+        return $user;
+    }
+
+    /**
+     * @param array $attributes
+     * @return \EQM\Models\Horses\Horse
+     */
+    public function createHorse(array $attributes = [])
+    {
+        return $this->modelFactory->create(Horse::class, array_merge([
+            'name' => 'test horse',
+            'life_number' => '123456',
+            'date_of_birth' => Carbon::now(),
+            'slug' => 'test-horse',
+            'gender' => Horse::GELDING,
+            'color' => Horse::BAY,
+            'height' => 5,
+            'breed' => Horse::ABTENAUER,
+        ], $attributes));
     }
 }

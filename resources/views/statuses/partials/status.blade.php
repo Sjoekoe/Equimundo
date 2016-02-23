@@ -69,7 +69,7 @@
                     <div class="media-block pad-all bg-gray-light">
                         <div class="media-body">
                             <div class="mar-btm">
-                                <a href="{{ route('users.profiles.show', $comment->poster()->id()) }}" class="btn-link text-mint text-semibold media-heading box-inline">
+                                <a href="{{ route('users.profiles.show', $comment->poster()->slug()) }}" class="btn-link text-mint text-semibold media-heading box-inline">
                                     {{ $comment->poster()->fullName() }}
                                 </a>
                                 <div class="pull-right">

@@ -59,5 +59,20 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-sm-6 col-lg-3">
+                <div class="panel media pad-all">
+                    <div class="media-left">
+                        <span class="icon-wrap icon-wrap-sm icon-circle bg-danger">
+                            <i class="fa fa-search fa-2x"></i>
+                        </span>
+                    </div>
+                    <div class="media-body">
+                        <p class="text-2x mar-no text-thin">{{ $searchResults }}</p>
+                        <p class="text-muted mar-no">Searches performed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @stop
