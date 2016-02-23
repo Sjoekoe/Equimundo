@@ -1,9 +1,12 @@
 <?php
 namespace EQM\Http\Controllers\Horses;
 
+use EQM\Events\HorseWasFollowed;
 use EQM\Http\Controllers\Controller;
 use EQM\Models\Follows\FollowsRepository;
 use EQM\Models\Horses\Horse;
+use EQM\Models\Notifications\Notification;
+use EQM\Models\Notifications\NotificationRepository;
 
 class FollowsController extends Controller
 {
@@ -12,9 +15,15 @@ class FollowsController extends Controller
      */
     private $follows;
 
-    public function __construct(FollowsRepository $follows)
+    /**
+     * @var \EQM\Models\Notifications\NotificationRepository
+     */
+    private $notifications;
+
+    public function __construct(FollowsRepository $follows, NotificationRepository $notifications)
     {
         $this->follows = $follows;
+        $this->notifications = $notifications;
     }
 
     public function index(Horse $horse)
@@ -29,6 +38,13 @@ class FollowsController extends Controller
         $this->authorize('follow-horse', $horse);
 
         auth()->user()->follow($horse);
+
+        event(new HorseWasFollowed(
+            $horse,
+            auth()->user(),
+            Notification::HORSE_FOLLOWED,
+            ['follower' => auth()->user()->fullName(), 'horse' => $horse->name()]
+        ));
 
         session()->put('success', 'You are now following ' . $horse->name());
 

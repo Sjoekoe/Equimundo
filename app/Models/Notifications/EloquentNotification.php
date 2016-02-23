@@ -93,10 +93,13 @@ class EloquentNotification extends Model implements Notification
                 return route('statuses.show', $entity->id());
 
             case self::PEDIGREE_CREATED:
-                return route('horses.show', $entity->slug);
+                return route('horses.show', $entity->slug());
 
             case self::COMMENT_LIKED:
                 return route('statuses.show', $entity->id());
+
+            case self::HORSE_FOLLOWED:
+                return route('users.profiles.show', $entity->slug());
         }
     }
 

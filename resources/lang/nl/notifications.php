@@ -7,4 +7,5 @@ return [
     Notification::COMMENT_POSTED => ':sender heeft gereageerd op een status van :horse.',
     Notification::PEDIGREE_CREATED => ':family is toegevoegd aan de stamboom van :horse.',
     Notification::COMMENT_LIKED => ':liker vindt je commentaar leuk.',
+    Notification::HORSE_FOLLOWED => ':follower volgt :horse',
 ];
