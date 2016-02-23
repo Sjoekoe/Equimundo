@@ -26,7 +26,6 @@
 			@else
 				@foreach($horse->statuses() as $status)
 					@include('statuses.partials.status')
-					}
 				@endforeach
 			@endif
 		</div>
