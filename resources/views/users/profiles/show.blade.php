@@ -75,10 +75,10 @@
                                     <div class="col-sm-4">
                                         <a href="{{ route('horses.show', $follow->slug()) }}">
                                             <div class="panel widget panel-bordered-mint">
-                                                <div class="widget-header" style="background-image: url({{ $horse->getHeaderImage() ? route('file.picture', $horse->getHeaderImage()->id()) : asset('images/header.jpg') }})">
+                                                <div class="widget-header" style="background-image: url({{ $follow->getHeaderImage() ? route('file.picture', $follow->getHeaderImage()->id()) : asset('images/header.jpg') }})">
                                                 </div>
                                                 <div class="widget-body text-center">
-                                                    @if ($horse->getProfilePicture())
+                                                    @if ($follow->getProfilePicture())
                                                         <img alt="Profile Picture" class="widget-img img-circle img-border-light" src="{{ route('file.picture', $follow->getProfilePicture()->id()) }}">
                                                     @else
                                                         <img alt="Profile Picture" class="widget-img img-circle img-border-light" src="{{ asset('images/eqm.png') }}">
@@ -97,7 +97,7 @@
                                                             @if (! auth()->user()->isInHorseTeam($follow))
                                                                 @if (auth()->user()->isFollowing($follow))
                                                                     {{ Form::open(['route' => ['follows.destroy', $follow->id()], 'method' => 'DELETE']) }}
-                                                                    <button type="submit" class="btn btn-mint">{{ trans('copy.a.unfollow') . $horse->name() }}</button>
+                                                                    <button type="submit" class="btn btn-mint">{{ trans('copy.a.unfollow') . $follow->name() }}</button>
                                                                     {{ Form::close() }}
                                                                 @else
                                                                     {{ Form::open(['route' => ['follows.store', $follow->id()]]) }}
