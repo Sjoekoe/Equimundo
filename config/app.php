@@ -147,6 +147,7 @@ return [
         EQM\Core\Dates\DateServiceProvider::class,
         EQM\Http\HttpServiceProvider::class,
         Bugsnag\BugsnagLaravel\BugsnagLaravelServiceProvider::class,
+        Stevebauman\Location\LocationServiceProvider::class,
 
         /*
          * Model Service Providers
@@ -220,5 +221,6 @@ return [
         'Image'     => Intervention\Image\Facades\Image::class,
         'Active'    => HieuLe\Active\Facades\Active::class,
         'Bugsnag' => Bugsnag\BugsnagLaravel\BugsnagFacade::class,
+        'Location' => Stevebauman\Location\Facades\Location::class,
     ],
 ];

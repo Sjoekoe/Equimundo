@@ -3,6 +3,7 @@ namespace EQM\Models\Users;
 
 use Carbon\Carbon;
 use DB;
+use Location;
 
 class EloquentUserRepository implements UserRepository
 {
@@ -33,6 +34,7 @@ class EloquentUserRepository implements UserRepository
             'activation_key' => $values['activationCode'],
             'language' => 'en',
             'gender' => $values['gender'],
+            'country' => Location::get()->countryCode,
         ]);
 
         $user->save();
