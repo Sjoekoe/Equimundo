@@ -9,6 +9,7 @@ use EQM\Models\Palmares\Palmares;
 use EQM\Models\Palmares\PalmaresCreator;
 use EQM\Models\Palmares\PalmaresDeleter;
 use EQM\Models\Palmares\PalmaresRepository;
+use EQM\Models\Palmares\Requests\StorePalmaresRequest;
 use Illuminate\Http\Request;
 
 class PalmaresController extends Controller
@@ -42,8 +43,7 @@ class PalmaresController extends Controller
         return view('horses.palmares.create', compact('horse'));
     }
 
-    // todo add validation
-    public function store(Request $request, PalmaresCreator $creator, Horse $horse)
+    public function store(StorePalmaresRequest $request, PalmaresCreator $creator, Horse $horse)
     {
         ini_set('upload_max_filesize', '350MB');
         ini_set('post_max_size', '350MB');
