@@ -167,12 +167,12 @@
                             @endif
                         </li>
                         <li class="list-group-item list-item-sm">
-                            <i class="fa fa-clock-o fa-fw"></i> Member since {{ eqm_translated_date($user->created_at)->diffForHumans() }}
+                            <i class="fa fa-clock-o fa-fw"></i> {{ trans('copy.titles.member_since') }} : {{ eqm_translated_date($user->created_at)->format('F Y') }}
                         </li>
                     </ul>
                     <hr>
                     <div class="pad-hor">
-                        <h5>About Me</h5>
+                        <h5>{{ trans('copy.titles.about_me') }}</h5>
                         <small class="text-thin">
                             {{ $user->about() }}
                         </small>

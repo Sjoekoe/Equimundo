@@ -20,17 +20,6 @@
             <a href="{{ route('horses.show', $family->slug()) }}" class="btn btn-mint">
                 <i class="fa fa-eye"></i>
             </a>
-            {{--@if (auth()->check() && ! auth()->user()->isInHorseTeam($family))
-                @if (Auth::user()->isFollowing($family))
-                    {{ Form::open(['route' => ['follows.destroy', $family->id()], 'method' => 'DELETE']) }}
-                    <button type="submit" class="btn btn-mint">{{ trans('copy.a.unfollow') . $family->name() }}</button>
-                    {{ Form::close() }}
-                @else
-                    {{ Form::open(['route' => ['follows.store', $family->id()]]) }}
-                    <button type="submit" class="btn btn-mint">{{ trans('copy.a.follow') . $family->name() }}</button>
-                    {{ Form::close() }}
-                @endif
-            @endif--}}
         </li>
         <li class="col-sm-4">
             <span class="text-lg">{{ count($family->followers()) }}</span>

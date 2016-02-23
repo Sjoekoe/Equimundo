@@ -80,7 +80,7 @@
                                                         @else
                                                             <div class="panel-body">
                                                                 @if (auth()->check() && auth()->user()->isInHorseTeam($horse))
-                                                                    <a href="{{ route('pedigree.create', [$horse->slug(), 'type=5']) }}" class="btn btn-mint">{{ trans('copy.a.add_father_mother') }}</a>
+                                                                    <a href="{{ route('pedigree.create', [$horse->slug(), 'type=5']) }}" class="btn btn-mint">{{ trans('copy.a.add_father_father') }}</a>
                                                                 @endif
                                                             </div>
                                                         @endif
