@@ -1,6 +1,7 @@
 <?php
 namespace EQM\Http\Controllers\Search;
 
+use EQM\Events\SearchWasPerformed;
 use EQM\Models\Horses\HorseRepository;
 use EQM\Models\Users\UserRepository;
 use Illuminate\Http\Request;
@@ -33,6 +34,7 @@ class SearchController extends Controller
         $profiles = $this->users->search($searchWord);
 
         $count = count($horses) + count($profiles);
+        event(new SearchWasPerformed($request->get('search'), $count));
 
         return view('searches.index', compact('horses', 'profiles', 'searchWord', 'count'));
     }

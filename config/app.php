@@ -166,6 +166,7 @@ return [
         EQM\Models\Pedigrees\PedigreeServiceProvider::class,
         EQM\Models\Pictures\PictureServiceProvider::class,
         EQM\Models\Roles\RoleServiceProvider::class,
+        EQM\Models\Searches\SearchServiceProvider::class,
         EQM\Models\Statuses\StatusServiceProvider::class,
         EQM\Models\Statuses\Likes\LikeServiceProvider::class,
         EQM\Models\Users\AuthServiceProvider::class,
