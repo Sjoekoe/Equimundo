@@ -2,6 +2,7 @@
 
 use EQM\Events\CommentWasLiked;
 use EQM\Events\CommentWasPosted;
+use EQM\Events\HorseWasFollowed;
 use EQM\Events\PedigreeWasCreated;
 use EQM\Events\StatusLiked;
 use EQM\Events\UserRegistered;
@@ -9,6 +10,7 @@ use EQM\Listeners\Events\EmailRegisteredUser;
 use EQM\Listeners\Events\NotifyCommentPoster;
 use EQM\Listeners\Events\NotifyHorseOwner;
 use EQM\Listeners\Events\NotifyStatusPoster;
+use EQM\Listeners\Events\SendHorseFollowedNotification;
 use EQM\Listeners\Events\Statuses\Likes\EmailHorseOwner;
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -26,6 +28,9 @@ class EventServiceProvider extends ServiceProvider {
         ],
         CommentWasPosted::class => [
             NotifyStatusPoster::class,
+        ],
+        HorseWasFollowed::class => [
+            SendHorseFollowedNotification::class,
         ],
         PedigreeWasCreated::class => [
             NotifyHorseOwner::class,

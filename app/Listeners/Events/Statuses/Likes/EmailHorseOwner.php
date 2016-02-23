@@ -26,7 +26,7 @@ class EmailHorseOwner
     public function handle(StatusLiked $event)
     {
         foreach ($event->status->horse()->users() as $user) {
-            if ($user->id() !== $this->auth->user()->id()) {
+            if ($user->id() !== $this->auth->user()->id() && $user->emailNotifications()) {
                 $this->mailer->sendStatusLikedTo($user, $event->status, $event->sender);
             }
         }
