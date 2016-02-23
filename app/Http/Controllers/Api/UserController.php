@@ -2,6 +2,7 @@
 namespace EQM\Http\Controllers\Api;
 
 use EQM\Api\Statuses\StatusTransformer;
+use EQM\Api\Users\UserTransformer;
 use EQM\Http\Controllers\Controller;
 use EQM\Models\Statuses\StatusRepository;
 use EQM\Models\Users\User;
@@ -9,6 +10,7 @@ use Input;
 use League\Fractal\Manager;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 use League\Fractal\Resource\Collection;
+use League\Fractal\Resource\Item;
 use League\Fractal\Serializer\DataArraySerializer;
 
 class UserController extends Controller
@@ -21,6 +23,16 @@ class UserController extends Controller
     public function __construct(StatusRepository $statuses)
     {
         $this->statuses = $statuses;
+    }
+
+    public function show(User $user)
+    {
+        $manager = new Manager();
+        $manager->setSerializer(new DataArraySerializer());
+        $collection  = new Item($user, new UserTransformer());
+        $result = $manager->createData($collection)->toArray();
+
+        return response($result);
     }
 
     public function feed(User $user)
