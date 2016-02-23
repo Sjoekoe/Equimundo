@@ -44,6 +44,7 @@ class ConversationCreator
         $this->messages->create($conversation, $user, $request->all());
 
         $user->addConversation($conversation);
+        $conversation->markAsRead(auth()->user());
 
         $recipientId = $request->get('contact_id');
 
