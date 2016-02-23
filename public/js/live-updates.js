@@ -17,14 +17,23 @@ new Vue({
 	ready: function(){
 		//this.fetchStatusses();
 		this.fetchHorse();
+		this.fetchUser();
 	},
 
 	methods: {
 
 		fetchHorse: function(){
-			this.$http.get('/api/horses/1', function(horse){
+			this.$http.get('/api/horses/' + horse_id + '', function(horse){
 				this.$set('horse', horse);
 				this.$set('statuses', horse.data.statuses.data);
+			});
+		},
+
+		fetchUser: function(){
+			console.log(user_id);
+
+			this.$http.get('/api/user/' + user_id + '', function(user){
+				this.$set('user', user);
 			});
 		},
 

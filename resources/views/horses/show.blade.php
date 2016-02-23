@@ -2,6 +2,7 @@
 
 <?php
 	var_dump($horse->id());
+	$user = Auth::user();
 ?>
 
 @section('content')
@@ -32,6 +33,7 @@
 	</div>
 	<script>
 		var horse_id = {{ $horse->id() }};
+		var user_id = {{ $user->id() }};
 		var horse = {{ json_encode($horse) }};
 		var statuses = {{ json_encode($horse->statuses()) }};
 	</script>
