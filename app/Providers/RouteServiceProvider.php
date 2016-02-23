@@ -13,6 +13,7 @@ use EQM\Models\Pedigrees\PedigreeRouteBinder;
 use EQM\Models\Pictures\PictureRouteBinder;
 use EQM\Models\Statuses\StatusRouteBinder;
 use EQM\Models\Users\UserRouteBinder;
+use EQM\Models\Users\UserSlugRouteBinder;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -39,6 +40,7 @@ class RouteServiceProvider extends ServiceProvider {
         $router->bind('picture', PictureRouteBinder::class);
         $router->bind('status', StatusRouteBinder::class);
         $router->bind('user', UserRouteBinder::class);
+        $router->bind('user_slug', UserSlugRouteBinder::class);
     }
 
     public function map(Router $router)
