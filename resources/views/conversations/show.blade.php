@@ -25,7 +25,7 @@
                                         </div>
                                         <div class="media-body pad-hor speech-right">
                                             <div class="speech">
-                                                <a href="{{ route('users.profiles.show', $message->user()->id()) }}" class="media-heading">{{ $message->user()->fullName() }}</a>
+                                                <a href="{{ route('users.profiles.show', $message->user()->slug()) }}" class="media-heading">{{ $message->user()->fullName() }}</a>
                                                 <p>{{ nl2br($message->body()) }}</p>
                                                 <p class="speech-time">
                                                     <i class="fa fa-clock-o fa-fw"></i>{{ eqm_translated_date($message->createdAt())->diffForHumans() }}
@@ -40,7 +40,7 @@
                                             </div>
                                             <div class="media-body pad-hor">
                                                 <div class="speech">
-                                                    <a href="{{ route('users.profiles.show', $message->user()->id()) }}" class="media-heading">{{ $message->user()->fullName() }}</a>
+                                                    <a href="{{ route('users.profiles.show', $message->user()->slug()) }}" class="media-heading">{{ $message->user()->fullName() }}</a>
                                                     <p>{{ nl2br($message->body()) }}</p>
                                                     <p class="speech-time">
                                                         <i class="fa fa-clock-o fa-fw"></i>{{ eqm_translated_date($message->createdAt())->diffForHumans() }}

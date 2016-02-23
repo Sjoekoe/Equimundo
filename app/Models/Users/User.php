@@ -222,4 +222,9 @@ interface User
      * @return string
      */
     public function activationKey();
+
+    /**
+     * @return string
+     */
+    public function slug();
 }

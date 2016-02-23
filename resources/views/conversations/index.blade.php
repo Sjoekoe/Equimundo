@@ -39,7 +39,7 @@
                                 </label>
                             </div>
                             <div class="mail-from">
-                                <a href="{{ route('users.profiles.show', $conversation->contactPerson(auth()->user())->id()) }}">
+                                <a href="{{ route('users.profiles.show', $conversation->contactPerson(auth()->user())->slug()) }}">
                                     {{ $conversation->contactPerson(auth()->user())->fullName() }}
                                 </a>
                             </div>

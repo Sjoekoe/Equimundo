@@ -25,6 +25,7 @@ $factory->define(EloquentUser::class, function (Generator $faker) {
         'remember_token' => str_random(10),
         'country' => 'BE',
         'gender' => 'M',
+        'slug' => $faker->slug
     ];
 });
 

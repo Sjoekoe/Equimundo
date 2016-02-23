@@ -27,11 +27,6 @@ class HorseCreator
     private $uploader;
 
     /**
-     * @var \EQM\Core\Slugs\SlugCreator
-     */
-    private $slugCreator;
-
-    /**
      * @var \EQM\Models\HorseTeams\HorseTeamRepository
      */
     private $horseTeams;
@@ -45,14 +40,12 @@ class HorseCreator
         HorseRepository $horses,
         DisciplineRepository $disciplines,
         Uploader $uploader,
-        SlugCreator $slugCreator,
         HorseTeamRepository $horseTeams,
         AlbumRepository $albums
     ) {
         $this->horses = $horses;
         $this->disciplines = $disciplines;
         $this->uploader = $uploader;
-        $this->slugCreator = $slugCreator;
         $this->horseTeams = $horseTeams;
         $this->albums = $albums;
     }
@@ -101,8 +94,6 @@ class HorseCreator
     private function createNewHorse(array $values, $pedigree)
     {
         $horse = $this->horses->create($values, $pedigree);
-
-        $horse->slug = $this->slugCreator->createForHorse($values['name']);
 
         return $horse;
     }

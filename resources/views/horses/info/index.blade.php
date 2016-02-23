@@ -69,7 +69,7 @@
                                         {{ trans('horse_teams.type.' . $team->type()) }}
                                     </dt>
                                     <dd>
-                                        <a href="{{ route('users.profiles.show', $user->id()) }}" class="text-mint">
+                                        <a href="{{ route('users.profiles.show', $user->slug()) }}" class="text-mint">
                                             {{ $user->fullName() }}
                                         </a>
                                         @if (auth()->check() && ($user->id() !== auth()->user()->id()))

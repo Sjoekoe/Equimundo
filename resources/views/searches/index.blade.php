@@ -106,7 +106,7 @@
                                                                 {{ $profile->about() }}
                                                             </p>
                                                             <div class="pad-ver">
-                                                                <a href="{{ route('users.profiles.show', $profile->id()) }}" class="btn btn-primary">Show profile</a>
+                                                                <a href="{{ route('users.profiles.show', $profile->slug()) }}" class="btn btn-primary">Show profile</a>
                                                                 <a href="{{ route('conversation.create', ['contact' => $profile->id()]) }}" class="btn btn-mint">
                                                                     {{ trans('copy.a.contact_message') }}
                                                                 </a>

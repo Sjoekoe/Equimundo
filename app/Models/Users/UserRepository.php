@@ -77,4 +77,16 @@ interface UserRepository
      * @return int
      */
     public function findRegisteredUsersBeforeDate(Carbon $date);
+
+    /**
+     * @param string $slug
+     * @return int
+     */
+    public function findSlugCount($slug);
+
+    /**
+     * @param string $slug
+     * @return \EQM\Models\Users\User
+     */
+    public function findBySlug($slug);
 }

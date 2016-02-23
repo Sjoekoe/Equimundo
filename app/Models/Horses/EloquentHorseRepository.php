@@ -4,6 +4,7 @@ namespace EQM\Models\Horses;
 use Carbon\Carbon;
 use DB;
 use DateTime;
+use EQM\Core\Slugs\SlugCreator;
 use EQM\Models\Users\User;
 
 class EloquentHorseRepository implements HorseRepository
@@ -79,6 +80,7 @@ class EloquentHorseRepository implements HorseRepository
         $horse->name = $values['name'];
         $horse->gender = $values['gender'];
         $horse->breed = $values['breed'];
+        $horse->slug = (new SlugCreator())->createForHorse($values['name']);
 
         if (array_key_exists('life_number', $values)) {
             $horse->life_number = $values['life_number'];

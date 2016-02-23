@@ -3,6 +3,7 @@ namespace EQM\Models\Users;
 
 use Carbon\Carbon;
 use DB;
+use EQM\Core\Slugs\SlugCreator;
 use Location;
 
 class EloquentUserRepository implements UserRepository
@@ -34,7 +35,7 @@ class EloquentUserRepository implements UserRepository
             'activation_key' => $values['activationCode'],
             'language' => 'en',
             'gender' => $values['gender'],
-            'country' => Location::get()->countryCode,
+            'slug' => (new SlugCreator())->createForUser($values['first_name'], $values['last_name']),
         ]);
 
         $user->save();
@@ -161,5 +162,23 @@ class EloquentUserRepository implements UserRepository
     public function findRegisteredUsersBeforeDate(Carbon $date)
     {
         return count($this->user->where('created_at', '<=', $date)->get());
+    }
+
+    /**
+     * @param string $slug
+     * @return int
+     */
+    public function findSlugCount($slug)
+    {
+        return count($this->user->whereRaw("slug REGEXP '^{$slug}(-[0-9]*)?$'")->get());
+    }
+
+    /**
+     * @param string $slug
+     * @return \EQM\Models\Users\User
+     */
+    public function findBySlug($slug)
+    {
+        return $this->user->where('slug', $slug)->firstOrFail();
     }
 }
