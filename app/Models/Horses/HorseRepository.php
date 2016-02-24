@@ -79,4 +79,14 @@ interface HorseRepository
      * @return int
      */
     public function findCreatedHorsesBeforeDate(Carbon $date);
+
+    /**
+     * @return \EQM\Models\Horses\Horse[]
+     */
+    public function findMostActiveHorses();
+
+    /**
+     * @return \EQM\Models\Horses\Horse
+     */
+    public function findMostPopularHorses();
 }

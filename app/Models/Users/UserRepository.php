@@ -94,4 +94,10 @@ interface UserRepository
      * @return \EQM\Models\Users\User
      */
     public function findBySlug($slug);
+
+    /**
+     * @param \EQM\Models\Users\User $user
+     * @return \EQM\Models\Users\User[]
+     */
+    public function getLatest(User $user);
 }
