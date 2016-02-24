@@ -4,6 +4,7 @@ use Carbon\Carbon;
 use EQM\Core\Factories\BuildModels;
 use EQM\Core\Factories\ModelFactory;
 use EQM\Models\Horses\Horse;
+use EQM\Models\HorseTeams\HorseTeam;
 use EQM\Models\Users\User;
 
 class TestCase extends Illuminate\Foundation\Testing\TestCase
@@ -83,6 +84,17 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
             'color' => Horse::BAY,
             'height' => 5,
             'breed' => Horse::ABTENAUER,
+        ], $attributes));
+    }
+
+    /**
+     * @param array $attributes
+     * @return \EQM\Models\HorseTeams\HorseTeam
+     */
+    public function createHorseTeam(array $attributes)
+    {
+        return $this->modelFactory->create(HorseTeam::class, array_merge([
+            'type' => HorseTeam::OWNER
         ], $attributes));
     }
 }

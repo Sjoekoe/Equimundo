@@ -36,4 +36,15 @@ class ProfileController extends  Controller
     {
         return view('users.profiles.show', compact('user'));
     }
+
+    public function delete()
+    {
+        $user = auth()->user();
+
+        auth()->logout();
+
+        $this->users->delete($user);
+
+        return redirect()->route('home');
+    }
 }

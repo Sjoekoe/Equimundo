@@ -3,6 +3,7 @@ namespace EQM\Models\HorseTeams;
 
 interface HorseTeam
 {
+    const TABLE = 'horse_team';
     const OWNER = 1;
     const RIDER = 2;
     const GROOM = 3;
