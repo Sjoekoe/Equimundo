@@ -89,44 +89,44 @@
                                 <p class="text-muted text-sm">
                                     {{ eqm_translated_date($comment->created_at)->diffForHumans() }}
                                 </p>
-							</div>
-							<p>{{ $comment->body() }}</p>
-							<div class="pad-ver">
-													<span class="tag tag-sm">
-														<i class="fa fa-heart text-danger"></i> {{ count($comment->likes()) }}
-													</span>
-								<div class="btn-group">
-									@if (auth()->check())
-										{{ Form::open(['route' => ['comment.like', $comment->id()], 'class' => 'like-button', 'data-remote']) }}
-										{{ Form::hidden('comment_id', $comment->id()) }}
-										@if ($comment->isLikedByUser(auth()->user()))
-											<a class="btn btn-sm btn-default btn-hover-success active" href="#"><i class="fa fa-thumbs-up"></i> You Like it</a>
-										@else
-											<a class="btn btn-sm btn-default btn-hover-success" href="#"><i class="fa fa-thumbs-up"></i></a>
-										@endif
-										{{ Form::close() }}
-									@endif
-								</div>
-							</div>
-						</div>
-						<hr>
-					</div>
-				@endforeach
-			</div>
-			<div class="media-footer">
-				@if (Auth::check())
-					<div class="media-block pad-ver">
-						{{ Form::open(['route' => ['comment.store', $status->id()], 'class' => 'comments__create-form col s12']) }}
-						<div class="row">
-							<div class="col-sm-12 col-md-11 col-md-offset-1">
-								{{ Form::textarea('body', null, ['class' => 'form-control', 'rows' => 1, 'placeholder' => trans('forms.placeholders.write_a_comment')]) }}
-							</div>
-						</div>
-						{{ Form::close() }}
-					</div>
-				@endif
-			</div>
-		</div>
-	</div>
+                            </div>
+                            <p>{{ $comment->body() }}</p>
+                            <div class="pad-ver">
+                                                    <span class="tag tag-sm">
+                                                        <i class="fa fa-heart text-danger"></i> {{ count($comment->likes()) }}
+                                                    </span>
+                                <div class="btn-group">
+                                    @if (auth()->check())
+                                        {{ Form::open(['route' => ['comment.like', $comment->id()], 'class' => 'like-button', 'data-remote']) }}
+                                        {{ Form::hidden('comment_id', $comment->id()) }}
+                                        @if ($comment->isLikedByUser(auth()->user()))
+                                            <a class="btn btn-sm btn-default btn-hover-success active" href="#"><i class="fa fa-thumbs-up"></i> You Like it</a>
+                                        @else
+                                            <a class="btn btn-sm btn-default btn-hover-success" href="#"><i class="fa fa-thumbs-up"></i></a>
+                                        @endif
+                                        {{ Form::close() }}
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                @endforeach
+            </div>
+            <div class="media-footer">
+                @if (Auth::check())
+                    <div class="media-block pad-ver">
+                        {{ Form::open(['route' => ['comment.store', $status->id()], 'class' => 'comments__create-form col s12']) }}
+                        <div class="row">
+                            <div class="col-sm-12 col-md-11 col-md-offset-1">
+                                {{ Form::textarea('body', null, ['class' => 'form-control', 'rows' => 1, 'placeholder' => trans('forms.placeholders.write_a_comment')]) }}
+                            </div>
+                        </div>
+                        {{ Form::close() }}
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
 </div>
 
