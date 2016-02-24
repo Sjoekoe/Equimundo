@@ -1,5 +1,6 @@
 <?php namespace EQM\Models\Users\Requests;
 
+use Carbon\Carbon;
 use EQM\Http\Requests\Request;
 
 class UpdateUserProfile extends Request {
@@ -21,10 +22,12 @@ class UpdateUserProfile extends Request {
      */
     public function rules()
     {
+        $allowedDate = Carbon::now()->subYear(13)->format('d/m/Y');
+
         return [
             'first_name' => 'required',
             'last_name' => 'required',
-            'date_of_birth' => 'date_format:d/m/Y',
+            'date_of_birth' => 'required|date_format:d/m/Y|before:' . $allowedDate,
             'website' => 'url_host',
         ];
     }

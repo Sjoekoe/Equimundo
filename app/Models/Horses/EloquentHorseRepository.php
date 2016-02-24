@@ -153,7 +153,7 @@ class EloquentHorseRepository implements HorseRepository
      */
     public function paginated($limit = 10)
     {
-        return $this->horse->paginate($limit);
+        return $this->horse->latest()->paginate($limit);
     }
 
     /**

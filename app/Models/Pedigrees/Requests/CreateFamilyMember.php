@@ -1,5 +1,6 @@
 <?php namespace EQM\Models\Pedigrees\Requests;
 
+use Carbon\Carbon;
 use EQM\Http\Requests\Request;
 
 class CreateFamilyMember extends Request {
@@ -21,9 +22,10 @@ class CreateFamilyMember extends Request {
 	 */
     public function rules()
     {
+        $thisYear = Carbon::now()->addYear()->format('Y');
         return [
             'name' => 'required',
-            'date_of_birth' => 'date_format:Y',
+            'date_of_birth' => 'date_format:Y|before:' . $thisYear,
             'date_of_death' => 'date_format:Y',
         ];
     }
