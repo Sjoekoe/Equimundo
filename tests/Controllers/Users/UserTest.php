@@ -1,6 +1,7 @@
 <?php
 namespace Controllers\Users;
 
+use Carbon\Carbon;
 use EQM\Models\Horses\Horse;
 use EQM\Models\HorseTeams\HorseTeam;
 use EQM\Models\Users\EloquentUser;

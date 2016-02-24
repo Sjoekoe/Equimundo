@@ -56,7 +56,7 @@ class PicturesController extends Controller
     public function setProfilePicture(Picture $picture)
     {
         $horse = $picture->horse();
-        
+
         if ($old = $horse->getProfilePicture()) {
             $old->profile_pic = false;
             $old->save();
