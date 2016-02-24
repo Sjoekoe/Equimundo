@@ -8,7 +8,6 @@ use EQM\Models\Users\EloquentUser;
 
 class CommentsTest extends \TestCase
 {
-    /** @test */
     function it_can_get_all_comments_for_a_status()
     {
         $user = factory(EloquentUser::class)->create();
@@ -27,6 +26,7 @@ class CommentsTest extends \TestCase
                     [
                         'id' => $comment->id(),
                         'body' => $comment->body(),
+                        'like_count' => 0,
                         'user' => [
                             'data' => [
                                 'id' => $user->id(),
@@ -55,7 +55,6 @@ class CommentsTest extends \TestCase
             ]);
     }
 
-    /** @test */
     function it_can_create_a_comment()
     {
         $user = factory(EloquentUser::class)->create();
@@ -71,6 +70,42 @@ class CommentsTest extends \TestCase
                 'data' => [
                     'id' => 1,
                     'body' => 'Foo',
+                    'like_count' => 0,
+                    'user' => [
+                        'data' => [
+                            'id' => $user->id(),
+                            'first_name' => $user->firstName(),
+                            'last_name' => $user->lastName(),
+                            'email' => $user->email(),
+                            'date_of_birth' => null,
+                            'gender' => $user->gender(),
+                            'country' => $user->country(),
+                            'is_admin' => $user->isAdmin(),
+                            'language' => $user->language(),
+                        ],
+                    ],
+                ],
+            ]);
+    }
+
+    function it_can_show_a_comment()
+    {
+        $user = factory(EloquentUser::class)->create();
+        $horse = factory(EloquentHorse::class)->create();
+        $status = factory(EloquentStatus::class)->create([
+            'horse_id' => $horse->id(),
+        ]);
+        $comment = factory(EloquentComment::class)->create([
+            'status_id' => $status->id(),
+            'user_id' => $user->id(),
+        ]);
+
+        $this->get('/api/statuses/' . $status->id() . '/comments/' . $comment->id())
+            ->seeJsonEquals([
+                'data' => [
+                    'id' => $comment->id(),
+                    'body' => $comment->body(),
+                    'like_count' => 0,
                     'user' => [
                         'data' => [
                             'id' => $user->id(),
@@ -89,7 +124,7 @@ class CommentsTest extends \TestCase
     }
 
     /** @test */
-    function it_can_show_a_comment()
+    public function it_can_show_a_comment_with_likes()
     {
         $user = factory(EloquentUser::class)->create();
         $horse = factory(EloquentHorse::class)->create();
@@ -101,11 +136,17 @@ class CommentsTest extends \TestCase
             'user_id' => $user->id(),
         ]);
 
+        $this->app->make('db')->table('comment_likes')->insert([
+            'comment_id' => $comment->id(),
+            'user_id' => $user->id(),
+        ]);
+
         $this->get('/api/statuses/' . $status->id() . '/comments/' . $comment->id())
             ->seeJsonEquals([
                 'data' => [
                     'id' => $comment->id(),
                     'body' => $comment->body(),
+                    'like_count' => 1,
                     'user' => [
                         'data' => [
                             'id' => $user->id(),
@@ -117,6 +158,21 @@ class CommentsTest extends \TestCase
                             'country' => $user->country(),
                             'is_admin' => $user->isAdmin(),
                             'language' => $user->language(),
+                        ],
+                    ],
+                    'likes' => [
+                        'data' => [
+                            [
+                                'id' => $user->id(),
+                                'first_name' => $user->firstName(),
+                                'last_name' => $user->lastName(),
+                                'email' => $user->email(),
+                                'date_of_birth' => null,
+                                'gender' => $user->gender(),
+                                'country' => $user->country(),
+                                'is_admin' => $user->isAdmin(),
+                                'language' => $user->language(),
+                            ],
                         ],
                     ],
                 ],
@@ -142,6 +198,7 @@ class CommentsTest extends \TestCase
                 'data' => [
                     'id' => $comment->id(),
                     'body' => 'Foo',
+                    'like_count' => 0,
                     'user' => [
                         'data' => [
                             'id' => $user->id(),
