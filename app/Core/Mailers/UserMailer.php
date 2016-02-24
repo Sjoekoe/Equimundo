@@ -16,6 +16,8 @@ class UserMailer extends Mailer
         $view = 'emails.registration.confirm';
         $data = [
             'activationLink' => route('activate', ['token' => $user->activationKey(), 'email' => $user->email()]),
+            'userName' => $user->firstName(),
+            'userMail' => $user->email(),
         ];
 
         return $this->sendTo($user, $subject, $view, $data);
