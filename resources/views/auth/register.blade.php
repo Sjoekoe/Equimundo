@@ -54,8 +54,8 @@
                                 <div class="input-group date">
                                     <span class="input-group-addon"><i class="fa fa-calendar fa-lg"></i></span>
                                     {{ Form::text('date_of_birth', null, ['placeholder' => 'dd/mm/yyyy', 'class' => 'form-control', 'tabindex' => 4]) }}
-                                    @include('layout.partials._error_message', ['field' => 'date_of_birth'])
                                 </div>
+                                @include('layout.partials._error_message', ['field' => 'date_of_birth'])
                             </div>
                             <div class="form-group" style="height: 31px;">
                                 <div class="radio">

@@ -1,6 +1,7 @@
 <?php
 namespace EQM\Http\Controllers\Auth;
 
+use Carbon\Carbon;
 use EQM\Http\Controllers\Controller;
 use EQM\Models\Users\UserCreator;
 use EQM\Models\Users\UserRepository;
@@ -45,13 +46,15 @@ class AuthController extends Controller {
      */
     public function validator(array $data)
     {
+        $allowedDate = Carbon::now()->subYear(13)->format('d/m/Y');
+
         return Validator::make($data, [
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
             'terms' => 'accepted',
-            'date_of_birth' => 'required|date_format:d/m/Y',
+            'date_of_birth' => 'required|date_format:d/m/Y|before:' . $allowedDate,
         ]);
     }
 
