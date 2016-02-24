@@ -151,7 +151,7 @@ class EloquentUserRepository implements UserRepository
      */
     public function paginated($limit = 20)
     {
-        return $this->user->paginate($limit);
+        return $this->user->latest()->paginate($limit);
     }
 
     /**

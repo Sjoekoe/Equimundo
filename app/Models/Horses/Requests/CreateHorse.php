@@ -1,5 +1,6 @@
 <?php namespace EQM\Models\Horses\Requests;
 
+use Carbon\Carbon;
 use EQM\Http\Requests\Request;
 use EQM\Models\Horses\HorseRepository;
 
@@ -30,9 +31,10 @@ class CreateHorse extends Request {
      */
     public function rules()
     {
+        $today = Carbon::now()->addDay()->startOfDay()->format('d/m/Y');
         $rules = [
             'name' => 'required',
-            'date_of_birth' => 'date_format:d/m/Y',
+            'date_of_birth' => 'date_format:d/m/Y|before:' . $today,
             'profile_pic' => 'image',
         ];
 
