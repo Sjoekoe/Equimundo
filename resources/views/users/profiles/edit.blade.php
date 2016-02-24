@@ -86,6 +86,24 @@
                     </div>
                 {{ Form::close() }}
             </div>
+            <br>
+            <div class="panel panel-bordered-danger">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Delete Account
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <div class="alert alert-warning">
+                        <div class="alert-title">
+                            Be careful, This action can not be undone, and you will lose your access to Equimundo
+                        </div>
+                        <div class="mar-top text-right">
+                            <a href="{{ route('users.delete') }}" class="btn btn-danger">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @stop

@@ -82,6 +82,14 @@ class EloquentUserRepository implements UserRepository
     }
 
     /**
+     * @param \EQM\Models\Users\User $user
+     */
+    public function delete(User $user)
+    {
+        $user->delete();
+    }
+
+    /**
      * @param int $id
      * @return \EQM\Models\Users\EloquentUser
      */

@@ -25,6 +25,11 @@ interface UserRepository
     public function update(User $user, array $values);
 
     /**
+     * @param \EQM\Models\Users\User $user
+     */
+    public function delete(User $user);
+
+    /**
      * @param int $id
      * @return \EQM\Models\Users\User
      */

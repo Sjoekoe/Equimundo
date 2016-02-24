@@ -7,6 +7,8 @@ use EQM\Models\Roles\Role;
 
 interface User
 {
+    const TABLE = 'users';
+
     /**
      * @return int
      */
