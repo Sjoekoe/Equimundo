@@ -21,18 +21,25 @@
                                 </div>
                                 @include('layout.partials._error_message', ['field' => 'first_name'])
                             </div>
-                            <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
+                            <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
                                 <div class="input-group">
-                                    <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
-                                    {{ Form::password('password', ['class' => 'form-control', 'placeholder' => 'Password', 'tabindex' => 4]) }}
+                                    <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
+                                    {{ Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'E-mail', 'tabindex' => 3]) }}
                                 </div>
-                                @include('layout.partials._error_message', ['field' => 'password'])
+                                @include('layout.partials._error_message', ['field' => 'email'])
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
-                                    <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
-                                    {{ Form::password('password_confirmation', ['class' => 'form-control', 'placeholder' => 'Confirm Password', 'tabIndex' => 5]) }}
+                                    <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
+                                    {{ Form::select('interests[]', ['Owner', 'Enthousiast', 'Professional', 'Breeder', 'Athlete'], '', ['multiple' => true, 'class' => 'selectPicker form-control', 'title' => 'My business in horses...', 'tabindex' => 5]) }}
                                 </div>
+                            </div>
+                            <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
+                                    {{ Form::password('password', ['class' => 'form-control', 'placeholder' => 'Password', 'tabindex' => 8]) }}
+                                </div>
+                                @include('layout.partials._error_message', ['field' => 'password'])
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -43,23 +50,29 @@
                                 </div>
                                 @include('layout.partials._error_message', ['field' => 'last_name'])
                             </div>
-                            <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
-                                <div class="input-group">
-                                    <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
-                                    {{ Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'E-mail', 'tabindex' => 3]) }}
+                            <div class="form-group {{ $errors->has('date_of_birth') ? 'has-error' : '' }}">
+                                <div class="input-group date">
+                                    <span class="input-group-addon"><i class="fa fa-calendar fa-lg"></i></span>
+                                    {{ Form::text('date_of_birth', null, ['placeholder' => 'dd/mm/yyyy', 'class' => 'form-control', 'tabindex' => 4]) }}
+                                    @include('layout.partials._error_message', ['field' => 'date_of_birth'])
                                 </div>
-                                @include('layout.partials._error_message', ['field' => 'email'])
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" style="height: 31px;">
                                 <div class="radio">
-                                    <label class="form-radio form-icon form-text active">
-                                        <input type="radio" checked name="gender" value="F">
+                                    <label class="form-radio form-icon form-text active" tabindex="6">
+                                        <input type="radio" name="gender" value="F">
                                         Female
                                     </label>
-                                    <label class="form-radio form-icon form-text active">
+                                    <label class="form-radio form-icon form-text active" tabindex="7">
                                         <input type="radio" name="gender" value="M">
                                         Male
                                     </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
+                                    {{ Form::password('password_confirmation', ['class' => 'form-control', 'placeholder' => 'Confirm Password', 'tabIndex' => 9]) }}
                                 </div>
                             </div>
                         </div>
@@ -86,3 +99,12 @@
     </div>
 </div>
 @endsection
+
+@section('footer')
+    <script>
+        $('.input-group.date').datepicker({
+            format: 'dd/mm/yyyy',
+            autoclose:true
+        });
+    </script>
+@stop
