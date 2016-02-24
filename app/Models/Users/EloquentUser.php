@@ -490,4 +490,14 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
     {
         return $this->slug;
     }
+
+    /**
+     * @return \Carbon\Carbon
+     */
+    public function lastLogin()
+    {
+        $login = $this->last_login ?: $this->created_at;
+
+        return Carbon::parse($login);
+    }
 }
