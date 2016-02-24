@@ -1,6 +1,7 @@
 <?php
 namespace Controllers\Sessions;
 
+use Carbon\Carbon;
 use EQM\Events\UserRegistered;
 use EQM\Models\Users\EloquentUser;
 
@@ -17,11 +18,37 @@ class RegisterTest extends \TestCase
             ->type('john@example.com', 'email')
             ->type('password', 'password')
             ->type('password', 'password_confirmation')
+            ->select('M', 'gender')
+            ->type('08/02/1982', 'date_of_birth')
             ->check('terms')
             ->press('Register')
             ->seePageIs('/');
 
         $this->seeInDatabase('users', [
+            'first_name' => 'John',
+            'last_name' => 'Doe',
+            'email' => 'john@example.com'
+        ]);
+    }
+
+    /** @test */
+    function it_can_not_register_when_you_are_younger_than_13()
+    {
+        $date = Carbon::now()->subYear(13)->format('d/m/Y');
+
+        $this->visit('/register')
+            ->type('John', 'first_name')
+            ->type('Doe', 'last_name')
+            ->type('john@example.com', 'email')
+            ->type('password', 'password')
+            ->type('password', 'password_confirmation')
+            ->select('M', 'gender')
+            ->type($date, 'date_of_birth')
+            ->check('terms')
+            ->press('Register')
+            ->seePageIs('/register');
+
+        $this->missingFromDatabase('users', [
             'first_name' => 'John',
             'last_name' => 'Doe',
             'email' => 'john@example.com'

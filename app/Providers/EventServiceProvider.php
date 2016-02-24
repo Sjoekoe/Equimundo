@@ -1,5 +1,6 @@
 <?php namespace EQM\Providers;
 
+use Carbon\Carbon;
 use EQM\Events\CommentWasLiked;
 use EQM\Events\CommentWasPosted;
 use EQM\Events\HorseWasFollowed;
@@ -50,15 +51,18 @@ class EventServiceProvider extends ServiceProvider {
     ];
 
     /**
-	 * Register any other events for your application.
-	 *
-	 * @param  \Illuminate\Contracts\Events\Dispatcher  $events
-	 * @return void
-	 */
+     * Register any other events for your application.
+     *
+     * @param  \Illuminate\Contracts\Events\Dispatcher  $events
+     * @return void
+     */
     public function boot(DispatcherContract $events)
     {
         parent::boot($events);
-        //
 
+        $events->listen('auth.login', function ($user, $remember) {
+            $user->last_login = Carbon::now();
+            $user->save();
+        });
     }
 }

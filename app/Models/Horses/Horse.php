@@ -3,6 +3,8 @@ namespace EQM\Models\Horses;
 
 interface Horse
 {
+    const TABLE = 'horses';
+
     // Genders
     const GELDING = 1;
     const MARE = 2;

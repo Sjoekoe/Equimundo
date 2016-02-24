@@ -36,6 +36,7 @@ class EloquentUserRepository implements UserRepository
             'language' => 'en',
             'gender' => $values['gender'],
             'slug' => (new SlugCreator())->createForUser($values['first_name'], $values['last_name']),
+            'date_of_birth' => $values['date_of_birth'],
         ]);
 
         $user->save();
@@ -79,6 +80,14 @@ class EloquentUserRepository implements UserRepository
         $user->save();
 
         return $user;
+    }
+
+    /**
+     * @param \EQM\Models\Users\User $user
+     */
+    public function delete(User $user)
+    {
+        $user->delete();
     }
 
     /**
@@ -142,7 +151,7 @@ class EloquentUserRepository implements UserRepository
      */
     public function paginated($limit = 20)
     {
-        return $this->user->paginate($limit);
+        return $this->user->latest()->paginate($limit);
     }
 
     /**
@@ -180,5 +189,16 @@ class EloquentUserRepository implements UserRepository
     public function findBySlug($slug)
     {
         return $this->user->where('slug', $slug)->firstOrFail();
+    }
+
+    /**
+     * @param \EQM\Models\Users\User $user
+     * @return \EQM\Models\Users\User[]
+     */
+    public function getLatest(User $user)
+    {
+        return $this->user->where('activated', true)
+            ->where('id', '!=', $user->id())
+            ->orderBy('created_at', 'DESC')->limit(3)->get();
     }
 }

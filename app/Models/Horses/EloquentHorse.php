@@ -5,7 +5,6 @@ use Carbon\Carbon;
 use EQM\Models\Albums\EloquentAlbum;
 use EQM\Models\Disciplines\EloquentDiscipline;
 use EQM\Models\HorseTeams\EloquentHorseTeam;
-use EQM\Models\HorseTeams\HorseTeam;
 use EQM\Models\Palmares\EloquentPalmares;
 use EQM\Models\Pedigrees\EloquentPedigree;
 use EQM\Models\Pedigrees\Pedigree;

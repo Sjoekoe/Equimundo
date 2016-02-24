@@ -1,12 +1,15 @@
 <?php
 namespace EQM\Models\Users;
 
+use Carbon\Carbon;
 use EQM\Models\Conversations\Conversation;
 use EQM\Models\Horses\Horse;
 use EQM\Models\Roles\Role;
 
 interface User
 {
+    const TABLE = 'users';
+
     /**
      * @return int
      */
@@ -227,4 +230,9 @@ interface User
      * @return string
      */
     public function slug();
+
+    /**
+     * @return \Carbon\Carbon
+     */
+    public function lastLogin();
 }

@@ -49,6 +49,7 @@
                                     <th>Name</th>
                                     <th>Status</th>
                                     <th>Member since</th>
+                                    <th>Last Login</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -64,6 +65,7 @@
                                                 @endif
                                             </td>
                                             <td>{{ eqm_date($user->created_at) }}</td>
+                                            <td>{{ eqm_date($user->lastLogin()) }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

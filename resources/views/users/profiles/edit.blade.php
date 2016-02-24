@@ -86,6 +86,27 @@
                     </div>
                 {{ Form::close() }}
             </div>
+            <br>
+            <div class="panel panel-bordered-danger">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        {{ trans('copy.titles.delete_account') }}
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <div class="alert">
+                        <div class="col-sm-6">
+                            <p class="alert-message">
+                                {{ trans('copy.p.delete_account') }}
+                            </p>
+                        </div>
+
+                        <div class="text-right">
+                            <a href="{{ route('users.delete') }}" class="btn btn-danger">{{ trans('copy.a.delete') }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @stop

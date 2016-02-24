@@ -25,6 +25,11 @@ interface UserRepository
     public function update(User $user, array $values);
 
     /**
+     * @param \EQM\Models\Users\User $user
+     */
+    public function delete(User $user);
+
+    /**
      * @param int $id
      * @return \EQM\Models\Users\User
      */
@@ -89,4 +94,10 @@ interface UserRepository
      * @return \EQM\Models\Users\User
      */
     public function findBySlug($slug);
+
+    /**
+     * @param \EQM\Models\Users\User $user
+     * @return \EQM\Models\Users\User[]
+     */
+    public function getLatest(User $user);
 }

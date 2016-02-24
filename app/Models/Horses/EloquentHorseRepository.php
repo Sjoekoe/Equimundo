@@ -153,7 +153,7 @@ class EloquentHorseRepository implements HorseRepository
      */
     public function paginated($limit = 10)
     {
-        return $this->horse->paginate($limit);
+        return $this->horse->latest()->paginate($limit);
     }
 
     /**
@@ -173,5 +173,31 @@ class EloquentHorseRepository implements HorseRepository
     public function findCreatedHorsesBeforeDate(Carbon $date)
     {
         return count($this->horse->where('created_at', '<=', $date)->get());
+    }
+
+    /**
+     * @return \EQM\Models\Horses\Horse[]
+     */
+    public function findMostActiveHorses()
+    {
+        $horses = $this->horse->get()->sortByDesc(function($horse)
+        {
+            return $horse->statuses()->count();
+        });
+
+        return $horses->take(3);
+    }
+
+    /**
+     * @return \EQM\Models\Horses\Horse[]
+     */
+    public function findMostPopularHorses()
+    {
+        $horses = $this->horse->get()->sortByDesc(function($horse)
+        {
+            return $horse->followers()->count();
+        });
+
+        return $horses->take(3);
     }
 }
