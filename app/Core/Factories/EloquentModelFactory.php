@@ -5,6 +5,8 @@ use EQM\Models\Horses\EloquentHorse;
 use EQM\Models\Horses\Horse;
 use EQM\Models\HorseTeams\EloquentHorseTeam;
 use EQM\Models\HorseTeams\HorseTeam;
+use EQM\Models\Statuses\EloquentStatus;
+use EQM\Models\Statuses\Status;
 use EQM\Models\Users\EloquentUser;
 use EQM\Models\Users\User;
 use Illuminate\Database\Eloquent\Factory;
@@ -23,6 +25,7 @@ class EloquentModelFactory implements ModelFactory
         User::class => EloquentUser::class,
         Horse::class => EloquentHorse::class,
         HorseTeam::class => EloquentHorseTeam::class,
+        Status::class => EloquentStatus::class,
     ];
 
     /**
