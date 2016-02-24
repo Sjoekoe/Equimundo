@@ -17,6 +17,8 @@ class RegisterTest extends \TestCase
             ->type('john@example.com', 'email')
             ->type('password', 'password')
             ->type('password', 'password_confirmation')
+            ->select('M', 'gender')
+            ->type('08/02/198', 'date_of_birth')
             ->check('terms')
             ->press('Register')
             ->seePageIs('/');
