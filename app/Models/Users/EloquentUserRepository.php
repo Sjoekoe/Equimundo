@@ -190,4 +190,15 @@ class EloquentUserRepository implements UserRepository
     {
         return $this->user->where('slug', $slug)->firstOrFail();
     }
+
+    /**
+     * @param \EQM\Models\Users\User $user
+     * @return \EQM\Models\Users\User[]
+     */
+    public function getLatest(User $user)
+    {
+        return $this->user->where('activated', true)
+            ->where('id', '!=', $user->id())
+            ->orderBy('created_at', 'DESC')->limit(3)->get();
+    }
 }

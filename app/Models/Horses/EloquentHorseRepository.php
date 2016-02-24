@@ -174,4 +174,30 @@ class EloquentHorseRepository implements HorseRepository
     {
         return count($this->horse->where('created_at', '<=', $date)->get());
     }
+
+    /**
+     * @return \EQM\Models\Horses\Horse[]
+     */
+    public function findMostActiveHorses()
+    {
+        $horses = $this->horse->get()->sortByDesc(function($horse)
+        {
+            return $horse->statuses()->count();
+        });
+
+        return $horses->take(3);
+    }
+
+    /**
+     * @return \EQM\Models\Horses\Horse[]
+     */
+    public function findMostPopularHorses()
+    {
+        $horses = $this->horse->get()->sortByDesc(function($horse)
+        {
+            return $horse->followers()->count();
+        });
+
+        return $horses->take(3);
+    }
 }
