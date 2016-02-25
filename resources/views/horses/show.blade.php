@@ -28,7 +28,5 @@
     <script>
         var horse_id = {{ $horse->id() }};
         var user_id = {{ auth()->user()->id() }};
-        var horse = {{ json_encode($horse) }};
-        var statuses = {{ json_encode($horse->statuses()) }};
     </script>
 @stop
