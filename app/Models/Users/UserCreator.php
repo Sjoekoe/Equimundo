@@ -60,7 +60,7 @@ class UserCreator
         $this->roles->create($user, new MemberRole());
 
         if (array_key_exists('interests', $data)) {
-            foreach ($data['interests'] as $interest) {
+            foreach ($data['interests'] as $key => $interest) {
                 $this->interests->create($user, $interest);
             }
         }
