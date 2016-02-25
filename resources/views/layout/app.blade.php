@@ -75,5 +75,16 @@
     <script src="/js/vue-resource-min.js"></script>
     <script src="/js/live-updates.js"></script>
     @yield('footer')
+    @if (auth()->check())
+        <script
+                src="//d2s6cp23z9c3gz.cloudfront.net/js/embed.widget.min.js"
+                data-domain="equimundo.besnappy.com"
+                data-lang="en"
+                data-name="{{ auth()->user()->fullName() }}"
+                data-email="{{ auth()->user()->email() }}"
+                data-background="#40c4a7"
+         >
+        </script>
+    @endif
 </body>
 </html>

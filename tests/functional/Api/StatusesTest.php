@@ -14,57 +14,46 @@ class StatusesTest extends \TestCase
     {
         $now = Carbon::now();
         $user = factory(EloquentUser::class)->create([]);
-        factory(EloquentHorse::class, 4)->create()->each(function($h) use ($user, $now) {
-            factory(EloquentStatus::class, 1)->create([
-                'horse_id' => $h->id(),
-                'body' => 'Foo',
-                'created_at' => $now,
-            ]);
-            DB::table('follows')->insert([
-                'horse_id' => $h->id(),
-                'user_id' => $user->id(),
-            ]);
-        });
+        $horse = $this->createHorse();
+        $status = $this->createStatus([
+            'horse_id' => $horse->id(),
+        ]);
+
+        DB::table('follows')->insert([
+            'horse_id' => $horse->id(),
+            'user_id' => $user->id(),
+        ]);
 
         $this->get('/api/users/' . $user->id() . '/feed')
             ->seeJsonEquals([
                 'data' => [
                     [
-                        'id' => 1,
-                        'body' => 'Foo',
+                        'id' => $status->id(),
+                        'body' => $status->body(),
                         'created_at' => $now->toIso8601String(),
                         'like_count' => 0,
-                        'prefix' => 1,
-                    ],
-                    [
-                        'id' => 2,
-                        'body' => 'Foo',
-                        'created_at' => $now->toIso8601String(),
-                        'like_count' => 0,
-                        'prefix' => 1,
-                    ],
-                    [
-                        'id' => 3,
-                        'body' => 'Foo',
-                        'created_at' => $now->toIso8601String(),
-                        'like_count' => 0,
-                        'prefix' => 1,
-                    ],
-                    [
-                        'id' => 4,
-                        'body' => 'Foo',
-                        'created_at' => $now->toIso8601String(),
-                        'like_count' => 0,
-                        'prefix' => 1,
+                        'prefix' => $status->prefix(),
+                        'horse' => [
+                            'data' => [
+                                'id' => $horse->id(),
+                                'name' => $horse->name(),
+                                'life_number' => $horse->lifeNumber(),
+                                'breed' => $horse->breed,
+                                'height' => $horse->height(),
+                                'gender' => $horse->gender(),
+                                'date_of_birth' => $horse->dateOfBirth()->toIso8601String(),
+                                'color' => $horse->color(),
+                            ],
+                        ],
                     ],
                 ],
                 'meta' => [
                     'pagination' => [
-                        'count' => 4,
+                        'count' => 1,
                         'current_page' => 1,
                         'links' => [],
                         'per_page' => 10,
-                        'total' => 4,
+                        'total' => 1,
                         'total_pages' => 1,
                     ],
                 ],
@@ -74,7 +63,7 @@ class StatusesTest extends \TestCase
     /** @test */
     function it_can_create_a_status()
     {
-        $horse = factory(EloquentHorse::class)->create();
+        $horse = $this->createHorse();
 
         $this->post('/api/statuses', [
             'horse_id' => $horse->id(),
@@ -86,6 +75,18 @@ class StatusesTest extends \TestCase
                 'created_at' => Carbon::now()->toIso8601String(),
                 'like_count' => 0,
                 'prefix' => null,
+                'horse' => [
+                    'data' => [
+                        'id' => $horse->id(),
+                        'name' => $horse->name(),
+                        'life_number' => $horse->lifeNumber(),
+                        'breed' => $horse->breed,
+                        'height' => $horse->height(),
+                        'gender' => $horse->gender(),
+                        'date_of_birth' => $horse->dateOfBirth()->toIso8601String(),
+                        'color' => $horse->color(),
+                    ],
+                ],
             ],
         ]);
     }
@@ -93,8 +94,8 @@ class StatusesTest extends \TestCase
     /** @test */
     function it_can_show_a_status()
     {
-        $horse = factory(EloquentHorse::class)->create();
-        $status = factory(EloquentStatus::class)->create([
+        $horse = $this->createHorse();
+        $status = $this->createStatus([
             'horse_id' => $horse->id(),
         ]);
 
@@ -106,6 +107,18 @@ class StatusesTest extends \TestCase
                     'created_at' => $status->createdAt()->toIso8601String(),
                     'like_count' => 0,
                     'prefix' => 1,
+                    'horse' => [
+                        'data' => [
+                            'id' => $horse->id(),
+                            'name' => $horse->name(),
+                            'life_number' => $horse->lifeNumber(),
+                            'breed' => $horse->breed,
+                            'height' => $horse->height(),
+                            'gender' => $horse->gender(),
+                            'date_of_birth' => $horse->dateOfBirth()->toIso8601String(),
+                            'color' => $horse->color(),
+                        ],
+                    ],
                 ],
             ]);
     }
@@ -132,6 +145,18 @@ class StatusesTest extends \TestCase
                     'created_at' => $status->createdAt()->toIso8601String(),
                     'like_count' => 1,
                     'prefix' => 1,
+                    'horse' => [
+                        'data' => [
+                            'id' => $horse->id(),
+                            'name' => $horse->name(),
+                            'life_number' => $horse->lifeNumber(),
+                            'breed' => $horse->breed,
+                            'height' => $horse->height(),
+                            'gender' => $horse->gender(),
+                            'date_of_birth' => $horse->dateOfBirth()->toIso8601String(),
+                            'color' => $horse->color(),
+                        ],
+                    ],
                     'likes' => [
                         'data' => [
                             [
@@ -154,8 +179,8 @@ class StatusesTest extends \TestCase
     /** @test */
     function it_can_update_a_status()
     {
-        $horse = factory(EloquentHorse::class)->create();
-        $status = factory(EloquentStatus::class)->create([
+        $horse = $this->createHorse();
+        $status = $this->createStatus([
             'horse_id' => $horse->id(),
         ]);
 
@@ -168,6 +193,18 @@ class StatusesTest extends \TestCase
                 'created_at' => $status->createdAt()->toIso8601String(),
                 'like_count' => 0,
                 'prefix' => 1,
+                'horse' => [
+                    'data' => [
+                        'id' => $horse->id(),
+                        'name' => $horse->name(),
+                        'life_number' => $horse->lifeNumber(),
+                        'breed' => $horse->breed,
+                        'height' => $horse->height(),
+                        'gender' => $horse->gender(),
+                        'date_of_birth' => $horse->dateOfBirth()->toIso8601String(),
+                        'color' => $horse->color(),
+                    ],
+                ],
             ],
         ]);
     }
@@ -175,8 +212,8 @@ class StatusesTest extends \TestCase
     /** @test */
     function it_can_delete_a_status()
     {
-        $horse = factory(EloquentHorse::class)->create();
-        $status = factory(EloquentStatus::class)->create([
+        $horse = $this->createHorse();
+        $status = $this->createStatus([
             'horse_id' => $horse->id(),
         ]);
 
