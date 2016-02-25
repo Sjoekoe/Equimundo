@@ -16,17 +16,29 @@ new Vue({
 		user: '',
 		horse: '',
 		statuses: '',
+		allHorses: '',
 	},
 
 	ready: function(){
-		//this.fetchStatusses();
-		this.fetchHorse();
+
+		// Get the data for a horse detail page
+		if(horse_id){
+
+			this.fetchHorse();
+
+		// Get the data for a horse overview page
+		}else{
+			this.fetchAllHorses();
+		}
+
+		// Get the auth user
 		this.fetchUser();
 	},
 
 	methods: {
 
 		fetchHorse: function(){
+
 			this.$http.get('/api/horses/' + horse_id + '/?include=statuses', function(horse){
 
 				// Create a comments object for each status
@@ -35,7 +47,8 @@ new Vue({
 						value.comments = {
 							"data" : []
 						};
-					}if(!value.likes){
+					}
+					if(!value.likes){
 						value.likes = {
 							"data" : []
 						}
@@ -46,6 +59,40 @@ new Vue({
 				this.$set('horse', horse);
 				this.$set('statuses', horse.data.statuses.data);
 
+			});
+		},
+
+		fetchAllHorses: function(){
+			this.$http.get('/api/users/' + user_id + '/feed', function(statuses){
+
+				// Create a comments object for each status
+				$.each(statuses.data, function(ndx, value){
+					if(!value.comments){
+						value.comments = {
+							"data" : []
+						};
+					}
+					if(!value.likes){
+						value.likes = {
+							"data" : []
+						}
+					}
+					// Store the profile picture in an extra field to read it in the view
+					if(value.horse.data.pictures){
+						console.log("there is one");
+
+						$.each(value.horse.data.pictures.data, function(index, picture){
+							if(picture.is_profile_picture){
+								value.horse.data.profile_picture_path = picture.id;
+							}
+						});
+					}
+
+					// TODO this is to set the links, has to come out of backend
+					value.horse.data.slug = value.horse.data.name.replace(/\s/g,"-");
+				});
+
+				this.$set('statuses', statuses.data);
 			});
 		},
 

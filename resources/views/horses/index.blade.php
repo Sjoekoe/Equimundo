@@ -7,7 +7,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row ennogiets">
         @foreach ($user->horses() as $horse)
             <div class="col s6 horse-overview">
                 <div class="card">
