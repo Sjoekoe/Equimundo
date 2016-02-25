@@ -27,7 +27,7 @@ new Vue({
 	methods: {
 
 		fetchHorse: function(){
-			this.$http.get('/api/horses/' + horse_id + '', function(horse){
+			this.$http.get('/api/horses/' + horse_id + '/?include=statuses', function(horse){
 
 				// Create a comments object for each status
 				$.each(horse.data.statuses.data, function(ndx, value){
