@@ -2,6 +2,7 @@
 namespace EQM\Models\Statuses;
 
 use EQM\Models\Pictures\Picture;
+use EQM\Models\Users\User;
 
 interface Status
 {
@@ -71,4 +72,10 @@ interface Status
      * @return \Carbon\Carbon
      */
     public function createdAt();
+
+    /**
+     * @param \EQM\Models\Users\User $user
+     * @return bool
+     */
+    public function isLikedByUser(User $user);
 }
