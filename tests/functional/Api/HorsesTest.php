@@ -86,6 +86,7 @@ class HorsesTest extends \TestCase
                                 'created_at' => $status->createdAt()->toIso8601String(),
                                 'prefix' => $status->prefix(),
                                 'like_count' => 0,
+                                'liked_by_user' => false,
                                 'horse' => [
                                     'data' => [
                                         'id' => $horse->id(),

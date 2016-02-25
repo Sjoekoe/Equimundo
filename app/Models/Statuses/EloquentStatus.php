@@ -8,6 +8,7 @@ use EQM\Models\Palmares\EloquentPalmares;
 use EQM\Models\Pictures\EloquentPicture;
 use EQM\Models\Pictures\Picture;
 use EQM\Models\Users\EloquentUser;
+use EQM\Models\Users\User;
 use Illuminate\Database\Eloquent\Model;
 
 class EloquentStatus extends Model implements Status
@@ -124,5 +125,20 @@ class EloquentStatus extends Model implements Status
     public function createdAt()
     {
         return Carbon::instance($this->created_at);
+    }
+
+    /**
+     * @param \EQM\Models\Users\User $user
+     * @return bool
+     */
+    public function isLikedByUser(User $user)
+    {
+        foreach ($this->likes() as $like) {
+            if ($like->id() === $user->id()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
