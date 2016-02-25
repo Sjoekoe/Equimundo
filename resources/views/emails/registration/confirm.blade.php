@@ -86,7 +86,32 @@
                                 <tr>
                                     <td>
                                         <span style="font-family:Helvetica Neue,Helvetica,Lucida Grande,tahoma,verdana,arial,sans-serif;font-size:14px;line-height:19px;color:#898f9c">
-                                            At Equimundo you can follow your favourite horses and contact their owners. As a member of equimundo you can share updates pictures and much more.
+                                            At Equimundo you can follow your favourite horses and contact their owners. <br>
+                                            As a member of Equimundo you can share updates pictures and much more.
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="14" style="line-height:14px">&nbsp;</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td width="15" style="display:block;width:15px">&nbsp;&nbsp;&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td width="15" style="display:block;width:15px">&nbsp;&nbsp;&nbsp;</td>
+                        <td>
+                            <table cellspacing="0" cellpadding="0" width="100%" style="border-collapse:collapse">
+                                <tbody>
+                                <tr>
+                                    <td height="14" style="line-height:14px">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span style="font-family:Helvetica Neue,Helvetica,Lucida Grande,tahoma,verdana,arial,sans-serif;font-size:14px;line-height:19px;color:#898f9c">
+                                            We are still developing very hard to give you the best experience. <br>
+                                            If you notice any strange things or you have request or a question, don't hesitate to contact us.
                                         </span>
                                     </td>
                                 </tr>
