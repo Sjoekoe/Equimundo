@@ -12,6 +12,7 @@ new Vue({
 			// 	'id' : ''
 			// }]
 		},
+		newLike: '',
 		user: '',
 		horse: '',
 		statuses: '',
@@ -75,7 +76,31 @@ new Vue({
 			// Reset input field
 			this.newComment = { comment:'' };
 
-			// Send POST ajax request
+			// TODO Send POST ajax request
+		},
+
+		onSubmitLike: function($e, $status){
+
+			$status.like_count++;
+
+			// Prevent default submit behaviour
+			$e.preventDefault();
+
+			// TODO Send POST ajax request
+
+		},
+
+		deleteComment: function($comment, $status){
+
+			//Vue.delete($status.comments , $comment);
+
+			$.each($status.comments.data, function(ndx, comment){
+				if(comment.id === $comment.id){
+					console.log(this);
+				}
+			});
+
+			$status.comments.data.splice( $.inArray($comment, $status.comments.data), 1 );
 		}
 	}
 
