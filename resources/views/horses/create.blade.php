@@ -9,11 +9,27 @@
             <div class="col-sm-12">
                 <div class="panel panel-default">
                     <div class="panel-body">
+                        <div class="alert alert-info">
+                            <div class="media-left">
+                                <span class="icon-wrap icon-wrap-xs icon-circle alert-icon">
+                                    <i class="fa fa-bullhorn fa-lg"></i>
+                                </span>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="alert-title">
+                                    How to get the most out of Equimundo?
+                                </h4>
+                                <p class="alert-message">
+                                    We recommend you to fill in the data like in the horse's passport. <br>
+                                    By entering the correct life number you will get informed when another horse of it's pedigree is registered.
+                                </p>
+                            </div>
+                        </div>
                         {{ Form::open(['files' => true]) }}
                             <div class="row">
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        {{ Form::label('name', trans('forms.labels.name'), ['class' => 'control-label']) }}
+                                        {{ Form::label('name', trans('forms.labels.name') . '*', ['class' => 'control-label']) }}
                                         {{ Form::text('name', null, ['class' => 'form-control']) }}
                                         @include('layout.partials._error_message', ['field' => 'name'])
                                     </div>
