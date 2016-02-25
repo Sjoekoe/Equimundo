@@ -94,11 +94,11 @@ new Vue({
 
 			//Vue.delete($status.comments , $comment);
 
-			$.each($status.comments.data, function(ndx, comment){
-				if(comment.id === $comment.id){
-					console.log(this);
-				}
-			});
+			// $.each($status.comments.data, function(ndx, comment){
+			// 	if(comment.id === $comment.id){
+			// 		console.log(this);
+			// 	}
+			// });
 
 			$status.comments.data.splice( $.inArray($comment, $status.comments.data), 1 );
 		}

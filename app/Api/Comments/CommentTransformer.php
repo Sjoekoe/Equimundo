@@ -9,6 +9,7 @@ class CommentTransformer extends TransformerAbstract
 {
     protected $defaultIncludes = [
         'user',
+        'likes'
     ];
 
     public function transform(Comment $comment)
@@ -16,11 +17,17 @@ class CommentTransformer extends TransformerAbstract
         return [
             'id' => $comment->id(),
             'body' => $comment->body(),
+            'like_count' =>count($comment->likes()),
         ];
     }
 
     public function includeUser(Comment $comment)
     {
         return $this->item($comment->poster(), new UserTransformer());
+    }
+
+    public function includeLikes(Comment $comment)
+    {
+        return count($comment->likes()) ? $this->collection($comment->likes(), new UserTransformer()) : null;
     }
 }

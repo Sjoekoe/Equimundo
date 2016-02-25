@@ -111,6 +111,47 @@ class StatusesTest extends \TestCase
     }
 
     /** @test */
+    function it_can_show_a_status_with_the_likers()
+    {
+        $user = $this->createUser();
+        $horse = $this->createHorse();
+        $status = $this->createStatus([
+            'horse_id' => $horse->id(),
+        ]);
+
+        $this->app->make('db')->table('likes')->insert([
+            'status_id' => $status->id(),
+            'user_id' => $user->id(),
+        ]);
+
+        $this->get('/api/statuses/' . $status->id())
+            ->seeJsonEquals([
+                'data' => [
+                    'id' => 1,
+                    'body' => $status->body(),
+                    'created_at' => $status->createdAt()->toIso8601String(),
+                    'like_count' => 1,
+                    'prefix' => 1,
+                    'likes' => [
+                        'data' => [
+                            [
+                                'id' => $user->id(),
+                                'first_name' => $user->firstName(),
+                                'last_name' => $user->lastName(),
+                                'email' => $user->email(),
+                                'date_of_birth' => null,
+                                'gender' => $user->gender(),
+                                'country' => $user->country(),
+                                'is_admin' => $user->isAdmin(),
+                                'language' => $user->language(),
+                            ],
+                        ],
+                    ],
+                ],
+            ]);
+    }
+
+    /** @test */
     function it_can_update_a_status()
     {
         $horse = factory(EloquentHorse::class)->create();

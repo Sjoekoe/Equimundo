@@ -5,6 +5,7 @@ use EQM\Core\Factories\BuildModels;
 use EQM\Core\Factories\ModelFactory;
 use EQM\Models\Horses\Horse;
 use EQM\Models\HorseTeams\HorseTeam;
+use EQM\Models\Statuses\Status;
 use EQM\Models\Users\User;
 
 class TestCase extends Illuminate\Foundation\Testing\TestCase
@@ -95,6 +96,18 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
     {
         return $this->modelFactory->create(HorseTeam::class, array_merge([
             'type' => HorseTeam::OWNER
+        ], $attributes));
+    }
+
+    /**
+     * @param array $attributes
+     * @return \EQM\Models\Statuses\Status
+     */
+    public function createStatus(array $attributes)
+    {
+        return $this->modelFactory->create(Status::class, array_merge([
+            'body' => 'Lorem ipsum dolores est',
+            'prefix' => 1
         ], $attributes));
     }
 }
