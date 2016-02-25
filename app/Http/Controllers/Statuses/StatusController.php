@@ -40,7 +40,9 @@ class StatusController extends Controller
 
     public function show(Status $status)
     {
-        $likes = $this->likes->findForUser(auth()->user());
+        if (auth()->check()) {
+            $likes = $this->likes->findForUser(auth()->user());
+        }
 
         return view('statuses.show', compact('status', 'likes'));
     }
