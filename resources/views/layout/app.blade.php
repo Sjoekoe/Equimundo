@@ -71,5 +71,16 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="/js/all.js"></script>
     @yield('footer')
+    @if (auth()->check())
+        <script
+                src="//d2s6cp23z9c3gz.cloudfront.net/js/embed.widget.min.js"
+                data-domain="equimundo.besnappy.com"
+                data-lang="en"
+                data-name="{{ auth()->user()->fullName() }}"
+                data-email="{{ auth()->user()->email() }}"
+                data-background="#40c4a7"
+         >
+        </script>
+    @endif
 </body>
 </html>
