@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta id="token" name="token" value="{{ csrf_token() }}" />
     <title>{{ isset($horse) ? $horse->name() . ' at ' : '' }}EquiMundo</title>
     <meta property="og:url"           content="{{ isset($horse) ? route('horses.show', $horse->slug()) : '' }}" />
     <meta property="og:type"          content="website" />
@@ -70,6 +71,9 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="/js/all.js"></script>
+    <script src="/js/vue.js"></script>
+    <script src="/js/vue-resource-min.js"></script>
+    <script src="/js/live-updates.js"></script>
     @yield('footer')
     @if (auth()->check())
         <script

@@ -28,8 +28,8 @@ class StatusController extends Controller
 
     public function store(PostStatus $request, StatusCreator $creator)
     {
-        ini_set('upload_max_filesize', '350M');
-        ini_set('post_max_size', '350M');
+        ini_set('upload_max_filesize', '350MB');
+        ini_set('post_max_size', '10M');
 
         $creator->create($request->all());
 
@@ -38,14 +38,11 @@ class StatusController extends Controller
         return redirect()->route('home');
     }
 
-    public function show(Status $status)
-    {
-        if (auth()->check()) {
-            $likes = $this->likes->findForUser(auth()->user());
-        }
-
-        return view('statuses.show', compact('status', 'likes'));
-    }
+	public function show(Status $status)
+	{
+		$likes = $this->likes->findForUser(auth()->user());
+		return view('statuses.show', compact('status', 'likes'));
+	}
 
     public function edit(Status $status)
     {
