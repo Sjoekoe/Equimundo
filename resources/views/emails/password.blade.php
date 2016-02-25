@@ -39,7 +39,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="{{ url('password/reset/'.$token) }}"
+                                        <a href="{{ url('password/reset'.$token) }}"
                                            style="color:#1ABC9C;text-decoration:none" target="_blank">
                                             <table cellspacing="0" cellpadding="0" width="100%"
                                                    style="border-collapse:collapse">
@@ -124,6 +124,3 @@
         </tbody>
     </table>
 </div>
-
-
-{{ trans('emails.reset_password') }} {{ url('password/reset/'.$token) }}
