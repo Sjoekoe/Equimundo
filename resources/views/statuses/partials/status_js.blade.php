@@ -28,9 +28,8 @@
 						<form class="like-button" method="POST" v-on:submit= "onSubmitLike($event, status)">
 
 							<!-- Vue template -->
-
 							<!-- Check if the the status likes array contains the user_id -->
-							<template v-if="user.data.id === 1">
+							<template v-if="status.liked_by_user">
 								<button class="btn btn-sm btn-default btn-hover-success active" type="submit"><i class="fa fa-thumbs-up"></i> You Like it</button>
 							</template>
 							<template v-else>

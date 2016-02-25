@@ -35,6 +35,10 @@ new Vue({
 						value.comments = {
 							"data" : []
 						};
+					}if(!value.likes){
+						value.likes = {
+							"data" : []
+						}
 					}
 				});
 
@@ -54,8 +58,10 @@ new Vue({
 
 		onSubmitComment: function(e, status){
 
+
 			//console.log(this.newComment.comment);
 			var comment_body;
+			var comment;
 
 			// Prevent default submit behaviour
 			e.preventDefault();
@@ -64,19 +70,26 @@ new Vue({
 				comment_body = value;
 			});
 
-			// Add new comment to statuses.comments.data
-			// status.comments.data.push(this.newComment.comment);
-			if(status.comments){
-				status.comments.data.push({
+			if(comment_body.replace(/[^a-zA-Z 0-9]+/g, '').trim().length === 0){
+				return;
+			}else{
+
+				comment = {
 					"body" : comment_body,
-					"user" : this.user,
-				});
+					"user" : this.user
+				}
+				// Add new comment to statuses.comments.data
+				// status.comments.data.push(this.newComment.comment);
+				if(status.comments){
+					status.comments.data.push(comment);
+				}
 			}
 
 			// Reset input field
 			this.newComment = { comment:'' };
 
 			// TODO Send POST ajax request
+			this.$http.post('/api/statuses/' + status.id + '/comments', comment);
 		},
 
 		onSubmitLike: function($e, $status){
@@ -85,22 +98,22 @@ new Vue({
 
 			// Prevent default submit behaviour
 			$e.preventDefault();
+			$status.likes.data.push(
+					this.user.data
+				);
 
 			// TODO Send POST ajax request
+			this.$http.post('/api/statuses/' + $status.id + '/like');
 
 		},
 
 		deleteComment: function($comment, $status){
 
-			//Vue.delete($status.comments , $comment);
-
-			// $.each($status.comments.data, function(ndx, comment){
-			// 	if(comment.id === $comment.id){
-			// 		console.log(this);
-			// 	}
-			// });
-
 			$status.comments.data.splice( $.inArray($comment, $status.comments.data), 1 );
+
+			if($comment.id){
+				this.$http.delete('/api/statuses/' + $status.id + '/comments/' + $comment.id + '');
+			}
 		}
 	}
 
