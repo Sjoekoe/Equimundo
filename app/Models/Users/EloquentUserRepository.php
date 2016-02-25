@@ -37,6 +37,7 @@ class EloquentUserRepository implements UserRepository
             'gender' => $values['gender'],
             'slug' => (new SlugCreator())->createForUser($values['first_name'], $values['last_name']),
             'date_of_birth' => $values['date_of_birth'],
+            'country' => $values['country']
         ]);
 
         $user->save();
