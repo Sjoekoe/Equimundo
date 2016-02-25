@@ -35,6 +35,9 @@ class UserMailer extends Mailer
         $data = [
             'link' => route('statuses.show', $status->id()),
             'sender' => $sender,
+            'userMail' => $user->email(),
+            'userName' => $user->firstName(),
+            'horseName' => $status->horse()->name(),
         ];
 
         return $this->sendTo($user, $subject, $view, $data);
@@ -55,6 +58,8 @@ class UserMailer extends Mailer
             'sender' => $sender,
             'family' => $family,
             'horse' => $horse,
+            'userName' => $user->firstName(),
+            'userMail' => $user->email(),
         ];
 
         return $this->sendTo($user, $subject, $view, $data);
