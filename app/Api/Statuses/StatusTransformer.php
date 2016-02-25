@@ -23,6 +23,7 @@ class StatusTransformer extends TransformerAbstract
             'like_count' => count($status->likes()),
             'created_at' => $status->createdAt()->toIso8601String(),
             'prefix' => $status->prefix(),
+            'liked_by_user' => auth()->check() ? $status->isLikedByUser(auth()->user()) : false,
         ];
     }
 

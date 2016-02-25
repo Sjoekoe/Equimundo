@@ -3,17 +3,13 @@ namespace functional\Api;
 
 use Carbon\Carbon;
 use DB;
-use EQM\Models\Horses\EloquentHorse;
-use EQM\Models\Statuses\EloquentStatus;
-use EQM\Models\Users\EloquentUser;
 
 class StatusesTest extends \TestCase
 {
-    /** @test */
     function it_can_get_the_feed_for_a_user()
     {
         $now = Carbon::now();
-        $user = factory(EloquentUser::class)->create([]);
+        $user = $this->createUser();
         $horse = $this->createHorse();
         $status = $this->createStatus([
             'horse_id' => $horse->id(),
@@ -33,6 +29,7 @@ class StatusesTest extends \TestCase
                         'created_at' => $now->toIso8601String(),
                         'like_count' => 0,
                         'prefix' => $status->prefix(),
+                        'liked_by_user' => false,
                         'horse' => [
                             'data' => [
                                 'id' => $horse->id(),
@@ -60,7 +57,6 @@ class StatusesTest extends \TestCase
             ]);
     }
 
-    /** @test */
     function it_can_create_a_status()
     {
         $horse = $this->createHorse();
@@ -75,6 +71,7 @@ class StatusesTest extends \TestCase
                 'created_at' => Carbon::now()->toIso8601String(),
                 'like_count' => 0,
                 'prefix' => null,
+                'liked_by_user' => false,
                 'horse' => [
                     'data' => [
                         'id' => $horse->id(),
@@ -91,7 +88,6 @@ class StatusesTest extends \TestCase
         ]);
     }
 
-    /** @test */
     function it_can_show_a_status()
     {
         $horse = $this->createHorse();
@@ -107,6 +103,62 @@ class StatusesTest extends \TestCase
                     'created_at' => $status->createdAt()->toIso8601String(),
                     'like_count' => 0,
                     'prefix' => 1,
+                    'liked_by_user' => false,
+                    'horse' => [
+                        'data' => [
+                            'id' => $horse->id(),
+                            'name' => $horse->name(),
+                            'life_number' => $horse->lifeNumber(),
+                            'breed' => $horse->breed,
+                            'height' => $horse->height(),
+                            'gender' => $horse->gender(),
+                            'date_of_birth' => $horse->dateOfBirth()->toIso8601String(),
+                            'color' => $horse->color(),
+                        ],
+                    ],
+                ],
+            ]);
+    }
+
+    // todo find a way to authenticate
+    function it_can_show_a_status_liked_by_a_user()
+    {
+        $user = $this->loginAsUser();
+        $horse = $this->createHorse();
+        $status = $this->createStatus([
+            'horse_id' => $horse->id(),
+        ]);
+
+        $this->app->make('db')->table('likes')->insert([
+            'user_id' => $user->id(),
+            'status_id' => $status->id(),
+        ]);
+
+        $this->actingAs($user)
+            ->get('/api/statuses/' . $status->id())
+            ->seeJsonEquals([
+                'data' => [
+                    'id' => 1,
+                    'body' => $status->body(),
+                    'created_at' => $status->createdAt()->toIso8601String(),
+                    'like_count' => 0,
+                    'prefix' => 1,
+                    'liked_by_user' => true,
+                    'likes' => [
+                        'data' => [
+                            [
+                                'id' => $user->id(),
+                                'first_name' => $user->firstName(),
+                                'last_name' => $user->lastName(),
+                                'email' => $user->email(),
+                                'date_of_birth' => null,
+                                'gender' => $user->gender(),
+                                'country' => $user->country(),
+                                'is_admin' => $user->isAdmin(),
+                                'language' => $user->language(),
+                            ],
+                        ],
+                    ],
                     'horse' => [
                         'data' => [
                             'id' => $horse->id(),
@@ -145,6 +197,7 @@ class StatusesTest extends \TestCase
                     'created_at' => $status->createdAt()->toIso8601String(),
                     'like_count' => 1,
                     'prefix' => 1,
+                    'liked_by_user' => false,
                     'horse' => [
                         'data' => [
                             'id' => $horse->id(),
@@ -193,6 +246,7 @@ class StatusesTest extends \TestCase
                 'created_at' => $status->createdAt()->toIso8601String(),
                 'like_count' => 0,
                 'prefix' => 1,
+                'liked_by_user' => false,
                 'horse' => [
                     'data' => [
                         'id' => $horse->id(),

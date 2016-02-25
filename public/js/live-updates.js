@@ -92,21 +92,6 @@ new Vue({
 			this.$http.post('/api/statuses/' + status.id + '/comments', comment);
 		},
 
-		onSubmitLike: function($e, $status){
-
-			$status.like_count++;
-
-			// Prevent default submit behaviour
-			$e.preventDefault();
-			$status.likes.data.push(
-					this.user.data
-				);
-
-			// TODO Send POST ajax request
-			this.$http.post('/api/statuses/' + $status.id + '/like');
-
-		},
-
 		deleteComment: function($comment, $status){
 
 			$status.comments.data.splice( $.inArray($comment, $status.comments.data), 1 );
@@ -114,7 +99,32 @@ new Vue({
 			if($comment.id){
 				this.$http.delete('/api/statuses/' + $status.id + '/comments/' + $comment.id + '');
 			}
-		}
+		},
+
+		onSubmitLike: function($e, $status){
+
+			// Prevent default submit behaviour
+			$e.preventDefault();
+
+			if($status.liked_by_user){
+
+				$status.like_count--;
+				$status.liked_by_user = false;
+				this.$http.post('/api/statuses/' + $status.id + '/like');
+
+			}else{
+
+				$status.like_count++;
+
+				$status.likes.data.push(
+						this.user.data
+					);
+
+				$status.liked_by_user = true;
+				this.$http.post('/api/statuses/' + $status.id + '/like');
+			}
+
+		},
 	}
 
 });
