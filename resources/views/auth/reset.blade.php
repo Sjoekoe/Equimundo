@@ -9,8 +9,12 @@
         <div class="cls-content">
             <div class="cls-content-sm panel">
                 <div class="panel-body">
+                    @if (session()->has('status'))
+                        <p>{{ session()->get('status') }}</p>
+                    @endif
                     <p class="pad-btm">Reset your password.</p>
-                    {{ Form::open(['route' => 'password.post_forgot', 'class' => 'form-horizontal']) }}
+                    {{ Form::open(['class' => 'form-horizontal']) }}
+                        {{ Form::hidden('token', $token) }}
                     <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
                         <div class="input-group">
                             <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
@@ -24,6 +28,7 @@
                             <input type="password" class="form-control" name="password" placeholder="password">
                         </div>
                         @include('layout.partials._error_message', ['field' => 'password'])
+                        @include('layout.partials._error_message', ['field' => 'token'])
                     </div>
                     <div class="form-group">
                         <div class="input-group">
