@@ -8,11 +8,13 @@
             <div v-for="status in statuses">
                 @include('statuses.partials.status_js')
             </div>
+
+            <!--
             <pre>
                 [[ horse.data.statuses ]]
                 [[ $data | json ]]
             </pre>
-
+            -->
 
             @if (! count($horse->statuses()))
                 <p>{{ trans('copy.p.no_statuses') }}</p>
