@@ -62,11 +62,7 @@
 
                                             {{ Form::file('picture', ['class' => 'pull-left', 'id' => 'picture']) }}
 
-                                            {{--<label for="movie">
-                                                <i class="btn btn-trans btn-icon fa fa-video-camera"></i>
-                                            </label>
 
-                                            {{ Form::file('movie', ['class' => 'pull-left', 'id' => 'movie']) }}--}}
                                         </div>
                                     </div>
                             </div>

@@ -12,7 +12,6 @@ use EQM\Models\HorseTeams\HorseTeamRepository;
 use EQM\Models\Statuses\Likes\LikeRepository;
 use EQM\Models\Statuses\StatusRepository;
 use EQM\Models\Users\User;
-use Laracasts\Utilities\JavaScript\JavaScriptFacade as JavaScript;
 
 class HorseController extends Controller
 {
@@ -76,10 +75,6 @@ class HorseController extends Controller
         if (auth()->check()) {
             $likes = $this->likes->findForUser(auth()->user());
         }
-
-        JavaScript::put(compact('horse', 'likes', 'statuses'));
-
-        //var_dump(compact('horse', 'likes', 'statuses'));exit;
 
         return view('horses.show', compact('horse', 'likes', 'statuses'));
     }
