@@ -35,13 +35,13 @@ class StatusController extends Controller
 
         session()->put('success', 'Status has been posted');
 
-        //return redirect()->route('home');
+        return redirect()->route('home');
     }
 
 	public function show(Status $status)
 	{
 		$likes = $this->likes->findForUser(auth()->user());
-		//return view('statuses.show', compact('status', 'likes'));
+		return view('statuses.show', compact('status', 'likes'));
 	}
 
     public function edit(Status $status)
