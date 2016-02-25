@@ -37,6 +37,17 @@ class StatusesTest extends \TestCase
     }
 
     /** @test */
+    function it_can_show_a_status_when_not_logged_in() {
+        $horse = $this->createHorse();
+        $status = $this->createStatus([
+            'horse_id' => $horse->id(),
+        ]);
+
+        $this->visit('/status/' . $status->id() . '/show')
+            ->assertResponseOk();
+    }
+
+    /** @test */
     function it_can_edit_a_status()
     {
         $user = factory(EloquentUser::class)->create([
