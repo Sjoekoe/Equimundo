@@ -2,6 +2,7 @@
 namespace EQM\Api\Statuses;
 
 use EQM\Api\Comments\CommentTransformer;
+use EQM\Api\Horses\HorseTransformer;
 use EQM\Api\Users\UserTransformer;
 use EQM\Models\Statuses\Status;
 use League\Fractal\TransformerAbstract;
@@ -9,6 +10,7 @@ use League\Fractal\TransformerAbstract;
 class StatusTransformer extends TransformerAbstract
 {
     protected $defaultIncludes = [
+        'horse',
         'comments',
         'likes',
     ];
@@ -22,6 +24,11 @@ class StatusTransformer extends TransformerAbstract
             'created_at' => $status->createdAt()->toIso8601String(),
             'prefix' => $status->prefix(),
         ];
+    }
+
+    public function includeHorse(Status $status)
+    {
+        return $this->item($status->horse(), new HorseTransformer());
     }
 
     public function includeComments(Status $status)

@@ -9,8 +9,11 @@ use League\Fractal\TransformerAbstract;
 class HorseTransformer extends TransformerAbstract
 {
     protected $defaultIncludes = [
-        'statuses',
         'pictures',
+    ];
+
+    protected $availableIncludes = [
+        'statuses',
     ];
 
     public function transform(Horse $horse)
