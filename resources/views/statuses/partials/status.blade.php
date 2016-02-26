@@ -62,7 +62,6 @@
                                 @endif
                                 {{ Form::close() }}
                             </div>
-                            <a class="btn btn-sm btn-default btn-hover-primary" href="#">Comment</a>
                         @endif
                     </div>
                     <hr>
