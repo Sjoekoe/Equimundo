@@ -115,16 +115,31 @@ class EloquentHorseRepository implements HorseRepository
     public function update(Horse $horse, array $values = [])
     {
         $horse->name = $values['name'];
-        $horse->gender = $values['gender'];
-        $horse->breed = $values['breed'];
-        $horse->height = $values['height'];
-        $horse->color = $values['color'];
+
+        if (array_key_exists('gender', $values)) {
+            $horse->gender = $values['gender'];
+        }
+
+        if (array_key_exists('breed', $values)) {
+            $horse->breed = $values['breed'];
+        }
+
+
+        if (array_key_exists('height', $values)) {
+            $horse->height = $values['height'];
+        }
+
+        if (array_key_exists('color', $values)) {
+            $horse->color = $values['color'];
+        }
 
         if (array_key_exists('date_of_birth', $values)) {
             $horse->date_of_birth = Carbon::createFromFormat('d/m/Y', $values['date_of_birth'])->startOfDay();
         }
 
-        $horse->life_number = $values['life_number'];
+        if (array_key_exists('life_number', $values)) {
+            $horse->life_number = $values['life_number'];
+        }
 
         $horse->save();
 
