@@ -24,7 +24,7 @@ class CommentTest extends \TestCase
         $this->actingAs($user)
             ->post('/statuses/' . $status->id() . '/comments', [
                 'body' => 'Foo body'
-            ])->assertResponseStatus(200);
+            ])->assertResponseStatus(302);
 
         $this->seeInDatabase('comments', [
             'id' => 1,
