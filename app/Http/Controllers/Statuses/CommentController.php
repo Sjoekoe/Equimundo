@@ -7,6 +7,8 @@ use EQM\Models\Comments\CommentCreator;
 use EQM\Models\Comments\CommentRepository;
 use EQM\Models\Statuses\Status;
 use Illuminate\Http\Request;
+use Redirect;
+use URL;
 
 class CommentController extends Controller
 {
@@ -27,7 +29,8 @@ class CommentController extends Controller
 
         session()->put('success', 'Your comment was posted');
 
-        return response()->json('success', 200);
+        return Redirect::to(URL::previous() . "#" . $status->id());
+        //return response()->json('success', 200);
     }
 
     public function edit(Comment $comment)

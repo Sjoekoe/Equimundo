@@ -1,3 +1,4 @@
+/*
 (function() {
     var submitAjaxRequest = function(e) {
         var form = $(this);
@@ -21,4 +22,4 @@
     }
 
     $('.like-button').on('submit', submitAjaxRequest);
-})();
+})();*/
