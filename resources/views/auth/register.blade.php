@@ -66,7 +66,7 @@
                             <div class="form-group" style="height: 31px;">
                                 <div class="radio">
                                     <label class="form-radio form-icon form-text active" tabindex="6">
-                                        <input type="radio" name="gender" value="F">
+                                        <input type="radio" checked name="gender" value="F">
                                         Female
                                     </label>
                                     <label class="form-radio form-icon form-text active">
