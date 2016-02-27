@@ -19,6 +19,7 @@ return [
         'horse_count' => 'You have :0 horses',
         'horses' => 'Horses',
         'horses_of' => 'Horses of',
+        'latest_horses' => 'Our latest horses',
         'latest_users' => 'Our latest users',
         'lets_get_started' => 'Let\'s get you started.',
         'member_since' => 'Member since',

@@ -19,6 +19,7 @@ return [
         'horse_count' => 'Je hebt :0 paarden',
         'horses' => 'Paarden',
         'horses_of' => 'Paarden van',
+        'latest_horses' => 'Onze laatste paarden.',
         'latest_users' => 'Onze nieuwste gebruikers.',
         'lets_get_started' => 'Laten we je op weg helpen.',
         'member_since' => 'Lid sinds',
