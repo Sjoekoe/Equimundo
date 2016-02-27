@@ -182,6 +182,20 @@
                     </div>
                 @endif
             </div>
+            <div class="col-md-2">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            Our latest horses
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        @foreach ($latestHorses as $latestHorse)
+                            <a href="{{ route('horses.show', $latestHorse->slug()) }}" class="text-mint">{{ $latestHorse->name() }}</a> <br>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @stop

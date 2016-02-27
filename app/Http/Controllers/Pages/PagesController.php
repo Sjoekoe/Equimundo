@@ -68,7 +68,9 @@ class PagesController extends Controller
             $latestUsers = $this->users->getLatest(auth()->user());
         }
 
-        return view('pages.home', compact('horses', 'statuses', 'likes', 'initialPicture', 'latestUsers', 'popularHorses', 'activeHorses'));
+        $latestHorses = $this->horses->latestHorse();
+
+        return view('pages.home', compact('horses', 'statuses', 'likes', 'initialPicture', 'latestUsers', 'popularHorses', 'activeHorses', 'latestHorses'));
     }
 
     public function terms()
