@@ -225,11 +225,6 @@ class EloquentHorseRepository implements HorseRepository
      */
     public function latestHorse()
     {
-        $horses = $this->horse->get()->sortByDesc(function($horse)
-        {
-            return $horse->userTeams()->count();
-        });
-
-        return $horses->take(20);
+        return  $this->horse->latest()->limit(20)->get();
     }
 }
