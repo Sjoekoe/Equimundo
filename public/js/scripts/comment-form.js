@@ -1,5 +1,5 @@
 (function () {
-    function displayComment(data) {
+    /*function displayComment(data) {
         var commentHtml = createComment(data);
         var commentEl = $(commentHtml);
         commentEl.hide();
@@ -42,5 +42,5 @@
                 }
             });
         }
-    });
+    });*/
 })();
