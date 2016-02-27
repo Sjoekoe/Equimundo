@@ -89,4 +89,9 @@ interface HorseRepository
      * @return \EQM\Models\Horses\Horse
      */
     public function findMostPopularHorses();
+
+    /**
+     * @return \EQM\Models\Horses\Horse
+     */
+    public function latestHorse();
 }
