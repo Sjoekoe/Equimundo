@@ -105,4 +105,18 @@ class EloquentAlbumRepository implements AlbumRepository
             'type' => Album::TIMELINEPICTURES,
         ]);
     }
+
+    /**
+     * @param \EQM\Models\Horses\Horse $horse
+     * @param int $type
+     * @param string $title
+     * @return \EQM\Models\Albums\Album
+     */
+    public function createStandardAlbum(Horse $horse, $type, $title)
+    {
+        return $this->create($horse, [
+            'name' => $title,
+            'type' => $type,
+        ]);
+    }
 }

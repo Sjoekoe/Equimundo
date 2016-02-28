@@ -65,7 +65,11 @@ class PicturesController extends Controller
         $picture->profile_pic = true;
         $picture->save();
 
-        $profileAlbum = $horse->getStandardAlbum(Album::PROFILEPICTURES);
+        if (! $horse->getStandardAlbum(Album::PROFILEPICTURES)) {
+            $profileAlbum = $this->albums->createStandardAlbum($horse, Album::PROFILEPICTURES, 'profile_album');
+        } else {
+            $profileAlbum = $horse->getStandardAlbum(Album::PROFILEPICTURES);
+        }
 
         $profilePictures = [];
 

@@ -14,6 +14,7 @@
                                     </div>
                                     <div class="row mar-top">
                                         {{ Form::textarea('body', null, ['class' => 'form-control', 'rows' => 3, 'placeholder' => trans('forms.placeholders.what_you_been_doing')]) }}
+                                        @include('layout.partials._error_message', ['field' => 'body'])
                                     </div>
                                     <div class="row mar-top">
                                         <div class="col-sm-6 pad-no">
