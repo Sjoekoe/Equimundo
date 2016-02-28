@@ -348,7 +348,7 @@ class EloquentHorse extends Model implements Horse
     public function getStandardAlbum($type)
     {
         foreach($this->albums() as $album) {
-            if ($album->type == $type) {
+            if ($album->type() && ($album->type() === $type)) {
                 return $album;
             }
         }

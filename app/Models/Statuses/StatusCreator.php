@@ -78,7 +78,7 @@ class StatusCreator
                 $album = $horse->getStandardAlbum(Album::TIMELINEPICTURES);
             }
 
-            $picture->addToAlbum($horse->getStandardAlbum($album));
+            $picture->addToAlbum($album);
             $status->setPicture($picture);
 
             $status->save();
