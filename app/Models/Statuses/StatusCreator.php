@@ -73,12 +73,12 @@ class StatusCreator
             $picture = $this->uploader->uploadPicture($values['picture'], $horse);
 
             if (! $horse->getStandardAlbum(Album::TIMELINEPICTURES)) {
-                $album = $this->albums->createStandardAlbum(Album::TIMELINEPICTURES, 'timeline_album');
+                $album = $this->albums->createStandardAlbum($horse, Album::TIMELINEPICTURES, 'timeline_album');
             } else {
                 $album = $horse->getStandardAlbum(Album::TIMELINEPICTURES);
             }
 
-            $picture->addToAlbum($horse->getStandardAlbum($album));
+            $picture->addToAlbum($album);
             $status->setPicture($picture);
 
             $status->save();
