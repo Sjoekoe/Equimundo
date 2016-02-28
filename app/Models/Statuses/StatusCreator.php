@@ -3,6 +3,7 @@ namespace EQM\Models\Statuses;
 
 use EQM\Core\Files\Uploader;
 use EQM\Models\Albums\Album;
+use EQM\Models\Albums\AlbumRepository;
 use EQM\Models\Horses\Horse;
 use EQM\Models\Horses\HorseRepository;
 
@@ -24,15 +25,21 @@ class StatusCreator
     private $uploader;
 
     /**
+     * @var \EQM\Models\Albums\AlbumRepository
+     */
+    private $albums;
+
+    /**
      * @param \EQM\Models\Statuses\StatusRepository $statuses
      * @param \EQM\Models\Horses\HorseRepository $horses
      * @param \EQM\Core\Files\Uploader $uploader
      */
-    public function __construct(StatusRepository $statuses, HorseRepository $horses, Uploader $uploader)
+    public function __construct(StatusRepository $statuses, HorseRepository $horses, Uploader $uploader, AlbumRepository $albums)
     {
         $this->statuses = $statuses;
         $this->horses = $horses;
         $this->uploader = $uploader;
+        $this->albums = $albums;
     }
 
     /**
@@ -65,7 +72,13 @@ class StatusCreator
         if (array_key_exists('picture', $values)) {
             $picture = $this->uploader->uploadPicture($values['picture'], $horse);
 
-            $picture->addToAlbum($horse->getStandardAlbum(Album::TIMELINEPICTURES));
+            if (! $horse->getStandardAlbum(Album::TIMELINEPICTURES)) {
+                $album = $this->albums->createStandardAlbum(Album::TIMELINEPICTURES, 'timeline_album');
+            } else {
+                $album = $horse->getStandardAlbum(Album::TIMELINEPICTURES);
+            }
+
+            $picture->addToAlbum($horse->getStandardAlbum($album));
             $status->setPicture($picture);
 
             $status->save();

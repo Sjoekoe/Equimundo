@@ -40,4 +40,12 @@ interface AlbumRepository
      * @param \EQM\Models\Horses\Horse $horse
      */
     public function createStandardAlbums(Horse $horse);
+
+    /**
+     * @param \EQM\Models\Horses\Horse $horse
+     * @param int $type
+     * @param string $title
+     * @return \EQM\Models\Albums\Album
+     */
+    public function createStandardAlbum(Horse $horse, $type, $title);
 }
