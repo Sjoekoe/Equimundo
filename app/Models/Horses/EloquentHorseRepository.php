@@ -133,7 +133,7 @@ class EloquentHorseRepository implements HorseRepository
             $horse->color = $values['color'];
         }
 
-        if (array_key_exists('date_of_birth', $values)) {
+        if (array_key_exists('date_of_birth', $values) && $values['date_of_birth'] !== '') {
             $horse->date_of_birth = Carbon::createFromFormat('d/m/Y', $values['date_of_birth'])->startOfDay();
         }
 
