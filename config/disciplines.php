@@ -31,6 +31,7 @@ return [
         Discipline::POINT_TO_POINT ,
         Discipline::STEEPLECHASE ,
         Discipline::THOROUGHBRED_RACING ,
+        Discipline::ENDURANCE,
     ],
 
     'classic' => [

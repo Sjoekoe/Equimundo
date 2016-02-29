@@ -79,6 +79,7 @@ interface Discipline
     const MOUNTED_ARCHERY = 74;
     const MOUNTED_GAMES = 75;
     const TENT_PEGGING = 76;
+    const ENDURANCE = 77;
 
     /**
      * @return int
