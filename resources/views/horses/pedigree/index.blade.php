@@ -162,7 +162,14 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="panel panel-bordered-info">
-                            <div class="panel-header">
+                            <div class="panel-heading">
+                                <div class="panel-control">
+                                    <div class="btn-group">
+                                        <a href="{{ route('pedigree.create', [$horse->slug(), 'type' => \EQM\Models\Pedigrees\Pedigree::SON]) }}" class="btn btn-mint">
+                                            <i class="fa fa-plus"></i>
+                                        </a>
+                                    </div>
+                                </div>
                                 <h3 class="panel-title">
                                     {{ trans('copy.titles.sons') }}
                                 </h3>
@@ -178,7 +185,14 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="panel panel-bordered-pink">
-                            <div class="panel-header">
+                            <div class="panel-heading">
+                                <div class="panel-control">
+                                    <div class="btn-group">
+                                        <a href="{{ route('pedigree.create', [$horse->slug(), 'type' => \EQM\Models\Pedigrees\Pedigree::DAUGHTER]) }}" class="btn btn-mint">
+                                            <i class="fa fa-plus"></i>
+                                        </a>
+                                    </div>
+                                </div>
                                 <h3 class="panel-title">
                                     {{ trans('copy.titles.daughters') }}
                                 </h3>
