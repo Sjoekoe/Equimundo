@@ -378,6 +378,7 @@ interface Horse
     const SUDAN = 342;
     const ZANISKARI = 343;
     const ZEMAITUKAS = 344;
+    const HAFLOARAB = 345;
 
     /**
      * @return int

@@ -79,4 +79,5 @@ return [
     Discipline::MOUNTED_ARCHERY => 'Mounted archery',
     Discipline::MOUNTED_GAMES => 'Mounted Games',
     Discipline::TENT_PEGGING => 'Tent pegging',
+    Discipline::ENDURANCE => 'Endurance',
 ];

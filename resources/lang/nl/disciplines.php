@@ -78,4 +78,5 @@ return [
     Discipline::MOUNTED_ARCHERY => 'Boogschieten te paard',
     Discipline::MOUNTED_GAMES => 'Mounted Games',
     Discipline::TENT_PEGGING => 'Tentpegging',
+    Discipline::ENDURANCE => 'Endurance',
 ];

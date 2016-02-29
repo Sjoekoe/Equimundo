@@ -145,6 +145,7 @@ return [
             Horse::GYPSY => 'Gypsy horse',
             Horse::HACKNEY => 'Hackney horse',
             Horse::HAFLINGER => 'Haflinger',
+            Horse::HAFLOARAB => 'Haflo-arab',
             Horse::HANOVERIAN => 'Hanoverian horse',
             Horse::HECK => 'Heck horse',
             Horse::HEIHE => 'Heihe horse',

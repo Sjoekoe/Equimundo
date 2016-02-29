@@ -34,7 +34,6 @@ return [
     ],
 
     'breeds' =>  [
-
         Horse::ABTENAUER => 'Abtenauer',
         Horse::ABYSSIAN => 'Abyssinian horse',
         Horse::AEIGIDIENBERGER => 'Aegidienberger',
@@ -145,6 +144,7 @@ return [
         Horse::GYPSY => 'Gypsy horse',
         Horse::HACKNEY => 'Hackney horse',
         Horse::HAFLINGER => 'Haflinger',
+        Horse::HAFLOARAB => 'Haflo-Arabier',
         Horse::HANOVERIAN => 'Hanoveraan',
         Horse::HECK => 'Heck horse',
         Horse::HEIHE => 'Heihe horse',
@@ -243,8 +243,8 @@ return [
         Horse::QUARAB => 'Quarab',
         Horse::RACKING => 'Racking horse',
         Horse::RETUERTA => 'Retuerta horse',
-        Horse::RHENISH => 'Rhenish German Coldblood',
-        Horse::RHINELANDER => 'Rhinelander horse',
+        Horse::RHENISH => 'Rijnlandse koudbloed',
+        Horse::RHINELANDER => 'Rijnlandse warmbloed',
         Horse::RIWOCHE => 'Riwoche horse',
         Horse::ROCKY_MOUNTAIN => 'Rocky Mountain Horse',
         Horse::ROMANIAN => 'Romanian Sporthorse',
