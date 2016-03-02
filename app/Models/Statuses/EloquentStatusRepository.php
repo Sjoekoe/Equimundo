@@ -52,7 +52,7 @@ class EloquentStatusRepository implements StatusRepository
             array_push($horseIds, $horse->id());
         }
 
-        return $this->status->whereIn('horse_id', array_flatten($horseIds))->latest()->get();
+        return $this->status->whereIn('horse_id', array_flatten($horseIds))->latest()->paginate(10);
     }
 
     /**

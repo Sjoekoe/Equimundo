@@ -57,9 +57,12 @@
                     </div>
                 @endif
                 @if (count($statuses))
-                    @foreach($statuses as $status)
-                        @include('statuses.partials.status')
-                    @endforeach
+                    <div class="status-scroll">
+                        @foreach($statuses as $status)
+                            @include('statuses.partials.status')
+                        @endforeach
+                        {{ $statuses->render() }}
+                    </div>
                 @else
                     <div class="panel">
                         <div class="panel-heading">
