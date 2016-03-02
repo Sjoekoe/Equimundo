@@ -202,4 +202,30 @@ class EloquentUserRepository implements UserRepository
             ->where('id', '!=', $user->id())
             ->orderBy('created_at', 'DESC')->limit(3)->get();
     }
+
+    /**
+     * @return \EQM\Models\Users\User[]
+     */
+    public function findUnactivatedUsers()
+    {
+        $fiveDaysAgo = Carbon::now()->subDay(5);
+
+        return $this->user
+            ->where('activated', false)
+            ->where('reminder_sent', false)
+            ->where('created_at', '<', $fiveDaysAgo)
+            ->get();
+    }
+
+    /**
+     * @param \EQM\Models\Users\User $user
+     * @return \EQM\Models\Users\User
+     */
+    public function reminded(User $user)
+    {
+        $user->reminder_sent = true;
+        $user->save();
+
+        return $user;
+    }
 }
