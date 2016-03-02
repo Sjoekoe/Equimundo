@@ -7,6 +7,7 @@ use EQM\Models\Horses\HorseRepository;
 use EQM\Models\Statuses\Likes\LikeRepository;
 use EQM\Models\Statuses\StatusRepository;
 use EQM\Models\Users\UserRepository;
+use Mail;
 use Queue;
 
 class PagesController extends Controller
@@ -96,5 +97,7 @@ class PagesController extends Controller
 
             $m->to('hans@equimundo.com', 'Hans Jonckers')->subject('Your Reminder!');
         });
+
+        return 'send';
     }
 }
