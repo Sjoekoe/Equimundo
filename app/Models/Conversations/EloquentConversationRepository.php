@@ -60,4 +60,12 @@ class EloquentConversationRepository implements ConversationRepository
 
         return $conversation;
     }
+
+    /**
+     * @return int
+     */
+    public function count()
+    {
+        return count($this->conversation->all());
+    }
 }

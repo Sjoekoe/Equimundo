@@ -41,4 +41,9 @@ interface PictureRepository
      * @param \EQM\Models\Pictures\Picture $picture
      */
     public function delete(Picture $picture);
+
+    /**
+     * @return int
+     */
+    public function count();
 }

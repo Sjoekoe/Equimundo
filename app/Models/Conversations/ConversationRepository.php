@@ -28,4 +28,9 @@ interface ConversationRepository
      * @return \EQM\Models\Conversations\Conversation
      */
     public function create($values);
+
+    /**
+     * @return int
+     */
+    public function count();
 }

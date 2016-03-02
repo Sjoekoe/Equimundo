@@ -7,17 +7,19 @@
     <div id="page-content">
         <div class="row">
             <div class="col-sm-6 col-lg-3">
-                <div class="panel media pad-all">
-                    <div class="media-left">
-                        <span class="icon-wrap icon-wrap-sm icon-circle bg-success">
-                            <i class="fa fa-user fa-2x"></i>
-                        </span>
+                <a href="{{ route('admin.users') }}">
+                    <div class="panel media pad-all">
+                        <div class="media-left">
+                            <span class="icon-wrap icon-wrap-sm icon-circle bg-success">
+                                <i class="fa fa-user fa-2x"></i>
+                            </span>
+                        </div>
+                        <div class="media-body">
+                            <p class="text-2x mar-no text-thin">{{ $users }}</p>
+                            <p class="text-muted mar-no">Registered users</p>
+                        </div>
                     </div>
-                    <div class="media-body">
-                        <p class="text-2x mar-no text-thin">{{ $users }}</p>
-                        <p class="text-muted mar-no">Registered users</p>
-                    </div>
-                </div>
+                </a>
             </div>
             <div class="col-sm-6 col-lg-3">
                 <div class="panel media pad-all">
@@ -46,30 +48,58 @@
                 </div>
             </div>
             <div class="col-sm-6 col-lg-3">
-                <div class="panel media pad-all">
-                    <div class="media-left">
-                        <span class="icon-wrap icon-wrap-sm icon-circle bg-info">
-                            <i class="fa fa-photo fa-2x"></i>
-                        </span>
+                <a href="{{ 'route.admin.horses' }}">
+                    <div class="panel media pad-all">
+                        <div class="media-left">
+                            <span class="icon-wrap icon-wrap-sm icon-circle bg-info">
+                                <i class="fa fa-photo fa-2x"></i>
+                            </span>
+                        </div>
+                        <div class="media-body">
+                            <p class="text-2x mar-no text-thin">{{ $horses }}</p>
+                            <p class="text-muted mar-no">Horses</p>
+                        </div>
                     </div>
-                    <div class="media-body">
-                        <p class="text-2x mar-no text-thin">{{ $horses }}</p>
-                        <p class="text-muted mar-no">Horses</p>
-                    </div>
-                </div>
+                </a>
             </div>
-        </div>
-        <div class="row">
+            <div class="col-sm-6 col-lg-3">
+                <a href="{{ route('admin.searches.index') }}">
+                    <div class="panel media pad-all">
+                        <div class="media-left">
+                                <span class="icon-wrap icon-wrap-sm icon-circle bg-danger">
+                                    <i class="fa fa-search fa-2x"></i>
+                                </span>
+                        </div>
+                        <div class="media-body">
+                            <p class="text-2x mar-no text-thin">{{ $searchResults }}</p>
+                            <p class="text-muted mar-no">Searches performed</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
             <div class="col-sm-6 col-lg-3">
                 <div class="panel media pad-all">
                     <div class="media-left">
-                        <span class="icon-wrap icon-wrap-sm icon-circle bg-danger">
-                            <i class="fa fa-search fa-2x"></i>
+                        <span class="icon-wrap icon-wrap-sm icon-circle bg-purple">
+                            <i class="fa fa-microphone fa-2x"></i>
                         </span>
                     </div>
                     <div class="media-body">
-                        <p class="text-2x mar-no text-thin">{{ $searchResults }}</p>
-                        <p class="text-muted mar-no">Searches performed</p>
+                        <p class="text-2x mar-no text-thin">{{ $conversations }}</p>
+                        <p class="text-muted mar-no">Conversations</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="panel media pad-all">
+                    <div class="media-left">
+                        <span class="icon-wrap icon-wrap-sm icon-circle bg-primary">
+                            <i class="fa fa-picture-o fa-2x"></i>
+                        </span>
+                    </div>
+                    <div class="media-body">
+                        <p class="text-2x mar-no text-thin">{{ $pictures }}</p>
+                        <p class="text-muted mar-no">Pictures uploaded</p>
                     </div>
                 </div>
             </div>
