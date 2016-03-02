@@ -50,6 +50,7 @@
                                     <th>Status</th>
                                     <th>Member since</th>
                                     <th>Last Login</th>
+                                    <th>IP</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -66,6 +67,7 @@
                                             </td>
                                             <td>{{ eqm_date($user->created_at) }}</td>
                                             <td>{{ eqm_date($user->lastLogin()) }}</td>
+                                            <td>{{ $user->ip() }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

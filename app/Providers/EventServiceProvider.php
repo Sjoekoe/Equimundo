@@ -17,6 +17,7 @@ use EQM\Listeners\Events\Statuses\Likes\EmailHorseOwner;
 use EQM\Listeners\Events\UpdateSearchTable;
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Request;
 
 class EventServiceProvider extends ServiceProvider {
 
@@ -62,6 +63,7 @@ class EventServiceProvider extends ServiceProvider {
 
         $events->listen('auth.login', function ($user, $remember) {
             $user->last_login = Carbon::now();
+            $user->ip = Request::ip();
             $user->save();
         });
     }

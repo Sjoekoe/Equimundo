@@ -235,4 +235,9 @@ interface User
      * @return \Carbon\Carbon
      */
     public function lastLogin();
+
+    /**
+     * @return string
+     */
+    public function ip();
 }
