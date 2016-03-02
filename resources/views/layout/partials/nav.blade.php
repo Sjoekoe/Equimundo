@@ -157,9 +157,9 @@
 
                     <!--User dropdown-->
                     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-                    <li id="dropdown-user" class="dropdown">
+                    <li id="dropdown" class="dropdown">
                         <a href="#" data-toggle="dropdown" class="dropdown-toggle text-right">
-                            <div class="username hidden-xs">{{ auth()->user()->fullName() }}</div>
+                            <i class="fa fa-user fa-lg"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-md dropdown-menu-right with-arrow panel-default">
                             <!-- User dropdown menu -->

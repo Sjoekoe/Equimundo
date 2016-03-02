@@ -500,4 +500,12 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
 
         return Carbon::parse($login);
     }
+
+    /**
+     * @return string
+     */
+    public function ip()
+    {
+        return $this->ip;
+    }
 }
