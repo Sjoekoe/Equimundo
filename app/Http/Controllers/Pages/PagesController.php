@@ -7,6 +7,7 @@ use EQM\Models\Horses\HorseRepository;
 use EQM\Models\Statuses\Likes\LikeRepository;
 use EQM\Models\Statuses\StatusRepository;
 use EQM\Models\Users\UserRepository;
+use Queue;
 
 class PagesController extends Controller
 {
@@ -81,5 +82,19 @@ class PagesController extends Controller
     public function privacy()
     {
         return view('pages.privacy');
+    }
+
+    public function queue()
+    {
+        return Queue::marshal();
+    }
+
+    public function secret()
+    {
+        Mail::queue('emails.reminder', [], function ($m) {
+            $m->from('hello@app.com', 'Your Application');
+
+            $m->to('hans@equimundo.com', 'Hans Jonckers')->subject('Your Reminder!');
+        });
     }
 }
