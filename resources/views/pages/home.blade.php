@@ -213,7 +213,7 @@
                         sharing their horses life.
                     </p>
                     <div class="mar-top">
-                        <a href="#" class="btn btn-primary">Invite them</a>
+                        <a href="{{ route('invite_friends') }}" class="btn btn-primary">Invite them</a>
                     </div>
                 </div>
             </div>
