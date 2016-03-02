@@ -88,4 +88,12 @@ class EloquentPictureRepository implements PictureRepository
     {
         $picture->delete();
     }
+
+    /**
+     * @return int
+     */
+    public function count()
+    {
+        return (count($this->picture->all()));
+    }
 }
