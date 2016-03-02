@@ -80,4 +80,19 @@ class UserMailer extends Mailer
 
         return $this->sendTo($user, $subject, $view, $data);
     }
+
+    public function sendInvitation(User $user, $email)
+    {
+        $subject = $user->fullName() . ' has invited you to Equimundo.';
+        $view = 'emails.users.invite';
+        $data = [
+            'activationLink' => route('register'),
+            'userName' => $user->firstName(),
+            'userMail' => $email,
+        ];
+
+        return $this->mail->queue($view, $data, function ($message) use ($email, $subject) {
+            $message->to($email)->subject($subject);
+        });
+    }
 }

@@ -196,6 +196,23 @@
                         @endforeach
                     </div>
                 </div>
+
+                <div class="alert alert-info fade in">
+                    <button class="close" data-dismiss="alert">
+                        <span>×</span>
+                    </button>
+                    <h4 class="alert-title">
+                        Invite your friends
+                    </h4>
+                    <br>
+                    <p class="alert-message">
+                        To make the Equimundo experience even more fun, you can invite your friends who you think will be interested in
+                        sharing their horses life.
+                    </p>
+                    <div class="mar-top">
+                        <a href="#" class="btn btn-primary">Invite them</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
