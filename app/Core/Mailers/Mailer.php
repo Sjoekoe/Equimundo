@@ -9,7 +9,7 @@ abstract class Mailer
     /**
      * @var \Illuminate\Mail\Mailer
      */
-    private $mail;
+    protected $mail;
 
     /**
      * @param \Illuminate\Mail\Mailer $mail

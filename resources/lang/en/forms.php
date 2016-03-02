@@ -39,6 +39,7 @@ return [
     ],
 
     'buttons' => [
+        'invite' => 'Invite',
         'login' => 'Sign In',
         'post_status' => 'Post Status',
         'reply' => 'Reply',

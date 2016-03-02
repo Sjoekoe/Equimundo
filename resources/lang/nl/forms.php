@@ -39,6 +39,7 @@ return [
     ],
 
     'buttons' => [
+        'invite' => 'Uitnodigen',
         'login' => 'Log in',
         'post_status' => 'Plaats Status',
         'reply' => 'Antwoord',
