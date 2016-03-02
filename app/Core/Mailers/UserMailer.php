@@ -25,6 +25,22 @@ class UserMailer extends Mailer
 
     /**
      * @param \EQM\Models\Users\User $user
+     */
+    public function sendActivationReminder(User $user)
+    {
+        $subject = 'Activate your account';
+        $view = 'emails.registration.reminder';
+        $data = [
+            'activationLink' => route('activate', ['token' => $user->activationKey(), 'email' => $user->email()]),
+            'userName' => $user->firstName(),
+            'userMail' => $user->email(),
+        ];
+
+        return $this->sendTo($user, $subject, $view, $data);
+    }
+
+    /**
+     * @param \EQM\Models\Users\User $user
      * @param \EQM\Models\Statuses\Status $status
      * @param \EQM\Models\Users\User $sender
      */

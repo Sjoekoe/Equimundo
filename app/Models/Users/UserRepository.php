@@ -100,4 +100,15 @@ interface UserRepository
      * @return \EQM\Models\Users\User[]
      */
     public function getLatest(User $user);
+
+    /**
+     * @return \EQM\Models\Users\User[]
+     */
+    public function findUnactivatedUsers();
+
+    /**
+     * @param \EQM\Models\Users\User $user
+     * @return \EQM\Models\Users\User
+     */
+    public function reminded(User $user);
 }
