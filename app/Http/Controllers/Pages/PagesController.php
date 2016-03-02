@@ -93,7 +93,7 @@ class PagesController extends Controller
     public function secret()
     {
         Mail::queue('emails.reminder', [], function ($m) {
-            $m->from('hello@app.com', 'Your Application');
+            $m->from('info@equimundo.com', 'Your Application');
 
             $m->to('hans@equimundo.com', 'Hans Jonckers')->subject('Your Reminder!');
         });
