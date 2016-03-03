@@ -25,11 +25,6 @@
 
                                                 {{ Form::file('picture', ['class' => 'pull-left', 'id' => 'picture']) }}
 
-                                                {{--<label for="movie">
-                                                    <i class="btn btn-trans btn-icon fa fa-video-camera"></i>
-                                                </label>
-
-                                                {{ Form::file('movie', ['class' => 'pull-left', 'id' => 'movie']) }}--}}
                                             </div>
                                         </div>
                                         <div class="col-sm-6 pad-no">
@@ -205,15 +200,14 @@
                         <span>×</span>
                     </button>
                     <h4 class="alert-title">
-                        Invite your friends
+                        {{ trans('copy.titles.invite_your_friends') }}
                     </h4>
                     <br>
                     <p class="alert-message">
-                        To make the Equimundo experience even more fun, you can invite your friends who you think will be interested in
-                        sharing their horses life.
+                        {{ trans('copy.p.invite_your_friends') }}
                     </p>
                     <div class="mar-top">
-                        <a href="{{ route('invite_friends') }}" class="btn btn-primary">Invite them</a>
+                        <a href="{{ route('invite_friends') }}" class="btn btn-primary">{{ trans('copy.a.invite_now') }}</a>
                     </div>
                 </div>
             </div>

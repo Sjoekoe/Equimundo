@@ -17,7 +17,7 @@
                     <div class="alert alert-info fade in">
                         {{ trans('copy.p.invite_friends') }}
                     </div>
-                    <select multiple name="emails[]" type="text" class="form-control" placeholder="Add a tag" data-role="tagsinput">
+                    <select multiple name="emails[]" type="text" class="form-control" placeholder="Add email addresses..." data-role="tagsinput">
                 </div>
                 <div class="panel-footer text-right">
                     {{ Form::submit(trans('forms.buttons.invite'), ['class' => 'btn btn-info']) }}

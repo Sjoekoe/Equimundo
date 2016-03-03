@@ -103,6 +103,40 @@
                     </div>
                 </div>
             </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="panel media pad-all">
+                    <div class="media-left">
+                        <span class="icon-wrap icon-wrap-sm icon-circle bg-dark">
+                            <i class="fa fa-envelope-o fa-2x"></i>
+                        </span>
+                    </div>
+                    <div class="media-body">
+                        <p class="text-2x mar-no text-thin">@{{ invites }}</p>
+                        <p class="text-muted mar-no">Friends invited</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+@stop
+
+@section('footer')
+    <script>
+        var app = new Vue({
+            el: 'body',
+
+            data: {
+                invites: {{ $invites }}
+            },
+
+            ready: function() {
+                this.pusher = new Pusher('50125ce9622090efbd5a');
+                this.pusherChannel = this.pusher.subscribe('admin-dashboard');
+
+                this.pusherChannel.bind('EQM\\Events\\InvitationWasSent', function() {
+                    app.invites +=1;
+                });
+            }
+        });
+    </script>
 @stop
