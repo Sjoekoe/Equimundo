@@ -161,6 +161,7 @@ return [
         EQM\Models\Follows\FollowsServiceProvider::class,
         EQM\Models\HorseTeams\HorseTeamServiceProvider::class,
         EQM\Models\Horses\HorseServiceProvider::class,
+        EQM\Models\Invites\InviteServiceProvider::class,
         EQM\Models\Notifications\NotificationServiceProvider::class,
         EQM\Models\Palmares\PalmaresServiceProvider::class,
         EQM\Models\Pedigrees\PedigreeServiceProvider::class,

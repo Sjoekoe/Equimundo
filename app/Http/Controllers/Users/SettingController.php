@@ -2,6 +2,8 @@
 namespace EQM\Http\Controllers\Users;
 
 use EQM\Core\Mailers\UserMailer;
+use EQM\Events\InvitationWasSent;
+use EQM\Models\Invites\FriendInvitesRepository;
 use EQM\Models\Users\Settings\SettingsUpdater;
 use EQM\Models\Users\UserRepository;
 use Illuminate\Http\Request;
@@ -20,10 +22,16 @@ class SettingController extends Controller
      */
     private $users;
 
-    public function __construct(UserMailer $mailer, UserRepository $users)
+    /**
+     * @var \EQM\Models\Invites\FriendInvitesRepository
+     */
+    private $invites;
+
+    public function __construct(UserMailer $mailer, UserRepository $users, FriendInvitesRepository $invites)
     {
         $this->mailer = $mailer;
         $this->users = $users;
+        $this->invites = $invites;
     }
 
     public function index()
@@ -49,7 +57,9 @@ class SettingController extends Controller
     {
         foreach ($request->get('emails') as $email) {
             if (filter_var($email, FILTER_VALIDATE_EMAIL) && ! $this->users->findByEmail($email)) {
+                $this->invites->create(auth()->user(), $email);
                 $this->mailer->sendInvitation(auth()->user(), $email);
+                event(new InvitationWasSent());
             }
         }
 

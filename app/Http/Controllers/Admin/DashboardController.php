@@ -3,6 +3,7 @@ namespace EQM\Http\Controllers\Admin;
 
 use EQM\Models\Conversations\ConversationRepository;
 use EQM\Models\Horses\HorseRepository;
+use EQM\Models\Invites\FriendInvitesRepository;
 use EQM\Models\Pedigrees\PedigreeRepository;
 use EQM\Models\Pictures\PictureRepository;
 use EQM\Models\Searches\SearchRepository;
@@ -47,6 +48,11 @@ class DashboardController extends Controller
      */
     private $conversations;
 
+    /**
+     * @var \EQM\Models\Invites\FriendInvitesRepository
+     */
+    private $invites;
+
     public function __construct(
         UserRepository $users,
         StatusRepository $statuses,
@@ -54,7 +60,8 @@ class DashboardController extends Controller
         HorseRepository $horses,
         SearchRepository $searches,
         PictureRepository $pictures,
-        ConversationRepository $conversations
+        ConversationRepository $conversations,
+        FriendInvitesRepository $invites
     ) {
         $this->users = $users;
         $this->statuses = $statuses;
@@ -63,6 +70,7 @@ class DashboardController extends Controller
         $this->searches = $searches;
         $this->pictures = $pictures;
         $this->conversations = $conversations;
+        $this->invites = $invites;
     }
 
     /**
@@ -77,7 +85,10 @@ class DashboardController extends Controller
         $searchResults = $this->searches->count();
         $pictures = $this->pictures->count();
         $conversations = $this->conversations->count();
+        $invites = $this->invites->count();
 
-        return view('admin.dashboard', compact('users', 'statuses', 'pedigrees', 'horses', 'searchResults', 'pictures', 'conversations'));
+        return view('admin.dashboard', compact(
+            'users', 'statuses', 'pedigrees', 'horses', 'searchResults', 'pictures', 'conversations', 'invites'
+        ));
     }
 }
