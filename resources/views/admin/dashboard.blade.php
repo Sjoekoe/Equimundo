@@ -15,7 +15,7 @@
                             </span>
                         </div>
                         <div class="media-body">
-                            <p class="text-2x mar-no text-thin">{{ $users }}</p>
+                            <p class="text-2x mar-no text-thin">@{{ users }}</p>
                             <p class="text-muted mar-no">Registered users</p>
                         </div>
                     </div>
@@ -116,6 +116,45 @@
                     </div>
                 </div>
             </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="panel media pad-all">
+                    <div class="media-left">
+                        <span class="icon-wrap icon-wrap-sm icon-circle bg-mint">
+                            <i class="fa fa-commenting-o fa-2x"></i>
+                        </span>
+                    </div>
+                    <div class="media-body">
+                        <p class="text-2x mar-no text-thin">@{{ comments }}</p>
+                        <p class="text-muted mar-no">Comments placed</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="panel media pad-all">
+                    <div class="media-left">
+                        <span class="icon-wrap icon-wrap-sm icon-circle bg-success">
+                            <i class="fa fa-thumbs-o-up fa-2x"></i>
+                        </span>
+                    </div>
+                    <div class="media-body">
+                        <p class="text-2x mar-no text-thin">@{{ likes }}</p>
+                        <p class="text-muted mar-no">Likes given</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="panel media pad-all">
+                    <div class="media-left">
+                        <span class="icon-wrap icon-wrap-sm icon-circle bg-danger">
+                            <i class="fa fa-thumbs-o-down fa-2x"></i>
+                        </span>
+                    </div>
+                    <div class="media-body">
+                        <p class="text-2x mar-no text-thin">{{ $unactivatedUsers }}</p>
+                        <p class="text-muted mar-no">Unactivated users</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @stop
@@ -126,7 +165,10 @@
             el: 'body',
 
             data: {
-                invites: {{ $invites }}
+                invites: {{ $invites }},
+                comments: {{ $comments }},
+                likes: {{ $likes }},
+                users: {{ $users }}
             },
 
             ready: function() {
@@ -135,6 +177,18 @@
 
                 this.pusherChannel.bind('EQM\\Events\\InvitationWasSent', function() {
                     app.invites +=1;
+                });
+
+                this.pusherChannel.bind('EQM\\Events\\CommentWasPosted', function() {
+                    app.comments +=1;
+                });
+
+                this.pusherChannel.bind('EQM\\Events\\StatusLiked', function() {
+                    app.likes +=1;
+                });
+
+                this.pusherChannel.bind('EQM\\Events\\UserRegistered', function() {
+                    app.users +=1;
                 });
             }
         });

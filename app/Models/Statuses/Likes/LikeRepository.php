@@ -10,4 +10,9 @@ interface LikeRepository
      * @return array
      */
     public function findForUser(User $user);
+
+    /**
+     * @return int
+     */
+    public function count();
 }

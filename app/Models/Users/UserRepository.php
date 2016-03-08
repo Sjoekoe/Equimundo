@@ -111,4 +111,9 @@ interface UserRepository
      * @return \EQM\Models\Users\User
      */
     public function reminded(User $user);
+
+    /**
+     * @return int
+     */
+    public function countUnactivatedUsers();
 }

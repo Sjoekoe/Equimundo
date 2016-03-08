@@ -1,12 +1,14 @@
 <?php
 namespace EQM\Http\Controllers\Admin;
 
+use EQM\Models\Comments\CommentRepository;
 use EQM\Models\Conversations\ConversationRepository;
 use EQM\Models\Horses\HorseRepository;
 use EQM\Models\Invites\FriendInvitesRepository;
 use EQM\Models\Pedigrees\PedigreeRepository;
 use EQM\Models\Pictures\PictureRepository;
 use EQM\Models\Searches\SearchRepository;
+use EQM\Models\Statuses\Likes\LikeRepository;
 use EQM\Models\Statuses\StatusRepository;
 use EQM\Models\Users\UserRepository;
 use Illuminate\Routing\Controller;
@@ -53,6 +55,16 @@ class DashboardController extends Controller
      */
     private $invites;
 
+    /**
+     * @var \EQM\Models\Comments\CommentRepository
+     */
+    private $comments;
+
+    /**
+     * @var \EQM\Models\Statuses\Likes\LikeRepository
+     */
+    private $likes;
+
     public function __construct(
         UserRepository $users,
         StatusRepository $statuses,
@@ -61,7 +73,9 @@ class DashboardController extends Controller
         SearchRepository $searches,
         PictureRepository $pictures,
         ConversationRepository $conversations,
-        FriendInvitesRepository $invites
+        FriendInvitesRepository $invites,
+        CommentRepository $comments,
+        LikeRepository $likes
     ) {
         $this->users = $users;
         $this->statuses = $statuses;
@@ -71,6 +85,8 @@ class DashboardController extends Controller
         $this->pictures = $pictures;
         $this->conversations = $conversations;
         $this->invites = $invites;
+        $this->comments = $comments;
+        $this->likes = $likes;
     }
 
     /**
@@ -79,6 +95,7 @@ class DashboardController extends Controller
     public function index()
     {
         $users = $this->users->count();
+        $unactivatedUsers = $this->users->countUnactivatedUsers();
         $statuses = $this->statuses->count();
         $pedigrees = $this->pedigrees->count();
         $horses = $this->horses->count();
@@ -86,9 +103,12 @@ class DashboardController extends Controller
         $pictures = $this->pictures->count();
         $conversations = $this->conversations->count();
         $invites = $this->invites->count();
+        $comments = $this->comments->count();
+        $likes = $this->likes->count();
 
         return view('admin.dashboard', compact(
-            'users', 'statuses', 'pedigrees', 'horses', 'searchResults', 'pictures', 'conversations', 'invites'
+            'users', 'statuses', 'pedigrees', 'horses', 'searchResults', 'pictures', 'conversations', 'invites', 'comments',
+            'likes', 'unactivatedUsers'
         ));
     }
 }

@@ -72,4 +72,12 @@ class EloquentCommentRepository implements CommentRepository
     {
         $comment->delete();
     }
+
+    /**
+     * @return int
+     */
+    public function count()
+    {
+        return count($this->comment->all());
+    }
 }

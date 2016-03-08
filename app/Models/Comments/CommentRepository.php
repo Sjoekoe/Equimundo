@@ -33,4 +33,9 @@ interface CommentRepository
      * @param \EQM\Models\Comments\Comment $comment
      */
     public function delete(Comment $comment);
+
+    /**
+     * @return int
+     */
+    public function count();
 }
