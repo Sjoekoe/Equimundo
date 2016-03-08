@@ -3,9 +3,10 @@ namespace EQM\Events;
 
 use EQM\Models\Statuses\Status;
 use EQM\Models\Users\User;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Queue\SerializesModels;
 
-class CommentWasPosted extends Event
+class CommentWasPosted extends Event implements ShouldBroadcast
 {
     use SerializesModels;
 
@@ -41,5 +42,15 @@ class CommentWasPosted extends Event
         $this->sender = $sender;
         $this->notification = $notification;
         $this->data = $data;
+    }
+
+    /**
+     * Get the channels the event should broadcast on.
+     *
+     * @return array
+     */
+    public function broadcastOn()
+    {
+        return ['admin-dashboard'];
     }
 }

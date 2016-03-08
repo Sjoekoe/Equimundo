@@ -14,4 +14,12 @@ class EloquentLikeRepository implements LikeRepository
     {
         return DB::table('likes')->whereUserId($user->id())->lists('status_id');
     }
+
+    /**
+     * @return int
+     */
+    public function count()
+    {
+        return count(DB::table('likes')->get());
+    }
 }

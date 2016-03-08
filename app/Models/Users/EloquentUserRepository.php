@@ -228,4 +228,12 @@ class EloquentUserRepository implements UserRepository
 
         return $user;
     }
+
+    /**
+     * @return int
+     */
+    public function countUnactivatedUsers()
+    {
+        return count($this->user->where('activated', false)->get());
+    }
 }
