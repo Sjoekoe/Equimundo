@@ -17,7 +17,7 @@
             </p>
         </li>
         <li class="col-sm-4">
-            <a href="{{ route('horses.show', $family->slug()) }}" class="btn btn-mint">
+            <a href="{{ route('pedigree.index', $family->slug()) }}" class="btn btn-mint">
                 <i class="fa fa-eye"></i>
             </a>
         </li>

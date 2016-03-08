@@ -178,7 +178,7 @@
                             </div>
                             <div class="panel-body">
                                 @foreach ($horse->sons() as $son)
-                                    <a href="{{ route('horses.show', $son->originalHorse->slug()) }}">
+                                    <a href="{{ route('pedigree.index', $son->originalHorse->slug()) }}">
                                         {{ $son->originalHorse->name() }} <br>
                                     </a>
                                 @endforeach
@@ -203,7 +203,7 @@
                             </div>
                             <div class="panel-body">
                                 @foreach ($horse->daughters() as $daughter)
-                                    <a href="{{ route('horses.show', $daughter->originalHorse->slug()) }}">
+                                    <a href="{{ route('pedigree.index', $daughter->originalHorse->slug()) }}">
                                         {{ $daughter->originalHorse->name() }} <br>
                                     </a>
                                 @endforeach

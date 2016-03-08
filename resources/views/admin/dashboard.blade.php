@@ -48,7 +48,7 @@
                 </div>
             </div>
             <div class="col-sm-6 col-lg-3">
-                <a href="{{ 'route.admin.horses' }}">
+                <a href="{{ route('admin.horses.index') }}">
                     <div class="panel media pad-all">
                         <div class="media-left">
                             <span class="icon-wrap icon-wrap-sm icon-circle bg-info">

@@ -79,7 +79,7 @@ class EloquentStatusRepository implements StatusRepository
      */
     public function findFeedForHorse(Horse $horse)
     {
-        return $this->status->where('horse_id', $horse->id())->latest()->get();
+        return $this->status->where('horse_id', $horse->id())->latest()->paginate(10);
     }
 
     /**
