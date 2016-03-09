@@ -19,9 +19,7 @@ class NotificationController extends Controller
 
     public function index()
     {
-        $notifications = $this->notifications->findForUser(auth()->user());
-
-        return view('notifications.index', compact('notifications'));
+        return view('notifications.index');
     }
 
     public function show(Notification $notification)

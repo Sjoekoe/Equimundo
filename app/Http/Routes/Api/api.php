@@ -14,3 +14,7 @@ Route::post('/api/statuses/{status}/comments', ['as' => 'api.comments.store', 'u
 Route::get('/api/statuses/{status}/comments/{comment}', ['as' => 'api.comments.show', 'uses' => 'CommentController@show']);
 Route::put('/api/statuses/{status}/comments/{comment}', ['as' => 'api.comments.update', 'uses' => 'CommentController@update']);
 Route::delete('/api/statuses/{status}/comments/{comment}', ['as' => 'api.comments.delete', 'uses' => 'CommentController@delete']);
+
+Route::get('api/notifications', ['as' => 'api.notifications.index', 'uses' => 'NotificationController@index']);
+Route::get('api/notifications/mark-as-read', ['as' => 'api.notifications.read', 'uses' => 'NotificationController@markRead']);
+Route::delete('api/notifications/{notification}', ['as' => 'api.notifications.delete', 'uses' => 'NotificationController@delete']);
