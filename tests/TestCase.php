@@ -5,6 +5,7 @@ use EQM\Core\Factories\BuildModels;
 use EQM\Core\Factories\ModelFactory;
 use EQM\Models\Horses\Horse;
 use EQM\Models\HorseTeams\HorseTeam;
+use EQM\Models\Notifications\Notification;
 use EQM\Models\Statuses\Status;
 use EQM\Models\Users\User;
 
@@ -108,6 +109,18 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
         return $this->modelFactory->create(Status::class, array_merge([
             'body' => 'Lorem ipsum dolores est',
             'prefix' => 1
+        ], $attributes));
+    }
+
+    /**
+     * @param array $attributes
+     * @return \EQM\Models\Notifications\Notification
+     */
+    public function createNotification(array $attributes)
+    {
+        return $this->modelFactory->create(Notification::class, array_merge([
+            'type' => Notification::STATUS_LIKED,
+            'read' => false,
         ], $attributes));
     }
 }

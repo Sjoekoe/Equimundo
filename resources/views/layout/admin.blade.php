@@ -38,8 +38,8 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.17/vue.min.js"></script>
-<script src="//js.pusher.com/3.0/pusher.min.js"></script>
 <script src="/js/all.js"></script>
+<script src="/js/app.js"></script>
 @yield('footer')
 </body>
 </html>
