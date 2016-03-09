@@ -31,7 +31,7 @@ class UserMailer extends Mailer
         $subject = 'Activate your account';
         $view = 'emails.registration.reminder';
         $data = [
-            'activationLink' => route('activate', ['token' => $user->activationKey(), 'email' => $user->email()]),
+            'activationLink' => 'https://www.equimundo.com/activate?token=' . $user->activationKey() . '&email=' . $user->email(),
             'userName' => $user->firstName(),
             'userMail' => $user->email(),
         ];
