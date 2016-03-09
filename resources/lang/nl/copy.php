@@ -39,6 +39,7 @@ return [
         'category' => 'Categorie',
         'date' => 'Datum',
         'delete_account' => 'Voorzichtig! Deze actie kan niet ongedaan worden gemaakt.',
+        'delete_horse' => 'Als je alle gegevens van je paard wil wissen kan je op verwijderen klikken.',
         'discipline' => 'Discipline',
         'empty_conversation' => 'Geen berichten meer in deze conversatie',
         'event' => 'Evenement',
@@ -55,6 +56,7 @@ return [
         'passed_away' => 'Gestorven',
         'please_create_horse' => 'Gelieve eerst een paard aan te maken voor je een status kan posten',
         'ranked' => 'Rangschikking',
+        'unlink_horse' => 'Is je paard verkocht, of heb je er niets meer mee te maken, dan kan je het ontkoppelen.',
         'welcome_message' => 'Welkom bij het social media platform waar je het leven van je paard kan delen',
     ],
 
@@ -100,6 +102,7 @@ return [
         'statuses' => 'Statusen',
         'timeline' => 'Tijdlijn',
         'unfollow' => 'Ontvolg ',
+        'unlink' => 'Ontkoppelen',
     ],
 
     'span' => [

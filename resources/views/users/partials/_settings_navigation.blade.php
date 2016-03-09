@@ -13,6 +13,12 @@
                     {{ trans('copy.titles.profile') }}
                 </h5>
             </a>
+            <a href="{{ route('horses.settings.index') }}" class="list-group-item {{ Active::route('horses.settings.index') }}">
+                <h5>
+                    <i class="fa fa-chevron-right pull-right"></i>
+                    {{ trans('copy.titles.horses') }}
+                </h5>
+            </a>
             <a href="{{ route('invite_friends') }}" class="list-group-item {{ Active::route('invite_friends') }}">
                 <h5>
                     <i class="fa fa-chevron-right pull-right"></i>

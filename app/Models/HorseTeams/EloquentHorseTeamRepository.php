@@ -62,4 +62,17 @@ class EloquentHorseTeamRepository implements HorseTeamRepository
     {
         return $this->horseTeam->find($id);
     }
+
+    /**
+     * @param \EQM\Models\Horses\Horse $horse
+     * @param \EQM\Models\Users\User $user
+     * @return \EQM\Models\HorseTeams\HorseTeam
+     */
+    public function findByHorseAndUser(Horse $horse, User $user)
+    {
+        return $this->horseTeam
+            ->where('user_id', $user->id())
+            ->where('horse_id', $horse->id())
+            ->first();
+    }
 }

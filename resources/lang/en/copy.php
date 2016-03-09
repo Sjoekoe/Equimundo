@@ -39,6 +39,7 @@ return [
         'category' => 'Category',
         'date' => 'Date',
         'delete_account' => 'Be careful, This action can not be undone, and you will lose your access to Equimundo',
+        'delete_horse' => 'If you entirely want to delete all records of your horse you can delete it.',
         'discipline' => 'Discipline',
         'empty_conversation' => 'No more messages in this conversation',
         'event' => 'Event',
@@ -55,6 +56,7 @@ return [
         'passed_away' => 'Passed Away',
         'please_create_horse' => 'Please create a horse first before you can post a status',
         'ranked' => 'Place',
+        'unlink_horse' => 'If you sold your horse, or have no affiliation with it. You can unlink it.',
         'welcome_message' => 'Welcome to the social media platform where you can share the life of your horse',
     ],
 
@@ -100,6 +102,7 @@ return [
         'statuses' => 'Statuses',
         'timeline' => 'Timeline',
         'unfollow' => 'Unfollow :horse',
+        'unlink' => 'Unlink',
     ],
 
     'span' => [

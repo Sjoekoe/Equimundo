@@ -31,4 +31,11 @@ interface HorseTeamRepository
      * @return \EQM\Models\HorseTeams\HorseTeam
      */
     public function findById($id);
+
+    /**
+     * @param \EQM\Models\Horses\Horse $horse
+     * @param \EQM\Models\Users\User $user
+     * @return \EQM\Models\HorseTeams\HorseTeam
+     */
+    public function findByHorseAndUser(Horse $horse, User $user);
 }
