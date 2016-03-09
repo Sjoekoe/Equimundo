@@ -147,6 +147,14 @@ class EloquentHorseRepository implements HorseRepository
     }
 
     /**
+     * @param \EQM\Models\Horses\Horse $horse
+     */
+    public function delete(Horse $horse)
+    {
+        $horse->delete();
+    }
+
+    /**
      * @param \EQM\Models\Users\User $user
      * @return \EQM\Models\Horses\Horse[]
      */

@@ -22,7 +22,7 @@ trait Policies
     protected $horseTeamPolicies = [
         'edit-horse', 'delete-horse', 'create-album', 'edit-album', 'delete-album', 'upload-picture', 'delete-picture',
         'create-palmares', 'edit-palmares', 'delete-palmares', 'create-pedigree', 'edit-pedigree', 'delete-pedigree',
-        'create-disciplines',
+        'create-disciplines', 'unlink'
     ];
 
     protected $notificationPolicies = [

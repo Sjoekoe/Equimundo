@@ -21,6 +21,11 @@ interface HorseRepository
     public function update(Horse $horse, array $values = []);
 
     /**
+     * @param \EQM\Models\Horses\Horse $horse
+     */
+    public function delete(Horse $horse);
+
+    /**
      * @param int $id
      * @return \EQM\Models\Horses\Horse
      */

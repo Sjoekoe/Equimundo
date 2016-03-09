@@ -4,7 +4,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ isset($horse) ? $horse->name() . ' at ' : '' }}EquiMundo</title>
+
+    @if (isset($title))
+        <title>{{ $title }}</title>
+    @else
+        <title>{{ isset($horse) ? $horse->name() . ' at ' : '' }}EquiMundo</title>
+    @endif
+
     <meta property="og:url"           content="{{ isset($horse) ? route('horses.show', $horse->slug()) : '' }}" />
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="{{ isset($horse) ? $horse->name() . ' at ' : '' }}EquiMundo" />
