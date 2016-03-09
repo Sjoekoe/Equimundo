@@ -23,7 +23,7 @@ var Notification = Vue.extend({
             $.ajax({
                 url: 'api/notifications/' + notification.id,
                 type: 'post',
-                data: {_method: 'delete'},
+                data: {_method: 'delete'}
             });
         },
 
