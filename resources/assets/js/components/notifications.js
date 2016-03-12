@@ -1,6 +1,6 @@
 var Vue = require('vue');
 
-var Notification = Vue.extend({
+module.exports = Vue.extend({
     template: '#notifications-template',
 
     props: ['notifications'],
@@ -33,10 +33,4 @@ var Notification = Vue.extend({
             }.bind(this));
         }
     }
-});
-
-Vue.component('notifications', Notification);
-
-new Vue({
-    el: 'body'
 });
