@@ -52,12 +52,11 @@
                     </div>
                 @endif
                 @if (count($statuses))
-                    <div class="status-scroll">
-                        @foreach($statuses as $status)
-                            @include('statuses.partials.status')
-                        @endforeach
-                        {{ $statuses->render() }}
-                    </div>
+                    <userfeed></userfeed>
+
+                    <template id="user-feed-template">
+                        @include('statuses.partials._status_template')
+                    </template>
                 @else
                     <div class="panel">
                         <div class="panel-heading">
@@ -213,4 +212,7 @@
             </div>
         </div>
     </div>
+    <script>
+        var user_id = {{ auth()->user()->id() }}
+    </script>
 @stop

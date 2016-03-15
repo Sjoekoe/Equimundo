@@ -1,9 +1,9 @@
 var Vue = require('vue');
 
 module.exports = Vue.extend({
-    template: '#horse-feed-template',
+    template: '#user-feed-template',
 
-    props: ['horsefeed'],
+    props: ['userfeed'],
 
     data: function() {
         return {
@@ -20,7 +20,7 @@ module.exports = Vue.extend({
     },
 
     ready: function(){
-        $.getJSON('/api/horses/' + window.horse_id + '/statuses', function(statuses) {
+        $.getJSON('/api/users/' + window.user_id + '/feed', function(statuses) {
             this.loading = false;
             this.statuses = statuses.data;
         }.bind(this));
@@ -32,7 +32,7 @@ module.exports = Vue.extend({
                 vm.loading = true;
                 vm.page += 1;
 
-                $.getJSON('/api/horses/' + window.horse_id + '/statuses?page=' + vm.page, function(statuses) {
+                $.getJSON('/api/users/' + window.user_id + '/feed?page=' + vm.page, function(statuses) {
                     vm.loading = false;
                     statuses.data.map(function(status) {
                         vm.statuses.push(status);
