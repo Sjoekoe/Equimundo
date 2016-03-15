@@ -8,12 +8,9 @@ use League\Fractal\TransformerAbstract;
 
 class HorseTransformer extends TransformerAbstract
 {
-    protected $defaultIncludes = [
-        'pictures',
-    ];
-
     protected $availableIncludes = [
         'statuses',
+        'pictures'
     ];
 
     public function transform(Horse $horse)
@@ -27,6 +24,8 @@ class HorseTransformer extends TransformerAbstract
             'height' => $horse->height(),
             'breed' => (int) $horse->breed(),
             'color' => (int) $horse->color(),
+            'slug' => $horse->slug(),
+            'profile_picture' => $horse->getProfilePicture() ? route('file.picture', $horse->getProfilePicture()->id()) : asset('images/eqm.png')
         ];
     }
 

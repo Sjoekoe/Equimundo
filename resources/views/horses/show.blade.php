@@ -1,24 +1,119 @@
 @extends('layout.app')
 
 @section('content')
-    <div class="page-content">
+    <div class="page-content" xmlns:v-bind="http://www.w3.org/1999/xhtml">
         @include('layout.partials.heading')
 
         <div class="col-lg-7 col-lg-offset-2">
-            @if (! count($statuses))
-                <div class="panel">
+            <horsefeed></horsefeed>
+
+            <template id="horse-feed-template">
+                <div class="panel" v-for="status in statuses">
                     <div class="panel-body">
-                        <p class="text-center">{{ trans('copy.p.no_statuses') }}</p>
+                        <div class="media-block">
+                            <a href="/horses/@{{ status.horse.data.slug }}" class="media-left">
+                                <img v-bind:src="status.horse.data.profile_picture" alt="" class="img-circle img-sm">
+                            </a>
+                            <div class="media-body">
+                                <div class="mar-btm">
+                                    <div class="pull-right">
+                                        <div class="btn-group">
+                                            <i class="dropdown-toggle-icon fa fa-chevron-down" data-toggle="dropdown" aria-expanded="false" v-if="status.can_delete_status"></i>
+                                            <ul class="dropdown-menu dropdown-menu-right">
+                                                <li>
+                                                    <a href="javascript:void(0)" @click="deleteStatus(status)">
+                                                        {{ trans('copy.a.delete') }}
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <a href="/horses/@{{ status.horse.data.slug }}" class="btn-link text-semibold media-heading box-inline text-mint">
+                                        @{{ status.horse.data.name }}
+                                    </a>
+                                    <span class="text-semibold text-muted" v-if="status.prefix"> - @{{ status.prefix }}</span>
+                                    <p class="text-muted text-sm">
+                                        @{{ status.formatted_date }}
+                                    </p>
+                                </div>
+                                <p v-html="status.body"></p>
+                                <a v-if="status.picture" v-bind:href="status.picture" data-lightbox="@{{ status.id }}">
+                                    <img v-bind:src="status.picture" alt="" class="img-responsive thumbnail">
+                                </a>
+                                <div class="pad-ver">
+                                    <span class="tag tag-sm">
+                                        <i class="fa fa-heart text-danger"></i> @{{ status.like_count }}
+                                    </span>
+
+                                    @if (auth()->check())
+                                        <div class="btn-group">
+                                            <template v-if="status.liked_by_user">
+                                                <button class="btn btn-sm btn-default btn-hover-success active" type="submit" @click="likeStatus(status)"><i class="fa fa-thumbs-up"></i> You Like it</button>
+                                            </template>
+                                            <template v-else>
+                                                <button class="btn btn-sm btn-default btn-hover-success" type="submit" @click="likeStatus(status)"><i class="fa fa-thumbs-up"></i></button>
+                                            </template>
+                                        </div>
+                                    @endif
+                                </div>
+                                <hr>
+                                <div class="media-block pad-all bg-gray-light" v-for="comment in status.comments.data">
+                                    <div class="media-body">
+                                        <div class="mar-btm">
+                                            <a href="/user/@{{ comment.user.data.slug }}" class="btn-link text-mint text-semibold media-heading box-inline">
+                                                @{{ comment.user.data.first_name + ' ' + comment.user.data.last_name }}
+                                            </a>
+                                            <div class="pull-right">
+                                                <div class="btn-group">
+                                                    <i class="dropdown-toggle-icon fa fa-chevron-down" data-toggle="dropdown" aria-expanded="false" v-if="comment.can_delete_comment"></i>
+                                                    <ul class="dropdown-menu dropdown-menu-right">
+                                                        <li>
+                                                            <a href="javascript:void(0)" @click="deleteComment(status, comment)">
+                                                                {{ trans('copy.a.delete') }}
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <p class="text-muted text-sm">
+                                                @{{ comment.formatted_date }}
+                                            </p>
+                                        </div>
+                                        <p v-html="comment.body"></p>
+                                    </div>
+                                    <hr>
+                                </div>
+                            </div>
+                            <div class="media-footer">
+                                @if (auth()->check())
+                                    <div class="media-block pad-ver">
+                                        <form method="POST" v-on:submit="postComment($event, status)">
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-11 col-md-offset-1">
+                                                    <input type="textarea" name="body", class="form-control" rows="1", placeholder="{{ trans('forms.placeholders.write_a_comment') }}" v-model="newComment.comment[status.id]">
+                                                </div>
+                                            </div>
+                                            <div class="mar-ver text-right">
+                                                <button class="btn btn-info">Comment</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
                     </div>
                 </div>
-            @else
-                <div class="status-scroll">
-                    @foreach($statuses as $status)
-                        @include('statuses.partials.status')
-                    @endforeach
-                    {{ $statuses->render() }}
+                <div class="panel" v-if="loading">
+                    <div class="panel-body text-center">
+                        <i class="fa fa-refresh fa-spin fa-2x text-mint"></i>
+                        <br> <br>
+                        <p>Loading...</p>
+                    </div>
                 </div>
-            @endif
+            </template>
         </div>
     </div>
+    <script>
+        var horse_id = {{ $horse->id() }};
+    </script>
 @stop

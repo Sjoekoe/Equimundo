@@ -46,6 +46,7 @@ class NotificationsTest extends \TestCase
                                 'language' => $user->language(),
                                 'gender' => $user->gender(),
                                 'is_admin' => $user->isAdmin(),
+                                'slug' => $user->slug(),
                             ],
                         ],
                         'sender' => [
@@ -58,7 +59,8 @@ class NotificationsTest extends \TestCase
                                 'email' => $otherUser->email(),
                                 'language' => $otherUser->language(),
                                 'gender' => $otherUser->gender(),
-                                'is_admin' => $otherUser->isAdmin()
+                                'is_admin' => $otherUser->isAdmin(),
+                                'slug' => $otherUser->slug(),
                             ]
                         ],
                     ],
@@ -106,6 +108,7 @@ class NotificationsTest extends \TestCase
                                 'language' => $user->language(),
                                 'gender' => $user->gender(),
                                 'is_admin' => $user->isAdmin(),
+                                'slug' => $user->slug(),
                             ],
                         ],
                         'sender' => [
@@ -118,7 +121,8 @@ class NotificationsTest extends \TestCase
                                 'email' => $otherUser->email(),
                                 'language' => $otherUser->language(),
                                 'gender' => $otherUser->gender(),
-                                'is_admin' => $otherUser->isAdmin()
+                                'is_admin' => $otherUser->isAdmin(),
+                                'slug' => $otherUser->slug(),
                             ]
                         ],
                     ],

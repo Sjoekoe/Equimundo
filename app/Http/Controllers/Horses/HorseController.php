@@ -70,13 +70,7 @@ class HorseController extends Controller
 
     public function show(Horse $horse)
     {
-        $statuses = $this->statuses->findFeedForHorse($horse);
-
-        if (auth()->check()) {
-            $likes = $this->likes->findForUser(auth()->user());
-        }
-
-        return view('horses.show', compact('horse', 'likes', 'statuses'));
+        return view('horses.show', compact('horse'));
     }
 
     public function edit(Horse $horse)

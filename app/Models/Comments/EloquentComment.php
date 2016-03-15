@@ -1,6 +1,7 @@
 <?php
 namespace EQM\Models\Comments;
 
+use Carbon\Carbon;
 use EQM\Models\Statuses\EloquentStatus;
 use EQM\Models\Users\EloquentUser;
 use EQM\Models\Users\User;
@@ -71,5 +72,13 @@ class EloquentComment extends Model implements Comment
         }
 
         return false;
+    }
+
+    /**
+     * @return \Carbon\Carbon
+     */
+    public function createdAt()
+    {
+        return Carbon::instance($this->created_at);
     }
 }

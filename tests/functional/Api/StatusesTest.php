@@ -6,6 +6,7 @@ use DB;
 
 class StatusesTest extends \TestCase
 {
+    /** @test */
     function it_can_get_the_feed_for_a_user()
     {
         $now = Carbon::now();
@@ -26,10 +27,16 @@ class StatusesTest extends \TestCase
                     [
                         'id' => $status->id(),
                         'body' => $status->body(),
-                        'created_at' => $now->toIso8601String(),
+                        'created_at' => $status->createdAt()->toIso8601String(),
+                        'formatted_date' => eqm_translated_date($status->createdAt())->diffForHumans(),
                         'like_count' => 0,
-                        'prefix' => $status->prefix(),
+                        'prefix' => trans('statuses.prefixes.' . $status->prefix()),
                         'liked_by_user' => false,
+                        'can_delete_status' => false,
+                        'picture' => null,
+                        'comments' => [
+                            'data' => [],
+                        ],
                         'horse' => [
                             'data' => [
                                 'id' => $horse->id(),
@@ -40,6 +47,8 @@ class StatusesTest extends \TestCase
                                 'gender' => $horse->gender(),
                                 'date_of_birth' => $horse->dateOfBirth()->toIso8601String(),
                                 'color' => $horse->color(),
+                                'slug' => $horse->slug(),
+                                'profile_picture' =>  'http://localhost/images/eqm.png',
                             ],
                         ],
                     ],
@@ -57,6 +66,7 @@ class StatusesTest extends \TestCase
             ]);
     }
 
+    /** @test */
     function it_can_create_a_status()
     {
         $horse = $this->createHorse();
@@ -69,9 +79,15 @@ class StatusesTest extends \TestCase
                 'id' => 1,
                 'body' => 'Foo',
                 'created_at' => Carbon::now()->toIso8601String(),
+                'formatted_date' => eqm_translated_date(Carbon::now())->diffForHumans(),
                 'like_count' => 0,
                 'prefix' => null,
                 'liked_by_user' => false,
+                'can_delete_status' => false,
+                'comments' => [
+                    'data' => [],
+                ],
+                'picture' => null,
                 'horse' => [
                     'data' => [
                         'id' => $horse->id(),
@@ -82,12 +98,15 @@ class StatusesTest extends \TestCase
                         'gender' => $horse->gender(),
                         'date_of_birth' => $horse->dateOfBirth()->toIso8601String(),
                         'color' => $horse->color(),
+                        'slug' => $horse->slug(),
+                        'profile_picture' =>  'http://localhost/images/eqm.png',
                     ],
                 ],
             ],
         ]);
     }
 
+    /** @test */
     function it_can_show_a_status()
     {
         $horse = $this->createHorse();
@@ -101,9 +120,15 @@ class StatusesTest extends \TestCase
                     'id' => 1,
                     'body' => $status->body(),
                     'created_at' => $status->createdAt()->toIso8601String(),
+                    'formatted_date' => eqm_translated_date($status->createdAt())->diffForHumans(),
                     'like_count' => 0,
-                    'prefix' => 1,
+                    'prefix' => trans('statuses.prefixes.' . $status->prefix()),
                     'liked_by_user' => false,
+                    'can_delete_status' => false,
+                    'comments' => [
+                        'data' => [],
+                    ],
+                    'picture' => null,
                     'horse' => [
                         'data' => [
                             'id' => $horse->id(),
@@ -114,6 +139,8 @@ class StatusesTest extends \TestCase
                             'gender' => $horse->gender(),
                             'date_of_birth' => $horse->dateOfBirth()->toIso8601String(),
                             'color' => $horse->color(),
+                            'slug' => $horse->slug(),
+                            'profile_picture' =>  'http://localhost/images/eqm.png',
                         ],
                     ],
                 ],
@@ -195,9 +222,15 @@ class StatusesTest extends \TestCase
                     'id' => 1,
                     'body' => $status->body(),
                     'created_at' => $status->createdAt()->toIso8601String(),
+                    'formatted_date' => eqm_translated_date($status->createdAt())->diffForHumans(),
                     'like_count' => 1,
-                    'prefix' => 1,
+                    'prefix' => trans('statuses.prefixes.' . $status->prefix()),
                     'liked_by_user' => false,
+                    'can_delete_status' => false,
+                    'comments' => [
+                        'data' => [],
+                    ],
+                    'picture' => null,
                     'horse' => [
                         'data' => [
                             'id' => $horse->id(),
@@ -208,6 +241,8 @@ class StatusesTest extends \TestCase
                             'gender' => $horse->gender(),
                             'date_of_birth' => $horse->dateOfBirth()->toIso8601String(),
                             'color' => $horse->color(),
+                            'slug' => $horse->slug(),
+                            'profile_picture' =>  'http://localhost/images/eqm.png',
                         ],
                     ],
                     'likes' => [
@@ -222,6 +257,7 @@ class StatusesTest extends \TestCase
                                 'country' => $user->country(),
                                 'is_admin' => $user->isAdmin(),
                                 'language' => $user->language(),
+                                'slug' => $user->slug(),
                             ],
                         ],
                     ],
@@ -244,9 +280,15 @@ class StatusesTest extends \TestCase
                 'id' => 1,
                 'body' => 'Foo',
                 'created_at' => $status->createdAt()->toIso8601String(),
+                'formatted_date' => eqm_translated_date($status->createdAt())->diffForHumans(),
                 'like_count' => 0,
-                'prefix' => 1,
+                'prefix' => trans('statuses.prefixes.' . $status->prefix()),
                 'liked_by_user' => false,
+                'can_delete_status' => false,
+                'comments' => [
+                    'data' => [],
+                ],
+                'picture' => null,
                 'horse' => [
                     'data' => [
                         'id' => $horse->id(),
@@ -257,6 +299,8 @@ class StatusesTest extends \TestCase
                         'gender' => $horse->gender(),
                         'date_of_birth' => $horse->dateOfBirth()->toIso8601String(),
                         'color' => $horse->color(),
+                        'slug' => $horse->slug(),
+                        'profile_picture' =>  'http://localhost/images/eqm.png',
                     ],
                 ],
             ],

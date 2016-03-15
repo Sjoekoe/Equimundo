@@ -22,8 +22,11 @@ class StatusTransformer extends TransformerAbstract
             'body' => $status->body(),
             'like_count' => count($status->likes()),
             'created_at' => $status->createdAt()->toIso8601String(),
-            'prefix' => $status->prefix(),
+            'formatted_date' => eqm_translated_date($status->createdAt())->diffForHumans(),
+            'prefix' => $status->prefix() ? trans('statuses.prefixes.' . $status->prefix()) : null,
             'liked_by_user' => auth()->check() ? $status->isLikedByUser(auth()->user()) : false,
+            'picture' => $status->hasPicture() ? route('file.picture', [$status->getPicture()->id()]) : null,
+            'can_delete_status' => auth()->check() ? auth()->user()->can('delete-status', $status) : false,
         ];
     }
 
@@ -34,7 +37,7 @@ class StatusTransformer extends TransformerAbstract
 
     public function includeComments(Status $status)
     {
-        return count($status->comments()) ? $this->collection($status->comments(), new CommentTransformer()) : null;
+        return $this->collection($status->comments(), new CommentTransformer());
     }
 
     public function includeLikes(Status $status)

@@ -4,6 +4,7 @@ new Vue({
     el: 'body',
 
     components: {
-        notifications: require('./components/notifications')
+        notifications: require('./components/notifications'),
+        horsefeed: require('./components/statuses/horseFeed')
     }
 });

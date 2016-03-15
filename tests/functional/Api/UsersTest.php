@@ -20,6 +20,7 @@ class UsersTest extends \TestCase
                     'country' => $user->country(),
                     'is_admin' => $user->isAdmin(),
                     'language' => $user->language(),
+                    'slug' => $user->slug(),
                 ],
             ]);
     }

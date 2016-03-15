@@ -32,6 +32,8 @@ interface StatusRepository
      */
     public function findFeedForHorse(Horse $horse);
 
+    public function findFeedForHorsePaginated(Horse $horse, $limit = 10);
+
     /**
      * @param \EQM\Models\Horses\Horse $horse
      * @param string $body

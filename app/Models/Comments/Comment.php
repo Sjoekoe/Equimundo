@@ -35,4 +35,9 @@ interface Comment
      * @return bool
      */
     public function isLikedByUser(User $user);
+
+    /**
+     * @return \Carbon\Carbon
+     */
+    public function createdAt();
 }
