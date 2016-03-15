@@ -5,6 +5,7 @@ use EQM\Api\Comments\CommentTransformer;
 use EQM\Api\Comments\Requests\PostCommentRequest;
 use EQM\Http\Controllers\Controller;
 use EQM\Models\Comments\Comment;
+use EQM\Models\Comments\CommentCreator;
 use EQM\Models\Comments\CommentRepository;
 use EQM\Models\Statuses\Status;
 use Input;
@@ -39,9 +40,9 @@ class CommentController extends Controller
         return response($result);
     }
 
-    public function store(PostCommentRequest $request, Status $status)
+    public function store(PostCommentRequest $request, CommentCreator $creator, Status $status)
     {
-        $comment = $this->comments->create($status, auth()->user(), $request->get('body'));
+        $comment = $creator->create($status, auth()->user(), $request);
         $manager = new Manager();
         $manager->setSerializer(new DataArraySerializer());
         $collection  = new Item($comment, new CommentTransformer());
