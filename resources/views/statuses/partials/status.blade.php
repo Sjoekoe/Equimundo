@@ -31,7 +31,7 @@
                             {{ $status->horse()->name() }}
                         </a>
                         @if ($status->prefix())
-                            - <span class="text-semibold -text-muted">{{ trans('statuses.prefixes.' . $status->prefix()) }}</span>
+                            - <span class="text-semibold text-muted">{{ trans('statuses.prefixes.' . $status->prefix()) }}</span>
                         @endif
                         <p class="text-muted text-sm">
                             {{ eqm_translated_date($status->createdAt())->diffForHumans() }}

@@ -1,6 +1,7 @@
 <?php
 namespace functional\Api;
 
+use Carbon\Carbon;
 use EQM\Models\Comments\EloquentComment;
 use EQM\Models\Horses\EloquentHorse;
 use EQM\Models\Statuses\EloquentStatus;
@@ -8,6 +9,7 @@ use EQM\Models\Users\EloquentUser;
 
 class CommentsTest extends \TestCase
 {
+    /** @test */
     function it_can_get_all_comments_for_a_status()
     {
         $user = factory(EloquentUser::class)->create();
@@ -27,6 +29,9 @@ class CommentsTest extends \TestCase
                         'id' => $comment->id(),
                         'body' => $comment->body(),
                         'like_count' => 0,
+                        'can_delete_comment' => false,
+                        'created_at' => $comment->createdAt()->toIso8601String(),
+                        'formatted_date' => eqm_translated_date($comment->createdAt())->diffForHumans(),
                         'user' => [
                             'data' => [
                                 'id' => $user->id(),
@@ -38,6 +43,7 @@ class CommentsTest extends \TestCase
                                 'country' => $user->country(),
                                 'is_admin' => $user->isAdmin(),
                                 'language' => $user->language(),
+                                'slug' => $user->slug(),
                             ],
                         ],
                     ],
@@ -55,8 +61,11 @@ class CommentsTest extends \TestCase
             ]);
     }
 
+    /** @test */
     function it_can_create_a_comment()
     {
+        $now = new Carbon();
+
         $user = factory(EloquentUser::class)->create();
         $horse = factory(EloquentHorse::class)->create();
         $status = factory(EloquentStatus::class)->create([
@@ -71,6 +80,9 @@ class CommentsTest extends \TestCase
                     'id' => 1,
                     'body' => 'Foo',
                     'like_count' => 0,
+                    'created_at' => $now->toIso8601String(),
+                    'formatted_date' => eqm_translated_date($now)->diffForHumans(),
+                    'can_delete_comment' => true,
                     'user' => [
                         'data' => [
                             'id' => $user->id(),
@@ -82,12 +94,14 @@ class CommentsTest extends \TestCase
                             'country' => $user->country(),
                             'is_admin' => $user->isAdmin(),
                             'language' => $user->language(),
+                            'slug' => $user->slug(),
                         ],
                     ],
                 ],
             ]);
     }
 
+    /** @test */
     function it_can_show_a_comment()
     {
         $user = factory(EloquentUser::class)->create();
@@ -106,6 +120,9 @@ class CommentsTest extends \TestCase
                     'id' => $comment->id(),
                     'body' => $comment->body(),
                     'like_count' => 0,
+                    'formatted_date' => eqm_translated_date($comment->createdAt())->diffForHumans(),
+                    'created_at' => $comment->createdAt()->toIso8601String(),
+                    'can_delete_comment' => false,
                     'user' => [
                         'data' => [
                             'id' => $user->id(),
@@ -117,6 +134,7 @@ class CommentsTest extends \TestCase
                             'country' => $user->country(),
                             'is_admin' => $user->isAdmin(),
                             'language' => $user->language(),
+                            'slug' => $user->slug(),
                         ],
                     ],
                 ],
@@ -147,6 +165,9 @@ class CommentsTest extends \TestCase
                     'id' => $comment->id(),
                     'body' => $comment->body(),
                     'like_count' => 1,
+                    'created_at' => $comment->createdAt()->toIso8601String(),
+                    'formatted_date' => eqm_translated_date($comment->createdAt())->diffForHumans(),
+                    'can_delete_comment' => false,
                     'user' => [
                         'data' => [
                             'id' => $user->id(),
@@ -158,6 +179,7 @@ class CommentsTest extends \TestCase
                             'country' => $user->country(),
                             'is_admin' => $user->isAdmin(),
                             'language' => $user->language(),
+                            'slug' => $user->slug(),
                         ],
                     ],
                     'likes' => [
@@ -172,6 +194,7 @@ class CommentsTest extends \TestCase
                                 'country' => $user->country(),
                                 'is_admin' => $user->isAdmin(),
                                 'language' => $user->language(),
+                                'slug' => $user->slug(),
                             ],
                         ],
                     ],
@@ -199,6 +222,9 @@ class CommentsTest extends \TestCase
                     'id' => $comment->id(),
                     'body' => 'Foo',
                     'like_count' => 0,
+                    'created_at' => $comment->createdAt()->toIso8601String(),
+                    'formatted_date' => eqm_translated_date($comment->createdAt())->diffForHumans(),
+                    'can_delete_comment' => false,
                     'user' => [
                         'data' => [
                             'id' => $user->id(),
@@ -210,6 +236,7 @@ class CommentsTest extends \TestCase
                             'country' => $user->country(),
                             'is_admin' => $user->isAdmin(),
                             'language' => $user->language(),
+                            'slug' => $user->slug(),
                         ],
                     ],
                 ],

@@ -82,6 +82,11 @@ class EloquentStatusRepository implements StatusRepository
         return $this->status->where('horse_id', $horse->id())->latest()->paginate(10);
     }
 
+    public function findFeedForHorsePaginated(Horse $horse, $limit = 10)
+    {
+        return $this->status->where('horse_id', $horse->id())->latest()->paginate($limit);
+    }
+
     /**
      * @param \EQM\Models\Horses\Horse $horse
      * @param string $body

@@ -18,6 +18,7 @@ class UserTransformer extends TransformerAbstract
             'date_of_birth' => $user->dateOfBirth() ? $user->dateOfBirth()->toIso8601String() : null,
             'country' => $user->country(),
             'gender' => $user->gender(),
+            'slug' => $user->slug(),
         ];
     }
 }

@@ -4,6 +4,8 @@ Route::get('/api/users/{user}', ['as' => 'api.users.show', 'uses' => 'UserContro
 Route::get('/api/users/{user}/feed', ['as' => 'api.users.feed', 'uses' => 'UserController@feed']);
 Route::get('/api/horses/{horse}', ['as' => 'api.horses.show', 'uses' => 'HorseController@show']);
 
+Route::get('/api/horses/{horse}/statuses', ['as' => 'api.horses.statuses.index', 'uses' => 'HorseStatusController@index']);
+
 Route::post('/api/statuses', ['as' => 'api.statuses.store', 'uses' => 'StatusController@store']);
 Route::get('/api/statuses/{status}', ['as' => 'api.statuses.show', 'uses' => 'StatusController@show']);
 Route::put('/api/statuses/{status}', ['as' => 'api.statuses.update', 'uses' => 'StatusController@update']);

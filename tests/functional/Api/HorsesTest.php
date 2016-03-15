@@ -10,10 +10,7 @@ class HorsesTest extends \TestCase
     /** @test */
     public function it_can_show_a_horse()
     {
-        $horse = factory(EloquentHorse::class)->create();
-        $picture = factory(EloquentPicture::class)->create([
-            'horse_id' => $horse->id(),
-        ]);
+        $horse = $this->createHorse();
 
         $this->get('api/horses/' . $horse->id())
             ->seeJsonEquals([
@@ -26,19 +23,8 @@ class HorsesTest extends \TestCase
                     'gender' => $horse->gender(),
                     'date_of_birth' => $horse->dateOfBirth()->toIso8601String(),
                     'color' => $horse->color(),
-                    'pictures' => [
-                        'data' => [
-                            [
-                                'id' => $picture->id(),
-                                'is_header_image' => $picture->headerImage(),
-                                'is_image' => $picture->isImage(),
-                                'is_movie' => $picture->isMovie(),
-                                'is_profile_picture' => $picture->profilePicture(),
-                                'mime' => $picture->mime(),
-                                'path' => $picture->path(),
-                            ],
-                        ],
-                    ],
+                    'slug' => $horse->slug(),
+                    'profile_picture' =>  'http://localhost/images/eqm.png',
                 ],
             ]);
     }
@@ -46,10 +32,7 @@ class HorsesTest extends \TestCase
     /** @test */
     function it_can_show_a_horse_with_statuses()
     {
-        $horse = factory(EloquentHorse::class)->create();
-        $picture = factory(EloquentPicture::class)->create([
-            'horse_id' => $horse->id(),
-        ]);
+        $horse = $this->createHorse();
         $status = factory(EloquentStatus::class)->create([
             'horse_id' => $horse->id(),
         ]);
@@ -65,28 +48,22 @@ class HorsesTest extends \TestCase
                     'gender' => $horse->gender(),
                     'date_of_birth' => $horse->dateOfBirth()->toIso8601String(),
                     'color' => $horse->color(),
-                    'pictures' => [
-                        'data' => [
-                            [
-                                'id' => $picture->id(),
-                                'is_header_image' => $picture->headerImage(),
-                                'is_image' => $picture->isImage(),
-                                'is_movie' => $picture->isMovie(),
-                                'is_profile_picture' => $picture->profilePicture(),
-                                'mime' => $picture->mime(),
-                                'path' => $picture->path(),
-                            ],
-                        ],
-                    ],
+                    'slug' => $horse->slug(),
+                    'profile_picture' =>  'http://localhost/images/eqm.png',
                     'statuses' => [
                         'data' => [
                             [
                                 'id' => $status->id(),
                                 'body' => $status->body(),
                                 'created_at' => $status->createdAt()->toIso8601String(),
-                                'prefix' => $status->prefix(),
+                                'formatted_date' => eqm_translated_date($status->createdAt())->diffForHumans(),
+                                'prefix' => trans('statuses.prefixes.' . $status->prefix()),
                                 'like_count' => 0,
                                 'liked_by_user' => false,
+                                'can_delete_status' => false,
+                                'comments' => [
+                                    'data' => []
+                                ],
                                 'horse' => [
                                     'data' => [
                                         'id' => $horse->id(),
@@ -97,21 +74,11 @@ class HorsesTest extends \TestCase
                                         'gender' => $horse->gender(),
                                         'date_of_birth' => $horse->dateOfBirth()->toIso8601String(),
                                         'color' => $horse->color(),
-                                        'pictures' => [
-                                            'data' => [
-                                                [
-                                                    'id' => $picture->id(),
-                                                    'is_header_image' => $picture->headerImage(),
-                                                    'is_image' => $picture->isImage(),
-                                                    'is_movie' => $picture->isMovie(),
-                                                    'is_profile_picture' => $picture->profilePicture(),
-                                                    'mime' => $picture->mime(),
-                                                    'path' => $picture->path(),
-                                                ],
-                                            ],
-                                        ],
+                                        'slug' => $horse->slug(),
+                                        'profile_picture' =>  'http://localhost/images/eqm.png',
                                     ],
                                 ],
+                                'picture' => null,
                             ],
                         ],
                     ],
