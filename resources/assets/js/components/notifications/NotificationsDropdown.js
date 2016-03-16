@@ -33,6 +33,11 @@ module.exports = Vue.extend({
             this.unread_notifications += 1;
             $.getJSON('/api/notifications/' + response.notification.id, function(notification) {
                 this.notifications.unshift(notification.data);
+                $.niftyNoty({
+                    container:'floating',
+                    timer : 3000,
+                    html: '<div class="media-left"><span class="icon-wrap icon-wrap-xs icon-circle alert-icon"><i class="fa ' + notification.data.icon +' fa-lg"></i></span></div><div class="media-body"><p class="alert-message">' + notification.data.message + '</p></div>'
+                });
             }.bind(this));
         }.bind(this));
     },
