@@ -508,4 +508,12 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
     {
         return $this->ip;
     }
+
+    /**
+     * @return int
+     */
+    public function unreadNotifications()
+    {
+        return (int) $this->unread_notifications;
+    }
 }

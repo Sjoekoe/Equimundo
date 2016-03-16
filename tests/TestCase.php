@@ -54,7 +54,8 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
             'remember_token' => str_random(10),
             'country' => 'BE',
             'gender' => 'M',
-            'slug' => 'john.doe'
+            'slug' => 'john.doe',
+            'unread_notifications' => 0,
         ], $attributes));
     }
 

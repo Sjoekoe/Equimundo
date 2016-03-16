@@ -109,51 +109,9 @@
                     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
                     <!--End message dropdown-->
 
-                    <!--Notification dropdown-->
-                    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-                    <li class="dropdown">
-                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">
-                            <i class="fa fa-bell fa-lg"></i>
-                            @if (Auth::user()->hasUnreadNotifications())
-                                <span class="badge badge-header badge-danger">{{ Auth::user()->countUnreadNotifications() }}</span>
-                            @endif
-                        </a>
+                    <notedrop></notedrop>
 
-                        <!--Notification dropdown menu-->
-                        <div class="dropdown-menu dropdown-menu-md dropdown-menu-right with-arrow">
-                            <div class="nano scrollable">
-                                <div class="nano-content">
-                                    <ul class="head-list">
-                                        <!-- Dropdown list-->
-                                        @foreach (auth()->user()->notifications() as $notification)
-                                            <li class="{{ $notification->isUnread() ? 'bg-warning' : '' }}">
-                                                <a href="{{ route('notifications.show', $notification->id()) }}" class="media">
-                                                    <div class="media-left">
-                                                            <span class="icon-wrap icon-circle bg-primary">
-                                                                <i class="fa {{ config('notifications.' . $notification->type()) }} fa-lg"></i>
-                                                            </span>
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <div>{{ trans('notifications.' . $notification->type(), json_decode($notification->data(), true)) }}</div>
-                                                        <small class="text-muted">{{ eqm_translated_date($notification->created_at)->diffForHumans() }}</small>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <!--Dropdown footer-->
-                            <div class="pad-all bord-top">
-                                <a href="{{ route('notifications.index') }}" class="btn-link text-dark box-block">
-                                    <i class="fa fa-angle-right fa-lg pull-right"></i>{{ trans('copy.a.show_all_notifications') }}
-                                </a>
-                            </div>
-                        </div>
-                    </li>
-                    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-                    <!--End notifications dropdown-->
+                    @include('layout.partials._notifications_dropdown')
 
                     <!--User dropdown-->
                     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->

@@ -4,6 +4,7 @@ use Carbon\Carbon;
 use EQM\Events\CommentWasLiked;
 use EQM\Events\CommentWasPosted;
 use EQM\Events\HorseWasFollowed;
+use EQM\Events\NotificationWasSent;
 use EQM\Events\PedigreeWasCreated;
 use EQM\Events\SearchWasPerformed;
 use EQM\Events\StatusLiked;
@@ -15,6 +16,7 @@ use EQM\Listeners\Events\NotifyStatusPoster;
 use EQM\Listeners\Events\SendHorseFollowedNotification;
 use EQM\Listeners\Events\Statuses\Likes\EmailHorseOwner;
 use EQM\Listeners\Events\UpdateSearchTable;
+use EQM\Listeners\Events\UpdateUsersUnreadNotifications;
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Request;
@@ -35,6 +37,9 @@ class EventServiceProvider extends ServiceProvider {
         ],
         HorseWasFollowed::class => [
             SendHorseFollowedNotification::class,
+        ],
+        NotificationWasSent::class => [
+            UpdateUsersUnreadNotifications::class,
         ],
         PedigreeWasCreated::class => [
             NotifyHorseOwner::class,

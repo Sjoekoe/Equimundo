@@ -2,6 +2,8 @@
 
 Route::get('/api/users/{user}', ['as' => 'api.users.show', 'uses' => 'UserController@show']);
 Route::get('/api/users/{user}/feed', ['as' => 'api.users.feed', 'uses' => 'UserController@feed']);
+Route::get('/api/users/{user}/notifications/reset-count', ['as' => 'api.users.notifications.reset_count', 'uses' => 'NotificationController@resetCount']);
+
 Route::get('/api/horses/{horse}', ['as' => 'api.horses.show', 'uses' => 'HorseController@show']);
 
 Route::get('/api/horses/{horse}/statuses', ['as' => 'api.horses.statuses.index', 'uses' => 'HorseStatusController@index']);

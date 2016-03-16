@@ -2,6 +2,7 @@
 namespace functional\Api;
 
 use Carbon\Carbon;
+use EQM\Core\Testing\DefaultIncludes;
 use EQM\Models\Comments\EloquentComment;
 use EQM\Models\Horses\EloquentHorse;
 use EQM\Models\Statuses\EloquentStatus;
@@ -9,6 +10,8 @@ use EQM\Models\Users\EloquentUser;
 
 class CommentsTest extends \TestCase
 {
+    use DefaultIncludes;
+
     /** @test */
     function it_can_get_all_comments_for_a_status()
     {
@@ -32,20 +35,7 @@ class CommentsTest extends \TestCase
                         'can_delete_comment' => false,
                         'created_at' => $comment->createdAt()->toIso8601String(),
                         'formatted_date' => eqm_translated_date($comment->createdAt())->diffForHumans(),
-                        'user' => [
-                            'data' => [
-                                'id' => $user->id(),
-                                'first_name' => $user->firstName(),
-                                'last_name' => $user->lastName(),
-                                'email' => $user->email(),
-                                'date_of_birth' => null,
-                                'gender' => $user->gender(),
-                                'country' => $user->country(),
-                                'is_admin' => $user->isAdmin(),
-                                'language' => $user->language(),
-                                'slug' => $user->slug(),
-                            ],
-                        ],
+                        'user' => $this->includedUser($user),
                     ],
                 ],
                 'meta' => [
@@ -83,20 +73,7 @@ class CommentsTest extends \TestCase
                     'created_at' => $now->toIso8601String(),
                     'formatted_date' => eqm_translated_date($now)->diffForHumans(),
                     'can_delete_comment' => true,
-                    'user' => [
-                        'data' => [
-                            'id' => $user->id(),
-                            'first_name' => $user->firstName(),
-                            'last_name' => $user->lastName(),
-                            'email' => $user->email(),
-                            'date_of_birth' => null,
-                            'gender' => $user->gender(),
-                            'country' => $user->country(),
-                            'is_admin' => $user->isAdmin(),
-                            'language' => $user->language(),
-                            'slug' => $user->slug(),
-                        ],
-                    ],
+                    'user' => $this->includedUser($user),
                 ],
             ]);
     }
@@ -123,20 +100,7 @@ class CommentsTest extends \TestCase
                     'formatted_date' => eqm_translated_date($comment->createdAt())->diffForHumans(),
                     'created_at' => $comment->createdAt()->toIso8601String(),
                     'can_delete_comment' => false,
-                    'user' => [
-                        'data' => [
-                            'id' => $user->id(),
-                            'first_name' => $user->firstName(),
-                            'last_name' => $user->lastName(),
-                            'email' => $user->email(),
-                            'date_of_birth' => null,
-                            'gender' => $user->gender(),
-                            'country' => $user->country(),
-                            'is_admin' => $user->isAdmin(),
-                            'language' => $user->language(),
-                            'slug' => $user->slug(),
-                        ],
-                    ],
+                    'user' => $this->includedUser($user),
                 ],
             ]);
     }
@@ -144,8 +108,8 @@ class CommentsTest extends \TestCase
     /** @test */
     public function it_can_show_a_comment_with_likes()
     {
-        $user = factory(EloquentUser::class)->create();
-        $horse = factory(EloquentHorse::class)->create();
+        $user = $this->createUser();
+        $horse = $this->createHorse();
         $status = factory(EloquentStatus::class)->create([
             'horse_id' => $horse->id(),
         ]);
@@ -168,20 +132,7 @@ class CommentsTest extends \TestCase
                     'created_at' => $comment->createdAt()->toIso8601String(),
                     'formatted_date' => eqm_translated_date($comment->createdAt())->diffForHumans(),
                     'can_delete_comment' => false,
-                    'user' => [
-                        'data' => [
-                            'id' => $user->id(),
-                            'first_name' => $user->firstName(),
-                            'last_name' => $user->lastName(),
-                            'email' => $user->email(),
-                            'date_of_birth' => null,
-                            'gender' => $user->gender(),
-                            'country' => $user->country(),
-                            'is_admin' => $user->isAdmin(),
-                            'language' => $user->language(),
-                            'slug' => $user->slug(),
-                        ],
-                    ],
+                    'user' => $this->includedUser($user),
                     'likes' => [
                         'data' => [
                             [
@@ -195,6 +146,7 @@ class CommentsTest extends \TestCase
                                 'is_admin' => $user->isAdmin(),
                                 'language' => $user->language(),
                                 'slug' => $user->slug(),
+                                'unread_notifications' => $user->unreadNotifications(),
                             ],
                         ],
                     ],
@@ -205,8 +157,8 @@ class CommentsTest extends \TestCase
     /** @test */
     function it_can_update_a_comment()
     {
-        $user = factory(EloquentUser::class)->create();
-        $horse = factory(EloquentHorse::class)->create();
+        $user = $this->createUser();
+        $horse = $this->createHorse();
         $status = factory(EloquentStatus::class)->create([
             'horse_id' => $horse->id(),
         ]);
@@ -225,20 +177,7 @@ class CommentsTest extends \TestCase
                     'created_at' => $comment->createdAt()->toIso8601String(),
                     'formatted_date' => eqm_translated_date($comment->createdAt())->diffForHumans(),
                     'can_delete_comment' => false,
-                    'user' => [
-                        'data' => [
-                            'id' => $user->id(),
-                            'first_name' => $user->firstName(),
-                            'last_name' => $user->lastName(),
-                            'email' => $user->email(),
-                            'date_of_birth' => null,
-                            'gender' => $user->gender(),
-                            'country' => $user->country(),
-                            'is_admin' => $user->isAdmin(),
-                            'language' => $user->language(),
-                            'slug' => $user->slug(),
-                        ],
-                    ],
+                    'user' => $this->includedUser($user),
                 ],
             ]);
     }

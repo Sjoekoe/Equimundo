@@ -1,6 +1,7 @@
 <?php
 namespace EQM\Models\Notifications;
 
+use Carbon\Carbon;
 use EQM\Models\Users\EloquentUser;
 use Illuminate\Database\Eloquent\Model;
 
@@ -109,5 +110,13 @@ class EloquentNotification extends Model implements Notification
     public function data()
     {
         return $this->data;
+    }
+
+    /**
+     * @return \Carbon\Caron
+     */
+    public function createdAt()
+    {
+        return Carbon::instance($this->created_at);
     }
 }

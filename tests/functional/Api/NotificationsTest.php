@@ -2,10 +2,13 @@
 namespace functional\Api;
 
 use DB;
+use EQM\Core\Testing\DefaultIncludes;
 use EQM\Models\Notifications\Notification;
 
 class NotificationsTest extends \TestCase
 {
+    use DefaultIncludes;
+
     /** @test */
     function it_can_get_all_notifications_for_a_user()
     {
@@ -35,36 +38,22 @@ class NotificationsTest extends \TestCase
                         'type' => Notification::STATUS_LIKED,
                         'message' => 'John Doe has liked the status of test horse.',
                         'is_read' => false,
-                        'receiver' => [
-                            'data' => [
-                                'id' => $user->id(),
-                                'first_name' => $user->firstName(),
-                                'last_name' => $user->lastName(),
-                                'date_of_birth' => $user->dateOfBirth(),
-                                'country' => $user->country(),
-                                'email' => $user->email(),
-                                'language' => $user->language(),
-                                'gender' => $user->gender(),
-                                'is_admin' => $user->isAdmin(),
-                                'slug' => $user->slug(),
-                            ],
-                        ],
-                        'sender' => [
-                            'data' => [
-                                'id' => $otherUser->id(),
-                                'first_name' => $otherUser->firstName(),
-                                'last_name' => $otherUser->lastName(),
-                                'date_of_birth' => $otherUser->dateOfBirth(),
-                                'country' => $otherUser->country(),
-                                'email' => $otherUser->email(),
-                                'language' => $otherUser->language(),
-                                'gender' => $otherUser->gender(),
-                                'is_admin' => $otherUser->isAdmin(),
-                                'slug' => $otherUser->slug(),
-                            ]
-                        ],
+                        'icon' => 'fa-thumbs-o-up',
+                        'formatted_date' => '2045 years ago',
+                        'receiver' => $this->includedUser($user),
+                        'sender' => $this->includedUser($otherUser),
                     ],
                 ],
+                'meta' => [
+                    'pagination' => [
+                        'count' => 1,
+                        'current_page' => 1,
+                        'links' => [],
+                        'per_page' => 25,
+                        'total' => 1,
+                        'total_pages' => 1,
+                    ],
+                ]
             ]);
     }
 
@@ -97,34 +86,10 @@ class NotificationsTest extends \TestCase
                         'type' => Notification::STATUS_LIKED,
                         'message' => 'John Doe has liked the status of test horse.',
                         'is_read' => true,
-                        'receiver' => [
-                            'data' => [
-                                'id' => $user->id(),
-                                'first_name' => $user->firstName(),
-                                'last_name' => $user->lastName(),
-                                'date_of_birth' => $user->dateOfBirth(),
-                                'country' => $user->country(),
-                                'email' => $user->email(),
-                                'language' => $user->language(),
-                                'gender' => $user->gender(),
-                                'is_admin' => $user->isAdmin(),
-                                'slug' => $user->slug(),
-                            ],
-                        ],
-                        'sender' => [
-                            'data' => [
-                                'id' => $otherUser->id(),
-                                'first_name' => $otherUser->firstName(),
-                                'last_name' => $otherUser->lastName(),
-                                'date_of_birth' => $otherUser->dateOfBirth(),
-                                'country' => $otherUser->country(),
-                                'email' => $otherUser->email(),
-                                'language' => $otherUser->language(),
-                                'gender' => $otherUser->gender(),
-                                'is_admin' => $otherUser->isAdmin(),
-                                'slug' => $otherUser->slug(),
-                            ]
-                        ],
+                        'icon' => 'fa-thumbs-o-up',
+                        'formatted_date' => '2045 years ago',
+                        'receiver' => $this->includedUser($user),
+                        'sender' => $this->includedUser($otherUser),
                     ],
                 ],
             ]);

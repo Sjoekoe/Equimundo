@@ -19,6 +19,7 @@ class UserTransformer extends TransformerAbstract
             'country' => $user->country(),
             'gender' => $user->gender(),
             'slug' => $user->slug(),
+            'unread_notifications' => $user->unreadNotifications(),
         ];
     }
 }

@@ -5,8 +5,6 @@ use EQM\Http\Controllers\Controller;
 use EQM\Models\Comments\Comment;
 use EQM\Models\Statuses\Likes\LikeHandler;
 use EQM\Models\Statuses\Status;
-use Redirect;
-use URL;
 
 class LikeController extends Controller
 {
@@ -14,7 +12,7 @@ class LikeController extends Controller
     {
         $handler->handleStatus($status, auth()->user());
 
-        return Redirect::to(URL::previous() . "#" . $status->id());
+        return response()->json('success', 200);
     }
 
     public function likeComment(LikeHandler $handler, Comment $comment)
