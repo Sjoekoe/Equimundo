@@ -9,7 +9,6 @@ class StatusesTest extends \TestCase
     /** @test */
     function it_can_get_the_feed_for_a_user()
     {
-        $now = Carbon::now();
         $user = $this->createUser();
         $horse = $this->createHorse();
         $status = $this->createStatus([
@@ -22,6 +21,59 @@ class StatusesTest extends \TestCase
         ]);
 
         $this->get('/api/users/' . $user->id() . '/feed')
+            ->seeJsonEquals([
+                'data' => [
+                    [
+                        'id' => $status->id(),
+                        'body' => $status->body(),
+                        'created_at' => $status->createdAt()->toIso8601String(),
+                        'formatted_date' => eqm_translated_date($status->createdAt())->diffForHumans(),
+                        'like_count' => 0,
+                        'prefix' => trans('statuses.prefixes.' . $status->prefix()),
+                        'liked_by_user' => false,
+                        'can_delete_status' => false,
+                        'picture' => null,
+                        'comments' => [
+                            'data' => [],
+                        ],
+                        'horse' => [
+                            'data' => [
+                                'id' => $horse->id(),
+                                'name' => $horse->name(),
+                                'life_number' => $horse->lifeNumber(),
+                                'breed' => $horse->breed,
+                                'height' => $horse->height(),
+                                'gender' => $horse->gender(),
+                                'date_of_birth' => $horse->dateOfBirth()->toIso8601String(),
+                                'color' => $horse->color(),
+                                'slug' => $horse->slug(),
+                                'profile_picture' =>  'http://localhost/images/eqm.png',
+                            ],
+                        ],
+                    ],
+                ],
+                'meta' => [
+                    'pagination' => [
+                        'count' => 1,
+                        'current_page' => 1,
+                        'links' => [],
+                        'per_page' => 10,
+                        'total' => 1,
+                        'total_pages' => 1,
+                    ],
+                ],
+            ]);
+    }
+
+    /** @test */
+    function it_can_get_the_feed_for_a_horse()
+    {
+        $horse = $this->createHorse();
+        $status = $this->createStatus([
+            'horse_id' => $horse->id(),
+        ]);
+
+        $this->get('/api/horses/' . $horse->id() . '/statuses')
             ->seeJsonEquals([
                 'data' => [
                     [
