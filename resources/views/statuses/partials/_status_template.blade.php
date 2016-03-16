@@ -81,7 +81,6 @@
                             <div class="row">
                                 <div class="col-sm-12 col-md-11 col-md-offset-1">
                                     <input type="textarea" name="body", class="form-control" rows="1", placeholder="{{ trans('forms.placeholders.write_a_comment') }}" v-model="newComment.comment[status.id]">
-                                    <small class="help-block text-danger text-left">@{{ errors[status.id].body[0] }}</small>
                                 </div>
                             </div>
                             <div class="mar-ver text-right">
