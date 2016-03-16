@@ -236,4 +236,28 @@ class EloquentUserRepository implements UserRepository
     {
         return count($this->user->where('activated', false)->get());
     }
+
+    /**
+     * @param \EQM\Models\Users\User $user
+     * @return \EQM\Models\Users\User
+     */
+    public function resetNotificationCount(User $user)
+    {
+        $user->unread_notifications = 0;
+        $user->save();
+
+        return $user;
+    }
+
+    /**
+     * @param \EQM\Models\Users\User $user
+     * @return \EQM\Models\Users\User
+     */
+    public function updateUnreadNotifications(User $user)
+    {
+        $user->unread_notifications += 1;
+        $user->save();
+
+        return $user;
+    }
 }

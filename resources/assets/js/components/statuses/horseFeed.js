@@ -24,6 +24,7 @@ module.exports = Vue.extend({
         $.getJSON('/api/horses/' + window.horse_id + '/statuses', function(statuses) {
             this.loading = false;
             this.statuses = statuses.data;
+            this.max_pages = statuses.meta.pagination.total_pages
         }.bind(this));
 
         var vm = this;

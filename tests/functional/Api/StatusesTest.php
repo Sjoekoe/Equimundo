@@ -310,6 +310,7 @@ class StatusesTest extends \TestCase
                                 'is_admin' => $user->isAdmin(),
                                 'language' => $user->language(),
                                 'slug' => $user->slug(),
+                                'unread_notifications' => 0,
                             ],
                         ],
                     ],

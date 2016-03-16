@@ -1,32 +1,25 @@
 <?php
 namespace EQM\Listeners\Events;
 
-use EQM\Models\Notifications\NotificationRepository;
-use Illuminate\Auth\AuthManager;
+use EQM\Models\Notifications\NotificationCreator;
 
 class NotifyStatusPoster
 {
     /**
-     * @var \EQM\Models\Notifications\NotificationRepository
+     * @var \EQM\Models\Notifications\NotificationCreator
      */
-    private $notifications;
+    private $creator;
 
-    /**
-     * @var \Illuminate\Auth\AuthManager
-     */
-    private $auth;
-
-    public function __construct(NotificationRepository $notifications, AuthManager $auth)
+    public function __construct(NotificationCreator $creator)
     {
-        $this->notifications = $notifications;
-        $this->auth = $auth;
+        $this->creator = $creator;
     }
 
     public function handle($event)
     {
         foreach ($event->status->horse()->users() as $user) {
-            if ($user->id() !== $this->auth->user()->id()) {
-                $this->notifications->create($event->sender, $user, $event->notification, $event->status, $event->data);
+            if ($user->id() !== auth()->user()->id()) {
+                $this->creator->create($event->sender, $user, $event->notification, $event->status, $event->data);
             }
         }
     }

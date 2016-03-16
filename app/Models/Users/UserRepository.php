@@ -116,4 +116,16 @@ interface UserRepository
      * @return int
      */
     public function countUnactivatedUsers();
+
+    /**
+     * @param \EQM\Models\Users\User $user
+     * @return \EQM\Models\Users\User
+     */
+    public function resetNotificationCount(User $user);
+
+    /**
+     * @param \EQM\Models\Users\User $user
+     * @return \EQM\Models\Users\User
+     */
+    public function updateUnreadNotifications(User $user);
 }

@@ -2,25 +2,18 @@
 namespace EQM\Listeners\Events;
 
 use EQM\Events\CommentWasLiked;
-use EQM\Models\Notifications\NotificationRepository;
-use Illuminate\Auth\AuthManager;
+use EQM\Models\Notifications\NotificationCreator;
 
 class NotifyCommentPoster
 {
     /**
-     * @var \EQM\Models\Notifications\NotificationRepository
+     * @var \EQM\Models\Notifications\NotificationCreator
      */
-    private $notifications;
+    private $creator;
 
-    /**
-     * @var \Illuminate\Auth\AuthManager
-     */
-    private $auth;
-
-    public function __construct(NotificationRepository $notifications, AuthManager $auth)
+    public function __construct(NotificationCreator $creator)
     {
-        $this->notifications = $notifications;
-        $this->auth = $auth;
+        $this->creator = $creator;
     }
 
     public function handle(CommentWasLiked $event)
@@ -28,6 +21,6 @@ class NotifyCommentPoster
         $receiver = $event->comment->poster();
         $sender = $event->user;
 
-        $this->notifications->create($sender, $receiver, $event->notification, $event->comment->status(), $event->data);
+        $this->creator->create($sender, $receiver, $event->notification, $event->comment->status(), $event->data);
     }
 }

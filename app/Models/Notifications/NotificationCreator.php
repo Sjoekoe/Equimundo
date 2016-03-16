@@ -1,21 +1,26 @@
 <?php
 namespace EQM\Models\Notifications;
 
+use EQM\Events\NotificationWasSent;
 use EQM\Models\Users\User;
+use Illuminate\Contracts\Events\Dispatcher;
 
 class NotificationCreator
 {
     /**
-     * @var \EQM\Models\Notifications\EloquentNotification
+     * @var \EQM\Models\Notifications\NotificationRepository
      */
-    private $notification;
+    private $notifications;
 
     /**
-     * @param \EQM\Models\Notifications\EloquentNotification $notification
+     * @var \Illuminate\Contracts\Events\Dispatcher
      */
-    public function __construct(EloquentNotification $notification)
+    private $dispatcher;
+
+    public function __construct(NotificationRepository $notifications, Dispatcher $dispatcher)
     {
-        $this->notification = $notification;
+        $this->notifications = $notifications;
+        $this->dispatcher = $dispatcher;
     }
 
     /**
@@ -28,15 +33,9 @@ class NotificationCreator
      */
     public function create(User $sender, User $receiver, $type, $entity, $data)
     {
-        $notification = new EloquentNotification();
+        $notification = $this->notifications->create($sender, $receiver, $type, $entity, $data);
 
-        $notification->type = $type;
-        $notification->sender_id = $sender->id;
-        $notification->receiver_id = $receiver->id;
-        $notification->link = $this->notification->getRoute($type, $entity);
-        $notification->data = json_encode($data);
-
-        $notification->save();
+        $this->dispatcher->fire(new NotificationWasSent($receiver, $notification));
 
         return $notification;
     }

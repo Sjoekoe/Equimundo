@@ -12,7 +12,7 @@ module.exports = Vue.extend({
     },
 
     ready: function() {
-        $.getJSON('api/notifications', function(notifications) {
+        $.getJSON('/api/notifications', function(notifications) {
             this.notifications = notifications.data;
         }.bind(this));
     },
@@ -21,14 +21,14 @@ module.exports = Vue.extend({
         deleteNotification: function(notification) {
             this.notifications.$remove(notification);
             $.ajax({
-                url: 'api/notifications/' + notification.id,
+                url: '/api/notifications/' + notification.id,
                 type: 'post',
                 data: {_method: 'delete'},
             });
         },
 
         markAllAsRead: function() {
-            $.getJSON('api/notifications/mark-as-read', function(notifications) {
+            $.getJSON('/api/notifications/mark-as-read', function(notifications) {
                 this.notifications = notifications.data;
             }.bind(this));
         }

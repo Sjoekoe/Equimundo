@@ -240,4 +240,9 @@ interface User
      * @return string
      */
     public function ip();
+
+    /**
+     * @return int
+     */
+    public function unreadNotifications();
 }

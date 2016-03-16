@@ -5,7 +5,6 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 class InvitationWasSent extends Event implements ShouldBroadcast
 {
-
     /**
      * Get the channels the event should broadcast on.
      *

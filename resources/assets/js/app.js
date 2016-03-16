@@ -4,7 +4,9 @@ new Vue({
     el: 'body',
 
     components: {
-        notifications: require('./components/notifications'),
+        admindash: require('./components/admin/dashboard'),
+        notedrop: require('./components/notifications/NotificationsDropdown'),
+        notifications: require('./components/notifications/NotificationOverview'),
         horsefeed: require('./components/statuses/horseFeed'),
         userfeed: require('./components/statuses/userFeed')
     }

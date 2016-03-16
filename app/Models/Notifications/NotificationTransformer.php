@@ -19,6 +19,8 @@ class NotificationTransformer extends TransformerAbstract
             'url' => route('notifications.show', $notification->id()),
             'message' => trans('notifications.' . $notification->type(), json_decode($notification->data(), true)),
             'is_read' => (bool) $notification->isRead(),
+            'icon' => config('notifications.' . $notification->type()),
+            'formatted_date' => eqm_translated_date($notification->createdAt())->diffForHumans()
         ];
     }
 
