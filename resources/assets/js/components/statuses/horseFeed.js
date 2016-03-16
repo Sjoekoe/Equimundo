@@ -15,7 +15,8 @@ module.exports = Vue.extend({
                 comment: {
 
                 },
-            }
+            },
+            maxPages: 1,
         }
     },
 
@@ -28,16 +29,18 @@ module.exports = Vue.extend({
         var vm = this;
 
         $(window).scroll(function() {
-            if ($(document).height() <= ($(window).height() + $(window).scrollTop())) {
-                vm.loading = true;
-                vm.page += 1;
+            if (vm.loading == false && vm.page < vm.max_pages) {
+                if ($(document).height() <= ($(window).height() + $(window).scrollTop())) {
+                    vm.loading = true;
+                    vm.page += 1;
 
-                $.getJSON('/api/horses/' + window.horse_id + '/statuses?page=' + vm.page, function(statuses) {
-                    vm.loading = false;
-                    statuses.data.map(function(status) {
-                        vm.statuses.push(status);
-                    });
-                }.bind(vm));
+                    $.getJSON('/api/horses/' + window.horse_id + '/statuses?page=' + vm.page, function (statuses) {
+                        vm.loading = false;
+                        statuses.data.map(function (status) {
+                            vm.statuses.push(status);
+                        });
+                    }.bind(vm));
+                }
             }
         });
     },
@@ -81,9 +84,11 @@ module.exports = Vue.extend({
             e.preventDefault();
             this.commenting = true;
 
-            $.each(this.newComment.comment, function(ndx, value){
-                comment_body = value;
-            });
+            if (this.newComment !== '') {
+                $.each(this.newComment.comment, function(ndx, value){
+                    comment_body = value;
+                });
+            }
 
             var comment = {
                 "body": comment_body
@@ -98,6 +103,9 @@ module.exports = Vue.extend({
                 data: comment,
                 success: function(comment) {
                     status.comments.data.push(comment.data);
+                    vm.commenting = false;
+                },
+                error: function() {
                     vm.commenting = false;
                 }
             })
