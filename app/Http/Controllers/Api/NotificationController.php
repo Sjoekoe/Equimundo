@@ -45,6 +45,16 @@ class NotificationController extends Controller
         return response($result);
     }
 
+    public function show(Notification $notification)
+    {
+        $manager = new Manager();
+        $manager->setSerializer(new DataArraySerializer());
+        $collection  = new Item($notification, new NotificationTransformer());
+        $result = $manager->createData($collection)->toArray();
+
+        return response($result);
+    }
+
     public function markRead()
     {
         auth()->user()->markNotificationsAsRead();
