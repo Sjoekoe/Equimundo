@@ -29,9 +29,11 @@ module.exports = Vue.extend({
         this.pusher = new Pusher('50125ce9622090efbd5a');
         this.pusherChannel = this.pusher.subscribe('user-' + window.user_id + '');
 
-        this.pusherChannel.bind('EQM\\Events\\NotificationWasSent', function(data) {
+        this.pusherChannel.bind('EQM\\Events\\NotificationWasSent', function(response) {
             this.unread_notifications += 1;
-            this.notifications.unshift(data.notification);
+            $.getJSON('/api/notifications/' + response.notification.id, function(notification) {
+                this.notifications.unshift(notification.data);
+            }.bind(this));
         }.bind(this));
     },
 

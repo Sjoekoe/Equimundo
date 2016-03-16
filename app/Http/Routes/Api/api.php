@@ -21,4 +21,5 @@ Route::delete('/api/statuses/{status}/comments/{comment}', ['as' => 'api.comment
 
 Route::get('api/notifications', ['as' => 'api.notifications.index', 'uses' => 'NotificationController@index']);
 Route::get('api/notifications/mark-as-read', ['as' => 'api.notifications.read', 'uses' => 'NotificationController@markRead']);
+Route::get('api/notifications/{notification}', ['as' => 'api.notifications.show', 'uses' => 'NotificationController@show']);
 Route::delete('api/notifications/{notification}', ['as' => 'api.notifications.delete', 'uses' => 'NotificationController@delete']);

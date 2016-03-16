@@ -96,6 +96,42 @@ class NotificationsTest extends \TestCase
     }
 
     /** @test */
+    function it_can_show_a_notification()
+    {
+        $user = $this->loginAsUser();
+        $horse = $this->createHorse();
+        $otherUser = $this->createUser(['email' => 'test@test.com']);
+
+        DB::table('notifications')->insert([
+            'sender_id' => $otherUser->id(),
+            'receiver_id' => $user->id(),
+            'data' => json_encode([
+                'sender' => $otherUser->fullName(),
+                'horse' => $horse->name(),
+            ]),
+            'type' => Notification::STATUS_LIKED,
+            'read' => false,
+            'link' => 'www.test.com',
+        ]);
+
+        $this->actingAs($user)
+            ->get('/api/notifications/1')
+            ->seeJsonEquals([
+                'data' => [
+                    'id' => 1,
+                    'url' => 'http://localhost/notifications/1/show',
+                    'type' => Notification::STATUS_LIKED,
+                    'message' => 'John Doe has liked the status of test horse.',
+                    'is_read' => false,
+                    'icon' => 'fa-thumbs-o-up',
+                    'formatted_date' => '2045 years ago',
+                    'receiver' => $this->includedUser($user),
+                    'sender' => $this->includedUser($otherUser),
+                ],
+            ]);
+    }
+
+    /** @test */
     function it_can_delete_a_notification()
     {
         $user = $this->loginAsUser();
