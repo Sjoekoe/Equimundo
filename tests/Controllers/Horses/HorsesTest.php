@@ -81,22 +81,4 @@ class HorsesTest extends \TestCase
             'color' => 1
         ]);
     }
-
-    function it_can_delete_a_horse()
-    {
-        $user = factory(EloquentUser::class)->create();
-        $horse = factory(EloquentHorse::class)->create();
-        $horseTeam = factory(EloquentHorseTeam::class)->create([
-            'user_id' => $user->id,
-            'horse_id' => $horse->id()
-        ]);
-
-        $this->actingAs($user)
-            ->get('/horses/' . $horse->slug() . '/delete');
-
-        $this->assertRedirectedTo('/');
-        $this->notSeeInDatabase('horse_team', [
-            'id' => $horseTeam->id(),
-        ]);
-    }
 }

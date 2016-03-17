@@ -91,17 +91,6 @@ class HorseController extends Controller
         return redirect()->route('horses.edit', $horse->slug());
     }
 
-    public function delete(Horse $horse)
-    {
-        $this->authorize('delete-horse', $horse);
-
-        $this->horseTeams->delete();
-
-        session()->put('success', 'The horse was removed from your list');
-
-        return redirect()->route('home');
-    }
-
     public function data(Horse $horse)
     {
         $profilePicturePath = $horse->getProfilePicture() ? route('file.picture', $horse->getProfilePicture()->id()) : asset('images/eqm.png');
