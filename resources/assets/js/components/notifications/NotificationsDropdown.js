@@ -9,17 +9,13 @@ module.exports = Vue.extend({
     data: function() {
         return {
             unread_notifications: 0,
-            user_email: '',
             notifications: [],
-            user: {},
         };
     },
 
     ready: function() {
         $.getJSON('/api/users/' + window.user_id, function (user) {
-            this.user = user;
             this.unread_notifications = user.data.unread_notifications;
-            this.user_email = user.data.email;
         }.bind(this));
 
         $.getJSON('/api/notifications', function(notifications) {
@@ -51,7 +47,7 @@ module.exports = Vue.extend({
 
         resetNotificationCount: function() {
             if (this.unread_notifications) {
-                $.getJSON('/api/users/' + this.user.data.id + '/notifications/reset-count', function() {
+                $.getJSON('/api/users/' + window.user_id + '/notifications/reset-count', function() {
                     this.unread_notifications = 0;
                 }.bind(this));
             }
