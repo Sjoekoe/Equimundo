@@ -15,7 +15,7 @@ module.exports = Vue.extend({
     },
 
     ready: function() {
-        this.client = Algolia("OJ8NJIHEDF", "652c42b3a74b7d765b7f3b815a7239da");
+        this.client = Algolia("7V1YC3S2X5", "79e7674bda3dae6c35ceed58f7f52789");
         this.horseIndex = this.client.initIndex('horses');
         this.userIndex = this.client.initIndex('users');
 
