@@ -1,6 +1,7 @@
 <?php
 namespace EQM\Models\Users;
 
+use AlgoliaSearch\Laravel\AlgoliaEloquentTrait;
 use Carbon\Carbon;
 use EQM\Models\Comments\EloquentComment;
 use EQM\Models\Conversations\Conversation;
@@ -23,7 +24,7 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 
 class EloquentUser extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract, User
 {
-    use Authenticatable, Authorizable, CanResetPassword;
+    use Authenticatable, Authorizable, CanResetPassword, AlgoliaEloquentTrait;
 
     /**
      * The database table used by the model.

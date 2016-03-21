@@ -1,7 +1,10 @@
 <?php
 namespace EQM\Models\Horses;
 
+use AlgoliaSearch\Laravel\AlgoliaEloquentTrait;
 use Carbon\Carbon;
+use EQM\Core\Search\CanBeSearched;
+use EQM\Core\Search\Searchable;
 use EQM\Models\Albums\EloquentAlbum;
 use EQM\Models\Disciplines\EloquentDiscipline;
 use EQM\Models\HorseTeams\EloquentHorseTeam;
@@ -15,6 +18,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class EloquentHorse extends Model implements Horse
 {
+    use AlgoliaEloquentTrait;
+
     /**
      * The table name used by the entity
      *

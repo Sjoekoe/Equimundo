@@ -99,4 +99,9 @@ interface HorseRepository
      * @return \EQM\Models\Horses\Horse
      */
     public function latestHorse();
+
+    /**
+     * @return \EQM/Models\Horses\Horse[]
+     */
+    public function all();
 }

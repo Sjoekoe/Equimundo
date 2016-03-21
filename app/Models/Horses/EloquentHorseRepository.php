@@ -65,7 +65,7 @@ class EloquentHorseRepository implements HorseRepository
      */
     public function search($value)
     {
-        return $this->horse->where('name', 'like', '%' . $value . '%')->get();
+        return $this->horse->_search($value);
     }
 
     /**
@@ -234,5 +234,13 @@ class EloquentHorseRepository implements HorseRepository
     public function latestHorse()
     {
         return  $this->horse->latest()->limit(20)->get();
+    }
+
+    /**
+     * @return \EQM\Models\Horses\Horse[]
+     */
+    public function all()
+    {
+        return $this->horse->all();
     }
 }
