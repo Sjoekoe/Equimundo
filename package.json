@@ -4,6 +4,7 @@
     "laravel-elixir": "*"
   },
   "dependencies": {
+    "algoliasearch": "^3.13.0",
     "bootstrap-sass": "^3.3.6",
     "bootstrap-select": "^1.9.3",
     "lightbox2": "^2.8.2",

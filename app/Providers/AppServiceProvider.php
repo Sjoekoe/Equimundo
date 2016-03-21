@@ -1,6 +1,9 @@
 <?php namespace EQM\Providers;
 
+use AlgoliaSearch\Client;
 use Blade;
+use EQM\Core\Search\AlgoliaSearchEngine;
+use EQM\Core\Search\SearchEngine;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider {
@@ -32,6 +35,12 @@ class AppServiceProvider extends ServiceProvider {
             'Illuminate\Contracts\Auth\Registrar',
             'EQM\Services\Registrar'
         );
+
+        $this->app->singleton(SearchEngine::class, function() {
+            return new AlgoliaSearchEngine(
+                new Client(env('ALGOLIA_APP_ID'), env('ALGOLIA_ADMIN_API_KEY'))
+            );
+        });
     }
 
 }

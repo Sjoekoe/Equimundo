@@ -148,6 +148,7 @@ return [
         EQM\Http\HttpServiceProvider::class,
         Bugsnag\BugsnagLaravel\BugsnagLaravelServiceProvider::class,
         Stevebauman\Location\LocationServiceProvider::class,
+        AlgoliaSearch\Laravel\AlgoliaServiceProvider::class,
 
         /*
          * Model Service Providers

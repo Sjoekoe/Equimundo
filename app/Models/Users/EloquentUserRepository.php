@@ -133,9 +133,7 @@ class EloquentUserRepository implements UserRepository
      */
     public function search($input)
     {
-        return $this->user->where('first_name', 'like', '%' . $input . '%')
-            ->orWhere('last_name', 'like', '%' . $input . '%')
-            ->get();
+        return $this->user->_search($input);
     }
 
     /**
