@@ -19,7 +19,6 @@ class CommentTransformer extends TransformerAbstract
             'body' => $comment->body(),
             'like_count' =>count($comment->likes()),
             'created_at' => $comment->createdAt()->toIso8601String(),
-            'formatted_date' => eqm_translated_date($comment->createdAt())->diffForHumans(),
             'can_delete_comment' => auth()->check() ? auth()->user()->can('delete-comment', $comment) : false,
         ];
     }

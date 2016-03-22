@@ -5,41 +5,57 @@
         <div class="row">
             <div class="col-lg-6 col-lg-offset-2">
                 @if (count($horses))
-                    <div class="panel">
-                        <div class="panel-body">
-                            {{ Form::open(['route' => 'statuses.store', 'method' => 'POST', 'class' => 'status_form', 'files' => 'true']) }}
+                    <statuscreator></statuscreator>
+
+                    <template id="status-creator">
+                        <div class="panel">
+                            <div class="panel-body">
                                 <div class="col-md-10">
-                                    <div class="row">
-                                        {{ Form::select('horse', $horses, null, ['class' => 'form-control selectPicker', 'id' => 'js-status-select']) }}
-                                    </div>
-                                    <div class="row mar-top">
-                                        {{ Form::textarea('body', null, ['class' => 'form-control', 'rows' => 3, 'placeholder' => trans('forms.placeholders.what_you_been_doing')]) }}
-                                        @include('layout.partials._error_message', ['field' => 'body'])
-                                    </div>
-                                    <div class="row mar-top">
-                                        <div class="col-sm-6 pad-no">
-                                            <div class="image-upload">
-                                                <label for="picture">
-                                                    <i class="btn btn-trans btn-icon fa fa-camera add-tooltip"></i>
-                                                </label>
-
-                                                {{ Form::file('picture', ['class' => 'pull-left', 'id' => 'picture']) }}
-
+                                    <form method="post" enctype="multipart/form-data">
+                                        <div class="row">
+                                            <select class="form-control selectPicker" v-model="selected" v-bind:value="selectedId" v-on:change="changeImage">
+                                                <option v-for="option in options" v-bind:value="option.id">
+                                                    @{{ option.name }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="row mar-top">
+                                            <textarea name="body" id="" cols="30" rows="3" class="form-control" placeholder="{{ trans('forms.placeholders.what_you_been_doing') }}" v-model="body"></textarea>
+                                            <small class="help-block text-danger text-left" v-if="errors.body"><i class="fa fa-exclamation-circle"></i> @{{ errors.body }}</small>
+                                        </div>
+                                        <div class="row mar-top">
+                                            <div class="col-sm-6 pad-no">
+                                                <div class="image-upload">
+                                                    <label for="picture">
+                                                        <i class="btn btn-trans btn-icon fa fa-camera add-tooltip"></i>
+                                                    </label>
+                                                    <input id="picture" type="file" v-model="upload" @change="onFileChange">
+                                                </div>
+                                                <div v-if="image" >
+                                                    <img v-bind:src="image" alt="" class="img-lg img-border">
+                                                    <button class="btn btn-sm btn-danger" v-on:click="removeImage">X</button>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 pad-no">
+                                                <template v-if="submitting">
+                                                    <button class="btn btn-sm btn-info pull-right" disabled><i class="fa fa-spinner fa-spin"></i></button>
+                                                </template>
+                                                <template v-else>
+                                                    <button type="submit" class="btn btn-sm btn-info pull-right" v-on:click="submit($event)">{{ trans('forms.buttons.post_status') }}</button>
+                                                </template>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6 pad-no">
-                                            {{ Form::submit(trans('forms.buttons.post_status'), ['class' => 'btn btn-sm btn-info pull-right']) }}
-                                        </div>
-                                    </div>
+                                    </form>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="text-center ">
-                                        <img src="{{ $initialPicture }}" alt="" id="js-status-avatar" class="img-lg img-border">
+                                        <img v-bind:src="currentPicture" alt="" class="img-lg img-border">
                                     </div>
                                 </div>
-                            {{ Form::close() }}
+                            </div>
                         </div>
-                    </div>
+                        @include('statuses.partials._status_template')
+                    </template>
                 @else
                     <div class="panel">
                         <div class="panel-body text-center">

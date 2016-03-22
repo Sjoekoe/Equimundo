@@ -23,7 +23,7 @@
                     </a>
                     <span class="text-semibold text-muted" v-if="status.prefix"> - @{{ status.prefix }}</span>
                     <p class="text-muted text-sm">
-                        @{{ status.formatted_date }}
+                        @{{ status.created_at | timeformat }}
                     </p>
                 </div>
                 <p v-html="status.body"></p>
@@ -66,7 +66,7 @@
                                 </div>
                             </div>
                             <p class="text-muted text-sm">
-                                @{{ comment.formatted_date }}
+                                @{{ comment.created_at | timeformat }}
                             </p>
                         </div>
                         <p v-html="comment.body"></p>

@@ -59,7 +59,7 @@ interface Notification
     public function getRoute($type, $entity);
 
     /**
-     * @return \Carbon\Caron
+     * @return \Carbon\Carbon
      */
     public function createdAt();
 }

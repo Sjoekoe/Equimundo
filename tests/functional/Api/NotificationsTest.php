@@ -1,6 +1,7 @@
 <?php
 namespace functional\Api;
 
+use Carbon\Carbon;
 use DB;
 use EQM\Core\Testing\DefaultIncludes;
 use EQM\Models\Notifications\Notification;
@@ -15,6 +16,7 @@ class NotificationsTest extends \TestCase
         $user = $this->loginAsUser();
         $horse = $this->createHorse();
         $otherUser = $this->createUser(['email' => 'test@test.com']);
+        $now = Carbon::now();
 
         DB::table('notifications')->insert([
             'sender_id' => $otherUser->id(),
@@ -26,6 +28,7 @@ class NotificationsTest extends \TestCase
             'type' => Notification::STATUS_LIKED,
             'read' => false,
             'link' => 'www.test.com',
+            'created_at' => $now,
         ]);
 
         $this->actingAs($user)
@@ -39,7 +42,7 @@ class NotificationsTest extends \TestCase
                         'message' => 'John Doe has liked the status of test horse.',
                         'is_read' => false,
                         'icon' => 'fa-thumbs-o-up',
-                        'formatted_date' => '2045 years ago',
+                        'created_at' => $now->toIso8601String(),
                         'receiver' => $this->includedUser($user),
                         'sender' => $this->includedUser($otherUser),
                     ],
@@ -63,6 +66,7 @@ class NotificationsTest extends \TestCase
         $user = $this->loginAsUser();
         $horse = $this->createHorse();
         $otherUser = $this->createUser(['email' => 'test@test.com']);
+        $now = Carbon::now();
 
         DB::table('notifications')->insert([
             'sender_id' => $otherUser->id(),
@@ -74,6 +78,7 @@ class NotificationsTest extends \TestCase
             'type' => Notification::STATUS_LIKED,
             'read' => false,
             'link' => 'www.test.com',
+            'created_at' => $now,
         ]);
 
         $this->actingAs($user)
@@ -87,7 +92,7 @@ class NotificationsTest extends \TestCase
                         'message' => 'John Doe has liked the status of test horse.',
                         'is_read' => true,
                         'icon' => 'fa-thumbs-o-up',
-                        'formatted_date' => '2045 years ago',
+                        'created_at' => $now->toIso8601String(),
                         'receiver' => $this->includedUser($user),
                         'sender' => $this->includedUser($otherUser),
                     ],
@@ -101,6 +106,7 @@ class NotificationsTest extends \TestCase
         $user = $this->loginAsUser();
         $horse = $this->createHorse();
         $otherUser = $this->createUser(['email' => 'test@test.com']);
+        $now = Carbon::now();
 
         DB::table('notifications')->insert([
             'sender_id' => $otherUser->id(),
@@ -112,6 +118,7 @@ class NotificationsTest extends \TestCase
             'type' => Notification::STATUS_LIKED,
             'read' => false,
             'link' => 'www.test.com',
+            'created_at' => $now,
         ]);
 
         $this->actingAs($user)
@@ -124,7 +131,7 @@ class NotificationsTest extends \TestCase
                     'message' => 'John Doe has liked the status of test horse.',
                     'is_read' => false,
                     'icon' => 'fa-thumbs-o-up',
-                    'formatted_date' => '2045 years ago',
+                    'created_at' => $now->toIso8601String(),
                     'receiver' => $this->includedUser($user),
                     'sender' => $this->includedUser($otherUser),
                 ],

@@ -162,7 +162,7 @@ class EloquentHorseRepository implements HorseRepository
     {
         return $this->horse
             ->join('horse_team', 'horses.id', '=', 'horse_team.horse_id')
-            ->where('horse_team.user_id', $user->id)
+            ->where('horse_team.user_id', $user->id())
             ->get();
     }
 
