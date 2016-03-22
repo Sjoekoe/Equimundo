@@ -20,7 +20,7 @@ class NotificationTransformer extends TransformerAbstract
             'message' => trans('notifications.' . $notification->type(), json_decode($notification->data(), true)),
             'is_read' => (bool) $notification->isRead(),
             'icon' => config('notifications.' . $notification->type()),
-            'formatted_date' => eqm_translated_date($notification->createdAt())->diffForHumans()
+            'created_at' => $notification->createdAt()->toIso8601String(),
         ];
     }
 

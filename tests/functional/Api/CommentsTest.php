@@ -34,7 +34,6 @@ class CommentsTest extends \TestCase
                         'like_count' => 0,
                         'can_delete_comment' => false,
                         'created_at' => $comment->createdAt()->toIso8601String(),
-                        'formatted_date' => eqm_translated_date($comment->createdAt())->diffForHumans(),
                         'user' => $this->includedUser($user),
                     ],
                 ],
@@ -54,13 +53,12 @@ class CommentsTest extends \TestCase
     /** @test */
     function it_can_create_a_comment()
     {
-        $now = new Carbon();
-
         $user = factory(EloquentUser::class)->create();
         $horse = factory(EloquentHorse::class)->create();
         $status = factory(EloquentStatus::class)->create([
             'horse_id' => $horse->id(),
         ]);
+        $now = new Carbon();
 
         $this->actingAs($user)
             ->post('/api/statuses/' . $status->id() . '/comments', [
@@ -71,7 +69,6 @@ class CommentsTest extends \TestCase
                     'body' => 'Foo',
                     'like_count' => 0,
                     'created_at' => $now->toIso8601String(),
-                    'formatted_date' => eqm_translated_date($now)->diffForHumans(),
                     'can_delete_comment' => true,
                     'user' => $this->includedUser($user),
                 ],
@@ -97,7 +94,6 @@ class CommentsTest extends \TestCase
                     'id' => $comment->id(),
                     'body' => $comment->body(),
                     'like_count' => 0,
-                    'formatted_date' => eqm_translated_date($comment->createdAt())->diffForHumans(),
                     'created_at' => $comment->createdAt()->toIso8601String(),
                     'can_delete_comment' => false,
                     'user' => $this->includedUser($user),
@@ -130,7 +126,6 @@ class CommentsTest extends \TestCase
                     'body' => $comment->body(),
                     'like_count' => 1,
                     'created_at' => $comment->createdAt()->toIso8601String(),
-                    'formatted_date' => eqm_translated_date($comment->createdAt())->diffForHumans(),
                     'can_delete_comment' => false,
                     'user' => $this->includedUser($user),
                     'likes' => [
@@ -175,7 +170,6 @@ class CommentsTest extends \TestCase
                     'body' => 'Foo',
                     'like_count' => 0,
                     'created_at' => $comment->createdAt()->toIso8601String(),
-                    'formatted_date' => eqm_translated_date($comment->createdAt())->diffForHumans(),
                     'can_delete_comment' => false,
                     'user' => $this->includedUser($user),
                 ],

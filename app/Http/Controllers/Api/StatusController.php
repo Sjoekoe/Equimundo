@@ -5,8 +5,8 @@ use EQM\Api\Statuses\Requests\StoreStatusRequest;
 use EQM\Api\Statuses\Requests\UpdateStatusRequest;
 use EQM\Api\Statuses\StatusTransformer;
 use EQM\Http\Controllers\Controller;
-use EQM\Models\Horses\HorseRepository;
 use EQM\Models\Statuses\Status;
+use EQM\Models\Statuses\StatusCreator;
 use EQM\Models\Statuses\StatusRepository;
 use League\Fractal\Manager;
 use League\Fractal\Resource\Item;
@@ -15,25 +15,18 @@ use League\Fractal\Serializer\DataArraySerializer;
 class StatusController extends Controller
 {
     /**
-     * @var \EQM\Models\Horses\HorseRepository
-     */
-    private $horses;
-
-    /**
      * @var \EQM\Models\Statuses\StatusRepository
      */
     private $statuses;
 
-    public function __construct(HorseRepository $horses, StatusRepository $statuses)
+    public function __construct(StatusRepository $statuses)
     {
-        $this->horses = $horses;
         $this->statuses = $statuses;
     }
 
-    public function store(StoreStatusRequest $request)
+    public function store(StoreStatusRequest $request, StatusCreator $creator)
     {
-        $horse = $this->horses->findById($request->get('horse_id'));
-        $status = $this->statuses->create($horse, $request->get('body'));
+        $status = $creator->create($request->all());
         $manager = new Manager();
         $manager->setSerializer(new DataArraySerializer());
         $collection  = new Item($status, new StatusTransformer());

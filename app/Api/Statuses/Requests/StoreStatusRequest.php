@@ -13,7 +13,7 @@ class StoreStatusRequest extends Request
     public function rules()
     {
         return [
-            'horse_id' => 'required',
+            'horse' => 'required',
             'body' => 'required',
         ];
     }

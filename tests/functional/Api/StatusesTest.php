@@ -27,7 +27,6 @@ class StatusesTest extends \TestCase
                         'id' => $status->id(),
                         'body' => $status->body(),
                         'created_at' => $status->createdAt()->toIso8601String(),
-                        'formatted_date' => eqm_translated_date($status->createdAt())->diffForHumans(),
                         'like_count' => 0,
                         'prefix' => trans('statuses.prefixes.' . $status->prefix()),
                         'liked_by_user' => false,
@@ -80,7 +79,6 @@ class StatusesTest extends \TestCase
                         'id' => $status->id(),
                         'body' => $status->body(),
                         'created_at' => $status->createdAt()->toIso8601String(),
-                        'formatted_date' => eqm_translated_date($status->createdAt())->diffForHumans(),
                         'like_count' => 0,
                         'prefix' => trans('statuses.prefixes.' . $status->prefix()),
                         'liked_by_user' => false,
@@ -124,14 +122,13 @@ class StatusesTest extends \TestCase
         $horse = $this->createHorse();
 
         $this->post('/api/statuses', [
-            'horse_id' => $horse->id(),
+            'horse' => $horse->id(),
             'body' => 'Foo',
         ])->seeJsonEquals([
             'data' => [
                 'id' => 1,
                 'body' => 'Foo',
                 'created_at' => Carbon::now()->toIso8601String(),
-                'formatted_date' => eqm_translated_date(Carbon::now())->diffForHumans(),
                 'like_count' => 0,
                 'prefix' => null,
                 'liked_by_user' => false,
@@ -172,7 +169,6 @@ class StatusesTest extends \TestCase
                     'id' => 1,
                     'body' => $status->body(),
                     'created_at' => $status->createdAt()->toIso8601String(),
-                    'formatted_date' => eqm_translated_date($status->createdAt())->diffForHumans(),
                     'like_count' => 0,
                     'prefix' => trans('statuses.prefixes.' . $status->prefix()),
                     'liked_by_user' => false,
@@ -274,7 +270,6 @@ class StatusesTest extends \TestCase
                     'id' => 1,
                     'body' => $status->body(),
                     'created_at' => $status->createdAt()->toIso8601String(),
-                    'formatted_date' => eqm_translated_date($status->createdAt())->diffForHumans(),
                     'like_count' => 1,
                     'prefix' => trans('statuses.prefixes.' . $status->prefix()),
                     'liked_by_user' => false,
@@ -333,7 +328,6 @@ class StatusesTest extends \TestCase
                 'id' => 1,
                 'body' => 'Foo',
                 'created_at' => $status->createdAt()->toIso8601String(),
-                'formatted_date' => eqm_translated_date($status->createdAt())->diffForHumans(),
                 'like_count' => 0,
                 'prefix' => trans('statuses.prefixes.' . $status->prefix()),
                 'liked_by_user' => false,

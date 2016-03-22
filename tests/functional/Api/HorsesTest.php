@@ -56,7 +56,6 @@ class HorsesTest extends \TestCase
                                 'id' => $status->id(),
                                 'body' => $status->body(),
                                 'created_at' => $status->createdAt()->toIso8601String(),
-                                'formatted_date' => eqm_translated_date($status->createdAt())->diffForHumans(),
                                 'prefix' => trans('statuses.prefixes.' . $status->prefix()),
                                 'like_count' => 0,
                                 'liked_by_user' => false,
