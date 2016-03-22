@@ -69,7 +69,7 @@ class StatusCreator
 
     private function addPicture(Horse $horse, Status $status, array $values)
     {
-        if (array_key_exists('picture', $values)) {
+        if (array_key_exists('picture', $values) && $values['picture'] !== 'undefined') {
             $picture = $this->uploader->uploadPicture($values['picture'], $horse);
 
             if (! $horse->getStandardAlbum(Album::TIMELINEPICTURES)) {
