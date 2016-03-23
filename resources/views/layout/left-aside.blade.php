@@ -54,6 +54,11 @@
         var user_id = {{ auth()->user()->id() }}
     </script>
 @endif
+<script>
+    var algolia_id = '{{ env('ALGOLIA_APP_ID') }}';
+    var algolia_app_id = '{{ env('ALGOLIA_ADMIN_API_KEY') }}';
+    var pusher = '{{ env('PUSHER_KEY') }}';
+</script>
 
 <!-- Scripts -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
