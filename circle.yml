@@ -8,9 +8,9 @@ machine:
     DB_PASSWORD:
     DB_DATABASE: circle_test
     MAIL_PRETEND: true
-    ALGOLIA_APP_ID: OJ8NJIHEDF
-    ALGOLIA_API_KEY: 652c42b3a74b7d765b7f3b815a7239da
-    ALGOLIA_ADMIN_API_KEY: 9b36e9cf7763324d8f87558ea3dc7aa0
+    ALGOLIA_APP_ID: 5RYYZNL0EP
+    ALGOLIA_API_KEY: f240cce69f80027ee10c10dc84eda3b9
+    ALGOLIA_ADMIN_API_KEY: 254f43ce04f5ebd75e7937bbf710deef
 dependencies:
   pre:
     - echo "memory_limit = 3000M" >> ~/.phpenv/versions/$(phpenv global)/etc/conf.d/memory.ini

@@ -22,7 +22,7 @@ module.exports = Vue.extend({
             this.notifications = notifications.data;
         }.bind(this));
 
-        this.pusher = new Pusher('50125ce9622090efbd5a');
+        this.pusher = new Pusher(window.pusher);
         this.pusherChannel = this.pusher.subscribe('user-' + window.user_id + '');
 
         this.pusherChannel.bind('EQM\\Events\\NotificationWasSent', function(response) {

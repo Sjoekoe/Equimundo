@@ -36,6 +36,11 @@
 <script>
     var user_id = {{ auth()->user()->id() }}
 </script>
+<script>
+    var algolia_id = '{{ env('ALGOLIA_APP_ID') }}'
+    var algolia_app_id = '{{ env('ALGOLIA_ADMIN_API_KEY') }}'
+    var pusher = '{{ env('PUSHER_KEY') }}';
+</script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
