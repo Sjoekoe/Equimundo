@@ -377,7 +377,7 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
      */
     public function firstName()
     {
-        return $this->first_name;
+        return ucwords(strtolower($this->first_name));
     }
 
     /**
@@ -385,7 +385,7 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
      */
     public function lastName()
     {
-        return $this->last_name;
+        return ucwords(strtolower($this->last_name));
     }
 
     /**

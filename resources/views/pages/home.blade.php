@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('content')
-    <div class="page-content">
+    <div id="page-content">
         <div class="row">
             <div class="col-lg-6 col-lg-offset-2">
                 @if (count($horses))
