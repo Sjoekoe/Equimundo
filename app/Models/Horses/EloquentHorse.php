@@ -49,7 +49,7 @@ class EloquentHorse extends Model implements Horse
      */
     public function name()
     {
-        return $this->name;
+        return ucfirst(strtolower($this->name));
     }
 
     /**
