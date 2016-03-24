@@ -15,6 +15,7 @@ new Vue({
         horsefeed: require('./components/statuses/horseFeed'),
         horsestatus: require('./components/statuses/horseDetailStatus'),
         userfeed: require('./components/statuses/userFeed'),
+        singlestatus: require('./components/statuses/singleStatus'),
         statuscreator: require('./components/statuses/statusCreator'),
     },
 });
