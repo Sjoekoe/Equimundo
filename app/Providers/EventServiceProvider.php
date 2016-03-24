@@ -12,6 +12,7 @@ use EQM\Events\UserRegistered;
 use EQM\Listeners\Events\EmailRegisteredUser;
 use EQM\Listeners\Events\NotifyCommentPoster;
 use EQM\Listeners\Events\NotifyHorseOwner;
+use EQM\Listeners\Events\NotifyOtherCommenters;
 use EQM\Listeners\Events\NotifyStatusPoster;
 use EQM\Listeners\Events\SendHorseFollowedNotification;
 use EQM\Listeners\Events\Statuses\Likes\EmailHorseOwner;
@@ -34,6 +35,7 @@ class EventServiceProvider extends ServiceProvider {
         ],
         CommentWasPosted::class => [
             NotifyStatusPoster::class,
+            NotifyOtherCommenters::class,
         ],
         HorseWasFollowed::class => [
             SendHorseFollowedNotification::class,
