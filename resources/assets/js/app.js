@@ -13,6 +13,7 @@ new Vue({
         notifications: require('./components/notifications/NotificationOverview'),
         searchbar: require('./components/search/SearchBar'),
         horsefeed: require('./components/statuses/horseFeed'),
+        horsestatus: require('./components/statuses/horseDetailStatus'),
         userfeed: require('./components/statuses/userFeed'),
         statuscreator: require('./components/statuses/statusCreator'),
     },

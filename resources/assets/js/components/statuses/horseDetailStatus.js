@@ -1,47 +1,32 @@
 var Vue = require('vue');
 
 module.exports = Vue.extend({
-    template: '#status-creator',
+    template: '#horse-status-template',
 
-    props: ['statuscreator'],
+    props: ['horsestatus'],
 
     data: function() {
-       return {
-           options: [],
-           statuses: [],
-           currentPicture: '',
-           selected: '',
-           selectedId: '',
-           image: '',
-           body: '',
-           submitting: false,
-           errors: [],
-           commenting: false,
-           upload: '',
-           newComment: {
-               comment: {
+        return {
+            body: '',
+            submitting: false,
+            statuses: [],
+            errors: [],
+            commenting: false,
+            upload: '',
+            image: '',
+            newComment: {
+                comment: {
 
-               },
-           },
-       }
+                },
+            },
+        }
     },
 
     ready: function() {
-        $.getJSON('/api/users/' + window.user_id + '/horses', function(horses) {
-            this.options = horses.data;
-            this.selected = horses.data[0].name;
-            this.selectedId = horses.data[0].id;
-            this.currentPicture = horses.data[0].profile_picture;
-        }.bind(this));
+
     },
 
     methods: {
-        changeImage: function() {
-            $.getJSON('/api/horses/' + this.selected, function(horse) {
-                this.currentPicture = horse.data.profile_picture;
-            }.bind(this));
-        },
-
         submit: function(e) {
             e.preventDefault();
             this.submitting = true;
@@ -49,7 +34,7 @@ module.exports = Vue.extend({
             var file = form.files[0];
             var formData = new FormData();
             formData.append('body', this.body);
-            formData.append('horse', this.selected);
+            formData.append('horse', window.horse_id);
             this.image ? formData.append('picture', file) : formData.append('picture', 'undefined');
             var vm = this;
 
