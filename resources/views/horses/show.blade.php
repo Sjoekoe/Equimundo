@@ -5,7 +5,7 @@
         @include('layout.partials.heading')
 
         <div class="col-lg-7 col-lg-offset-2">
-            @if (auth()->user()->isInHorseTeam($horse))
+            @if (auth()->check() && auth()->user()->isInHorseTeam($horse))
                 <horsestatus></horsestatus>
 
                 <template id="horse-status-template">
