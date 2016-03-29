@@ -10,7 +10,7 @@ use League\Fractal\TransformerAbstract;
 class StatusTransformer extends TransformerAbstract
 {
     protected $defaultIncludes = [
-        'horse',
+        'horseRelation',
         'comments',
         'likes',
     ];
@@ -29,9 +29,9 @@ class StatusTransformer extends TransformerAbstract
         ];
     }
 
-    public function includeHorse(Status $status)
+    public function includeHorseRelation(Status $status)
     {
-        return $this->item($status->horse()->first(), new HorseTransformer());
+        return $this->item($status->horse(), new HorseTransformer());
     }
 
     public function includeComments(Status $status)

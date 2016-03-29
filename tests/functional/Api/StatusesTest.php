@@ -35,7 +35,7 @@ class StatusesTest extends \TestCase
                         'comments' => [
                             'data' => [],
                         ],
-                        'horse' => [
+                        'horseRelation' => [
                             'data' => [
                                 'id' => $horse->id(),
                                 'name' => $horse->name(),
@@ -87,7 +87,7 @@ class StatusesTest extends \TestCase
                         'comments' => [
                             'data' => [],
                         ],
-                        'horse' => [
+                        'horseRelation' => [
                             'data' => [
                                 'id' => $horse->id(),
                                 'name' => $horse->name(),
@@ -137,7 +137,7 @@ class StatusesTest extends \TestCase
                     'data' => [],
                 ],
                 'picture' => null,
-                'horse' => [
+                'horseRelation' => [
                     'data' => [
                         'id' => $horse->id(),
                         'name' => $horse->name(),
@@ -177,7 +177,7 @@ class StatusesTest extends \TestCase
                         'data' => [],
                     ],
                     'picture' => null,
-                    'horse' => [
+                    'horseRelation' => [
                         'data' => [
                             'id' => $horse->id(),
                             'name' => $horse->name(),
@@ -234,7 +234,7 @@ class StatusesTest extends \TestCase
                             ],
                         ],
                     ],
-                    'horse' => [
+                    'horseRelation' => [
                         'data' => [
                             'id' => $horse->id(),
                             'name' => $horse->name(),
@@ -278,7 +278,7 @@ class StatusesTest extends \TestCase
                         'data' => [],
                     ],
                     'picture' => null,
-                    'horse' => [
+                    'horseRelation' => [
                         'data' => [
                             'id' => $horse->id(),
                             'name' => $horse->name(),
@@ -336,7 +336,7 @@ class StatusesTest extends \TestCase
                     'data' => [],
                 ],
                 'picture' => null,
-                'horse' => [
+                'horseRelation' => [
                     'data' => [
                         'id' => $horse->id(),
                         'name' => $horse->name(),

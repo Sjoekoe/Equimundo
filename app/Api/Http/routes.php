@@ -18,6 +18,7 @@ $api->version('v1', function(Router $api) {
         $api->get('/statuses/{status}', ['as' => 'api.statuses.show', 'uses' => 'StatusController@show']);
         $api->put('/statuses/{status}', ['as' => 'api.statuses.update', 'uses' => 'StatusController@update']);
         $api->delete('/statuses/{status}', ['as' => 'api.statuses.delete', 'uses' => 'StatusController@delete']);
+        $api->post('/statuses/{status}/like', ['as' => 'status.like', 'uses' => 'LikeController@like', 'middleware' => 'auth']);
 
         $api->get('/statuses/{status}/comments', ['as' => 'api.comments.index', 'uses' => 'CommentController@index']);
         $api->post('/statuses/{status}/comments', ['as' => 'api.comments.store', 'uses' => 'CommentController@store']);

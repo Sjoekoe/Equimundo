@@ -43,6 +43,8 @@ class LikeHandler
 
             $this->dispatcher->fire(new StatusLiked($status, $user, Notification::STATUS_LIKED, $data));
         }
+
+        return $status;
     }
 
     public function handleComment(Comment $comment, User $user)

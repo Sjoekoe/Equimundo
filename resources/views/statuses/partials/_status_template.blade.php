@@ -1,8 +1,8 @@
 <div class="panel" v-for="status in statuses">
     <div class="panel-body">
         <div class="media-block">
-            <a href="/horses/@{{ status.horse.data.slug }}" class="media-left">
-                <img v-bind:src="status.horse.data.profile_picture" alt="" class="img-circle img-sm">
+            <a href="/horses/@{{ status.horseRelation.data.slug }}" class="media-left">
+                <img v-bind:src="status.horseRelation.data.profile_picture" alt="" class="img-circle img-sm">
             </a>
             <div class="media-body">
                 <div class="mar-btm">
@@ -18,8 +18,8 @@
                             </ul>
                         </div>
                     </div>
-                    <a href="/horses/@{{ status.horse.data.slug }}" class="btn-link text-semibold media-heading box-inline text-mint">
-                        @{{ status.horse.data.name }}
+                    <a href="/horses/@{{ status.horseRelation.data.slug }}" class="btn-link text-semibold media-heading box-inline text-mint">
+                        @{{ status.horseRelation.data.name }}
                     </a>
                     <span class="text-semibold text-muted" v-if="status.prefix"> - @{{ status.prefix }}</span>
                     <p class="text-muted text-sm">
