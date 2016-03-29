@@ -25,5 +25,6 @@
         <env name="DB_DATABASE" value="equimundo_testing"/>
         <env name="CACHE_DRIVER" value="array"/>
         <env name="SESSION_DRIVER" value="array"/>
+        <env name="API_DEBUG" value="false"/>
     </php>
 </phpunit>

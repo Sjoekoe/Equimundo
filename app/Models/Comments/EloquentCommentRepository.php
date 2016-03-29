@@ -45,7 +45,7 @@ class EloquentCommentRepository implements CommentRepository
         $comment = new EloquentComment();
         $comment->status_id = $status->id();
         $comment->body = (new StatusConvertor())->convert($body);
-        $comment->user_id = $user->id;
+        $comment->user_id = $user->id();
 
         $comment->save();
 

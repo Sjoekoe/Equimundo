@@ -5,35 +5,35 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateHorsesTable extends Migration {
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-		Schema::create('horses', function(Blueprint $table) {
-			$table->increments('id');
-			$table->string('name');
-			$table->string('gender');
-			$table->integer('breed');
-			$table->string('height');
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('horses', function(Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->string('gender');
+            $table->integer('breed');
+            $table->string('height');
             $table->dateTime('date_of_birth')->nullable();
-			$table->string('color');
-			$table->string('life_number')->nullable();
+            $table->string('color');
+            $table->string('life_number')->nullable();
             $table->string('slug');
             $table->timestamps();
-		});
-	}
+        });
+    }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		Schema::drop('horses');
-	}
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('horses');
+    }
 
 }

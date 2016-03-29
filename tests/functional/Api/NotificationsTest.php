@@ -97,6 +97,16 @@ class NotificationsTest extends \TestCase
                         'sender' => $this->includedUser($otherUser),
                     ],
                 ],
+                'meta' => [
+                    'pagination' => [
+                        'count' => 1,
+                        'current_page' => 1,
+                        'links' => [],
+                        'per_page' => 25,
+                        'total' => 1,
+                        'total_pages' => 1,
+                    ],
+                ]
             ]);
     }
 

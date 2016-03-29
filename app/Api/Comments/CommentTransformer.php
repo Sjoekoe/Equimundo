@@ -17,7 +17,7 @@ class CommentTransformer extends TransformerAbstract
         return [
             'id' => $comment->id(),
             'body' => $comment->body(),
-            'like_count' =>count($comment->likes()),
+            'like_count' => count($comment->likes()->get()),
             'created_at' => $comment->createdAt()->toIso8601String(),
             'can_delete_comment' => auth()->check() ? auth()->user()->can('delete-comment', $comment) : false,
         ];
@@ -30,6 +30,6 @@ class CommentTransformer extends TransformerAbstract
 
     public function includeLikes(Comment $comment)
     {
-        return count($comment->likes()) ? $this->collection($comment->likes(), new UserTransformer()) : null;
+        return $this->collection($comment->likes()->get(), new UserTransformer());
     }
 }

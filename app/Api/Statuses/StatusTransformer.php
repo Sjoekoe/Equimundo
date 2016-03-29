@@ -20,7 +20,7 @@ class StatusTransformer extends TransformerAbstract
         return [
             'id' => $status->id(),
             'body' => $status->body(),
-            'like_count' => count($status->likes()),
+            'like_count' => count($status->likes()->get()),
             'created_at' => $status->createdAt()->toIso8601String(),
             'prefix' => $status->prefix() ? trans('statuses.prefixes.' . $status->prefix()) : null,
             'liked_by_user' => auth()->check() ? $status->isLikedByUser(auth()->user()) : false,
@@ -31,16 +31,16 @@ class StatusTransformer extends TransformerAbstract
 
     public function includeHorse(Status $status)
     {
-        return $this->item($status->horse(), new HorseTransformer());
+        return $this->item($status->horse()->first(), new HorseTransformer());
     }
 
     public function includeComments(Status $status)
     {
-        return $this->collection($status->comments(), new CommentTransformer());
+        return $this->collection($status->comments()->get(), new CommentTransformer());
     }
 
     public function includeLikes(Status $status)
     {
-        return count($status->likes()) ? $this->collection($status->likes(), new UserTransformer()) : null;
+        return count($status->likes()->get()) ? $this->collection($status->likes()->get(), new UserTransformer()) : null;
     }
 }

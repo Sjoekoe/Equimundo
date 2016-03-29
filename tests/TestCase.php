@@ -34,7 +34,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
     {
         parent::setUp();
 
-        $this->artisan('migrate:reset');
+        $this->artisan('migrate:refresh');
         $this->artisan('migrate');
     }
 
@@ -57,6 +57,16 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
             'slug' => 'john.doe',
             'unread_notifications' => 0,
         ], $attributes));
+    }
+
+    /**
+     * @param $id
+     * @return \EQM\Models\Users\User
+     */
+    protected function findUser($id)
+    {
+        $users = app(\EQM\Models\Users\UserRepository::class);
+        return $users->findById($id);
     }
 
     /**

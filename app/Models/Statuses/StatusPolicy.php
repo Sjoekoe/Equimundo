@@ -12,6 +12,6 @@ class StatusPolicy
      */
     public function authorize(User $user, Status $status)
     {
-        return $user->isInHorseTeam($status->horse());
+        return $user->isInHorseTeam($status->horse()->first());
     }
 }

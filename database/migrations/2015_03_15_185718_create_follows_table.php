@@ -5,13 +5,13 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateFollowsTable extends Migration {
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
         Schema::create('follows', function(Blueprint $table)
         {
             $table->increments('id');
@@ -21,16 +21,15 @@ class CreateFollowsTable extends Migration {
             $table->foreign('horse_id')->references('id')->on('horses')->onDelete('cascade');
             $table->timestamps();
         });
-	}
+    }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		Schema::drop('follows');
-	}
-
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('follows');
+    }
 }

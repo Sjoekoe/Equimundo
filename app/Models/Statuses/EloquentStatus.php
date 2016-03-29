@@ -28,7 +28,7 @@ class EloquentStatus extends Model implements Status
      */
     public function horse()
     {
-        return $this->belongsTo(EloquentHorse::class)->first();
+        return $this->belongsTo(EloquentHorse::class);
     }
 
     /**
@@ -44,7 +44,7 @@ class EloquentStatus extends Model implements Status
      */
     public function comments()
     {
-        return $this->hasMany(EloquentComment::class, 'status_id', 'id')->get();
+        return $this->hasMany(EloquentComment::class, 'status_id', 'id');
     }
 
     /**
@@ -52,7 +52,7 @@ class EloquentStatus extends Model implements Status
      */
     public function likes()
     {
-        return $this->belongsToMany(EloquentUser::class, 'likes', 'status_id', 'user_id')->get();
+        return $this->belongsToMany(EloquentUser::class, 'likes', 'status_id', 'user_id');
     }
 
     /**

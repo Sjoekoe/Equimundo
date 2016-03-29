@@ -46,7 +46,7 @@ class EloquentNotification extends Model implements Notification
      */
     public function sender()
     {
-        return $this->hasOne(EloquentUser::class, 'id', 'sender_id')->first();
+        return $this->hasOne(EloquentUser::class, 'id', 'sender_id');
     }
 
     /**
@@ -54,7 +54,7 @@ class EloquentNotification extends Model implements Notification
     */
     public function receiver()
     {
-        return $this->hasOne(EloquentUser::class, 'id', 'receiver_id')->first();
+        return $this->hasOne(EloquentUser::class, 'id', 'receiver_id');
     }
 
     /**

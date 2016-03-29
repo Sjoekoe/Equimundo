@@ -4,9 +4,6 @@ namespace functional\Api;
 use Carbon\Carbon;
 use EQM\Core\Testing\DefaultIncludes;
 use EQM\Models\Comments\EloquentComment;
-use EQM\Models\Horses\EloquentHorse;
-use EQM\Models\Statuses\EloquentStatus;
-use EQM\Models\Users\EloquentUser;
 
 class CommentsTest extends \TestCase
 {
@@ -15,9 +12,9 @@ class CommentsTest extends \TestCase
     /** @test */
     function it_can_get_all_comments_for_a_status()
     {
-        $user = factory(EloquentUser::class)->create();
-        $horse = factory(EloquentHorse::class)->create();
-        $status = factory(EloquentStatus::class)->create([
+        $user = $this->createUser();
+        $horse = $this->createHorse();
+        $status = $this->createStatus([
             'horse_id' => $horse->id(),
         ]);
         $comment = factory(EloquentComment::class)->create([
@@ -35,6 +32,9 @@ class CommentsTest extends \TestCase
                         'can_delete_comment' => false,
                         'created_at' => $comment->createdAt()->toIso8601String(),
                         'user' => $this->includedUser($user),
+                        'likes' => [
+                            'data' => [],
+                        ],
                     ],
                 ],
                 'meta' => [
@@ -53,9 +53,9 @@ class CommentsTest extends \TestCase
     /** @test */
     function it_can_create_a_comment()
     {
-        $user = factory(EloquentUser::class)->create();
-        $horse = factory(EloquentHorse::class)->create();
-        $status = factory(EloquentStatus::class)->create([
+        $user = $this->createUser();
+        $horse = $this->createHorse();
+        $status = $this->createStatus([
             'horse_id' => $horse->id(),
         ]);
         $now = new Carbon();
@@ -71,6 +71,9 @@ class CommentsTest extends \TestCase
                     'created_at' => $now->toIso8601String(),
                     'can_delete_comment' => true,
                     'user' => $this->includedUser($user),
+                    'likes' => [
+                        'data' => [],
+                    ],
                 ],
             ]);
     }
@@ -78,9 +81,9 @@ class CommentsTest extends \TestCase
     /** @test */
     function it_can_show_a_comment()
     {
-        $user = factory(EloquentUser::class)->create();
-        $horse = factory(EloquentHorse::class)->create();
-        $status = factory(EloquentStatus::class)->create([
+        $user = $this->createUser();
+        $horse = $this->createHorse();
+        $status = $this->createStatus([
             'horse_id' => $horse->id(),
         ]);
         $comment = factory(EloquentComment::class)->create([
@@ -97,6 +100,9 @@ class CommentsTest extends \TestCase
                     'created_at' => $comment->createdAt()->toIso8601String(),
                     'can_delete_comment' => false,
                     'user' => $this->includedUser($user),
+                    'likes' => [
+                        'data' => [],
+                    ],
                 ],
             ]);
     }
@@ -106,7 +112,7 @@ class CommentsTest extends \TestCase
     {
         $user = $this->createUser();
         $horse = $this->createHorse();
-        $status = factory(EloquentStatus::class)->create([
+        $status = $this->createStatus([
             'horse_id' => $horse->id(),
         ]);
         $comment = factory(EloquentComment::class)->create([
@@ -154,7 +160,7 @@ class CommentsTest extends \TestCase
     {
         $user = $this->createUser();
         $horse = $this->createHorse();
-        $status = factory(EloquentStatus::class)->create([
+        $status = $this->createStatus([
             'horse_id' => $horse->id(),
         ]);
         $comment = factory(EloquentComment::class)->create([
@@ -172,6 +178,9 @@ class CommentsTest extends \TestCase
                     'created_at' => $comment->createdAt()->toIso8601String(),
                     'can_delete_comment' => false,
                     'user' => $this->includedUser($user),
+                    'likes' => [
+                        'data' => [],
+                    ],
                 ],
             ]);
     }
@@ -179,9 +188,9 @@ class CommentsTest extends \TestCase
     /** @test */
     function it_can_delete_a_comment()
     {
-        $user = factory(EloquentUser::class)->create();
-        $horse = factory(EloquentHorse::class)->create();
-        $status = factory(EloquentStatus::class)->create([
+        $user = $this->createUser();
+        $horse = $this->createHorse();
+        $status = $this->createStatus([
             'horse_id' => $horse->id(),
         ]);
         $comment = factory(EloquentComment::class)->create([
