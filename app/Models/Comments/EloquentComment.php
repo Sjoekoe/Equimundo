@@ -35,12 +35,17 @@ class EloquentComment extends Model implements Comment
         return $this->body;
     }
 
+    public function user()
+    {
+        return $this->belongsTo(EloquentUser::class, 'user_id', 'id');
+    }
+
     /**
      * @return \EQM\Models\Users\User
      */
     public function poster()
     {
-        return $this->belongsTo(EloquentUser::class, 'user_id', 'id')->first();
+        return $this->user()->first();
     }
 
     /**
@@ -56,7 +61,7 @@ class EloquentComment extends Model implements Comment
      */
     public function likes()
     {
-        return $this->belongsToMany(EloquentUser::class, 'comment_likes', 'comment_id', 'user_id')->get();
+        return $this->belongsToMany(EloquentUser::class, 'comment_likes', 'comment_id', 'user_id');
     }
 
     /**

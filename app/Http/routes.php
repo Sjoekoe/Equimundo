@@ -7,8 +7,9 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'admin'], function() {
     require __DIR__ . '/Routes/Admin/searches.php';
 });
 
-Route::group(['namespace' => 'Api'], function() {
-    require __DIR__ . '/Routes/Api/api.php';
+// The routes below are used for the Api endpoints.
+Route::group(['namespace' => 'Api'], function () {
+    require __DIR__ . '/../Api/Http/routes.php';
 });
 
 Route::group(['namespace' => 'Albums'], function() {

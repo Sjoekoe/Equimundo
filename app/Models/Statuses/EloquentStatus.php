@@ -23,6 +23,11 @@ class EloquentStatus extends Model implements Status
      */
     protected $fillable = ['body', 'prefix', 'horse_id'];
 
+    public function horseRelation()
+    {
+        return $this->belongsTo(EloquentHorse::class);
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -44,7 +49,7 @@ class EloquentStatus extends Model implements Status
      */
     public function comments()
     {
-        return $this->hasMany(EloquentComment::class, 'status_id', 'id')->get();
+        return $this->hasMany(EloquentComment::class, 'status_id', 'id');
     }
 
     /**
@@ -52,7 +57,7 @@ class EloquentStatus extends Model implements Status
      */
     public function likes()
     {
-        return $this->belongsToMany(EloquentUser::class, 'likes', 'status_id', 'user_id')->get();
+        return $this->belongsToMany(EloquentUser::class, 'likes', 'status_id', 'user_id');
     }
 
     /**

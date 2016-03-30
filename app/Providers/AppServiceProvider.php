@@ -36,11 +36,13 @@ class AppServiceProvider extends ServiceProvider {
             'EQM\Services\Registrar'
         );
 
-        $this->app->singleton(SearchEngine::class, function() {
-            return new AlgoliaSearchEngine(
-                new Client(env('ALGOLIA_APP_ID'), env('ALGOLIA_ADMIN_API_KEY'))
-            );
-        });
+        if (! $this->app->environment('testing')) {
+            $this->app->singleton(SearchEngine::class, function() {
+                return new AlgoliaSearchEngine(
+                    new Client(env('ALGOLIA_APP_ID'), env('ALGOLIA_ADMIN_API_KEY'))
+                );
+            });
+        }
     }
 
 }

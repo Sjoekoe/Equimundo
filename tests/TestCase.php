@@ -56,7 +56,18 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
             'gender' => 'M',
             'slug' => 'john.doe',
             'unread_notifications' => 0,
+            'timezone' => 'Europe/Brussels',
         ], $attributes));
+    }
+
+    /**
+     * @param $id
+     * @return \EQM\Models\Users\User
+     */
+    protected function findUser($id)
+    {
+        $users = app(\EQM\Models\Users\UserRepository::class);
+        return $users->findById($id);
     }
 
     /**

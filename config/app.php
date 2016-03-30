@@ -145,10 +145,14 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Jenssegers\Date\DateServiceProvider::class,
         EQM\Core\Dates\DateServiceProvider::class,
+        EQM\Core\JWT\JWTServiceProvider::class,
         EQM\Http\HttpServiceProvider::class,
         Bugsnag\BugsnagLaravel\BugsnagLaravelServiceProvider::class,
         Stevebauman\Location\LocationServiceProvider::class,
         AlgoliaSearch\Laravel\AlgoliaServiceProvider::class,
+        Dingo\Api\Provider\LaravelServiceProvider::class,
+        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+        EQM\Api\ApiServiceProvider::class,
 
         /*
          * Model Service Providers
@@ -225,5 +229,8 @@ return [
         'Active'    => HieuLe\Active\Facades\Active::class,
         'Bugsnag' => Bugsnag\BugsnagLaravel\BugsnagFacade::class,
         'Location' => Stevebauman\Location\Facades\Location::class,
+
+        // EQM Facades
+        'Info' => \EQM\Core\Info\Facades\Info::class,
     ],
 ];

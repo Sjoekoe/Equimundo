@@ -34,6 +34,7 @@ class EloquentUserRepository implements UserRepository
             'password' => bcrypt($values['password']),
             'activation_key' => $values['activationCode'],
             'language' => 'en',
+            'timezone' => 'UTC',
             'gender' => $values['gender'],
             'slug' => (new SlugCreator())->createForUser($values['first_name'], $values['last_name']),
             'date_of_birth' => $values['date_of_birth'],
@@ -77,6 +78,32 @@ class EloquentUserRepository implements UserRepository
         $user->facebook = array_get($values, 'facebook');
         $user->twitter = array_get($values, 'twitter');
         $user->website = array_get($values, 'website');
+
+        $user->save();
+
+        return $user;
+    }
+
+    /**
+     * @param \EQM\Models\Users\User $user
+     * @param array $values
+     * @return \EQM\Models\Users\User
+     */
+    public function updateSettings(User $user, array $values)
+    {
+        if (array_key_exists('email_notifications', $values)) {
+            $user->email_notifications = true;
+        } else {
+            $user->email_notifications = false;
+        }
+
+        if (array_key_exists('language', $values)) {
+            $user->language = $values['language'];
+        }
+
+        if (array_key_exists('timezone', $values)) {
+            $user->timezone = $values['timezone'];
+        }
 
         $user->save();
 

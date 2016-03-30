@@ -26,11 +26,11 @@ class NotificationTransformer extends TransformerAbstract
 
     public function includeSender(Notification $notification)
     {
-        return $this->item($notification->sender(), new UserTransformer());
+        return $this->item($notification->sender()->first(), new UserTransformer());
     }
 
     public function includeReceiver(Notification $notification)
     {
-        return $this->item($notification->receiver(), new UserTransformer());
+        return $this->item($notification->receiver()->first(), new UserTransformer());
     }
 }

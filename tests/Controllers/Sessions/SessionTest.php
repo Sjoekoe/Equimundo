@@ -69,7 +69,7 @@ class SessionTest extends \TestCase
     /** @test */
     public function logout()
     {
-        $user = factory(EloquentUser::class)->create();
+        $user = $this->createUser();
 
         $this->actingAs($user)
             ->withSession(['foo' => 'bar'])

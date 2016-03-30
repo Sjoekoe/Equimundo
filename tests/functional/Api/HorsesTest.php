@@ -63,7 +63,7 @@ class HorsesTest extends \TestCase
                                 'comments' => [
                                     'data' => []
                                 ],
-                                'horse' => [
+                                'horseRelation' => [
                                     'data' => [
                                         'id' => $horse->id(),
                                         'name' => $horse->name(),
