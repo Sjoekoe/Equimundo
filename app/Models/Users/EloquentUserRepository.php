@@ -85,6 +85,32 @@ class EloquentUserRepository implements UserRepository
 
     /**
      * @param \EQM\Models\Users\User $user
+     * @param array $values
+     * @return \EQM\Models\Users\User
+     */
+    public function updateSettings(User $user, array $values)
+    {
+        if (array_key_exists('email_notifications', $values)) {
+            $user->email_notifications = true;
+        } else {
+            $user->email_notifications = false;
+        }
+
+        if (array_key_exists('language', $values)) {
+            $user->language = $values['language'];
+        }
+
+        if (array_key_exists('timezone', $values)) {
+            $user->timezone = $values['timezone'];
+        }
+
+        $user->save();
+
+        return $user;
+    }
+
+    /**
+     * @param \EQM\Models\Users\User $user
      */
     public function delete(User $user)
     {

@@ -55,7 +55,8 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
         'facebook',
         'website',
         'activation_key',
-        'slug'
+        'slug',
+        'timezone'
     ];
 
     /**
@@ -516,5 +517,13 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
     public function unreadNotifications()
     {
         return (int) $this->unread_notifications;
+    }
+
+    /**
+     * @return string
+     */
+    public function timezone()
+    {
+        return $this->timezone;
     }
 }

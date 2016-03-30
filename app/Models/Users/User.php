@@ -245,4 +245,9 @@ interface User
      * @return int
      */
     public function unreadNotifications();
+
+    /**
+     * @return string
+     */
+    public function timezone();
 }

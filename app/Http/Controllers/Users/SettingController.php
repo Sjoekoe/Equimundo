@@ -39,9 +39,9 @@ class SettingController extends Controller
         return view('users.settings.index');
     }
 
-    public function update(Request $request, SettingsUpdater $updater)
+    public function update(Request $request)
     {
-        $updater->update(auth()->user(), $request);
+        $this->users->updateSettings(auth()->user(), $request->all());
 
         session()->put('success', 'Settings saved');
 

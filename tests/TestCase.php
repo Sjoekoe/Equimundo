@@ -34,7 +34,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
     {
         parent::setUp();
 
-        $this->artisan('migrate:refresh');
+        $this->artisan('migrate:reset');
         $this->artisan('migrate');
     }
 

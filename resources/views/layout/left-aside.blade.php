@@ -33,20 +33,11 @@
 <body>
 <div id="container" class="effect mainnav-out aside-in aside-left aside-bright">
     @include('layout.partials.nav')
-    @if (auth()->check())
-        <div class="boxed">
-
-            <!--CONTENT CONTAINER-->
-            <!--===================================================-->
-            <div id="content-container">
-                @include('layout.partials._search_bar')
-                @include('layout.partials._flash_messages')
-                @yield('content')
-            </div>
+    <div class="boxed">
+        <div id="content-container">
+            @yield('content')
         </div>
-    @else
-        @yield('content')
-    @endif
+    </div>
 </div>
 
 @if (auth()->check())
@@ -64,6 +55,7 @@
 @include('layout.partials._info')
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/typeahead.js/0.11.1/typeahead.jquery.min.js"></script>
 <script src="/js/all.js"></script>
 <script src="/js/app.js"></script>
 @if (auth()->check() && App::environment('production'))

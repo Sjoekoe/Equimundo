@@ -17,13 +17,19 @@
                         <div class="form-group">
                             {{ Form::label('email_notifications', trans('forms.labels.email_notifications'), ['class' => 'col-sm-3 control-label']) }}
                             <div class="col-sm-9">
-                                {{ Form::checkbox('email_notifications', 'email_notifications', Auth::user()->email_notifications, ['id' => 'email_notifications', 'class' => 'js-switchery form-control']) }}
+                                {{ Form::checkbox('email_notifications', 'email_notifications', auth()->user()->email_notifications, ['id' => 'email_notifications', 'class' => 'js-switchery form-control']) }}
                             </div>
                         </div>
                         <div class="form-group">
                             {{ Form::label('language', trans('forms.labels.language'), ['class' => 'col-sm-3 control-label']) }}
                             <div class="col-sm-9">
-                                {{ Form::select('language', config('languages'), Auth::user()->language(), ['class' => 'form-control selectPicker']) }}
+                                {{ Form::select('language', config('languages'), auth()->user()->language(), ['class' => 'form-control selectPicker']) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ Form::label('timezone', trans('forms.labels.language'), ['class' => 'col-sm-3 control-label']) }}
+                            <div class="col-sm-9">
+                                {{ Form::select('timezone', trans('timezones'), auth()->user()->timezone(), ['class' => 'form-control selectPicker']) }}
                             </div>
                         </div>
                     </div>
