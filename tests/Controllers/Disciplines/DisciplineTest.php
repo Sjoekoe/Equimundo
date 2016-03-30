@@ -13,7 +13,7 @@ class DisciplineTest extends \TestCase
     /** @test */
     function visitDisciplinesPage()
     {
-        $user = factory(EloquentUser::class)->create([]);
+        $user = $this->createUser();
         $horse = factory(EloquentHorse::class)->create([]);
         factory(EloquentHorseTeam::class)->create([
             'user_id' => $user->id(),

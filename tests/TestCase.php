@@ -56,6 +56,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
             'gender' => 'M',
             'slug' => 'john.doe',
             'unread_notifications' => 0,
+            'timezone' => 'Europe/Brussels',
         ], $attributes));
     }
 

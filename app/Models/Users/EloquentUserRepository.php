@@ -34,6 +34,7 @@ class EloquentUserRepository implements UserRepository
             'password' => bcrypt($values['password']),
             'activation_key' => $values['activationCode'],
             'language' => 'en',
+            'timezone' => 'UTC',
             'gender' => $values['gender'],
             'slug' => (new SlugCreator())->createForUser($values['first_name'], $values['last_name']),
             'date_of_birth' => $values['date_of_birth'],

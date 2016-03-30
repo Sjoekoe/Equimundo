@@ -17,7 +17,7 @@ class PedigreeTest extends \TestCase
     /** @test */
     function it_can_show_the_pedigree_page()
     {
-        $user = factory(EloquentUser::class)->create();
+        $user = $this->createUser();
         $horse = factory(EloquentHorse::class)->create([
             'gender' => Horse::MARE,
         ]);
