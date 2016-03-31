@@ -42,11 +42,27 @@ class EloquentNotification extends Model implements Notification
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function senderRelation()
+    {
+        return $this->hasOne(EloquentUser::class, 'id', 'sender_id');
+    }
+
+    /**
      * @return \EQM\Models\Users\User
      */
     public function sender()
     {
-        return $this->hasOne(EloquentUser::class, 'id', 'sender_id');
+        return $this->senderRelation()->first();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function receiverRelation()
+    {
+        return $this->hasOne(EloquentUser::class, 'id', 'receiver_id');
     }
 
     /**
@@ -54,7 +70,7 @@ class EloquentNotification extends Model implements Notification
     */
     public function receiver()
     {
-        return $this->hasOne(EloquentUser::class, 'id', 'receiver_id');
+        return $this->receiverRelation()->first();
     }
 
     /**

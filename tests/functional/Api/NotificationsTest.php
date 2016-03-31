@@ -43,8 +43,8 @@ class NotificationsTest extends \TestCase
                         'is_read' => false,
                         'icon' => 'fa-thumbs-o-up',
                         'created_at' => $now->toIso8601String(),
-                        'receiver' => $this->includedUser($user),
-                        'sender' => $this->includedUser($otherUser),
+                        'receiverRelation' => $this->includedUser($user),
+                        'senderRelation' => $this->includedUser($otherUser),
                     ],
                 ],
                 'meta' => [
@@ -93,8 +93,8 @@ class NotificationsTest extends \TestCase
                         'is_read' => true,
                         'icon' => 'fa-thumbs-o-up',
                         'created_at' => $now->toIso8601String(),
-                        'receiver' => $this->includedUser($user),
-                        'sender' => $this->includedUser($otherUser),
+                        'receiverRelation' => $this->includedUser($user),
+                        'senderRelation' => $this->includedUser($otherUser),
                     ],
                 ],
                 'meta' => [
@@ -142,8 +142,8 @@ class NotificationsTest extends \TestCase
                     'is_read' => false,
                     'icon' => 'fa-thumbs-o-up',
                     'created_at' => $now->toIso8601String(),
-                    'receiver' => $this->includedUser($user),
-                    'sender' => $this->includedUser($otherUser),
+                    'receiverRelation' => $this->includedUser($user),
+                    'senderRelation' => $this->includedUser($otherUser),
                 ],
             ]);
     }
