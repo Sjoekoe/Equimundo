@@ -36,6 +36,24 @@
                                 </span>
                             </a>
                         </li>
+                        <li class="{{ Active::route('admin.advertisements.companies.index', 'active-sub') }}">
+                            <a href="#">
+                                <i class="fa fa-money"></i>
+                                <span class="menu-title">
+                                    <strong>Advertisers</strong>
+                                </span>
+                                <i class="arrow"></i>
+                            </a>
+                            <ul class="collapse">
+                                <li><a href="#">Overview</a></li>
+                                <li class="{{ Active::route('admin.advertisements.companies.index', 'active-link') }}">
+                                    <a href="{{ route('admin.advertisements.companies.index') }}">
+                                        Companies
+                                    </a>
+                                </li>
+                                <li><a href="#">Advertisements</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
