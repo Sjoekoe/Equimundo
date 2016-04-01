@@ -197,6 +197,11 @@
                 @endif
             </div>
             <div class="col-md-2">
+                <a href="http://www.jumpingantwerpen.be" target="_blank">
+                    <div class="panel">
+                        <div class="panel-bg-cover" style="height: 150px; background-image: url({{ asset('images/jumping-a.png') }})"></div>
+                    </div>
+                </a>
                 <div class="panel">
                     <div class="panel-heading">
                         <h3 class="panel-title">

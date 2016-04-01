@@ -5,6 +5,8 @@ $api = app(Router::class);
 
 $api->version('v1', function(Router $api) {
     $api->group(['namespace' => 'EQM\\Api\\Http\\Controllers\\'], function (Router $api) {
+        $api->post('/competitions/jumping-antwerpen-2016', ['as' => 'jumping-antwerpen-post', 'uses' => 'PagesController@competition']);
+
         $api->get('/users/{user}', ['as' => 'api.users.show', 'uses' => 'UserController@show']);
         $api->get('/users/{user}/horses', ['as' => 'api.users.horses.index', 'uses' => 'HorseController@index']);
         $api->get('/users/{user}/feed', ['as' => 'api.users.feed', 'uses' => 'UserController@feed']);

@@ -17,5 +17,6 @@ new Vue({
         userfeed: require('./components/statuses/userFeed'),
         singlestatus: require('./components/statuses/singleStatus'),
         statuscreator: require('./components/statuses/statusCreator'),
+        jumping: require('./components/competitions/Jumping'),
     },
 });
