@@ -2,6 +2,7 @@
 namespace EQM\Http\Controllers\Pages;
 
 use EQM\Http\Controllers\Controller;
+use EQM\Http\Requests\CompetitionRequest;
 use EQM\Models\Horses\HorseCollection;
 use EQM\Models\Horses\HorseRepository;
 use EQM\Models\Statuses\Likes\LikeRepository;
@@ -87,5 +88,10 @@ class PagesController extends Controller
     public function queue()
     {
         return Queue::marshal();
+    }
+
+    public function competition()
+    {
+        return view('competition.index');
     }
 }
