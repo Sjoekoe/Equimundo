@@ -43,6 +43,10 @@ $api->version('v1', function(Router $api) {
 
                 $api->group(['prefix' => 'companies'], function(Router $api) {
                     $api->get('/', ['as' => 'api.admin.advertisements.companies.index', 'uses' => 'CompanyController@index']);
+                    $api->post('/', ['as' => 'api.admin.advertisements.companies.store', 'uses' => 'CompanyController@store']);
+                    $api->get('/{advertising_company}', ['as' => 'api.admin.advertisements.companies.show', 'uses' => 'CompanyController@show']);
+                    $api->put('/{advertising_company}', ['as' => 'api.admin.advertisements.companies.update', 'uses' => 'CompanyController@update']);
+                    $api->delete('/{advertising_company}', ['as' => 'api.admin.advertisements.companies.delete', 'uses' => 'CompanyController@delete']);
                 });
             });
         });

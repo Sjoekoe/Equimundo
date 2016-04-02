@@ -3,6 +3,8 @@ namespace EQM\Models\Addresses;
 
 interface Address
 {
+    const TABLE = 'addresses';
+    
     /**
      * @return int
      */
@@ -12,11 +14,6 @@ interface Address
      * @return string
      */
     public function street();
-
-    /**
-     * @return string
-     */
-    public function addressLine2();
 
     /**
      * @return string
@@ -37,4 +34,14 @@ interface Address
      * @return string
      */
     public function country();
+
+    /**
+     * @return string
+     */
+    public function longitude();
+
+    /**
+     * @return string
+     */
+    public function latitude();
 }

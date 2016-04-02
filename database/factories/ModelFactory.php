@@ -1,6 +1,8 @@
 <?php
 
 use Carbon\Carbon;
+use EQM\Models\Addresses\EloquentAddress;
+use EQM\Models\Advertising\Companies\EloquentAdvertisingCompany;
 use EQM\Models\Advertising\Contacts\EloquentAdvertisingContact;
 use EQM\Models\Albums\EloquentAlbum;
 use EQM\Models\Comments\EloquentComment;
@@ -105,5 +107,13 @@ $factory->define(EloquentAlbum::class, function(Generator $faker) {
 });
 
 $factory->define(EloquentAdvertisingContact::class, function(Generator $faker) {
+    return [];
+});
+
+$factory->define(EloquentAdvertisingCompany::class, function (Generator $faker) {
+    return [];
+});
+
+$factory->define(EloquentAddress::class, function(Generator $faker) {
     return [];
 });

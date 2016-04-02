@@ -3,6 +3,8 @@
 use Carbon\Carbon;
 use EQM\Core\Factories\BuildModels;
 use EQM\Core\Factories\ModelFactory;
+use EQM\Models\Addresses\Address;
+use EQM\Models\Advertising\Companies\AdvertisingCompany;
 use EQM\Models\Advertising\Contacts\AdvertisingContact;
 use EQM\Models\Horses\Horse;
 use EQM\Models\HorseTeams\HorseTeam;
@@ -148,6 +150,38 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
             'last_name' => 'Doe',
             'email' => 'john@doe.com',
             'telephone' => '1234'
+        ], $attributes));
+    }
+
+    /**
+     * @param array $attributes
+     * @return \EQM\Models\Advertising\Companies\AdvertisingCompany
+     */
+    public function createAdvertisingCompany(array $attributes = [])
+    {
+        return $this->modelFactory->create(AdvertisingCompany::class, array_merge([
+            'name' => 'Foo company',
+            'tax' => '1234567',
+            'telephone' => '1234',
+            'email' => 'foo@company.com',
+            'address_id' => null,
+        ], $attributes));
+    }
+
+    /**
+     * @param array $attributes
+     * @return \EQM\Models\Addresses\Address
+     */
+    public function createAddress(array $attributes = [])
+    {
+        return $this->modelFactory->create(Address::class, array_merge([
+            'street' => 'Foo street',
+            'city' => 'Baz City',
+            'state' => 'Antwerp',
+            'country' => 'BE',
+            'zip' => '2000',
+            'latitude' => '1234',
+            'longitude' => '5678',
         ], $attributes));
     }
 }

@@ -12,6 +12,18 @@ class EloquentAdvertisingCompany extends Model implements AdvertisingCompany
     use UsesTimeStamps;
 
     /**
+     * @var string
+     */
+    protected $table = self::TABLE;
+
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'tax', 'telephone', 'email', 'adv_contact_id', 'address_id'
+    ];
+
+    /**
      * @return int
      */
     public function id()
@@ -83,6 +95,9 @@ class EloquentAdvertisingCompany extends Model implements AdvertisingCompany
         return $this->addressRelation()->first();
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function contactRelation()
     {
         return $this->hasOne(EloquentAdvertisingContact::class, 'id', 'adv_contact_id');
