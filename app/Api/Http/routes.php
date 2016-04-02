@@ -30,5 +30,21 @@ $api->version('v1', function(Router $api) {
         $api->get('/notifications/mark-as-read', ['as' => 'api.notifications.read', 'uses' => 'NotificationController@markRead']);
         $api->get('/notifications/{notification}', ['as' => 'api.notifications.show', 'uses' => 'NotificationController@show']);
         $api->delete('/notifications/{notification}', ['as' => 'api.notifications.delete', 'uses' => 'NotificationController@delete']);
+
+        $api->group(['namespace' => 'Admin\\', 'prefix' => 'admin'], function(Router $api) {
+            $api->group(['prefix' => 'advertisements'], function(Router $api) {
+                $api->group(['prefix' => 'contacts'], function(Router $api) {
+                    $api->get('/', ['as' => 'api.admin.advertisements.contacts.index', 'uses' => 'ContactController@index']);
+                    $api->post('/', ['as' => 'api.admin.advertisements.contacts.store', 'uses' => 'ContactController@store']);
+                    $api->get('/{advertising_contact}', ['as' => 'api.admin.advertisements.contacts.show', 'uses' => 'ContactController@show']);
+                    $api->put('/{advertising_contact}', ['as' => 'api.admin.advertisements.contacts.update', 'uses' => 'ContactController@update']);
+                    $api->delete('/{advertising_contact}', ['as' => 'api.admin.advertisements.contacts.delete', 'uses' => 'ContactController@delete']);
+                });
+
+                $api->group(['prefix' => 'companies'], function(Router $api) {
+                    $api->get('/', ['as' => 'api.admin.advertisements.companies.index', 'uses' => 'CompanyController@index']);
+                });
+            });
+        });
     });
 });

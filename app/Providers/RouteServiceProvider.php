@@ -1,6 +1,7 @@
 <?php
 namespace EQM\Providers;
 
+use EQM\Models\Advertising\Contacts\AdvertisingContactRouteBinding;
 use EQM\Models\Albums\AlbumRouteBinder;
 use EQM\Models\Comments\CommentRouteBinder;
 use EQM\Models\Conversations\ConversationRouteBinder;
@@ -28,6 +29,7 @@ class RouteServiceProvider extends ServiceProvider {
     {
         parent::boot($router);
 
+        $router->bind('advertising_contact', AdvertisingContactRouteBinding::class);
         $router->bind('album', AlbumRouteBinder::class);
         $router->bind('comment', CommentRouteBinder::class);
         $router->bind('conversation', ConversationRouteBinder::class);

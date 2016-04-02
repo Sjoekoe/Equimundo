@@ -3,6 +3,7 @@
 use Carbon\Carbon;
 use EQM\Core\Factories\BuildModels;
 use EQM\Core\Factories\ModelFactory;
+use EQM\Models\Advertising\Contacts\AdvertisingContact;
 use EQM\Models\Horses\Horse;
 use EQM\Models\HorseTeams\HorseTeam;
 use EQM\Models\Notifications\Notification;
@@ -133,6 +134,20 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
         return $this->modelFactory->create(Notification::class, array_merge([
             'type' => Notification::STATUS_LIKED,
             'read' => false,
+        ], $attributes));
+    }
+
+    /**
+     * @param array $attributes
+     * @return \EQM\Models\Advertising\Contacts\AdvertisingContact
+     */
+    public function createAdvertisingContact(array $attributes = [])
+    {
+        return $this->modelFactory->create(AdvertisingContact::class, array_merge([
+            'first_name' => 'John',
+            'last_name' => 'Doe',
+            'email' => 'john@doe.com',
+            'telephone' => '1234'
         ], $attributes));
     }
 }

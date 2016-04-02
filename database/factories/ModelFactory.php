@@ -1,6 +1,7 @@
 <?php
 
 use Carbon\Carbon;
+use EQM\Models\Advertising\Contacts\EloquentAdvertisingContact;
 use EQM\Models\Albums\EloquentAlbum;
 use EQM\Models\Comments\EloquentComment;
 use EQM\Models\Disciplines\EloquentDiscipline;
@@ -101,4 +102,8 @@ $factory->define(EloquentAlbum::class, function(Generator $faker) {
         'description' => $faker->text(),
         'type' => null
     ];
+});
+
+$factory->define(EloquentAdvertisingContact::class, function(Generator $faker) {
+    return [];
 });

@@ -26,6 +26,11 @@ interface AdvertisingContact
     public function email();
 
     /**
+     * @return string
+     */
+    public function telephone();
+
+    /**
      * @return \Carbon\Carbon
      */
     public function createdAt();

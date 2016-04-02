@@ -1,6 +1,7 @@
 <?php
 namespace EQM\Core\Testing;
 
+use EQM\Models\Advertising\Contacts\AdvertisingContact;
 use EQM\Models\Users\User;
 
 trait DefaultIncludes
@@ -26,6 +27,24 @@ trait DefaultIncludes
                 'slug' => $user->slug(),
                 'unread_notifications' => $user->unreadNotifications(),
             ], $attributes),
+        ];
+    }
+
+    /**
+     * @param \EQM\Models\Advertising\Contacts\AdvertisingContact $contact
+     * @param array $attributes
+     * @return array
+     */
+    public function includedAdvertisingContact(AdvertisingContact $contact, $attributes = [])
+    {
+        return [
+            'data' => array_merge([
+                'id' => $contact->id(),
+                'first_name' => $contact->firstName(),
+                'last_name' => $contact->lastName(),
+                'email' => $contact->email(),
+                'telephone' => $contact->telephone(),
+            ], $attributes)
         ];
     }
 }
