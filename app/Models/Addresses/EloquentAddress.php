@@ -13,7 +13,7 @@ class EloquentAddress extends Model implements Address
     /**
      * @var array
      */
-    protected $fillable = ['addres_line_1', 'city', 'state', 'zip', 'country', 'latitude', 'longitude'];
+    protected $fillable = ['street', 'city', 'state', 'zip', 'country', 'latitude', 'longitude'];
 
     /**
      * @return int
@@ -28,7 +28,7 @@ class EloquentAddress extends Model implements Address
      */
     public function street()
     {
-        return $this->address_line_1;
+        return $this->street;
     }
 
     /**

@@ -159,7 +159,6 @@ return [
          */
         EQM\Models\Addresses\AddressServiceProvider::class,
         EQM\Models\Albums\AlbumServiceProvider::class,
-        EQM\Models\Advertising\AdvertisingServiceProvider::class,
         EQM\Models\Comments\CommentServiceProvider::class,
         EQM\Models\Conversations\ConversationServiceProvider::class,
         EQM\Models\Disciplines\DisciplineServiceProvider::class,
@@ -178,6 +177,7 @@ return [
         EQM\Models\Statuses\Likes\LikeServiceProvider::class,
         EQM\Models\Users\AuthServiceProvider::class,
         EQM\Models\Users\UserServiceProvider::class,
+        EQM\Models\Advertising\AdvertisingServiceProvider::class,
     ],
     /*
     |--------------------------------------------------------------------------

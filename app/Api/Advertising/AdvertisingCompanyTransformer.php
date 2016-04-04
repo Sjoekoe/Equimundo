@@ -45,6 +45,6 @@ class AdvertisingCompanyTransformer extends TransformerAbstract
      */
     public function includeAddressRelation(AdvertisingCompany $advertisingCompany)
     {
-        return $this->item($advertisingCompany->address(), new AddressTransformer());
+        return $advertisingCompany->address() ? $this->item($advertisingCompany->address(), new AddressTransformer()) : null;
     }
 }

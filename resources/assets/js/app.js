@@ -8,6 +8,9 @@ new Vue({
     },
 
     components: {
+        advertisingcompany: require('./components/admin/Advertisements/ShowAdvertisingCompany'),
+        advertisingcompaniestable: require('./components/admin/Advertisements/AdvertisingCompaniesTable'),
+        createadvertisingcompany: require('./components/admin/Advertisements/CreateAdvertisingCompany'),
         admindash: require('./components/admin/dashboard'),
         notedrop: require('./components/notifications/NotificationsDropdown'),
         notifications: require('./components/notifications/NotificationOverview'),

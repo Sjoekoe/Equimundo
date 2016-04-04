@@ -21,7 +21,7 @@ class EloquentAdvertisingCompanyRepository implements AdvertisingCompanyReposito
             'telephone' => array_get($values, 'telephone'),
             'email' => array_get($values, 'email'),
             'adv_contact_id' => $values['adv_contact_id'],
-            'address_id' => $values['address_id'],
+            'address_id' => array_get($values, 'address_id'),
         ]);
 
         $advertisingCompany->save();

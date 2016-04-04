@@ -11,19 +11,19 @@ use Illuminate\Support\ServiceProvider;
 
 class AdvertisingServiceProvider extends ServiceProvider
 {
-    protected $defer = true;
-    
+    protected $defer = false;
+
     public function register()
     {
         $this->app->singleton(AdvertisingContactRepository::class, function() {
             return new EloquentAdvertisingContactRepository(new EloquentAdvertisingContact());
         });
-        
+
         $this->app->singleton(AdvertisingCompanyRepository::class, function() {
             return new EloquentAdvertisingCompanyRepository(new EloquentAdvertisingCompany());
         });
     }
-    
+
     public function provides()
     {
         return [
