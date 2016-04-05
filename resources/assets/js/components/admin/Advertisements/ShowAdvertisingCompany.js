@@ -25,7 +25,7 @@ module.exports = Vue.extend({
             this.contact = company.data.contactRelation.data;
         }.bind(this));
 
-        setTimeout(this.initMap, 3500);
+        setTimeout(this.initMap, 5000);
     },
 
     methods: {
@@ -42,6 +42,28 @@ module.exports = Vue.extend({
                     position: vm.latLong,
                     map: map,
                 });
+
+                map.set('styles', [
+                    {
+                        featureType: 'road',
+                        elementType: 'geometry.stroke',
+                        stylers: [
+                            { color: '#40c4a7' },
+                            { weight: 1.6 },
+                            { lightness: -34 }
+                        ]
+                    },
+                    {
+                        featureType: 'landscape',
+                        elementType: 'all',
+                        stylers: [
+                            { color: '#40c4a7' },
+                            { saturation: -47 },
+                            { lightness: 19 },
+                            { gamma: 3.53 }
+                        ]
+                    }
+                ]);
             });
         }
     }

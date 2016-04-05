@@ -2,6 +2,7 @@
 
 use Carbon\Carbon;
 use EQM\Models\Addresses\EloquentAddress;
+use EQM\Models\Advertising\Advertisements\EloquentAdvertisement;
 use EQM\Models\Advertising\Companies\EloquentAdvertisingCompany;
 use EQM\Models\Advertising\Contacts\EloquentAdvertisingContact;
 use EQM\Models\Albums\EloquentAlbum;
@@ -115,5 +116,9 @@ $factory->define(EloquentAdvertisingCompany::class, function (Generator $faker) 
 });
 
 $factory->define(EloquentAddress::class, function(Generator $faker) {
+    return [];
+});
+
+$factory->define(EloquentAdvertisement::class, function(Generator $faker) {
     return [];
 });

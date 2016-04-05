@@ -10,7 +10,7 @@ trait UsesTimeStamps
      */
     public function createdAt()
     {
-        return Carbon::instance($this->created_at);
+        return Carbon::parse($this->created_at);
     }
 
     /**
@@ -18,6 +18,6 @@ trait UsesTimeStamps
      */
     public function updatedAt()
     {
-        return Carbon::instance($this->upated_at);
+        return Carbon::parse($this->upated_at);
     }
 }

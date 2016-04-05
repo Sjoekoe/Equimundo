@@ -2,7 +2,7 @@
 namespace EQM\Models\Advertising\Advertisements;
 
 use Carbon\Carbon;
-use EQM\Models\Advertising\Companies\AdvertisingCompany;
+use EQM\Models\Advertising\Companies\EloquentAdvertisingCompany;
 use EQM\Models\Pictures\EloquentPicture;
 use EQM\Models\UsesTimeStamps;
 use Illuminate\Database\Eloquent\Model;
@@ -10,10 +10,19 @@ use Illuminate\Database\Eloquent\Model;
 class EloquentAdvertisement extends Model implements Advertisement
 {
     use UsesTimeStamps;
-    
+
+    /**
+     * @var string
+     */
     protected $table = self::TABLE;
-    
-    protected $fillable = ['start', 'end', 'type', 'amount'];
+
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'start', 'end', 'type', 'amount', 'adv_company_id', 'picture_id', 'clicks', 'views', 'paid',
+        'website'
+    ];
 
     /**
      * @return int
@@ -28,7 +37,7 @@ class EloquentAdvertisement extends Model implements Advertisement
      */
     public function start()
     {
-        return $this->start ? Carbon::instance($this->start) : null;
+        return $this->start ? Carbon::parse($this->start) : null;
     }
 
     /**
@@ -36,7 +45,7 @@ class EloquentAdvertisement extends Model implements Advertisement
      */
     public function end()
     {
-        return $this->end ? Carbon::instance($this->end) : null;
+        return $this->end ? Carbon::parse($this->end) : null;
     }
 
     /**
@@ -80,11 +89,19 @@ class EloquentAdvertisement extends Model implements Advertisement
     }
 
     /**
+     * @return string
+     */
+    public function website()
+    {
+        return $this->website;
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function companyRelation()
     {
-        return $this->belongsTo(AdvertisingCompany::class, 'adv_company_id', 'id');
+        return $this->belongsTo(EloquentAdvertisingCompany::class, 'adv_company_id', 'id');
     }
 
     /**

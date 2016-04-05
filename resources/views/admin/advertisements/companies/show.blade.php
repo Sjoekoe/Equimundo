@@ -17,7 +17,7 @@
                     </div>
                     <div class="panel-body">
                         Name: @{{ company.name }} <br>
-                        Email: <a href="mailto:@{{ company.email }}">@{{ company.email }}</a> <br>
+                        Email: <a href="mailto:@{{ company.email }}" class="text-mint">@{{ company.email }}</a> <br>
                         Telephone: @{{ company.telephone }} <br>
                         Tax: @{{ company.tax }}
                     </div>
@@ -33,7 +33,7 @@
                     <div class="panel-body">
                         First name: @{{ contact.first_name }} <br>
                         Last name: @{{ contact.last_name }} <br>
-                        Email: <a href="mailto:@{{ contact.email }}">@{{ contact.email }}</a> <br>
+                        Email: <a href="mailto:@{{ contact.email }}" class="text-mint">@{{ contact.email }}</a> <br>
                         Telephone: @{{ contact.telephone }}
                     </div>
                 </div>

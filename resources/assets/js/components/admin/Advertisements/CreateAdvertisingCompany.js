@@ -94,7 +94,8 @@ module.exports = Vue.extend({
                 "telephone": this.company_telephone,
                 "email": this.company_email,
                 "tax": this.tax,
-                "adv_contact_id": this.contact.id
+                "adv_contact_id": this.contact.id,
+                "address_id": this.address.id,
             }
             var vm = this;
 

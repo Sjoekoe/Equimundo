@@ -4,10 +4,12 @@ new Vue({
     el: 'body',
 
     filters: {
-        timeformat: require('./filters/diffForHumans'),
+        diffForHumans: require('./filters/diffForHumans'),
+        timeFormat: require('./filters/timeFormat'),
     },
 
     components: {
+        advertisementstable: require('./components/admin/Advertisements/AdvertisementsTable'),
         advertisingcompany: require('./components/admin/Advertisements/ShowAdvertisingCompany'),
         advertisingcompaniestable: require('./components/admin/Advertisements/AdvertisingCompaniesTable'),
         createadvertisingcompany: require('./components/admin/Advertisements/CreateAdvertisingCompany'),

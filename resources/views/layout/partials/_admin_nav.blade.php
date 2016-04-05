@@ -51,7 +51,11 @@
                                         Companies
                                     </a>
                                 </li>
-                                <li><a href="#">Advertisements</a></li>
+                                <li class="{{ Active::route('admin.advertisements.index', 'active-link') }}">
+                                    <a href="{{ route('admin.advertisements.index') }}">
+                                        Advertisements
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                     </ul>

@@ -1,9 +1,11 @@
 <?php
 
 use Carbon\Carbon;
+use EQM\Core\Advertisements\AdObject;
 use EQM\Core\Factories\BuildModels;
 use EQM\Core\Factories\ModelFactory;
 use EQM\Models\Addresses\Address;
+use EQM\Models\Advertising\Advertisements\Advertisement;
 use EQM\Models\Advertising\Companies\AdvertisingCompany;
 use EQM\Models\Advertising\Contacts\AdvertisingContact;
 use EQM\Models\Horses\Horse;
@@ -182,6 +184,38 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
             'zip' => '2000',
             'latitude' => '1234',
             'longitude' => '5678',
+        ], $attributes));
+    }
+
+    /**
+     * @return \EQM\Models\Advertising\Companies\AdvertisingCompany
+     */
+    public function createCompleteAdvertisingCompany()
+    {
+        $address = $this->createAddress();
+        $contact = $this->createAdvertisingContact();
+        return $this->createAdvertisingCompany([
+            'address_id' => $address->id(),
+            'adv_contact_id' => $contact->id(),
+        ]);
+    }
+
+    /**
+     * @param array $attributes
+     * @return \EQM\Models\Advertising\Advertisements\Advertisement
+     */
+    public function createAdvertisement(array $attributes = [])
+    {
+        return $this->modelFactory->create(Advertisement::class, array_merge([
+            'start' => Carbon::now()->startOfDay(),
+            'end' => Carbon::now()->addDays(30)->endOfDay(),
+            'type' => AdObject::RECTANGLE,
+            'paid' => true,
+            'amount' => 500,
+            'clicks' => 1,
+            'views' => 2,
+            'picture_id' => null,
+            'website' => 'http://www.test.com',
         ], $attributes));
     }
 }

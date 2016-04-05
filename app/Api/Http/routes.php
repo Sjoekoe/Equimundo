@@ -35,6 +35,7 @@ $api->version('v1', function(Router $api) {
 
         $api->group(['namespace' => 'Admin\\', 'prefix' => 'admin'], function(Router $api) {
             $api->group(['prefix' => 'advertisements'], function(Router $api) {
+
                 $api->group(['prefix' => 'contacts'], function(Router $api) {
                     $api->get('/', ['as' => 'api.admin.advertisements.contacts.index', 'uses' => 'ContactController@index']);
                     $api->post('/', ['as' => 'api.admin.advertisements.contacts.store', 'uses' => 'ContactController@store']);
@@ -50,6 +51,12 @@ $api->version('v1', function(Router $api) {
                     $api->put('/{advertising_company}', ['as' => 'api.admin.advertisements.companies.update', 'uses' => 'CompanyController@update']);
                     $api->delete('/{advertising_company}', ['as' => 'api.admin.advertisements.companies.delete', 'uses' => 'CompanyController@delete']);
                 });
+
+                $api->get('/', ['as' => 'api.admin.advertisements.index', 'uses' => 'AdvertisementController@index']);
+                $api->post('/', ['as' => 'api.admin.advertisements.store', 'uses' => 'AdvertisementController@store']);
+                $api->get('/{advertisement}', ['as' => 'api.admin.advertisements.show', 'uses' => 'AdvertisementController@show']);
+                $api->put('/{advertisement}', ['as' => 'api.admin.advertisements.update', 'uses' => 'AdvertisementController@update']);
+                $api->delete('/{advertisement}', ['as' => 'api.admin.advertisements.delete', 'uses' => 'AdvertisementController@delete']);
             });
         });
     });

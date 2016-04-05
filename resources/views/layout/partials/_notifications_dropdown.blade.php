@@ -18,7 +18,7 @@
                                 </div>
                                 <div class="media-body">
                                     <div>@{{ notification.message }}</div>
-                                    <small class="text-muted">@{{ notification.created_at | timeformat }}</small>
+                                    <small class="text-muted">@{{ notification.created_at | diffForHumans }}</small>
                                 </div>
                             </a>
                         </li>

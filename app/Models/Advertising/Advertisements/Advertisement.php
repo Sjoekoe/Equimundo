@@ -46,6 +46,11 @@ interface Advertisement
     public function views();
 
     /**
+     * @return string
+     */
+    public function website();
+
+    /**
      * @return \EQM\Models\Advertising\Companies\AdvertisingCompany
      */
     public function company();

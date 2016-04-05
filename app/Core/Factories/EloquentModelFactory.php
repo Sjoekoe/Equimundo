@@ -3,6 +3,8 @@ namespace EQM\Core\Factories;
 
 use EQM\Models\Addresses\Address;
 use EQM\Models\Addresses\EloquentAddress;
+use EQM\Models\Advertising\Advertisements\Advertisement;
+use EQM\Models\Advertising\Advertisements\EloquentAdvertisement;
 use EQM\Models\Advertising\Companies\AdvertisingCompany;
 use EQM\Models\Advertising\Companies\EloquentAdvertisingCompany;
 use EQM\Models\Advertising\Contacts\AdvertisingContact;
@@ -31,6 +33,7 @@ class EloquentModelFactory implements ModelFactory
      */
     private $models = [
         Address::class => EloquentAddress::class,
+        Advertisement::class => EloquentAdvertisement::class,
         AdvertisingCompany::class => EloquentAdvertisingCompany::class,
         AdvertisingContact::class => EloquentAdvertisingContact::class,
         Horse::class => EloquentHorse::class,

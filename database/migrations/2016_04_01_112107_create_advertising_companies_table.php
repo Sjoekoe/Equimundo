@@ -46,9 +46,10 @@ class CreateAdvertisingCompaniesTable extends Migration
             $table->string('amount');
             $table->integer('clicks');
             $table->integer('views');
+            $table->string('website');
             $table->integer('adv_company_id')->unsigned();
             $table->foreign('adv_company_id')->references('id')->on(AdvertisingCompany::TABLE)->onDelete('cascade');
-            $table->integer('picture_id')->unsigned();
+            $table->integer('picture_id')->unsigned()->nullable();
             $table->foreign('picture_id')->references('id')->on('pictures')->onDelete('cascade');
             $table->timestamps();
         });
