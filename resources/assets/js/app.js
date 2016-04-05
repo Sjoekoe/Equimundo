@@ -12,6 +12,7 @@ new Vue({
         advertisementstable: require('./components/admin/Advertisements/AdvertisementsTable'),
         advertisingcompany: require('./components/admin/Advertisements/ShowAdvertisingCompany'),
         advertisingcompaniestable: require('./components/admin/Advertisements/AdvertisingCompaniesTable'),
+        createadvertisement: require('./components/admin/Advertisements/CreateAdvertisement'),
         createadvertisingcompany: require('./components/admin/Advertisements/CreateAdvertisingCompany'),
         admindash: require('./components/admin/dashboard'),
         notedrop: require('./components/notifications/NotificationsDropdown'),

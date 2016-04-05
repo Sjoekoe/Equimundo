@@ -13,7 +13,7 @@
                     <div class="panel">
                         <div class="panel-body">
                             <div class="pad-btm form-inline">
-                                <a href="#" class="btn btn-mint btn-labeled fa fa-plus">
+                                <a href="{{ route('admin.advertisements.create') }}" class="btn btn-mint btn-labeled fa fa-plus">
                                     Add
                                 </a>
                             </div>

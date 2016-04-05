@@ -1,6 +1,8 @@
 <?php
 namespace EQM\Models\Advertising\Companies;
 
+use Illuminate\Database\Eloquent\Collection;
+
 class EloquentAdvertisingCompanyRepository implements AdvertisingCompanyRepository
 {
     /**
@@ -61,6 +63,16 @@ class EloquentAdvertisingCompanyRepository implements AdvertisingCompanyReposito
     public function findById($id)
     {
         return $this->advertisingCompany->where('id', $id)->first();
+    }
+
+    /**
+     * @return \EQM\Models\Advertising\Companies\AdvertisingCompany[]
+     */
+    public function findAll()
+    {
+        $companies = $this->advertisingCompany->all();
+
+        return new Collection($companies);
     }
 
     public function findAllPaginated($limit = 10)
