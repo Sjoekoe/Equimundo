@@ -31,6 +31,7 @@ class AdvertisementsTest extends \TestCase
                         'amount' => $advertisement->amount(),
                         'paid' => $advertisement->paid(),
                         'website' => $advertisement->website(),
+                        'picture_path' => null,
                         'companyRelation' => [
                             'data' => [
                                 'id' => $company->id(),
@@ -94,6 +95,7 @@ class AdvertisementsTest extends \TestCase
                 'clicks' => 0,
                 'views' => 0,
                 'website' => 'http://www.equimundo.com',
+                'picture_path' => null,
                 'companyRelation' => [
                     'data' => [
                         'id' => $company->id(),
@@ -140,6 +142,7 @@ class AdvertisementsTest extends \TestCase
                     'amount' => $advertisement->amount(),
                     'paid' => $advertisement->paid(),
                     'website' => $advertisement->website(),
+                    'picture_path' => null,
                     'companyRelation' => [
                         'data' => [
                             'id' => $company->id(),
@@ -189,6 +192,7 @@ class AdvertisementsTest extends \TestCase
                     'amount' => 600,
                     'paid' => false,
                     'website' => $advertisement->website(),
+                    'picture_path' => null,
                     'companyRelation' => [
                         'data' => [
                             'id' => $company->id(),

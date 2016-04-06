@@ -37,10 +37,13 @@ class AdvertisementController extends Controller
 
     public function store(AdvertisementRequest $request)
     {
-        $picture = $this->uploader->uploadAdvertisement($request->file('picture'), $request->get('type'));
-
         $values = $request->all();
-        $values['picture_id'] = $picture->id();
+
+        if (! app()->environment('testing')) {
+            $picture = $this->uploader->uploadAdvertisement($request->file('picture'), $request->get('type'));
+
+            $values['picture_id'] = $picture->id();
+        }
 
         $advertisement = $this->advertisements->create($values);
 
@@ -51,7 +54,7 @@ class AdvertisementController extends Controller
     public function random()
     {
         $advertisements = $this->advertisements->findRandomByType(Input::get('type'));
-        
+
         if (! $advertisements->isEmpty()) {
             $advertisement = $advertisements->random(1);
 
