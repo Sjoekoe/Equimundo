@@ -19,8 +19,15 @@
                                 </option>
                             </select>
                             <br>
-                            <label for="start">Start</label>
-                            <input type="text" v-model="start" class="form-control">
+                            <label for="type">Type</label>
+                            <select name="type" id="type" class="form-control selectPicker" v-model="type">
+                                @foreach (config('advertisements') as $key => $advertisement)
+                                    <option value="{{ $key }}">{{ $advertisement }}</option>
+                                @endforeach
+                            </select>
+                            <br>
+                            <label for="start_date">Start</label>
+                            <input type="text" v-model="start_date" class="form-control">
                             <br>
                             <label for="end">End</label>
                             <input type="text" v-model="end" class="form-control">
@@ -30,6 +37,9 @@
                             <br>
                             <label for="amount">Amount</label>
                             <input type="text" v-model="amount" class="form-control">
+                            <br>
+                            <label for="picture">Picture</label>
+                            <input id="picture" type="file" v-model="picture", class="form-control">
                         </div>
                         <div class="panel-footer text-right">
                             <template v-if="submitting">

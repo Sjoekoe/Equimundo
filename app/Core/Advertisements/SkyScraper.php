@@ -15,12 +15,12 @@ class SkyScraper implements AdObject
 
     public function width()
     {
-        return '120px';
+        return '120';
     }
 
     public function height()
     {
-        return '600px';
+        return '600';
     }
 
     public function price()

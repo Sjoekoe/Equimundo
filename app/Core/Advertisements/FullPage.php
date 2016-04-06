@@ -15,12 +15,12 @@ class FullPage implements AdObject
 
     public function width()
     {
-        return '1920px';
+        return '1920';
     }
 
     public function height()
     {
-        return '1200px';
+        return '1200';
     }
 
     public function price()

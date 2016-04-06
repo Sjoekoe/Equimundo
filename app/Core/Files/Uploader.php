@@ -1,11 +1,18 @@
 <?php
 namespace EQM\Core\Files;
 
+use EQM\Core\Advertisements\AdObject;
+use EQM\Core\Advertisements\FullPage;
+use EQM\Core\Advertisements\LeaderBoard;
+use EQM\Core\Advertisements\Rectangle;
+use EQM\Core\Advertisements\SkyScraper;
 use EQM\Core\Movies\EQMWistia;
 use EQM\Models\Horses\Horse;
 use EQM\Models\Pictures\PictureRepository;
 use Illuminate\Contracts\Filesystem\Factory as Filesystem;
+use Intervention\Image\Constraint;
 use Intervention\Image\ImageManager;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class Uploader
 {
@@ -82,5 +89,56 @@ class Uploader
         $movie = $this->pictures->createVideo($file, $horse, $fileName, $extension);
 
         return $movie;
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\File\UploadedFile $file
+     * @param int $type
+     * @return \EQM\Models\Pictures\Picture
+     */
+    public function uploadAdvertisement(UploadedFile $file, $type)
+    {
+        $extension  = $file->getClientOriginalExtension();
+        $path       = '/uploads/advertisements';
+        $fileName   = str_random(12);
+        $pathToFile = $path . '/' . $fileName. '.' . $extension;
+
+        $picture = $this->pictures->create($file, null, false, $fileName, $extension);
+
+        if ( ! file_exists(storage_path() . $path) ) {
+            $this->file->makeDirectory($path);
+        }
+        
+        $object = $this->getAdObject($type);
+
+        $image = $this->image->make($file->getrealpath())->resize($object->width(), $object->height(), function(Constraint $constraint) {
+            $constraint->aspectRatio();
+        })->orientate();
+
+        $this->file->disk()->put($pathToFile, $image->stream()->__toString());
+
+        return $picture;
+    }
+
+    /**
+     * @param $type
+     * @return \EQM\Core\Advertisements\AdObject
+     */
+    private function getAdObject($type)
+    {
+        switch ($type)
+        {
+            case $type == AdObject::LEADERBOARD:
+                return new LeaderBoard();
+            
+            case $type == AdObject::FULL_PAGE;
+                return new FullPage();
+            
+            case $type == AdObject::RECTANGLE;
+                return new Rectangle();
+            
+            case $type == AdObject::SKYSCRAPER;
+                return new SkyScraper();
+        }
     }
 }

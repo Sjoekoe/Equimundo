@@ -5,6 +5,8 @@ use EQM\Models\Albums\Album;
 
 interface Picture
 {
+    const TABLE= 'pictures';
+    
     /**
      * @return int
      */

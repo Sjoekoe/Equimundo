@@ -8,14 +8,16 @@ module.exports = Vue.extend({
     data: function() {
         return {
             company_id: '',
-            start: '',
+            start_date: '',
             end: '',
-            type: 1,
+            type: '',
             amount: '',
             website: '',
+            picture: '',
             options: [],
             status: 'Creating advertisement ...',
             submitting: false,
+            errors: [],
         }
     },
 
@@ -27,21 +29,25 @@ module.exports = Vue.extend({
         Submit: function() {
             this.submitting = true;
 
-            var data = {
-                "company_id": this.company_id,
-                "start": this.start,
-                "end": this.end,
-                "website": this.website,
-                "amount": this.amount,
-                "type": this.type,
-            }
+            var form = document.querySelector('#picture');
+            var file = form.files[0];
+            var formData = new FormData();
+            formData.append('company_id', this.company_id);
+            formData.append('start', this.start_date);
+            formData.append('end', this.end);
+            formData.append('website', this.website);
+            formData.append('amount', this.amount);
+            formData.append('type', this.type);
+            this.picture ? formData.append('picture', file) : formData.append('picture', 'null');
 
             var vm = this;
 
             $.ajax({
                 url: '/api/admin/advertisements',
                 type: 'post',
-                data: data,
+                data: formData,
+                processData: false,
+                contentType:false,
                 success: function() {
                     vm.status = 'Redirecting ...';
                     window.location.replace("/admin/advertisements");

@@ -40,17 +40,17 @@ class EloquentPictureRepository implements PictureRepository
 
     /**
      * @param \Symfony\Component\HttpFoundation\File\UploadedFile $file
-     * @param \EQM\Models\Horses\Horse $horse
+     * @param \EQM\Models\Horses\Horse|null $horse
      * @param bool $profile
      * @param string $fileName
      * @param string $extension
      * @return \EQM\Models\Pictures\Picture
      */
-    public function create(UploadedFile $file, Horse $horse, $profile, $fileName, $extension)
+    public function create(UploadedFile $file, Horse $horse = null, $profile, $fileName, $extension)
     {
         $picture = new EloquentPicture();
         $picture->path = $fileName . '.' . $extension;
-        $picture->horse_id = $horse->id();
+        $picture->horse_id = $horse ? $horse->id() : null;
         $picture->mime = $file->getClientMimeType();
         $picture->original_name = $file->getClientOriginalName();
         $picture->profile_pic = $profile;

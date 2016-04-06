@@ -15,12 +15,12 @@ class Rectangle implements AdObject
 
     public function width()
     {
-        return '150px';
+        return '150';
     }
 
     public function height()
     {
-        return '180px';
+        return '180';
     }
 
     public function price()

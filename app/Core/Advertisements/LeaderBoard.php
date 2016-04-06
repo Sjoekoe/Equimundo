@@ -15,12 +15,12 @@ class LeaderBoard implements AdObject
 
     public function width()
     {
-        return '728px';
+        return '728';
     }
 
     public function height()
     {
-        return '90px';
+        return '90';
     }
 
     public function price()
