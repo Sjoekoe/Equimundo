@@ -28,4 +28,10 @@ interface AdvertisementRepository
     public function findById($id);
     
     public function findAllPaginated($limit = 10);
+
+    /**
+     * @param string $type
+     * @return \EQM\Models\Advertising\Advertisements\Advertisement[]
+     */
+    public function findRandomByType($type);
 }

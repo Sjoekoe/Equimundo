@@ -26,6 +26,7 @@ class AdvertisementTransformer extends TransformerAbstract
             'paid' => (bool) $advertisement->paid(),
             'amount' => (int) $advertisement->amount(),
             'website' => $advertisement->website(),
+            'picture_path' => $advertisement->picture() ? route('file.advertisement', $advertisement->picture()->id()) : null,
         ];
     }
 

@@ -1,6 +1,8 @@
 @extends('layout.app')
 
 @section('content')
+    @include('advertisements.leaderboard');
+
     <div id="page-content">
         <div class="col-md-4 col-md-offset-4">
             <notifications></notifications>

@@ -54,6 +54,7 @@ $api->version('v1', function(Router $api) {
 
                 $api->get('/', ['as' => 'api.admin.advertisements.index', 'uses' => 'AdvertisementController@index']);
                 $api->post('/', ['as' => 'api.admin.advertisements.store', 'uses' => 'AdvertisementController@store']);
+                $api->get('/random', ['as' => 'api.admin.advertisements.random', 'uses' => 'AdvertisementController@random']);
                 $api->get('/{advertisement}', ['as' => 'api.admin.advertisements.show', 'uses' => 'AdvertisementController@show']);
                 $api->put('/{advertisement}', ['as' => 'api.admin.advertisements.update', 'uses' => 'AdvertisementController@update']);
                 $api->delete('/{advertisement}', ['as' => 'api.admin.advertisements.delete', 'uses' => 'AdvertisementController@delete']);

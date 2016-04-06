@@ -19,7 +19,6 @@ class UpdateAdvertisementRequest extends Request
     public function rules()
     {
         return [
-            'amount' => 'required',
             'start' => 'date_format:d/m/Y',
             'end' => 'date_format:d/m/Y',
             'type' => 'int',

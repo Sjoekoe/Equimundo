@@ -48,6 +48,19 @@ class AdvertisementController extends Controller
         return $this->response()->item($advertisement, new AdvertisementTransformer());
     }
 
+    public function random()
+    {
+        $advertisements = $this->advertisements->findRandomByType(Input::get('type'));
+        
+        if (! $advertisements->isEmpty()) {
+            $advertisement = $advertisements->random(1);
+
+            return $this->response()->item($advertisement, new AdvertisementTransformer());
+        }
+
+        return $this->response()->noContent();
+    }
+
     public function show(Advertisement $advertisement)
     {
         return $this->response()->item($advertisement, new AdvertisementTransformer());

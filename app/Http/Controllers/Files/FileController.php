@@ -31,4 +31,11 @@ class FileController extends Controller
 
         return response($file, 200, ['Content-Type' => $picture->mime()]);
     }
+    
+    public function getAdvertisement(Picture $picture)
+    {
+        $file = Storage::disk()->get('/uploads/advertisements/' . $picture->path());
+
+        return response($file, 200, ['Content-Type' => $picture->mime()]);
+    }
 }

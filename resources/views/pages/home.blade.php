@@ -197,6 +197,7 @@
                 @endif
             </div>
             <div class="col-md-2">
+                @include('advertisements.rectangle')
                 <div class="panel">
                     <div class="panel-heading">
                         <h3 class="panel-title">

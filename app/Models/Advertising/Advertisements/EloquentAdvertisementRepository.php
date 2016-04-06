@@ -2,6 +2,10 @@
 namespace EQM\Models\Advertising\Advertisements;
 
 use Carbon\Carbon;
+use EQM\Core\Advertisements\FullPage;
+use EQM\Core\Advertisements\LeaderBoard;
+use EQM\Core\Advertisements\Rectangle;
+use EQM\Core\Advertisements\SkyScraper;
 
 class EloquentAdvertisementRepository implements AdvertisementRepository
 {
@@ -58,9 +62,25 @@ class EloquentAdvertisementRepository implements AdvertisementRepository
             $advertisement->website = eqm_protocol_prepend($values['website']);
         }
 
-        $advertisement->type = $values['type'];
-        $advertisement->paid = array_get($values, 'paid', false);
-        $advertisement->amount = $values['amount'];
+        if (array_key_exists('type', $values)) {
+            $advertisement->type = $values['type'];
+        }
+
+        if (array_key_exists('paid', $values)) {
+            $advertisement->paid = array_get($values, 'paid', false);
+        }
+
+        if (array_key_exists('amount', $values)) {
+            $advertisement->amount = $values['amount'];
+        }
+
+        if (array_key_exists('view', $values)) {
+            $advertisement->views += 1;
+        }
+
+        if (array_key_exists('click', $values)) {
+            $advertisement->clicks += 1;
+        }
 
         $advertisement->save();
 
@@ -87,5 +107,42 @@ class EloquentAdvertisementRepository implements AdvertisementRepository
     public function findAllPaginated($limit = 10)
     {
         return $this->advertisement->paginate($limit);
+    }
+
+    /**
+     * @param string $type
+     * @return \EQM\Models\Advertising\Advertisements\Advertisement[]
+     */
+    public function findRandomByType($type)
+    {
+        $now = Carbon::now();
+
+        return $this->advertisement
+            ->where('type', $this->getConvertedType($type)->type())
+            ->where('start', '<', $now)
+            ->where('end', '>', $now)
+            ->get();
+    }
+
+    /**
+     * @param $type
+     * @return \EQM\Core\Advertisements\AdObject
+     */
+    private function getConvertedType($type)
+    {
+        switch ($type)
+        {
+            case $type == 'rectangle':
+                return new Rectangle();
+
+            case $type == 'leaderboard':
+                return new LeaderBoard();
+
+            case $type == 'skyscraper':
+                return new SkyScraper();
+
+            case $type == 'full_page':
+                return new FullPage();
+        }
     }
 }
