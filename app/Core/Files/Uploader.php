@@ -1,12 +1,8 @@
 <?php
 namespace EQM\Core\Files;
 
-use EQM\Core\Advertisements\AdObject;
-use EQM\Core\Advertisements\FullPage;
-use EQM\Core\Advertisements\LeaderBoard;
-use EQM\Core\Advertisements\Rectangle;
-use EQM\Core\Advertisements\SkyScraper;
 use EQM\Core\Movies\EQMWistia;
+use EQM\Models\Advertising\Advertisements\Advertisement;
 use EQM\Models\Horses\Horse;
 use EQM\Models\Pictures\PictureRepository;
 use Illuminate\Contracts\Filesystem\Factory as Filesystem;
@@ -52,19 +48,19 @@ class Uploader
      */
     public function uploadPicture($file, Horse $horse, $profile = false, $headerImage = false)
     {
-        $extension  = $file->getClientOriginalExtension();
-        $path       = '/uploads/pictures/' . $horse->id();
-        $fileName   = str_random(12);
-        $pathToFile = $path . '/' . $fileName. '.' . $extension;
+        $extension = $file->getClientOriginalExtension();
+        $path = '/uploads/pictures/' . $horse->id();
+        $fileName = str_random(12);
+        $pathToFile = $path . '/' . $fileName . '.' . $extension;
         $width = $headerImage ? 1500 : 460;
 
         $picture = $this->pictures->create($file, $horse, $profile, $fileName, $extension);
 
-        if ( ! file_exists(storage_path() . $path) ) {
+        if (!file_exists(storage_path() . $path)) {
             $this->file->makeDirectory($path);
         }
 
-        $image = $this->image->make($file->getrealpath())->resize(null, $width, function($constraint) {
+        $image = $this->image->make($file->getrealpath())->resize(null, $width, function ($constraint) {
             $constraint->aspectRatio();
         })->orientate();
 
@@ -75,14 +71,14 @@ class Uploader
 
     public function uploadMovie($file, Horse $horse)
     {
-        if (! $horse->hasWistiaKey()) {
+        if (!$horse->hasWistiaKey()) {
             $wistiaKey = (new EQMWistia(env('WISTIA_API')))->createProject(['name' => $horse->slug()]);
 
             $horse->wistia_project_id = $wistiaKey->hashedId;
             $horse->save();
         }
 
-        $extension  = $file->getClientOriginalExtension();
+        $extension = $file->getClientOriginalExtension();
         $uploadedFile = (new EQMWistia(env('WISTIA_API')))->uploadVideo($file, $horse->wistiaKey());
         $fileName = $uploadedFile->hashed_id;
 
@@ -93,52 +89,28 @@ class Uploader
 
     /**
      * @param \Symfony\Component\HttpFoundation\File\UploadedFile $file
-     * @param int $type
+     * @param \EQM\Models\Advertising\Advertisements\Advertisement $advertisement
      * @return \EQM\Models\Pictures\Picture
      */
-    public function uploadAdvertisement(UploadedFile $file, $type)
+    public function uploadAdvertisement(UploadedFile $file, Advertisement $advertisement)
     {
-        $extension  = $file->getClientOriginalExtension();
-        $path       = '/uploads/advertisements';
-        $fileName   = str_random(12);
-        $pathToFile = $path . '/' . $fileName. '.' . $extension;
+        $extension = $file->getClientOriginalExtension();
+        $path = '/uploads/advertisements';
+        $fileName = str_random(12);
+        $pathToFile = $path . '/' . $fileName . '.' . $extension;
 
         $picture = $this->pictures->create($file, null, false, $fileName, $extension);
 
-        if ( ! file_exists(storage_path() . $path) ) {
+        if (!file_exists(storage_path() . $path)) {
             $this->file->makeDirectory($path);
         }
-        
-        $object = $this->getAdObject($type);
 
-        $image = $this->image->make($file->getrealpath())->resize($object->width(), $object->height(), function(Constraint $constraint) {
+        $image = $this->image->make($file->getrealpath())->resize($advertisement->width(), $advertisement->height(), function (Constraint $constraint) {
             $constraint->aspectRatio();
         })->orientate();
 
         $this->file->disk()->put($pathToFile, $image->stream()->__toString());
 
         return $picture;
-    }
-
-    /**
-     * @param $type
-     * @return \EQM\Core\Advertisements\AdObject
-     */
-    private function getAdObject($type)
-    {
-        switch ($type)
-        {
-            case $type == AdObject::LEADERBOARD:
-                return new LeaderBoard();
-            
-            case $type == AdObject::FULL_PAGE;
-                return new FullPage();
-            
-            case $type == AdObject::RECTANGLE;
-                return new Rectangle();
-            
-            case $type == AdObject::SKYSCRAPER;
-                return new SkyScraper();
-        }
     }
 }

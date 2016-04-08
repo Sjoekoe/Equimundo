@@ -6,6 +6,7 @@ use EQM\Core\Factories\BuildModels;
 use EQM\Core\Factories\ModelFactory;
 use EQM\Models\Addresses\Address;
 use EQM\Models\Advertising\Advertisements\Advertisement;
+use EQM\Models\Advertising\Advertisements\Rectangle;
 use EQM\Models\Advertising\Companies\AdvertisingCompany;
 use EQM\Models\Advertising\Contacts\AdvertisingContact;
 use EQM\Models\Horses\Horse;
@@ -206,10 +207,10 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
      */
     public function createAdvertisement(array $attributes = [])
     {
-        return $this->modelFactory->create(Advertisement::class, array_merge([
+        return $this->modelFactory->create(Rectangle::class, array_merge([
             'start' => Carbon::now()->startOfDay(),
             'end' => Carbon::now()->addDays(30)->endOfDay(),
-            'type' => AdObject::RECTANGLE,
+            'type' => Rectangle::NAME,
             'paid' => true,
             'amount' => 500,
             'clicks' => 1,

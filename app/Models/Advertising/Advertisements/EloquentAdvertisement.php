@@ -6,15 +6,26 @@ use EQM\Models\Advertising\Companies\EloquentAdvertisingCompany;
 use EQM\Models\Pictures\EloquentPicture;
 use EQM\Models\UsesTimeStamps;
 use Illuminate\Database\Eloquent\Model;
+use Nanigans\SingleTableInheritance\SingleTableInheritanceTrait;
 
 class EloquentAdvertisement extends Model implements Advertisement
 {
-    use UsesTimeStamps;
+    use UsesTimeStamps, SingleTableInheritanceTrait;
 
     /**
      * @var string
      */
     protected $table = self::TABLE;
+
+    /**
+     * @var string
+     */
+    protected static $singleTableTypeField = 'type';
+
+    /**
+     * @var array
+     */
+    protected static $singleTableSubclasses = [EloquentRectangle::class, EloquentLeaderBoard::class];
 
     /**
      * @var array
@@ -46,14 +57,6 @@ class EloquentAdvertisement extends Model implements Advertisement
     public function end()
     {
         return $this->end ? Carbon::parse($this->end) : null;
-    }
-
-    /**
-     * @return int
-     */
-    public function type()
-    {
-        return $this->type;
     }
 
     /**
@@ -126,5 +129,13 @@ class EloquentAdvertisement extends Model implements Advertisement
     public function picture()
     {
         return $this->pictureRelation()->first();
+    }
+
+    /**
+     * @return string
+     */
+    public function type()
+    {
+        return $this->type;
     }
 }

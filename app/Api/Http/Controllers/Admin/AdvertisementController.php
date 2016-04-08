@@ -39,14 +39,15 @@ class AdvertisementController extends Controller
     {
         $values = $request->all();
 
+        $advertisement = $this->advertisements->create($values);
+
         if (! app()->environment('testing')) {
-            $picture = $this->uploader->uploadAdvertisement($request->file('picture'), $request->get('type'));
+            $picture = $this->uploader->uploadAdvertisement($request->file('picture'), $advertisement);
 
             $values['picture_id'] = $picture->id();
         }
 
-        $advertisement = $this->advertisements->create($values);
-
+        $advertisement = $this->advertisements->update($advertisement, $values);
 
         return $this->response()->item($advertisement, new AdvertisementTransformer());
     }

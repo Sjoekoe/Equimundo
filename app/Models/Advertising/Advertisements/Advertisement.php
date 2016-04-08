@@ -21,11 +21,6 @@ interface Advertisement
     public function end();
 
     /**
-     * @return int
-     */
-    public function type();
-
-    /**
      * @return bool
      */
     public function paid();
@@ -69,4 +64,9 @@ interface Advertisement
      * @return \Carbon\Carbon
      */
     public function updatedAt();
+
+    /**
+     * @return string
+     */
+    public function type();
 }

@@ -41,7 +41,7 @@ class CreateAdvertisingCompaniesTable extends Migration
             $table->increments('id');
             $table->dateTime('start');
             $table->dateTime('end');
-            $table->integer('type');
+            $table->string('type');
             $table->boolean('paid');
             $table->string('amount');
             $table->integer('clicks');

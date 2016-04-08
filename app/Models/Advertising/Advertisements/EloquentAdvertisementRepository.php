@@ -2,10 +2,7 @@
 namespace EQM\Models\Advertising\Advertisements;
 
 use Carbon\Carbon;
-use EQM\Core\Advertisements\FullPage;
-use EQM\Core\Advertisements\LeaderBoard;
-use EQM\Core\Advertisements\Rectangle;
-use EQM\Core\Advertisements\SkyScraper;
+use EQM\Core\Advertisements\AdObject;
 
 class EloquentAdvertisementRepository implements AdvertisementRepository
 {
@@ -25,22 +22,13 @@ class EloquentAdvertisementRepository implements AdvertisementRepository
      */
     public function create(array $values)
     {
-        $advertisement = new EloquentAdvertisement([
-            'start' => Carbon::createFromFormat('d/m/Y', $values['start'])->startOfDay(),
-            'end' => Carbon::createFromFormat('d/m/Y', $values['end'])->endOfDay(),
-            'type' => $values['type'],
-            'adv_company_id' => $values['company_id'],
-            'picture_id' => array_get($values, 'picture_id'),
-            'paid' => array_get($values, 'paid', false),
-            'amount' => $values['amount'],
-            'clicks' => 0,
-            'views' => 0,
-            'website' => eqm_protocol_prepend($values['website']),
-        ]);
+        switch ($values['type']) {
+            case AdObject::RECTANGLE:
+                return $this->createRectangle($values);
 
-        $advertisement->save();
-
-        return $advertisement;
+            case AdObject::LEADERBOARD:
+                return $this->createLeaderBoard($values);
+        }
     }
 
     /**
@@ -60,10 +48,6 @@ class EloquentAdvertisementRepository implements AdvertisementRepository
 
         if (array_key_exists('website', $values)) {
             $advertisement->website = eqm_protocol_prepend($values['website']);
-        }
-
-        if (array_key_exists('type', $values)) {
-            $advertisement->type = $values['type'];
         }
 
         if (array_key_exists('paid', $values)) {
@@ -118,31 +102,49 @@ class EloquentAdvertisementRepository implements AdvertisementRepository
         $now = Carbon::now();
 
         return $this->advertisement
-            ->where('type', $this->getConvertedType($type)->type())
+            ->where('type', $type)
             ->where('start', '<', $now)
             ->where('end', '>', $now)
             ->get();
     }
 
     /**
-     * @param $type
-     * @return \EQM\Core\Advertisements\AdObject
+     * @param \EQM\Models\Advertising\Advertisements\Advertisement $advertisement
+     * @param array $values
+     * @return \EQM\Models\Advertising\Advertisements\Advertisement
      */
-    private function getConvertedType($type)
+    private function make(Advertisement $advertisement, array $values)
     {
-        switch ($type)
-        {
-            case $type == 'rectangle':
-                return new Rectangle();
+        $advertisement->start = Carbon::createFromFormat('d/m/Y', $values['start'])->startOfDay();
+        $advertisement->end = Carbon::createFromFormat('d/m/Y', $values['end'])->endOfDay();
+        $advertisement->adv_company_id = $values['company_id'];
+        $advertisement->picture_id = array_get($values, 'picture_id');
+        $advertisement->paid = array_get($values, 'paid', false);
+        $advertisement->amount = $values['amount'];
+        $advertisement->clicks = 0;
+        $advertisement->views = 0;
+        $advertisement->website = eqm_protocol_prepend($values['website']);
 
-            case $type == 'leaderboard':
-                return new LeaderBoard();
+        $advertisement->save();
 
-            case $type == 'skyscraper':
-                return new SkyScraper();
+        return $advertisement;
+    }
 
-            case $type == 'full_page':
-                return new FullPage();
-        }
+    /**
+     * @param array $values
+     * @return \EQM\Models\Advertising\Advertisements\Advertisement
+     */
+    private function createRectangle(array $values)
+    {
+        $advertisement = new EloquentRectangle();
+
+        return $this->make($advertisement, $values);
+    }
+
+    private function createLeaderBoard(array $values)
+    {
+        $advertisement = new EloquentLeaderBoard();
+
+        return $this->make($advertisement, $values);
     }
 }

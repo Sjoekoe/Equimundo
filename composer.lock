@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7c2795a65d82fc7cbb21c1cc35998c42",
-    "content-hash": "abb6a2aa93f14691d70906f3a81d8432",
+    "hash": "ff7f9a1bf38f0a2d55a7c9335f8111c9",
+    "content-hash": "3a80f9d1b8b92894b63c4264afef18eb",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -454,7 +454,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dingo/api/zipball/9ada1d349e4794bdf587c85bc2702e401f0e87ae",
+                "url": "https://api.github.com/repos/dingo/api/zipball/8cd1a6cd7d2ba9fc96841fd0745ef8fc1ce2a530",
                 "reference": "98d3d0047252bcb0d7503337972ac00fe62ab31f",
                 "shasum": ""
             },
@@ -2626,6 +2626,57 @@
             "time": "2015-06-29 05:41:44"
         },
         {
+            "name": "nanigans/single-table-inheritance",
+            "version": "0.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Nanigans/single-table-inheritance.git",
+                "reference": "c481d035ae0471fda3d33810b0f8abb158bdcfa0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Nanigans/single-table-inheritance/zipball/c481d035ae0471fda3d33810b0f8abb158bdcfa0",
+                "reference": "c481d035ae0471fda3d33810b0f8abb158bdcfa0",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "5.1.*",
+                "illuminate/support": "5.1.*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.*",
+                "orchestra/testbench": "3.1.*",
+                "phpunit/phpunit": "4.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Nanigans\\SingleTableInheritance\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jon Palmer",
+                    "email": "jpalmer@nanigans.com"
+                }
+            ],
+            "description": "Single Table Inheritance Trait",
+            "keywords": [
+                "eloquent",
+                "inheritance",
+                "laravel",
+                "model",
+                "single",
+                "table"
+            ],
+            "time": "2015-07-25 10:58:32"
+        },
+        {
             "name": "nesbot/carbon",
             "version": "1.20.0",
             "source": {
@@ -4287,7 +4338,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padraic/mockery/zipball/64d0c313c5fa6db3c113f577b47da45a0591ef4e",
+                "url": "https://api.github.com/repos/padraic/mockery/zipball/50c55201c8b649aa65f96748964ff72f3e7fdcf0",
                 "reference": "ee88cd05073533b10678772fe954d042748393c3",
                 "shasum": ""
             },

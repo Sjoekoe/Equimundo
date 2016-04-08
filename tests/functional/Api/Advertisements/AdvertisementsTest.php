@@ -5,6 +5,8 @@ use Carbon\Carbon;
 use EQM\Core\Advertisements\AdObject;
 use EQM\Core\Testing\DefaultIncludes;
 use EQM\Models\Advertising\Advertisements\Advertisement;
+use EQM\Models\Advertising\Advertisements\LeaderBoard;
+use EQM\Models\Advertising\Advertisements\Rectangle;
 
 class AdvertisementsTest extends \TestCase
 {
@@ -179,14 +181,13 @@ class AdvertisementsTest extends \TestCase
 
         $this->put('/api/admin/advertisements/' . $advertisement->id(), [
             'amount' => '600',
-            'type' => AdObject::FULL_PAGE,
             'paid' => false,
         ])->seeJsonEquals([
                 'data' => [
                     'id' => $advertisement->id(),
                     'start' => $advertisement->start()->toIso8601String(),
                     'end' => $advertisement->end()->toIso8601String(),
-                    'type' => AdObject::FULL_PAGE,
+                    'type' => Rectangle::TYPE,
                     'views' => $advertisement->views(),
                     'clicks' => $advertisement->clicks(),
                     'amount' => 600,
