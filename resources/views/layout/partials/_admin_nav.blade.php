@@ -45,7 +45,11 @@
                                 <i class="arrow"></i>
                             </a>
                             <ul class="collapse">
-                                <li><a href="#">Overview</a></li>
+                                <li class="{{ Active::route('admin.advertisements.overview', 'active-link') }}">
+                                    <a href="{{ route('admin.advertisements.overview') }}">
+                                        Overview
+                                    </a>
+                                </li>
                                 <li class="{{ Active::route('admin.advertisements.companies.index', 'active-link') }}">
                                     <a href="{{ route('admin.advertisements.companies.index') }}">
                                         Companies

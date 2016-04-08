@@ -70,7 +70,7 @@ class EloquentAdvertisingCompanyRepository implements AdvertisingCompanyReposito
      */
     public function findAll()
     {
-        $companies = $this->advertisingCompany->all();
+        $companies = $this->advertisingCompany->with('addressRelation')->get();
 
         return new Collection($companies);
     }

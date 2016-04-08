@@ -26,6 +26,11 @@ interface AdvertisementRepository
      * @return \EQM\Models\Advertising\Advertisements\Advertisement|null
      */
     public function findById($id);
+
+    /**
+     * @return \EQM\Models\Advertising\Advertisements\Advertisement[]
+     */
+    public function findAll();
     
     public function findAllPaginated($limit = 10);
 

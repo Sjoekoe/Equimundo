@@ -92,6 +92,14 @@ class EloquentAdvertisementRepository implements AdvertisementRepository
         return $this->advertisement->where('id', $id)->first();
     }
 
+    /**
+     * @return \EQM\Models\Advertising\Advertisements\Advertisement[]
+     */
+    public function findAll()
+    {
+        return $this->advertisement->get();
+    }
+
     public function findAllPaginated($limit = 10)
     {
         return $this->advertisement->paginate($limit);
