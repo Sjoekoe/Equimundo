@@ -13,9 +13,11 @@ new Vue({
         advertisingcompany: require('./components/admin/Advertisements/ShowAdvertisingCompany'),
         advertisingcompaniestable: require('./components/admin/Advertisements/AdvertisingCompaniesTable'),
         createadvertisement: require('./components/admin/Advertisements/CreateAdvertisement'),
+        createadvertisingcompany: require('./components/admin/Advertisements/CreateAdvertisingCompany'),
         leaderboard: require('./components/admin/Advertisements/ShowLeaderBoard'),
         rectangle: require('./components/admin/Advertisements/ShowRectangle'),
-        createadvertisingcompany: require('./components/admin/Advertisements/CreateAdvertisingCompany'),
+        showadvertisement: require('./components/admin/Advertisements/ShowAdvertisement'),
+        
         admindash: require('./components/admin/dashboard'),
         notedrop: require('./components/notifications/NotificationsDropdown'),
         notifications: require('./components/notifications/NotificationOverview'),

@@ -6,3 +6,4 @@ Route::get('/admin/advertisements/companies/{advertising_company}', ['as' => 'ad
 
 Route::get('/admin/advertisements', ['as' => 'admin.advertisements.index', 'uses' => 'AdvertisementController@index']);
 Route::get('/admin/advertisements/create', ['as' => 'admin.advertisements.create', 'uses' => 'AdvertisementController@create']);
+Route::get('/admin/advertisements/{advertisement}', ['as' => 'admin.advertisements.show', 'uses' => 'AdvertisementController@show']);

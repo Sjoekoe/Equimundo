@@ -3,6 +3,7 @@ namespace EQM\Http\Controllers\Admin;
 
 use EQM\Core\Info\Info;
 use EQM\Http\Controllers\Controller;
+use EQM\Models\Advertising\Advertisements\Advertisement;
 use EQM\Models\Advertising\Companies\AdvertisingCompanyCollection;
 use EQM\Models\Advertising\Companies\AdvertisingCompanyRepository;
 
@@ -30,5 +31,12 @@ class AdvertisementController extends Controller
         $info->flash('companies', $companies);
 
         return view('admin.advertisements.create', compact('companies'));
+    }
+
+    public function show(Info $info, Advertisement $advertisement)
+    {
+        $info->flash('advertisement', $advertisement);
+
+        return view('admin.advertisements.show');
     }
 }

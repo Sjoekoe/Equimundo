@@ -47,6 +47,9 @@
                                             <td>@{{ advertisement.type }}</td>
                                             <td>@{{ advertisement.companyRelation.data.name }}</td>
                                             <td>
+                                                <a href="/admin/advertisements/@{{ advertisement.id }}">
+                                                    <i class="fa fa-search"></i>
+                                                </a>
                                                 <a href="#" @click="delete(advertisement)">
                                                     <i class="fa fa-remove"></i>
                                                 </a>
