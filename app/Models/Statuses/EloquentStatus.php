@@ -138,7 +138,7 @@ class EloquentStatus extends Model implements Status
      */
     public function isLikedByUser(User $user)
     {
-        foreach ($this->likes() as $like) {
+        foreach ($this->likes()->get() as $like) {
             if ($like->id() === $user->id()) {
                 return true;
             }
