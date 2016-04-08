@@ -66,6 +66,10 @@ class EloquentAdvertisementRepository implements AdvertisementRepository
             $advertisement->clicks += 1;
         }
 
+        if (array_key_exists('picture_id', $values)) {
+            $advertisement->picture_id = $values['picture_id'];
+        }
+
         $advertisement->save();
 
         return $advertisement;
