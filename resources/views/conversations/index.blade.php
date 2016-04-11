@@ -1,6 +1,9 @@
 @extends('layout.app')
 
 @section('content')
+
+@include('advertisements.leaderboard');
+
 <div id="page-title">
     <h1 class="page-header text-overflow">{{ trans('copy.titles.messages') }}</h1>
 </div>

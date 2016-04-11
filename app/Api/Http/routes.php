@@ -5,6 +5,8 @@ $api = app(Router::class);
 
 $api->version('v1', function(Router $api) {
     $api->group(['namespace' => 'EQM\\Api\\Http\\Controllers\\'], function (Router $api) {
+        $api->post('/addresses', ['as' => 'api.addresses.create', 'uses' => 'AddressController@create']);
+
         $api->get('/users/{user}', ['as' => 'api.users.show', 'uses' => 'UserController@show']);
         $api->get('/users/{user}/horses', ['as' => 'api.users.horses.index', 'uses' => 'HorseController@index']);
         $api->get('/users/{user}/feed', ['as' => 'api.users.feed', 'uses' => 'UserController@feed']);
@@ -30,5 +32,33 @@ $api->version('v1', function(Router $api) {
         $api->get('/notifications/mark-as-read', ['as' => 'api.notifications.read', 'uses' => 'NotificationController@markRead']);
         $api->get('/notifications/{notification}', ['as' => 'api.notifications.show', 'uses' => 'NotificationController@show']);
         $api->delete('/notifications/{notification}', ['as' => 'api.notifications.delete', 'uses' => 'NotificationController@delete']);
+
+        $api->group(['namespace' => 'Admin\\', 'prefix' => 'admin'], function(Router $api) {
+            $api->group(['prefix' => 'advertisements'], function(Router $api) {
+
+                $api->group(['prefix' => 'contacts'], function(Router $api) {
+                    $api->get('/', ['as' => 'api.admin.advertisements.contacts.index', 'uses' => 'ContactController@index']);
+                    $api->post('/', ['as' => 'api.admin.advertisements.contacts.store', 'uses' => 'ContactController@store']);
+                    $api->get('/{advertising_contact}', ['as' => 'api.admin.advertisements.contacts.show', 'uses' => 'ContactController@show']);
+                    $api->put('/{advertising_contact}', ['as' => 'api.admin.advertisements.contacts.update', 'uses' => 'ContactController@update']);
+                    $api->delete('/{advertising_contact}', ['as' => 'api.admin.advertisements.contacts.delete', 'uses' => 'ContactController@delete']);
+                });
+
+                $api->group(['prefix' => 'companies'], function(Router $api) {
+                    $api->get('/', ['as' => 'api.admin.advertisements.companies.index', 'uses' => 'CompanyController@index']);
+                    $api->post('/', ['as' => 'api.admin.advertisements.companies.store', 'uses' => 'CompanyController@store']);
+                    $api->get('/{advertising_company}', ['as' => 'api.admin.advertisements.companies.show', 'uses' => 'CompanyController@show']);
+                    $api->put('/{advertising_company}', ['as' => 'api.admin.advertisements.companies.update', 'uses' => 'CompanyController@update']);
+                    $api->delete('/{advertising_company}', ['as' => 'api.admin.advertisements.companies.delete', 'uses' => 'CompanyController@delete']);
+                });
+
+                $api->get('/', ['as' => 'api.admin.advertisements.index', 'uses' => 'AdvertisementController@index']);
+                $api->post('/', ['as' => 'api.admin.advertisements.store', 'uses' => 'AdvertisementController@store']);
+                $api->get('/random', ['as' => 'api.admin.advertisements.random', 'uses' => 'AdvertisementController@random']);
+                $api->get('/{advertisement}', ['as' => 'api.admin.advertisements.show', 'uses' => 'AdvertisementController@show']);
+                $api->put('/{advertisement}', ['as' => 'api.admin.advertisements.update', 'uses' => 'AdvertisementController@update']);
+                $api->delete('/{advertisement}', ['as' => 'api.admin.advertisements.delete', 'uses' => 'AdvertisementController@delete']);
+            });
+        });
     });
 });

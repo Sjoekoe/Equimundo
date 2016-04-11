@@ -5,10 +5,15 @@ use Illuminate\Support\ServiceProvider;
 
 class AddressServiceProvider extends ServiceProvider
 {
+    /**
+     * @var bool
+     */
+    protected $defer = true;
+
     public function register()
     {
-        $this->app->singleton(Address::class, function() {
-            return new EloquentAddress();
+        $this->app->singleton(AddressRepository::class, function() {
+            return new EloquentAddressRepository(new EloquentAddress());
         });
     }
 
@@ -17,6 +22,6 @@ class AddressServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return [Address::class];
+        return [AddressRepository::class];
     }
 }

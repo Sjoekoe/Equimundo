@@ -8,12 +8,12 @@ class EloquentAddress extends Model implements Address
     /**
      * @var string
      */
-    protected $table = 'addresses';
+    protected $table = self::TABLE;
 
     /**
      * @var array
      */
-    protected $fillable = ['addres_line_1', 'address_line_2', 'city', 'state', 'zip', 'country'];
+    protected $fillable = ['street', 'city', 'state', 'zip', 'country', 'latitude', 'longitude'];
 
     /**
      * @return int
@@ -28,15 +28,7 @@ class EloquentAddress extends Model implements Address
      */
     public function street()
     {
-        return $this->address_line_1;
-    }
-
-    /**
-     * @return string
-     */
-    public function addressLine2()
-    {
-        return $this->address_line_2;
+        return $this->street;
     }
 
     /**
@@ -69,5 +61,21 @@ class EloquentAddress extends Model implements Address
     public function country()
     {
         return $this->country;
+    }
+
+    /**
+     * @return string
+     */
+    public function longitude()
+    {
+        return $this->longitude;
+    }
+
+    /**
+     * @return string
+     */
+    public function latitude()
+    {
+        return $this->latitude;
     }
 }

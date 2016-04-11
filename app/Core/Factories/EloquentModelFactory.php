@@ -1,6 +1,16 @@
 <?php
 namespace EQM\Core\Factories;
 
+use EQM\Models\Addresses\Address;
+use EQM\Models\Addresses\EloquentAddress;
+use EQM\Models\Advertising\Advertisements\Advertisement;
+use EQM\Models\Advertising\Advertisements\EloquentAdvertisement;
+use EQM\Models\Advertising\Advertisements\EloquentRectangle;
+use EQM\Models\Advertising\Advertisements\Rectangle;
+use EQM\Models\Advertising\Companies\AdvertisingCompany;
+use EQM\Models\Advertising\Companies\EloquentAdvertisingCompany;
+use EQM\Models\Advertising\Contacts\AdvertisingContact;
+use EQM\Models\Advertising\Contacts\EloquentAdvertisingContact;
 use EQM\Models\Horses\EloquentHorse;
 use EQM\Models\Horses\Horse;
 use EQM\Models\HorseTeams\EloquentHorseTeam;
@@ -24,11 +34,15 @@ class EloquentModelFactory implements ModelFactory
      * @var array
      */
     private $models = [
-        User::class => EloquentUser::class,
+        Address::class => EloquentAddress::class,
+        Rectangle::class => EloquentRectangle::class,
+        AdvertisingCompany::class => EloquentAdvertisingCompany::class,
+        AdvertisingContact::class => EloquentAdvertisingContact::class,
         Horse::class => EloquentHorse::class,
         HorseTeam::class => EloquentHorseTeam::class,
-        Status::class => EloquentStatus::class,
         Notification::class => EloquentNotification::class,
+        Status::class => EloquentStatus::class,
+        User::class => EloquentUser::class,
     ];
 
     /**

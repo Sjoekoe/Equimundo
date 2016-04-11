@@ -24,7 +24,8 @@
 		"algolia/algoliasearch-client-php": "^1.8",
 		"algolia/algoliasearch-laravel": "^1.0",
 		"dingo/api": "1.0.x@dev",
-		"tymon/jwt-auth": "^0.5.9"
+		"tymon/jwt-auth": "^0.5.9",
+		"nanigans/single-table-inheritance": "0.5.*"
 	},
 	"require-dev": {
 	  	"fzaninotto/faker": "~1.4",

@@ -177,6 +177,7 @@ return [
         EQM\Models\Statuses\Likes\LikeServiceProvider::class,
         EQM\Models\Users\AuthServiceProvider::class,
         EQM\Models\Users\UserServiceProvider::class,
+        EQM\Models\Advertising\AdvertisingServiceProvider::class,
     ],
     /*
     |--------------------------------------------------------------------------

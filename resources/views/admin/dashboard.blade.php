@@ -158,6 +158,19 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="panel media pad-all">
+                        <div class="media-left">
+                        <span class="icon-wrap icon-wrap-sm icon-circle bg-success">
+                            <i class="fa fa-money fa-2x"></i>
+                        </span>
+                        </div>
+                        <div class="media-body">
+                            <p class="text-2x mar-no text-thin">{{ $advertisements }}</p>
+                            <p class="text-muted mar-no">Advertisements</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </template>
 

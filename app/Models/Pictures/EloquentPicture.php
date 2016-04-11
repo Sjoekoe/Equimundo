@@ -11,7 +11,7 @@ class EloquentPicture extends Model implements Picture
     /**
      * @var string
      */
-    protected $table = 'pictures';
+    protected $table = self::TABLE;
 
     /**
      * @var array
