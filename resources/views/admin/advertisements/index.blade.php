@@ -50,7 +50,10 @@
                                                 <a href="/admin/advertisements/@{{ advertisement.id }}">
                                                     <i class="fa fa-search"></i>
                                                 </a>
-                                                <a href="#" @click="delete(advertisement)">
+                                                <a href="#" @click="markAsPaid(advertisement)" v-if="! advertisement.paid">
+                                                    <i class="fa fa-money"></i>
+                                                </a>
+                                                <a href="#" @click="deleteAdvertisement(advertisement)">
                                                     <i class="fa fa-remove"></i>
                                                 </a>
                                             </td>

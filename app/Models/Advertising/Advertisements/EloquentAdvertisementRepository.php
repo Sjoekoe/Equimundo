@@ -51,7 +51,7 @@ class EloquentAdvertisementRepository implements AdvertisementRepository
         }
 
         if (array_key_exists('paid', $values)) {
-            $advertisement->paid = array_get($values, 'paid', false);
+            $advertisement->paid = array_get($values, 'paid', false) == 'true';
         }
 
         if (array_key_exists('amount', $values)) {

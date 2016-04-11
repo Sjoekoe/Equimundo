@@ -18,13 +18,30 @@ module.exports = Vue.extend({
     },
 
     methods: {
-        delete: function(advertisement) {
+        deleteAdvertisement: function(advertisement) {
             this.advertisements.$remove(advertisement);
             $.ajax({
                 url: '/api/admin/advertisements/' + advertisement.id,
                 type: 'post',
                 data: {_method: 'delete'},
             });
+        },
+
+        markAsPaid: function(advertisement) {
+            var data = {
+                "paid": true,
+                _method: 'put',
+            };
+
+            var vm = this;
+            $.ajax({
+                url: '/api/admin/advertisements/' + advertisement.id,
+                type: 'post',
+                data: data,
+                success: function (advertisement) {
+                    window.location.replace('/admin/advertisements');
+                }.bind(vm),
+            })
         }
     }
 });
