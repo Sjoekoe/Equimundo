@@ -39,4 +39,9 @@ interface AdvertisementRepository
      * @return \EQM\Models\Advertising\Advertisements\Advertisement[]
      */
     public function findRandomByType($type);
+
+    /**
+     * @return int
+     */
+    public function count();
 }

@@ -153,10 +153,22 @@ class EloquentAdvertisementRepository implements AdvertisementRepository
         return $this->make($advertisement, $values);
     }
 
+    /**
+     * @param array $values
+     * @return \EQM\Models\Advertising\Advertisements\Advertisement
+     */
     private function createLeaderBoard(array $values)
     {
         $advertisement = new EloquentLeaderBoard();
 
         return $this->make($advertisement, $values);
+    }
+
+    /**
+     * @return int
+     */
+    public function count()
+    {
+        return count($this->advertisement->all());
     }
 }
