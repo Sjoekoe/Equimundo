@@ -90,6 +90,27 @@ class CompaniesTest extends \TestCase
     }
 
     /** @test */
+    function it_can_update_a_company()
+    {
+        $address = $this->createAddress();
+        $company = $this->createCompany([
+            'address_id' => $address->id(),
+        ]);
+
+        $this->put('/api/companies/' . $company->slug(), [
+            'name' => 'Update it',
+            'telephone' => '85096',
+            'website' => 'www.update.com',
+        ])->seeJsonEquals([
+            'data' => $this->includedCompany($company, [
+                'name' => 'Update it',
+                'telephone' => '85096',
+                'website' => 'http://www.update.com',
+            ])
+        ]);
+    }
+
+    /** @test */
     function it_can_delete_a_company()
     {
         $address = $this->createAddress();

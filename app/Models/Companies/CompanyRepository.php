@@ -14,6 +14,13 @@ interface CompanyRepository
 
     /**
      * @param \EQM\Models\Companies\Company $company
+     * @param array $values
+     * @return \EQM\Models\Companies\Company
+     */
+    public function update(Company $company, array $values);
+
+    /**
+     * @param \EQM\Models\Companies\Company $company
      */
     public function delete(Company $company);
 

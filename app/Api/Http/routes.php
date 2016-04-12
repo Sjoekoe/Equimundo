@@ -37,6 +37,7 @@ $api->version('v1', function(Router $api) {
             $api->get('/', ['as' => 'api.companies.index', 'uses' => 'CompanyController@index']);
             $api->post('/', ['as' => 'api.companies.store', 'uses' => 'CompanyController@store']);
             $api->get('/{company}', ['as' => 'api.companies.show', 'uses' => 'CompanyController@show']);
+            $api->put('/{company}', ['as' => 'api.companies.update', 'uses' => 'CompanyController@update']);
             $api->delete('/{company}', ['as' => 'api.companies.delete', 'uses' => 'CompanyController@delete']);
         });
 

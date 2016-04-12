@@ -31,6 +31,34 @@ class EloquentCompanyRepository implements CompanyRepository
 
     /**
      * @param \EQM\Models\Companies\Company $company
+     * @param array $values
+     * @return \EQM\Models\Companies\Company
+     */
+    public function update(Company $company, array $values)
+    {
+        if (array_key_exists('name', $values)) {
+            $company->name = $values['name'];
+        }
+
+        if (array_key_exists('telephone', $values)) {
+            $company->telephone = $values['telephone'];
+        }
+
+        if (array_key_exists('website', $values)) {
+            $company->website = eqm_protocol_prepend($values['website']);
+        }
+
+        if (array_key_exists('about', $values)) {
+            $company->about = $values['about'];
+        }
+
+        $company->save();
+
+        return $company;
+    }
+
+    /**
+     * @param \EQM\Models\Companies\Company $company
      */
     public function delete(Company $company)
     {

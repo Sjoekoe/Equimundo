@@ -4,6 +4,7 @@ namespace EQM\Api\Http\Controllers\Companies;
 use EQM\Api\Companies\CompanyTransformer;
 use EQM\Api\Companies\Jobs\CreatesCompany;
 use EQM\Api\Companies\Requests\StoreCompanyRequest;
+use EQM\Api\Companies\Requests\UpdateCompanyRequest;
 use EQM\Api\Http\Controller;
 use EQM\Models\Companies\Company;
 use EQM\Models\Companies\CompanyRepository;
@@ -46,11 +47,18 @@ class CompanyController extends Controller
     {
         return $this->response()->item($company, new CompanyTransformer());
     }
-    
+
+    public function update(UpdateCompanyRequest $request, Company $company)
+    {
+        $company = $this->companies->update($company, $request->all());
+
+        return $this->response()->item($company, new CompanyTransformer());
+    }
+
     public function delete(Company $company)
     {
         $this->companies->delete($company);
-        
+
         return $this->response()->noContent();
     }
 }
