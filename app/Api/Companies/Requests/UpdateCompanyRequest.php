@@ -9,11 +9,12 @@ class UpdateCompanyRequest extends Request
     {
         return true;
     }
-    
+
     public function rules()
     {
         return [
             'website' => 'url_host',
+            'email' => 'email',
         ];
     }
 }

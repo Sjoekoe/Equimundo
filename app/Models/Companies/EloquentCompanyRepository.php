@@ -51,6 +51,10 @@ class EloquentCompanyRepository implements CompanyRepository
         if (array_key_exists('about', $values)) {
             $company->about = $values['about'];
         }
+        
+        if (array_key_exists('email', $values)) {
+            $company->email = $values['email'];
+        }
 
         $company->save();
 
@@ -84,6 +88,7 @@ class EloquentCompanyRepository implements CompanyRepository
         $company->address_id = $address->id();
         $company->website = eqm_protocol_prepend($values['website']);
         $company->about = $values['about'];
+        $company->email = $values['email'];
 
         $company->save();
 

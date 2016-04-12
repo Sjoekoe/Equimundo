@@ -24,7 +24,8 @@ class StoreCompanyRequest extends Request
             'city' => 'required',
             'zip' => 'required',
             'country' => 'required',
-            'website' => 'url_host'
+            'website' => 'url_host',
+            'email' => 'email|required',
         ];
     }
 }
