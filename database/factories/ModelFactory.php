@@ -7,6 +7,7 @@ use EQM\Models\Advertising\Companies\EloquentAdvertisingCompany;
 use EQM\Models\Advertising\Contacts\EloquentAdvertisingContact;
 use EQM\Models\Albums\EloquentAlbum;
 use EQM\Models\Comments\EloquentComment;
+use EQM\Models\Companies\EloquentStable;
 use EQM\Models\Disciplines\EloquentDiscipline;
 use EQM\Models\Events\EloquentEvent;
 use EQM\Models\Horses\EloquentHorse;
@@ -120,5 +121,9 @@ $factory->define(EloquentAddress::class, function(Generator $faker) {
 });
 
 $factory->define(EloquentRectangle::class, function(Generator $faker) {
+    return [];
+});
+
+$factory->define(EloquentStable::class, function (Generator $faker) {
     return [];
 });

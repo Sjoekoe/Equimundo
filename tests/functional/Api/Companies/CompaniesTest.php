@@ -1,10 +1,40 @@
 <?php
 namespace functional\Api\Companies;
 
+use EQM\Core\Testing\DefaultIncludes;
+use EQM\Models\Companies\Company;
 use EQM\Models\Companies\Stable;
 
 class CompaniesTest extends \TestCase
 {
+    use DefaultIncludes;
+
+    /** @test */
+    function it_can_show_all_companies_paginated()
+    {
+        $address = $this->createAddress();
+        $company = $this->createCompany([
+            'address_id' => $address->id(),
+        ]);
+
+        $this->get('api/companies')
+            ->seeJsonEquals([
+                'data' => [
+                    $this->includedCompany($company),
+                ],
+                'meta' => [
+                    'pagination' => [
+                        'count' => 1,
+                        'current_page' => 1,
+                        'links' => [],
+                        'per_page' => 10,
+                        'total' => 1,
+                        'total_pages' => 1,
+                    ],
+                ],
+            ]);
+    }
+
     /** @test */
     function it_can_create_a_company()
     {
@@ -42,6 +72,40 @@ class CompaniesTest extends \TestCase
                     ]
                 ]
             ]
+        ]);
+    }
+
+    /** @test */
+    function it_can_show_a_company()
+    {
+        $address = $this->createAddress();
+        $company = $this->createCompany([
+            'address_id' => $address->id(),
+        ]);
+
+        $this->get('/api/companies/' . $company->slug())
+            ->seeJsonEquals([
+                'data' => $this->includedCompany($company),
+            ]);
+    }
+
+    /** @test */
+    function it_can_delete_a_company()
+    {
+        $address = $this->createAddress();
+        $company = $this->createCompany([
+            'address_id' => $address->id(),
+        ]);
+
+        $this->seeInDatabase(Company::TABLE, [
+            'id' => $company->id(),
+        ]);
+
+        $this->delete('/api/companies/' . $company->slug())
+            ->assertResponseStatus(204);
+
+        $this->missingFromDatabase(Company::TABLE, [
+            'id' => $company->id(),
         ]);
     }
 }

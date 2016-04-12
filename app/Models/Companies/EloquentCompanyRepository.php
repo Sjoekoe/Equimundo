@@ -31,6 +31,19 @@ class EloquentCompanyRepository implements CompanyRepository
 
     /**
      * @param \EQM\Models\Companies\Company $company
+     */
+    public function delete(Company $company)
+    {
+        $company->delete();
+    }
+
+    public function findAllPaginated($limit = 10)
+    {
+        return $this->company->paginate($limit);
+    }
+
+    /**
+     * @param \EQM\Models\Companies\Company $company
      * @param \EQM\Models\Addresses\Address $address
      * @param array $values
      * @return \EQM\Models\Companies\Company
@@ -59,6 +72,15 @@ class EloquentCompanyRepository implements CompanyRepository
         $company = new EloquentStable();
 
         return $this->make($company, $address, $values);
+    }
+
+    /**
+     * @param string $slug
+     * @return \EQM\Models\Companies\Company|null
+     */
+    public function findBySlug($slug)
+    {
+        return $this->company->where('slug', $slug)->first();
     }
 
     /**

@@ -1,7 +1,9 @@
 <?php
 namespace EQM\Core\Testing;
 
+use EQM\Models\Addresses\Address;
 use EQM\Models\Advertising\Contacts\AdvertisingContact;
+use EQM\Models\Companies\Company;
 use EQM\Models\Users\User;
 
 trait DefaultIncludes
@@ -46,5 +48,44 @@ trait DefaultIncludes
                 'telephone' => $contact->telephone(),
             ], $attributes)
         ];
+    }
+
+    /**
+     * @param \EQM\Models\Companies\Company $company
+     * @param array $attributes
+     * @return array
+     */
+    public function includedCompany(Company $company, $attributes = [])
+    {
+        return array_merge([
+            'id' => $company->id(),
+            'name' => $company->name(),
+            'slug' => $company->slug(),
+            'website' => $company->website(),
+            'telephone' => $company->telephone(),
+            'about' => $company->about(),
+            'addressRelation' => [
+                'data' => $this->includedAddress($company->address()),
+            ]
+        ], $attributes);
+    }
+
+    /**
+     * @param \EQM\Models\Addresses\Address $address
+     * @param array $attributes
+     * @return array
+     */
+    public function includedAddress(Address $address, $attributes = [])
+    {
+        return array_merge([
+            'id' => $address->id(),
+            'street' => $address->street(),
+            'city' => $address->city(),
+            'zip' => $address->zip(),
+            'state' => $address->state(),
+            'country' => $address->country(),
+            'latitude' => $address->latitude(),
+            'longitude' => $address->longitude(),
+        ], $attributes);
     }
 }

@@ -20,11 +20,11 @@ class ConversationRouteBinder extends AbstractRouteBinding implements RouteBindi
     }
 
     /**
-     * @param int|string $id
+     * @param int|string $slug
      * @return mixed
      */
-    public function find($id)
+    public function find($slug)
     {
-        return $this->conversations->findById($id);
+        return $this->conversations->findById($slug);
     }
 }

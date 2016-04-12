@@ -11,6 +11,8 @@ use EQM\Models\Advertising\Companies\AdvertisingCompany;
 use EQM\Models\Advertising\Companies\EloquentAdvertisingCompany;
 use EQM\Models\Advertising\Contacts\AdvertisingContact;
 use EQM\Models\Advertising\Contacts\EloquentAdvertisingContact;
+use EQM\Models\Companies\EloquentStable;
+use EQM\Models\Companies\Stable;
 use EQM\Models\Horses\EloquentHorse;
 use EQM\Models\Horses\Horse;
 use EQM\Models\HorseTeams\EloquentHorseTeam;
@@ -38,6 +40,7 @@ class EloquentModelFactory implements ModelFactory
         Rectangle::class => EloquentRectangle::class,
         AdvertisingCompany::class => EloquentAdvertisingCompany::class,
         AdvertisingContact::class => EloquentAdvertisingContact::class,
+        Stable::class => EloquentStable::class,
         Horse::class => EloquentHorse::class,
         HorseTeam::class => EloquentHorseTeam::class,
         Notification::class => EloquentNotification::class,

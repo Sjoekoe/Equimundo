@@ -34,7 +34,10 @@ $api->version('v1', function(Router $api) {
         $api->delete('/notifications/{notification}', ['as' => 'api.notifications.delete', 'uses' => 'NotificationController@delete']);
 
         $api->group(['namespace' => 'Companies\\', 'prefix' => 'companies'], function (Router $api) {
+            $api->get('/', ['as' => 'api.companies.index', 'uses' => 'CompanyController@index']);
             $api->post('/', ['as' => 'api.companies.store', 'uses' => 'CompanyController@store']);
+            $api->get('/{company}', ['as' => 'api.companies.show', 'uses' => 'CompanyController@show']);
+            $api->delete('/{company}', ['as' => 'api.companies.delete', 'uses' => 'CompanyController@delete']);
         });
 
         $api->group(['namespace' => 'Admin\\', 'prefix' => 'admin'], function(Router $api) {

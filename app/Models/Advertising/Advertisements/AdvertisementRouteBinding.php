@@ -17,11 +17,11 @@ class AdvertisementRouteBinding extends AbstractRouteBinding implements RouteBin
     }
 
     /**
-     * @param int|string $id
+     * @param int|string $slug
      * @return \EQM\Models\Advertising\Advertisements\Advertisement|null
      */
-    public function find($id)
+    public function find($slug)
     {
-        return $this->advertisements->findById($id);
+        return $this->advertisements->findById($slug);
     }
 }

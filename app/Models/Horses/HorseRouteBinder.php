@@ -20,11 +20,11 @@ class HorseRouteBinder extends AbstractRouteBinding implements RouteBinding
     }
 
     /**
-     * @param int|string $id
+     * @param int|string $slug
      * @return mixed
      */
-    public function find($id)
+    public function find($slug)
     {
-        return $this->horses->findById($id);
+        return $this->horses->findById($slug);
     }
 }

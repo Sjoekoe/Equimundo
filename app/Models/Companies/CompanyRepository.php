@@ -13,6 +13,19 @@ interface CompanyRepository
     public function create(Address $address, array $values);
 
     /**
+     * @param \EQM\Models\Companies\Company $company
+     */
+    public function delete(Company $company);
+
+    public function findAllPaginated($limit = 10);
+
+    /**
+     * @param string $slug
+     * @return \EQM\Models\Companies\Company|null
+     */
+    public function findBySlug($slug);
+
+    /**
      * @param string $slug
      * @return int
      */

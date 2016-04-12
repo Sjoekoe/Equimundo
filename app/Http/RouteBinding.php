@@ -10,8 +10,8 @@ interface RouteBinding
     public function bind($value);
 
     /**
-     * @param int|string $id
+     * @param int|string $slug
      * @return mixed
      */
-    public function find($id);
+    public function find($slug);
 }

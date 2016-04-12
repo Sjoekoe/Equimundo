@@ -9,6 +9,7 @@ use EQM\Models\Advertising\Advertisements\Advertisement;
 use EQM\Models\Advertising\Advertisements\Rectangle;
 use EQM\Models\Advertising\Companies\AdvertisingCompany;
 use EQM\Models\Advertising\Contacts\AdvertisingContact;
+use EQM\Models\Companies\Stable;
 use EQM\Models\Horses\Horse;
 use EQM\Models\HorseTeams\HorseTeam;
 use EQM\Models\Notifications\Notification;
@@ -217,6 +218,23 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
             'views' => 2,
             'picture_id' => null,
             'website' => 'http://www.test.com',
+        ], $attributes));
+    }
+
+    /**
+     * @param array $attributes
+     * @return \EQM\Models\Companies\Company
+     */
+    public function createCompany(array $attributes = [])
+    {
+        return $this->modelFactory->create(Stable::class, array_merge([
+            'name' => 'Stal de vogelzang',
+            'slug' => 'stal-de-vogelzang',
+            'type' => Stable::TYPE,
+            'address_id' => null,
+            'website' => 'staldevogelzang.be',
+            'about' => 'lorem ipsum',
+            'telephone' => '12345'
         ], $attributes));
     }
 }
