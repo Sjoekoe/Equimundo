@@ -28,6 +28,9 @@ class EloquentCompanyUserRepository implements CompanyUserRepository
         switch ($type) {
             case $type == TeamMember::ID:
                 return $this->createTeamMember($user, $company, $isAdmin);
+
+            case $type == Follower::ID:
+                return $this->createFollower($user, $company);
         }
     }
 
@@ -62,8 +65,44 @@ class EloquentCompanyUserRepository implements CompanyUserRepository
         return $this->make($companyUser, $user, $company, $isAdmin);
     }
 
+    /**
+     * @param \EQM\Models\Users\User $user
+     * @param \EQM\Models\Companies\Company $company
+     * @return \EQM\Models\Companies\Users\CompanyUser
+     */
+    private function createFollower(User $user, Company $company)
+    {
+        $companyUser = new EloquentFollower();
+
+        return $this->make($companyUser, $user, $company, false);
+    }
+
     public function findByCompanyPaginated(Company $company, $limit = 10)
     {
         return $this->companyUser->where('company_id', $company->id())->latest()->paginate($limit);
+    }
+
+    /**
+     * @param \EQM\Models\Companies\Company $company
+     * @param \EQM\Models\Users\User $user
+     * @return \EQM\Models\Companies\Users\CompanyUser
+     */
+    public function findByCompanyAndUser(Company $company, User $user)
+    {
+        return $this->companyUser
+            ->where('company_id', $company->id())
+            ->where('user_id', $user->id())
+            ->first();
+    }
+
+    /**
+     * @param \EQM\Models\Companies\Company $company
+     * @param \EQM\Models\Users\User $user
+     */
+    public function deleteByCompanyAndUser(Company $company, User $user)
+    {
+        $companyUser = $this->findByCompanyAndUser($company, $user);
+        
+        $companyUser->delete();
     }
 }
