@@ -33,6 +33,10 @@ $api->version('v1', function(Router $api) {
         $api->get('/notifications/{notification}', ['as' => 'api.notifications.show', 'uses' => 'NotificationController@show']);
         $api->delete('/notifications/{notification}', ['as' => 'api.notifications.delete', 'uses' => 'NotificationController@delete']);
 
+        $api->group(['namespace' => 'Companies\\', 'prefix' => 'companies'], function (Router $api) {
+            $api->post('/', ['as' => 'api.companies.store', 'uses' => 'CompanyController@store']);
+        });
+
         $api->group(['namespace' => 'Admin\\', 'prefix' => 'admin'], function(Router $api) {
             $api->group(['prefix' => 'advertisements'], function(Router $api) {
 

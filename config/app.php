@@ -160,6 +160,7 @@ return [
         EQM\Models\Addresses\AddressServiceProvider::class,
         EQM\Models\Albums\AlbumServiceProvider::class,
         EQM\Models\Comments\CommentServiceProvider::class,
+        EQM\Models\Companies\CompanyServiceProvider::class,
         EQM\Models\Conversations\ConversationServiceProvider::class,
         EQM\Models\Disciplines\DisciplineServiceProvider::class,
         EQM\Models\Events\EventServiceProvider::class,

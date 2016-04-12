@@ -19,6 +19,18 @@ class EloquentAddressRepository implements AddressRepository
      */
     public function create(array $values)
     {
+        $geocoded = $values['street'] . ' ' . $values['zip'];
+        $prepAddr = str_replace(' ', '+', $geocoded);
+        $geocode = file_get_contents('http://maps.google.com/maps/api/geocode/json?address='.$prepAddr.'&sensor=false');
+
+        $output = json_decode($geocode);
+
+        $lat = $output->results[0]->geometry->location->lat;
+        $long = $output->results[0]->geometry->location->lng;
+
+        $values['latitude'] = $lat;
+        $values['longitude'] = $long;
+        
         $address = new EloquentAddress([
             'street' => $values['street'],
             'zip' => $values['zip'],

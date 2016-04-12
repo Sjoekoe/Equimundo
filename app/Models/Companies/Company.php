@@ -18,7 +18,17 @@ interface Company
     /**
      * @return string
      */
+    public function slug();
+
+    /**
+     * @return string
+     */
     public function website();
+
+    /**
+     * @return string
+     */
+    public function telephone();
 
     /**
      * @return string

@@ -2,11 +2,15 @@
 namespace EQM\Models\Companies;
 
 use EQM\Models\Addresses\EloquentAddress;
+use EQM\Models\Companies\Users\CompanyUser;
+use EQM\Models\Companies\Users\EloquentCompanyUser;
+use EQM\Models\Companies\Users\Follower;
+use EQM\Models\Companies\Users\TeamMember;
 use EQM\Models\UsesTimeStamps;
 use Illuminate\Database\Eloquent\Model;
 use Nanigans\SingleTableInheritance\SingleTableInheritanceTrait;
 
-abstract class EloquentCompany extends Model
+class EloquentCompany extends Model implements Company
 {
     use UsesTimeStamps, SingleTableInheritanceTrait;
 
@@ -49,9 +53,25 @@ abstract class EloquentCompany extends Model
     /**
      * @return string
      */
+    public function slug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @return string
+     */
     public function website()
     {
         return $this->website;
+    }
+
+    /**
+     * @return string
+     */
+    public function telephone()
+    {
+        return $this->telephone;
     }
 
     /**
@@ -78,12 +98,19 @@ abstract class EloquentCompany extends Model
         return $this->addressRelation()->first();
     }
 
+    public function userTeamRelation()
+    {
+        return $this->hasMany(EloquentCompanyUser::class, 'company_id', 'id');
+    }
+
     /**
      * @return \EQM\Models\Users\User[]
      */
     public function userTeams()
     {
-        // TODO: Implement users() method.
+        $this->userTeamRelation()->filter(function (CompanyUser $user) {
+            return $user instanceof TeamMember;
+        });
     }
 
     /**
@@ -91,6 +118,16 @@ abstract class EloquentCompany extends Model
      */
     public function followers()
     {
-        // TODO: Implement followers() method.
+        $this->userTeamRelation()->filter(function (CompanyUser $user) {
+            return $user instanceof Follower;
+        });
+    }
+
+    /**
+     * @return string
+     */
+    public function type()
+    {
+        return $this->type;
     }
 }
