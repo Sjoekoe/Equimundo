@@ -6,6 +6,7 @@ use EQM\Models\Companies\Users\CompanyUser;
 use EQM\Models\Companies\Users\EloquentCompanyUser;
 use EQM\Models\Companies\Users\Follower;
 use EQM\Models\Companies\Users\TeamMember;
+use EQM\Models\Users\User;
 use EQM\Models\UsesTimeStamps;
 use Illuminate\Database\Eloquent\Model;
 use Nanigans\SingleTableInheritance\SingleTableInheritanceTrait;
@@ -124,7 +125,7 @@ class EloquentCompany extends Model implements Company
      */
     public function userTeams()
     {
-        $this->userRelation()->filter(function (CompanyUser $user) {
+        $this->userRelation->filter(function (CompanyUser $user) {
             return $user instanceof TeamMember;
         });
     }
@@ -134,9 +135,14 @@ class EloquentCompany extends Model implements Company
      */
     public function followers()
     {
-        $this->userRelation()->filter(function (CompanyUser $user) {
-            return $user instanceof Follower;
-        });
+        $users = [];
+        foreach($this->userRelation()->get() as $companyUser) {
+            if ($companyUser instanceof Follower) {
+                array_push($users, $companyUser);
+            }
+        }
+
+        return $users;
     }
 
     /**
@@ -145,5 +151,20 @@ class EloquentCompany extends Model implements Company
     public function type()
     {
         return $this->type;
+    }
+
+    /**
+     * @param \EQM\Models\Users\User $user
+     * @return bool
+     */
+    public function isFollowedByUser(User $user)
+    {
+        foreach ($this->followers() as $follower) {
+            if ($follower->user()->id() == $user->id()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

@@ -34,18 +34,18 @@ class CompanyUserController extends Controller
 
         return $this->response()->item($companyUser, new CompanyUserTransformer());
     }
-    
+
     public function show(Company $company, User $user)
     {
         $companyUser = $this->companyUsers->findByCompanyAndUser($company, $user);
 
         return $this->response()->item($companyUser, new CompanyUserTransformer());
     }
-    
+
     public function delete(Company $company, User $user)
     {
         $this->companyUsers->deleteByCompanyAndUser($company, $user);
-        
+
         return $this->response()->noContent();
     }
 }

@@ -1,6 +1,8 @@
 <?php
 namespace EQM\Models\Companies;
 
+use EQM\Models\Users\User;
+
 interface Company
 {
     const TABLE = 'companies';
@@ -74,4 +76,10 @@ interface Company
      * @return \EQM\Models\Companies\Users\CompanyUser[]
      */
     public function followers();
+
+    /**
+     * @param \EQM\Models\Users\User $user
+     * @return bool
+     */
+    public function isFollowedByUser(User $user);
 }

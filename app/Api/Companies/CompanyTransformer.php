@@ -32,6 +32,7 @@ class CompanyTransformer extends TransformerAbstract
             'telephone' => $company->telephone(),
             'email' => $company->email(),
             'about' => nl2br($company->about()),
+            'is_followed_by_user' => auth()->check() ? $company->isFollowedByUser(auth()->user()) : false,
         ];
     }
 

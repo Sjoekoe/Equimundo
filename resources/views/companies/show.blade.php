@@ -53,17 +53,24 @@
             <div id="aside">
                 <div class="nano">
                     <div class="nano-content">
-
-                        <!-- Simple profile -->
                         <div class="text-center pad-all">
                             <h4 class="text-lg text-overflow mar-no">@{{ company.name }}</h4>
 
                             <div class="pad-ver btn-group">
-                                <a title="" href="mailto:@{{  company.website }}" class="btn btn-icon btn-hover-warning fa fa-envelope icon-lg add-tooltip" data-original-title="Email" data-container="body"></a>
+                                <a title="" href="mailto:@{{  company.email }}" class="btn btn-icon btn-hover-warning fa fa-envelope icon-lg add-tooltip" data-original-title="Email" data-container="body"></a>
                                 <a title="" v-bind:href="company.website" target="_blank" class="btn btn-icon btn-hover-warning fa fa-laptop icon-lg add-tooltip" data-original-title="Website" data-container="body"></a>
                                 <a href="tel:@{{ company.telephone }}" class="btn btn-icon btn-hover-warning fa fa-phone icon-lg add-tooltip" data-original-title="Telephone" data-container="body"></a>
                             </div>
+                            @if (auth()->check())
+                                <template v-if="company.is_followed_by_user">
+                                    <button class="btn btn-block btn-mint" @click="unfollow">Unfollow</button>
+                                </template>
+                                <template v-else>
+                                    <button class="btn btn-block btn-mint" @click="follow">Follow</button>
+                                </template>
+                            @endif
                         </div>
+
                         <hr>
                         <div class="pad-hor">
                             <h5>Address</h5>

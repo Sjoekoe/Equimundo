@@ -65,7 +65,38 @@ module.exports = Vue.extend({
                 }
             ]);
         });
-
-        //setTimeout(this.setMap, 100);
     },
+
+    methods: {
+        follow: function() {
+            var data = {
+                type: 2,
+                is_admin: false,
+            }
+
+            var vm = this;
+
+            $.ajax({
+                url: '/api/companies/' + vm.company.slug + '/users',
+                type: 'post',
+                data: data,
+                success: function() {
+                    vm.company.is_followed_by_user = true;
+                }.bind(vm)
+            });
+        },
+
+        unfollow: function() {
+            var vm = this;
+
+            $.ajax({
+                url: '/api/companies/' + vm.company.slug + '/users/' + window.equimundo.auth.user.id,
+                type: 'post',
+                data: {_method: 'delete'},
+                success: function() {
+                    vm.company.is_followed_by_user = false;
+                }.bind(vm)
+            });
+        }
+    }
 });
