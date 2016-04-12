@@ -21,6 +21,7 @@ class CreateCompanyTables extends Migration
             $table->string('slug');
             $table->string('telephone');
             $table->string('website');
+            $table->string('email');
             $table->longText('about');
             $table->integer('address_id')->unsigned()->nullable();
             $table->foreign('address_id')->references('id')->on('addresses')->onDelete('set null');

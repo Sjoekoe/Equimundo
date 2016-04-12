@@ -44,6 +44,7 @@ class CompaniesTest extends \TestCase
             'name' => 'Test Company',
             'telephone' => '12345',
             'website' => 'www.test.com',
+            'email' => 'test@test.com',
             'about' => 'lorem ipsum',
             'street' => 'Puttingstraat 8',
             'zip' => '4564BJ',
@@ -58,6 +59,7 @@ class CompaniesTest extends \TestCase
                 'slug' => 'test-company',
                 'telephone' => '12345',
                 'about' => 'lorem ipsum',
+                'email' => 'test@test.com',
                 'website' => 'http://www.test.com',
                 'addressRelation' => [
                     'data' => [

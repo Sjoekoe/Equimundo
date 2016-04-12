@@ -22,6 +22,10 @@ Route::group(['namespace' => 'Auth'], function() {
     require __DIR__ . '/Routes/Auth/auth.php';
 });
 
+Route::group(['namespace' => 'Companies'], function() {
+    require __DIR__ . '/Routes/Companies/companies.php';
+});
+
 Route::group(['namespace' => 'Conversations'], function() {
     require __DIR__ . '/Routes/Conversations/conversations.php';
     require __DIR__ . '/Routes/Conversations/messages.php';

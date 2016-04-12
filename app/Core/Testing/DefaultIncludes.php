@@ -64,6 +64,7 @@ trait DefaultIncludes
             'website' => $company->website(),
             'telephone' => $company->telephone(),
             'about' => $company->about(),
+            'email' => $company->email(),
             'addressRelation' => [
                 'data' => $this->includedAddress($company->address()),
             ]

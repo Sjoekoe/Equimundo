@@ -23,6 +23,11 @@ interface Company
     /**
      * @return string
      */
+    public function email();
+
+    /**
+     * @return string
+     */
     public function website();
 
     /**
@@ -56,12 +61,17 @@ interface Company
     public function address();
 
     /**
-     * @return \EQM\Models\Users\User[]
+     * @return \EQM\Models\Companies\Users\CompanyUser[]
+     */
+    public function users();
+
+    /**
+     * @return \EQM\Models\Companies\Users\CompanyUser[]
      */
     public function userTeams();
 
     /**
-     * @return \EQM\Models\Users\User[]
+     * @return \EQM\Models\Companies\Users\CompanyUser[]
      */
     public function followers();
 }

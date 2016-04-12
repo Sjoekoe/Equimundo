@@ -232,6 +232,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
             'slug' => 'stal-de-vogelzang',
             'type' => Stable::TYPE,
             'address_id' => null,
+            'email' => 'company@test.com',
             'website' => 'staldevogelzang.be',
             'about' => 'lorem ipsum',
             'telephone' => '12345'

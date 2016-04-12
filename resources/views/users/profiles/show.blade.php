@@ -1,3 +1,4 @@
+
 @extends('layout.left-aside')
 
 @section('content')

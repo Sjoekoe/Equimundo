@@ -32,7 +32,7 @@ class EloquentCompany extends Model implements Company
     /**
      * @var array
      */
-    protected $fillable = ['name', 'website', 'about'];
+    protected $fillable = ['name', 'website', 'about', 'email', 'telephone'];
 
     /**
      * @return int
@@ -56,6 +56,14 @@ class EloquentCompany extends Model implements Company
     public function slug()
     {
         return $this->slug;
+    }
+
+    /**
+     * @return string
+     */
+    public function email()
+    {
+        return $this->email;
     }
 
     /**
@@ -98,27 +106,35 @@ class EloquentCompany extends Model implements Company
         return $this->addressRelation()->first();
     }
 
-    public function userTeamRelation()
+    public function userRelation()
     {
         return $this->hasMany(EloquentCompanyUser::class, 'company_id', 'id');
     }
 
     /**
-     * @return \EQM\Models\Users\User[]
+     * @return \EQM\Models\Companies\Users\CompanyUser[]
+     */
+    public function users()
+    {
+        return $this->userRelation()->latest()->get();
+    }
+
+    /**
+     * @return \EQM\Models\Companies\Users\CompanyUser[]
      */
     public function userTeams()
     {
-        $this->userTeamRelation()->filter(function (CompanyUser $user) {
+        $this->userRelation()->filter(function (CompanyUser $user) {
             return $user instanceof TeamMember;
         });
     }
 
     /**
-     * @return \EQM\Models\Users\User[]
+     * @return \EQM\Models\Companies\Users\CompanyUser[]
      */
     public function followers()
     {
-        $this->userTeamRelation()->filter(function (CompanyUser $user) {
+        $this->userRelation()->filter(function (CompanyUser $user) {
             return $user instanceof Follower;
         });
     }

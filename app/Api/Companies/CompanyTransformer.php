@@ -14,6 +14,10 @@ class CompanyTransformer extends TransformerAbstract
         'addressRelation',
     ];
 
+    protected $availableIncludes = [
+        'userRelation'
+    ];
+
     /**
      * @param \EQM\Models\Companies\Company $company
      * @return array
@@ -26,7 +30,8 @@ class CompanyTransformer extends TransformerAbstract
             'slug' => $company->slug(),
             'website' => $company->website(),
             'telephone' => $company->telephone(),
-            'about' => $company->about(),
+            'email' => $company->email(),
+            'about' => nl2br($company->about()),
         ];
     }
 
@@ -37,5 +42,14 @@ class CompanyTransformer extends TransformerAbstract
     public function includeAddressRelation(Company $company)
     {
         return $this->item($company->address(), new AddressTransformer());
+    }
+
+    /**
+     * @param \EQM\Models\Companies\Company $company
+     * @return \League\Fractal\Resource\Item
+     */
+    public function includeUserRelation(Company $company)
+    {
+        return $this->collection($company->users(), new CompanyUserTransformer());
     }
 }
