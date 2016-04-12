@@ -10,14 +10,21 @@ module.exports = Vue.extend({
         return {
             company: {},
             address: {},
+            users: {},
             latLong: {},
         }
     },
 
     ready: function() {
-        $.getJSON('/api/companies/' + window.equimundo.company + '?include=userRelation', function(company) {
+        var companySlug = window.equimundo.company;
+
+        $.getJSON('/api/companies/' + companySlug , function(company) {
             this.company = company.data;
             this.address = company.data.addressRelation.data;
+        }.bind(this));
+
+        $.getJSON('/api/companies/' + companySlug + '/users', function (users) {
+            this.users = users.data;
         }.bind(this));
 
         this.latLong = {lat: parseFloat(window.equimundo.latitude), lng: parseFloat(window.equimundo.longitude)};
@@ -25,7 +32,6 @@ module.exports = Vue.extend({
         var vm = this;
         googleMaps.load(function (google) {
             var mapDiv = document.getElementById('map');
-            console.log(mapDiv);
             var map = new google.maps.Map(mapDiv, {
                 center: vm.latLong,
                 zoom: 14,

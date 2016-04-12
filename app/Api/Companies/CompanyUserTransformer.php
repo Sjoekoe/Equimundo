@@ -3,6 +3,7 @@ namespace EQM\Api\Companies;
 
 use EQM\Api\Users\UserTransformer;
 use EQM\Models\Companies\Users\CompanyUser;
+use EQM\Models\Companies\Users\TeamMember;
 use League\Fractal\TransformerAbstract;
 
 class CompanyUserTransformer extends TransformerAbstract
@@ -23,7 +24,7 @@ class CompanyUserTransformer extends TransformerAbstract
     {
         return [
             'id' => $companyUser->id(),
-            'is_admin' => (bool) $companyUser->isAdmin(),
+            'is_admin' => (bool) $companyUser instanceof TeamMember ? $companyUser->isAdmin() : false,
         ];
     }
 

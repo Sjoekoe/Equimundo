@@ -39,6 +39,8 @@ $api->version('v1', function(Router $api) {
             $api->get('/{company}', ['as' => 'api.companies.show', 'uses' => 'CompanyController@show']);
             $api->put('/{company}', ['as' => 'api.companies.update', 'uses' => 'CompanyController@update']);
             $api->delete('/{company}', ['as' => 'api.companies.delete', 'uses' => 'CompanyController@delete']);
+
+            $api->get('/{company}/users', ['as' => 'api.companies.users.index', 'uses' => 'CompanyUserController@index']);
         });
 
         $api->group(['namespace' => 'Admin\\', 'prefix' => 'admin'], function(Router $api) {

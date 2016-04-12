@@ -35,7 +35,7 @@
                             </h3>
                         </div>
                         <div class="panel-body">
-                            <ul v-for="user in company.userRelation.data" class="list-unstyled">
+                            <ul v-for="user in users" class="list-unstyled">
                                 <li>
                                     <a href="/user/@{{ user.userRelation.data.slug }}" class="text-mint">
                                         @{{ user.userRelation.data.first_name + ' ' +  user.userRelation.data.last_name}}
@@ -80,17 +80,6 @@
                             <small class="text-thin" v-html="company.about">
 
                             </small>
-                        </div>
-                        <hr>
-                        <div class="text-center clearfix">
-                            <div class="col-xs-6">
-
-                                <small class="text-muted">{{ trans('copy.titles.horses') }}</small>
-                            </div>
-                            <div class="col-xs-6">
-
-                                <small class="text-muted">{{ trans('copy.titles.followers') }}</small>
-                            </div>
                         </div>
                     </div>
                 </div>

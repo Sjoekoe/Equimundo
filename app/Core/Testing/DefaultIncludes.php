@@ -4,6 +4,7 @@ namespace EQM\Core\Testing;
 use EQM\Models\Addresses\Address;
 use EQM\Models\Advertising\Contacts\AdvertisingContact;
 use EQM\Models\Companies\Company;
+use EQM\Models\Companies\Users\CompanyUser;
 use EQM\Models\Users\User;
 
 trait DefaultIncludes
@@ -87,6 +88,23 @@ trait DefaultIncludes
             'country' => $address->country(),
             'latitude' => $address->latitude(),
             'longitude' => $address->longitude(),
+        ], $attributes);
+    }
+
+    /**
+     * @param \EQM\Models\Companies\Users\CompanyUser $companyUser
+     * @param array $attributes
+     * @return array
+     */
+    public function includedCompanyUser(CompanyUser $companyUser, $attributes = [])
+    {
+        return array_merge([
+            'id' => $companyUser->id(),
+            'is_admin' => false,
+            'userRelation' => $this->includedUser($companyUser->user()),
+            'companyRelation' => [
+                'data' => $this->includedCompany($companyUser->company())
+            ]
         ], $attributes);
     }
 }

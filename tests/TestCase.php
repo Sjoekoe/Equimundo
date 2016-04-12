@@ -10,6 +10,7 @@ use EQM\Models\Advertising\Advertisements\Rectangle;
 use EQM\Models\Advertising\Companies\AdvertisingCompany;
 use EQM\Models\Advertising\Contacts\AdvertisingContact;
 use EQM\Models\Companies\Stable;
+use EQM\Models\Companies\Users\Follower;
 use EQM\Models\Horses\Horse;
 use EQM\Models\HorseTeams\HorseTeam;
 use EQM\Models\Notifications\Notification;
@@ -236,6 +237,18 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
             'website' => 'staldevogelzang.be',
             'about' => 'lorem ipsum',
             'telephone' => '12345'
+        ], $attributes));
+    }
+
+    /**
+     * @param array $attributes
+     * @return \EQM\Models\Companies\Users\CompanyUser
+     */
+    public function createCompanyUser(array $attributes = [])
+    {
+        return $this->modelFactory->create(Follower::class, array_merge([
+            'is_admin' => false,
+            'type' => Follower::TYPE,
         ], $attributes));
     }
 }

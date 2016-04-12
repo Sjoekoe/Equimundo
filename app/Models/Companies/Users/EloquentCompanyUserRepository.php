@@ -61,4 +61,9 @@ class EloquentCompanyUserRepository implements CompanyUserRepository
 
         return $this->make($companyUser, $user, $company, $isAdmin);
     }
+
+    public function findByCompanyPaginated(Company $company, $limit = 10)
+    {
+        return $this->companyUser->where('company_id', $company->id())->latest()->paginate($limit);
+    }
 }
