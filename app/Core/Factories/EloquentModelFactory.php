@@ -10,6 +10,8 @@ use EQM\Models\Advertising\Companies\EloquentAdvertisingCompany;
 use EQM\Models\Advertising\Contacts\AdvertisingContact;
 use EQM\Models\Advertising\Contacts\EloquentAdvertisingContact;
 use EQM\Models\Companies\EloquentStable;
+use EQM\Models\Companies\Horses\CompanyHorse;
+use EQM\Models\Companies\Horses\EloquentCompanyHorse;
 use EQM\Models\Companies\Stable;
 use EQM\Models\Companies\Users\EloquentFollower;
 use EQM\Models\Companies\Users\Follower;
@@ -40,6 +42,7 @@ class EloquentModelFactory implements ModelFactory
         Rectangle::class => EloquentRectangle::class,
         AdvertisingCompany::class => EloquentAdvertisingCompany::class,
         AdvertisingContact::class => EloquentAdvertisingContact::class,
+        CompanyHorse::class => EloquentCompanyHorse::class,
         Stable::class => EloquentStable::class,
         Follower::class => EloquentFollower::class,
         Horse::class => EloquentHorse::class,

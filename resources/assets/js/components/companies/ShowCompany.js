@@ -10,8 +10,10 @@ module.exports = Vue.extend({
         return {
             company: {},
             address: {},
-            users: {},
+            users: [],
+            horses: [],
             latLong: {},
+            following: true,
         }
     },
 
@@ -26,49 +28,22 @@ module.exports = Vue.extend({
         $.getJSON('/api/companies/' + companySlug + '/users', function (users) {
             this.users = users.data;
         }.bind(this));
+        
+        $.getJSON('/api/companies/' + companySlug + '/horses', function(horses) {
+            this.horses = horses.data;
+        }.bind(this));
 
         this.latLong = {lat: parseFloat(window.equimundo.latitude), lng: parseFloat(window.equimundo.longitude)};
 
-        var vm = this;
-        googleMaps.load(function (google) {
-            var mapDiv = document.getElementById('map');
-            var map = new google.maps.Map(mapDiv, {
-                center: vm.latLong,
-                zoom: 14,
-                disableDefaultUI: true
-            });
+        this.loadMap(this.latLong);
 
-            var marker = new google.maps.Marker({
-                position: vm.latLong,
-                map: map,
-            });
-
-            map.set('styles', [
-                {
-                    featureType: 'road',
-                    elementType: 'geometry.stroke',
-                    stylers: [
-                        { color: '#40c4a7' },
-                        { weight: 0.6 },
-                        { lightness: -34 }
-                    ]
-                },
-                {
-                    featureType: 'landscape',
-                    elementType: 'all',
-                    stylers: [
-                        { color: '#40c4a7' },
-                        { saturation: -47 },
-                        { lightness: 19 },
-                        { gamma: 3.53 }
-                    ]
-                }
-            ]);
-        });
+        this.following = false;
     },
 
     methods: {
         follow: function() {
+            this.following = true;
+
             var data = {
                 type: 2,
                 is_admin: false,
@@ -80,8 +55,10 @@ module.exports = Vue.extend({
                 url: '/api/companies/' + vm.company.slug + '/users',
                 type: 'post',
                 data: data,
-                success: function() {
+                success: function(user) {
                     vm.company.is_followed_by_user = true;
+                    vm.users.push(user.data);
+                    vm.following = false;
                 }.bind(vm)
             });
         },
@@ -89,13 +66,57 @@ module.exports = Vue.extend({
         unfollow: function() {
             var vm = this;
 
+            $.get('/api/companies/' + vm.company.slug + '/users/' + window.equimundo.auth.user.id, function(record) {
+                vm.users.$remove(record.data);
+            }.bind(vm));
+
             $.ajax({
                 url: '/api/companies/' + vm.company.slug + '/users/' + window.equimundo.auth.user.id,
                 type: 'post',
                 data: {_method: 'delete'},
                 success: function() {
                     vm.company.is_followed_by_user = false;
+                    vm.following = false;
                 }.bind(vm)
+            });
+        },
+
+        loadMap: function (latLong) {
+            googleMaps.load(function (google) {
+                var mapDiv = document.getElementById('map');
+                var map = new google.maps.Map(mapDiv, {
+                    center: latLong,
+                    zoom: 14,
+                    disableDefaultUI: true
+                });
+
+                var marker = new google.maps.Marker({
+                    position: latLong,
+                    map: map,
+                });
+
+
+                map.set('styles', [
+                    {
+                        featureType: 'road',
+                        elementType: 'geometry.stroke',
+                        stylers: [
+                            { color: '#40c4a7' },
+                            { weight: 0.6 },
+                            { lightness: -34 }
+                        ]
+                    },
+                    {
+                        featureType: 'landscape',
+                        elementType: 'all',
+                        stylers: [
+                            { color: '#40c4a7' },
+                            { saturation: -47 },
+                            { lightness: 19 },
+                            { gamma: 3.53 }
+                        ]
+                    }
+                ]);
             });
         }
     }

@@ -62,12 +62,13 @@
                                 <a href="tel:@{{ company.telephone }}" class="btn btn-icon btn-hover-warning fa fa-phone icon-lg add-tooltip" data-original-title="Telephone" data-container="body"></a>
                             </div>
                             @if (auth()->check())
-                                <template v-if="company.is_followed_by_user">
-                                    <button class="btn btn-block btn-mint" @click="unfollow">Unfollow</button>
-                                </template>
-                                <template v-else>
-                                    <button class="btn btn-block btn-mint" @click="follow">Follow</button>
-                                </template>
+
+                                    <template v-if="company.is_followed_by_user">
+                                        <button class="btn btn-block btn-mint" @click="unfollow">Unfollow</button>
+                                    </template>
+                                    <template v-else>
+                                        <button class="btn btn-block btn-mint" @click="follow">Follow</button>
+                                    </template>
                             @endif
                         </div>
 

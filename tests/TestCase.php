@@ -9,6 +9,7 @@ use EQM\Models\Advertising\Advertisements\Advertisement;
 use EQM\Models\Advertising\Advertisements\Rectangle;
 use EQM\Models\Advertising\Companies\AdvertisingCompany;
 use EQM\Models\Advertising\Contacts\AdvertisingContact;
+use EQM\Models\Companies\Horses\CompanyHorse;
 use EQM\Models\Companies\Stable;
 use EQM\Models\Companies\Users\Follower;
 use EQM\Models\Horses\Horse;
@@ -250,5 +251,14 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
             'is_admin' => false,
             'type' => Follower::TYPE,
         ], $attributes));
+    }
+
+    /**
+     * @param array $attributes
+     * @return \EQM\Models\Companies\Horses\CompanyHorse
+     */
+    public function createCompanyHorse(array $attributes = [])
+    {
+        return $this->modelFactory->create(CompanyHorse::class, array_merge([], $attributes));
     }
 }

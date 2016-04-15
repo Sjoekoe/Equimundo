@@ -1,7 +1,9 @@
 <?php
 
 use EQM\Models\Companies\Company;
+use EQM\Models\Companies\Horses\CompanyHorse;
 use EQM\Models\Companies\Users\CompanyUser;
+use EQM\Models\Horses\Horse;
 use EQM\Models\Users\User;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -39,6 +41,15 @@ class CreateCompanyTables extends Migration
             $table->string('type');
             $table->timestamps();
         });
+
+        Schema::create(CompanyHorse::TABLE, function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('horse_id')->unsigned();
+            $table->foreign('horse_id')->references('id')->on(Horse::TABLE)->onDelete('cascade');
+            $table->integer('company_id')->unsigned();
+            $table->foreign('company_id')->references('id')->on(Company::TABLE)->onDelete('cascade');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -48,6 +59,7 @@ class CreateCompanyTables extends Migration
      */
     public function down()
     {
+        Schema::drop(CompanyHorse::TABLE);
         Schema::drop(CompanyUser::TABLE);
         Schema::drop(Company::TABLE);
     }

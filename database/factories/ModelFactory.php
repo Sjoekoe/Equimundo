@@ -8,6 +8,7 @@ use EQM\Models\Advertising\Contacts\EloquentAdvertisingContact;
 use EQM\Models\Albums\EloquentAlbum;
 use EQM\Models\Comments\EloquentComment;
 use EQM\Models\Companies\EloquentStable;
+use EQM\Models\Companies\Horses\EloquentCompanyHorse;
 use EQM\Models\Companies\Users\EloquentFollower;
 use EQM\Models\Disciplines\EloquentDiscipline;
 use EQM\Models\Events\EloquentEvent;
@@ -130,5 +131,8 @@ $factory->define(EloquentStable::class, function (Generator $faker) {
 });
 
 $factory->define(EloquentFollower::class, function (Generator $faker) {
+    return [];
+});
+$factory->define(EloquentCompanyHorse::class, function (Generator $faker) {
     return [];
 });

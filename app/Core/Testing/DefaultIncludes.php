@@ -4,7 +4,9 @@ namespace EQM\Core\Testing;
 use EQM\Models\Addresses\Address;
 use EQM\Models\Advertising\Contacts\AdvertisingContact;
 use EQM\Models\Companies\Company;
+use EQM\Models\Companies\Horses\CompanyHorse;
 use EQM\Models\Companies\Users\CompanyUser;
+use EQM\Models\Horses\Horse;
 use EQM\Models\Users\User;
 
 trait DefaultIncludes
@@ -66,6 +68,7 @@ trait DefaultIncludes
             'telephone' => $company->telephone(),
             'about' => $company->about(),
             'email' => $company->email(),
+            'is_followed_by_user' => false,
             'addressRelation' => [
                 'data' => $this->includedAddress($company->address()),
             ]
@@ -105,6 +108,45 @@ trait DefaultIncludes
             'companyRelation' => [
                 'data' => $this->includedCompany($companyUser->company())
             ]
+        ], $attributes);
+    }
+
+    /**
+     * @param \EQM\Models\Companies\Horses\CompanyHorse $companyHorse
+     * @param array $attributes
+     * @return array
+     */
+    public function includedCompanyHorse(CompanyHorse $companyHorse, $attributes = [])
+    {
+        return array_merge([
+            'id' => $companyHorse->id(),
+            'companyRelation' => [
+                'data' => $this->includedCompany($companyHorse->company()),
+            ],
+            'horseRelation' => [
+                'data' => $this->includedHorse($companyHorse->horse()),
+            ]
+        ], $attributes);
+    }
+
+    /**
+     * @param \EQM\Models\Horses\Horse $horse
+     * @param array $attributes
+     * @return array
+     */
+    public function includedHorse(Horse $horse, $attributes = [])
+    {
+        return array_merge([
+            'id' => $horse->id(),
+            'name' => $horse->name(),
+            'life_number' => $horse->lifeNumber(),
+            'breed' => $horse->breed(),
+            'height' => $horse->height(),
+            'gender' => (int) $horse->gender(),
+            'date_of_birth' => $horse->dateOfBirth()->toIso8601String(),
+            'color' => (int) $horse->color(),
+            'slug' => $horse->slug(),
+            'profile_picture' =>  'http://localhost/images/eqm.png',
         ], $attributes);
     }
 }
