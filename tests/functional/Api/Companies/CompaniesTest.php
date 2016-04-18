@@ -61,6 +61,7 @@ class CompaniesTest extends \TestCase
                 'about' => 'lorem ipsum',
                 'email' => 'test@test.com',
                 'website' => 'http://www.test.com',
+                'is_followed_by_user' => false,
                 'addressRelation' => [
                     'data' => [
                         'id' => 1,

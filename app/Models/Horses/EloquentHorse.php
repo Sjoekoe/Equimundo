@@ -15,7 +15,7 @@ use EQM\Models\Palmares\EloquentPalmares;
 use EQM\Models\Pedigrees\EloquentPedigree;
 use EQM\Models\Pedigrees\Pedigree;
 use EQM\Models\Pictures\EloquentPicture;
-use EQM\Models\Statuses\EloquentStatus;
+use EQM\Models\Statuses\EloquentHorseStatus;
 use EQM\Models\Users\EloquentUser;
 use Illuminate\Database\Eloquent\Model;
 
@@ -138,7 +138,7 @@ class EloquentHorse extends Model implements Horse
      */
     public function statuses()
     {
-        return $this->hasMany(EloquentStatus::class, 'horse_id', 'id')->latest()->get();
+        return $this->hasMany(EloquentHorseStatus::class, 'horse_id', 'id')->latest()->get();
     }
 
     /**

@@ -58,7 +58,9 @@ class CompanyUsersTest extends \TestCase
                 'is_admin' => false,
                 'userRelation' => $this->includedUser($user),
                 'companyRelation' => [
-                    'data' => $this->includedCompany($company)
+                    'data' => $this->includedCompany($company, [
+                        'is_followed_by_user' => true,
+                    ])
                 ],
             ]
         ]);

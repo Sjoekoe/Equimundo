@@ -32,6 +32,7 @@ class StatusesTest extends \TestCase
                         'liked_by_user' => false,
                         'can_delete_status' => false,
                         'picture' => null,
+                        'is_horse_status' => true,
                         'comments' => [
                             'data' => [],
                         ],
@@ -84,6 +85,7 @@ class StatusesTest extends \TestCase
                         'liked_by_user' => false,
                         'can_delete_status' => false,
                         'picture' => null,
+                        'is_horse_status' => true,
                         'comments' => [
                             'data' => [],
                         ],
@@ -133,6 +135,7 @@ class StatusesTest extends \TestCase
                 'prefix' => null,
                 'liked_by_user' => false,
                 'can_delete_status' => false,
+                'is_horse_status' => true,
                 'comments' => [
                     'data' => [],
                 ],
@@ -173,6 +176,7 @@ class StatusesTest extends \TestCase
                     'prefix' => trans('statuses.prefixes.' . $status->prefix()),
                     'liked_by_user' => false,
                     'can_delete_status' => false,
+                    'is_horse_status' => true,
                     'comments' => [
                         'data' => [],
                     ],
@@ -219,6 +223,7 @@ class StatusesTest extends \TestCase
                     'like_count' => 0,
                     'prefix' => 1,
                     'liked_by_user' => true,
+                    'is_horse_status' => true,
                     'likes' => [
                         'data' => [
                             [
@@ -274,6 +279,7 @@ class StatusesTest extends \TestCase
                     'prefix' => trans('statuses.prefixes.' . $status->prefix()),
                     'liked_by_user' => false,
                     'can_delete_status' => false,
+                    'is_horse_status' => true,
                     'comments' => [
                         'data' => [],
                     ],
@@ -332,6 +338,7 @@ class StatusesTest extends \TestCase
                 'prefix' => trans('statuses.prefixes.' . $status->prefix()),
                 'liked_by_user' => false,
                 'can_delete_status' => false,
+                'is_horse_status' => true,
                 'comments' => [
                     'data' => [],
                 ],

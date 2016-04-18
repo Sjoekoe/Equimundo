@@ -7,7 +7,6 @@ use EQM\Models\Events\EloquentEvent;
 use EQM\Models\Horses\EloquentHorse;
 use EQM\Models\HorseTeams\EloquentHorseTeam;
 use EQM\Models\Palmares\EloquentPalmares;
-use EQM\Models\Statuses\EloquentStatus;
 use EQM\Models\Statuses\Status;
 use EQM\Models\Users\EloquentUser;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
@@ -62,7 +61,7 @@ class PalmaresTest extends \TestCase
             'user_id' => $user->id(),
             'horse_id' => $horse->id(),
         ]);
-        $status = factory(EloquentStatus::class)->create([
+        $status = $this->createStatus([
             'horse_id' => $horse->id(),
         ]);
         $event = factory(EloquentEvent::class)->create([
@@ -104,7 +103,7 @@ class PalmaresTest extends \TestCase
             'user_id' => $user->id(),
             'horse_id' => $horse->id(),
         ]);
-        $status = factory(EloquentStatus::class)->create([
+        $status = $this->createStatus([
             'horse_id' => $horse->id(),
         ]);
         $event = factory(EloquentEvent::class)->create([

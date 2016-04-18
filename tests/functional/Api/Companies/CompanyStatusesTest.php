@@ -58,6 +58,7 @@ class CompanyStatusesTest extends \TestCase
                 'liked_by_user' => false,
                 'can_delete_status' => false,
                 'picture' => null,
+                'is_horse_status' => false,
                 'comments' => [
                     'data' => [],
                 ],
