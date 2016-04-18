@@ -3,6 +3,7 @@ namespace EQM\Api\Statuses;
 
 use EQM\Api\Comments\CommentTransformer;
 use EQM\Api\Users\UserTransformer;
+use EQM\Models\Statuses\HorseStatus;
 use EQM\Models\Statuses\Status;
 use League\Fractal\TransformerAbstract;
 
@@ -31,6 +32,7 @@ class StatusTransformer extends TransformerAbstract
             'liked_by_user' => auth()->check() ? $status->isLikedByUser(auth()->user()) : false,
             'picture' => $status->hasPicture() ? route('file.picture', [$status->getPicture()->id()]) : null,
             'can_delete_status' => auth()->check() ? auth()->user()->can('delete-status', $status) : false,
+            'is_horse_status' => $status instanceof HorseStatus,
         ];
     }
 

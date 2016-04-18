@@ -397,8 +397,12 @@ class EloquentHorse extends Model implements Horse
      */
     public function isFollowingCompany(Company $company)
     {
-        foreach ($this->companies() as $company) {
-            return $company->id();
+        foreach ($this->companies() as $horseCompany) {
+            if ($horseCompany->id() == $company->id()) {
+                return true;
+            }
         }
+
+        return false;
     }
 }

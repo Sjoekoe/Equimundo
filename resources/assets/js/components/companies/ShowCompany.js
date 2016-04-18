@@ -17,8 +17,19 @@ module.exports = Vue.extend({
             userHorses: [],
             image: '',
             body: '',
+            upload: '',
             submitting: false,
             errors: [],
+            statuses: [],
+            loading: true,
+            page: 1,
+            max_pages: 1,
+            commenting: false,
+            newComment: {
+                comment: {
+
+                },
+            },
         }
     },
 
@@ -38,11 +49,35 @@ module.exports = Vue.extend({
             this.horses = horses.data;
         }.bind(this));
 
+        $.getJSON('/api/companies/' + companySlug + '/statuses', function(statuses) {
+            this.statuses = statuses.data;
+            this.max_pages = statuses.meta.pagination.total_pages;
+            this.loading = false;
+        }.bind(this));
+
         this.latLong = {lat: parseFloat(window.equimundo.latitude), lng: parseFloat(window.equimundo.longitude)};
 
         this.loadMap(this.latLong);
 
         this.following = false;
+
+        var vm = this;
+
+        $(window).scroll(function() {
+            if (vm.loading == false && vm.page < vm.max_pages) {
+                if ($(document).height() <= ($(window).height() + $(window).scrollTop())) {
+                    vm.loading = true;
+                    vm.page += 1;
+
+                    $.getJSON('/api/companies/' + companySlug + '/statuses?page=' + vm.page, function (statuses) {
+                        vm.loading = false;
+                        statuses.data.map(function (status) {
+                            vm.statuses.push(status);
+                        });
+                    }.bind(vm));
+                }
+            }
+        });
     },
 
     methods: {
@@ -136,7 +171,7 @@ module.exports = Vue.extend({
             var vm = this;
 
             $.ajax({
-                url: '/api/companies/' + window.eqauimunod.company + '/statuses',
+                url: '/api/companies/' + window.equimundo.company + '/statuses',
                 type: 'post',
                 data: formData,
                 processData: false,
@@ -154,5 +189,93 @@ module.exports = Vue.extend({
                 }.bind(vm)
             })
         },
+
+        onFileChange: function(e) {
+            var files = e.target.files || e.dataTransfer.files;
+            if (!files.length) {
+                return;
+            }
+            this.createImage(files[0]);
+        },
+
+        createImage: function(file) {
+            var image = new Image();
+            var reader = new FileReader();
+            var vm = this;
+
+            reader.onload = function(e) {
+                vm.image = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        },
+
+        removeImage: function (e) {
+            this.image = '';
+        },
+
+        likeStatus: function(status) {
+            if (status.liked_by_user) {
+                status.like_count--;
+                status.liked_by_user = false;
+            } else {
+                status.like_count++;
+                status.liked_by_user = true;
+            }
+
+            $.ajax({
+                url: '/api/statuses/' + status.id + '/like',
+                type: 'post',
+            });
+        },
+
+        deleteStatus: function(status) {
+            this.statuses.$remove(status);
+            $.ajax({
+                url: '/api/statuses/' + status.id,
+                type: 'post',
+                data: {_method: 'delete'},
+            });
+        },
+
+        deleteComment: function(status, comment) {
+            status.comments.data.$remove(comment);
+            $.ajax({
+                url: '/api/statuses/' + status.id + '/comments/' + comment.id,
+                type: 'post',
+                data: {_method: 'delete'},
+            });
+        },
+
+        postComment: function(e, status) {
+            var comment_body;
+            e.preventDefault();
+            this.commenting = true;
+
+            if (this.newComment !== '') {
+                $.each(this.newComment.comment, function(ndx, value){
+                    comment_body = value;
+                });
+            }
+
+            var comment = {
+                "body": comment_body
+            }
+
+            this.newComment = '';
+            var vm = this;
+
+            $.ajax({
+                url: '/api/statuses/' + status.id + '/comments',
+                type: 'post',
+                data: comment,
+                success: function(comment) {
+                    status.comments.data.push(comment.data);
+                    vm.commenting = false;
+                },
+                errors: function() {
+                    vm.commenting = false;
+                }
+            })
+        }
     }
 });

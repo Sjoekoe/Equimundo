@@ -2,6 +2,7 @@
 namespace EQM\Api\Http\Controllers;
 
 use EQM\Api\Http\Controller;
+use EQM\Api\Statuses\HorseStatusTransformer;
 use EQM\Api\Statuses\Requests\StoreStatusRequest;
 use EQM\Api\Statuses\Requests\UpdateStatusRequest;
 use EQM\Api\Statuses\StatusTransformer;
@@ -25,19 +26,19 @@ class StatusController extends Controller
     {
         $status = $creator->create($request->all());
 
-        return $this->response()->item($status, new StatusTransformer());
+        return $this->response()->item($status, new HorseStatusTransformer());
     }
 
     public function show(Status $status)
     {
-        return $this->response()->item($status, new StatusTransformer());
+        return $this->response()->item($status, new HorseStatusTransformer());
     }
 
     public function update(UpdateStatusRequest $request, Status $status)
     {
         $status = $this->statuses->update($status, $request->all());
 
-        return $this->response()->item($status, new StatusTransformer());
+        return $this->response()->item($status, new HorseStatusTransformer());
     }
 
     public function delete(Status $status)

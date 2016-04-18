@@ -3,6 +3,7 @@ namespace EQM\Models\Pictures;
 
 use EQM\Models\Albums\Album;
 use EQM\Models\Albums\EloquentAlbum;
+use EQM\Models\Companies\EloquentCompany;
 use EQM\Models\Horses\EloquentHorse;
 use Illuminate\Database\Eloquent\Model;
 
@@ -112,5 +113,21 @@ class EloquentPicture extends Model implements Picture
     public function isMovie()
     {
         return in_array($this->mime, ['video/quicktime', 'video/mp4']);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function companyRelation()
+    {
+        return $this->belongsTo(EloquentCompany::class, 'company_id', 'id');
+    }
+
+    /**
+     * @return \EQM\Models\Companies\Company
+     */
+    public function company()
+    {
+        return $this->companyRelation()->first();
     }
 }

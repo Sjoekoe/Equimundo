@@ -3,6 +3,7 @@ namespace EQM\Models\Comments;
 
 use EQM\Events\CommentWasPosted;
 use EQM\Models\Notifications\Notification;
+use EQM\Models\Statuses\HorseStatus;
 use EQM\Models\Statuses\Status;
 use EQM\Models\Users\User;
 use Illuminate\Contracts\Events\Dispatcher;
@@ -39,9 +40,11 @@ class CommentCreator
     {
         $comment = $this->comments->create($status, $user, $request->get('body'));
 
-        $data = ['sender' => $user->fullName(), 'horse' => $status->horse()->name()];
+        if ($status instanceof HorseStatus) {
+            $data = ['sender' => $user->fullName(), 'horse' => $status->horse()->name()];
 
-        $this->dispatcher->fire(new CommentWasPosted($comment->status(), auth()->user(), Notification::COMMENT_POSTED, $data));
+            $this->dispatcher->fire(new CommentWasPosted($comment->status(), auth()->user(), Notification::COMMENT_POSTED, $data));
+        }
 
         return $comment;
     }

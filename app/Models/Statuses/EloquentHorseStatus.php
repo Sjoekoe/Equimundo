@@ -15,7 +15,7 @@ class EloquentHorseStatus extends EloquentStatus implements Status, HorseStatus
      */
     public function horseRelation()
     {
-        return $this->belongsTo(EloquentHorse::class);
+        return $this->belongsTo(EloquentHorse::class, 'horse_id', 'id');
     }
 
     /**

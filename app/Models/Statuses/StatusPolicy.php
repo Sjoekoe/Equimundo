@@ -17,7 +17,7 @@ class StatusPolicy
         }
 
         if ($status instanceof CompanyStatus) {
-            return $user->isCompanyAdmin($status->company());
+            return $user->isInCompanyTeam($status->company());
         }
     }
 }

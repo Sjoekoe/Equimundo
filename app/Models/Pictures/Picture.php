@@ -66,4 +66,9 @@ interface Picture
      * @return bool
      */
     public function isMovie();
+
+    /**
+     * @return \EQM\Models\Companies\Company
+     */
+    public function company();
 }

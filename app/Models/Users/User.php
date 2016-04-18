@@ -262,4 +262,10 @@ interface User
      * @return bool
      */
     public function isCompanyAdmin(Company $company);
+
+    /**
+     * @param \EQM\Models\Companies\Company $company
+     * @return bool
+     */
+    public function isInCompanyTeam(Company $company);
 }
