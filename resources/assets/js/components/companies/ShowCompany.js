@@ -14,6 +14,7 @@ module.exports = Vue.extend({
             horses: [],
             latLong: {},
             following: true,
+            userHorses: [],
         }
     },
 
@@ -28,7 +29,7 @@ module.exports = Vue.extend({
         $.getJSON('/api/companies/' + companySlug + '/users', function (users) {
             this.users = users.data;
         }.bind(this));
-        
+
         $.getJSON('/api/companies/' + companySlug + '/horses', function(horses) {
             this.horses = horses.data;
         }.bind(this));
@@ -118,6 +119,6 @@ module.exports = Vue.extend({
                     }
                 ]);
             });
-        }
+        },
     }
 });

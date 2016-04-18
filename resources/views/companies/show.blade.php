@@ -25,7 +25,37 @@
                             </h3>
                         </div>
                         <div class="panel-body">
-                            Oplijsting
+                            @if (auth()->check())
+                                <ul class="list-unstyled">
+                                    @foreach(auth()->user()->horses() as $horse)
+                                        <li style="margin-top: 5px;">
+                                            <a href="{{ route('horses.show', $horse->slug()) }}" class="text-mint">
+                                                {{ $horse->name() }}
+                                            </a>
+
+                                            @if ($horse->isFollowingCompany($company))
+                                                <a href="{{ route('companies.follow', [$company->slug(), $horse->id()]) }}">
+                                                    <span class="label label-danger pull-right">
+                                                        <i class="fa fa-remove"></i>
+                                                    </span>
+                                                </a>
+                                            @else
+                                                <a href="{{ route('companies.follow', [$company->slug(), $horse->id()]) }}">
+                                                    <span class="label label-info pull-right">
+                                                        <i class="fa fa-plus"></i>
+                                                    </span>
+                                                </a>
+                                            @endif
+                                        </li>
+                                    @endforeach
+                                </ul>
+                                <hr>
+                            @endif
+                            <ul class="list-unstyled" v-for="horse in horses">
+                                <a href="/horses/@{{ horse.horseRelation.data.slug }}" class="text-mint">
+                                    @{{ horse.horseRelation.data.name }}
+                                </a>
+                            </ul>
                         </div>
                     </div>
                     <div class="panel">

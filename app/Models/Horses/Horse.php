@@ -1,6 +1,8 @@
 <?php
 namespace EQM\Models\Horses;
 
+use EQM\Models\Companies\Company;
+
 interface Horse
 {
     const TABLE = 'horses';
@@ -566,4 +568,15 @@ interface Horse
      * @return bool
      */
     public function hasWistiaKey();
+
+    /**
+     * @return \EQM\Models\Companies\Company[]
+     */
+    public function companies();
+
+    /**
+     * @param \EQM\Models\Companies\Company $company
+     * @return bool
+     */
+    public function isFollowingCompany(Company $company);
 }
