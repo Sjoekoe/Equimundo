@@ -111,7 +111,7 @@ class EloquentStatusRepository implements StatusRepository
      */
     public function create(Horse $horse, $body, $prefix = null)
     {
-        $status = new EloquentStatus();
+        $status = new EloquentHorseStatus();
         $status->body = (new StatusConvertor())->convert($body);
         $status->horse_id = $horse->id();
         $status->prefix = $prefix;
@@ -143,6 +143,18 @@ class EloquentStatusRepository implements StatusRepository
     public function createForPalmares(Horse $horse, $body)
     {
         $status = $this->create($horse, $body, Status::PREFIX_PALMARES);
+
+        return $status;
+    }
+
+    public function createForCompany(Company $company, array $values)
+    {
+        $status = new EloquentCompanyStatus();
+        $status->body = (new StatusConvertor())->convert($values['body']);
+        $status->prefix = null;
+        $status->company_id = $company->id();
+
+        $status->save();
 
         return $status;
     }

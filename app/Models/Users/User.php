@@ -2,6 +2,7 @@
 namespace EQM\Models\Users;
 
 use Carbon\Carbon;
+use EQM\Models\Companies\Company;
 use EQM\Models\Conversations\Conversation;
 use EQM\Models\Horses\Horse;
 use EQM\Models\Roles\Role;
@@ -250,4 +251,15 @@ interface User
      * @return string
      */
     public function timezone();
+
+    /**
+     * @return \EQM\Models\Companies\Company[]
+     */
+    public function companies();
+
+    /**
+     * @param \EQM\Models\Companies\Company $company
+     * @return bool
+     */
+    public function isCompanyAdmin(Company $company);
 }

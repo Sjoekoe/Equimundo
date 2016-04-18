@@ -4,6 +4,9 @@ namespace EQM\Models\Users;
 use AlgoliaSearch\Laravel\AlgoliaEloquentTrait;
 use Carbon\Carbon;
 use EQM\Models\Comments\EloquentComment;
+use EQM\Models\Companies\Company;
+use EQM\Models\Companies\EloquentCompany;
+use EQM\Models\Companies\Users\EloquentCompanyUser;
 use EQM\Models\Conversations\Conversation;
 use EQM\Models\Conversations\EloquentConversation;
 use EQM\Models\Events\EloquentEvent;
@@ -525,5 +528,33 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
     public function timezone()
     {
         return $this->timezone;
+    }
+
+    public function companyRelation()
+    {
+        return $this->belongsToMany(EloquentCompany::class, EloquentCompanyUser::TABLE, 'user_id', 'company_id');
+    }
+
+    /**
+     * @return \EQM\Models\Companies\Company[]
+     */
+    public function companies()
+    {
+        return $this->companyRelation()->get();
+    }
+
+    /**
+     * @param \EQM\Models\Companies\Company $company
+     * @return bool
+     */
+    public function isCompanyAdmin(Company $company)
+    {
+        foreach ($this->companyRelation() as $companyRelation) {
+            if ($company->id() == $companyRelation->company()->id()) {
+                return $companyRelation->isAdmin();
+            }
+        }
+        
+        return false;
     }
 }

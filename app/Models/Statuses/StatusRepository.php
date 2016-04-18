@@ -68,6 +68,13 @@ interface StatusRepository
     public function createForPalmares(Horse $horse, $body);
 
     /**
+     * @param \EQM\Models\Companies\Company $company
+     * @param array $values
+     * @return \EQM\Models\Statuses\Status
+     */
+    public function createForCompany(Company $company, array $values);
+
+    /**
      * @param \EQM\Models\Statuses\Status $status
      * @param array $values
      * @return \EQM\Models\Statuses\Status
