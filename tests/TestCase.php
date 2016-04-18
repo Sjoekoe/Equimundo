@@ -1,11 +1,9 @@
 <?php
 
 use Carbon\Carbon;
-use EQM\Core\Advertisements\AdObject;
 use EQM\Core\Factories\BuildModels;
 use EQM\Core\Factories\ModelFactory;
 use EQM\Models\Addresses\Address;
-use EQM\Models\Advertising\Advertisements\Advertisement;
 use EQM\Models\Advertising\Advertisements\Rectangle;
 use EQM\Models\Advertising\Companies\AdvertisingCompany;
 use EQM\Models\Advertising\Contacts\AdvertisingContact;
@@ -15,7 +13,8 @@ use EQM\Models\Companies\Users\Follower;
 use EQM\Models\Horses\Horse;
 use EQM\Models\HorseTeams\HorseTeam;
 use EQM\Models\Notifications\Notification;
-use EQM\Models\Statuses\Status;
+use EQM\Models\Statuses\CompanyStatus;
+use EQM\Models\Statuses\HorseStatus;
 use EQM\Models\Users\User;
 
 class TestCase extends Illuminate\Foundation\Testing\TestCase
@@ -127,8 +126,9 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
      */
     public function createStatus(array $attributes)
     {
-        return $this->modelFactory->create(Status::class, array_merge([
+        return $this->modelFactory->create(HorseStatus::class, array_merge([
             'body' => 'Lorem ipsum dolores est',
+            'type' => HorseStatus::TYPE,
             'prefix' => 1
         ], $attributes));
     }
@@ -260,5 +260,18 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
     public function createCompanyHorse(array $attributes = [])
     {
         return $this->modelFactory->create(CompanyHorse::class, array_merge([], $attributes));
+    }
+
+    /**
+     * @param array $attributes
+     * @return \EQM\Models\Statuses\CompanyStatus
+     */
+    public function createCompanyStatus(array $attributes = [])
+    {
+        return $this->modelFactory->create(CompanyStatus::class, array_merge([
+            'body' => 'lorem ipsum',
+            'type' => CompanyStatus::TYPE,
+            'prefix' => 1,
+        ], $attributes));
     }
 }

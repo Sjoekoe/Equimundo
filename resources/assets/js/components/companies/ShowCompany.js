@@ -15,6 +15,10 @@ module.exports = Vue.extend({
             latLong: {},
             following: true,
             userHorses: [],
+            image: '',
+            body: '',
+            submitting: false,
+            errors: [],
         }
     },
 
@@ -119,6 +123,36 @@ module.exports = Vue.extend({
                     }
                 ]);
             });
+        },
+
+        submit: function(e) {
+            e.preventDefault();
+            this.submitting = true;
+            var form = document.querySelector('#picture');
+            var file = form.files[0];
+            var formData = new FormData();
+            formData.append('body', this.body);
+            this.image ? formData.append('picture', file) : formData.append('picture', 'undefined');
+            var vm = this;
+
+            $.ajax({
+                url: '/api/companies/' + window.eqauimunod.company + '/statuses',
+                type: 'post',
+                data: formData,
+                processData: false,
+                contentType:false,
+                success: function(status) {
+                    vm.statuses.unshift(status.data);
+                    vm.body = '';
+                    vm.image = '';
+                    vm.upload = '';
+                    vm.submitting = false;
+                }.bind(vm),
+                error: function(errors) {
+                    vm.errors = errors.responseJSON;
+                    vm.submitting = false;
+                }.bind(vm)
+            })
         },
     }
 });

@@ -10,31 +10,31 @@ use EQM\Models\Pictures\Picture;
 use EQM\Models\Users\EloquentUser;
 use EQM\Models\Users\User;
 use Illuminate\Database\Eloquent\Model;
+use Nanigans\SingleTableInheritance\SingleTableInheritanceTrait;
 
 class EloquentStatus extends Model implements Status
 {
+    use SingleTableInheritanceTrait;
+
     /**
      * @var string
      */
-    protected $table = 'statuses';
+    protected static $singleTableTypeField = 'type';
+
+    /**
+     * @var array
+     */
+    protected static $singleTableSubclasses = [EloquentHorseStatus::class, EloquentCompanyStatus::class];
+    
+    /**
+     * @var string
+     */
+    protected $table = self::TABLE;
 
     /**
      * @var array
      */
     protected $fillable = ['body', 'prefix', 'horse_id'];
-
-    public function horseRelation()
-    {
-        return $this->belongsTo(EloquentHorse::class);
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function horse()
-    {
-        return $this->belongsTo(EloquentHorse::class)->first();
-    }
 
     /**
      * @return \EQM\Models\Users\User

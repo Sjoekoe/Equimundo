@@ -7,6 +7,7 @@ use EQM\Models\Companies\Company;
 use EQM\Models\Companies\Horses\CompanyHorse;
 use EQM\Models\Companies\Users\CompanyUser;
 use EQM\Models\Horses\Horse;
+use EQM\Models\Statuses\Status;
 use EQM\Models\Users\User;
 
 trait DefaultIncludes
@@ -147,6 +148,31 @@ trait DefaultIncludes
             'color' => (int) $horse->color(),
             'slug' => $horse->slug(),
             'profile_picture' =>  'http://localhost/images/eqm.png',
+        ], $attributes);
+    }
+
+    /**
+     * @param \EQM\Models\Statuses\Status $status
+     * @param array $attributes
+     * @return array
+     */
+    public function includedCompanyStatus(Status $status, $attributes = [])
+    {
+        return array_merge([
+            'id' => $status->id(),
+            'body' => $status->body(),
+            'created_at' => $status->createdAt()->toIso8601String(),
+            'like_count' => 0,
+            'prefix' => trans('statuses.prefixes.' . $status->prefix()),
+            'liked_by_user' => false,
+            'can_delete_status' => false,
+            'picture' => null,
+            'comments' => [
+                'data' => [],
+            ],
+            'companyRelation' => [
+                'data' => $this->includedCompany($status->company()),
+            ],
         ], $attributes);
     }
 }

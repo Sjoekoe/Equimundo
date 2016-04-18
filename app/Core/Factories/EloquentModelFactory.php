@@ -21,8 +21,10 @@ use EQM\Models\HorseTeams\EloquentHorseTeam;
 use EQM\Models\HorseTeams\HorseTeam;
 use EQM\Models\Notifications\EloquentNotification;
 use EQM\Models\Notifications\Notification;
-use EQM\Models\Statuses\EloquentStatus;
-use EQM\Models\Statuses\Status;
+use EQM\Models\Statuses\CompanyStatus;
+use EQM\Models\Statuses\EloquentCompanyStatus;
+use EQM\Models\Statuses\EloquentHorseStatus;
+use EQM\Models\Statuses\HorseStatus;
 use EQM\Models\Users\EloquentUser;
 use EQM\Models\Users\User;
 use Illuminate\Database\Eloquent\Factory;
@@ -43,12 +45,13 @@ class EloquentModelFactory implements ModelFactory
         AdvertisingCompany::class => EloquentAdvertisingCompany::class,
         AdvertisingContact::class => EloquentAdvertisingContact::class,
         CompanyHorse::class => EloquentCompanyHorse::class,
+        CompanyStatus::class => EloquentCompanyStatus::class,
         Stable::class => EloquentStable::class,
         Follower::class => EloquentFollower::class,
         Horse::class => EloquentHorse::class,
         HorseTeam::class => EloquentHorseTeam::class,
         Notification::class => EloquentNotification::class,
-        Status::class => EloquentStatus::class,
+        HorseStatus::class => EloquentHorseStatus::class,
         User::class => EloquentUser::class,
     ];
 

@@ -49,6 +49,8 @@ $api->version('v1', function(Router $api) {
             $api->post('/{company}/horses', ['as' => 'api.companies.horses.store', 'uses' => 'CompanyHorseController@store']);
             $api->get('/{company}/horses/{horse}', ['as' => 'api.companies.horses.show', 'uses' => 'CompanyHorseController@show']);
             $api->delete('/{company}/horses/{horse}', ['as' => 'api.companies.horses.delete', 'uses' => 'CompanyHorseController@delete']);
+
+            $api->get('/{company}/statuses', ['as' => 'api.companies.statuses.index', 'uses' => 'CompanyStatusController@index']);
         });
 
         $api->group(['namespace' => 'Admin\\', 'prefix' => 'admin'], function(Router $api) {

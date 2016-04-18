@@ -2,6 +2,7 @@
 namespace EQM\Models\Statuses;
 
 use EQM\Core\Helpers\StatusConvertor;
+use EQM\Models\Companies\Company;
 use EQM\Models\Horses\Horse;
 use EQM\Models\Users\User;
 
@@ -58,7 +59,7 @@ class EloquentStatusRepository implements StatusRepository
     /**
      * @param \EQM\Models\Users\User $user
      * @param int $limit
-     * @return mixed
+     * @return \Illuminate\Pagination\LengthAwarePaginator
      */
     public function findFeedForUserPaginated(User $user, $limit = 10)
     {
@@ -82,9 +83,24 @@ class EloquentStatusRepository implements StatusRepository
         return $this->status->where('horse_id', $horse->id())->latest()->paginate(10);
     }
 
+    /**
+     * @param \EQM\Models\Horses\Horse $horse
+     * @param int $limit
+     * @return \Illuminate\Pagination\LengthAwarePaginator
+     */
     public function findFeedForHorsePaginated(Horse $horse, $limit = 10)
     {
         return $this->status->where('horse_id', $horse->id())->latest()->paginate($limit);
+    }
+
+    /**
+     * @param \EQM\Models\Companies\Company $company
+     * @param int $limit
+     * @return \Illuminate\Pagination\LengthAwarePaginator
+     */
+    public function findForCompanyPaginated(Company $company, $limit = 10)
+    {
+        return $this->status->where('company_id', $company->id())->latest()->paginate($limit);
     }
 
     /**
