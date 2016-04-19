@@ -23,7 +23,6 @@ dependencies:
     - "vendor"
 database:
   post:
-    - php artisan droptables
     - yes | php artisan migrate
 test:
   override:
