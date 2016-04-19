@@ -2,8 +2,8 @@
 namespace EQM\Api\Http\Controllers\Companies;
 
 use EQM\Api\Http\Controller;
-use EQM\Api\Statuses\CompanyStatusTransformer;
 use EQM\Api\Statuses\Requests\StoreCompanyStatusRequest;
+use EQM\Api\Statuses\StatusTransformer;
 use EQM\Core\Files\Uploader;
 use EQM\Models\Companies\Company;
 use EQM\Models\Statuses\StatusRepository;
@@ -30,7 +30,7 @@ class CompanyStatusController extends Controller
     {
         $statuses = $this->statuses->findForCompanyPaginated($company);
 
-        return $this->response()->paginator($statuses, new CompanyStatusTransformer());
+        return $this->response()->paginator($statuses, new StatusTransformer());
     }
 
     public function store(StoreCompanyStatusRequest $request, Company $company)
@@ -45,6 +45,6 @@ class CompanyStatusController extends Controller
             $status->save();
         }
 
-        return $this->response()->item($status, new CompanyStatusTransformer());
+        return $this->response()->item($status, new StatusTransformer());
     }
 }

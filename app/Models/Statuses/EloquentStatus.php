@@ -25,7 +25,7 @@ class EloquentStatus extends Model implements Status
      * @var array
      */
     protected static $singleTableSubclasses = [EloquentHorseStatus::class, EloquentCompanyStatus::class];
-    
+
     /**
      * @var string
      */
@@ -145,5 +145,10 @@ class EloquentStatus extends Model implements Status
         }
 
         return false;
+    }
+
+    public function type()
+    {
+        return $this->type;
     }
 }

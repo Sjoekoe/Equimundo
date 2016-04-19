@@ -2,7 +2,6 @@
 namespace EQM\Api\Http\Controllers;
 
 use EQM\Api\Http\Controller;
-use EQM\Api\Statuses\HorseStatusTransformer;
 use EQM\Api\Statuses\StatusTransformer;
 use EQM\Models\Horses\Horse;
 use EQM\Models\Statuses\StatusRepository;
@@ -24,6 +23,6 @@ class HorseStatusController extends Controller
     {
         $statuses = $this->statuses->findFeedForHorsePaginated($horse, Input::get('limit', 10));
 
-        return $this->response()->paginator($statuses, new HorseStatusTransformer());
+        return $this->response()->paginator($statuses, new StatusTransformer());
     }
 }

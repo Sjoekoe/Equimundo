@@ -9,4 +9,11 @@ interface HorseStatus
      * @return \EQM\Models\Horses\Horse
      */
     public function horse();
+
+    /**
+     * @return string
+     */
+    public function type();
+    
+    public function poster();
 }

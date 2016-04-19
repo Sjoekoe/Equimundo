@@ -2,7 +2,6 @@
 namespace EQM\Api\Horses;
 
 use EQM\Api\Pictures\PictureTransformer;
-use EQM\Api\Statuses\HorseStatusTransformer;
 use EQM\Api\Statuses\StatusTransformer;
 use EQM\Models\Horses\Horse;
 use League\Fractal\TransformerAbstract;
@@ -43,7 +42,7 @@ class HorseTransformer extends TransformerAbstract
      */
     public function includeStatuses(Horse $horse)
     {
-        return count($horse->statuses()) ? $this->collection($horse->statuses(), new HorseStatusTransformer()) : null;
+        return count($horse->statuses()) ? $this->collection($horse->statuses(), new StatusTransformer()) : null;
     }
 
     /**

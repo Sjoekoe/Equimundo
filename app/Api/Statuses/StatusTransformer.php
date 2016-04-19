@@ -2,7 +2,10 @@
 namespace EQM\Api\Statuses;
 
 use EQM\Api\Comments\CommentTransformer;
+use EQM\Api\Companies\CompanyTransformer;
+use EQM\Api\Horses\HorseTransformer;
 use EQM\Api\Users\UserTransformer;
+use EQM\Models\Statuses\CompanyStatus;
 use EQM\Models\Statuses\HorseStatus;
 use EQM\Models\Statuses\Status;
 use League\Fractal\TransformerAbstract;
@@ -15,6 +18,7 @@ class StatusTransformer extends TransformerAbstract
     protected $defaultIncludes = [
         'comments',
         'likes',
+        'poster'
     ];
 
     /**
@@ -52,5 +56,14 @@ class StatusTransformer extends TransformerAbstract
     public function includeLikes(Status $status)
     {
         return count($status->likes()->get()) ? $this->collection($status->likes()->get(), new UserTransformer()) : null;
+    }
+
+    public function includePoster(Status $status)
+    {
+        if ($status->type() == HorseStatus::TYPE) {
+            return $this->item($status->horse(), new HorseTransformer());
+        }
+
+        return $this->item($status->company(), new CompanyTransformer());
     }
 }

@@ -2,12 +2,12 @@
     <div class="panel-body">
         <div class="media-block">
             <template v-if="status.is_horse_status">
-                <a href="/horses/@{{ status.horseRelation.data.slug }}" class="media-left">
-                    <img v-bind:src="status.horseRelation.data.profile_picture" alt="" class="img-circle img-sm">
+                <a href="/horses/@{{ status.poster.data.slug }}" class="media-left">
+                    <img v-bind:src="status.poster.data.profile_picture" alt="" class="img-circle img-sm">
                 </a>
             </template>
             <template v-else>
-                <a href="/companies/@{{ status.companyRelation.data.slug }}" class="media-left">
+                <a href="/companies/@{{ status.poster.data.slug }}" class="media-left">
                     <img src="{{ asset('images/eqm.png') }}" alt="" class="img-circle img-sm">
                 </a>
             </template>
@@ -26,13 +26,13 @@
                         </div>
                     </div>
                     <template v-if="status.is_horse_status">
-                        <a href="/horses/@{{ status.horseRelation.data.slug }}" class="btn-link text-semibold media-heading box-inline text-mint">
-                            @{{ status.horseRelation.data.name }}
+                        <a href="/horses/@{{ status.poster.data.slug }}" class="btn-link text-semibold media-heading box-inline text-mint">
+                            @{{ status.poster.data.name }}
                         </a>
                     </template>
                     <template v-else>
-                        <a href="/companies/@{{ status.companyRelation.data.slug }}" class="btn-link text-semibold media-heading box-inline text-mint">
-                            @{{ status.companyRelation.data.name }}
+                        <a href="/companies/@{{ status.poster.data.slug }}" class="btn-link text-semibold media-heading box-inline text-mint">
+                            @{{ status.poster.data.name }}
                         </a>
                     </template>
                     <span class="text-semibold text-muted" v-if="status.prefix"> - @{{ status.prefix }}</span>

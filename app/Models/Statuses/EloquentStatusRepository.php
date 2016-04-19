@@ -53,7 +53,21 @@ class EloquentStatusRepository implements StatusRepository
             array_push($horseIds, $horse->id());
         }
 
-        return $this->status->whereIn('horse_id', array_flatten($horseIds))->latest()->paginate(10);
+        $companyIds = [];
+
+        foreach ($user->companies() as $company) {
+            array_push($companyIds, $company->id());
+        }
+
+        return $this->status
+            ->orWhere(function ($query) use ($horseIds) {
+                $query->whereIn('horse_id', array_flatten($horseIds));
+            })
+            ->orWhere(function($query) use ($companyIds) {
+                $query->whereIn('company_id', array_flatten($companyIds));
+            })
+            ->latest()
+            ->paginate(10);
     }
 
     /**
@@ -71,7 +85,21 @@ class EloquentStatusRepository implements StatusRepository
             array_push($horseIds, $horse->id());
         }
 
-        return $this->status->whereIn('horse_id', array_flatten($horseIds))->latest()->paginate($limit);
+        $companyIds = [];
+
+        foreach ($user->companies() as $company) {
+            array_push($companyIds, $company->id());
+        }
+
+        return $this->status
+            ->orWhere(function ($query) use ($horseIds) {
+                $query->whereIn('horse_id', array_flatten($horseIds));
+            })
+            ->orWhere(function($query) use ($companyIds) {
+                $query->whereIn('company_id', array_flatten($companyIds));
+            })
+            ->latest()
+            ->paginate($limit);
     }
 
     /**

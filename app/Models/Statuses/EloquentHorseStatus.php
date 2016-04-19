@@ -25,4 +25,17 @@ class EloquentHorseStatus extends EloquentStatus implements Status, HorseStatus
     {
         return $this->horseRelation()->first();
     }
+
+    /**
+     * @return string
+     */
+    public function type()
+    {
+        return self::TYPE;
+    }
+
+    public function poster()
+    {
+        return $this->belongsTo(EloquentHorse::class, 'horse_id', 'id');
+    }
 }

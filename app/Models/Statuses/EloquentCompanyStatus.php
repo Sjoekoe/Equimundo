@@ -24,4 +24,17 @@ class EloquentCompanyStatus extends EloquentStatus implements Status, CompanySta
     {
         return $this->companyRelation()->first();
     }
+
+    /**
+     * @return string
+     */
+    public function type()
+    {
+        return self::TYPE;
+    }
+
+    public function poster()
+    {
+        return $this->belongsTo(EloquentCompany::class, 'company_id', 'id');
+    }
 }
