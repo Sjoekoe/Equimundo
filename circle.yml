@@ -23,7 +23,7 @@ dependencies:
     - "vendor"
 database:
   post:
-    - composer dump-autoload
+    - php artisan droptables
     - yes | php artisan migrate
 test:
   override:

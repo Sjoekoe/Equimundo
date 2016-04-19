@@ -1,6 +1,7 @@
 <?php namespace EQM\Console;
 
 use EQM\Console\Commands\AlgoliaIndexer;
+use EQM\Console\Commands\DropTables;
 use EQM\Console\Commands\SendReminderEmail;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -15,6 +16,7 @@ class Kernel extends ConsoleKernel {
     protected $commands = [
         AlgoliaIndexer::class,
         SendReminderEmail::class,
+        DropTables::class,
     ];
 
     /**
