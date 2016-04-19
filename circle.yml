@@ -23,6 +23,7 @@ dependencies:
     - "vendor"
 database:
   post:
+    - composer dump-autoload
     - yes | php artisan migrate
 test:
   override:

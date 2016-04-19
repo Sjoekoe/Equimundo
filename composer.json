@@ -5,10 +5,9 @@
 	"license": "MIT",
 	"type": "project",
 	"require": {
-		"laravel/framework": "5.1.*",
-		"illuminate/html": "~5.0",
-        "intervention/image": "~2.1",
-        "hieu-le/active": "~2.0",
+		"laravel/framework": "^5.2",
+		"intervention/image": "~2.1",
+		"hieu-le/active": "~2.0",
 		"pusher/pusher-php-server": "~2.0",
 		"jenssegers/date": "^3.0",
 		"league/fractal": "^0.13.0",
@@ -16,7 +15,6 @@
 		"intervention/imagecache": "^2.3",
 		"bugsnag/bugsnag-laravel": "1.*",
 		"iron-io/iron_mq": "~4.0",
-		"barryvdh/laravel-debugbar": "2.*",
 		"aws/aws-sdk-php": "^3.15",
 		"league/flysystem-aws-s3-v3": "~1.0",
 		"doctrine/dbal": "^2.5",
@@ -25,7 +23,9 @@
 		"algolia/algoliasearch-laravel": "^1.0",
 		"dingo/api": "1.0.x@dev",
 		"tymon/jwt-auth": "^0.5.9",
-		"nanigans/single-table-inheritance": "0.5.*"
+		"laravelcollective/html": "^5.2",
+		"nanigans/single-table-inheritance": "^0.6.1",
+		"laravelcollective/iron-queue": "^5.2"
 	},
 	"require-dev": {
 	  	"fzaninotto/faker": "~1.4",
@@ -33,7 +33,9 @@
 		"phpspec/phpspec": "~2.1",
         "mockery/mockery": "dev-master",
 		"hamcrest/hamcrest-php": "^1.2",
-		"laravel/homestead": "^3.0"
+		"laravel/homestead": "^3.0",
+		"symfony/dom-crawler": "^3.0",
+		"symfony/css-selector": "^3.0"
 	},
 	"autoload": {
 		"classmap": [
