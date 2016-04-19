@@ -43,7 +43,7 @@ class SettingsTest extends \TestCase
 
     /**
      * @test
-     * @expectedException \Symfony\Component\HttpKernel\Exception\HttpException
+     * @expectedException \Illuminate\Auth\Access\AuthorizationException
      */
     function it_can_not_unlink_a_horse_when_you_do_not_belong_to_the_team()
     {
@@ -95,7 +95,7 @@ class SettingsTest extends \TestCase
 
     /**
      * @test
-     * @expectedException \Symfony\Component\HttpKernel\Exception\HttpException
+     * @expectedException \Illuminate\Auth\Access\AuthorizationException
      */
     function it_can_not_delete_a_horse_when_you_are_not_in_the_team()
     {

@@ -23,6 +23,10 @@ return [
         'secret' => env('MANDRILL_API'),
     ],
 
+    'sparkpost' => [
+        'secret' => env('SPARKPOST'),
+    ],
+
     'ses' => [
         'key' => '',
         'secret' => '',

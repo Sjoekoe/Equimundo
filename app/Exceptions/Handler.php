@@ -1,6 +1,7 @@
 <?php namespace EQM\Exceptions;
 
 use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Validation\ValidationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Bugsnag\BugsnagLaravel\BugsnagExceptionHandler as ExceptionHandler;
@@ -16,8 +17,10 @@ class Handler extends ExceptionHandler {
      * @var array
      */
     protected $dontReport = [
+        AuthorizationException::class,
         HttpException::class,
         ModelNotFoundException::class,
+        ValidationException::class,
     ];
 
     /**

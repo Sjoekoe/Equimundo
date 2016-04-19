@@ -2,6 +2,8 @@
 
 return [
 
+    'env' => env('APP_ENV', 'production'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode
@@ -110,7 +112,6 @@ return [
         Illuminate\Bus\BusServiceProvider::class,
         Illuminate\Cache\CacheServiceProvider::class,
         Illuminate\Foundation\Providers\ConsoleSupportServiceProvider::class,
-        Illuminate\Routing\ControllerServiceProvider::class,
         Illuminate\Cookie\CookieServiceProvider::class,
         Illuminate\Database\DatabaseServiceProvider::class,
         Illuminate\Encryption\EncryptionServiceProvider::class,
@@ -127,7 +128,6 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        Illuminate\Html\HtmlServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
 
         /*
@@ -136,13 +136,11 @@ return [
         EQM\Core\Factories\ModelFactoryServiceProvider::class,
         EQM\Providers\AppServiceProvider::class,
         EQM\Providers\AuthServiceProvider::class,
-        EQM\Providers\BusServiceProvider::class,
         EQM\Providers\ConfigServiceProvider::class,
         EQM\Providers\EventServiceProvider::class,
         EQM\Providers\RouteServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         HieuLe\Active\ActiveServiceProvider::class,
-        Barryvdh\Debugbar\ServiceProvider::class,
         Jenssegers\Date\DateServiceProvider::class,
         EQM\Core\Dates\DateServiceProvider::class,
         EQM\Core\JWT\JWTServiceProvider::class,
@@ -153,6 +151,8 @@ return [
         Dingo\Api\Provider\LaravelServiceProvider::class,
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         EQM\Api\ApiServiceProvider::class,
+        Collective\IronQueue\IronQueueServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
 
         /*
          * Model Service Providers
@@ -224,8 +224,8 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
-        'Form'      => Illuminate\Html\FormFacade::class,
-        'Html'      => Illuminate\Html\HtmlFacade::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
         'Image'     => Intervention\Image\Facades\Image::class,
         'Active'    => HieuLe\Active\Facades\Active::class,
         'Bugsnag' => Bugsnag\BugsnagLaravel\BugsnagFacade::class,

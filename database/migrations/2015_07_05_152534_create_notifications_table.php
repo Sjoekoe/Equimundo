@@ -5,14 +5,14 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateNotificationsTable extends Migration {
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-		Schema::create('notifications', function(Blueprint $table) {
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('notifications', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('type');
             $table->string('link');
@@ -20,20 +20,20 @@ class CreateNotificationsTable extends Migration {
             $table->foreign('sender_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('receiver_id')->unsigned();
             $table->foreign('receiver_id')->references('id')->on('users')->onDelete('cascade');
-            $table->json('data');
+            $table->text('data');
             $table->boolean('read');
             $table->timestamps();
         });
-	}
+    }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		Schema::drop('notifications');
-	}
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('notifications');
+    }
 
 }

@@ -1,7 +1,7 @@
 <?php
 namespace EQM\Models\Users;
 
-use Illuminate\Auth\Guard;
+use Illuminate\Auth\SessionGuard;
 use Illuminate\Support\ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -17,12 +17,12 @@ class AuthServiceProvider extends ServiceProvider
 
     private function extendAuth()
     {
-        $this->app['auth']->extend('eloquent', function ($app) {
-            $users = $app[EloquentUserRepository::class];
+        //$this->app['auth']->provider('eloquent', function ($app) {
+        //    $users = $app[EloquentUserRepository::class];
 
-            $userProvider = new EloquentUserProvider($app['hash'], $users);
+        //    $userProvider = new EloquentUserProvider($app['hash'], $users);
 
-            return new Guard($userProvider, $app['session.store']);
-        });
+        //    return new SessionGuard($userProvider, $app['session.store']);
+        //});
     }
 }
