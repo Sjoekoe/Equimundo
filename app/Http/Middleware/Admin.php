@@ -2,19 +2,16 @@
 namespace EQM\Http\Middleware;
 
 use Closure;
-use Illuminate\Auth\Guard;
+use Illuminate\Auth\AuthManager;
 
 class Admin
 {
     /**
-     * @var \Illuminate\Auth\Guard
+     * @var \Illuminate\Auth\AuthManager
      */
     private $auth;
 
-    /**
-     * @param \Illuminate\Auth\Guard $auth
-     */
-    public function __construct(Guard $auth)
+    public function __construct(AuthManager $auth)
     {
         $this->auth = $auth;
     }
