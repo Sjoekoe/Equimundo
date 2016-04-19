@@ -64,6 +64,7 @@ return [
             'project' => '56c87e41d2c992000600003b',
             'queue'   => 'EQM2',
             'encrypt' => true,
+            'timeout' => 60,
         ],
 
         'redis' => [
