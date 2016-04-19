@@ -41,6 +41,14 @@ class AuthController extends Controller {
     }
 
     /**
+     * @return string
+     */
+    public function loginPath()
+    {
+        return $this->loginPath;
+    }
+
+    /**
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */

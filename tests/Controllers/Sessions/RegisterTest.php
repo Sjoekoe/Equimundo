@@ -31,7 +31,10 @@ class RegisterTest extends \TestCase
         ]);
     }
 
-    /** @test */
+    /**
+     * @test
+     * @expectedException \Illuminate\Foundation\Validation\ValidationException
+     */
     function it_can_not_register_when_you_are_younger_than_13()
     {
         $date = Carbon::now()->subYear(13)->format('d/m/Y');
@@ -55,7 +58,10 @@ class RegisterTest extends \TestCase
         ]);
     }
 
-    /** @test */
+    /**
+     * @test
+     * @expectedException  \Illuminate\Foundation\Validation\ValidationException
+     */
     function it_cannot_register_when_the_terms_are_not_checked()
     {
         $this->visit('/register')
@@ -74,7 +80,10 @@ class RegisterTest extends \TestCase
         ]);
     }
 
-    /** @test */
+    /**
+     * @test
+     * @expectedException \Illuminate\Foundation\Validation\ValidationException
+     */
     function it_can_not_register_when_an_email_has_already_been_taken()
     {
         factory(EloquentUser::class)->create([

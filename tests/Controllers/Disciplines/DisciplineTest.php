@@ -6,7 +6,7 @@ use EQM\Models\Disciplines\EloquentDiscipline;
 use EQM\Models\Horses\EloquentHorse;
 use EQM\Models\HorseTeams\EloquentHorseTeam;
 use EQM\Models\Users\EloquentUser;
-use Symfony\Component\HttpKernel\Exception\HttpException;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class DisciplineTest extends \TestCase
 {
@@ -32,7 +32,7 @@ class DisciplineTest extends \TestCase
         $user = factory(EloquentUser::class)->create([]);
         $horse = factory(EloquentHorse::class)->create([]);
 
-        $this->setExpectedException(HttpException::class);
+        $this->setExpectedException(AuthorizationException::class);
 
         $this->withoutMiddleware()
             ->actingAs($user)
