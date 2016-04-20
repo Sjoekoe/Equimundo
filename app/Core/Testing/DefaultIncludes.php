@@ -171,7 +171,7 @@ trait DefaultIncludes
             'comments' => [
                 'data' => [],
             ],
-            'companyRelation' => [
+            'poster' => [
                 'data' => $this->includedCompany($status->company()),
             ],
         ], $attributes);

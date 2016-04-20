@@ -62,7 +62,7 @@ class CompanyStatusesTest extends \TestCase
                 'comments' => [
                     'data' => [],
                 ],
-                'companyRelation' => [
+                'poster' => [
                     'data' => $this->includedCompany($company),
                 ],
             ],
