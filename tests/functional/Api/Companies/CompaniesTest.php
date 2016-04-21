@@ -104,12 +104,30 @@ class CompaniesTest extends \TestCase
             'name' => 'Update it',
             'telephone' => '85096',
             'website' => 'www.update.com',
+            'email' => $company->email(),
+            'street' => $address->street(),
+            'zip' => $address->zip(),
+            'city' => $address->city(),
+            'state' => $address->state(),
+            'country' => $address->country(),
         ])->seeJsonEquals([
-            'data' => $this->includedCompany($company, [
+            'data' => [
+                'id' => $company->id(),
                 'name' => 'Update it',
-                'telephone' => '85096',
+                'slug' => $company->slug(),
                 'website' => 'http://www.update.com',
-            ])
+                'telephone' => '85096',
+                'about' => $company->about(),
+                'email' => $company->email(),
+                'is_followed_by_user' => false,
+                'addressRelation' => [
+                    'data' => $this->includedAddress($company->address(), [
+                        'id' => 2,
+                        'latitude' => '44.4495134',
+                        'longitude' => '-102.0783189',
+                    ]),
+                ]
+            ]
         ]);
     }
 
