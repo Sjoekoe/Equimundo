@@ -18,7 +18,7 @@ class CompanyController extends Controller
     {
         $this->companyHorses = $companyHorses;
     }
-    
+
     public function create()
     {
         return view('companies.create');
@@ -34,17 +34,24 @@ class CompanyController extends Controller
 
         return view('companies.show', compact('company'));
     }
-    
+
+    public function edit(Info $info, Company $company)
+    {
+        $info->flash(['company' => $company->slug()]);
+
+        return view('companies.edit', compact('company'));
+    }
+
     public function follow(Company $company, Horse $horse)
     {
         if ($horse->isFollowingCompany($company)) {
             $companyHorse = $this->companyHorses->findByCompanyAndHorse($company, $horse);
-            
+
             $this->companyHorses->delete($companyHorse);
         } else {
             $this->companyHorses->create($company, $horse->id());
         }
-        
+
         return back();
     }
 }

@@ -8,6 +8,7 @@ use EQM\Api\Http\Controller;
 use EQM\Models\Companies\Company;
 use EQM\Models\Companies\CompanyCreator;
 use EQM\Models\Companies\CompanyRepository;
+use EQM\Models\Companies\CompanyUpdater;
 use Input;
 
 class CompanyController extends Controller
@@ -41,9 +42,9 @@ class CompanyController extends Controller
         return $this->response()->item($company, new CompanyTransformer());
     }
 
-    public function update(UpdateCompanyRequest $request, Company $company)
+    public function update(StoreCompanyRequest $request, CompanyUpdater $updater, Company $company)
     {
-        $company = $this->companies->update($company, $request->all());
+        $company = $updater->update($company, $request->all());
 
         return $this->response()->item($company, new CompanyTransformer());
     }

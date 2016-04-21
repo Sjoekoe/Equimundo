@@ -55,6 +55,10 @@ class EloquentCompanyRepository implements CompanyRepository
         if (array_key_exists('email', $values)) {
             $company->email = $values['email'];
         }
+        
+        if (array_key_exists('address_id', $values)) {
+            $company->address_id = $values['address_id'];
+        }
 
         $company->save();
 

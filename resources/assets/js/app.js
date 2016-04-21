@@ -20,6 +20,7 @@ new Vue({
 
         showcompany: require('./components/companies/ShowCompany'),
         createcompany: require('./components/companies/CreateCompany'),
+        editcompany: require('./components/companies/EditCompany'),
 
         admindash: require('./components/admin/dashboard'),
         notedrop: require('./components/notifications/NotificationsDropdown'),

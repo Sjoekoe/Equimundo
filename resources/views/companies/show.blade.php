@@ -104,8 +104,6 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
         <aside id="aside-container">
             <div id="aside">
@@ -120,13 +118,18 @@
                                 <a href="tel:@{{ company.telephone }}" class="btn btn-icon btn-hover-warning fa fa-phone icon-lg add-tooltip" data-original-title="Telephone" data-container="body"></a>
                             </div>
                             @if (auth()->check())
-
+                                @if (! auth()->user()->isInCompanyTeam($company))
                                     <template v-if="company.is_followed_by_user">
                                         <button class="btn btn-block btn-mint" @click="unfollow">Unfollow</button>
                                     </template>
                                     <template v-else>
                                         <button class="btn btn-block btn-mint" @click="follow">Follow</button>
                                     </template>
+                                @elseif(auth()->user()->isCompanyAdmin($company))
+                                    <a href="{{ route('company.edit', $company->slug()) }}" class="btn btn-block btn-mint">
+                                        Edit Company
+                                    </a>
+                                @endif
                             @endif
                         </div>
 
@@ -143,9 +146,7 @@
                         <hr>
                         <div class="pad-hor">
                             <h5>{{ trans('copy.titles.about_me') }}</h5>
-                            <small class="text-thin" v-html="company.about">
-
-                            </small>
+                            <small class="text-thin" v-html="company.about"></small>
                         </div>
                     </div>
                 </div>
