@@ -69,7 +69,7 @@ class Uploader
 
         return $picture;
     }
-    
+
     public function uploadForCompany($file, Company $company)
     {
         $extension = $file->getClientOriginalExtension();
@@ -77,8 +77,8 @@ class Uploader
         $fileName = str_random(12);
         $pathToFile = $path . '/' . $fileName . '.' . $extension;
         $width = 460;
-
-        $picture = $this->pictures->createForCompany($file, $company, false, $fileName, $extension);
+        
+        $picture = $this->pictures->createForCompany($file, $company, $fileName, $extension);
 
         if (!file_exists(storage_path() . $path)) {
             $this->file->makeDirectory($path);
