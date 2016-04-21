@@ -37,6 +37,8 @@ class CompanyController extends Controller
 
     public function edit(Info $info, Company $company)
     {
+        $this->authorize('edit-company', $company);
+        
         $info->flash(['company' => $company->slug()]);
 
         return view('companies.edit', compact('company'));

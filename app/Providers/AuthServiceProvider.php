@@ -2,6 +2,7 @@
 namespace EQM\Providers;
 
 use EQM\Models\Comments\CommentPolicy;
+use EQM\Models\Companies\CompanyPolicy;
 use EQM\Models\Conversations\ConversationPolicy;
 use EQM\Models\Horses\HorsePolicy;
 use EQM\Models\Notifications\NotificationPolicy;
@@ -27,6 +28,10 @@ class AuthServiceProvider extends ServiceProvider
 
         foreach ($this->commentPrivilegePolicies as $policy) {
             $gate->define($policy, CommentPolicy::class . '@privilege');
+        }
+        
+        foreach ($this->companyPolicies as $policy) {
+            $gate->define($policy, CompanyPolicy::class . '@authorize');
         }
 
         foreach ($this->conversationPolicies as $policy) {

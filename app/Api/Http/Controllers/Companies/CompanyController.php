@@ -3,7 +3,6 @@ namespace EQM\Api\Http\Controllers\Companies;
 
 use EQM\Api\Companies\CompanyTransformer;
 use EQM\Api\Companies\Requests\StoreCompanyRequest;
-use EQM\Api\Companies\Requests\UpdateCompanyRequest;
 use EQM\Api\Http\Controller;
 use EQM\Models\Companies\Company;
 use EQM\Models\Companies\CompanyCreator;
@@ -44,6 +43,8 @@ class CompanyController extends Controller
 
     public function update(StoreCompanyRequest $request, CompanyUpdater $updater, Company $company)
     {
+        auth()->user()->can('edit-company', $company);
+        
         $company = $updater->update($company, $request->all());
 
         return $this->response()->item($company, new CompanyTransformer());
@@ -51,6 +52,8 @@ class CompanyController extends Controller
 
     public function delete(Company $company)
     {
+        auth()->user('delete-company', $company);
+        
         $this->companies->delete($company);
 
         return $this->response()->noContent();
