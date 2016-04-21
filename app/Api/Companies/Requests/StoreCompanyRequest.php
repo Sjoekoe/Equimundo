@@ -1,9 +1,10 @@
 <?php
 namespace EQM\Api\Companies\Requests;
 
+use Dingo\Api\Http\FormRequest;
 use EQM\Http\Requests\Request;
 
-class StoreCompanyRequest extends Request
+class StoreCompanyRequest extends FormRequest
 {
     /**
      * @return bool

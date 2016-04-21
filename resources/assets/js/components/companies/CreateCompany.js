@@ -60,9 +60,9 @@ module.exports = Vue.extend({
                     window.location.replace('/companies/' + company.data.slug);
                 }.bind(vm),
                 error: function(errors) {
-                    vm.errors = errors.responseJSON;
+                    vm.errors = errors.responseJSON.errors;
                     vm.submitting = false;
-                }
+                }.bind(vm)
             })
         }
     }
