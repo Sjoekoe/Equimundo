@@ -18,6 +18,11 @@ class CompanyController extends Controller
     {
         $this->companyHorses = $companyHorses;
     }
+    
+    public function create()
+    {
+        return view('companies.create');
+    }
 
     public function show(Info $info, Company $company)
     {

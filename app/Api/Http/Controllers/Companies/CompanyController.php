@@ -2,13 +2,12 @@
 namespace EQM\Api\Http\Controllers\Companies;
 
 use EQM\Api\Companies\CompanyTransformer;
-use EQM\Api\Companies\Jobs\CreatesCompany;
 use EQM\Api\Companies\Requests\StoreCompanyRequest;
 use EQM\Api\Companies\Requests\UpdateCompanyRequest;
 use EQM\Api\Http\Controller;
 use EQM\Models\Companies\Company;
+use EQM\Models\Companies\CompanyCreator;
 use EQM\Models\Companies\CompanyRepository;
-use Illuminate\Bus\Dispatcher;
 use Input;
 
 class CompanyController extends Controller
@@ -18,15 +17,9 @@ class CompanyController extends Controller
      */
     private $companies;
 
-    /**
-     * @var \Illuminate\Bus\Dispatcher
-     */
-    private $dispatcher;
-
-    public function __construct(CompanyRepository $companies, Dispatcher $dispatcher)
+    public function __construct(CompanyRepository $companies)
     {
         $this->companies = $companies;
-        $this->dispatcher = $dispatcher;
     }
 
     public function index()
@@ -36,9 +29,9 @@ class CompanyController extends Controller
         return $this->response()->paginator($companies, new CompanyTransformer());
     }
 
-    public function store(StoreCompanyRequest $request)
+    public function store(StoreCompanyRequest $request, CompanyCreator $creator)
     {
-        $company = $this->dispatcher->dispatch(new CreatesCompany(auth()->user(), $request->all()));
+        $company = $creator->create(auth()->user(), $request->all());
 
         return $this->response()->item($company, new CompanyTransformer());
     }

@@ -19,6 +19,7 @@ new Vue({
         showadvertisement: require('./components/admin/Advertisements/ShowAdvertisement'),
 
         showcompany: require('./components/companies/ShowCompany'),
+        createcompany: require('./components/companies/CreateCompany'),
 
         admindash: require('./components/admin/dashboard'),
         notedrop: require('./components/notifications/NotificationsDropdown'),

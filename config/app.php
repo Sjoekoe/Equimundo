@@ -153,6 +153,7 @@ return [
         EQM\Api\ApiServiceProvider::class,
         Collective\IronQueue\IronQueueServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        EQM\Core\Database\DatabaseServiceProvider::class,
 
         /*
          * Model Service Providers
