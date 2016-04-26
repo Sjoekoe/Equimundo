@@ -202,4 +202,16 @@ class EloquentStatusRepository implements StatusRepository
     {
         return count($this->status->all());
     }
+
+    /**
+     * @param \EQM\Models\Horses\Horse $horse
+     * @param array $values
+     * @return \EQM\Models\Statuses\Status
+     */
+    public function createForFollowingCompany(Horse $horse, array $values)
+    {
+        $status = $this->create($horse, $values['body'], Status::PREFIX_JOINED_COMPANY);
+        
+        return $status;
+    }
 }

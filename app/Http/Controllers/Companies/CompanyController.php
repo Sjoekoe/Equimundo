@@ -6,6 +6,7 @@ use EQM\Http\Controllers\Controller;
 use EQM\Models\Companies\Company;
 use EQM\Models\Companies\Horses\CompanyHorseRepository;
 use EQM\Models\Horses\Horse;
+use EQM\Models\Statuses\StatusCreator;
 
 class CompanyController extends Controller
 {
@@ -14,9 +15,15 @@ class CompanyController extends Controller
      */
     private $companyHorses;
 
-    public function __construct(CompanyHorseRepository $companyHorses)
+    /**
+     * @var \EQM\Models\Statuses\StatusCreator
+     */
+    private $creator;
+
+    public function __construct(CompanyHorseRepository $companyHorses, StatusCreator $creator)
     {
         $this->companyHorses = $companyHorses;
+        $this->creator = $creator;
     }
 
     public function create()
@@ -52,6 +59,8 @@ class CompanyController extends Controller
             $this->companyHorses->delete($companyHorse);
         } else {
             $this->companyHorses->create($company, $horse->id());
+            
+            $this->creator->createForFollowingCompany($horse, $company);
         }
 
         return back();

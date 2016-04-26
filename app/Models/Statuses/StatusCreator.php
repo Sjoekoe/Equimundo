@@ -4,6 +4,7 @@ namespace EQM\Models\Statuses;
 use EQM\Core\Files\Uploader;
 use EQM\Models\Albums\Album;
 use EQM\Models\Albums\AlbumRepository;
+use EQM\Models\Companies\Company;
 use EQM\Models\Horses\Horse;
 use EQM\Models\Horses\HorseRepository;
 
@@ -33,9 +34,14 @@ class StatusCreator
      * @param \EQM\Models\Statuses\StatusRepository $statuses
      * @param \EQM\Models\Horses\HorseRepository $horses
      * @param \EQM\Core\Files\Uploader $uploader
+     * @param \EQM\Models\Albums\AlbumRepository $albums
      */
-    public function __construct(StatusRepository $statuses, HorseRepository $horses, Uploader $uploader, AlbumRepository $albums)
-    {
+    public function __construct(
+        StatusRepository $statuses,
+        HorseRepository $horses,
+        Uploader $uploader,
+        AlbumRepository $albums
+    ) {
         $this->statuses = $statuses;
         $this->horses = $horses;
         $this->uploader = $uploader;
@@ -63,6 +69,17 @@ class StatusCreator
 
         $this->addPicture($horse, $status, $values);
         $this->addMovie($horse, $status, $values);
+
+        return $status;
+    }
+
+    public function createForFollowingCompany(Horse $horse, Company $company)
+    {
+        $values['body'] = '<a href="/companies/' . $company->slug() . '" class="text-mint">' . $company->name() . '</a>';
+        $values['body'] .= '<br><br>';
+        $values['body'] .= $company->about();
+
+        $status = $this->statuses->createForFollowingCompany($horse, $values);
 
         return $status;
     }

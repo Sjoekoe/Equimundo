@@ -90,4 +90,11 @@ interface StatusRepository
      * @return int
      */
     public function count();
+
+    /**
+     * @param \EQM\Models\Horses\Horse $horse
+     * @param array $values
+     * @return \EQM\Models\Statuses\Status
+     */
+    public function createForFollowingCompany(Horse $horse, array $values);
 }
