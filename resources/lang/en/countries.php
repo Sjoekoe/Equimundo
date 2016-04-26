@@ -1,4 +1,5 @@
-<?php
+<?php 
+
 return [
     'AF' => 'Afghanistan',
     'AL' => 'Albania',
@@ -181,7 +182,7 @@ return [
     'PZ' => 'Panama Canal Zone',
     'PG' => 'Papua New Guinea',
     'PY' => 'Paraguay',
-    'YD' => "People's Democratic Republic of Yemen",
+    'YD' => 'People\'s Democratic Republic of Yemen',
     'PE' => 'Peru',
     'PH' => 'Philippines',
     'PN' => 'Pitcairn Islands',
@@ -262,4 +263,5 @@ return [
     'ZM' => 'Zambia',
     'ZW' => 'Zimbabwe',
     'AX' => 'Åland Islands',
+    'ZZ' => 'Unknown',
 ];

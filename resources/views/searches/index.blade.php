@@ -19,13 +19,13 @@
                                 </li>
                                 <li>
                                     <a href="#users" data-toggle="tab" aria-expanded="false">
-                                        Users
+                                        {{ trans('copy.titles.users') }}
                                         <i class="label label-danger">{{ count($profiles) }}</i>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="#companies" data-toggle="tab" aria-expanded="false">
-                                        Companies / Groups
+                                        {{ trans('copy.titles.companies_groups') }}
                                         <i class="label label-danger">{{ count($companies) }}</i>
                                     </a>
                                 </li>
@@ -92,7 +92,7 @@
                             </div>
                             <div id="users" class="tab-pane fade">
                                 <div class="col-sm-12">
-                                    <h4 class="text-thin">Users</h4>
+                                    <h4 class="text-thin">{{ trans('copy.titles.users') }}</h4>
                                 </div>
                                 <hr>
                                 @if (count($profiles))
@@ -129,7 +129,7 @@
                             </div>
                             <div id="companies" class="tab-pane fade">
                                 <div class="col-sm-12">
-                                    <h4 class="text-thin">Companies / Groups</h4>
+                                    <h4 class="text-thin">{{ trans('copy.titles.companies_groups') }}</h4>
                                 </div>
                                 <hr>
                                 @if (count($companies))
@@ -157,7 +157,7 @@
                                         </div>
                                     @endforeach
                                 @else
-                                    <p>{{ trans('copy.p.no_users_found') }}</p>
+                                    <p>{{ trans('copy.p.no_companies_groups_found') }}</p>
                                 @endif
                             </div>
                         </div>

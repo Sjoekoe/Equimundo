@@ -46,11 +46,11 @@
                                                             @if (auth()->check() && ! auth()->user()->isInHorseTeam($horse))
                                                                 @if (Auth::user()->isFollowing($horse))
                                                                     {{ Form::open(['route' => ['follows.destroy', $horse->id()], 'method' => 'DELETE']) }}
-                                                                    <button type="submit" class="btn btn-mint">{{ trans('copy.a.unfollow') . $horse->name() }}</button>
+                                                                    <button type="submit" class="btn btn-mint">{{ trans('copy.a.unfollow') }}</button>
                                                                     {{ Form::close() }}
                                                                 @else
                                                                     {{ Form::open(['route' => ['follows.store', $horse->id()]]) }}
-                                                                    <button type="submit" class="btn btn-mint">{{ trans('copy.a.follow') . $horse->name() }}</button>
+                                                                    <button type="submit" class="btn btn-mint">{{ trans('copy.a.follow') }}</button>
                                                                     {{ Form::close() }}
                                                                 @endif
                                                             @endif
@@ -98,11 +98,11 @@
                                                             @if (auth()->check() && ! auth()->user()->isInHorseTeam($follow))
                                                                 @if (auth()->user()->isFollowing($follow))
                                                                     {{ Form::open(['route' => ['follows.destroy', $follow->id()], 'method' => 'DELETE']) }}
-                                                                    <button type="submit" class="btn btn-mint">{{ trans('copy.a.unfollow') . $follow->name() }}</button>
+                                                                    <button type="submit" class="btn btn-mint">{{ trans('copy.a.unfollow') }}</button>
                                                                     {{ Form::close() }}
                                                                 @else
                                                                     {{ Form::open(['route' => ['follows.store', $follow->id()]]) }}
-                                                                    <button type="submit" class="btn btn-mint">{{ trans('copy.a.follow') . $follow->name() }}</button>
+                                                                    <button type="submit" class="btn btn-mint">{{ trans('copy.a.follow') }}</button>
                                                                     {{ Form::close() }}
                                                                 @endif
                                                             @endif

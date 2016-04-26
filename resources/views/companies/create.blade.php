@@ -6,7 +6,7 @@
             <div class="panel">
                 <div class="panel-heading">
                     <h3 class="panel-title">
-                        Create a Company
+                        {{ trans('copy.a.create_a_group') }}
                     </h3>
                 </div>
                 <createcompany></createcompany>
@@ -16,7 +16,7 @@
                         <div class="panel-body">
                             <div class="form-group">
                                 <div class="col-sm-2">
-                                    <label for="name" class="control-label">Name</label>
+                                    <label for="name" class="control-label">{{ trans('forms.labels.name') }}</label>
                                 </div>
                                 <div class="col-sm-10">
                                     <input type="text" for="name", v-model="name", class="form-control">
@@ -26,7 +26,7 @@
                             <br><br>
                             <div class="form-group">
                                 <div class="col-sm-2">
-                                    <label for="telephone" class="control-label">Telephone</label>
+                                    <label for="telephone" class="control-label">{{ trans('forms.labels.telephone') }}</label>
                                 </div>
                                 <div class="col-sm-10">
                                     <input type="text" for="telephone", v-model="telephone", class="form-control">
@@ -56,7 +56,7 @@
                             <br><br>
                             <div class="form-group">
                                 <div class="col-sm-2">
-                                    <label for="street" class="control-label">Street</label>
+                                    <label for="street" class="control-label">{{ trans('forms.labels.street') }}</label>
                                 </div>
                                 <div class="col-sm-10">
                                     <input type="text" for="street", v-model="street", class="form-control">
@@ -66,7 +66,7 @@
                             <br><br>
                             <div class="form-group">
                                 <div class="col-sm-2">
-                                    <label for="name" class="control-label">Zip</label>
+                                    <label for="name" class="control-label">{{ trans('forms.labels.zip') }}</label>
                                 </div>
                                 <div class="col-sm-10">
                                     <input type="text" for="zip", v-model="zip", class="form-control">
@@ -76,7 +76,7 @@
                             <br><br>
                             <div class="form-group">
                                 <div class="col-sm-2">
-                                    <label for="city" class="control-label">City</label>
+                                    <label for="city" class="control-label">{{ trans('forms.labels.city') }}</label>
                                 </div>
                                 <div class="col-sm-10">
                                     <input type="city" for="city", v-model="city", class="form-control">
@@ -86,7 +86,7 @@
                             <br><br>
                             <div class="form-group">
                                 <div class="col-sm-2">
-                                    <label for="state" class="control-label">State</label>
+                                    <label for="state" class="control-label">{{ trans('forms.labels.state') }}</label>
                                 </div>
                                 <div class="col-sm-10">
                                     <input type="text" for="state", v-model="state", class="form-control">
@@ -96,7 +96,7 @@
                             <br> <br>
                             <div class="form-group">
                                 <div class="col-sm-2">
-                                    <label for="country" class="control-label">Country</label>
+                                    <label for="country" class="control-label">{{ trans('forms.labels.country') }}</label>
                                 </div>
                                 <div class="col-sm-10">
                                     <select name="country" id="country" v-model="country" class="form-control">
@@ -110,7 +110,7 @@
                             <br>
                             <div class="form-group">
                                 <div class="col-sm-2">
-                                    <label for="about" class="control-label">About</label>
+                                    <label for="about" class="control-label">{{ trans('forms.labels.description') }}</label>
                                 </div>
                                 <div class="col-sm-10">
                                     <textarea name="about" id="about" cols="30" rows="3" class="form-control" v-model="about"></textarea>

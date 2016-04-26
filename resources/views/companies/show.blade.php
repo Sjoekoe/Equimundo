@@ -49,7 +49,7 @@
                     <div class="panel">
                         <div class="panel-heading">
                             <h3 class="panel-title">
-                                Horses
+                                {{ trans('copy.titles.horses') }}
                             </h3>
                         </div>
                         <div class="panel-body">
@@ -89,7 +89,7 @@
                     <div class="panel">
                         <div class="panel-heading">
                             <h3 class="panel-title">
-                                Users
+                                {{ trans('copy.titles.followers') }}
                             </h3>
                         </div>
                         <div class="panel-body">
@@ -120,14 +120,14 @@
                             @if (auth()->check())
                                 @if (! auth()->user()->isInCompanyTeam($company))
                                     <template v-if="company.is_followed_by_user">
-                                        <button class="btn btn-block btn-mint" @click="unfollow">Unfollow</button>
+                                        <button class="btn btn-block btn-mint" @click="unfollow">{{ trans('copy.a.unfollow') }}</button>
                                     </template>
                                     <template v-else>
-                                        <button class="btn btn-block btn-mint" @click="follow">Follow</button>
+                                        <button class="btn btn-block btn-mint" @click="follow">{{ trans('copy.a.follow') }}</button>
                                     </template>
                                 @elseif(auth()->user()->isCompanyAdmin($company))
                                     <a href="{{ route('company.edit', $company->slug()) }}" class="btn btn-block btn-mint">
-                                        Edit Company
+                                        {{ trans('copy.titles.edit') }}
                                     </a>
                                 @endif
                             @endif
@@ -135,7 +135,7 @@
 
                         <hr>
                         <div class="pad-hor">
-                            <h5>Address</h5>
+                            <h5>{{ trans('copy.titles.address') }}</h5>
                             <address>
                                 @{{ address.street }} <br>
                                 @{{ address.zip + ' ' + address.city }} <br>
@@ -145,7 +145,7 @@
                         </div>
                         <hr>
                         <div class="pad-hor">
-                            <h5>{{ trans('copy.titles.about_me') }}</h5>
+                            <h5>{{ trans('copy.titles.about_us') }}</h5>
                             <small class="text-thin" v-html="company.about"></small>
                         </div>
                     </div>

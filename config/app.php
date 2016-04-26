@@ -154,6 +154,7 @@ return [
         Collective\IronQueue\IronQueueServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         EQM\Core\Database\DatabaseServiceProvider::class,
+        Themsaid\Langman\LangmanServiceProvider::class,
 
         /*
          * Model Service Providers
