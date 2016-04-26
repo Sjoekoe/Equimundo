@@ -2,6 +2,7 @@
 namespace EQM\Core\Mailers;
 
 use EQM\Models\Horses\Horse;
+use EQM\Models\Statuses\HorseStatus;
 use EQM\Models\Statuses\Status;
 use EQM\Models\Users\User;
 
@@ -46,14 +47,17 @@ class UserMailer extends Mailer
      */
     public function sendStatusLikedTo(User $user, Status $status, User $sender)
     {
-        $subject = $sender->fullName() . ' likes the status of ' . $status->horse()->name();
+        $entity = $status instanceof HorseStatus ? $status->horse() : $status->company();
+
+        $subject = $sender->fullName() . ' likes the status of ' . $entity->name();
         $view = 'emails.statuses.liked';
+        
         $data = [
             'link' => route('statuses.show', $status->id()),
             'sender' => $sender,
             'userMail' => $user->email(),
             'userName' => $user->firstName(),
-            'horseName' => $status->horse()->name(),
+            'horseName' => $entity->name(),
         ];
 
         return $this->sendTo($user, $subject, $view, $data);

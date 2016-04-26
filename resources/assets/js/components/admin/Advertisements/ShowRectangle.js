@@ -14,7 +14,7 @@ module.exports = Vue.extend({
 
     ready: function() {
         $.getJSON('/api/admin/advertisements/random?type=rectangle', function(advertisement) {
-            if (advertisement) {
+            if (advertisement !== undefined) {
                 this.advertisement = advertisement.data;
                 this.found = true;
                 this.addView();

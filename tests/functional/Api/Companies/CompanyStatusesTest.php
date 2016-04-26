@@ -40,11 +40,12 @@ class CompanyStatusesTest extends \TestCase
     /** @test */
     function it_can_create_a_company_status()
     {
-        $now = Carbon::now();
         $address = $this->createAddress();
         $company = $this->createCompany([
             'address_id' => $address->id(),
         ]);
+
+        $now = Carbon::now();
 
         $this->post('/api/companies/' . $company->slug() . '/statuses', [
             'body' => 'Test Status',
