@@ -1,13 +1,17 @@
 <?php
 namespace EQM\Models\Companies;
 
+use AlgoliaSearch\Laravel\AlgoliaEloquentTrait;
+
 class EloquentStable extends EloquentCompany implements Stable, Company
 {
+    use AlgoliaEloquentTrait;
+
     /**
      * @var string
      */
     protected static $singleTableType = self::TYPE;
-    
+
     /**
      * @return \EQM\Models\Horses\Horse[]
      */
