@@ -4,6 +4,7 @@ namespace functional\Api\Companies;
 use EQM\Core\Testing\DefaultIncludes;
 use EQM\Models\Companies\Company;
 use EQM\Models\Companies\Stable;
+use EQM\Models\Companies\Users\TeamMember;
 
 class CompaniesTest extends \TestCase
 {
@@ -95,9 +96,16 @@ class CompaniesTest extends \TestCase
     /** @test */
     function it_can_update_a_company()
     {
+        $user = $this->loginAsUser();
         $address = $this->createAddress();
         $company = $this->createCompany([
             'address_id' => $address->id(),
+        ]);
+        $this->createCompanyUser([
+            'user_id' => $user->id(),
+            'company_id' => $company->id(),
+            'is_admin' => true,
+            'type' => TeamMember::TYPE,
         ]);
 
         $this->put('/api/companies/' . $company->slug(), [
@@ -119,7 +127,7 @@ class CompaniesTest extends \TestCase
                 'telephone' => '85096',
                 'about' => $company->about(),
                 'email' => $company->email(),
-                'is_followed_by_user' => false,
+                'is_followed_by_user' => true,
                 'addressRelation' => [
                     'data' => $this->includedAddress($company->address(), [
                         'id' => 2,
