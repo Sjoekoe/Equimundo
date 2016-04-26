@@ -23,6 +23,12 @@
                                         <i class="label label-danger">{{ count($profiles) }}</i>
                                     </a>
                                 </li>
+                                <li>
+                                    <a href="#companies" data-toggle="tab" aria-expanded="false">
+                                        Companies / Groups
+                                        <i class="label label-danger">{{ count($companies) }}</i>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -109,6 +115,39 @@
                                                                 <a href="{{ route('users.profiles.show', $profile->slug()) }}" class="btn btn-primary">Show profile</a>
                                                                 <a href="{{ route('conversation.create', ['contact' => $profile->id()]) }}" class="btn btn-mint">
                                                                     {{ trans('copy.a.contact_message') }}
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    @endforeach
+                                @else
+                                    <p>{{ trans('copy.p.no_users_found') }}</p>
+                                @endif
+                            </div>
+                            <div id="companies" class="tab-pane fade">
+                                <div class="col-sm-12">
+                                    <h4 class="text-thin">Companies / Groups</h4>
+                                </div>
+                                <hr>
+                                @if (count($companies))
+                                    @foreach($companies->chunk(4) as $companyChunk)
+                                        <div class="row">
+                                            @foreach ($companyChunk as $company)
+                                                <div class="col-sm-3">
+                                                    <div class="panel text-center">
+                                                        <div class="panel-body">
+                                                            <h4 class="mar-no">{{ $company->name() }}</h4>
+                                                        </div>
+                                                        <div class="pad-all">
+                                                            <p class="text-muted">
+                                                                {{ $company->about() }}
+                                                            </p>
+                                                            <div class="pad-ver">
+                                                                <a href="{{ route('companies.show', $company->slug()) }}" class="btn btn-mint">
+                                                                    <i class="fa fa-eye"></i>
                                                                 </a>
                                                             </div>
                                                         </div>

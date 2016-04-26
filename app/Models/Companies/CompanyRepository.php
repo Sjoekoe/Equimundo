@@ -24,6 +24,10 @@ interface CompanyRepository
      */
     public function delete(Company $company);
 
+    /**
+     * @param int $limit
+     * @return \Illuminate\Pagination\LengthAwarePaginator
+     */
     public function findAllPaginated($limit = 10);
 
     /**
@@ -33,8 +37,20 @@ interface CompanyRepository
     public function findBySlug($slug);
 
     /**
+     * @param int $id
+     * @return \EQM\Models\Companies\Company|null
+     */
+    public function findById($id);
+
+    /**
      * @param string $slug
      * @return int
      */
     public function findSlugCount($slug);
+
+    /**
+     * @param string $keyWord
+     * @return \EQM\Models\Companies\Company[]
+     */
+    public function search($keyWord);
 }

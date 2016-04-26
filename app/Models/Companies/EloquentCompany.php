@@ -1,6 +1,7 @@
 <?php
 namespace EQM\Models\Companies;
 
+use AlgoliaSearch\Laravel\AlgoliaEloquentTrait;
 use EQM\Models\Addresses\EloquentAddress;
 use EQM\Models\Companies\Users\CompanyUser;
 use EQM\Models\Companies\Users\EloquentCompanyUser;
@@ -13,7 +14,7 @@ use Nanigans\SingleTableInheritance\SingleTableInheritanceTrait;
 
 class EloquentCompany extends Model implements Company
 {
-    use UsesTimeStamps, SingleTableInheritanceTrait;
+    use UsesTimeStamps, SingleTableInheritanceTrait, AlgoliaEloquentTrait;
 
     /**
      * @var string

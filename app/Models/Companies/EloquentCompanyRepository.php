@@ -121,11 +121,29 @@ class EloquentCompanyRepository implements CompanyRepository
     }
 
     /**
+     * @param int $id
+     * @return \EQM\Models\Companies\Company|null
+     */
+    public function findById($id)
+    {
+        return $this->company->where('id', $id)->first();
+    }
+
+    /**
      * @param string $slug
      * @return int
      */
     public function findSlugCount($slug)
     {
         return count($this->company->whereRaw("slug REGEXP '^{$slug}(-[0-9]*)?$'")->get());
+    }
+
+    /**
+     * @param string $keyWord
+     * @return \EQM\Models\Companies\Company[]
+     */
+    public function search($keyWord)
+    {
+        return $this->company->_search($keyWord);
     }
 }
