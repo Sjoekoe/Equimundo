@@ -11,6 +11,11 @@
                             <ul class="nav nav-tabs">
                                 <li class="active"><a href="#horses" data-toggle="tab" aria-expanded="true">{{ trans('copy.titles.horses') }}</a></li>
                                 <li><a href="#following" data-toggle="tab" aria-expanded="false">{{ trans('copy.titles.following') }}</a></li>
+                                <li>
+                                    <a href="#companies" data-toggle="tab" aria-expanded="false">
+                                        {{ trans('copy.titles.companies_groups') }}
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -117,6 +122,30 @@
                                                 </div>
                                             </div>
                                         </a>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <div id="companies" class="tab-pane fade">
+                                <div class="col-sm-12">
+                                    <h4 class="text-thin">{{ trans('copy.titles.companies_groups') }}</h4>
+                                </div>
+                                @foreach($user->companies() as $company)
+                                    <div class="col-sm-3">
+                                        <div class="panel text-center panel-bordered-mint">
+                                            <div class="panel-body">
+                                                <h4 class="mar-no">{{ $company->name() }}</h4>
+                                            </div>
+                                            <div class="pad-all">
+                                                <p class="text-muted">
+                                                    {{ $company->about() }}
+                                                </p>
+                                                <div class="pad-ver">
+                                                    <a href="{{ route('companies.show', $company->slug()) }}" class="btn btn-mint">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 @endforeach
                             </div>

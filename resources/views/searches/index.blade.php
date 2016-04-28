@@ -137,7 +137,7 @@
                                         <div class="row">
                                             @foreach ($companyChunk as $company)
                                                 <div class="col-sm-3">
-                                                    <div class="panel text-center">
+                                                    <div class="panel text-center panel-bordered-mint">
                                                         <div class="panel-body">
                                                             <h4 class="mar-no">{{ $company->name() }}</h4>
                                                         </div>
