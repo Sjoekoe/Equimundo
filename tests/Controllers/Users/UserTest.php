@@ -1,20 +1,19 @@
 <?php
 namespace Controllers\Users;
 
-use Carbon\Carbon;
 use EQM\Models\Horses\Horse;
 use EQM\Models\HorseTeams\HorseTeam;
-use EQM\Models\Users\EloquentUser;
 use EQM\Models\Users\User;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class UserTest extends \TestCase
 {
-    use WithoutMiddleware;
+    use WithoutMiddleware, DatabaseTransactions;
 
     /** @test */
     function add_user_details() {
-        $user = factory(EloquentUser::class)->create([
+        $user = $this->createUser([
             'activated' => true,
         ]);
 
@@ -31,7 +30,7 @@ class UserTest extends \TestCase
         $this->assertRedirectedTo('/edit-profile');
 
         $this->seeInDatabase(User::TABLE, [
-            'id' => 1,
+            'id' => $user->id(),
             'first_name' => 'Foo',
             'last_name' => 'Bar',
             'gender' => 'M',

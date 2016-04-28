@@ -1,12 +1,14 @@
 <?php
 namespace functional\Api\Advertisements;
 
+use DB;
 use EQM\Core\Testing\DefaultIncludes;
 use EQM\Models\Advertising\Companies\AdvertisingCompany;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class CompaniesTest extends \TestCase
 {
-    use DefaultIncludes;
+    use DefaultIncludes, DatabaseTransactions;
 
     /** @test */
     function it_can_get_all_companies()
@@ -70,7 +72,7 @@ class CompaniesTest extends \TestCase
             'email' => 'test@test.com',
         ])->seeJsonEquals([
             'data' => [
-                'id' => 1,
+                'id' => DB::table(AdvertisingCompany::TABLE)->first()->id,
                 'name' => 'Test Company',
                 'email' => 'test@test.com',
                 'telephone' => '4567893',

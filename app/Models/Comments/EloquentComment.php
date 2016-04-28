@@ -12,7 +12,7 @@ class EloquentComment extends Model implements Comment
     /**
      * @var string
      */
-    protected $table = 'comments';
+    protected $table = self::TABLE;
 
     /**
      * @var array

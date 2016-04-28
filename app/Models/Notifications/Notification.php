@@ -3,6 +3,7 @@ namespace EQM\Models\Notifications;
 
 interface Notification
 {
+    const TABLE = 'notifications';
     const STATUS_LIKED = 1;
     const COMMENT_POSTED = 2;
     const PEDIGREE_CREATED = 3;

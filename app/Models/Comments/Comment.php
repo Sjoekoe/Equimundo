@@ -5,6 +5,8 @@ use EQM\Models\Users\User;
 
 interface Comment
 {
+    const TABLE = 'comments';
+    
     /**
      * @return int
      */

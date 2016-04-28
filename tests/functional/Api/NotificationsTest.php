@@ -1,14 +1,13 @@
 <?php
 namespace functional\Api;
 
-use Carbon\Carbon;
-use DB;
 use EQM\Core\Testing\DefaultIncludes;
 use EQM\Models\Notifications\Notification;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class NotificationsTest extends \TestCase
 {
-    use DefaultIncludes;
+    use DefaultIncludes, DatabaseTransactions;
 
     /** @test */
     function it_can_get_all_notifications_for_a_user()
@@ -16,36 +15,20 @@ class NotificationsTest extends \TestCase
         $user = $this->loginAsUser();
         $horse = $this->createHorse();
         $otherUser = $this->createUser(['email' => 'test@test.com']);
-        $now = Carbon::now();
-
-        DB::table('notifications')->insert([
+        $notification = $this->createNotification([
             'sender_id' => $otherUser->id(),
             'receiver_id' => $user->id(),
             'data' => json_encode([
                 'sender' => $otherUser->fullName(),
                 'horse' => $horse->name(),
             ]),
-            'type' => Notification::STATUS_LIKED,
-            'read' => false,
-            'link' => 'www.test.com',
-            'created_at' => $now,
         ]);
 
         $this->actingAs($user)
             ->get('/api/notifications')
             ->seeJsonEquals([
                 'data' => [
-                    [
-                        'id' => 1,
-                        'url' => 'http://localhost/notifications/1/show',
-                        'type' => Notification::STATUS_LIKED,
-                        'message' => 'John Doe has liked the status of Test horse.',
-                        'is_read' => false,
-                        'icon' => 'fa-thumbs-o-up',
-                        'created_at' => $now->toIso8601String(),
-                        'receiverRelation' => $this->includedUser($user),
-                        'senderRelation' => $this->includedUser($otherUser),
-                    ],
+                    $this->includedNotification($notification),
                 ],
                 'meta' => [
                     'pagination' => [
@@ -66,36 +49,20 @@ class NotificationsTest extends \TestCase
         $user = $this->loginAsUser();
         $horse = $this->createHorse();
         $otherUser = $this->createUser(['email' => 'test@test.com']);
-        $now = Carbon::now();
-
-        DB::table('notifications')->insert([
+        $notification = $this->createNotification([
             'sender_id' => $otherUser->id(),
             'receiver_id' => $user->id(),
             'data' => json_encode([
                 'sender' => $otherUser->fullName(),
                 'horse' => $horse->name(),
             ]),
-            'type' => Notification::STATUS_LIKED,
-            'read' => false,
-            'link' => 'www.test.com',
-            'created_at' => $now,
         ]);
 
         $this->actingAs($user)
             ->get('/api/notifications/mark-as-read')
             ->seeJsonEquals([
                 'data' => [
-                    [
-                        'id' => 1,
-                        'url' => 'http://localhost/notifications/1/show',
-                        'type' => Notification::STATUS_LIKED,
-                        'message' => 'John Doe has liked the status of Test horse.',
-                        'is_read' => true,
-                        'icon' => 'fa-thumbs-o-up',
-                        'created_at' => $now->toIso8601String(),
-                        'receiverRelation' => $this->includedUser($user),
-                        'senderRelation' => $this->includedUser($otherUser),
-                    ],
+                    $this->includedNotification($notification, ['is_read' => true]),
                 ],
                 'meta' => [
                     'pagination' => [
@@ -116,35 +83,19 @@ class NotificationsTest extends \TestCase
         $user = $this->loginAsUser();
         $horse = $this->createHorse();
         $otherUser = $this->createUser(['email' => 'test@test.com']);
-        $now = Carbon::now();
-
-        DB::table('notifications')->insert([
+        $notification = $this->createNotification([
             'sender_id' => $otherUser->id(),
             'receiver_id' => $user->id(),
             'data' => json_encode([
                 'sender' => $otherUser->fullName(),
                 'horse' => $horse->name(),
             ]),
-            'type' => Notification::STATUS_LIKED,
-            'read' => false,
-            'link' => 'www.test.com',
-            'created_at' => $now,
         ]);
 
         $this->actingAs($user)
-            ->get('/api/notifications/1')
+            ->get('/api/notifications/' . $notification->id())
             ->seeJsonEquals([
-                'data' => [
-                    'id' => 1,
-                    'url' => 'http://localhost/notifications/1/show',
-                    'type' => Notification::STATUS_LIKED,
-                    'message' => 'John Doe has liked the status of Test horse.',
-                    'is_read' => false,
-                    'icon' => 'fa-thumbs-o-up',
-                    'created_at' => $now->toIso8601String(),
-                    'receiverRelation' => $this->includedUser($user),
-                    'senderRelation' => $this->includedUser($otherUser),
-                ],
+                'data' => $this->includedNotification($notification),
             ]);
     }
 
@@ -154,25 +105,21 @@ class NotificationsTest extends \TestCase
         $user = $this->loginAsUser();
         $horse = $this->createHorse();
         $otherUser = $this->createUser(['email' => 'test@test.com']);
-
-        DB::table('notifications')->insert([
+        $notification = $this->createNotification([
             'sender_id' => $otherUser->id(),
             'receiver_id' => $user->id(),
             'data' => json_encode([
                 'sender' => $otherUser->fullName(),
                 'horse' => $horse->name(),
             ]),
-            'type' => Notification::STATUS_LIKED,
-            'read' => false,
-            'link' => 'www.test.com',
         ]);
 
         $this->actingAs($user)
-            ->delete('api/notifications/1')
+            ->delete('api/notifications/' . $notification->id())
             ->assertResponseStatus(204);
 
-        $this->missingFromDatabase('notifications', [
-            'id' => 1,
+        $this->missingFromDatabase(Notification::TABLE, [
+            'id' => $notification->id(),
         ]);
     }
 }

@@ -14,6 +14,7 @@ use EQM\Models\Disciplines\EloquentDiscipline;
 use EQM\Models\Events\EloquentEvent;
 use EQM\Models\Horses\EloquentHorse;
 use EQM\Models\HorseTeams\EloquentHorseTeam;
+use EQM\Models\Notifications\EloquentNotification;
 use EQM\Models\Palmares\EloquentPalmares;
 use EQM\Models\Pedigrees\EloquentPedigree;
 use EQM\Models\Pictures\EloquentPicture;
@@ -23,114 +24,53 @@ use EQM\Models\Users\EloquentUser;
 use Faker\Generator;
 
 $factory->define(EloquentUser::class, function (Generator $faker) {
-    return [
-        'last_name' => $faker->name,
-        'first_name' => $faker->name,
-        'email' => $faker->email,
-        'language' => 'en',
-        'activated' => true,
-        'password' => bcrypt('password'),
-        'remember_token' => str_random(10),
-        'country' => 'BE',
-        'gender' => 'M',
-        'slug' => $faker->slug
-    ];
+    return [];
 });
-
 $factory->define(EloquentHorse::class, function (Generator $faker) {
-    return [
-        'name' => 'test horse',
-        'life_number' => $faker->sentence,
-        'date_of_birth' => Carbon::now(),
-        'slug' => 'test-horse',
-        'gender' => 1,
-        'color' => 1,
-        'height' => 5,
-        'breed' => 1,
-    ];
+    return [];
 });
-
 $factory->define(EloquentHorseTeam::class, function (Generator $faker) {
-    return [
-        'type' => 1,
-    ];
+    return [];
 });
-
 $factory->define(EloquentHorseStatus::class, function (Generator $faker) {
-    return [
-        'body' => $faker->text,
-        'prefix' => 1
-    ];
+    return [];
 });
-
 $factory->define(EloquentPalmares::class, function(Generator $faker) {
-    return [
-        'discipline' => $faker->randomDigitNotNull,
-        'level' => 'zz',
-        'ranking' => $faker->randomDigitNotNull,
-        'date' => $faker->dateTime,
-    ];
+    return [];
 });
-
 $factory->define(EloquentEvent::class, function(Generator $faker) {
-    return [
-        'name' => $faker->name,
-    ];
+    return [];
 });
-
 $factory->define(EloquentPedigree::class, function(Generator $faker) {
     return [];
 });
-
 $factory->define(EloquentComment::class, function (Generator $faker) {
-    return [
-        'body' => $faker->text,
-    ];
+    return [];
 });
-
 $factory->define(EloquentDiscipline::class, function (Generator $faker) {
     return [];
 });
-
 $factory->define(EloquentPicture::class, function (Generator $faker) {
-    return [
-        'path' => $faker->word . '.' . $faker->fileExtension,
-        'profile_pic' => false,
-        'mime' => $faker->mimeType,
-        'original_name' => $faker->name,
-        'header_image' => false
-    ];
+    return [];
 });
-
 $factory->define(EloquentAlbum::class, function(Generator $faker) {
-    return [
-        'horse_id' => $faker->randomDigit,
-        'name' => $faker->name,
-        'description' => $faker->text(),
-        'type' => null
-    ];
+    return [];
 });
-
 $factory->define(EloquentAdvertisingContact::class, function(Generator $faker) {
     return [];
 });
-
 $factory->define(EloquentAdvertisingCompany::class, function (Generator $faker) {
     return [];
 });
-
 $factory->define(EloquentAddress::class, function(Generator $faker) {
     return [];
 });
-
 $factory->define(EloquentRectangle::class, function(Generator $faker) {
     return [];
 });
-
 $factory->define(EloquentStable::class, function (Generator $faker) {
     return [];
 });
-
 $factory->define(EloquentFollower::class, function (Generator $faker) {
     return [];
 });
@@ -138,5 +78,8 @@ $factory->define(EloquentCompanyHorse::class, function (Generator $faker) {
     return [];
 });
 $factory->define(EloquentCompanyStatus::class, function (Generator $faker) {
+    return [];
+});
+$factory->define(EloquentNotification::class, function (Generator $faker) {
     return [];
 });

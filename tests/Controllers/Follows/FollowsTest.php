@@ -1,19 +1,18 @@
 <?php
 namespace Controllers\Follows;
 
-use EQM\Models\Horses\EloquentHorse;
-use EQM\Models\Users\EloquentUser;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class FollowsTest extends \TestCase
 {
-    use WithoutMiddleware;
+    use WithoutMiddleware, DatabaseTransactions;
 
     /** @test */
     function it_can_follow_and_unfollow_a_horse()
     {
-        $user = factory(EloquentUser::class)->create();
-        $horse = factory(EloquentHorse::class)->create();
+        $user = $this->createUser();
+        $horse = $this->createHorse();
 
         $this->actingAs($user)
             ->post('/follows/' . $horse->id());

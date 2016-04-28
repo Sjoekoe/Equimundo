@@ -3,6 +3,8 @@ namespace EQM\Models\Palmares;
 
 interface Palmares
 {
+    const TABLE = 'palmares';
+    
     /**
      * @return int
      */

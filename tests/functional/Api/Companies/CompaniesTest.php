@@ -1,14 +1,17 @@
 <?php
 namespace functional\Api\Companies;
 
+use DB;
 use EQM\Core\Testing\DefaultIncludes;
+use EQM\Models\Addresses\Address;
 use EQM\Models\Companies\Company;
 use EQM\Models\Companies\Stable;
 use EQM\Models\Companies\Users\TeamMember;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class CompaniesTest extends \TestCase
 {
-    use DefaultIncludes;
+    use DefaultIncludes, DatabaseTransactions;
 
     /** @test */
     function it_can_show_all_companies_paginated()
@@ -55,7 +58,7 @@ class CompaniesTest extends \TestCase
             'type' => Stable::ID,
         ])->seeJsonEquals([
             'data' => [
-                'id' => 1,
+                'id' => DB::table(Company::TABLE)->first()->id,
                 'name' => 'Test Company',
                 'slug' => 'test-company',
                 'telephone' => '12345',
@@ -65,7 +68,7 @@ class CompaniesTest extends \TestCase
                 'is_followed_by_user' => false,
                 'addressRelation' => [
                     'data' => [
-                        'id' => 1,
+                        'id' => DB::table(Address::TABLE)->first()->id,
                         'street' => 'Puttingstraat 8',
                         'zip' => '4564BJ',
                         'city' => 'Sint Jansteen',
@@ -130,7 +133,7 @@ class CompaniesTest extends \TestCase
                 'is_followed_by_user' => true,
                 'addressRelation' => [
                     'data' => $this->includedAddress($company->address(), [
-                        'id' => 2,
+                        'id' => DB::table(Address::TABLE)->orderBy('id', 'desc')->first()->id,
                         'latitude' => '44.4495134',
                         'longitude' => '-102.0783189',
                     ]),

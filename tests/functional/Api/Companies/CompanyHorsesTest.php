@@ -1,12 +1,14 @@
 <?php
 namespace functional\Api\Companies;
 
+use DB;
 use EQM\Core\Testing\DefaultIncludes;
 use EQM\Models\Companies\Horses\CompanyHorse;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class CompanyHorsesTest extends \TestCase
 {
-    use DefaultIncludes;
+    use DefaultIncludes, DatabaseTransactions;
 
     /** @test */
     function it_can_get_all_horses_for_a_company()
@@ -53,7 +55,7 @@ class CompanyHorsesTest extends \TestCase
             'horse_id' => $horse->id(),
         ])->seeJsonEquals([
             'data' => [
-                'id' => 1,
+                'id' => DB::table(CompanyHorse::TABLE)->first()->id,
                 'companyRelation' => [
                     'data' => $this->includedCompany($company),
                 ],

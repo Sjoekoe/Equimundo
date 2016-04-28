@@ -10,7 +10,7 @@ class EloquentEvent extends Model implements Event
     /**
      * @var string
      */
-    protected $table = 'events';
+    protected $table = self::TABLE;
 
     /**
      * @var array

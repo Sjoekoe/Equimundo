@@ -1,36 +1,34 @@
 <?php
 namespace Controllers\Statuses;
 
-use EQM\Models\Horses\EloquentHorse;
-use EQM\Models\HorseTeams\EloquentHorseTeam;
-use EQM\Models\Statuses\EloquentStatus;
-use EQM\Models\Users\EloquentUser;
+use EQM\Models\Statuses\Status;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class StatusesTest extends \TestCase
 {
-    use WithoutMiddleware;
+    use WithoutMiddleware, DatabaseTransactions;
 
     /** @test */
     function it_can_create_a_status()
     {
-        $user = factory(EloquentUser::class)->create([
+        $user = $this->createUser([
             'email' => 'foo@bar.com',
         ]);
-        $horse = factory(EloquentHorse::class)->create();
-        factory(EloquentHorseTeam::class)->create([
+        $horse = $this->createHorse();
+        $this->createHorseTeam([
             'user_id' => $user->id(),
-            'horse_id' => $horse->id,
+            'horse_id' => $horse->id(),
         ]);
 
         $this->actingAs($user)
             ->post('/statuses/create', [
-            'horse' => $horse->id,
+            'horse' => $horse->id(),
             'body' => 'some status',
         ]);
 
-        $this->seeInDatabase('statuses', [
-            'horse_id' => $horse->id,
+        $this->seeInDatabase(Status::TABLE, [
+            'horse_id' => $horse->id(),
             'body' => 'some status',
             'prefix' => null,
         ]);
@@ -50,13 +48,13 @@ class StatusesTest extends \TestCase
     /** @test */
     function it_can_edit_a_status()
     {
-        $user = factory(EloquentUser::class)->create([
+        $user = $this->createUser([
             'email' => 'foo@bar.com',
         ]);
-        $horse = factory(EloquentHorse::class)->create();
-        factory(EloquentHorseTeam::class)->create([
-            'user_id' => $user->id,
-            'horse_id' => $horse->id,
+        $horse = $this->createHorse();
+        $this->createHorseTeam([
+            'user_id' => $user->id(),
+            'horse_id' => $horse->id(),
         ]);
         $status = $this->createStatus([
             'horse_id' => $horse->id(),
@@ -68,7 +66,7 @@ class StatusesTest extends \TestCase
                 'body' => 'Some status',
             ]);
 
-        $this->seeInDatabase('statuses', [
+        $this->seeInDatabase(Status::TABLE, [
             'id' => $status->id(),
             'body' => 'Some status'
         ]);
@@ -77,11 +75,11 @@ class StatusesTest extends \TestCase
     /** @test */
     function it_can_delete_a_status()
     {
-        $user = factory(EloquentUser::class)->create([
+        $user = $this->createUser([
             'email' => 'foo@bar.com',
         ]);
-        $horse = factory(EloquentHorse::class)->create();
-        factory(EloquentHorseTeam::class)->create([
+        $horse = $this->createHorse();
+        $this->createHorseTeam([
             'user_id' => $user->id(),
             'horse_id' => $horse->id(),
         ]);
@@ -92,7 +90,7 @@ class StatusesTest extends \TestCase
         $this->actingAs($user)
             ->get('/status/' . $status->id() . '/delete');
 
-        $this->notSeeInDatabase('statuses', [
+        $this->notSeeInDatabase(Status::TABLE, [
             'id' => $status->id()
         ]);
     }

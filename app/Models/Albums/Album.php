@@ -3,6 +3,7 @@ namespace EQM\Models\Albums;
 
 interface Album
 {
+    const TABLE = 'albums';
     const PROFILEPICTURES = 1;
     const COVERPICTURES = 2;
     const TIMELINEPICTURES = 3;

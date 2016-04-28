@@ -2,10 +2,11 @@
 namespace functional\Api;
 
 use EQM\Core\Testing\DefaultIncludes;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class UsersTest extends \TestCase
 {
-    use DefaultIncludes;
+    use DefaultIncludes, DatabaseTransactions;
 
     /** @test */
     function it_can_show_a_user()

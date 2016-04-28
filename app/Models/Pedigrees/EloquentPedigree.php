@@ -9,7 +9,7 @@ class EloquentPedigree extends Model implements Pedigree
     /**
      * @var string
      */
-    protected $table = 'pedigrees';
+    protected $table = self::TABLE;
 
     /**
      * @var array

@@ -1,22 +1,20 @@
 <?php
 namespace Controllers\Statuses;
 
-use EQM\Events\CommentWasLiked;
-use EQM\Models\Comments\EloquentComment;
-use EQM\Models\Horses\EloquentHorse;
-use EQM\Models\Statuses\EloquentStatus;
-use EQM\Models\Users\EloquentUser;
+use DB;
+use EQM\Models\Comments\Comment;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class CommentTest extends \TestCase
 {
-    use WithoutMiddleware;
+    use WithoutMiddleware, DatabaseTransactions;
 
     /** @test */
     function it_can_create_a_comment()
     {
-        $user = factory(EloquentUser::class)->create();
-        $horse = factory(EloquentHorse::class)->create();
+        $user = $this->createUser();
+        $horse = $this->createHorse();
         $status = $this->createStatus([
             'horse_id' => $horse->id(),
         ]);
@@ -26,8 +24,8 @@ class CommentTest extends \TestCase
                 'body' => 'Foo body'
             ])->assertResponseStatus(302);
 
-        $this->seeInDatabase('comments', [
-            'id' => 1,
+        $this->seeInDatabase(Comment::TABLE, [
+            'id' => DB::table(Comment::TABLE)->first()->id,
             'body' => 'Foo body',
             'status_id' => $status->id(),
             'user_id' => $user->id(),

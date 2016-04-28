@@ -12,7 +12,7 @@ class EloquentPalmares extends Model implements Palmares
     /**
      * @var string
      */
-    protected $table = 'palmares';
+    protected $table = self::TABLE;
 
     /**
      * @var array

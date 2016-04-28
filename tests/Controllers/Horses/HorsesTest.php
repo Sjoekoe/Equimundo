@@ -2,19 +2,20 @@
 namespace Controllers\Horses;
 
 use Carbon\Carbon;
-use EQM\Models\Horses\EloquentHorse;
-use EQM\Models\HorseTeams\EloquentHorseTeam;
-use EQM\Models\Users\EloquentUser;
+use DB;
+use EQM\Models\Horses\Horse;
+use EQM\Models\HorseTeams\HorseTeam;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class HorsesTest extends \TestCase
 {
-    use WithoutMiddleware;
+    use WithoutMiddleware, DatabaseTransactions;
 
     /** @test */
     function it_can_create_a_horse()
     {
-        $user = factory(EloquentUser::class)->create();
+        $user = $this->createUser();
 
         $this->actingAs($user)
             ->post('/horses/create', [
@@ -29,7 +30,7 @@ class HorsesTest extends \TestCase
 
         $this->assertRedirectedTo('/');
         $this->seeInDatabase('horses', [
-                'id' => 1,
+                'id' => DB::table(Horse::TABLE)->first()->id,
                 'name' => 'Foo horse',
                 'life_number' => '1234',
                 'date_of_birth' => '1982-06-08 00:00:00',
@@ -40,9 +41,9 @@ class HorsesTest extends \TestCase
             ]);
 
         $this->seeInDatabase('horse_team', [
-            'id' => 1,
+            'id' => DB::table(HorseTeam::TABLE)->first()->id,
             'user_id' => $user->id(),
-            'horse_id' => 1,
+            'horse_id' => DB::table(Horse::TABLE)->first()->id,
             'type' => 1,
         ]);
     }
@@ -51,9 +52,10 @@ class HorsesTest extends \TestCase
     function it_can_edit_a_horse()
     {
         $now = Carbon::createFromDate(2000, 10, 5)->startOfDay();
-        $user = factory(EloquentUser::class)->create();
-        $horse = factory(EloquentHorse::class)->create();
-        factory(EloquentHorseTeam::class)->create([
+
+        $user = $this->createUser();
+        $horse = $this->createHorse();
+        $this->createHorseTeam([
             'user_id' => $user->id,
             'horse_id' => $horse->id(),
         ]);
@@ -71,7 +73,7 @@ class HorsesTest extends \TestCase
 
         $this->assertRedirectedTo('/horses/edit/' . $horse->slug());
         $this->seeInDatabase('horses', [
-            'id' => 1,
+            'id' => $horse->id(),
             'name' => 'Foo horse',
             'life_number' => '1234',
             'date_of_birth' => $now->toIso8601String(),

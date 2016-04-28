@@ -3,9 +3,13 @@ namespace functional\Api;
 
 use Carbon\Carbon;
 use DB;
+use EQM\Models\Statuses\Status;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class StatusesTest extends \TestCase
 {
+    use DatabaseTransactions;
+
     /** @test */
     function it_can_get_the_feed_for_a_user()
     {
@@ -128,7 +132,7 @@ class StatusesTest extends \TestCase
             'body' => 'Foo',
         ])->seeJsonEquals([
             'data' => [
-                'id' => 1,
+                'id' => DB::table(Status::TABLE)->first()->id,
                 'body' => 'Foo',
                 'created_at' => Carbon::now()->toIso8601String(),
                 'like_count' => 0,
@@ -169,7 +173,7 @@ class StatusesTest extends \TestCase
         $this->get('/api/statuses/' . $status->id())
             ->seeJsonEquals([
                 'data' => [
-                    'id' => 1,
+                    'id' => $status->id(),
                     'body' => $status->body(),
                     'created_at' => $status->createdAt()->toIso8601String(),
                     'like_count' => 0,
@@ -272,7 +276,7 @@ class StatusesTest extends \TestCase
         $this->get('/api/statuses/' . $status->id())
             ->seeJsonEquals([
                 'data' => [
-                    'id' => 1,
+                    'id' => $status->id(),
                     'body' => $status->body(),
                     'created_at' => $status->createdAt()->toIso8601String(),
                     'like_count' => 1,
@@ -331,7 +335,7 @@ class StatusesTest extends \TestCase
             'body' => 'Foo',
         ])->seeJsonEquals([
             'data' => [
-                'id' => 1,
+                'id' => $status->id(),
                 'body' => 'Foo',
                 'created_at' => $status->createdAt()->toIso8601String(),
                 'like_count' => 0,
@@ -372,7 +376,7 @@ class StatusesTest extends \TestCase
         $this->delete('/api/statuses/' . $status->id(), [])
             ->assertResponseStatus(204);
 
-        $this->notSeeInDatabase('statuses', [
+        $this->notSeeInDatabase(Status::TABLE, [
             'id' => $status->id(),
         ]);
     }
