@@ -19,8 +19,14 @@
                                 </li>
                                 <li>
                                     <a href="#users" data-toggle="tab" aria-expanded="false">
-                                        Users
+                                        {{ trans('copy.titles.users') }}
                                         <i class="label label-danger">{{ count($profiles) }}</i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#companies" data-toggle="tab" aria-expanded="false">
+                                        {{ trans('copy.titles.companies_groups') }}
+                                        <i class="label label-danger">{{ count($companies) }}</i>
                                     </a>
                                 </li>
                             </ul>
@@ -86,7 +92,7 @@
                             </div>
                             <div id="users" class="tab-pane fade">
                                 <div class="col-sm-12">
-                                    <h4 class="text-thin">Users</h4>
+                                    <h4 class="text-thin">{{ trans('copy.titles.users') }}</h4>
                                 </div>
                                 <hr>
                                 @if (count($profiles))
@@ -119,6 +125,39 @@
                                     @endforeach
                                 @else
                                     <p>{{ trans('copy.p.no_users_found') }}</p>
+                                @endif
+                            </div>
+                            <div id="companies" class="tab-pane fade">
+                                <div class="col-sm-12">
+                                    <h4 class="text-thin">{{ trans('copy.titles.companies_groups') }}</h4>
+                                </div>
+                                <hr>
+                                @if (count($companies))
+                                    @foreach($companies->chunk(4) as $companyChunk)
+                                        <div class="row">
+                                            @foreach ($companyChunk as $company)
+                                                <div class="col-sm-3">
+                                                    <div class="panel text-center panel-bordered-mint">
+                                                        <div class="panel-body">
+                                                            <h4 class="mar-no">{{ $company->name() }}</h4>
+                                                        </div>
+                                                        <div class="pad-all">
+                                                            <p class="text-muted">
+                                                                {{ $company->about() }}
+                                                            </p>
+                                                            <div class="pad-ver">
+                                                                <a href="{{ route('companies.show', $company->slug()) }}" class="btn btn-mint">
+                                                                    <i class="fa fa-eye"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    @endforeach
+                                @else
+                                    <p>{{ trans('copy.p.no_companies_groups_found') }}</p>
                                 @endif
                             </div>
                         </div>

@@ -1,6 +1,7 @@
 <?php
 namespace EQM\Models\Pictures;
 
+use EQM\Models\Companies\Company;
 use EQM\Models\Horses\Horse;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -54,6 +55,28 @@ class EloquentPictureRepository implements PictureRepository
         $picture->mime = $file->getClientMimeType();
         $picture->original_name = $file->getClientOriginalName();
         $picture->profile_pic = $profile;
+
+        $picture->save();
+
+        return $picture;
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\File\UploadedFile $file
+     * @param \EQM\Models\Companies\Company $company
+     * @param string $fileName
+     * @param string $extension
+     * @return \EQM\Models\Pictures\Picture
+     */
+    public function createForCompany(UploadedFile $file, Company $company, $fileName, $extension)
+    {
+        $picture = new EloquentPicture();
+        $picture->path = $fileName . '.' . $extension;
+        $picture->horse_id = null;
+        $picture->mime = $file->getClientMimeType();
+        $picture->original_name = $file->getClientOriginalName();
+        $picture->profile_pic = false;
+        $picture->company_id = $company->id();
 
         $picture->save();
 

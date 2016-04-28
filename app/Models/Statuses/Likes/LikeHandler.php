@@ -5,6 +5,7 @@ use EQM\Events\CommentWasLiked;
 use EQM\Events\StatusLiked;
 use EQM\Models\Comments\Comment;
 use EQM\Models\Notifications\Notification;
+use EQM\Models\Statuses\HorseStatus;
 use EQM\Models\Statuses\Status;
 use EQM\Models\Users\User;
 use Illuminate\Contracts\Events\Dispatcher;
@@ -39,7 +40,9 @@ class LikeHandler
             $user->likes()->detach($status);
         } else {
             $user->likes()->attach($status);
-            $data = ['sender' => $user->fullName(), 'horse' => $status->horse()->name()];
+            
+            $receiver = $status instanceof HorseStatus ? $status->horse() : $status->company();
+            $data = ['sender' => $user->fullName(), 'horse' => $receiver->name()];
 
             $this->dispatcher->fire(new StatusLiked($status, $user, Notification::STATUS_LIKED, $data));
         }

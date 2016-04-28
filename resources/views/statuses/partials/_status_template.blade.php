@@ -1,9 +1,16 @@
 <div class="panel" v-for="status in statuses">
     <div class="panel-body">
         <div class="media-block">
-            <a href="/horses/@{{ status.horseRelation.data.slug }}" class="media-left">
-                <img v-bind:src="status.horseRelation.data.profile_picture" alt="" class="img-circle img-sm">
-            </a>
+            <template v-if="status.is_horse_status">
+                <a href="/horses/@{{ status.poster.data.slug }}" class="media-left">
+                    <img v-bind:src="status.poster.data.profile_picture" alt="" class="img-circle img-sm">
+                </a>
+            </template>
+            <template v-else>
+                <a href="/companies/@{{ status.poster.data.slug }}" class="media-left">
+                    <img src="{{ asset('images/eqm.png') }}" alt="" class="img-circle img-sm">
+                </a>
+            </template>
             <div class="media-body">
                 <div class="mar-btm">
                     <div class="pull-right">
@@ -18,9 +25,16 @@
                             </ul>
                         </div>
                     </div>
-                    <a href="/horses/@{{ status.horseRelation.data.slug }}" class="btn-link text-semibold media-heading box-inline text-mint">
-                        @{{ status.horseRelation.data.name }}
-                    </a>
+                    <template v-if="status.is_horse_status">
+                        <a href="/horses/@{{ status.poster.data.slug }}" class="btn-link text-semibold media-heading box-inline text-mint">
+                            @{{ status.poster.data.name }}
+                        </a>
+                    </template>
+                    <template v-else>
+                        <a href="/companies/@{{ status.poster.data.slug }}" class="btn-link text-semibold media-heading box-inline text-mint">
+                            @{{ status.poster.data.name }}
+                        </a>
+                    </template>
                     <span class="text-semibold text-muted" v-if="status.prefix"> - @{{ status.prefix }}</span>
                     <p class="text-muted text-sm">
                         @{{ status.created_at | diffForHumans }}
@@ -38,7 +52,7 @@
                     @if (auth()->check())
                         <div class="btn-group">
                             <template v-if="status.liked_by_user">
-                                <button class="btn btn-sm btn-default btn-hover-success active" type="submit" @click="likeStatus(status)"><i class="fa fa-thumbs-up"></i> You Like it</button>
+                                <button class="btn btn-sm btn-default btn-hover-success active" type="submit" @click="likeStatus(status)"><i class="fa fa-thumbs-up"></i> {{ trans('copy.a.you_like_it') }}</button>
                             </template>
                             <template v-else>
                                 <button class="btn btn-sm btn-default btn-hover-success" type="submit" @click="likeStatus(status)"><i class="fa fa-thumbs-up"></i></button>

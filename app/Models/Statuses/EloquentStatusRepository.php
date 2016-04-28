@@ -2,6 +2,7 @@
 namespace EQM\Models\Statuses;
 
 use EQM\Core\Helpers\StatusConvertor;
+use EQM\Models\Companies\Company;
 use EQM\Models\Horses\Horse;
 use EQM\Models\Users\User;
 
@@ -52,13 +53,27 @@ class EloquentStatusRepository implements StatusRepository
             array_push($horseIds, $horse->id());
         }
 
-        return $this->status->whereIn('horse_id', array_flatten($horseIds))->latest()->paginate(10);
+        $companyIds = [];
+
+        foreach ($user->companies() as $company) {
+            array_push($companyIds, $company->id());
+        }
+
+        return $this->status
+            ->orWhere(function ($query) use ($horseIds) {
+                $query->whereIn('horse_id', array_flatten($horseIds));
+            })
+            ->orWhere(function($query) use ($companyIds) {
+                $query->whereIn('company_id', array_flatten($companyIds));
+            })
+            ->latest()
+            ->paginate(10);
     }
 
     /**
      * @param \EQM\Models\Users\User $user
      * @param int $limit
-     * @return mixed
+     * @return \Illuminate\Pagination\LengthAwarePaginator
      */
     public function findFeedForUserPaginated(User $user, $limit = 10)
     {
@@ -70,7 +85,21 @@ class EloquentStatusRepository implements StatusRepository
             array_push($horseIds, $horse->id());
         }
 
-        return $this->status->whereIn('horse_id', array_flatten($horseIds))->latest()->paginate($limit);
+        $companyIds = [];
+
+        foreach ($user->companies() as $company) {
+            array_push($companyIds, $company->id());
+        }
+
+        return $this->status
+            ->orWhere(function ($query) use ($horseIds) {
+                $query->whereIn('horse_id', array_flatten($horseIds));
+            })
+            ->orWhere(function($query) use ($companyIds) {
+                $query->whereIn('company_id', array_flatten($companyIds));
+            })
+            ->latest()
+            ->paginate($limit);
     }
 
     /**
@@ -82,9 +111,24 @@ class EloquentStatusRepository implements StatusRepository
         return $this->status->where('horse_id', $horse->id())->latest()->paginate(10);
     }
 
+    /**
+     * @param \EQM\Models\Horses\Horse $horse
+     * @param int $limit
+     * @return \Illuminate\Pagination\LengthAwarePaginator
+     */
     public function findFeedForHorsePaginated(Horse $horse, $limit = 10)
     {
         return $this->status->where('horse_id', $horse->id())->latest()->paginate($limit);
+    }
+
+    /**
+     * @param \EQM\Models\Companies\Company $company
+     * @param int $limit
+     * @return \Illuminate\Pagination\LengthAwarePaginator
+     */
+    public function findForCompanyPaginated(Company $company, $limit = 10)
+    {
+        return $this->status->where('company_id', $company->id())->latest()->paginate($limit);
     }
 
     /**
@@ -95,7 +139,7 @@ class EloquentStatusRepository implements StatusRepository
      */
     public function create(Horse $horse, $body, $prefix = null)
     {
-        $status = new EloquentStatus();
+        $status = new EloquentHorseStatus();
         $status->body = (new StatusConvertor())->convert($body);
         $status->horse_id = $horse->id();
         $status->prefix = $prefix;
@@ -131,6 +175,18 @@ class EloquentStatusRepository implements StatusRepository
         return $status;
     }
 
+    public function createForCompany(Company $company, array $values)
+    {
+        $status = new EloquentCompanyStatus();
+        $status->body = (new StatusConvertor())->convert($values['body']);
+        $status->prefix = null;
+        $status->company_id = $company->id();
+
+        $status->save();
+
+        return $status;
+    }
+
     /**
      * @param \EQM\Models\Statuses\Status $status
      */
@@ -145,5 +201,17 @@ class EloquentStatusRepository implements StatusRepository
     public function count()
     {
         return count($this->status->all());
+    }
+
+    /**
+     * @param \EQM\Models\Horses\Horse $horse
+     * @param array $values
+     * @return \EQM\Models\Statuses\Status
+     */
+    public function createForFollowingCompany(Horse $horse, array $values)
+    {
+        $status = $this->create($horse, $values['body'], Status::PREFIX_JOINED_COMPANY);
+        
+        return $status;
     }
 }

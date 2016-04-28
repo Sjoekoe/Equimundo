@@ -20,20 +20,7 @@ class AddressController extends Controller
 
     public function create(AddressRequest $request)
     {
-        $geocoded = $request->get('street') . ' ' . $request->get('zip');
-        $prepAddr = str_replace(' ', '+', $geocoded);
-        $geocode = file_get_contents('http://maps.google.com/maps/api/geocode/json?address='.$prepAddr.'&sensor=false');
-
-        $output = json_decode($geocode);
-
-        $lat = $output->results[0]->geometry->location->lat;
-        $long = $output->results[0]->geometry->location->lng;
-
-        $values = $request->all();
-        $values['latitude'] = $lat;
-        $values['longitude'] = $long;
-
-        $address = $this->addresses->create($values);
+        $address = $this->addresses->create($request->all());
 
         return $this->response()->item($address, new AddressTransformer());
     }

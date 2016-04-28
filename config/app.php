@@ -153,6 +153,8 @@ return [
         EQM\Api\ApiServiceProvider::class,
         Collective\IronQueue\IronQueueServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        EQM\Core\Database\DatabaseServiceProvider::class,
+        Themsaid\Langman\LangmanServiceProvider::class,
 
         /*
          * Model Service Providers
@@ -160,6 +162,7 @@ return [
         EQM\Models\Addresses\AddressServiceProvider::class,
         EQM\Models\Albums\AlbumServiceProvider::class,
         EQM\Models\Comments\CommentServiceProvider::class,
+        EQM\Models\Companies\CompanyServiceProvider::class,
         EQM\Models\Conversations\ConversationServiceProvider::class,
         EQM\Models\Disciplines\DisciplineServiceProvider::class,
         EQM\Models\Events\EventServiceProvider::class,

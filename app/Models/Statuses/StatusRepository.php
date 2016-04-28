@@ -1,6 +1,7 @@
 <?php
 namespace EQM\Models\Statuses;
 
+use EQM\Models\Companies\Company;
 use EQM\Models\Horses\Horse;
 use EQM\Models\Users\User;
 
@@ -24,6 +25,11 @@ interface StatusRepository
      */
     public function findFeedForUser(User $user);
 
+    /**
+     * @param \EQM\Models\Users\User $user
+     * @param int $limit
+     * @return \Illuminate\Pagination\LengthAwarePaginator
+     */
     public function findFeedForUserPaginated(User $user, $limit = 10);
 
     /**
@@ -32,7 +38,19 @@ interface StatusRepository
      */
     public function findFeedForHorse(Horse $horse);
 
+    /**
+     * @param \EQM\Models\Horses\Horse $horse
+     * @param int $limit
+     * @return \Illuminate\Pagination\LengthAwarePaginator
+     */
     public function findFeedForHorsePaginated(Horse $horse, $limit = 10);
+
+    /**
+     * @param \EQM\Models\Companies\Company $company
+     * @param int $limit
+     * @return \Illuminate\Pagination\LengthAwarePaginator
+     */
+    public function findForCompanyPaginated(Company $company, $limit = 10);
 
     /**
      * @param \EQM\Models\Horses\Horse $horse
@@ -50,6 +68,13 @@ interface StatusRepository
     public function createForPalmares(Horse $horse, $body);
 
     /**
+     * @param \EQM\Models\Companies\Company $company
+     * @param array $values
+     * @return \EQM\Models\Statuses\Status
+     */
+    public function createForCompany(Company $company, array $values);
+
+    /**
      * @param \EQM\Models\Statuses\Status $status
      * @param array $values
      * @return \EQM\Models\Statuses\Status
@@ -65,4 +90,11 @@ interface StatusRepository
      * @return int
      */
     public function count();
+
+    /**
+     * @param \EQM\Models\Horses\Horse $horse
+     * @param array $values
+     * @return \EQM\Models\Statuses\Status
+     */
+    public function createForFollowingCompany(Horse $horse, array $values);
 }

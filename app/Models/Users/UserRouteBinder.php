@@ -20,11 +20,11 @@ class UserRouteBinder extends AbstractRouteBinding implements RouteBinding
     }
 
     /**
-     * @param int|string $id
+     * @param int|string $slug
      * @return mixed
      */
-    public function find($id)
+    public function find($slug)
     {
-        return $this->users->findById($id);
+        return $this->users->findById($slug);
     }
 }

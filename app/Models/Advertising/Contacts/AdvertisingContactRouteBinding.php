@@ -17,11 +17,11 @@ class AdvertisingContactRouteBinding extends AbstractRouteBinding implements Rou
     }
 
     /**
-     * @param int|string $id
+     * @param int|string $slug
      * @return \EQM\Models\Advertising\Contacts\AdvertisingContact|null
      */
-    public function find($id)
+    public function find($slug)
     {
-        return $this->advertisingContacts->findById($id);
+        return $this->advertisingContacts->findById($slug);
     }
 }

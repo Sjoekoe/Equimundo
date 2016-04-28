@@ -67,6 +67,34 @@
                         </div>
                     </li>
 
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle text-right" data-toggle="dropdown">
+                            <i class="fa fa-users fa-lg"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-md dropdown-menu-right with-arrow">
+                            <div class="pad-all bord-btm">
+                                <a href="{{ route('company.create') }}" class="btn-link text-dark box-block">
+                                    <i class="fa fa-plus-square-o fa-lg pull-right"></i> {{ trans('copy.a.create_a_group') }}
+                                </a>
+                            </div>
+                            <div class="nano scrollable">
+                                <div class="nano-content">
+                                    <ul class="head-list">
+                                        @foreach(Auth::user()->companies() as $company)
+                                            <li>
+                                                <a href="{{ route('companies.show', $company->slug()) }}" class="media">
+                                                    <div class="media-body">
+                                                        <div class="text-nowrap">{{ $company->name() }}</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
                     <!--User dropdown-->
                     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
                     <li class="dropdown">

@@ -10,7 +10,8 @@ module.exports = Vue.extend({
         return {
             query: '',
             horses: [],
-            users: []
+            users: [],
+            companies: [],
         };
     },
 
@@ -18,6 +19,7 @@ module.exports = Vue.extend({
         this.client = Algolia(window.algolia_id, window.algolia_app_id);
         this.horseIndex = this.client.initIndex('horses');
         this.userIndex = this.client.initIndex('users');
+        this.companyIndex = this.client.initIndex('companies');
 
         $('#typeahead').typeahead({
             highlight: true
@@ -37,8 +39,18 @@ module.exports = Vue.extend({
             display: 'first_name',
             templates: {
                 header: '<h3 class="panel-title">Users</h3>',
-                suggestion: function(hit) {
+                suggestion: function (hit) {
                     return '<p>' + hit.first_name + ' ' + hit.last_name + '</p>';
+                }
+            }
+        }, {
+            name: 'Companies',
+            source : this.companyIndex.ttAdapter(),
+            displayKey: 'name',
+            templates: {
+                header: '<h3 class="panel-title">Companies / Groups</h3>',
+                suggestion: function(hit) {
+                    return '<p>' + hit . name + '</p>';
                 }
             }
         }).on('typeahead:select', function(e, suggestion) {
@@ -54,6 +66,10 @@ module.exports = Vue.extend({
 
             this.userIndex.search(this.query, function(error, results) {
                 this.users = results.hits;
+            }.bind(this));
+
+            this.companyIndex.search(this.query, function(error, results) {
+                this.companies = results.hits;
             }.bind(this));
         },
 

@@ -17,7 +17,11 @@ new Vue({
         leaderboard: require('./components/admin/Advertisements/ShowLeaderBoard'),
         rectangle: require('./components/admin/Advertisements/ShowRectangle'),
         showadvertisement: require('./components/admin/Advertisements/ShowAdvertisement'),
-        
+
+        showcompany: require('./components/companies/ShowCompany'),
+        createcompany: require('./components/companies/CreateCompany'),
+        editcompany: require('./components/companies/EditCompany'),
+
         admindash: require('./components/admin/dashboard'),
         notedrop: require('./components/notifications/NotificationsDropdown'),
         notifications: require('./components/notifications/NotificationOverview'),

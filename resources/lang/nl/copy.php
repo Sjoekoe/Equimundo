@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 return [
     'titles' => [
@@ -32,8 +32,11 @@ return [
         'sons' => 'Zonen',
         'users' => 'Gebruikers',
         'welcome_message' => 'Welkom bij Equimundo',
+        'followers' => 'Volgers',
+        'about_us' => 'Over Ons',
+        'address' => 'Adres',
+        'companies_groups' => 'Bedrijven / Groepen',
     ],
-
     'p' => [
         'born' => 'Geboren',
         'category' => 'Categorie',
@@ -58,8 +61,9 @@ return [
         'ranked' => 'Rangschikking',
         'unlink_horse' => 'Is je paard verkocht, of heb je er niets meer mee te maken, dan kan je het ontkoppelen.',
         'welcome_message' => 'Welkom bij het social media platform waar je het leven van je paard kan delen',
+        'no_companies_groups_found' => 'Geen bedrijven / groepen gevonden',
+        'company_warning' => 'Op dit moment is het enkel mogelijk om een stal / manege aan te maken. Later breiden we uit met meer mogelijkheden.',
     ],
-
     'a' => [
         'add_achievement' => 'Voeg prestatie toe',
         'add_disciplines' => 'Disciplines toevoegen',
@@ -101,15 +105,16 @@ return [
         'sign_up' => 'Registreer',
         'statuses' => 'Statusen',
         'timeline' => 'Tijdlijn',
-        'unfollow' => 'Ontvolg ',
+        'unfollow' => 'Niet meer volgen',
         'unlink' => 'Ontkoppelen',
+        'create_a_group' => 'Maak een groep / bedrijf aan',
+        'edit_singular' => 'Wijzig',
+        'you_like_it' => 'Je vindt dit leuk',
     ],
-
     'span' => [
         'file' => 'Bestand',
     ],
-
     'strong' => [
-        'whoops' => 'Oops!'
+        'whoops' => 'Oops!',
     ],
 ];

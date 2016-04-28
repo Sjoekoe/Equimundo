@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 return [
     'labels' => [
@@ -36,8 +36,12 @@ return [
         'to' => 'Aan',
         'username' => 'Gebruikersnaam',
         'venue' => 'Wedstrijd',
+        'city' => 'Stad',
+        'street' => 'Straat',
+        'state' => 'Provincie',
+        'telephone' => 'Telefoon',
+        'zip' => 'Postcode',
     ],
-
     'buttons' => [
         'invite' => 'Uitnodigen',
         'login' => 'Log in',
@@ -47,14 +51,12 @@ return [
         'send' => 'Verzenden',
         'signup' => 'Registreer',
     ],
-
     'copy' => [
         'female' => 'Vrouwelijk',
         'forgot_password' => 'Wachtwoord vergeten?',
         'male' => 'Mannelijk',
         'remember' => 'Onthou mij',
     ],
-
     'placeholders' => [
         'what_you_been_doing' => 'Wat heb je gedaan ...',
         'write_a_comment' => 'Geef een reactie ...',

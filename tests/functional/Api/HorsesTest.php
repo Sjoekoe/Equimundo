@@ -33,7 +33,7 @@ class HorsesTest extends \TestCase
     function it_can_show_a_horse_with_statuses()
     {
         $horse = $this->createHorse();
-        $status = factory(EloquentStatus::class)->create([
+        $status = $this->createStatus([
             'horse_id' => $horse->id(),
         ]);
 
@@ -60,10 +60,11 @@ class HorsesTest extends \TestCase
                                 'like_count' => 0,
                                 'liked_by_user' => false,
                                 'can_delete_status' => false,
+                                'is_horse_status' => true,
                                 'comments' => [
                                     'data' => []
                                 ],
-                                'horseRelation' => [
+                                'poster' => [
                                     'data' => [
                                         'id' => $horse->id(),
                                         'name' => $horse->name(),

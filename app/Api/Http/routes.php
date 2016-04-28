@@ -33,6 +33,27 @@ $api->version('v1', function(Router $api) {
         $api->get('/notifications/{notification}', ['as' => 'api.notifications.show', 'uses' => 'NotificationController@show']);
         $api->delete('/notifications/{notification}', ['as' => 'api.notifications.delete', 'uses' => 'NotificationController@delete']);
 
+        $api->group(['namespace' => 'Companies\\', 'prefix' => 'companies'], function (Router $api) {
+            $api->get('/', ['as' => 'api.companies.index', 'uses' => 'CompanyController@index']);
+            $api->post('/', ['as' => 'api.companies.store', 'uses' => 'CompanyController@store']);
+            $api->get('/{company}', ['as' => 'api.companies.show', 'uses' => 'CompanyController@show']);
+            $api->put('/{company}', ['as' => 'api.companies.update', 'uses' => 'CompanyController@update']);
+            $api->delete('/{company}', ['as' => 'api.companies.delete', 'uses' => 'CompanyController@delete']);
+
+            $api->get('/{company}/users', ['as' => 'api.companies.users.index', 'uses' => 'CompanyUserController@index']);
+            $api->post('/{company}/users', ['as' => 'api.companies.users.store', 'uses' => 'CompanyUserController@store']);
+            $api->get('/{company}/users/{user}', ['as' => 'api.companies.users.show', 'uses' => 'CompanyUserController@show']);
+            $api->delete('/{company}/users/{user}', ['as' => 'api.companies.delete', 'uses' => 'CompanyUserController@delete']);
+
+            $api->get('/{company}/horses', ['as' => 'api.companies.horses.index', 'uses' => 'CompanyHorseController@index']);
+            $api->post('/{company}/horses', ['as' => 'api.companies.horses.store', 'uses' => 'CompanyHorseController@store']);
+            $api->get('/{company}/horses/{horse}', ['as' => 'api.companies.horses.show', 'uses' => 'CompanyHorseController@show']);
+            $api->delete('/{company}/horses/{horse}', ['as' => 'api.companies.horses.delete', 'uses' => 'CompanyHorseController@delete']);
+
+            $api->get('/{company}/statuses', ['as' => 'api.companies.statuses.index', 'uses' => 'CompanyStatusController@index']);
+            $api->post('/{company}/statuses', ['as' => 'api.companies.statuses.store', 'uses' => 'CompanyStatusController@store']);
+        });
+
         $api->group(['namespace' => 'Admin\\', 'prefix' => 'admin'], function(Router $api) {
             $api->group(['prefix' => 'advertisements'], function(Router $api) {
 

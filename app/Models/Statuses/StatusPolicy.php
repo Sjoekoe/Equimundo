@@ -12,6 +12,12 @@ class StatusPolicy
      */
     public function authorize(User $user, Status $status)
     {
-        return $user->isInHorseTeam($status->horse());
+        if ($status instanceof HorseStatus) {
+            return $user->isInHorseTeam($status->horse());
+        }
+
+        if ($status instanceof CompanyStatus) {
+            return $user->isInCompanyTeam($status->company());
+        }
     }
 }

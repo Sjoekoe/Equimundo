@@ -1,18 +1,20 @@
 <?php
 
 use Carbon\Carbon;
-use EQM\Core\Advertisements\AdObject;
 use EQM\Core\Factories\BuildModels;
 use EQM\Core\Factories\ModelFactory;
 use EQM\Models\Addresses\Address;
-use EQM\Models\Advertising\Advertisements\Advertisement;
 use EQM\Models\Advertising\Advertisements\Rectangle;
 use EQM\Models\Advertising\Companies\AdvertisingCompany;
 use EQM\Models\Advertising\Contacts\AdvertisingContact;
+use EQM\Models\Companies\Horses\CompanyHorse;
+use EQM\Models\Companies\Stable;
+use EQM\Models\Companies\Users\Follower;
 use EQM\Models\Horses\Horse;
 use EQM\Models\HorseTeams\HorseTeam;
 use EQM\Models\Notifications\Notification;
-use EQM\Models\Statuses\Status;
+use EQM\Models\Statuses\CompanyStatus;
+use EQM\Models\Statuses\HorseStatus;
 use EQM\Models\Users\User;
 
 class TestCase extends Illuminate\Foundation\Testing\TestCase
@@ -124,8 +126,9 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
      */
     public function createStatus(array $attributes)
     {
-        return $this->modelFactory->create(Status::class, array_merge([
+        return $this->modelFactory->create(HorseStatus::class, array_merge([
             'body' => 'Lorem ipsum dolores est',
+            'type' => HorseStatus::TYPE,
             'prefix' => 1
         ], $attributes));
     }
@@ -217,6 +220,58 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
             'views' => 2,
             'picture_id' => null,
             'website' => 'http://www.test.com',
+        ], $attributes));
+    }
+
+    /**
+     * @param array $attributes
+     * @return \EQM\Models\Companies\Company
+     */
+    public function createCompany(array $attributes = [])
+    {
+        return $this->modelFactory->create(Stable::class, array_merge([
+            'name' => 'Stal de vogelzang',
+            'slug' => 'stal-de-vogelzang',
+            'type' => Stable::TYPE,
+            'address_id' => null,
+            'email' => 'company@test.com',
+            'website' => 'staldevogelzang.be',
+            'about' => 'lorem ipsum',
+            'telephone' => '12345'
+        ], $attributes));
+    }
+
+    /**
+     * @param array $attributes
+     * @return \EQM\Models\Companies\Users\CompanyUser
+     */
+    public function createCompanyUser(array $attributes = [])
+    {
+        return $this->modelFactory->create(Follower::class, array_merge([
+            'is_admin' => false,
+            'type' => Follower::TYPE,
+        ], $attributes));
+    }
+
+    /**
+     * @param array $attributes
+     * @return \EQM\Models\Companies\Horses\CompanyHorse
+     */
+    public function createCompanyHorse(array $attributes = [])
+    {
+        return $this->modelFactory->create(CompanyHorse::class, array_merge([], $attributes));
+    }
+
+    /**
+     * @param array $attributes
+     * @return \EQM\Models\Statuses\CompanyStatus
+     */
+    public function createCompanyStatus(array $attributes = [])
+    {
+        return $this->modelFactory->create(CompanyStatus::class, array_merge([
+            'body' => 'lorem ipsum',
+            'type' => CompanyStatus::TYPE,
+            'prefix' => 1,
         ], $attributes));
     }
 }

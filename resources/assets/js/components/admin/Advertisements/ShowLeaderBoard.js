@@ -14,9 +14,11 @@ module.exports = Vue.extend({
 
     ready: function() {
         $.getJSON('/api/admin/advertisements/random?type=leaderboard', function(advertisement) {
-            this.advertisement = advertisement.data;
-            this.found = true;
-            this.addView();
+            if (advertisement !== undefined) {
+                this.advertisement = advertisement.data;
+                this.found = true;
+                this.addView();
+            }
         }.bind(this));
     },
 

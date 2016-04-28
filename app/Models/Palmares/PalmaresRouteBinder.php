@@ -20,11 +20,11 @@ class PalmaresRouteBinder extends AbstractRouteBinding implements RouteBinding
     }
 
     /**
-     * @param int|string $id
+     * @param int|string $slug
      * @return mixed
      */
-    public function find($id)
+    public function find($slug)
     {
-        return $this->palmares->findById($id);
+        return $this->palmares->findById($slug);
     }
 }

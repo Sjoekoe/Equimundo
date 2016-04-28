@@ -6,13 +6,16 @@ use Carbon\Carbon;
 use EQM\Core\Search\CanBeSearched;
 use EQM\Core\Search\Searchable;
 use EQM\Models\Albums\EloquentAlbum;
+use EQM\Models\Companies\Company;
+use EQM\Models\Companies\EloquentCompany;
+use EQM\Models\Companies\Horses\EloquentCompanyHorse;
 use EQM\Models\Disciplines\EloquentDiscipline;
 use EQM\Models\HorseTeams\EloquentHorseTeam;
 use EQM\Models\Palmares\EloquentPalmares;
 use EQM\Models\Pedigrees\EloquentPedigree;
 use EQM\Models\Pedigrees\Pedigree;
 use EQM\Models\Pictures\EloquentPicture;
-use EQM\Models\Statuses\EloquentStatus;
+use EQM\Models\Statuses\EloquentHorseStatus;
 use EQM\Models\Users\EloquentUser;
 use Illuminate\Database\Eloquent\Model;
 
@@ -135,7 +138,7 @@ class EloquentHorse extends Model implements Horse
      */
     public function statuses()
     {
-        return $this->hasMany(EloquentStatus::class, 'horse_id', 'id')->latest()->get();
+        return $this->hasMany(EloquentHorseStatus::class, 'horse_id', 'id')->latest()->get();
     }
 
     /**
@@ -373,5 +376,33 @@ class EloquentHorse extends Model implements Horse
     public function hasWistiaKey()
     {
         return $this->wistiaKey() !== null;
+    }
+
+    public function companyRelation()
+    {
+        return $this->belongsToMany(EloquentCompany::class, EloquentCompanyHorse::TABLE, 'horse_id', 'company_id');
+    }
+
+    /**
+     * @return \EQM\Models\Companies\Company[]
+     */
+    public function companies()
+    {
+        return $this->companyRelation()->get();
+    }
+
+    /**
+     * @param \EQM\Models\Companies\Company $company
+     * @return bool
+     */
+    public function isFollowingCompany(Company $company)
+    {
+        foreach ($this->companies() as $horseCompany) {
+            if ($horseCompany->id() == $company->id()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

@@ -3,22 +3,28 @@ namespace EQM\Core\Factories;
 
 use EQM\Models\Addresses\Address;
 use EQM\Models\Addresses\EloquentAddress;
-use EQM\Models\Advertising\Advertisements\Advertisement;
-use EQM\Models\Advertising\Advertisements\EloquentAdvertisement;
 use EQM\Models\Advertising\Advertisements\EloquentRectangle;
 use EQM\Models\Advertising\Advertisements\Rectangle;
 use EQM\Models\Advertising\Companies\AdvertisingCompany;
 use EQM\Models\Advertising\Companies\EloquentAdvertisingCompany;
 use EQM\Models\Advertising\Contacts\AdvertisingContact;
 use EQM\Models\Advertising\Contacts\EloquentAdvertisingContact;
+use EQM\Models\Companies\EloquentStable;
+use EQM\Models\Companies\Horses\CompanyHorse;
+use EQM\Models\Companies\Horses\EloquentCompanyHorse;
+use EQM\Models\Companies\Stable;
+use EQM\Models\Companies\Users\EloquentFollower;
+use EQM\Models\Companies\Users\Follower;
 use EQM\Models\Horses\EloquentHorse;
 use EQM\Models\Horses\Horse;
 use EQM\Models\HorseTeams\EloquentHorseTeam;
 use EQM\Models\HorseTeams\HorseTeam;
 use EQM\Models\Notifications\EloquentNotification;
 use EQM\Models\Notifications\Notification;
-use EQM\Models\Statuses\EloquentStatus;
-use EQM\Models\Statuses\Status;
+use EQM\Models\Statuses\CompanyStatus;
+use EQM\Models\Statuses\EloquentCompanyStatus;
+use EQM\Models\Statuses\EloquentHorseStatus;
+use EQM\Models\Statuses\HorseStatus;
 use EQM\Models\Users\EloquentUser;
 use EQM\Models\Users\User;
 use Illuminate\Database\Eloquent\Factory;
@@ -38,10 +44,14 @@ class EloquentModelFactory implements ModelFactory
         Rectangle::class => EloquentRectangle::class,
         AdvertisingCompany::class => EloquentAdvertisingCompany::class,
         AdvertisingContact::class => EloquentAdvertisingContact::class,
+        CompanyHorse::class => EloquentCompanyHorse::class,
+        CompanyStatus::class => EloquentCompanyStatus::class,
+        Stable::class => EloquentStable::class,
+        Follower::class => EloquentFollower::class,
         Horse::class => EloquentHorse::class,
         HorseTeam::class => EloquentHorseTeam::class,
         Notification::class => EloquentNotification::class,
-        Status::class => EloquentStatus::class,
+        HorseStatus::class => EloquentHorseStatus::class,
         User::class => EloquentUser::class,
     ];
 

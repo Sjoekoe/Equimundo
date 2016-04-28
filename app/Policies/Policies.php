@@ -11,6 +11,10 @@ trait Policies
         'delete-comment',
     ];
 
+    protected $companyPolicies = [
+        'edit-company', 'delete-company'
+    ];
+
     protected $conversationPolicies = [
         'read-conversation', 'delete-conversation', 'reply-to',
     ];

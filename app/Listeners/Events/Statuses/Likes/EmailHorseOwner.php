@@ -3,6 +3,8 @@ namespace EQM\Listeners\Events\Statuses\Likes;
 
 use EQM\Core\Mailers\UserMailer;
 use EQM\Events\StatusLiked;
+use EQM\Models\Statuses\CompanyStatus;
+use EQM\Models\Statuses\HorseStatus;
 use Illuminate\Auth\AuthManager;
 
 class EmailHorseOwner
@@ -25,9 +27,24 @@ class EmailHorseOwner
 
     public function handle(StatusLiked $event)
     {
-        foreach ($event->status->horse()->users() as $user) {
-            if ($user->id() !== $this->auth->user()->id() && $user->emailNotifications()) {
-                $this->mailer->sendStatusLikedTo($user, $event->status, $event->sender);
+        if ($event->status instanceof HorseStatus) {
+            foreach ($event->status->horse()->users() as $user) {
+                if ($user->id() !== $this->auth->user()->id() && $user->emailNotifications()) {
+                    $this->mailer->sendStatusLikedTo($user, $event->status, $event->sender);
+                }
+            }
+        }
+
+        if ($event->status instanceof CompanyStatus) {
+            foreach ($event->status->company()->userTeams() as $teamMember) {
+                $user = $teamMember->user();
+
+                if ($user->isCompanyAdmin($event->status->company())
+                    && ($user->id() !== $this->auth->user()->id())
+                    && $user->emailNotifications()
+                ) {
+                    $this->mailer->sendStatusLikedTo($user, $event->status, $event->sender);
+                }
             }
         }
     }

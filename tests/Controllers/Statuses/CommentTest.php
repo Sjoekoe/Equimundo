@@ -17,8 +17,8 @@ class CommentTest extends \TestCase
     {
         $user = factory(EloquentUser::class)->create();
         $horse = factory(EloquentHorse::class)->create();
-        $status = factory(EloquentStatus::class)->create([
-            'horse_id' => $horse->id()
+        $status = $this->createStatus([
+            'horse_id' => $horse->id(),
         ]);
 
         $this->actingAs($user)

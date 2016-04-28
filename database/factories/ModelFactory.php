@@ -7,6 +7,9 @@ use EQM\Models\Advertising\Companies\EloquentAdvertisingCompany;
 use EQM\Models\Advertising\Contacts\EloquentAdvertisingContact;
 use EQM\Models\Albums\EloquentAlbum;
 use EQM\Models\Comments\EloquentComment;
+use EQM\Models\Companies\EloquentStable;
+use EQM\Models\Companies\Horses\EloquentCompanyHorse;
+use EQM\Models\Companies\Users\EloquentFollower;
 use EQM\Models\Disciplines\EloquentDiscipline;
 use EQM\Models\Events\EloquentEvent;
 use EQM\Models\Horses\EloquentHorse;
@@ -14,7 +17,8 @@ use EQM\Models\HorseTeams\EloquentHorseTeam;
 use EQM\Models\Palmares\EloquentPalmares;
 use EQM\Models\Pedigrees\EloquentPedigree;
 use EQM\Models\Pictures\EloquentPicture;
-use EQM\Models\Statuses\EloquentStatus;
+use EQM\Models\Statuses\EloquentCompanyStatus;
+use EQM\Models\Statuses\EloquentHorseStatus;
 use EQM\Models\Users\EloquentUser;
 use Faker\Generator;
 
@@ -52,7 +56,7 @@ $factory->define(EloquentHorseTeam::class, function (Generator $faker) {
     ];
 });
 
-$factory->define(EloquentStatus::class, function (Generator $faker) {
+$factory->define(EloquentHorseStatus::class, function (Generator $faker) {
     return [
         'body' => $faker->text,
         'prefix' => 1
@@ -120,5 +124,19 @@ $factory->define(EloquentAddress::class, function(Generator $faker) {
 });
 
 $factory->define(EloquentRectangle::class, function(Generator $faker) {
+    return [];
+});
+
+$factory->define(EloquentStable::class, function (Generator $faker) {
+    return [];
+});
+
+$factory->define(EloquentFollower::class, function (Generator $faker) {
+    return [];
+});
+$factory->define(EloquentCompanyHorse::class, function (Generator $faker) {
+    return [];
+});
+$factory->define(EloquentCompanyStatus::class, function (Generator $faker) {
     return [];
 });

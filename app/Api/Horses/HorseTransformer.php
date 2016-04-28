@@ -8,11 +8,18 @@ use League\Fractal\TransformerAbstract;
 
 class HorseTransformer extends TransformerAbstract
 {
+    /**
+     * @var array
+     */
     protected $availableIncludes = [
         'statuses',
         'pictures'
     ];
 
+    /**
+     * @param \EQM\Models\Horses\Horse $horse
+     * @return array
+     */
     public function transform(Horse $horse)
     {
         return [
@@ -29,11 +36,19 @@ class HorseTransformer extends TransformerAbstract
         ];
     }
 
+    /**
+     * @param \EQM\Models\Horses\Horse $horse
+     * @return \League\Fractal\Resource\Collection|null
+     */
     public function includeStatuses(Horse $horse)
     {
         return count($horse->statuses()) ? $this->collection($horse->statuses(), new StatusTransformer()) : null;
     }
 
+    /**
+     * @param \EQM\Models\Horses\Horse $horse
+     * @return \League\Fractal\Resource\Collection|null
+     */
     public function includePictures(Horse $horse)
     {
         return count($horse->pictures()) ? $this->collection($horse->pictures(), new PictureTransformer()) : null;

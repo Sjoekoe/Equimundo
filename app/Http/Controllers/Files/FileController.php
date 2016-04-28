@@ -20,7 +20,9 @@ class FileController extends Controller
 
     public function getImage(Picture $picture)
     {
-        $file = Storage::disk()->get('/uploads/pictures/' . $picture->horse()->id() . '/' . $picture->path());
+        $path = $this->getPicturePath($picture);
+        
+        $file = Storage::disk()->get($path);
 
         return response($file, 200, ['Content-Type' => $picture->mime()]);
     }
@@ -37,5 +39,18 @@ class FileController extends Controller
         $file = Storage::disk()->get('/uploads/advertisements/' . $picture->path());
 
         return response($file, 200, ['Content-Type' => $picture->mime()]);
+    }
+
+    /**
+     * @param \EQM\Models\Pictures\Picture $picture
+     * @return string
+     */
+    private function getPicturePath(Picture $picture)
+    {
+        if ($picture->horse()) {
+            return '/uploads/pictures/' . $picture->horse()->id() . '/' . $picture->path();
+        } else {
+            return '/uploads/companies/' . $picture->company()->id() . '/' . $picture->path();
+        }
     }
 }

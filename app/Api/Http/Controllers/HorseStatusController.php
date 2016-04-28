@@ -22,7 +22,7 @@ class HorseStatusController extends Controller
     public function index(Horse $horse)
     {
         $statuses = $this->statuses->findFeedForHorsePaginated($horse, Input::get('limit', 10));
-        
+
         return $this->response()->paginator($statuses, new StatusTransformer());
     }
 }

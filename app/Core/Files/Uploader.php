@@ -3,6 +3,7 @@ namespace EQM\Core\Files;
 
 use EQM\Core\Movies\EQMWistia;
 use EQM\Models\Advertising\Advertisements\Advertisement;
+use EQM\Models\Companies\Company;
 use EQM\Models\Horses\Horse;
 use EQM\Models\Pictures\PictureRepository;
 use Illuminate\Contracts\Filesystem\Factory as Filesystem;
@@ -55,6 +56,29 @@ class Uploader
         $width = $headerImage ? 1500 : 460;
 
         $picture = $this->pictures->create($file, $horse, $profile, $fileName, $extension);
+
+        if (!file_exists(storage_path() . $path)) {
+            $this->file->makeDirectory($path);
+        }
+
+        $image = $this->image->make($file->getrealpath())->resize(null, $width, function ($constraint) {
+            $constraint->aspectRatio();
+        })->orientate();
+
+        $this->file->disk()->put($pathToFile, $image->stream()->__toString());
+
+        return $picture;
+    }
+
+    public function uploadForCompany($file, Company $company)
+    {
+        $extension = $file->getClientOriginalExtension();
+        $path = '/uploads/companies/' . $company->id();
+        $fileName = str_random(12);
+        $pathToFile = $path . '/' . $fileName . '.' . $extension;
+        $width = 460;
+        
+        $picture = $this->pictures->createForCompany($file, $company, $fileName, $extension);
 
         if (!file_exists(storage_path() . $path)) {
             $this->file->makeDirectory($path);

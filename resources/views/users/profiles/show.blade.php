@@ -1,3 +1,4 @@
+
 @extends('layout.left-aside')
 
 @section('content')
@@ -10,6 +11,11 @@
                             <ul class="nav nav-tabs">
                                 <li class="active"><a href="#horses" data-toggle="tab" aria-expanded="true">{{ trans('copy.titles.horses') }}</a></li>
                                 <li><a href="#following" data-toggle="tab" aria-expanded="false">{{ trans('copy.titles.following') }}</a></li>
+                                <li>
+                                    <a href="#companies" data-toggle="tab" aria-expanded="false">
+                                        {{ trans('copy.titles.companies_groups') }}
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -45,11 +51,11 @@
                                                             @if (auth()->check() && ! auth()->user()->isInHorseTeam($horse))
                                                                 @if (Auth::user()->isFollowing($horse))
                                                                     {{ Form::open(['route' => ['follows.destroy', $horse->id()], 'method' => 'DELETE']) }}
-                                                                    <button type="submit" class="btn btn-mint">{{ trans('copy.a.unfollow') . $horse->name() }}</button>
+                                                                    <button type="submit" class="btn btn-mint">{{ trans('copy.a.unfollow') }}</button>
                                                                     {{ Form::close() }}
                                                                 @else
                                                                     {{ Form::open(['route' => ['follows.store', $horse->id()]]) }}
-                                                                    <button type="submit" class="btn btn-mint">{{ trans('copy.a.follow') . $horse->name() }}</button>
+                                                                    <button type="submit" class="btn btn-mint">{{ trans('copy.a.follow') }}</button>
                                                                     {{ Form::close() }}
                                                                 @endif
                                                             @endif
@@ -97,11 +103,11 @@
                                                             @if (auth()->check() && ! auth()->user()->isInHorseTeam($follow))
                                                                 @if (auth()->user()->isFollowing($follow))
                                                                     {{ Form::open(['route' => ['follows.destroy', $follow->id()], 'method' => 'DELETE']) }}
-                                                                    <button type="submit" class="btn btn-mint">{{ trans('copy.a.unfollow') . $follow->name() }}</button>
+                                                                    <button type="submit" class="btn btn-mint">{{ trans('copy.a.unfollow') }}</button>
                                                                     {{ Form::close() }}
                                                                 @else
                                                                     {{ Form::open(['route' => ['follows.store', $follow->id()]]) }}
-                                                                    <button type="submit" class="btn btn-mint">{{ trans('copy.a.follow') . $follow->name() }}</button>
+                                                                    <button type="submit" class="btn btn-mint">{{ trans('copy.a.follow') }}</button>
                                                                     {{ Form::close() }}
                                                                 @endif
                                                             @endif
@@ -116,6 +122,30 @@
                                                 </div>
                                             </div>
                                         </a>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <div id="companies" class="tab-pane fade">
+                                <div class="col-sm-12">
+                                    <h4 class="text-thin">{{ trans('copy.titles.companies_groups') }}</h4>
+                                </div>
+                                @foreach($user->companies() as $company)
+                                    <div class="col-sm-3">
+                                        <div class="panel text-center panel-bordered-mint">
+                                            <div class="panel-body">
+                                                <h4 class="mar-no">{{ $company->name() }}</h4>
+                                            </div>
+                                            <div class="pad-all">
+                                                <p class="text-muted">
+                                                    {{ $company->about() }}
+                                                </p>
+                                                <div class="pad-ver">
+                                                    <a href="{{ route('companies.show', $company->slug()) }}" class="btn btn-mint">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 @endforeach
                             </div>

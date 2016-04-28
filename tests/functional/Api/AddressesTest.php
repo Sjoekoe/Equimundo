@@ -20,8 +20,8 @@ class AddressesTest extends \TestCase
                 'city' => 'Antwerp',
                 'state' => 'Antwerpen',
                 'country' => 'BE',
-                'latitude' => 39.1307924,
-                'longitude' => 117.1897018,
+                'latitude' => 49.577943,
+                'longitude' => 10.9070102,
             ]
         ]);
     }

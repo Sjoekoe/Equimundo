@@ -7,6 +7,8 @@ use EQM\Models\Users\User;
 interface Status
 {
     const PREFIX_PALMARES = 1;
+    const PREFIX_JOINED_COMPANY = 2;
+    const TABLE = 'statuses';
 
     /**
      * @return int
@@ -22,11 +24,6 @@ interface Status
      * @return int
      */
     public function prefix();
-
-    /**
-     * @return \EQM\Models\Horses\Horse
-     */
-    public function horse();
 
     /**
      * @return \EQM\Models\Users\User

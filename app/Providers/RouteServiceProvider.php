@@ -6,6 +6,7 @@ use EQM\Models\Advertising\Companies\AdvertisingCompanyRouteBinding;
 use EQM\Models\Advertising\Contacts\AdvertisingContactRouteBinding;
 use EQM\Models\Albums\AlbumRouteBinder;
 use EQM\Models\Comments\CommentRouteBinder;
+use EQM\Models\Companies\CompanyRouteBinding;
 use EQM\Models\Conversations\ConversationRouteBinder;
 use EQM\Models\Horses\HorseRouteBinder;
 use EQM\Models\Horses\HorseSlugRouteBinder;
@@ -36,6 +37,7 @@ class RouteServiceProvider extends ServiceProvider {
         $router->bind('advertising_contact', AdvertisingContactRouteBinding::class);
         $router->bind('album', AlbumRouteBinder::class);
         $router->bind('comment', CommentRouteBinder::class);
+        $router->bind('company', CompanyRouteBinding::class);
         $router->bind('conversation', ConversationRouteBinder::class);
         $router->bind('horse', HorseRouteBinder::class);
         $router->bind('horse_team', HorseTeamRouteBinder::class);
