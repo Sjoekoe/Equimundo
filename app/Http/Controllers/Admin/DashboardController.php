@@ -3,6 +3,7 @@ namespace EQM\Http\Controllers\Admin;
 
 use EQM\Models\Advertising\Advertisements\AdvertisementRepository;
 use EQM\Models\Comments\CommentRepository;
+use EQM\Models\Companies\CompanyRepository;
 use EQM\Models\Conversations\ConversationRepository;
 use EQM\Models\Horses\HorseRepository;
 use EQM\Models\Invites\FriendInvitesRepository;
@@ -71,6 +72,11 @@ class DashboardController extends Controller
      */
     private $advertisements;
 
+    /**
+     * @var \EQM\Models\Companies\CompanyRepository
+     */
+    private $companies;
+
     public function __construct(
         UserRepository $users,
         StatusRepository $statuses,
@@ -82,7 +88,8 @@ class DashboardController extends Controller
         FriendInvitesRepository $invites,
         CommentRepository $comments,
         LikeRepository $likes,
-        AdvertisementRepository $advertisements
+        AdvertisementRepository $advertisements,
+        CompanyRepository $companies
     ) {
         $this->users = $users;
         $this->statuses = $statuses;
@@ -95,6 +102,7 @@ class DashboardController extends Controller
         $this->comments = $comments;
         $this->likes = $likes;
         $this->advertisements = $advertisements;
+        $this->companies = $companies;
     }
 
     /**
@@ -114,10 +122,11 @@ class DashboardController extends Controller
         $comments = $this->comments->count();
         $likes = $this->likes->count();
         $advertisements = $this->advertisements->count();
+        $companies = $this->companies->count();
 
         return view('admin.dashboard', compact(
             'users', 'statuses', 'pedigrees', 'horses', 'searchResults', 'pictures', 'conversations', 'invites', 'comments',
-            'likes', 'unactivatedUsers', 'advertisements'
+            'likes', 'unactivatedUsers', 'advertisements', 'companies'
         ));
     }
 }

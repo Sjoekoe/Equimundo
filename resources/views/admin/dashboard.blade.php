@@ -171,6 +171,21 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-sm-6 col-lg-3">
+                    <a href="{{ route('admin.companies.index') }}">
+                        <div class="panel media pad-all">
+                            <div class="media-left">
+                        <span class="icon-wrap icon-wrap-sm icon-circle bg-pink">
+                            <i class="fa fa-industry fa-2x"></i>
+                        </span>
+                            </div>
+                            <div class="media-body">
+                                <p class="text-2x mar-no text-thin">{{ $companies }}</p>
+                                <p class="text-muted mar-no">Companies / Groups</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
             </div>
         </template>
 
