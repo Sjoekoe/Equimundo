@@ -1,14 +1,16 @@
 <?php
 namespace Controllers\Sessions;
 
-use EQM\Models\Users\EloquentUser;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class SessionTest extends \TestCase
 {
+    use DatabaseTransactions;
+
     /** @test */
     public function login()
     {
-        $user = factory(EloquentUser::class)->create([
+        $user = $this->createUser([
             'email' => 'foo@bar.com',
         ]);
 
@@ -23,7 +25,7 @@ class SessionTest extends \TestCase
     /** @test */
     public function it_can_not_login_when_the_user_is_not_activated()
     {
-        $user = factory(EloquentUser::class)->create([
+        $user = $this->createUser([
             'email' => 'foo@bar.com',
             'activated' => false,
         ]);
@@ -39,7 +41,7 @@ class SessionTest extends \TestCase
     /** @test */
     public function it_can_not_login_with_a_wrong_password()
     {
-        $user = factory(EloquentUser::class)->create([
+        $user = $this->createUser([
             'email' => 'foo@bar.com',
         ]);
 
@@ -54,7 +56,7 @@ class SessionTest extends \TestCase
     /** @test */
     function it_can_not_login_with_a_wrong_email_address()
     {
-        $user = factory(EloquentUser::class)->create([
+        $user = $this->createUser([
             'email' => 'foo@bar.com',
         ]);
 

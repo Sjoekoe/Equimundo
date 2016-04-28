@@ -2,12 +2,14 @@
 namespace functional\Api;
 
 use Carbon\Carbon;
+use DB;
 use EQM\Core\Testing\DefaultIncludes;
-use EQM\Models\Comments\EloquentComment;
+use EQM\Models\Comments\Comment;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class CommentsTest extends \TestCase
 {
-    use DefaultIncludes;
+    use DefaultIncludes, DatabaseTransactions;
 
     /** @test */
     function it_can_get_all_comments_for_a_status()
@@ -17,7 +19,7 @@ class CommentsTest extends \TestCase
         $status = $this->createStatus([
             'horse_id' => $horse->id(),
         ]);
-        $comment = factory(EloquentComment::class)->create([
+        $comment = $this->createComment([
             'status_id' => $status->id(),
             'user_id' => $user->id(),
         ]);
@@ -65,7 +67,7 @@ class CommentsTest extends \TestCase
             'body' => 'Foo',
         ])->seeJsonEquals([
                 'data' => [
-                    'id' => 1,
+                    'id' => DB::table(Comment::TABLE)->first()->id,
                     'body' => 'Foo',
                     'like_count' => 0,
                     'created_at' => $now->toIso8601String(),
@@ -86,7 +88,7 @@ class CommentsTest extends \TestCase
         $status = $this->createStatus([
             'horse_id' => $horse->id(),
         ]);
-        $comment = factory(EloquentComment::class)->create([
+        $comment = $this->createComment([
             'status_id' => $status->id(),
             'user_id' => $user->id(),
         ]);
@@ -115,7 +117,7 @@ class CommentsTest extends \TestCase
         $status = $this->createStatus([
             'horse_id' => $horse->id(),
         ]);
-        $comment = factory(EloquentComment::class)->create([
+        $comment = $this->createComment([
             'status_id' => $status->id(),
             'user_id' => $user->id(),
         ]);
@@ -163,7 +165,7 @@ class CommentsTest extends \TestCase
         $status = $this->createStatus([
             'horse_id' => $horse->id(),
         ]);
-        $comment = factory(EloquentComment::class)->create([
+        $comment = $this->createComment([
             'status_id' => $status->id(),
             'user_id' => $user->id(),
         ]);
@@ -193,7 +195,7 @@ class CommentsTest extends \TestCase
         $status = $this->createStatus([
             'horse_id' => $horse->id(),
         ]);
-        $comment = factory(EloquentComment::class)->create([
+        $comment = $this->createComment([
             'status_id' => $status->id(),
             'user_id' => $user->id(),
         ]);
@@ -201,7 +203,7 @@ class CommentsTest extends \TestCase
         $this->delete('/api/statuses/' . $status->id() . '/comments/' . $comment->id(), [])
             ->assertResponseStatus(204);
 
-        $this->notSeeInDatabase('comments', [
+        $this->notSeeInDatabase(Comment::TABLE, [
             'id' => $comment->id(),
         ]);
     }

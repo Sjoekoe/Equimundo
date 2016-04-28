@@ -3,19 +3,19 @@ namespace Controllers\Disciplines;
 
 use EQM\Models\Disciplines\Discipline;
 use EQM\Models\Disciplines\EloquentDiscipline;
-use EQM\Models\Horses\EloquentHorse;
-use EQM\Models\HorseTeams\EloquentHorseTeam;
-use EQM\Models\Users\EloquentUser;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class DisciplineTest extends \TestCase
 {
+    use DatabaseTransactions;
+
     /** @test */
     function visitDisciplinesPage()
     {
         $user = $this->createUser();
-        $horse = factory(EloquentHorse::class)->create([]);
-        factory(EloquentHorseTeam::class)->create([
+        $horse = $this->createHorse();
+        $this->createHorseTeam([
             'user_id' => $user->id(),
             'horse_id' => $horse->id(),
         ]);
@@ -29,8 +29,8 @@ class DisciplineTest extends \TestCase
     /** @test */
     function it_can_not_access_the_disciplines_of_a_horse_that_doesnt_belong_to_you()
     {
-        $user = factory(EloquentUser::class)->create([]);
-        $horse = factory(EloquentHorse::class)->create([]);
+        $user = $this->createUser();
+        $horse = $this->createHorse();
 
         $this->setExpectedException(AuthorizationException::class);
 
@@ -43,9 +43,9 @@ class DisciplineTest extends \TestCase
     /** @test */
     function it_can_add_disciplines_for_a_horse()
     {
-        $user = factory(EloquentUser::class)->create();
-        $horse = factory(EloquentHorse::class)->create();
-        factory(EloquentHorseTeam::class)->create([
+        $user = $this->createUser();
+        $horse = $this->createHorse();
+        $this->createHorseTeam([
             'user_id' => $user->id(),
             'horse_id' => $horse->id(),
         ]);
@@ -79,13 +79,13 @@ class DisciplineTest extends \TestCase
     /** @test */
     function it_removes_disciplines_when_they_are_not_selected_anymore()
     {
-        $user = factory(EloquentUser::class)->create();
-        $horse = factory(EloquentHorse::class)->create();
-        factory(EloquentHorseTeam::class)->create([
+        $user = $this->createUser();
+        $horse = $this->createHorse();
+        $this->createHorseTeam([
             'user_id' => $user->id(),
             'horse_id' => $horse->id(),
         ]);
-        factory(EloquentDiscipline::class)->create([
+        $this->createDiscipline([
             'horse_id' => $horse->id(),
             'discipline' => Discipline::SHOW_JUMPING,
         ]);
@@ -124,13 +124,13 @@ class DisciplineTest extends \TestCase
     /** @test */
     function it_does_not_duplicate_disciplines()
     {
-        $user = factory(EloquentUser::class)->create();
-        $horse = factory(EloquentHorse::class)->create();
-        factory(EloquentHorseTeam::class)->create([
+        $user = $this->createUser();
+        $horse = $this->createHorse();
+        $this->createHorseTeam([
             'user_id' => $user->id(),
             'horse_id' => $horse->id(),
         ]);
-        factory(EloquentDiscipline::class)->create([
+        $this->createDiscipline([
             'horse_id' => $horse->id(),
             'discipline' => Discipline::SHOW_JUMPING,
         ]);

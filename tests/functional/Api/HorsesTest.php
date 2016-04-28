@@ -1,12 +1,12 @@
 <?php
 namespace functional\Api;
 
-use EQM\Models\Horses\EloquentHorse;
-use EQM\Models\Pictures\EloquentPicture;
-use EQM\Models\Statuses\EloquentStatus;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class HorsesTest extends \TestCase
 {
+    use DatabaseTransactions;
+
     /** @test */
     public function it_can_show_a_horse()
     {

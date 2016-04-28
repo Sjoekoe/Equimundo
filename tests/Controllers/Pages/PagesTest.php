@@ -4,9 +4,12 @@ namespace Controllers\Pages;
 use EQM\Models\Horses\EloquentHorse;
 use EQM\Models\HorseTeams\EloquentHorseTeam;
 use EQM\Models\Users\EloquentUser;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class PagesTest extends \TestCase
 {
+    use DatabaseTransactions;
+    
     /** @test */
     public function viewHomepage()
     {

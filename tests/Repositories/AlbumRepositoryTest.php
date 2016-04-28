@@ -1,12 +1,15 @@
 <?php
 namespace Repositories;
 
+use DB;
+use EQM\Models\Albums\Album;
 use EQM\Models\Albums\AlbumRepository;
-use EQM\Models\Albums\EloquentAlbum;
-use EQM\Models\Horses\EloquentHorse;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AlbumRepositoryTest extends \TestCase
 {
+    use DatabaseTransactions;
+
     /**
      * @var \EQM\Models\Albums\AlbumRepository
      */
@@ -22,8 +25,8 @@ class AlbumRepositoryTest extends \TestCase
     /** @test */
     function it_can_find_an_album_by_id()
     {
-        $horse = factory(EloquentHorse::class)->create();
-        $album = factory(EloquentAlbum::class)->create([
+        $horse = $this->createHorse();
+        $album = $this->createAlbum([
             'horse_id' => $horse->id(),
         ]);
 
@@ -39,11 +42,11 @@ class AlbumRepositoryTest extends \TestCase
     /** @test */
     function it_can_find_albums_for_a_horse()
     {
-        $horse = factory(EloquentHorse::class)->create();
-        factory(EloquentAlbum::class)->create([
+        $horse = $this->createHorse();
+        $this->createAlbum([
             'horse_id' => $horse->id(),
         ]);
-        factory(EloquentAlbum::class)->create([
+        $this->createAlbum([
             'horse_id' => $horse->id(),
         ]);
 
@@ -55,15 +58,15 @@ class AlbumRepositoryTest extends \TestCase
     /** @test */
     function it_can_create_an_album_for_a_horse()
     {
-        $horse = factory(EloquentHorse::class)->create();
+        $horse = $this->createHorse();
 
         $this->albums->create($horse, [
             'name' => 'Foo',
             'description' => 'bar',
         ]);
 
-        $this->seeInDatabase('albums', [
-            'id' => 1,
+        $this->seeInDatabase(Album::TABLE, [
+            'id' => DB::table(Album::TABLE)->first()->id,
             'name' => 'Foo',
             'description' => 'Bar',
         ]);
@@ -72,8 +75,8 @@ class AlbumRepositoryTest extends \TestCase
     /** @test */
     function it_can_update_an_album()
     {
-        $horse = factory(EloquentHorse::class)->create();
-        $album = factory(EloquentAlbum::class)->create([
+        $horse = $this->createHorse();
+        $album = $this->createAlbum([
             'horse_id' => $horse->id(),
         ]);
 
@@ -90,8 +93,8 @@ class AlbumRepositoryTest extends \TestCase
     /** @test */
     function it_can_delete_an_album()
     {
-        $horse = factory(EloquentHorse::class)->create();
-        $album = factory(EloquentAlbum::class)->create([
+        $horse = $this->createHorse();
+        $album = $this->createAlbum([
             'horse_id' => $horse->id(),
         ]);
 
@@ -105,7 +108,7 @@ class AlbumRepositoryTest extends \TestCase
     /** @test */
     function it_can_create_standard_albums_for_a_horse()
     {
-        $horse = factory(EloquentHorse::class)->create();
+        $horse = $this->createHorse();
 
         $this->albums->createStandardAlbums($horse);
 

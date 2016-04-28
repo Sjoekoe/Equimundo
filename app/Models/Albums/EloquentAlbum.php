@@ -10,7 +10,7 @@ class EloquentAlbum extends Model implements Album
     /**
      * @var string
      */
-    protected $table = 'albums';
+    protected $table = self::TABLE;
 
     /**
      * @var array

@@ -3,10 +3,13 @@ namespace Controllers\Sessions;
 
 use Carbon\Carbon;
 use EQM\Events\UserRegistered;
-use EQM\Models\Users\EloquentUser;
+use EQM\Models\Users\User;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class RegisterTest extends \TestCase
 {
+    use DatabaseTransactions;
+
     /** @test */
     public function register()
     {
@@ -24,7 +27,7 @@ class RegisterTest extends \TestCase
             ->press('Register')
             ->seePageIs('/');
 
-        $this->seeInDatabase('users', [
+        $this->seeInDatabase(User::TABLE, [
             'first_name' => 'John',
             'last_name' => 'Doe',
             'email' => 'john@example.com'
@@ -51,7 +54,7 @@ class RegisterTest extends \TestCase
             ->press('Register')
             ->seePageIs('/register');
 
-        $this->missingFromDatabase('users', [
+        $this->missingFromDatabase(User::TABLE, [
             'first_name' => 'John',
             'last_name' => 'Doe',
             'email' => 'john@example.com'
@@ -73,7 +76,7 @@ class RegisterTest extends \TestCase
             ->press('Register')
             ->seePageIs('/register');
 
-        $this->missingFromDatabase('users', [
+        $this->missingFromDatabase(User::TABLE, [
             'first_name' => 'John',
             'last_name' => 'Doe',
             'email' => 'john@example.com'
@@ -86,13 +89,13 @@ class RegisterTest extends \TestCase
      */
     function it_can_not_register_when_an_email_has_already_been_taken()
     {
-        factory(EloquentUser::class)->create([
+        $this->createUser([
             'email' => 'john@example.com',
         ]);
 
         $this->visit('/register')
-            ->type('John', 'first_name')
-            ->type('Doe', 'last_name')
+            ->type('Foo', 'first_name')
+            ->type('Bar', 'last_name')
             ->type('john@example.com', 'email')
             ->type('password', 'password')
             ->type('password', 'password_confirmation')
@@ -100,9 +103,9 @@ class RegisterTest extends \TestCase
             ->press('Register')
             ->seePageIs('/register');
 
-        $this->missingFromDatabase('users', [
-            'first_name' => 'John',
-            'last_name' => 'Doe',
+        $this->missingFromDatabase(User::TABLE, [
+            'first_name' => 'Foo',
+            'last_name' => 'Bar',
             'email' => 'john@example.com'
         ]);
     }

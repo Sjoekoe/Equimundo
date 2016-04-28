@@ -7,6 +7,7 @@ use EQM\Models\Companies\Company;
 use EQM\Models\Companies\Horses\CompanyHorse;
 use EQM\Models\Companies\Users\CompanyUser;
 use EQM\Models\Horses\Horse;
+use EQM\Models\Notifications\Notification;
 use EQM\Models\Statuses\Status;
 use EQM\Models\Users\User;
 
@@ -174,6 +175,26 @@ trait DefaultIncludes
             'poster' => [
                 'data' => $this->includedCompany($status->company()),
             ],
+        ], $attributes);
+    }
+
+    /**
+     * @param \EQM\Models\Notifications\Notification $notification
+     * @param array $attributes
+     * @return array
+     */
+    public function includedNotification(Notification $notification, $attributes = [])
+    {
+        return array_merge([
+            'id' => $notification->id(),
+            'type' => $notification->type(),
+            'url' => route('notifications.show', $notification->id()),
+            'message' => trans('notifications.' . $notification->type(), json_decode($notification->data(), true)),
+            'is_read' => (bool) $notification->isRead(),
+            'icon' => config('notifications.' . $notification->type()),
+            'created_at' => $notification->createdAt()->toIso8601String(),
+            'receiverRelation' => $this->includedUser($notification->receiver()),
+            'senderRelation' =>  $this->includedUser($notification->sender()),
         ], $attributes);
     }
 }

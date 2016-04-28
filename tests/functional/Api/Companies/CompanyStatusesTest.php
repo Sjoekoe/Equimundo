@@ -2,11 +2,14 @@
 namespace functional\Api\Companies;
 
 use Carbon\Carbon;
+use DB;
 use EQM\Core\Testing\DefaultIncludes;
+use EQM\Models\Statuses\Status;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class CompanyStatusesTest extends \TestCase
 {
-    use DefaultIncludes;
+    use DefaultIncludes, DatabaseTransactions;
 
     /** @test */
     function it_can_get_all_statuses_for_a_company()
@@ -51,7 +54,7 @@ class CompanyStatusesTest extends \TestCase
             'body' => 'Test Status',
         ])->seeJsonEquals([
             'data' => [
-                'id' => 1,
+                'id' => DB::table(Status::TABLE)->first()->id,
                 'body' => 'Test Status',
                 'created_at' => $now->toIso8601String(),
                 'like_count' => 0,

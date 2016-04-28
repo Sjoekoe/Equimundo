@@ -2,15 +2,16 @@
 namespace functional\Api\Advertisements;
 
 use Carbon\Carbon;
+use DB;
 use EQM\Core\Advertisements\AdObject;
 use EQM\Core\Testing\DefaultIncludes;
 use EQM\Models\Advertising\Advertisements\Advertisement;
-use EQM\Models\Advertising\Advertisements\LeaderBoard;
 use EQM\Models\Advertising\Advertisements\Rectangle;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AdvertisementsTest extends \TestCase
 {
-    use DefaultIncludes;
+    use DefaultIncludes, DatabaseTransactions;
 
     /** @test */
     function it_can_get_all_advertisements()
@@ -88,7 +89,7 @@ class AdvertisementsTest extends \TestCase
             'website' => 'www.equimundo.com',
         ])->seeJsonEquals([
             'data' => [
-                'id' => 1,
+                'id' => DB::table(Advertisement::TABLE)->first()->id,
                 'start' => $now->startOfDay()->toIso8601String(),
                 'end' => $end->endOfDay()->toIso8601String(),
                 'amount' => 300,

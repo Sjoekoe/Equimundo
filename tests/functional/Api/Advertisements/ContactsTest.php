@@ -1,12 +1,14 @@
 <?php
 namespace functional\Api\Advertisements;
 
+use DB;
 use EQM\Core\Testing\DefaultIncludes;
 use EQM\Models\Advertising\Contacts\AdvertisingContact;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ContactsTest extends \TestCase
 {
-    use DefaultIncludes;
+    use DefaultIncludes, DatabaseTransactions;
 
     /** @test */
     function it_can_get_all_contacts()
@@ -47,7 +49,7 @@ class ContactsTest extends \TestCase
             'telephone' => '5678',
         ])->seeJsonEquals([
             'data' => [
-                'id' => 1,
+                'id' => DB::table(AdvertisingContact::TABLE)->first()->id,
                 'first_name' => 'foo',
                 'last_name' => 'bar',
                 'email' => 'foo@bar.com',

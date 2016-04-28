@@ -1,8 +1,14 @@
 <?php
 namespace functional\Api;
 
+use DB;
+use EQM\Models\Addresses\Address;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+
 class AddressesTest extends \TestCase
 {
+    use DatabaseTransactions;
+
     /** @test */
     function it_can_create_an_address()
     {
@@ -14,7 +20,7 @@ class AddressesTest extends \TestCase
             'country' => 'BE',
         ])->seeJsonEquals([
             'data' => [
-                'id' => 1,
+                'id' => DB::table(Address::TABLE)->first()->id,
                 'street' => 'Foo street',
                 'zip' => '1234',
                 'city' => 'Antwerp',

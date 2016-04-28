@@ -1,11 +1,13 @@
 <?php
 namespace functional\Search;
 
-use EQM\Events\SearchWasPerformed;
 use EQM\Models\Searches\Search;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class SearchTest extends \TestCase
 {
+    use DatabaseTransactions;
+
     /** @test */
     function it_can_search_for_users()
     {

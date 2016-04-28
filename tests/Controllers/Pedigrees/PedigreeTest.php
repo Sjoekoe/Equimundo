@@ -2,26 +2,24 @@
 namespace Controllers\Pedigrees;
 
 use Carbon\Carbon;
-use EQM\Models\Horses\EloquentHorse;
+use DB;
 use EQM\Models\Horses\Horse;
-use EQM\Models\HorseTeams\EloquentHorseTeam;
-use EQM\Models\Pedigrees\EloquentPedigree;
 use EQM\Models\Pedigrees\Pedigree;
-use EQM\Models\Users\EloquentUser;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class PedigreeTest extends \TestCase
 {
-    use WithoutMiddleware;
+    use WithoutMiddleware, DatabaseTransactions;
 
     /** @test */
     function it_can_show_the_pedigree_page()
     {
         $user = $this->createUser();
-        $horse = factory(EloquentHorse::class)->create([
+        $horse = $this->createHorse([
             'gender' => Horse::MARE,
         ]);
-        factory(EloquentHorseTeam::class)->create([
+        $this->createHorseTeam([
             'user_id' => $user->id(),
             'horse_id' => $horse->id(),
         ]);
@@ -34,11 +32,11 @@ class PedigreeTest extends \TestCase
     /** @test */
     function it_can_add_a_father()
     {
-        $user = factory(EloquentUser::class)->create();
-        $horse = factory(EloquentHorse::class)->create([
+        $user = $this->createUser();
+        $horse = $this->createHorse([
             'gender' => Horse::MARE,
         ]);
-        factory(EloquentHorseTeam::class)->create([
+        $this->createHorseTeam([
             'user_id' => $user->id(),
             'horse_id' => $horse->id(),
         ]);
@@ -53,34 +51,36 @@ class PedigreeTest extends \TestCase
 
         $this->assertResponseStatus(302);
 
-        $this->seeInDatabase('horses', [
-            'id' => 2,
+        $familyId = DB::table(Horse::TABLE)->orderBy('id', 'desc')->first()->id;
+
+        $this->seeInDatabase(Horse::TABLE, [
+            'id' => $familyId,
             'name' => 'Foo horse',
         ]);
 
-        $this->seeInDatabase('pedigrees', [
-            'id' => 1,
-            'horse_id' => 2,
+        $this->seeInDatabase(Pedigree::TABLE, [
+            'id' => DB::table(Pedigree::TABLE)->first()->id,
+            'horse_id' => $familyId,
             'type' => Pedigree::DAUGHTER,
             'family_id' => $horse->id(),
         ]);
 
-        $this->seeInDatabase('pedigrees', [
-            'id' => 2,
+        $this->seeInDatabase(Pedigree::TABLE, [
+            'id' => DB::table(Pedigree::TABLE)->orderBy('id', 'desc')->first()->id,
             'horse_id' => $horse->id(),
             'type' => Pedigree::FATHER,
-            'family_id' => 2,
+            'family_id' => $familyId,
         ]);
     }
 
     /** @test */
     function it_can_add_a_mother()
     {
-        $user = factory(EloquentUser::class)->create();
-        $horse = factory(EloquentHorse::class)->create([
+        $user = $this->createUser();
+        $horse = $this->createHorse([
             'gender' => Horse::MARE,
         ]);
-        factory(EloquentHorseTeam::class)->create([
+        $this->createHorseTeam([
             'user_id' => $user->id(),
             'horse_id' => $horse->id(),
         ]);
@@ -95,34 +95,36 @@ class PedigreeTest extends \TestCase
 
         $this->assertResponseStatus(302);
 
-        $this->seeInDatabase('horses', [
-            'id' => 2,
+        $familyId = DB::table(Horse::TABLE)->orderBy('id', 'desc')->first()->id;
+
+        $this->seeInDatabase(Horse::TABLE, [
+            'id' => $familyId,
             'name' => 'Foo horse',
         ]);
 
         $this->seeInDatabase('pedigrees', [
-            'id' => 1,
-            'horse_id' => 2,
+            'id' => DB::table(Pedigree::TABLE)->first()->id,
+            'horse_id' => $familyId,
             'type' => Pedigree::DAUGHTER,
             'family_id' => $horse->id(),
         ]);
 
         $this->seeInDatabase('pedigrees', [
-            'id' => 2,
+            'id' => DB::table(Pedigree::TABLE)->orderBy('id', 'desc')->first()->id,
             'horse_id' => $horse->id(),
             'type' => Pedigree::MOTHER,
-            'family_id' => 2,
+            'family_id' => $familyId,
         ]);
     }
 
     /** @test */
     function it_can_add_a_daughter()
     {
-        $user = factory(EloquentUser::class)->create();
-        $horse = factory(EloquentHorse::class)->create([
+        $user = $this->createUser();
+        $horse = $this->createHorse([
             'gender' => Horse::MARE,
         ]);
-        factory(EloquentHorseTeam::class)->create([
+        $this->createHorseTeam([
             'user_id' => $user->id(),
             'horse_id' => $horse->id(),
         ]);
@@ -137,34 +139,36 @@ class PedigreeTest extends \TestCase
 
         $this->assertResponseStatus(302);
 
-        $this->seeInDatabase('horses', [
-            'id' => 2,
+        $familyId = DB::table(Horse::TABLE)->orderBy('id', 'desc')->first()->id;
+
+        $this->seeInDatabase(Horse::TABLE, [
+            'id' => $familyId,
             'name' => 'Foo horse',
         ]);
 
         $this->seeInDatabase('pedigrees', [
-            'id' => 1,
-            'horse_id' => 2,
+            'id' => DB::table(Pedigree::TABLE)->first()->id,
+            'horse_id' => $familyId,
             'type' => Pedigree::MOTHER,
             'family_id' => $horse->id(),
         ]);
 
         $this->seeInDatabase('pedigrees', [
-            'id' => 2,
+            'id' => DB::table(Pedigree::TABLE)->orderBy('id', 'desc')->first()->id,
             'horse_id' => $horse->id(),
             'type' => Pedigree::DAUGHTER,
-            'family_id' => 2,
+            'family_id' => $familyId,
         ]);
     }
 
     /** @test */
     function it_can_add_a_son()
     {
-        $user = factory(EloquentUser::class)->create();
-        $horse = factory(EloquentHorse::class)->create([
+        $user = $this->createUser();
+        $horse = $this->createHorse([
             'gender' => Horse::MARE,
         ]);
-        factory(EloquentHorseTeam::class)->create([
+        $this->createHorseTeam([
             'user_id' => $user->id(),
             'horse_id' => $horse->id(),
         ]);
@@ -179,39 +183,41 @@ class PedigreeTest extends \TestCase
 
         $this->assertResponseStatus(302);
 
+        $familyId = DB::table(Horse::TABLE)->orderBy('id', 'desc')->first()->id;
+
         $this->seeInDatabase('horses', [
-            'id' => 2,
+            'id' => $familyId,
             'name' => 'Foo horse',
         ]);
 
         $this->seeInDatabase('pedigrees', [
-            'id' => 1,
-            'horse_id' => 2,
+            'id' => DB::table(Pedigree::TABLE)->first()->id,
+            'horse_id' => $familyId,
             'type' => Pedigree::MOTHER,
             'family_id' => $horse->id(),
         ]);
 
         $this->seeInDatabase('pedigrees', [
-            'id' => 2,
+            'id' => DB::table(Pedigree::TABLE)->orderBy('id', 'desc')->first()->id,
             'horse_id' => $horse->id(),
             'type' => Pedigree::SON,
-            'family_id' => 2,
+            'family_id' => $familyId,
         ]);
     }
 
     /** @test */
     function it_will_not_create_an_extra_horse_if_the_life_number_is_known()
     {
-        $user = factory(EloquentUser::class)->create();
-        $horse = factory(EloquentHorse::class)->create([
+        $user = $this->createUser();
+        $horse = $this->createHorse([
             'gender' => Horse::MARE,
         ]);
-        $relative = factory(EloquentHorse::class)->create([
-            'life_number' => '1234',
-        ]);
-        factory(EloquentHorseTeam::class)->create([
+        $this->createHorseTeam([
             'user_id' => $user->id(),
             'horse_id' => $horse->id(),
+        ]);
+        $relative = $this->createHorse([
+            'life_number' => '1234',
         ]);
 
         $this->actingAs($user)
@@ -225,31 +231,31 @@ class PedigreeTest extends \TestCase
 
         $this->assertResponseStatus(302);
 
-        $this->notSeeInDatabase('horses', [
-            'id' => 3,
+        $this->notSeeInDatabase(Horse::TABLE, [
+            'id' => $relative->id() + 1,
         ]);
     }
 
     /** @test */
     function it_can_not_create_two_higher_pedigrees_of_the_same_type()
     {
-        $user = factory(EloquentUser::class)->create();
-        $horse = factory(EloquentHorse::class)->create([
+        $user = $this->createUser();
+        $horse = $this->createHorse([
             'gender' => Horse::MARE,
         ]);
-        $relative = factory(EloquentHorse::class)->create([
+        $relative = $this->createHorse([
             'life_number' => '1234',
         ]);
-        factory(EloquentHorseTeam::class)->create([
+        $this->createHorseTeam([
             'user_id' => $user->id(),
             'horse_id' => $horse->id(),
         ]);
-        factory(EloquentPedigree::class)->create([
+        $this->createPedigree([
             'horse_id' => $horse->id(),
             'type' => Pedigree::MOTHER,
             'family_id' => $relative->id(),
         ]);
-        factory(EloquentPedigree::class)->create([
+        $this->createPedigree([
             'horse_id' => $relative->id(),
             'type' => Pedigree::DAUGHTER,
             'family_id' => $horse->id(),
@@ -265,23 +271,22 @@ class PedigreeTest extends \TestCase
             ]);
 
         $this->assertResponseStatus(302);
-        $this->notSeeInDatabase('pedigrees', [
-            'id' => 3,
-        ]);
+
+        $this->assertEquals(2, count(DB::table(Pedigree::TABLE)->get()));
     }
 
     /** @test */
     function it_can_not_add_the_wrong_gender_to_an_already_existing_horse()
     {
-        $user = factory(EloquentUser::class)->create();
-        $horse = factory(EloquentHorse::class)->create([
+        $user = $this->createUser();
+        $horse = $this->createHorse([
             'gender' => Horse::MARE,
         ]);
-        $relative = factory(EloquentHorse::class)->create([
+        $relative = $this->createHorse([
             'gender' => Horse::MARE,
             'life_number' => '1234',
         ]);
-        factory(EloquentHorseTeam::class)->create([
+        $this->createHorseTeam([
             'user_id' => $user->id(),
             'horse_id' => $horse->id(),
         ]);
@@ -297,25 +302,23 @@ class PedigreeTest extends \TestCase
 
         $this->assertResponseStatus(302);
 
-        $this->notSeeInDatabase('pedigrees', [
-            'id' => 1,
-        ]);
+        $this->assertEmpty(DB::table(Pedigree::TABLE)->get());
     }
 
     /** @test */
     function it_can_not_add_a_younger_horse_as_a_parent()
     {
-        $user = factory(EloquentUser::class)->create();
-        $horse = factory(EloquentHorse::class)->create([
+        $user = $this->createUser();
+        $horse = $this->createHorse([
             'gender' => Horse::MARE,
             'date_of_birth' => Carbon::now()->subYear(5),
         ]);
-        $relative = factory(EloquentHorse::class)->create([
+        $relative = $this->createHorse([
             'gender' => Horse::STALLION,
             'date_of_birth' => Carbon::now()->subYear(2),
             'life_number' => '1234',
         ]);
-        factory(EloquentHorseTeam::class)->create([
+        $this->createHorseTeam([
             'user_id' => $user->id(),
             'horse_id' => $horse->id(),
         ]);
@@ -331,25 +334,23 @@ class PedigreeTest extends \TestCase
 
         $this->assertResponseStatus(302);
 
-        $this->notSeeInDatabase('pedigrees', [
-            'id' => 1,
-        ]);
+        $this->assertEmpty(DB::table(Pedigree::TABLE)->get());
     }
 
     /** @test */
     function it_can_not_add_an_older_horse_as_offspring()
     {
-        $user = factory(EloquentUser::class)->create();
-        $horse = factory(EloquentHorse::class)->create([
+        $user = $this->createUser();
+        $horse = $this->createHorse([
             'gender' => Horse::MARE,
             'date_of_birth' => Carbon::now()->subYear(4),
         ]);
-        $relative = factory(EloquentHorse::class)->create([
+        $relative = $this->createHorse([
             'gender' => Horse::STALLION,
             'date_of_birth' => Carbon::now()->subYear(5),
             'life_number' => '1234',
         ]);
-        factory(EloquentHorseTeam::class)->create([
+        $this->createHorseTeam([
             'user_id' => $user->id(),
             'horse_id' => $horse->id(),
         ]);
@@ -365,25 +366,23 @@ class PedigreeTest extends \TestCase
 
         $this->assertResponseStatus(302);
 
-        $this->notSeeInDatabase('pedigrees', [
-            'id' => 1,
-        ]);
+        $this->assertEmpty(DB::table(Pedigree::TABLE)->get());
     }
 
     /** @test */
     function it_can_add_an_older_parent()
     {
-        $user = factory(EloquentUser::class)->create();
-        $horse = factory(EloquentHorse::class)->create([
+        $user = $this->createUser();
+        $horse = $this->createHorse([
             'gender' => Horse::MARE,
             'date_of_birth' => Carbon::now()->subYear(3),
         ]);
-        $relative = factory(EloquentHorse::class)->create([
+        $relative = $this->createHorse([
             'gender' => Horse::STALLION,
             'date_of_birth' => Carbon::now()->subYear(5),
             'life_number' => '1234',
         ]);
-        factory(EloquentHorseTeam::class)->create([
+        $this->createHorseTeam([
             'user_id' => $user->id(),
             'horse_id' => $horse->id(),
         ]);
@@ -399,25 +398,25 @@ class PedigreeTest extends \TestCase
 
         $this->assertResponseStatus(302);
 
-        $this->seeInDatabase('pedigrees', [
-            'id' => 1,
+        $this->seeInDatabase(Pedigree::TABLE, [
+            'id' => DB::table(Pedigree::TABLE)->first()->id,
         ]);
     }
 
     /** @test */
     function it_can_add_a_younger_horse_as_offspring()
     {
-        $user = factory(EloquentUser::class)->create();
-        $horse = factory(EloquentHorse::class)->create([
+        $user = $this->createUser();
+        $horse = $this->createHorse([
             'gender' => Horse::MARE,
             'date_of_birth' => Carbon::now()->subYear(5)
         ]);
-        $relative = factory(EloquentHorse::class)->create([
+        $relative = $this->createHorse([
             'gender' => Horse::STALLION,
             'date_of_birth' => Carbon::now()->subYear(2),
             'life_number' => '1234',
         ]);
-        factory(EloquentHorseTeam::class)->create([
+        $this->createHorseTeam([
             'user_id' => $user->id(),
             'horse_id' => $horse->id(),
         ]);
@@ -433,38 +432,38 @@ class PedigreeTest extends \TestCase
 
         $this->assertResponseStatus(302);
 
-        $this->seeInDatabase('pedigrees', [
-            'id' => 1,
+        $this->seeInDatabase(Pedigree::TABLE, [
+            'id' => DB::table(Pedigree::TABLE)->first()->id,
         ]);
     }
 
     /** @test */
     function it_can_not_add_offspring_with_a_parent_of_the_same_gender()
     {
-        $user = factory(EloquentUser::class)->create();
-        $horse = factory(EloquentHorse::class)->create([
+        $user = $this->createUser();
+        $horse = $this->createHorse([
             'gender' => Horse::MARE,
             'date_of_birth' => Carbon::now()->subYear(5)
         ]);
-        $relative = factory(EloquentHorse::class)->create([
+        $relative = $this->createHorse([
             'life_number' => '1234',
             'date_of_birth' => Carbon::now()->subYear(2),
             'gender' => Horse::STALLION
         ]);
-        $relativesParent = factory(EloquentHorse::class)->create([
+        $relativesParent = $this->createHorse([
             'life_number' => '5678',
             'gender' => Horse::MARE,
         ]);
-        factory(EloquentHorseTeam::class)->create([
+        $this->createHorseTeam([
             'user_id' => $user->id(),
             'horse_id' => $horse->id(),
         ]);
-        factory(EloquentPedigree::class)->create([
+        $this->createPedigree([
             'horse_id' => $relativesParent->id(),
             'type' => Pedigree::SON,
             'family_id' => $relative->id(),
         ]);
-        factory(EloquentPedigree::class)->create([
+        $this->createPedigree([
             'horse_id' => $relative->id(),
             'type' => Pedigree::MOTHER,
             'family_id' => $relativesParent->id(),
@@ -481,8 +480,6 @@ class PedigreeTest extends \TestCase
 
         $this->assertResponseStatus(302);
 
-        $this->notSeeInDatabase('pedigrees', [
-            'id' => 3,
-        ]);
+        $this->assertEquals(2, count(DB::table(Pedigree::TABLE)->get()));
     }
 }

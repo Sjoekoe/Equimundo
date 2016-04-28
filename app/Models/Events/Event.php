@@ -3,6 +3,8 @@ namespace EQM\Models\Events;
 
 interface Event
 {
+    const TABLE = 'events';
+    
     /**
      * @return int
      */

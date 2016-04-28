@@ -3,6 +3,7 @@ namespace EQM\Models\Pedigrees;
 
 interface Pedigree
 {
+    const TABLE = 'pedigrees';
     const FATHER = 1;
     const MOTHER = 2;
     const SON = 3;

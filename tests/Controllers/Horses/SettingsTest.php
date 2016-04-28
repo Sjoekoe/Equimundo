@@ -3,9 +3,12 @@ namespace Controllers\Horses;
 
 use EQM\Models\Horses\Horse;
 use EQM\Models\HorseTeams\HorseTeam;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class SettingsTest extends \TestCase
 {
+    use DatabaseTransactions;
+    
     /** @test */
     function it_can_visit_the_settings_page()
     {

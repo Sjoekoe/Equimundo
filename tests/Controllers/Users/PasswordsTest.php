@@ -1,17 +1,17 @@
 <?php
 namespace Controllers\Users;
 
-use EQM\Models\Users\EloquentUser;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class PasswordsTest extends \TestCase
 {
-    use WithoutMiddleware;
+    use WithoutMiddleware, DatabaseTransactions;
 
     /** @test */
     function it_can_change_a_password()
     {
-        $user = factory(EloquentUser::class)->create();
+        $user = $this->createUser();
 
         $this->actingAs($user)
             ->post('settings/password', [

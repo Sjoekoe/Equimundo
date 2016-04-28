@@ -1,13 +1,15 @@
 <?php
 namespace functional\Api\Companies;
 
+use DB;
 use EQM\Core\Testing\DefaultIncludes;
 use EQM\Models\Companies\Users\CompanyUser;
 use EQM\Models\Companies\Users\Follower;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class CompanyUsersTest extends \TestCase
 {
-    use DefaultIncludes;
+    use DefaultIncludes, DatabaseTransactions;
 
     /** @test */
     function it_can_get_all_users_for_a_company()
@@ -54,7 +56,7 @@ class CompanyUsersTest extends \TestCase
             'type' => Follower::ID,
         ])->seeJsonEquals([
             'data' => [
-                'id' => 1,
+                'id' => DB::table(CompanyUser::TABLE)->first()->id,
                 'is_admin' => false,
                 'userRelation' => $this->includedUser($user),
                 'companyRelation' => [

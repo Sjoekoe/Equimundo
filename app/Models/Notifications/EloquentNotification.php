@@ -10,7 +10,7 @@ class EloquentNotification extends Model implements Notification
     /**
      * @var string
      */
-    protected $table = 'notifications';
+    protected $table = self::TABLE;
 
     /**
      * @var array
