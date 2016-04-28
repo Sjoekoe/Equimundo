@@ -1,6 +1,7 @@
 <?php
 namespace EQM\Models\Companies;
 
+use Carbon\Carbon;
 use EQM\Core\Slugs\SlugCreator;
 use EQM\Models\Addresses\Address;
 
@@ -51,11 +52,11 @@ class EloquentCompanyRepository implements CompanyRepository
         if (array_key_exists('about', $values)) {
             $company->about = $values['about'];
         }
-        
+
         if (array_key_exists('email', $values)) {
             $company->email = $values['email'];
         }
-        
+
         if (array_key_exists('address_id', $values)) {
             $company->address_id = $values['address_id'];
         }
@@ -73,6 +74,10 @@ class EloquentCompanyRepository implements CompanyRepository
         $company->delete();
     }
 
+    /**
+     * @param int $limit
+     * @return \Illuminate\Pagination\LengthAwarePaginator
+     */
     public function findAllPaginated($limit = 10)
     {
         return $this->company->paginate($limit);
@@ -145,5 +150,41 @@ class EloquentCompanyRepository implements CompanyRepository
     public function search($keyWord)
     {
         return $this->company->_search($keyWord);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function count()
+    {
+        return count($this->company->all());
+    }
+
+    /**
+     * @param int $limit
+     * @return \Illuminate\Pagination\LengthAwarePaginator
+     */
+    public function paginated($limit = 10)
+    {
+        return $this->company->paginate($limit);
+    }
+
+    /**
+     * @param \Carbon\Carbon $start
+     * @param \Carbon\Carbon $end
+     * @return int
+     */
+    public function findCountByDate(Carbon $start, Carbon $end)
+    {
+        return count($this->company->where('created_at', '>', $start)->where('created_at', '<', $end)->get());
+    }
+
+    /**
+     * @param \Carbon\Carbon $date
+     * @return int
+     */
+    public function findRegisteredUsersBeforeDate(Carbon $date)
+    {
+        return count($this->company->where('created_at', '<=', $date)->get());
     }
 }

@@ -1,6 +1,7 @@
 <?php
 namespace EQM\Models\Companies;
 
+use Carbon\Carbon;
 use EQM\Models\Addresses\Address;
 
 interface CompanyRepository
@@ -53,4 +54,19 @@ interface CompanyRepository
      * @return \EQM\Models\Companies\Company[]
      */
     public function search($keyWord);
+
+    /**
+     * @return mixed
+     */
+    public function count();
+
+    /**
+     * @param int $limit
+     * @return \Illuminate\Pagination\LengthAwarePaginator
+     */
+    public function paginated($limit = 10);
+    
+    public function findCountByDate(Carbon $start, Carbon $end);
+    
+    public function findRegisteredUsersBeforeDate(Carbon $date);
 }
