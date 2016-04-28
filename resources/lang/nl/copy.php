@@ -62,6 +62,7 @@ return [
         'unlink_horse' => 'Is je paard verkocht, of heb je er niets meer mee te maken, dan kan je het ontkoppelen.',
         'welcome_message' => 'Welkom bij het social media platform waar je het leven van je paard kan delen',
         'no_companies_groups_found' => 'Geen bedrijven / groepen gevonden',
+        'company_warning' => 'Op dit moment is het enkel mogelijk om een stal / manege aan te maken. Later breiden we uit met meer mogelijkheden.',
     ],
     'a' => [
         'add_achievement' => 'Voeg prestatie toe',

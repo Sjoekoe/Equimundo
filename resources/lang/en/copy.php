@@ -63,6 +63,7 @@ return [
         'ranked' => 'Place',
         'unlink_horse' => 'If you sold your horse, or have no affiliation with it. You can unlink it.',
         'welcome_message' => 'Welcome to the social media platform where you can share the life of your horse',
+        'company_warning' => 'At this moment it is only possible to create a stable. Later we will expand with more possibilities.',
     ],
 
     'a' => [

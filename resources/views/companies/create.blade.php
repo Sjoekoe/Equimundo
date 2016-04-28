@@ -14,6 +14,18 @@
                 <template id="create-company">
                     <form>
                         <div class="panel-body">
+                            <div class="alert alert-info">
+                                <div class="media-left">
+                                <span class="icon-wrap icon-wrap-xs icon-circle alert-icon">
+                                    <i class="fa fa-bullhorn fa-lg"></i>
+                                </span>
+                                </div>
+                                <div class="media-body">
+                                    <p class="alert-message">
+                                        {{ trans('copy.p.company_warning') }}
+                                    </p>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <div class="col-sm-2">
                                     <label for="name" class="control-label">{{ trans('forms.labels.name') }} *</label>
@@ -23,7 +35,7 @@
                                     <small class="help-block text-danger text-left" v-if="errors.name"><i class="fa fa-exclamation-circle"></i> @{{ errors.name }}</small>
                                 </div>
                             </div>
-                            <br><br>
+                            <br><br><br>
                             <div class="form-group">
                                 <div class="col-sm-2">
                                     <label for="telephone" class="control-label">{{ trans('forms.labels.telephone') }}</label>
