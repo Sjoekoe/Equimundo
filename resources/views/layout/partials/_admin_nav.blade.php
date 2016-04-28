@@ -28,6 +28,14 @@
                                 </span>
                             </a>
                         </li>
+                        <li class="{{ Active::route('admin.companies.index', 'active-link') }}">
+                            <a href="{{ route('admin.companies.index') }}">
+                                <i class="fa fa-industry"></i>
+                                <span class="menu-title">
+                                    <strong>Companies / Groups</strong>
+                                </span>
+                            </a>
+                        </li>
                         <li class="{{ Active::route('admin.searches.index', 'active-link') }}">
                             <a href="{{ route('admin.searches.index') }}">
                                 <i class="fa fa-search"></i>
