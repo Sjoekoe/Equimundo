@@ -28,11 +28,15 @@
         @endif
     </div>
     <div class="panel-media mar-btm pad-no" style="padding-bottom: 0px;">
-        @if ($horse->getProfilePicture())
-            <img src="{{ route('file.picture', $horse->getProfilePicture()->id()) }}" alt="{{ $horse->name() }}" class="panel-media-img img-circle img-border-light">
-        @else
-            <img src="{{ asset('images/eqm.png') }}" alt="{{ $horse->name() }}" class="panel-media-img img-circle img-border-light">
-        @endif
+            @if ($horse->getProfilePicture())
+                <a href="{{ route('file.picture', $horse->getProfilePicture()->id()) }}" data-lightbox="profilePicture">
+                    <img src="{{ route('file.picture', $horse->getProfilePicture()->id()) }}" alt="{{ $horse->name() }}" class="panel-media-img img-circle img-border-light">
+                </a>
+            @else
+                <a href="{{ asset('images/eqm.png') }}" data-lightbox="profilePicture">
+                    <img src="{{ asset('images/eqm.png') }}" alt="{{ $horse->name() }}" class="panel-media-img img-circle img-border-light">
+                </a>
+            @endif
         <div class="row mar-btm">
             <div class="col-lg-7">
                 <h1 class="panel-media-heading text-mint">{{ $horse->name() }}</h1>

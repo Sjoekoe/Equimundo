@@ -45,9 +45,9 @@
                     <img v-bind:src="status.picture" alt="" class="img-responsive thumbnail">
                 </a>
                 <div class="pad-ver">
-                                    <span class="tag tag-sm">
-                                        <i class="fa fa-heart text-danger"></i> @{{ status.like_count }}
-                                    </span>
+                    <span class="tag tag-sm">
+                        <i class="fa fa-heart text-danger"></i> @{{ status.like_count }}
+                    </span>
 
                     @if (auth()->check())
                         <div class="btn-group">
