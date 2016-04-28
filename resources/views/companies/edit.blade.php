@@ -16,7 +16,7 @@
                         <div class="panel-body">
                             <div class="form-group">
                                 <div class="col-sm-2">
-                                    <label for="name" class="control-label">{{ trans('forms.labels.name') }}</label>
+                                    <label for="name" class="control-label">{{ trans('forms.labels.name') }} *</label>
                                 </div>
                                 <div class="col-sm-10">
                                     <input type="text" for="name", v-model="name", class="form-control">
@@ -36,7 +36,7 @@
                             <br><br>
                             <div class="form-group">
                                 <div class="col-sm-2">
-                                    <label for="email" class="control-label">Email</label>
+                                    <label for="email" class="control-label">Email *</label>
                                 </div>
                                 <div class="col-sm-10">
                                     <input type="email" for="email", v-model="email", class="form-control">
@@ -56,7 +56,7 @@
                             <br><br>
                             <div class="form-group">
                                 <div class="col-sm-2">
-                                    <label for="street" class="control-label">{{ trans('forms.labels.street') }}</label>
+                                    <label for="street" class="control-label">{{ trans('forms.labels.street') }} *</label>
                                 </div>
                                 <div class="col-sm-10">
                                     <input type="text" for="street", v-model="street", class="form-control">
@@ -66,7 +66,7 @@
                             <br><br>
                             <div class="form-group">
                                 <div class="col-sm-2">
-                                    <label for="name" class="control-label">{{ trans('forms.labels.zip') }}</label>
+                                    <label for="name" class="control-label">{{ trans('forms.labels.zip') }} *</label>
                                 </div>
                                 <div class="col-sm-10">
                                     <input type="text" for="zip", v-model="zip", class="form-control">
@@ -76,7 +76,7 @@
                             <br><br>
                             <div class="form-group">
                                 <div class="col-sm-2">
-                                    <label for="city" class="control-label">{{ trans('forms.labels.city') }}</label>
+                                    <label for="city" class="control-label">{{ trans('forms.labels.city') }} *</label>
                                 </div>
                                 <div class="col-sm-10">
                                     <input type="city" for="city", v-model="city", class="form-control">
@@ -86,7 +86,7 @@
                             <br><br>
                             <div class="form-group">
                                 <div class="col-sm-2">
-                                    <label for="state" class="control-label">{{ trans('forms.labels.state') }}</label>
+                                    <label for="state" class="control-label">{{ trans('forms.labels.state') }} *</label>
                                 </div>
                                 <div class="col-sm-10">
                                     <input type="text" for="state", v-model="state", class="form-control">
@@ -96,7 +96,7 @@
                             <br> <br>
                             <div class="form-group">
                                 <div class="col-sm-2">
-                                    <label for="country" class="control-label">{{ trans('forms.labels.country') }}</label>
+                                    <label for="country" class="control-label">{{ trans('forms.labels.country') }} *</label>
                                 </div>
                                 <div class="col-sm-10">
                                     <select name="country" id="country" v-model="country" class="form-control">

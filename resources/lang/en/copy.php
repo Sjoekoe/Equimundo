@@ -110,6 +110,7 @@ return [
         'timeline' => 'Timeline',
         'unfollow' => 'Unfollow',
         'unlink' => 'Unlink',
+        'you_like_it' => 'You like it',
     ],
 
     'span' => [

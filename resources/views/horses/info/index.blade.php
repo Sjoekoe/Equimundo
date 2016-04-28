@@ -85,7 +85,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-sm-6">
                     <div class="panel">
                         <div class="panel-heading">
                             <h3 class="panel-title">
@@ -104,6 +104,27 @@
                                 <a href="{{ route('disciplines.index', $horse->slug()) }}" class="btn btn-info">{{ trans('copy.a.add_disciplines') }}</a>
                             </div>
                         @endif
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                {{ trans('copy.titles.companies_groups') }}
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <dl class="dl-horizontal">
+                                @foreach($horse->companies() as $company)
+                                    <dt>{{ trans('companies.types.' . $company->type()) }}</dt>
+                                    <dd>
+                                        <a href="{{ route('companies.show', $company->slug()) }}" class="text-mint">
+                                            {{ $company->name() }}
+                                        </a>
+                                    </dd>
+                                @endforeach
+                            </dl>
+                        </div>
                     </div>
                 </div>
             </div>

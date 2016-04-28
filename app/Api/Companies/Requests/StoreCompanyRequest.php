@@ -24,6 +24,7 @@ class StoreCompanyRequest extends FormRequest
             'street' => 'required',
             'city' => 'required',
             'zip' => 'required',
+            'state' => 'required',
             'country' => 'required',
             'website' => 'url_host',
             'email' => 'email|required',

@@ -52,7 +52,7 @@
                     @if (auth()->check())
                         <div class="btn-group">
                             <template v-if="status.liked_by_user">
-                                <button class="btn btn-sm btn-default btn-hover-success active" type="submit" @click="likeStatus(status)"><i class="fa fa-thumbs-up"></i> You Like it</button>
+                                <button class="btn btn-sm btn-default btn-hover-success active" type="submit" @click="likeStatus(status)"><i class="fa fa-thumbs-up"></i> {{ trans('copy.a.you_like_it') }}</button>
                             </template>
                             <template v-else>
                                 <button class="btn btn-sm btn-default btn-hover-success" type="submit" @click="likeStatus(status)"><i class="fa fa-thumbs-up"></i></button>
