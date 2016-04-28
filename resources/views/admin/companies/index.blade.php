@@ -44,22 +44,22 @@
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead>
-                                <tr>
-                                    <th class="min-width">ID</th>
-                                    <th>Name</th>
-                                    <th>Type</th>
-                                    <th>Created at</th>
-                                </tr>
+                                    <tr>
+                                        <th class="min-width">ID</th>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Created at</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($companies as $company)
-                                    <tr>
-                                        <td>{{ $company->id() }}</td>
-                                        <td>{{ $company->name() }}</td>
-                                        <td>{{ trans('companies.types.' . $company->type()) }}</td>
-                                        <td>{{ eqm_date($company->createdAt()) }}</td>
-                                    </tr>
-                                @endforeach
+                                    @foreach($companies as $company)
+                                        <tr>
+                                            <td>{{ $company->id() }}</td>
+                                            <td>{{ $company->name() }}</td>
+                                            <td>{{ trans('companies.types.' . $company->type()) }}</td>
+                                            <td>{{ eqm_date($company->createdAt()) }}</td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
