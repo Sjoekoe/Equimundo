@@ -275,6 +275,7 @@ trait CreatesModels
     {
         return $this->modelFactory->create(Event::class, array_merge([
             'name' => 'Test name',
+            'description' => 'Lorem ipsum est',
         ], $attributes));
     }
 

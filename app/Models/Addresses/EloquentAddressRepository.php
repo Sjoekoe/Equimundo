@@ -27,6 +27,10 @@ class EloquentAddressRepository implements AddressRepository
 
         $lat = $output->results[0]->geometry->location->lat;
         $long = $output->results[0]->geometry->location->lng;
+        
+        if ($address = $this->findByLatLong($lat, $long)) {
+            return $address;
+        }
 
         $values['latitude'] = $lat;
         $values['longitude'] = $long;
