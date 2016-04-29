@@ -36,12 +36,17 @@ interface Event
     public function description();
 
     /**
-     * @return \DateTime
+     * @return \Carbon\Carbon|null
      */
     public function startDate();
 
     /**
-     * @return \DateTime
+     * @return \Carbon\Carbon|null
      */
     public function endDate();
+
+    /**
+     * @return \EQM\Models\Addresses\Address
+     */
+    public function address();
 }

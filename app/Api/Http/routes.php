@@ -81,5 +81,11 @@ $api->version('v1', function(Router $api) {
                 $api->delete('/{advertisement}', ['as' => 'api.admin.advertisements.delete', 'uses' => 'AdvertisementController@delete']);
             });
         });
+
+        $api->get('/events', ['as' => 'events.index', 'uses' => 'EventController@index']);
+        $api->post('/events', ['as' => 'events.store', 'uses' => 'EventController@store']);
+        $api->get('/events/{event}', ['as' => 'events.show', 'uses' => 'EventController@show']);
+        $api->put('/events/{event}', ['as' => 'dvents.update', 'uses' => 'EventController@update']);
+        $api->delete('/events/{event}', ['as' => 'events.delete', 'uses' => 'EventController@delete']);
     });
 });

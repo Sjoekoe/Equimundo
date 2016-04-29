@@ -6,6 +6,7 @@ use EQM\Models\Advertising\Contacts\AdvertisingContact;
 use EQM\Models\Companies\Company;
 use EQM\Models\Companies\Horses\CompanyHorse;
 use EQM\Models\Companies\Users\CompanyUser;
+use EQM\Models\Events\Event;
 use EQM\Models\Horses\Horse;
 use EQM\Models\Notifications\Notification;
 use EQM\Models\Statuses\Status;
@@ -195,6 +196,27 @@ trait DefaultIncludes
             'created_at' => $notification->createdAt()->toIso8601String(),
             'receiverRelation' => $this->includedUser($notification->receiver()),
             'senderRelation' =>  $this->includedUser($notification->sender()),
+        ], $attributes);
+    }
+
+    /**
+     * @param \EQM\Models\Events\Event $event
+     * @param array $attributes
+     * @return array
+     */
+    public function includedEvent(Event $event, $attributes = [])
+    {
+        return array_merge([
+            'id' => $event->id(),
+            'name' => $event->name(),
+            'description' => $event->description(),
+            'place' => $event->place(),
+            'start_date' => $event->startDate() ? $event->startDate()->toIso8601String() : null,
+            'end_date' => $event->endDate() ? $event->endDate()->toIso8601String() : null,
+            'creatorRelation' => $this->includedUser($event->creator()),
+            'addressRelation' => [
+                'data' => $event->address() ? $this->includedAddress($event->address()) : null,
+            ],
         ], $attributes);
     }
 }

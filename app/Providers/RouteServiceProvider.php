@@ -8,6 +8,7 @@ use EQM\Models\Albums\AlbumRouteBinder;
 use EQM\Models\Comments\CommentRouteBinder;
 use EQM\Models\Companies\CompanyRouteBinding;
 use EQM\Models\Conversations\ConversationRouteBinder;
+use EQM\Models\Events\EventRouteBinding;
 use EQM\Models\Horses\HorseRouteBinder;
 use EQM\Models\Horses\HorseSlugRouteBinder;
 use EQM\Models\HorseTeams\HorseTeamRouteBinder;
@@ -39,6 +40,7 @@ class RouteServiceProvider extends ServiceProvider {
         $router->bind('comment', CommentRouteBinder::class);
         $router->bind('company', CompanyRouteBinding::class);
         $router->bind('conversation', ConversationRouteBinder::class);
+        $router->bind('event', EventRouteBinding::class);
         $router->bind('horse', HorseRouteBinder::class);
         $router->bind('horse_team', HorseTeamRouteBinder::class);
         $router->bind('horse_slug', HorseSlugRouteBinder::class);

@@ -1,6 +1,8 @@
 <?php
 namespace EQM\Models\Events;
 
+use Carbon\Carbon;
+use EQM\Models\Addresses\EloquentAddress;
 use EQM\Models\Palmares\EloquentPalmares;
 use EQM\Models\Users\EloquentUser;
 use Illuminate\Database\Eloquent\Model;
@@ -18,11 +20,19 @@ class EloquentEvent extends Model implements Event
     protected $fillable = ['creator_id', 'name', 'place', 'description', 'date'];
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function creatorRelation()
+    {
+        return $this->belongsTo(EloquentUser::class, 'creator_id', 'id');
+    }
+
+    /**
      * @return \EQM\Models\Users\User
      */
     public function creator()
     {
-        return $this->belongsTo(EloquentUser::class, 'id', 'creator_id')->first();
+        return $this->creatorRelation()->first();
     }
 
     /**
@@ -66,18 +76,34 @@ class EloquentEvent extends Model implements Event
     }
 
     /**
-     * @return \DateTime
+     * @return \Carbon\Carbon|null
      */
     public function startDate()
     {
-        return $this->start_date;
+        return $this->start_date ? Carbon::parse($this->start_date) : null;
     }
 
     /**
-     * @return \DateTime
+     * @return \Carbon\Carbon|null
      */
     public function endDate()
     {
-        return $this->end_date;
+        return $this->end_date ? Carbon::parse($this->end_date) : null;
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function addressRelation()
+    {
+        return $this->belongsTo(EloquentAddress::class, 'address_id', 'id');
+    }
+
+    /**
+     * @return \EQM\Models\Addresses\Address
+     */
+    public function address()
+    {
+        return $this->addressRelation()->first();
     }
 }
