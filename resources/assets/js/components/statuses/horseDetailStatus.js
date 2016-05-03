@@ -14,6 +14,7 @@ module.exports = Vue.extend({
             commenting: false,
             upload: '',
             image: '',
+            hideNoStatusesText: true,
             newComment: {
                 comment: {
 

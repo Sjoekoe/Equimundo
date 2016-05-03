@@ -110,6 +110,7 @@ return [
         'create_a_group' => 'Maak een groep / bedrijf aan',
         'edit_singular' => 'Wijzig',
         'you_like_it' => 'Je vindt dit leuk',
+        'place_comment' => 'Plaats reactie',
     ],
     'span' => [
         'file' => 'Bestand',

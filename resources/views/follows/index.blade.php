@@ -7,7 +7,7 @@
             <div class="panel">
                 <div class="panel-heading">
                     <h3 class="panel-title">
-                        Followers
+                        {{ trans('copy.titles.followers') }}
                     </h3>
                 </div>
                 <div class="panel-body">
