@@ -4,9 +4,23 @@
     @include('layout.partials.heading')
     <div id="page-content">
         <div class="col-sm-12 col-lg-8 col-lg-offset-2">
+            @if (auth()->check() && auth()->user()->isInHorseTeam($horse) && ! $album->isDefaultAlbum())
+                <div class="panel">
+                    <div class="panel-body">
+                        {{ Form::open(['route' => ['album.picture.store', $album->id()], 'files' => true]) }}
+                            <div class="col-md-4">
+                                {{ Form::file('pictures[]', ['multiple' => 'true']) }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form::submit('upload', ['class' => 'btn btn-info']) }}
+                            </div>
+                        {{ Form::close() }}
+                    </div>
+                </div>
+            @endif
             <div class="panel">
                 <div class="panel-heading">
-                    @if (auth()->check() && auth()->user()->isInHorseTeam($horse))
+                    @if (auth()->check() && auth()->user()->isInHorseTeam($horse) && ! $album->isDefaultAlbum())
                         <div class="panel-control">
                             <a href="{{ route('album.edit', $album->id()) }}" class="btn btn-default">
                                 <i class="fa fa-pencil fa-lg fa-fw"></i>

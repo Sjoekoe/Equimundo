@@ -32,7 +32,7 @@ class StatusTransformer extends TransformerAbstract
             'body' => $status->body(),
             'like_count' => count($status->likes()->get()),
             'created_at' => $status->createdAt()->toIso8601String(),
-            'prefix' => $status->prefix() ? trans('statuses.prefixes.' . $status->prefix()) : null,
+            'prefix' => $status->prefix() ? trans('statuses.prefixes.' . $status->prefix(), ['link' => $status->prefixLink()]) : null,
             'liked_by_user' => auth()->check() ? $status->isLikedByUser(auth()->user()) : false,
             'picture' => $status->hasPicture() ? route('file.picture', [$status->getPicture()->id()]) : null,
             'can_delete_status' => auth()->check() ? auth()->user()->can('delete-status', $status) : false,

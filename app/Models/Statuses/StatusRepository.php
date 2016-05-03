@@ -56,9 +56,10 @@ interface StatusRepository
      * @param \EQM\Models\Horses\Horse $horse
      * @param string $body
      * @param int|null $prefix
+     * @param null $prefixLink
      * @return \EQM\Models\Statuses\Status
      */
-    public function create(Horse $horse, $body, $prefix = null);
+    public function create(Horse $horse, $body, $prefix = null, $prefixLink = null);
 
     /**
      * @param \EQM\Models\Horses\Horse $horse
@@ -94,7 +95,8 @@ interface StatusRepository
     /**
      * @param \EQM\Models\Horses\Horse $horse
      * @param array $values
+     * @param string $link
      * @return \EQM\Models\Statuses\Status
      */
-    public function createForFollowingCompany(Horse $horse, array $values);
+    public function createForFollowingCompany(Horse $horse, array $values, $link);
 }

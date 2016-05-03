@@ -1,10 +1,10 @@
 <?php
 
-use EQM\Models\Statuses\Status;
-
 return [
     'prefixes' => [
-        Status::PREFIX_PALMARES => 'heeft een prestatie toegevoegd.',
-        Status::PREFIX_JOINED_COMPANY => 'is lid geworden van een groep / bedrijf',
+        '1' => ' - heeft een prestatie toegevoegd.',
+        '2' => ' - is lid geworden van een <a href=":link" class="text-mint">groep / bedrijf</a>',
+        '3' => ' - heeft een nieuw <a href=":link" class="text-mint">album</a> aangemaakt',
+        '4' => ' - heeft fotos toegevoegd aan een <a href=":link" class="text-mint">album</a>',
     ],
 ];

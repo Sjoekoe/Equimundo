@@ -24,6 +24,7 @@ class AlbumRequest extends Request
     {
         return [
             'name' => 'required|between:1,100',
+            'pictures.*' => 'image',
         ];
     }
 }

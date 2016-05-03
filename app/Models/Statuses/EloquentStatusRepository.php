@@ -135,14 +135,16 @@ class EloquentStatusRepository implements StatusRepository
      * @param \EQM\Models\Horses\Horse $horse
      * @param string $body
      * @param int|null $prefix
+     * @param null $prefixLink
      * @return \EQM\Models\Statuses\Status
      */
-    public function create(Horse $horse, $body, $prefix = null)
+    public function create(Horse $horse, $body, $prefix = null, $prefixLink = null)
     {
         $status = new EloquentHorseStatus();
         $status->body = (new StatusConvertor())->convert($body);
         $status->horse_id = $horse->id();
         $status->prefix = $prefix;
+        $status->prefix_link = $prefixLink;
 
         $status->save();
 
@@ -206,12 +208,13 @@ class EloquentStatusRepository implements StatusRepository
     /**
      * @param \EQM\Models\Horses\Horse $horse
      * @param array $values
+     * @param string $link
      * @return \EQM\Models\Statuses\Status
      */
-    public function createForFollowingCompany(Horse $horse, array $values)
+    public function createForFollowingCompany(Horse $horse, array $values, $link)
     {
-        $status = $this->create($horse, $values['body'], Status::PREFIX_JOINED_COMPANY);
-        
+        $status = $this->create($horse, $values['body'], Status::PREFIX_JOINED_COMPANY, $link);
+
         return $status;
     }
 }

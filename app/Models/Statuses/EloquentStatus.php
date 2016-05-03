@@ -34,7 +34,7 @@ class EloquentStatus extends Model implements Status
     /**
      * @var array
      */
-    protected $fillable = ['body', 'prefix', 'horse_id'];
+    protected $fillable = ['body', 'prefix', 'horse_id', 'prefix_link'];
 
     /**
      * @return \EQM\Models\Users\User
@@ -150,5 +150,13 @@ class EloquentStatus extends Model implements Status
     public function type()
     {
         return $this->type;
+    }
+
+    /**
+     * @return string
+     */
+    public function prefixLink()
+    {
+        return $this->prefix_link;
     }
 }

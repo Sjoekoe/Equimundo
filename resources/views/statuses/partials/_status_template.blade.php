@@ -40,7 +40,7 @@
                             @{{ status.poster.data.name }}
                         </a>
                     </template>
-                    <span class="text-semibold text-muted" v-if="status.prefix"> - @{{ status.prefix }}</span>
+                    <span class="text-semibold text-muted" v-if="status.prefix" v-html="status.prefix"></span>
                     <p class="text-muted text-sm">
                         @{{ status.created_at | diffForHumans }}
                     </p>
