@@ -27,6 +27,8 @@ $api->version('v1', function(Router $api) {
         $api->get('/statuses/{status}/comments/{comment}', ['as' => 'api.comments.show', 'uses' => 'CommentController@show']);
         $api->put('/statuses/{status}/comments/{comment}', ['as' => 'api.comments.update', 'uses' => 'CommentController@update']);
         $api->delete('/statuses/{status}/comments/{comment}', ['as' => 'api.comments.delete', 'uses' => 'CommentController@delete']);
+        
+        $api->post('/comments/{comment}/like', ['as' => 'comments.like', 'uses' => 'LikeController@likeComment']);
 
         $api->get('/notifications', ['as' => 'api.notifications.index', 'uses' => 'NotificationController@index']);
         $api->get('/notifications/mark-as-read', ['as' => 'api.notifications.read', 'uses' => 'NotificationController@markRead']);

@@ -21,6 +21,8 @@ class NotifyCommentPoster
         $receiver = $event->comment->poster();
         $sender = $event->user;
 
-        $this->creator->create($sender, $receiver, $event->notification, $event->comment->status(), $event->data);
+        if ($sender->id() !== $receiver->id()) {
+            $this->creator->create($sender, $receiver, $event->notification, $event->comment->status(), $event->data);
+        }
     }
 }
