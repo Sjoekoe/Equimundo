@@ -8,6 +8,8 @@ interface Status
 {
     const PREFIX_PALMARES = 1;
     const PREFIX_JOINED_COMPANY = 2;
+    const PREFIX_CREATED_ALBUM = 3;
+    const PREFIX_ADDED_PICTURES = 4;
     const TABLE = 'statuses';
 
     /**
@@ -75,4 +77,9 @@ interface Status
      * @return bool
      */
     public function isLikedByUser(User $user);
+
+    /**
+     * @return string
+     */
+    public function prefixLink();
 }

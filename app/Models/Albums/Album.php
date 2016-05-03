@@ -37,4 +37,9 @@ interface Album
      * @return \EQM\Models\Pictures\Picture[]
      */
     public function pictures();
+
+    /**
+     * @return bool
+     */
+    public function isDefaultAlbum();
 }

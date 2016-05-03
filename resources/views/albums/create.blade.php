@@ -15,6 +15,7 @@
                         <div class="form-group">
                             {{ Form::label('name', trans('forms.labels.name'), ['class' => 'control-label']) }}
                             {{ Form::text('name', null, ['class' => 'form-control']) }}
+                            @include('layout.partials._error_message', ['field' => 'name'])
                         </div>
                         <div class="form-group">
                             {{ Form::label('description', trans('forms.labels.description'), ['class' => 'control-label']) }}
@@ -22,6 +23,7 @@
                         </div>
                         <div class="form-group">
                             {{ Form::file('pictures[]', ['multiple' => 'true']) }}
+                            @include('layout.partials._error_message', ['field' => 'pictures'])
                         </div>
                     </div>
                     <div class="panel-footer text-right">

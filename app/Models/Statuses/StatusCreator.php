@@ -78,8 +78,9 @@ class StatusCreator
         $values['body'] = '<a href="/companies/' . $company->slug() . '" class="text-mint">' . $company->name() . '</a>';
         $values['body'] .= '<br><br>';
         $values['body'] .= $company->about();
+        $link = route('companies.show', $company->slug());
 
-        $status = $this->statuses->createForFollowingCompany($horse, $values);
+        $status = $this->statuses->createForFollowingCompany($horse, $values, $link);
 
         return $status;
     }

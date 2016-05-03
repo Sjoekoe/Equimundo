@@ -2,11 +2,11 @@
 namespace EQM\Http\Controllers\Albums;
 
 use EQM\Http\Controllers\Controller;
-use EQM\Http\Requests\Request;
 use EQM\Models\Albums\Album;
 use EQM\Models\Pictures\Picture;
 use EQM\Models\Pictures\PictureCreator;
 use EQM\Models\Pictures\PictureRepository;
+use EQM\Models\Pictures\Requests\AlbumPicturesRequest;
 use Illuminate\Filesystem\Filesystem;
 use Storage;
 
@@ -30,7 +30,7 @@ class PictureController extends Controller
     }
 
     // todo add validation
-    public function store(Request $request, PictureCreator $creator, Album $album)
+    public function store(AlbumPicturesRequest $request, PictureCreator $creator, Album $album)
     {
         $this->authorize('upload-picture', $album->horse());
 
