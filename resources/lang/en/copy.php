@@ -101,6 +101,7 @@ return [
         'notifications' => 'Notifications',
         'palmares' => 'Palmares',
         'pedigree' => 'Pedigree',
+        'place_comment' => 'Place comment',
         'pictures' => 'Pictures',
         'settings' => 'Settings',
         'show_all_notifications' => 'Show All Notifications',

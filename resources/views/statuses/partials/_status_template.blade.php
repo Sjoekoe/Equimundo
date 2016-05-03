@@ -1,4 +1,9 @@
-<div class="panel" v-for="status in statuses">
+<div class="panel" v-if="! loading && ! statuses.length && ! hideNoStatusesText">
+    <div class="panel-body">
+        <p class="text-center">{{ trans('copy.p.no_statuses') }}</p>
+    </div>
+</div>
+<div class="panel" v-else v-for="status in statuses">
     <div class="panel-body">
         <div class="media-block">
             <template v-if="status.is_horse_status">
@@ -102,7 +107,7 @@
                                     <button class="btn btn-info" disabled><i class="fa fa-spinner fa-spin"></i></button>
                                 </template>
                                 <template v-else>
-                                    <button class="btn btn-info">Comment</button>
+                                    <button class="btn btn-info">{{ trans('copy.a.place_comment') }}</button>
                                 </template>
                             </div>
                         </form>
