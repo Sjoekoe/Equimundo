@@ -34,6 +34,7 @@ class CommentsTest extends \TestCase
                         'can_delete_comment' => false,
                         'created_at' => $comment->createdAt()->toIso8601String(),
                         'user' => $this->includedUser($user),
+                        'liked_by_user' => false,
                         'likes' => [
                             'data' => [],
                         ],
@@ -73,6 +74,7 @@ class CommentsTest extends \TestCase
                     'created_at' => $now->toIso8601String(),
                     'can_delete_comment' => true,
                     'user' => $this->includedUser($user),
+                    'liked_by_user' => false,
                     'likes' => [
                         'data' => [],
                     ],
@@ -102,6 +104,7 @@ class CommentsTest extends \TestCase
                     'created_at' => $comment->createdAt()->toIso8601String(),
                     'can_delete_comment' => false,
                     'user' => $this->includedUser($user),
+                    'liked_by_user' => false,
                     'likes' => [
                         'data' => [],
                     ],
@@ -136,6 +139,7 @@ class CommentsTest extends \TestCase
                     'created_at' => $comment->createdAt()->toIso8601String(),
                     'can_delete_comment' => false,
                     'user' => $this->includedUser($user),
+                    'liked_by_user' => false,
                     'likes' => [
                         'data' => [
                             [
@@ -180,6 +184,7 @@ class CommentsTest extends \TestCase
                     'created_at' => $comment->createdAt()->toIso8601String(),
                     'can_delete_comment' => false,
                     'user' => $this->includedUser($user),
+                    'liked_by_user' => false,
                     'likes' => [
                         'data' => [],
                     ],
