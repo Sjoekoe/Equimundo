@@ -276,6 +276,21 @@ module.exports = Vue.extend({
                     vm.commenting = false;
                 }
             })
-        }
+        },
+
+        likeComment: function(comment) {
+            if (comment.liked_by_user) {
+                comment.like_count--;
+                comment.liked_by_user = false;
+            } else {
+                comment.like_count++;
+                comment.liked_by_user = true;
+            }
+
+            $.ajax({
+                url: '/api/comments/' + comment.id + '/like',
+                type: 'post',
+            });
+        },
     }
 });

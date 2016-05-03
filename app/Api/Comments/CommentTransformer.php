@@ -20,6 +20,8 @@ class CommentTransformer extends TransformerAbstract
             'like_count' => count($comment->likes()->get()),
             'created_at' => $comment->createdAt()->toIso8601String(),
             'can_delete_comment' => auth()->check() ? auth()->user()->can('delete-comment', $comment) : false,
+            'liked_by_user' => auth()->check() ? $comment->isLikedByUser(auth()->user()) : false,
+            'likes_count' => count($comment->likes()),
         ];
     }
 

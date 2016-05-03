@@ -89,6 +89,15 @@
                             </p>
                         </div>
                         <p v-html="comment.body"></p>
+                        @if (auth()->check())
+                            <div class="pad-ver">
+                                <span class="tag tag-sm">
+                                    <i class="fa fa-heart text-danger"></i> @{{ comment.like_count }}
+                                </span>
+                                <button class="btn btn-sm btn-default btn-hover-success active" v-if="comment.liked_by_user" type="submit" @click="likeComment(comment)"><i class="fa fa-thumbs-up"></i> {{ trans('copy.a.you_like_it') }}</button>
+                                <button class="btn btn-sm btn-default btn-hover-success" v-else type="submit" @click="likeComment(comment)"><i class="fa fa-thumbs-up"></i></button>
+                            </div>
+                        @endif
                     </div>
                     <hr>
                 </div>

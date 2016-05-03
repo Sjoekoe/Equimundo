@@ -70,7 +70,7 @@ class EloquentComment extends Model implements Comment
      */
     public function isLikedByUser(User $user)
     {
-        foreach ($this->likes() as $liker) {
+        foreach ($this->likes()->get() as $liker) {
             if ($liker->id() == $user->id()) {
                 return true;
             }
