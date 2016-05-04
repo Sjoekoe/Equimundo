@@ -8,6 +8,8 @@ interface Pedigree
     const MOTHER = 2;
     const SON = 3;
     const DAUGHTER = 4;
+    const FATHERSMOTHER = 6;
+    const MOTHERSMOTHER = 8;
 
     /**
      * @return \EQM\Models\Horses\Horse
