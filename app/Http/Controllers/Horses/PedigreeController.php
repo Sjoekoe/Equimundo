@@ -208,7 +208,11 @@ class PedigreeController extends Controller
      */
     private function generateGenderByType(array $values)
     {
-        if ($values['type'] == Pedigree::MOTHER || $values['type'] == Pedigree::DAUGHTER) {
+        if ($values['type'] == Pedigree::MOTHER ||
+            $values['type'] == Pedigree::DAUGHTER ||
+            $values['type'] == Pedigree::FATHERSMOTHER ||
+            $values['type'] == Pedigree::MOTHERSMOTHER
+        ) {
             $values['gender'] = Horse::MARE;
         } else {
             $values['gender'] = Horse::STALLION;
