@@ -22,13 +22,15 @@
 </head>
 <body>
 
-<div id="container" class="effect mainnav-lg">
-    @include('layout.partials.nav')
-    <div class="boxed">
-        <div id="content-container">
-            @yield('content')
+<div id="wrapper">
+    <div id="page-wrapper" class="gray-bg">
+        @include('layout.partials.nav')
+        <div class="boxed">
+            <div id="content-container">
+                @yield('content')
+            </div>
+            @include('layout.partials._admin_nav')
         </div>
-        @include('layout.partials._admin_nav')
     </div>
 </div>
 

@@ -59,19 +59,17 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
     </script>
-    <div id="container" class="effect mainnav-out">
-        @include('layout.partials.nav')
+    <div id="wrapper">
         @if (auth()->check())
-            <div class="boxed">
-                <div id="content-container">
-                    @include('layout.partials._search_bar')
-                    @include('layout.partials._flash_messages')
-                    @yield('content')
-                </div>
-            </div>
-        @else
-            @yield('content')
+            @include('layout.partials._left_navigation')
         @endif
+        <div id="page-wrapper" class="gray-bg">
+            @include('layout.partials.nav')
+            <div class="wrapper wrapper-content animated fadeInRight">
+                @yield('content')
+            </div>
+        </div>
+
     </div>
 
     <!-- Scripts -->
