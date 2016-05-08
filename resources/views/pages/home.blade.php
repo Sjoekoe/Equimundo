@@ -86,41 +86,7 @@
                         <div class="row">
                             @foreach ($popularHorses as $popularHorse)
                                 <div class="col-sm-4">
-                                    <a href="{{ route('horses.show', $popularHorse->slug()) }}">
-                                        <div class="panel widget panel-bordered-mint">
-                                            <div class="widget-header" style="background-image: url({{ $popularHorse->getHeaderImage() ? route('file.picture', $popularHorse->getHeaderImage()->id()) : asset('images/header.jpg') }})">
-                                            </div>
-                                            <div class="widget-body text-center">
-                                                @if ($popularHorse->getProfilePicture())
-                                                    <img alt="Profile Picture" class="widget-img img-circle img-border-light" src="{{ route('file.picture', $popularHorse->getProfilePicture()->id()) }}">
-                                                @else
-                                                    <img alt="Profile Picture" class="widget-img img-circle img-border-light" src="{{ asset('images/eqm.png') }}">
-                                                @endif
-                                                <h4 class="mar-no">{{ $popularHorse->name() }}</h4>
-                                                <p class="text-muted mar-btm">{{ trans('horses.breeds.' . $popularHorse->breed()) }}</p>
-
-                                                <ul class="list-unstyled text-center pad-top mar-no clearfix">
-                                                    <li class="col-sm-4">
-                                                        <span class="text-lg">{{ count($popularHorse->statuses()) }}</span>
-                                                        <p class="text-muted text-uppercase">
-                                                            <small>{{ trans('copy.a.statuses') }}</small>
-                                                        </p>
-                                                    </li>
-                                                    <li class="col-sm-4">
-                                                        <a href="{{ route('horses.show', $popularHorse->slug()) }}" class="btn btn-mint">
-                                                            <i class="fa fa-eye"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="col-sm-4">
-                                                        <span class="text-lg">{{ count($popularHorse->followers()) }}</span>
-                                                        <p class="text-muted text-uppercase">
-                                                            <small>{{ trans('copy.a.followers') }}</small>
-                                                        </p>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </a>
+                                    @include('horses._partials._horse_info', ['horse' => $popularHorse])
                                 </div>
                             @endforeach
                         </div>
@@ -128,41 +94,7 @@
                         <div class="row">
                             @foreach ($activeHorses as $activeHorse)
                                 <div class="col-sm-4">
-                                    <a href="{{ route('horses.show', $activeHorse->slug()) }}">
-                                        <div class="panel widget panel-bordered-mint">
-                                            <div class="widget-header" style="background-image: url({{ $activeHorse->getHeaderImage() ? route('file.picture', $activeHorse->getHeaderImage()->id()) : asset('images/header.jpg') }})">
-                                            </div>
-                                            <div class="widget-body text-center">
-                                                @if ($activeHorse->getProfilePicture())
-                                                    <img alt="Profile Picture" class="widget-img img-circle img-border-light" src="{{ route('file.picture', $activeHorse->getProfilePicture()->id()) }}">
-                                                @else
-                                                    <img alt="Profile Picture" class="widget-img img-circle img-border-light" src="{{ asset('images/eqm.png') }}">
-                                                @endif
-                                                <h4 class="mar-no">{{ $activeHorse->name() }}</h4>
-                                                <p class="text-muted mar-btm">{{ trans('horses.breeds.' . $activeHorse->breed()) }}</p>
-
-                                                <ul class="list-unstyled text-center pad-top mar-no clearfix">
-                                                    <li class="col-sm-4">
-                                                        <span class="text-lg">{{ count($activeHorse->statuses()) }}</span>
-                                                        <p class="text-muted text-uppercase">
-                                                            <small>{{ trans('copy.a.statuses') }}</small>
-                                                        </p>
-                                                    </li>
-                                                    <li class="col-sm-4">
-                                                        <a href="{{ route('horses.show', $activeHorse->slug()) }}" class="btn btn-mint">
-                                                            <i class="fa fa-eye"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="col-sm-4">
-                                                        <span class="text-lg">{{ count($activeHorse->followers()) }}</span>
-                                                        <p class="text-muted text-uppercase">
-                                                            <small>{{ trans('copy.a.followers') }}</small>
-                                                        </p>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </a>
+                                    @include('horses._partials._horse_info', ['horse' => $activeHorse])
                                 </div>
                             @endforeach
                         </div>
