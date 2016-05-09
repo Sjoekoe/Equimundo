@@ -36,6 +36,7 @@ return [
         'about_us' => 'Over Ons',
         'address' => 'Adres',
         'companies_groups' => 'Bedrijven / Groepen',
+        'get_the_most_of_equimundo' => 'Hoe krijg je de beste ervaring op Equimundo?',
     ],
     'p' => [
         'born' => 'Geboren',
@@ -63,6 +64,8 @@ return [
         'welcome_message' => 'Welkom bij het social media platform waar je het leven van je paard kan delen',
         'no_companies_groups_found' => 'Geen bedrijven / groepen gevonden',
         'company_warning' => 'Op dit moment is het enkel mogelijk om een stal / manege aan te maken. Later breiden we uit met meer mogelijkheden.',
+        'recommend_filling_in_the_password' => 'We raden je aan de informatie in te vullen zoals in het paspoort van het paard.',
+        'entering_th_life_number' => 'Door het invullen van het levensnummer wordt je automatisch op de hoogte gebracht wanneer een paard van dezelfde stamboom zich registreerd.',
     ],
     'a' => [
         'add_achievement' => 'Voeg prestatie toe',
