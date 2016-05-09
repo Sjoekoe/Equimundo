@@ -1,15 +1,10 @@
-@extends('layout.admin')
+@extends('layout.admin', ['pageTitle' => true, 'title' => 'Show advertisement'])
 
 @section('content')
     <showadvertisement></showadvertisement>
 
     <template id="show-advertisement">
-        <div id="page-title">
-            <h1 class="page-header text-overflow">
-                Advertisement #@{{ advertisement.id }} (@{{ advertisement.start | timeFormat }} - @{{ advertisement.end | timeFormat }})
-            </h1>
-        </div>
-        <div id="page-content">
+        <div class="row">
             <div class="col-md-6">
                 <div class="panel">
                     <div class="panel-heading">
@@ -69,7 +64,7 @@
                             <p class="text-muted" v-if="advertisement.views > 0">Average cost per image: € @{{ advertisement.amount / advertisement.views }}</p>
                             <p class="text-muted" v-if="advertisement.clicks > 0">Average cost per click: € @{{ advertisement.amount / advertisement.clicks }}</p>
                         </div>
-                        <div class="col-md-12" style="height: 220px">
+                        <div class="col-md-12" >
                             <div id="morris-donut" class="morris-donut"></div>
                         </div>
                     </div>

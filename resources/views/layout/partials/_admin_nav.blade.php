@@ -53,7 +53,7 @@
                     </span>
                 </a>
             </li>
-            <li class="{{ Active::route('admin.advertisements*', 'active') }}">
+            <li class="{{ Active::route('admin.advertisements.*', 'active') }}">
                 <a href="#">
                     <i class="fa fa-money"></i>
                     <span class="menu-title">

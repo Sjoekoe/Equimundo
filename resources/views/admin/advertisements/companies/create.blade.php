@@ -1,10 +1,7 @@
-@extends('layout.admin')
+@extends('layout.admin', ['pageTitle' => true , 'title' => 'Create company'])
 
 @section('content')
-    <div id="page-title">
-        <h1 class="page-header text-overflow">Create company</h1>
-    </div>
-    <div id="page-content">
+    <div class="row">
         <createadvertisingcompany></createadvertisingcompany>
         <template id="create-advertising-company">
             <div class="col-md-6">

@@ -1,10 +1,7 @@
-@extends('layout.admin')
+@extends('layout.admin', ['pageTitle' => true, 'title' => 'Advertisements'])
 
 @section('content')
-    <div id="page-title">
-        <h1 class="page-header text-overflow">Advertisements</h1>
-    </div>
-    <div id="page-content">
+    <div class="row">
         <div class="row">
             <div class="col-lg-12">
                 <advertisementstable></advertisementstable>
@@ -12,8 +9,8 @@
                 <template id="advertisements-table">
                     <div class="panel">
                         <div class="panel-body">
-                            <div class="pad-btm form-inline">
-                                <a href="{{ route('admin.advertisements.create') }}" class="btn btn-mint btn-labeled fa fa-plus">
+                            <div class="pad-btm form-inline text-right">
+                                <a href="{{ route('admin.advertisements.create') }}" class="btn btn-info btn-labeled fa fa-plus">
                                     Add
                                 </a>
                             </div>

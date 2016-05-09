@@ -1,12 +1,9 @@
-@extends('layout.admin')
+@extends('layout.admin', ['pageTitle' => true, 'title' => 'Create Advertisement'])
 
 @section('content')
-    <div id="page-title">
-        <h1 class="page-header text-overflow">Create Advertisement</h1>
-    </div>
-    <div id="page-content">
+    <div class="row">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-12">
                 <createadvertisement></createadvertisement>
 
                 <template id="create-advertisement">
