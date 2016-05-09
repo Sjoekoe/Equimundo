@@ -1,11 +1,11 @@
-@extends('layout.app')
+@extends('layout.app', ['title' => trans('copy.titles.settings'), 'pageTitle' => true])
 
 @section('content')
-    <div id="page-content">
-        <div class="col-md-2 col-md-offset-2">
+    <div class="row">
+        <div class="col-md-4">
             @include('users.partials._settings_navigation')
         </div>
-        <div class="col-md-4">
+        <div class="col-md-8">
             <div class="panel">
                 <div class="panel-heading">
                     <h3 class="panel-title">
@@ -27,7 +27,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            {{ Form::label('timezone', trans('forms.labels.language'), ['class' => 'col-sm-3 control-label']) }}
+                            {{ Form::label('timezone', trans('forms.labels.timezone'), ['class' => 'col-sm-3 control-label']) }}
                             <div class="col-sm-9">
                                 {{ Form::select('timezone', trans('timezones'), auth()->user()->timezone(), ['class' => 'form-control selectPicker']) }}
                             </div>

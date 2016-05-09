@@ -1,5 +1,5 @@
-<div class="panel">
-    <div class="banel-body">
+<div class="ibox float-e-margins">
+    <div class="ibox-content no-padding">
         <div class="list-group">
             <a href="{{ route('settings.index') }}" class="list-group-item {{ Active::route('settings.index') }}">
                 <h5>

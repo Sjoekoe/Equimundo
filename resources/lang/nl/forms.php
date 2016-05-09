@@ -41,6 +41,7 @@ return [
         'state' => 'Provincie',
         'telephone' => 'Telefoon',
         'zip' => 'Postcode',
+        'timezone' => 'Tijdzone',
     ],
     'buttons' => [
         'invite' => 'Uitnodigen',
