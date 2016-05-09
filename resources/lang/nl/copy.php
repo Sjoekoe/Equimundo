@@ -37,6 +37,7 @@ return [
         'address' => 'Adres',
         'companies_groups' => 'Bedrijven / Groepen',
         'get_the_most_of_equimundo' => 'Hoe krijg je de beste ervaring op Equimundo?',
+        'notifications' => 'Notificaties',
     ],
     'p' => [
         'born' => 'Geboren',
@@ -116,6 +117,7 @@ return [
         'place_comment' => 'Plaats reactie',
         'back_to' => 'Terug naar',
         'add_horse' => 'Paard toevoegen',
+        'show_more' => 'Meer tonen',
     ],
     'span' => [
         'file' => 'Bestand',

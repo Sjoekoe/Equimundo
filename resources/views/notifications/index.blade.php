@@ -1,30 +1,36 @@
-@extends('layout.app')
+@extends('layout.app', ['title' => trans('copy.titles.notifications'), 'pageTitle' => true])
 
 @section('content')
-    @include('advertisements.leaderboard');
+    @include('advertisements.leaderboard')
 
-    <div id="page-content">
-        <div class="col-md-4 col-md-offset-4">
+    <div class="row">
+        <div class="col-md-12">
             <notifications></notifications>
 
             <template id="notifications-template">
-                <div class="panel">
-                    <div class="panel-heading">
-                        <div class="panel-control">
-                            <div class="btn-group">
-                                <button class="btn btn-info pull-right" @click="markAllAsRead">
-                                    {{ trans('copy.a.mark_as_read') }}
-                                </button>
-                            </div>
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <div class="ibox-tools">
+                            <button class="btn btn-info btn-xs" disabled v-if="marking">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </button>
+                            <button class="btn btn-info btn-xs" v-else @click="markAllAsRead">
+                                {{ trans('copy.a.mark_as_read') }}
+                            </button>
+                            <button class="btn btn-info btn-xs" disabled v-if="fetching">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </button>
+                            <button class="btn btn-info btn-xs" v-else @click="fetchMore">
+                                {{ trans('copy.a.show_more') }}
+                            </button>
                         </div>
-                        <h3 class="panel-title">
-                            Notifications
-                        </h3>
                     </div>
-                    <div class="panel-body">
-                        <ul class="list-group list-group-striped">
-                            <li class="list-group-item list-item-lg " v-for="notification in notifications" v-bind:class="{ 'text-bold': ! notification.is_read }">
-                                <a href="@{{ notification.url }}">
+                    <div class="ibox-content no-padding">
+                        <ul class="list-group">
+                            <li class="list-group-item " v-for="notification in notifications" >
+                                <i class="fa fa-eye text-danger" v-if="! notification.is_read"></i>
+                                <i class="fa fa-check text-info" v-else></i>
+                                <a href="@{{ notification.url }}" v-bind:class="{ 'text-danger': ! notification.is_read }">
                                     @{{ notification.message }}
                                 </a>
                                 <i class="fa fa-trash fa-lg text-mint pull-right" @click="deleteNotification(notification)"></i>
