@@ -1,6 +1,6 @@
 <template id="notedrop">
     <li class="dropdown">
-        <a href="#" data-toggle="dropdown" class="dropdown-toggle counnt-info" @click="resetNotificationCount()">
+        <a href="#" data-toggle="dropdown" class="dropdown-toggle count-info" @click="resetNotificationCount()">
             <i class="fa fa-bell"></i>
             <span class="label label-primary" v-if="unread_notifications">@{{ unread_notifications }}</span>
         </a>

@@ -28,7 +28,7 @@ module.exports = Vue.extend({
             source: this.horseIndex.ttAdapter(),
             displayKey: 'name',
             templates: {
-                header: '<h3 class="panel-title">Horses</h3>',
+                header: '<h3 style="padding-left: 1em;">Horses</h3> </hr>',
                 suggestion: function(hit) {
                     return '<p>' + hit.name + '</p>';
                 }
@@ -38,7 +38,7 @@ module.exports = Vue.extend({
             source: this.userIndex.ttAdapter(),
             display: 'first_name',
             templates: {
-                header: '<h3 class="panel-title">Users</h3>',
+                header: '<h3 style="padding-left: 1em;">Users</h3> </hr>',
                 suggestion: function (hit) {
                     return '<p>' + hit.first_name + ' ' + hit.last_name + '</p>';
                 }
@@ -48,7 +48,7 @@ module.exports = Vue.extend({
             source : this.companyIndex.ttAdapter(),
             displayKey: 'name',
             templates: {
-                header: '<h3 class="panel-title">Companies / Groups</h3>',
+                header: '<h3 style="padding-left: 1em;">Companies / Groups</h3> </hr>',
                 suggestion: function(hit) {
                     return '<p>' + hit . name + '</p>';
                 }

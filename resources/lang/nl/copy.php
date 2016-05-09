@@ -38,6 +38,7 @@ return [
         'companies_groups' => 'Bedrijven / Groepen',
         'get_the_most_of_equimundo' => 'Hoe krijg je de beste ervaring op Equimundo?',
         'notifications' => 'Notificaties',
+        'search_results' => ':count resultaten gevonden voor <i class=\"text-info\">:searchWord</i>',
     ],
     'p' => [
         'born' => 'Geboren',
@@ -67,6 +68,7 @@ return [
         'company_warning' => 'Op dit moment is het enkel mogelijk om een stal / manege aan te maken. Later breiden we uit met meer mogelijkheden.',
         'recommend_filling_in_the_password' => 'We raden je aan de informatie in te vullen zoals in het paspoort van het paard.',
         'entering_th_life_number' => 'Door het invullen van het levensnummer wordt je automatisch op de hoogte gebracht wanneer een paard van dezelfde stamboom zich registreerd.',
+        'no_followers' => 'Nog geen volgers',
     ],
     'a' => [
         'add_achievement' => 'Voeg prestatie toe',
