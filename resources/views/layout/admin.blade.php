@@ -23,13 +23,16 @@
 <body>
 
 <div id="wrapper">
+    @include('layout.partials._admin_nav')
     <div id="page-wrapper" class="gray-bg">
         @include('layout.partials.nav')
-        <div class="boxed">
-            <div id="content-container">
-                @yield('content')
-            </div>
-            @include('layout.partials._admin_nav')
+
+        @if (isset($pageTitle))
+            @include('layout.partials._page_title')
+        @endif
+
+        <div class="wrapper wrapper-content animated fadeInRight">
+            @yield('content')
         </div>
     </div>
 </div>

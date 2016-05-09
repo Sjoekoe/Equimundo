@@ -1,187 +1,192 @@
-@extends('layout.admin')
+@extends('layout.admin', ['pageTitle' => true, 'title' => 'Dashboard'])
 
 @section('content')
-    <div id="page-title">
-        <h1 class="page-header text-overflow">Dashboard</h1>
-    </div>
-    <div id="page-content">
+    <div class="row">
         <admindash></admindash>
 
         <template id="admindash">
             <div class="row">
                 <div class="col-sm-6 col-lg-3">
                     <a href="{{ route('admin.users') }}">
-                        <div class="panel media pad-all">
-                            <div class="media-left">
-                            <span class="icon-wrap icon-wrap-sm icon-circle bg-success">
-                                <i class="fa fa-user fa-2x"></i>
-                            </span>
-                            </div>
-                            <div class="media-body">
-                                <p class="text-2x mar-no text-thin">@{{ users }}</p>
-                                <p class="text-muted mar-no">Registered users</p>
+                        <div class="widget style1 lazur-bg">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <i class="fa fa-user fa-5x"></i>
+                                </div>
+                                <div class="col-xs-8 text-right">
+                                    <span> Registered users </span>
+                                    <h2 class="font-bold">@{{ users }}</h2>
+                                </div>
                             </div>
                         </div>
                     </a>
                 </div>
                 <div class="col-sm-6 col-lg-3">
-                    <div class="panel media pad-all">
-                        <div class="media-left">
-                        <span class="icon-wrap icon-wrap-sm icon-circle bg-warning">
-                            <i class="fa fa-comment fa-2x"></i>
-                        </span>
-                        </div>
-                        <div class="media-body">
-                            <p class="text-2x mar-no text-thin">{{ $statuses }}</p>
-                            <p class="text-muted mar-no">Statuses</p>
+                    <div class="widget style1 navy-bg">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <i class="fa fa-comment fa-5x"></i>
+                            </div>
+                            <div class="col-xs-8 text-right">
+                                <span> Statuses </span>
+                                <h2 class="font-bold">{{ $statuses }}</h2>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-3">
-                    <div class="panel media pad-all">
-                        <div class="media-left">
-                        <span class="icon-wrap icon-wrap-sm icon-circle bg-pink">
-                            <i class="fa fa-share-alt fa-2x"></i>
-                        </span>
-                        </div>
-                        <div class="media-body">
-                            <p class="text-2x mar-no text-thin">{{ $pedigrees }}</p>
-                            <p class="text-muted mar-no">Pedigree connections</p>
+                    <div class="widget style1 yellow-bg">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <i class="fa fa-share-alt fa-5x"></i>
+                            </div>
+                            <div class="col-xs-8 text-right">
+                                <span> Pedigree connections </span>
+                                <h2 class="font-bold">{{ $pedigrees }}</h2>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-3">
                     <a href="{{ route('admin.horses.index') }}">
-                        <div class="panel media pad-all">
-                            <div class="media-left">
-                            <span class="icon-wrap icon-wrap-sm icon-circle bg-info">
-                                <i class="fa fa-photo fa-2x"></i>
-                            </span>
-                            </div>
-                            <div class="media-body">
-                                <p class="text-2x mar-no text-thin">{{ $horses }}</p>
-                                <p class="text-muted mar-no">Horses</p>
+                        <div class="widget style1 blue-bg">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <i class="fa fa-photo fa-5x"></i>
+                                </div>
+                                <div class="col-xs-8 text-right">
+                                    <span> Horses </span>
+                                    <h2 class="font-bold">{{ $horses }}</h2>
+                                </div>
                             </div>
                         </div>
                     </a>
                 </div>
                 <div class="col-sm-6 col-lg-3">
                     <a href="{{ route('admin.searches.index') }}">
-                        <div class="panel media pad-all">
-                            <div class="media-left">
-                                <span class="icon-wrap icon-wrap-sm icon-circle bg-danger">
-                                    <i class="fa fa-search fa-2x"></i>
-                                </span>
-                            </div>
-                            <div class="media-body">
-                                <p class="text-2x mar-no text-thin">{{ $searchResults }}</p>
-                                <p class="text-muted mar-no">Searches performed</p>
+                        <div class="widget style1 red-bg">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <i class="fa fa-search fa-5x"></i>
+                                </div>
+                                <div class="col-xs-8 text-right">
+                                    <span> Searches performed </span>
+                                    <h2 class="font-bold">{{ $searchResults }}</h2>
+                                </div>
                             </div>
                         </div>
                     </a>
                 </div>
+
                 <div class="col-sm-6 col-lg-3">
-                    <div class="panel media pad-all">
-                        <div class="media-left">
-                        <span class="icon-wrap icon-wrap-sm icon-circle bg-purple">
-                            <i class="fa fa-microphone fa-2x"></i>
-                        </span>
-                        </div>
-                        <div class="media-body">
-                            <p class="text-2x mar-no text-thin">{{ $conversations }}</p>
-                            <p class="text-muted mar-no">Conversations</p>
+                    <div class="widget style1 black-bg">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <i class="fa fa-microphone fa-5x"></i>
+                            </div>
+                            <div class="col-xs-8 text-right">
+                                <span> Conversations </span>
+                                <h2 class="font-bold">{{ $conversations }}</h2>
+                            </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-sm-6 col-lg-3">
-                    <div class="panel media pad-all">
-                        <div class="media-left">
-                        <span class="icon-wrap icon-wrap-sm icon-circle bg-primary">
-                            <i class="fa fa-picture-o fa-2x"></i>
-                        </span>
-                        </div>
-                        <div class="media-body">
-                            <p class="text-2x mar-no text-thin">{{ $pictures }}</p>
-                            <p class="text-muted mar-no">Pictures uploaded</p>
+                    <div class="widget style1 blue-bg">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <i class="fa fa-picture-o fa-5x"></i>
+                            </div>
+                            <div class="col-xs-8 text-right">
+                                <span> Pictures uploaded </span>
+                                <h2 class="font-bold">{{ $pictures }}</h2>
+                            </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-sm-6 col-lg-3">
-                    <div class="panel media pad-all">
-                        <div class="media-left">
-                        <span class="icon-wrap icon-wrap-sm icon-circle bg-dark">
-                            <i class="fa fa-envelope-o fa-2x"></i>
-                        </span>
-                        </div>
-                        <div class="media-body">
-                            <p class="text-2x mar-no text-thin">@{{ invites }}</p>
-                            <p class="text-muted mar-no">Friends invited</p>
+                    <div class="widget style1 navy-bg">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <i class="fa fa-envelope-o fa-5x"></i>
+                            </div>
+                            <div class="col-xs-8 text-right">
+                                <span> Friends invited </span>
+                                <h2 class="font-bold">@{{ invites }}</h2>
+                            </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-sm-6 col-lg-3">
-                    <div class="panel media pad-all">
-                        <div class="media-left">
-                        <span class="icon-wrap icon-wrap-sm icon-circle bg-mint">
-                            <i class="fa fa-commenting-o fa-2x"></i>
-                        </span>
-                        </div>
-                        <div class="media-body">
-                            <p class="text-2x mar-no text-thin">@{{ comments }}</p>
-                            <p class="text-muted mar-no">Comments placed</p>
+                    <div class="widget style1 lazur-bg">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <i class="fa fa-commenting-o fa-5x"></i>
+                            </div>
+                            <div class="col-xs-8 text-right">
+                                <span> Comments placed </span>
+                                <h2 class="font-bold">@{{ comments }}</h2>
+                            </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-sm-6 col-lg-3">
-                    <div class="panel media pad-all">
-                        <div class="media-left">
-                        <span class="icon-wrap icon-wrap-sm icon-circle bg-success">
-                            <i class="fa fa-thumbs-o-up fa-2x"></i>
-                        </span>
-                        </div>
-                        <div class="media-body">
-                            <p class="text-2x mar-no text-thin">@{{ likes }}</p>
-                            <p class="text-muted mar-no">Likes given</p>
+                    <div class="widget style1 yellow-bg">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <i class="fa fa-thumbs-o-up fa-5x"></i>
+                            </div>
+                            <div class="col-xs-8 text-right">
+                                <span> Likes given </span>
+                                <h2 class="font-bold">@{{ likes }}</h2>
+                            </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-sm-6 col-lg-3">
-                    <div class="panel media pad-all">
-                        <div class="media-left">
-                        <span class="icon-wrap icon-wrap-sm icon-circle bg-danger">
-                            <i class="fa fa-thumbs-o-down fa-2x"></i>
-                        </span>
-                        </div>
-                        <div class="media-body">
-                            <p class="text-2x mar-no text-thin">{{ $unactivatedUsers }}</p>
-                            <p class="text-muted mar-no">Unactivated users</p>
+                    <div class="widget style1 red-bg">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <i class="fa fa-thumbs-o-down fa-5x"></i>
+                            </div>
+                            <div class="col-xs-8 text-right">
+                                <span> Unactivated users </span>
+                                <h2 class="font-bold">{{ $unactivatedUsers }}</h2>
+                            </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-sm-6 col-lg-3">
-                    <div class="panel media pad-all">
-                        <div class="media-left">
-                        <span class="icon-wrap icon-wrap-sm icon-circle bg-success">
-                            <i class="fa fa-money fa-2x"></i>
-                        </span>
-                        </div>
-                        <div class="media-body">
-                            <p class="text-2x mar-no text-thin">{{ $advertisements }}</p>
-                            <p class="text-muted mar-no">Advertisements</p>
+                    <div class="widget style1 white-bg">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <i class="fa fa-money fa-5x"></i>
+                            </div>
+                            <div class="col-xs-8 text-right">
+                                <span> Advertisements </span>
+                                <h2 class="font-bold">{{ $advertisements }}</h2>
+                            </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-sm-6 col-lg-3">
                     <a href="{{ route('admin.companies.index') }}">
-                        <div class="panel media pad-all">
-                            <div class="media-left">
-                        <span class="icon-wrap icon-wrap-sm icon-circle bg-pink">
-                            <i class="fa fa-industry fa-2x"></i>
-                        </span>
-                            </div>
-                            <div class="media-body">
-                                <p class="text-2x mar-no text-thin">{{ $companies }}</p>
-                                <p class="text-muted mar-no">Companies / Groups</p>
+                        <div class="widget style1 blue-bg">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <i class="fa fa-industry fa-5x"></i>
+                                </div>
+                                <div class="col-xs-8 text-right">
+                                    <span> Companies / Groups </span>
+                                    <h2 class="font-bold">{{ $companies }}</h2>
+                                </div>
                             </div>
                         </div>
                     </a>
