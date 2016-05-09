@@ -168,9 +168,17 @@ class EloquentHorse extends Model implements Horse
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function palmares()
+    public function palmaresRelation()
     {
         return $this->hasMany(EloquentPalmares::class, 'horse_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function palmares()
+    {
+        return $this->palmaresRelation()->get();
     }
 
     /**
