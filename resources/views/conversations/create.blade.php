@@ -1,12 +1,7 @@
-@extends('layout.app')
+@extends('layout.app', ['title' => trans('copy.titles.send_message', ['receiver' => $owner->fullName()]), 'pageTitle' => true])
 
 @section('content')
-    <div id="page-title">
-        <h1 class="page-header text-overflow">
-            Send Message
-        </h1>
-    </div>
-    <div id="page-content">
+    <div class="row">
         <div class="panel">
             {{ Form::open(['route' => 'conversation.store', 'class' => 'form-horizontal']) }}
                 <div class="panel-body">

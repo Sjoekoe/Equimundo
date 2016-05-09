@@ -35,6 +35,7 @@ return [
         'profile' => 'Profile',
         'results' => 'Results',
         'search_results' => ':count results found for "<i class="text-info">:searchWord</i>',
+        'send_message' => 'Send message to :receiver',
         'settings' => 'Settings',
         'sons' => 'Sons',
         'users' => 'Users',

@@ -24,6 +24,14 @@
                 </a>
             </li>
             <li>
+                <a href="{{ route('conversation.index') }}">
+                    <i class="fa fa-envelope"></i> <span class="nav-label">{{ trans('copy.titles.messages') }}</span>
+                    @if (auth()->user()->countUnreadMessages())
+                        <span class="label label-warning pull-right">{{ auth()->user()->countUnreadMessages() }}</span>
+                    @endif
+                </a>
+            </li>
+            <li>
                 <a href="#"><i class="fa fa-tags"></i> <span class="nav-label">{{ trans('copy.titles.horses') }}</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     @foreach (auth()->user()->horses() as $horse)

@@ -1,73 +1,37 @@
-@extends('layout.app')
+@extends('layout.app', ['title' => trans('copy.titles.messages'), 'pageTitle' => true])
 
 @section('content')
 
-@include('advertisements.leaderboard');
+@include('advertisements.leaderboard')
 
-<div id="page-title">
-    <h1 class="page-header text-overflow">{{ trans('copy.titles.messages') }}</h1>
-</div>
-<div id="page-content">
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <div class="row">
-                <div class="col-sm-7">
-
-                </div>
-                <hr class="hr-sm visible-xs">
-                <div class="col-sm-5 clearfix">
-                    <div class="pull-right">
-                        <!--Pager buttons-->
-                        <div class="btn-group btn-group">
-                            <button class="btn btn-mint" type="button">
-                                <span class="fa fa-chevron-left"></span>
-                            </button>
-                            <button class="btn btn-mint" type="button">
-                                <span class="fa fa-chevron-right"></span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <hr class="hr-sm">
-
-            <!--Mail list group-->
-            <ul class="mail-list">
-                @foreach (auth()->user()->conversations() as $conversation)
-                    @if (! $conversation->isDeletedForUser(auth()->user()))
-                        <li class="mail-list-read">
-                            <div class="mail-control">
-                                <label for="{{ $conversation->id() }}" class="form-checkbox form-normal form-primary">
-                                    <input type="checkbox">
-                                </label>
-                            </div>
-                            <div class="mail-from">
+<div id="row">
+    <div class="col-md-12">
+        <div class="mail-box-header">
+            <h2>Inbox</h2>
+        </div>
+        <div class="mail-box">
+            <table class="table table-hover table-mail">
+                <tbody>
+                    @foreach (auth()->user()->conversations() as $conversation)
+                        <tr>
+                            <td class="check-mail">
+                                {{ Form::checkbox('messages[]', $conversation->id(), false, ['id' => $conversation->id(), 'class' => 'i-checks']) }}
+                            </td>
+                            <td class="mail-ontact">
                                 <a href="{{ route('users.profiles.show', $conversation->contactPerson(auth()->user())->slug()) }}">
                                     {{ $conversation->contactPerson(auth()->user())->fullName() }}
                                 </a>
-                            </div>
-                            <div class="mail-time">{{ eqm_date($conversation->updated_at) }}</div>
-                            <div class="mail-subject">
+                            </td>
+                            <td class="mail-subject">
                                 <a href="{{ route('conversation.show', $conversation->id()) }}">{{ $conversation->subject() }}</a>
-                            </div>
-                        </li>
-                    @endif
-                @endforeach
-            </ul>
-        </div>
-
-        <!--Mail footer-->
-        <div class="panel-footer clearfix">
-            <div class="pull-right">
-                <div class="btn-group btn-group">
-                    <button type="button" class="btn btn-mint">
-                        <span class="fa fa-chevron-left"></span>
-                    </button>
-                    <button type="button" class="btn btn-mint">
-                        <span class="fa fa-chevron-right"></span>
-                    </button>
-                </div>
-            </div>
+                            </td>
+                            <td class="text-right mail-date">
+                                {{ eqm_date($conversation->created_at) }}
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
