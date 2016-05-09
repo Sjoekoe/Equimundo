@@ -65,6 +65,11 @@
         @endif
         <div id="page-wrapper" class="gray-bg">
             @include('layout.partials.nav')
+
+            @if (isset($pageTitle))
+                @include('layout.partials._page_title')
+            @endif
+
             <div class="wrapper wrapper-content animated fadeInRight">
                 @yield('content')
             </div>

@@ -15,7 +15,7 @@
             </li>
             <li>
                 <a href="{{ route('home') }}">
-                    <i class="fa fa-list"></i> <span class="nav-label">Timeline</span>
+                    <i class="fa fa-list"></i> <span class="nav-label">{{ trans('copy.a.timeline') }}</span>
                 </a>
             </li>
             <li>
