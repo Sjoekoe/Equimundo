@@ -24,11 +24,6 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('home') }}">
-                    <i class="fa fa-list"></i> <span class="nav-label">{{ trans('copy.a.timeline') }}</span>
-                </a>
-            </li>
-            <li>
                 <a href="#"><i class="fa fa-tags"></i> <span class="nav-label">{{ trans('copy.titles.horses') }}</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     @foreach (auth()->user()->horses() as $horse)

@@ -22,7 +22,7 @@
                                     {{ trans('copy.titles.edit') }}
                                 </a>
                             @endif
-                            <button class="btn btn-block btn-info" data-toggle="modal" href="#horseModal">Add Horse</button>
+                            <button class="btn btn-block btn-info" data-toggle="modal" href="#horseModal">{{ trans('copy.a.add_horse') }}</button>
                                 <div id="horseModal" class="modal fade" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -131,7 +131,7 @@
                                                 <input id="picture" type="file" v-model="upload" @change="onFileChange">
                                             </div>
                                             <div v-if="image" >
-                                                <img v-bind:src="image" alt="" class="img-lg img-border">
+                                                <img v-bind:src="image" alt="" class="profile-image">
                                                 <button class="btn btn-sm btn-danger" v-on:click="removeImage">X</button>
                                             </div>
                                         </div>

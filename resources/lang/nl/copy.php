@@ -111,6 +111,8 @@ return [
         'edit_singular' => 'Wijzig',
         'you_like_it' => 'Je vindt dit leuk',
         'place_comment' => 'Plaats reactie',
+        'back_to' => 'Terug naar',
+        'add_horse' => 'Paard toevoegen',
     ],
     'span' => [
         'file' => 'Bestand',
