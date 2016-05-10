@@ -56,8 +56,8 @@
                             <td class="col-md-8">
                                 <table>
                                     <tbody>
-                                    <tr class="col-md-12">
-                                        <td class="col-md-10">
+                                    <tr class="">
+                                        <td class="col-md-6">
                                             @if ($horse->father())
                                                 @include('horses.pedigree._partials._pedigree', ['family' => $horse->father()])
                                             @else
@@ -133,7 +133,7 @@
                                             </td>
                                             @endif
                                         </td>
-                                        <td class="col-md-8">
+                                        <td class="col-md-6">
                                             <table>
                                                 <tbody>
                                                     <tr>
