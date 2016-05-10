@@ -13,7 +13,7 @@
                 </div>
                 <div class="panel-body">
                     @if (count($horse->followers()))
-                        @foreach($horse->followers->chunk(3) as $profileChunk)
+                        @foreach($horse->followers()->chunk(3) as $profileChunk)
                             <div class="row">
                                 @foreach ($profileChunk as $profile)
                                     <div class="col-md-4">
