@@ -5,7 +5,6 @@ use EQM\Api\Comments\CommentTransformer;
 use EQM\Api\Companies\CompanyTransformer;
 use EQM\Api\Horses\HorseTransformer;
 use EQM\Api\Users\UserTransformer;
-use EQM\Models\Statuses\CompanyStatus;
 use EQM\Models\Statuses\HorseStatus;
 use EQM\Models\Statuses\Status;
 use League\Fractal\TransformerAbstract;

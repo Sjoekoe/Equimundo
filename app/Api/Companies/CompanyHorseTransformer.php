@@ -14,7 +14,7 @@ class CompanyHorseTransformer extends TransformerAbstract
         'horseRelation',
         'companyRelation'
     ];
-    
+
     /**
      * @param \EQM\Models\Companies\Horses\CompanyHorse $companyHorse
      * @return array
