@@ -1,8 +1,8 @@
 @extends('layout.outer-app')
 
 @section('content')
-    <div class="middle-box text-center loginscreen animated fadeInDown">
-        <div>
+    <div class="passwordBox text-center loginscreen animated fadeInDown">
+        <div class="ibox-content">
             <h3>Welcome to Equimundo</h3>
             <p>The worlds premier social network for horses. </p>
             {{ Form::open(['route' => 'login', 'class' => 'm-t']) }}

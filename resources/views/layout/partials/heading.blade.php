@@ -49,45 +49,47 @@
             </tbody>
         </table>
     </div>
-    <div class="col-md-3">
-        <div class="pull-right">
-            @if (auth()->user()->isInHorseTeam($horse))
-                <a href="{{ route('horses.edit', $horse->slug()) }}" class="btn btn-sm btn-info">{{ trans('copy.a.edit_horse', ['horse' => $horse->name()]) }}</a>
-            @else
-                @include('horses.partials.follow-form')
-            @endif
+    @if (auth()->check())
+        <div class="col-md-3">
+            <div class="pull-right">
+                @if (auth()->user()->isInHorseTeam($horse))
+                    <a href="{{ route('horses.edit', $horse->slug()) }}" class="btn btn-sm btn-info">{{ trans('copy.a.edit_horse', ['horse' => $horse->name()]) }}</a>
+                @else
+                    @include('horses.partials.follow-form')
+                @endif
+            </div>
         </div>
-    </div>
+    @endif
 </div>
 
 <div class="row m-b-md white-bg">
     <div class="col-lg-12 text-center">
-        <div class="col-xs-2 active-nav">
+        <div class="col-xs-2 {{ Active::route('horses.show', 'active-nav') }}">
             <a href="{{ route('horses.show', $horse->slug()) }}" class="text-muted">
                 <i class="fa fa-list fa-2x"></i>
             </a>
         </div>
-        <div class="col-xs-2">
+        <div class="col-xs-2 {{ Active::route('horse.info', 'active-nav') }}">
             <a href="{{ route('horse.info', $horse->slug()) }}" class="text-muted">
                 <i class="fa fa-info-circle fa-2x"></i>
             </a>
         </div>
-        <div class="col-xs-2">
+        <div class="col-xs-2 {{ Active::route('follows.index', 'active-nav') }}">
             <a href="{{ route('follows.index', $horse->slug()) }}" class="text-muted">
                 <i class="fa fa-users fa-2x"></i>
             </a>
         </div>
-        <div class="col-xs-2">
+        <div class="col-xs-2 {{ Active::route(['horses.pictures.index', 'album.show', 'album.create', 'album.edit'], 'active-nav') }}">
             <a href="{{ route('horses.pictures.index', $horse->slug()) }}" class="text-muted">
                 <i class="fa fa-camera fa-2x"></i>
             </a>
         </div>
-        <div class="col-xs-2">
+        <div class="col-xs-2 {{ Active::route(['pedigree.index', 'pedigree.create'], 'active-nav') }}">
             <a href="{{ route('pedigree.index', $horse->slug()) }}" class="text-muted">
                 <i class="fa fa-share-alt fa-2x"></i>
             </a>
         </div>
-        <div class="col-xs-2">
+        <div class="col-xs-2 {{ Active::route(['palmares.index', 'palmares.create', 'palmares.edit'], 'active-nav') }}">
             <a href="{{ route('palmares.index', $horse->slug()) }}" class="text-muted">
                 <i class="fa fa-trophy fa-2x"></i>
             </a>
