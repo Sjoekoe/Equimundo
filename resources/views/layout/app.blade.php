@@ -69,12 +69,21 @@
             @if (isset($pageTitle))
                 @include('layout.partials._page_title')
             @endif
-
+            @include('layout.partials._flash_messages')
             <div class="wrapper wrapper-content animated fadeInRight">
                 @yield('content')
             </div>
         </div>
             <div id="blueimp-gallery" class="blueimp-gallery">
+                <div class="slides"></div>
+                <h3 class="title"></h3>
+                <a class="prev">‹</a>
+                <a class="next">›</a>
+                <a class="close">×</a>
+                <a class="play-pause"></a>
+                <ol class="indicator"></ol>
+            </div>
+            <div id="blueimp-gallery-profile" class="blueimp-gallery">
                 <div class="slides"></div>
                 <h3 class="title"></h3>
                 <a class="prev">‹</a>

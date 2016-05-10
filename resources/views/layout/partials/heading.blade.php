@@ -14,7 +14,7 @@
     <div class="col-md-6">
         <div class="profile-image">
             @if ($horse->getProfilePicture())
-                <a href="{{ route('file.picture', $horse->getProfilePicture()->id()) }}" data-lightbox="profilePicture">
+                <a href="{{ route('file.picture', $horse->getProfilePicture()->id()) }}" data-gallery="#blueimp-gallery-profile">
                     <img src="{{ route('file.picture', $horse->getProfilePicture()->id()) }}" alt="{{ $horse->name() }}" class="img-circle circle-border m-b-md">
                 </a>
             @else

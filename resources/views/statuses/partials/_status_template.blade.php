@@ -44,8 +44,8 @@
         </div>
         <div class="social-body">
             <p v-html="status.body"></p>
-            <a v-if="status.picture" v-bind:href="status.picture">
-                <img v-bind:src="status.picture" class="img-responsive" style="width: 100%; height: auto;">
+            <a v-if="status.picture" v-bind:href="status.picture" data-gallery="#blueimp-gallery-@{{ status.id }}">
+                <img v-bind:src="status.picture" class="img-responsive" style="width: 100%; height: auto;" data-lightbox>
             </a>
             <div class="btn-group">
                 <button class="btn btn-white btn-xs">
@@ -128,3 +128,15 @@
         <p>Loading...</p>
     </div>
 </div>
+
+@section('footer')
+    <div id="blueimp-gallery-@{{ status.id }}" class="blueimp-gallery" v-if="status.picture">
+        <div class="slides"></div>
+        <h3 class="title"></h3>
+        <a class="prev">‹</a>
+        <a class="next">›</a>
+        <a class="close">×</a>
+        <a class="play-pause"></a>
+        <ol class="indicator"></ol>
+    </div>
+@stop
