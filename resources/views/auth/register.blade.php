@@ -1,110 +1,65 @@
 @extends('layout.outer-app')
 
 @section('content')
-
-<div id="container" class="cls-container">
-    <div id="bg-overlay" class="bg-img" style="background-image: url({{ asset('images/horses.jpg') }})"></div>
-
-    @include('layout.partials._outer_app_header')
-
-    <div class="cls-content">
-        <div class="cls-content-lg panel">
-            <div class="panel-body">
-                <p class="pad-btm">Create an account</p>
-                {{ Form::open(['class' => 'form-horizontal']) }}
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <div class="input-group {{ $errors->has('first_name') ? 'has-error' : '' }}">
-                                    <div class="input-group-addon"><i class="fa fa-male"></i></div>
-                                    {{ Form::text('first_name', null, ['class' => 'form-control', 'placeholder' => 'First name', 'tabindex' => 1]) }}
-                                </div>
-                                @include('layout.partials._error_message', ['field' => 'first_name'])
-                            </div>
-                            <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
-                                <div class="input-group">
-                                    <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
-                                    {{ Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'E-mail', 'tabindex' => 3]) }}
-                                </div>
-                                @include('layout.partials._error_message', ['field' => 'email'])
-                            </div>
-                            <div class="form-group" {{ $errors->has('country') ? 'has-error' : '' }}>
-                                <div class="input-group">
-                                    <div class="input-group-addon"><i class="fa fa-globe"></i></div>
-                                    {{ Form::select('country', trans('countries'), '', ['class' => 'form-control selectPicker', 'tabindex' => 5]) }}
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
-                                    {{ Form::select('interests[]', ['Owner', 'Enthousiast', 'Professional', 'Breeder', 'Athlete'], '', ['multiple' => true, 'class' => 'selectPicker form-control', 'title' => 'My business in horses...', 'tabindex' => 7]) }}
-                                </div>
-                            </div>
-                            <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
-                                <div class="input-group">
-                                    <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
-                                    {{ Form::password('password', ['class' => 'form-control', 'placeholder' => 'Password', 'tabindex' => 9]) }}
-                                </div>
-                                @include('layout.partials._error_message', ['field' => 'password'])
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group {{ $errors->has('last_name') ? 'has-error' : '' }}">
-                                <div class="input-group">
-                                    <div class="input-group-addon"><i class="fa fa-male"></i></div>
-                                    {{ Form::text('last_name', null, ['class' => 'form-control', 'placeholder' => 'Last name', 'tabindex' => 2]) }}
-                                </div>
-                                @include('layout.partials._error_message', ['field' => 'last_name'])
-                            </div>
-                            <div class="form-group {{ $errors->has('date_of_birth') ? 'has-error' : '' }}">
-                                <div class="input-group date">
-                                    <span class="input-group-addon"><i class="fa fa-calendar fa-lg"></i></span>
-                                    {{ Form::text('date_of_birth', null, ['placeholder' => 'dd/mm/yyyy', 'class' => 'form-control', 'tabindex' => 4]) }}
-                                </div>
-                                @include('layout.partials._error_message', ['field' => 'date_of_birth'])
-                            </div>
-                            <div class="form-group" style="height: 31px;">
-                                <div class="radio">
-                                    <label class="form-radio form-icon form-text active" tabindex="6">
-                                        <input type="radio" checked name="gender" value="F">
-                                        Female
-                                    </label>
-                                    <label class="form-radio form-icon form-text active">
-                                        <input type="radio" name="gender" value="M">
-                                        Male
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="form-group" style="height: 31px;"></div>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
-                                    {{ Form::password('password_confirmation', ['class' => 'form-control', 'placeholder' => 'Confirm Password', 'tabIndex' => 9]) }}
-                                </div>
-                            </div>
-                        </div>
+    <div class="passwordBox text-center loginscreen animated fadeInDown">
+        <div class="ibox-content">
+            <h3>Welcome to Equimundo</h3>
+            <p>The worlds premier social network for horses.</p>
+            {{ Form::open(['class' => 'm-t']) }}
+                <div class="form-group">
+                    {{ Form::text('first_name', null, ['class' => 'form-control', 'placeholder' => 'First name']) }}
+                    @include('layout.partials._error_message', ['field' => 'first_name'])
+                </div>
+                <div class="form-group">
+                    {{ Form::text('last_name', null, ['class' => 'form-control', 'placeholder' => 'Last name']) }}
+                    @include('layout.partials._error_message', ['field' => 'last_name'])
+                </div>
+                <div class="form-group">
+                    {{ Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'E-mail']) }}
+                    @include('layout.partials._error_message', ['field' => 'email'])
+                </div>
+                <div class="form-group">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        {{ Form::text('date_of_birth', null, ['placeholder' => 'date of birth - dd/mm/yyyy', 'class' => 'form-control']) }}
+                        @include('layout.partials._error_message', ['field' => 'date_of_birth'])
                     </div>
-                    <div class="row">
-                        <div class="col-xs-8 text-left checkbox">
-                            <label class="form-checkbox form-icon">
-                                <input type="checkbox" name="terms"> I agree with the <a href="{{ route('terms_of_service') }}" target="_blank" class="mint-anchor">Terms and Conditions</a>
-                            </label>
-                            @include('layout.partials._error_message', ['field' => 'terms'])
-                        </div>
-                        <div class="col-xs-4">
-                            <div class="form-group text-right">
-                                <button class="btn btn-mint text-uppercase" type="submit">Register</button>
-                            </div>
-                        </div>
+                </div>
+                <div class="form-group">
+                    {{ Form::select('country', trans('countries'), '', ['class' => 'form-control selectPicker', 'tabindex' => 5]) }}
+                </div>
+                <div class="form-group">
+                    <div class="radio radio-info radio-inline">
+                        <input type="radio" checked name="gender" value="F">
+                        <label> Female </label>
                     </div>
-                {{ Form::close() }}
-            </div>
-        </div>
-        <div class="pad-ver">
-            Already have an account ? <a href="{{ route('login') }}" class="btn-link mar-rgt">Sign In</a>
+                    <div class="radio radio-info radio-inline">
+                        <input type="radio" name="gender" value="M">
+                        <label> Male </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ Form::password('password', ['class' => 'form-control', 'placeholder' => 'Password']) }}
+                    @include('layout.partials._error_message', ['field' => 'password'])
+                </div>
+                <div class="form-group">
+                    {{ Form::password('password_confirmation', ['class' => 'form-control', 'placeholder' => 'Confirm Password']) }}
+                    @include('layout.partials._error_message', ['field' => 'password_confirmation'])
+                </div>
+                <div class="form-group">
+                    <div class="checkbox checkbox-info">
+                        <input type="checkbox" name="terms">
+                        <label> Agree the <a href="{{ route('terms_of_service') }}">terms and policy </a></label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary block full-width m-b">Register</button>
+
+                <p class="text-muted text-center"><small>Already have an account?</small></p>
+                <a class="btn btn-sm btn-white btn-block" href="{{ route('login') }}">Login</a>
+            {{ Form::close() }}
+            <p class="m-t"> <small>Inspinia we app framework base on Bootstrap 3 &copy; 2014</small> </p>
         </div>
     </div>
-</div>
 @endsection
 
 @section('footer')

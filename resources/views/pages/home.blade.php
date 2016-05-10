@@ -101,24 +101,15 @@
                         <h4 class="text-thin">{{ trans('copy.titles.latest_users') }}</h4>
                         <div class="row">
                             @foreach ($latestUsers as $latestUser)
-                                <div class="col-sm-4">
-                                    <div class="panel text-center {{ $latestUser->gender() == 'M' ? 'panel-bordered-primary' : 'panel-bordered-pink' }}">
-                                        <div class="panel-body {{ $latestUser->gender() == 'M' ? 'bg-primary' : 'bg-pink' }}">
-                                            <h4 class="mar-no">{{ $latestUser->fullName() }}</h4>
-                                            @if ($latestUser->country())
-                                                <p>{{ trans('countries.' . $latestUser->country()) }}</p>
-                                            @endif
-                                        </div>
-                                        <div class="pad-all">
-                                            <p class="text-muted">
-                                                {{ $latestUser->about() }}
-                                            </p>
-                                            <div class="pad-ver">
-                                                <a href="{{ route('users.profiles.show', $latestUser->slug()) }}" class="btn btn-primary">Show profile</a>
-                                                <a href="{{ route('conversation.create', ['contact' => $latestUser->id()]) }}" class="btn btn-mint">
-                                                    {{ trans('copy.a.contact_message') }}
-                                                </a>
-                                            </div>
+                                <div class="col-md-4">
+                                    <div class="ibox-content text-center">
+                                        <h4>{{ $latestUser->fullName() }}</h4>
+                                        <p>{{ $latestUser->about() }}</p>
+
+                                        <div class="text-center">
+                                            <a class="btn btn-xs btn-primary" href="{{ route('users.profiles.show', $latestUser->slug()) }}">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

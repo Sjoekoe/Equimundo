@@ -92,6 +92,13 @@
                         </li>
                     </ul>
                 </li>
+            @else
+                <li>
+                    <a href="{{ route('register') }}">Sign Up</a>
+                </li>
+                <li>
+                    <a href="{{ route('login') }}">Sign In</a>
+                </li>
             @endif
         </ul>
     </nav>

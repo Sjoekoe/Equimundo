@@ -1,37 +1,37 @@
 @extends('layout.outer-app')
 
 @section('content')
+    <div class="passwordBox animated fadeInDown">
+        <div class="row">
 
-<div id="container" class="cls-container">
-    <div id="bg-overlay" class="bg-img" style="background-image: url({{ asset('images/horses.jpg') }})"></div>
-
-    @include('layout.partials._outer_app_header')
-
-    <div class="cls-content">
-        <div class="cls-content-sm panel">
-            <div class="panel-body">
-                @if (session()->has('status'))
-                    <p>{{ session()->pull('status') }}</p>
-                @else
-                    <p class="pad-btm">Enter your email address to recover your password.</p>
-                    {{ Form::open(['route' => 'password.post_forgot', 'class' => 'form-horizontal']) }}
-                    <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
-                        <div class="input-group">
-                            <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
-                            <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="email">
+            <div class="col-md-12">
+                <div class="ibox-content">
+                    <h2 class="font-bold">Forgot password</h2>
+                    <p>
+                        Enter your email address to recover your password.
+                    </p>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            {{ Form::open(['route' => 'password.post_forgot', 'class' => 'm-t']) }}
+                                <div class="form-group">
+                                    <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="email">
+                                    @include('layout.partials._error_message', ['field' => 'email'])
+                                </div>
+                                {{ Form::submit('Send Password Reset Link', ['class' => 'btn btn-info']) }}
+                            {{ Form::close() }}
                         </div>
-                        @include('layout.partials._error_message', ['field' => 'email'])
                     </div>
-                    <div class="form-group text-right">
-                        {{ Form::submit('Send Password Reset Link', ['class' => 'btn btn-mint text-uppercase']) }}
-                    </div>
-                    {{ Form::close() }}
-                @endif
+                </div>
             </div>
         </div>
-        <div class="pad-ver">
-            <a href="{{ route('login') }}" class="btn-link mar-rgt">Back to Login</a>
+        <hr/>
+        <div class="row">
+            <div class="col-md-6">
+                Equimundo All rights reserved
+            </div>
+            <div class="col-md-6 text-right">
+                <small>© {{ \Carbon\Carbon::now()->format('Y') }}</small>
+            </div>
         </div>
     </div>
-</div>
 @endsection
