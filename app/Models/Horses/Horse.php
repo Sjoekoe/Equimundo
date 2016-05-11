@@ -579,4 +579,14 @@ interface Horse
      * @return bool
      */
     public function isFollowingCompany(Company $company);
+
+    /**
+     * @return \EQM\Models\Horses\Horse[]
+     */
+    public function brothers();
+
+    /**
+     * @return \EQM\Models\Horses\Horse[]
+     */
+    public function sisters();
 }

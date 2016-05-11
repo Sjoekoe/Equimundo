@@ -40,10 +40,10 @@
             <tbody>
             <tr>
                 <td>
-                    <strong>{{ count($horse->statuses()) }}</strong> Statuses
+                    <strong>{{ count($horse->statuses()) }}</strong> {{ trans('copy.a.statuses') }}
                 </td>
                 <td>
-                    <strong>{{ count($horse->followers()) }}</strong> Followers
+                    <strong>{{ count($horse->followers()) }}</strong> {{ trans('copy.titles.followers') }}
                 </td>
             </tr>
             </tbody>

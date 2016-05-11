@@ -17,6 +17,7 @@ use EQM\Models\Pedigrees\Pedigree;
 use EQM\Models\Pictures\EloquentPicture;
 use EQM\Models\Statuses\EloquentHorseStatus;
 use EQM\Models\Users\EloquentUser;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 class EloquentHorse extends Model implements Horse
@@ -412,5 +413,65 @@ class EloquentHorse extends Model implements Horse
         }
 
         return false;
+    }
+
+    /**
+     * @return \EQM\Models\Horses\Horse[]
+     */
+    public function brothers()
+    {
+        $result = new Collection();
+
+        if ($this->father()) {
+            foreach ($this->father()->sons() as $son) {
+                $horse = $son->originalHorse()->first();
+
+                if ($horse->id() !== $this->id()) {
+                    $result->push($son->originalHorse()->first());
+                }
+            }
+        }
+
+        if ($this->mother()) {
+            foreach ($this->mother()->sons() as $son) {
+                $horse = $son->originalHorse()->first();
+
+                if ($horse->id() !== $this->id()) {
+                    $result->push($son->originalHorse()->first());
+                }
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * @return \EQM\Models\Horses\Horse[]
+     */
+    public function sisters()
+    {
+        $result = new Collection();
+
+        if ($this->father()) {
+            foreach ($this->father()->daughters() as $daughter) {
+                $horse = $daughter->originalHorse()->first();
+
+                if ($horse->id() !== $this->id()) {
+                    $result->push($daughter->originalHorse()->first());
+                }
+            }
+        }
+
+        if ($this->mother()) {
+            foreach ($this->mother()->daughters() as $daughter) {
+                $horse = $daughter->originalHorse()->first();
+
+                if ($horse->id() !== $this->id()) {
+                    $result->push($daughter->originalHorse()->first());
+                }
+            }
+        }
+
+        return $result;
     }
 }

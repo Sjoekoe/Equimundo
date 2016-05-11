@@ -183,13 +183,13 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-6">
-                    <div class="panel panel-bordered-info">
+                <div class="col-lg-3">
+                    <div class="panel">
                         <div class="panel-heading">
                             @if (auth()->check() && auth()->user()->isInHorseTeam($horse))
                                 <div class="panel-control">
-                                    <div class="btn-group">
-                                        <a href="{{ route('pedigree.create', [$horse->slug(), 'type' => \EQM\Models\Pedigrees\Pedigree::SON]) }}" class="btn btn-mint">
+                                    <div class="btn-group pull-right">
+                                        <a href="{{ route('pedigree.create', [$horse->slug(), 'type' => \EQM\Models\Pedigrees\Pedigree::SON]) }}" class="btn btn-xs btn-info">
                                             <i class="fa fa-plus"></i>
                                         </a>
                                     </div>
@@ -208,13 +208,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="panel panel-bordered-pink">
+                <div class="col-lg-3">
+                    <div class="panel">
                         <div class="panel-heading">
                             @if (auth()->check() && auth()->user()->isInHorseTeam($horse))
                                 <div class="panel-control">
-                                    <div class="btn-group">
-                                        <a href="{{ route('pedigree.create', [$horse->slug(), 'type' => \EQM\Models\Pedigrees\Pedigree::DAUGHTER]) }}" class="btn btn-mint">
+                                    <div class="btn-group pull-right">
+                                        <a href="{{ route('pedigree.create', [$horse->slug(), 'type' => \EQM\Models\Pedigrees\Pedigree::DAUGHTER]) }}" class="btn btn-xs btn-info">
                                             <i class="fa fa-plus"></i>
                                         </a>
                                     </div>
@@ -228,6 +228,34 @@
                             @foreach ($horse->daughters() as $daughter)
                                 <a href="{{ route('pedigree.index', $daughter->originalHorse->slug()) }}">
                                     {{ $daughter->originalHorse->name() }} <br>
+                                </a>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{ trans('copy.titles.brothers') }}</h3>
+                        </div>
+                        <div class="panel-body">
+                            @foreach($horse->brothers() as $brother)
+                                <a href="{{ route('pedigree.index', $brother->slug()) }}">
+                                    {{ $brother->name() }} <br>
+                                </a>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{ trans('copy.titles.sisters') }}</h3>
+                        </div>
+                        <div class="panel-body">
+                            @foreach($horse->sisters() as $sister)
+                                <a href="{{ route('pedigree.index', $sister->slug()) }}">
+                                    {{ $sister->name() }} <br>
                                 </a>
                             @endforeach
                         </div>
