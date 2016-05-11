@@ -41,7 +41,8 @@
         </script>
     @endif
 </head>
-<body class="{{ ! auth()->check() || ! auth()->user()->showSideBar() ? 'mini-navbar' : '' }}">
+<body class="{{ ! auth()->check() ||
+ ! auth()->user()->showSideBar() ? 'mini-navbar' : '' }}">
     <script>
         window.fbAsyncInit = function() {
             FB.init({
@@ -60,9 +61,9 @@
         }(document, 'script', 'facebook-jssdk'));
     </script>
     <div id="wrapper">
-        @if (auth()->check())
-            @include('layout.partials._left_navigation')
-        @endif
+
+        @include('layout.partials._left_navigation')
+
         <div id="page-wrapper" class="gray-bg">
             @include('layout.partials.nav')
 

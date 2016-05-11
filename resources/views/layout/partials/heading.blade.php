@@ -9,7 +9,7 @@
     }(document, 'script', 'facebook-jssdk'));
 </script>
 <div class="row white-bg">
-    <div class="col-lg-12 heading m-b-md img-border panel-bg-cover" style="height: 20em; background-position: center; background-size: cover; background-image: url({{ $horse->getHeaderImage() ? route('file.picture', $horse->getHeaderImage()->id()) : asset('images/header.jpg') }})">
+    <div class="col-lg-12 heading m-b-md img-border panel-bg-cover" style="height: 22em; background-position: center; background-size: cover; background-image: url({{ $horse->getHeaderImage() ? route('file.picture', $horse->getHeaderImage()->id()) : asset('images/header.jpg') }})">
         @if (auth()->check() && auth()->user()->isInHorseTeam($horse))
             <div class="pull-right">
                 {{ Form::open(['route' => ['horses.pictures.header', $horse->id()], 'files' => 'true']) }}
@@ -64,8 +64,9 @@
             </tr>
             <tr>
                 <td>
-                    <div class="fb-share-button" data-href="{{ route('horses.show', $horse->slug()) }}" data-layout="icon">
+                    <div class="fb-share-button" data-href="{{ route('horses.show', $horse->slug()) }}" data-layout="icon"></div>
                 </td>
+                <td></td>
             </tr>
             </tbody>
         </table>
