@@ -1,14 +1,11 @@
-@extends('layout.app')
+@extends('layout.app', ['title' => trans('copy.titles.disciplines'), 'pageTitle' => true])
 
 @section('content')
-    <div id="page-title">
-        <h1 class="page-header text-overflow">{{ trans('copy.titles.disciplines') }}</h1>
-    </div>
-    <div id="page-content">
+    <div class="row">
         <div class="row">
             <div class="col-xs-4 pull-right">
                 <div class="form-group text-right pull-right">
-                    <a href="{{ route('horse.info', $horse->slug()) }}" class="btn btn-info">Back To {{ $horse->name() }}</a>
+                    <a href="{{ route('horse.info', $horse->slug()) }}" class="btn btn-info">{{ trans('copy.a.back_to') }} {{ $horse->name() }}</a>
                 </div>
             </div>
         </div>
@@ -22,9 +19,9 @@
                 <div class="panel-body">
                     @foreach (config('disciplines.various') as $discipline)
                         <div>
-                            <div class="col-xs-3 text-left checkbox">
+                            <div class="col-xs-3 text-left checkbox checkbox-info">
+                                {{ Form::checkbox('disciplines[]', $discipline, $horse->performsDiscipline($discipline), ['id' => $discipline]) }}
                                 <label class="form-checkbox form-icon" for="{{ $discipline }}">
-                                    {{ Form::checkbox('disciplines[]', $discipline, $horse->performsDiscipline($discipline), ['id' => $discipline]) }}
                                     {{ trans('disciplines.' . $discipline) }}
                                 </label>
                             </div>
@@ -41,9 +38,9 @@
                 <div class="panel-body">
                     @foreach (config('disciplines.racing') as $discipline)
                         <div>
-                            <div class="col-xs-3 text-left checkbox">
+                            <div class="col-xs-3 text-left checkbox checkbox-info">
+                                {{ Form::checkbox('disciplines[]', $discipline, $horse->performsDiscipline($discipline), ['id' => $discipline]) }}
                                 <label class="form-checkbox form-icon" for="{{ $discipline }}">
-                                    {{ Form::checkbox('disciplines[]', $discipline, $horse->performsDiscipline($discipline), ['id' => $discipline]) }}
                                     {{ trans('disciplines.' . $discipline) }}
                                 </label>
                             </div>
@@ -60,9 +57,9 @@
                 <div class="panel-body">
                     @foreach (config('disciplines.classic') as $discipline)
                         <div>
-                            <div class="col-xs-3 text-left checkbox {{ $horse->performsDiscipline($discipline) ? 'active' : '' }}">
+                            <div class="col-xs-3 text-left checkbox checkbox-info {{ $horse->performsDiscipline($discipline) ? 'active' : '' }}">
+                                {{ Form::checkbox('disciplines[]', $discipline, $horse->performsDiscipline($discipline), ['id' => $discipline]) }}
                                 <label class="form-checkbox form-icon" for="{{ $discipline }}">
-                                    {{ Form::checkbox('disciplines[]', $discipline, $horse->performsDiscipline($discipline), ['id' => $discipline]) }}
                                     {{ trans('disciplines.' . $discipline) }}
                                 </label>
                             </div>
@@ -79,9 +76,9 @@
                 <div class="panel-body">
                     @foreach (config('disciplines.western_sports') as $discipline)
                         <div>
-                            <div class="col-xs-3 text-left checkbox">
+                            <div class="col-xs-3 text-left checkbox checkbox-info">
+                                {{ Form::checkbox('disciplines[]', $discipline, $horse->performsDiscipline($discipline), ['id' => $discipline]) }}
                                 <label class="form-checkbox form-icon" for="{{ $discipline }}">
-                                    {{ Form::checkbox('disciplines[]', $discipline, $horse->performsDiscipline($discipline), ['id' => $discipline]) }}
                                     {{ trans('disciplines.' . $discipline) }}
                                 </label>
                             </div>
@@ -98,9 +95,9 @@
                 <div class="panel-body">
                     @foreach (config('disciplines.harness') as $discipline)
                         <div>
-                            <div class="col-xs-3 text-left checkbox">
+                            <div class="col-xs-3 text-left checkbox checkbox-info">
+                                {{ Form::checkbox('disciplines[]', $discipline, $horse->performsDiscipline($discipline), ['id' => $discipline]) }}
                                 <label class="form-checkbox form-icon" for="{{ $discipline }}">
-                                    {{ Form::checkbox('disciplines[]', $discipline, $horse->performsDiscipline($discipline), ['id' => $discipline]) }}
                                     {{ trans('disciplines.' . $discipline) }}
                                 </label>
                             </div>
@@ -117,9 +114,9 @@
                 <div class="panel-body">
                     @foreach (config('disciplines.team') as $discipline)
                         <div>
-                            <div class="col-xs-3 text-left checkbox">
+                            <div class="col-xs-3 text-left checkbox checkbox-info">
+                                {{ Form::checkbox('disciplines[]', $discipline, $horse->performsDiscipline($discipline), ['id' => $discipline]) }}
                                 <label class="form-checkbox form-icon" for="{{ $discipline }}">
-                                    {{ Form::checkbox('disciplines[]', $discipline, $horse->performsDiscipline($discipline), ['id' => $discipline]) }}
                                     {{ trans('disciplines.' . $discipline) }}
                                 </label>
                             </div>
@@ -136,9 +133,9 @@
                 <div class="panel-body">
                     @foreach (config('disciplines.ancient') as $discipline)
                         <div>
-                            <div class="col-xs-3 text-left checkbox">
+                            <div class="col-xs-3 text-left checkbox checkbox-info">
+                                {{ Form::checkbox('disciplines[]', $discipline, $horse->performsDiscipline($discipline), ['id' => $discipline]) }}
                                 <label class="form-checkbox form-icon" for="{{ $discipline }}">
-                                    {{ Form::checkbox('disciplines[]', $discipline, $horse->performsDiscipline($discipline), ['id' => $discipline]) }}
                                     {{ trans('disciplines.' . $discipline) }}
                                 </label>
                             </div>
@@ -149,7 +146,7 @@
             <div class="row">
                 <div class="col-xs-4 pull-right">
                     <div class="form-group text-right pull-right">
-                        {{ Form::submit(trans('forms.buttons.save'), ['class' => 'btn btn-mint text-uppercase']) }}
+                        {{ Form::submit(trans('forms.buttons.save'), ['class' => 'btn btn-info']) }}
                     </div>
                 </div>
             </div>

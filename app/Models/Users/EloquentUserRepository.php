@@ -38,7 +38,8 @@ class EloquentUserRepository implements UserRepository
             'gender' => $values['gender'],
             'slug' => (new SlugCreator())->createForUser($values['first_name'], $values['last_name']),
             'date_of_birth' => $values['date_of_birth'],
-            'country' => $values['country']
+            'country' => $values['country'],
+            'sidebar_collapsed' => true,
         ]);
 
         $user->save();
@@ -65,19 +66,46 @@ class EloquentUserRepository implements UserRepository
      */
     public function update(User $user, array $values)
     {
-        $user->first_name = $values['first_name'];
-        $user->last_name = $values['last_name'];
-        $user->country = $values['country'];
-        $user->gender = $values['gender'];
+        if (array_key_exists('first_name', $values)) {
+            $user->first_name = $values['first_name'];
+        }
+
+        if (array_key_exists('last_name', $values)) {
+            $user->last_name = $values['last_name'];
+        }
+
+        if (array_key_exists('country', $values)) {
+            $user->country = $values['country'];
+        }
+
+        if (array_key_exists('gender', $values)) {
+            $user->gender = $values['gender'];
+        }
 
         if (array_key_exists('date_of_birth', $values) && $values['date_of_birth'] !== '') {
             $user->date_of_birth = Carbon::createFromFormat('d/m/Y', $values['date_of_birth'])->startOfDay();
         }
 
-        $user->about = array_get($values, 'about');
-        $user->facebook = array_get($values, 'facebook');
-        $user->twitter = array_get($values, 'twitter');
-        $user->website = array_get($values, 'website');
+        if (array_key_exists('about', $values)) {
+            $user->about = array_get($values, 'about');
+        }
+
+        if (array_key_exists('facebook', $values)) {
+            $user->facebook = array_get($values, 'facebook');
+        }
+
+        if (array_key_exists('twitter', $values)) {
+            $user->twitter = array_get($values, 'twitter');
+        }
+
+        if (array_key_exists('website', $values)) {
+            $user->website = array_get($values, 'website');
+        }
+
+        if (array_key_exists('sidebar_collapsed', $values)) {
+            $value = $values['sidebar_collapsed'] === 'true' ? true : false;
+            $user->sidebar_collapsed = $value;
+        }
 
         $user->save();
 

@@ -1,10 +1,9 @@
 @extends('layout.app')
 
 @section('content')
-    <div class="page-content" xmlns:v-bind="http://www.w3.org/1999/xhtml">
-        @include('layout.partials.heading')
-
-        <div class="col-lg-7 col-lg-offset-2">
+    @include('layout.partials.heading')
+    <div class="row">
+        <div class="col-lg-8">
             @if (auth()->check() && auth()->user()->isInHorseTeam($horse))
                 <horsestatus></horsestatus>
 
@@ -26,10 +25,11 @@
                                                 <input id="picture" type="file" v-model="upload" @change="onFileChange">
                                             </div>
                                             <div v-if="image" >
-                                                <img v-bind:src="image" alt="" class="img-lg img-border">
+                                                <img v-bind:src="image" alt="" class="profile-image">
                                                 <button class="btn btn-sm btn-danger" v-on:click="removeImage">X</button>
                                             </div>
                                         </div>
+                                        <br>
                                         <div class="col-sm-6 pad-no">
                                             <template v-if="submitting">
                                                 <button class="btn btn-sm btn-info pull-right" disabled><i class="fa fa-spinner fa-spin"></i></button>
@@ -46,7 +46,6 @@
                     @include('statuses.partials._status_template')
                 </template>
             @endif
-
             <horsefeed></horsefeed>
 
             <template id="horse-feed-template">
@@ -54,6 +53,7 @@
             </template>
         </div>
     </div>
+
     <script>
         var horse_id = {{ $horse->id() }};
     </script>

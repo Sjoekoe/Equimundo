@@ -41,7 +41,8 @@
         </script>
     @endif
 </head>
-<body>
+<body class="{{ ! auth()->check() ||
+ ! auth()->user()->showSideBar() ? 'mini-navbar' : '' }}">
     <script>
         window.fbAsyncInit = function() {
             FB.init({
@@ -59,19 +60,39 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
     </script>
-    <div id="container" class="effect mainnav-out">
-        @include('layout.partials.nav')
-        @if (auth()->check())
-            <div class="boxed">
-                <div id="content-container">
-                    @include('layout.partials._search_bar')
-                    @include('layout.partials._flash_messages')
-                    @yield('content')
-                </div>
+    <div id="wrapper">
+
+        @include('layout.partials._left_navigation')
+
+        <div id="page-wrapper" class="gray-bg">
+            @include('layout.partials.nav')
+
+            @if (isset($pageTitle))
+                @include('layout.partials._page_title')
+            @endif
+            @include('layout.partials._flash_messages')
+            <div class="wrapper wrapper-content animated fadeInRight">
+                @yield('content')
             </div>
-        @else
-            @yield('content')
-        @endif
+        </div>
+            <div id="blueimp-gallery" class="blueimp-gallery">
+                <div class="slides"></div>
+                <h3 class="title"></h3>
+                <a class="prev">‹</a>
+                <a class="next">›</a>
+                <a class="close">×</a>
+                <a class="play-pause"></a>
+                <ol class="indicator"></ol>
+            </div>
+            <div id="blueimp-gallery-profile" class="blueimp-gallery">
+                <div class="slides"></div>
+                <h3 class="title"></h3>
+                <a class="prev">‹</a>
+                <a class="next">›</a>
+                <a class="close">×</a>
+                <a class="play-pause"></a>
+                <ol class="indicator"></ol>
+            </div>
     </div>
 
     <!-- Scripts -->

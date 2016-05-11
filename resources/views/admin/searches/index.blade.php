@@ -1,10 +1,7 @@
-@extends('layout.admin')
+@extends('layout.admin', ['pageTitle' => true, 'title' => 'Searches'])
 
 @section('content')
-    <div id="page-title">
-        <h1 class="page-header text-overflow">Searches</h1>
-    </div>
-    <div id="page-content">
+    <div class="row">
         <div class="panel">
             <div class="panel-body">
                 <div class="table-responsive">

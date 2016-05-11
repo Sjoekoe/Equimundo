@@ -31,5 +31,7 @@ new Vue({
         userfeed: require('./components/statuses/userFeed'),
         singlestatus: require('./components/statuses/singleStatus'),
         statuscreator: require('./components/statuses/statusCreator'),
+
+        sidebarbutton: require('./components/nav/CollapseSideBar'),
     },
 });

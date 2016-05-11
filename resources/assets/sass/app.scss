@@ -1,12 +1,15 @@
 @import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 @import "../../../node_modules/bootstrap-select/sass/variables";
 @import "../../../node_modules/bootstrap-select/sass/bootstrap-select";
+@import "../../../node_modules/toastr/build/toastr";
+@import "hs/animate";
 @import "hs/bootstrap-tags";
 @import "hs/datepicker";
 @import "hs/switchery";
+@import "hs/blueimp";
 @import "hs/general";
-@import "hs/nifty";
+@import "hs/heading";
+@import "hs/inspinia";
 @import "hs/lightbox";
 @import "hs/search";
-
-
+@import "hs/awesome-bootstrap-checkbox";

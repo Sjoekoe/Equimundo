@@ -1,5 +1,6 @@
 var Vue = require('vue');
 var Pusher = require('pusher-js');
+var toastr = require('toastr');
 
 module.exports = Vue.extend({
     template: '#notedrop',
@@ -29,11 +30,22 @@ module.exports = Vue.extend({
             this.unread_notifications += 1;
             $.getJSON('/api/notifications/' + response.notification.id, function(notification) {
                 this.notifications.unshift(notification.data);
-                $.niftyNoty({
-                    container:'floating',
-                    timer : 3000,
-                    html: '<div class="media-left"><span class="icon-wrap icon-wrap-xs icon-circle alert-icon"><i class="fa ' + notification.data.icon +' fa-lg"></i></span></div><div class="media-body"><p class="alert-message">' + notification.data.message + '</p></div>'
-                });
+                toastr.info(notification.data.message, '', {
+                    "closeButton": true,
+                    "debug": false,
+                    "progressBar": true,
+                    "preventDuplicates": false,
+                    "positionClass": "toast-top-right",
+                    "onclick": null,
+                    "showDuration": "400",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                })
             }.bind(this));
         }.bind(this));
     },

@@ -1,61 +1,32 @@
-@extends('layout.app')
+@extends('layout.app', ['title' => $conversation->subject(), 'pageTitle' => true])
 
 @section('content')
-    <div id="page-title">
-        <div class="col-md-8 col-md-offset-2 cl-sm-12">
-            <a href="{{ route('conversation.index') }}" class="btn btn-info btn-small pull-right">Back to Inbox</a>
-        </div>
-    </div>
-    <div id="page-content">
-        <div class="col-md-8 col-md-offset-2 col-sm-12">
-            <div class="panel">
-                <div class="panel-heading">
-                    <h3 class="panel-title">{{ $conversation->subject() }}</h3>
-                </div>
-
-                <div id="chat-body" class="collapse in" aria-expanded="true">
-                    <div class="nano" style="height:500px">
-                        <div id="chat-content" class="nano-content pad-all" tabindex="0">
-                            <ul class="list-unstyled media-block">
-                                @foreach ($messages as $message)
-                                    @if ($message->user()->id() == auth()->user()->id())
-                                    <li class="mar-btm">
-                                        <div class="media-right">
-                                            <p>{{ substr($message->user()->fullName(), 0, 1) }}</p>
-                                        </div>
-                                        <div class="media-body pad-hor speech-right">
-                                            <div class="speech">
-                                                <a href="{{ route('users.profiles.show', $message->user()->slug()) }}" class="media-heading">{{ $message->user()->fullName() }}</a>
-                                                <p>{{ nl2br($message->body()) }}</p>
-                                                <p class="speech-time">
-                                                    <i class="fa fa-clock-o fa-fw"></i>{{ eqm_translated_date($message->createdAt())->diffForHumans() }}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    @else
-                                        <li class="mar-btm">
-                                            <div class="media-left">
-                                                <p>{{ substr($message->user()->fullName(), 0, 1) }}</p>
-                                            </div>
-                                            <div class="media-body pad-hor">
-                                                <div class="speech">
-                                                    <a href="{{ route('users.profiles.show', $message->user()->slug()) }}" class="media-heading">{{ $message->user()->fullName() }}</a>
-                                                    <p>{{ nl2br($message->body()) }}</p>
-                                                    <p class="speech-time">
-                                                        <i class="fa fa-clock-o fa-fw"></i>{{ eqm_translated_date($message->createdAt())->diffForHumans() }}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    @endif
-                                @endforeach
-                            </ul>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <div class="scroll-content">
+                        <div class="chat-activity-list">
+                            @foreach($messages as $message)
+                                <div class="chat-element">
+                                    <div class="media-body {{ $message->user()->id() == auth()->user()->id() ? 'text-right' : '' }}">
+                                        <small class="{{ $message->user()->id() == auth()->user()->id() ? 'pull-left' : 'pull-right' }}">
+                                            {{ eqm_translated_date($message->createdAt())->diffForHumans() }}
+                                        </small>
+                                        <strong>
+                                            <a href="{{ route('users.profiles.show', $message->user()->slug()) }}">
+                                                {{ $message->user()->fullName() }}
+                                            </a>
+                                        </strong>
+                                        <p class="m-b-xs">
+                                            {{ nl2br($message->body()) }}
+                                        </p>
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
-                        <div class="nano-pane"><div class="nano-slider" style="height: 137px; transform: translate(0px, 0px);"></div></div></div>
-
-                    <!--Widget footer-->
-                    <div class="panel-footer">
+                    </div>
+                    <div class="chat-form m-t-md">
                         {{ Form::open(['route' => ['message.store', $conversation->id()]]) }}
                         <div class="row">
                             <div class="col-xs-9">
@@ -75,7 +46,11 @@
 
 @section('footer')
     <script>
-        var objDiv = document.getElementById("chat-content");
-        objDiv.scrollTop = objDiv.scrollHeight;
+        $(document).ready(function () {
+            $('.scroll-content').slimscroll({
+                height: '350px',
+                start: 'bottom'
+            })
+        });
     </script>
 @stop

@@ -1,11 +1,11 @@
-@extends('layout.app', ['title' => 'Horse settings'])
+@extends('layout.app', ['title' => trans('copy.titles.settings'), 'pageTitle' => true])
 
 @section('content')
-    <div id="page-content">
-        <div class="col-md-2 col-md-offset-2">
+    <div class="row">
+        <div class="col-md-4">
             @include('users.partials._settings_navigation')
         </div>
-        <div class="col-md-4">
+        <div class="col-md-8">
             <div class="panel">
                 <div class="panel-heading">
                     <h3 class="panel-title">

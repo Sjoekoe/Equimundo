@@ -1,9 +1,10 @@
 @extends('layout.app')
 
 @section('content')
-    <div class="page-content">
-        @include('layout.partials.heading')
-        <div class="col-lg-8 col-lg-offset-2">
+    @include('layout.partials.heading')
+
+    <div class="row">
+        <div class="col-md-12">
             <div class="panel">
                 <div class="panel-heading">
                     <h3 class="panel-title">
@@ -11,27 +12,28 @@
                     </h3>
                 </div>
                 <div class="panel-body">
-                    @foreach ($horse->followers() as $follower)
-                        <div class="col-sm-4">
-                            <div class="panel text-center panel-bordered-dark">
-                                <div class="panel-body {{ $follower->gender() == 'M' ? 'bg-primary' : 'bg-pink' }}">
-                                    <h4 class="mar-no">{{ $follower->fullName() }}</h4>
-                                    <p>{{ trans('countries.' . $follower->country()) }}</p>
-                                </div>
-                                <div class="pad-all">
-                                    <p class="text-muted">
-                                        {{ $follower->about() }}
-                                    </p>
-                                    <div class="pad-ver">
-                                        <a href="{{ route('users.profiles.show', $follower->slug()) }}" class="btn btn-primary">Show profile</a>
-                                        <a href="{{ route('conversation.create', ['contact' => $follower->id()]) }}" class="btn btn-mint">
-                                            {{ trans('copy.a.contact_message') }}
-                                        </a>
+                    @if (count($horse->followers()))
+                        @foreach($horse->followers()->chunk(3) as $profileChunk)
+                            <div class="row">
+                                @foreach ($profileChunk as $profile)
+                                    <div class="col-md-4">
+                                        <div class="ibox-content text-center">
+                                            <h4>{{ $profile->fullName() }}</h4>
+                                            <p>{{ $profile->about() }}</p>
+
+                                            <div class="text-center">
+                                                <a class="btn btn-xs btn-primary" href="{{ route('users.profiles.show', $profile->slug()) }}">
+                                                    <i class="fa fa-eye"></i>
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                @endforeach
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    @else
+                        <p>{{ trans('copy.p.no_followers') }}</p>
+                    @endif
                 </div>
             </div>
         </div>

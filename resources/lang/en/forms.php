@@ -37,6 +37,7 @@ return [
         'street' => 'Street',
         'subject' => 'Subject:',
         'telephone' => 'Telephone:',
+        'timezone' => 'Timezone',
         'to' => 'To:',
         'username' => 'Username:',
         'venue' => 'Venue:',

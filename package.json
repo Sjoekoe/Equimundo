@@ -13,6 +13,7 @@
     "moment-timezone": "^0.5.3",
     "pusher": "^1.2.1",
     "pusher-js": "^3.0.0",
+    "toastr": "^2.1.2",
     "vue": "^1.0.17"
   }
 }

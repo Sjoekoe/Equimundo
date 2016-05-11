@@ -268,4 +268,9 @@ interface User
      * @return bool
      */
     public function isInCompanyTeam(Company $company);
+
+    /**
+     * @return bool
+     */
+    public function showSideBar();
 }

@@ -1,10 +1,7 @@
-@extends('layout.admin')
+@extends('layout.admin', ['pageTitle' => true, 'title' => 'Advertisements overview'])
 
 @section('content')
-    <div id="page-title">
-        <h1 class="page-header text-overflow">Advertisements Overview</h1>
-    </div>
-    <div id="page-content">
+    <div class="row">
         <div class="col-md-6">
             <div class="panel">
                 <div class="panel-heading">
@@ -16,7 +13,7 @@
                     <div class="row">
                         # advertisers: {{ count($companies) }}
                     </div>
-                    <div class="row" style="height:205px;">
+                    <div class="row">
                         <div id="company-locations" class="morris-donut"></div>
                     </div>
                 </div>
@@ -33,7 +30,7 @@
                     <div class="row">
                         # Advertisements: {{ count($advertisements) }}
                     </div>
-                    <div class="row" style="height:205px;">
+                    <div class="row">
                         <div id="advertisements" class="morris-donut"></div>
                     </div>
                 </div>
@@ -47,7 +44,7 @@
                     </h3>
                 </div>
                 <div class="panel-body text-center">
-                    <div class="row" style="height:205px;">
+                    <div class="row">
                         <div id="payments" class="morris-donut"></div>
                     </div>
                 </div>

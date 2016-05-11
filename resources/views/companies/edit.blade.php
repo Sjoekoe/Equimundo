@@ -1,14 +1,9 @@
-@extends('layout.app')
+@extends('layout.app', ['title' => trans('copy.a.edit_singular') . ' ' . $company->name(), 'pageTitle' => true])
 
 @section('content')
-    <div id="page-content">
-        <div class="col-md-8 col-md-offset-2 col-sm-12">
+    <div class="row">
+        <div class="col-md-12">
             <div class="panel">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        {{ trans('copy.a.edit_singular') }} {{ $company->name() }}
-                    </h3>
-                </div>
                 <editcompany></editcompany>
 
                 <template id="edit-company">
@@ -107,7 +102,7 @@
                                     <small class="help-block text-danger text-left" v-if="errors.country"><i class="fa fa-exclamation-circle"></i> @{{ errors.country }}</small>
                                 </div>
                             </div>
-                            <br>
+                            <br><br>
                             <div class="form-group">
                                 <div class="col-sm-2">
                                     <label for="about" class="control-label">{{ trans('forms.labels.description') }}</label>

@@ -22,13 +22,18 @@
 </head>
 <body>
 
-<div id="container" class="effect mainnav-lg">
-    @include('layout.partials.nav')
-    <div class="boxed">
-        <div id="content-container">
+<div id="wrapper">
+    @include('layout.partials._admin_nav')
+    <div id="page-wrapper" class="gray-bg">
+        @include('layout.partials.nav')
+
+        @if (isset($pageTitle))
+            @include('layout.partials._page_title')
+        @endif
+
+        <div class="wrapper wrapper-content animated fadeInRight">
             @yield('content')
         </div>
-        @include('layout.partials._admin_nav')
     </div>
 </div>
 

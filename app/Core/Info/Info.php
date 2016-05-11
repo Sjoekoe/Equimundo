@@ -78,6 +78,7 @@ class Info implements Jsonable
                     'id' => auth()->user()->id(),
                     'locale' => auth()->user()->language(),
                     'timezone' => auth()->user()->timezone(),
+                    'show_sidebar' => (bool) auth()->user()->showSideBar(),
                 ],
             ];
         }

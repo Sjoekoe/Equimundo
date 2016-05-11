@@ -5,6 +5,10 @@
     }
 }
 
+a {
+    color: #23c6c8;
+}
+
 .image-upload > input
 {
     display: none;
@@ -16,4 +20,25 @@
 
 .mint-anchor {
     color: #1ABC9C !important;
+}
+
+.widget-img {
+    width: 64px;
+    height: 64px;
+    left: 50%;
+}
+
+.bg-img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover
 }

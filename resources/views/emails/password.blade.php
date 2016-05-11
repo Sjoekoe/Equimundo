@@ -39,14 +39,14 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="{{ url('password/reset'.$token) }}"
+                                        <a href="{{ url('password/reset/' . $token) }}"
                                            style="color:#1ABC9C;text-decoration:none" target="_blank">
                                             <table cellspacing="0" cellpadding="0" width="100%"
                                                    style="border-collapse:collapse">
                                                 <tbody>
                                                 <tr>
                                                     <td style="border-collapse:collapse;border-radius:2px;text-align:center;display:block;border:solid 1px #16a085;background:#1ABC9C;padding:7px 16px 11px 16px">
-                                                        <a href="{{ url('password/reset/'.$token) }}"
+                                                        <a href="{{ url('password/reset/' . $token) }}"
                                                            style="color:#1ABC9C;text-decoration:none;display:block"
                                                            target="_blank">
                                                             <center><font size="3"><span

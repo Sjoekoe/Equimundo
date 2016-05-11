@@ -3,133 +3,139 @@
         <p class="text-center">{{ trans('copy.p.no_statuses') }}</p>
     </div>
 </div>
-<div class="panel" v-else v-for="status in statuses">
-    <div class="panel-body">
-        <div class="media-block">
+
+<div class="social-feed-box" v-else v-for="status in statuses">
+    <div class="pull-right social-action dropdown">
+        <button data-toggle="dropdown" class="dropdown-toggle btn-white" v-if="status.can_delete_status">
+            <i class="fa fa-angle-down"></i>
+        </button>
+        <ul class="dropdown-menu m-t-xs">
+            <li>
+                <a href="javascript:void(0)" @click="deleteStatus(status)">
+                    {{ trans('copy.a.delete') }}
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="social-avatar">
+        <template v-if="status.is_horse_status">
+            <a href="/horses/@{{ status.poster.data.slug }}" class="pull-left">
+                <img alt="image" v-bind:src="status.poster.data.profile_picture">
+            </a>
+        </template>
+        <template v-else>
+            <a href="/companies/@{{ status.poster.data.slug }}" class="pull-left">
+                <img alt="image" src="{{ asset('images/eqm.png') }}">
+            </a>
+        </template>
+        <span class="text-muted pull-right" v-if="status.prefix" v-html="status.prefix"></span>
+        <div class="media-body">
             <template v-if="status.is_horse_status">
-                <a href="/horses/@{{ status.poster.data.slug }}" class="media-left">
-                    <img v-bind:src="status.poster.data.profile_picture" alt="" class="img-circle img-sm">
+                <a href="/horses/@{{ status.poster.data.slug }}" class="text-info">
+                    @{{ status.poster.data.name }}
                 </a>
             </template>
             <template v-else>
-                <a href="/companies/@{{ status.poster.data.slug }}" class="media-left">
-                    <img src="{{ asset('images/eqm.png') }}" alt="" class="img-circle img-sm">
+                <a href="/companies/@{{ status.poster.data.slug }}" class="text-info">
+                    @{{ status.poster.data.name }}
                 </a>
             </template>
-            <div class="media-body">
-                <div class="mar-btm">
-                    <div class="pull-right">
-                        <div class="btn-group">
-                            <i class="dropdown-toggle-icon fa fa-chevron-down" data-toggle="dropdown" aria-expanded="false" v-if="status.can_delete_status"></i>
-                            <ul class="dropdown-menu dropdown-menu-right">
-                                <li>
-                                    <a href="javascript:void(0)" @click="deleteStatus(status)">
-                                    {{ trans('copy.a.delete') }}
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <template v-if="status.is_horse_status">
-                        <a href="/horses/@{{ status.poster.data.slug }}" class="btn-link text-semibold media-heading box-inline text-mint">
-                            @{{ status.poster.data.name }}
-                        </a>
+            <small class="text-muted">@{{ status.created_at | diffForHumans }}</small>
+        </div>
+        <div class="social-body">
+            <p v-html="status.body"></p>
+            <a v-if="status.picture" v-bind:href="status.picture" data-gallery="#blueimp-gallery-@{{ status.id }}">
+                <img v-bind:src="status.picture" class="img-responsive" style="width: 100%; height: auto;" data-lightbox>
+            </a>
+            <div class="btn-group">
+                <button class="btn btn-white btn-xs">
+                    <i class="fa fa-heart text-danger"></i> @{{ status.like_count }}
+                </button>
+                @if (auth()->check())
+                    <template v-if="status.liked_by_user">
+                        <button class="btn btn-info btn-xs" @click="likeStatus(status)"><i class="fa fa-thumbs-up"></i> {{ trans('copy.a.you_like_it') }}</button>
                     </template>
                     <template v-else>
-                        <a href="/companies/@{{ status.poster.data.slug }}" class="btn-link text-semibold media-heading box-inline text-mint">
-                            @{{ status.poster.data.name }}
-                        </a>
+                        <button class="btn btn-white btn-xs" @click="likeStatus(status)"><i class="fa fa-thumbs-up"></i></button>
                     </template>
-                    <span class="text-semibold text-muted" v-if="status.prefix" v-html="status.prefix"></span>
-                    <p class="text-muted text-sm">
-                        @{{ status.created_at | diffForHumans }}
-                    </p>
+                    </div>
+                @endif
+            </div>
+        </div>
+        <div class="social-footer">
+            <div class="social-comment" v-for="comment in status.comments.data">
+                <div class="pull-right social-action dropdown">
+                    <button data-toggle="dropdown" class="dropdown-toggle btn-link" v-if="comment.can_delete_comment">
+                        <i class="fa fa-angle-down"></i>
+                    </button>
+                    <ul class="dropdown-menu m-t-xs">
+                        <li>
+                            <a href="javascript:void(0)" @click="deleteComment(status, comment)">
+                            {{ trans('copy.a.delete') }}
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-                <p v-html="status.body"></p>
-                <a v-if="status.picture" v-bind:href="status.picture" data-lightbox="@{{ status.id }}">
-                    <img v-bind:src="status.picture" alt="" class="img-responsive thumbnail">
-                </a>
-                <div class="pad-ver">
-                    <span class="tag tag-sm">
-                        <i class="fa fa-heart text-danger"></i> @{{ status.like_count }}
-                    </span>
-
-                    @if (auth()->check())
-                        <div class="btn-group">
-                            <template v-if="status.liked_by_user">
-                                <button class="btn btn-sm btn-default btn-hover-success active" type="submit" @click="likeStatus(status)"><i class="fa fa-thumbs-up"></i> {{ trans('copy.a.you_like_it') }}</button>
+                <div class="media-body">
+                    <a href="/user/@{{ comment.user.data.slug }}" class="text-info">
+                        @{{ comment.user.data.first_name + ' ' + comment.user.data.last_name }}
+                    </a>
+                    <small class="text-muted">
+                        @{{ comment.created_at | diffForHumans }}
+                    </small>
+                    <p v-html="comment.body"></p>
+                    <div class="btn-group">
+                        <button class="btn btn-white btn-xs">
+                            <i class="fa fa-heart text-danger"></i> @{{ comment.like_count }}
+                        </button>
+                        @if (auth()->check())
+                            <template v-if="comment.liked_by_user">
+                                <button class="btn btn-info btn-xs" @click="likeComment(comment)"><i class="fa fa-thumbs-up"></i></button>
                             </template>
                             <template v-else>
-                                <button class="btn btn-sm btn-default btn-hover-success" type="submit" @click="likeStatus(status)"><i class="fa fa-thumbs-up"></i></button>
+                                <button class="btn btn-white btn-xs" @click="likeComment(comment)"><i class="fa fa-thumbs-up"></i></button>
                             </template>
-                        </div>
-                    @endif
-                </div>
-                <hr>
-                <div class="media-block pad-all bg-gray-light" v-for="comment in status.comments.data">
-                    <div class="media-body">
-                        <div class="mar-btm">
-                            <a href="/user/@{{ comment.user.data.slug }}" class="btn-link text-mint text-semibold media-heading box-inline">
-                                @{{ comment.user.data.first_name + ' ' + comment.user.data.last_name }}
-                            </a>
-                            <div class="pull-right">
-                                <div class="btn-group">
-                                    <i class="dropdown-toggle-icon fa fa-chevron-down" data-toggle="dropdown" aria-expanded="false" v-if="comment.can_delete_comment"></i>
-                                    <ul class="dropdown-menu dropdown-menu-right">
-                                        <li>
-                                            <a href="javascript:void(0)" @click="deleteComment(status, comment)">
-                                            {{ trans('copy.a.delete') }}
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <p class="text-muted text-sm">
-                                @{{ comment.created_at | diffForHumans }}
-                            </p>
-                        </div>
-                        <p v-html="comment.body"></p>
-                        @if (auth()->check())
-                            <div class="pad-ver">
-                                <span class="tag tag-sm">
-                                    <i class="fa fa-heart text-danger"></i> @{{ comment.like_count }}
-                                </span>
-                                <button class="btn btn-sm btn-default btn-hover-success active" v-if="comment.liked_by_user" type="submit" @click="likeComment(comment)"><i class="fa fa-thumbs-up"></i> {{ trans('copy.a.you_like_it') }}</button>
-                                <button class="btn btn-sm btn-default btn-hover-success" v-else type="submit" @click="likeComment(comment)"><i class="fa fa-thumbs-up"></i></button>
-                            </div>
                         @endif
                     </div>
-                    <hr>
                 </div>
             </div>
-            <div class="media-footer">
-                @if (auth()->check())
-                    <div class="media-block pad-ver">
+            @if (auth()->check())
+                <div class="social-comment">
+                    <div class="media-body">
                         <form method="POST" v-on:submit="postComment($event, status)">
-                            <div class="row">
-                                <div class="col-sm-12 col-md-11 col-md-offset-1">
-                                    <input type="textarea" name="body", class="form-control" rows="1", placeholder="{{ trans('forms.placeholders.write_a_comment') }}" v-model="newComment.comment[status.id]">
-                                </div>
-                            </div>
+                            <input type="textarea" name="body", class="form-control" rows="1", placeholder="{{ trans('forms.placeholders.write_a_comment') }}" v-model="newComment.comment[status.id]">
+                            <br>
                             <div class="mar-ver text-right">
                                 <template v-if="commenting">
-                                    <button class="btn btn-info" disabled><i class="fa fa-spinner fa-spin"></i></button>
+                                    <button class="btn btn-info btn-xs" disabled><i class="fa fa-spinner fa-spin"></i></button>
                                 </template>
                                 <template v-else>
-                                    <button class="btn btn-info">{{ trans('copy.a.place_comment') }}</button>
+                                    <button class="btn btn-info btn-xs">{{ trans('copy.a.place_comment') }}</button>
                                 </template>
                             </div>
                         </form>
                     </div>
-                @endif
-            </div>
+                </div>
+            @endif
         </div>
     </div>
 </div>
 <div class="panel" v-if="loading">
     <div class="panel-body text-center">
-        <i class="fa fa-refresh fa-spin fa-2x text-mint"></i>
+        <i class="fa fa-refresh fa-spin fa-2x text-info"></i>
         <br> <br>
         <p>Loading...</p>
     </div>
 </div>
+
+@section('footer')
+    <div id="blueimp-gallery-@{{ status.id }}" class="blueimp-gallery" v-if="status.picture">
+        <div class="slides"></div>
+        <h3 class="title"></h3>
+        <a class="prev">‹</a>
+        <a class="next">›</a>
+        <a class="close">×</a>
+        <a class="play-pause"></a>
+        <ol class="indicator"></ol>
+    </div>
+@stop

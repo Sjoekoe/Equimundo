@@ -1,72 +1,67 @@
-@extends('layout.admin')
+@extends('layout.admin', ['pageTitle' => true, 'title' => 'Companies / Groups'])
 
 @section('content')
-    <div id="page-title">
-        <h1 class="page-header text-overflow">Companies / Groups</h1>
-    </div>
-    <div id="page-content">
-        <div class="row">
-            <div class="col-lg-12">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel">
                 <div class="panel">
-                    <div class="panel">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">
-                                Companies / Groups
-                            </h3>
-                        </div>
-                        <div class="panel-body">
-                            <div id="companiesChart" style="height: 250px;"></div>
-                        </div>
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            Companies / Groups
+                        </h3>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="panel">
-                    <div class="panel">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">
-                                Companies / Groups Growth
-                            </h3>
-                        </div>
-                        <div class="panel-body">
-                            <div id="companiesGrowth" style="height: 250px;"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="panel">
                     <div class="panel-body">
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead>
+                        <div id="companiesChart" style="height: 250px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            Companies / Groups Growth
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div id="companiesGrowth" style="height: 250px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="min-width">ID</th>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Created at</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($companies as $company)
                                     <tr>
-                                        <th class="min-width">ID</th>
-                                        <th>Name</th>
-                                        <th>Type</th>
-                                        <th>Created at</th>
+                                        <td>{{ $company->id() }}</td>
+                                        <td>{{ $company->name() }}</td>
+                                        <td>{{ trans('companies.types.' . $company->type()) }}</td>
+                                        <td>{{ eqm_date($company->createdAt()) }}</td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($companies as $company)
-                                        <tr>
-                                            <td>{{ $company->id() }}</td>
-                                            <td>{{ $company->name() }}</td>
-                                            <td>{{ trans('companies.types.' . $company->type()) }}</td>
-                                            <td>{{ eqm_date($company->createdAt()) }}</td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="panel-footer text-right">
-                        {{ $companies->render() }}
-                    </div>
+                </div>
+                <div class="panel-footer text-right">
+                    {{ $companies->render() }}
                 </div>
             </div>
         </div>

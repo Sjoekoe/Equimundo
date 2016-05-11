@@ -1,25 +1,15 @@
-@extends('layout.app')
+@extends('layout.app', ['title' => trans('copy.a.create_a_group'), 'pageTitle' => true])
 
 @section('content')
-    <div id="page-content">
-        <div class="col-md-8 col-md-offset-2 col-sm-12">
+    <div class="row">
+        <div class="col-md-12">
             <div class="panel">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        {{ trans('copy.a.create_a_group') }}
-                    </h3>
-                </div>
                 <createcompany></createcompany>
 
                 <template id="create-company">
                     <form>
                         <div class="panel-body">
                             <div class="alert alert-info">
-                                <div class="media-left">
-                                <span class="icon-wrap icon-wrap-xs icon-circle alert-icon">
-                                    <i class="fa fa-bullhorn fa-lg"></i>
-                                </span>
-                                </div>
                                 <div class="media-body">
                                     <p class="alert-message">
                                         {{ trans('copy.p.company_warning') }}
@@ -119,7 +109,7 @@
                                     <small class="help-block text-danger text-left" v-if="errors.country"><i class="fa fa-exclamation-circle"></i> @{{ errors.country }}</small>
                                 </div>
                             </div>
-                            <br>
+                            <br> <br>
                             <div class="form-group">
                                 <div class="col-sm-2">
                                     <label for="about" class="control-label">{{ trans('forms.labels.description') }}</label>

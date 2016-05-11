@@ -2,8 +2,8 @@
 
 @section('content')
     @include('layout.partials.heading')
-    <div id="page-content">
-        <div class="col-md-8 col-md-offset-2 col-sm-12">
+    <div class="row">
+        <div class="col-md-12">
             <div class="panel">
                 <div class="panel-heading">
                     <h3 class="panel-title">

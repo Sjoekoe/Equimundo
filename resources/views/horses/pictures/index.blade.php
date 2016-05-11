@@ -2,8 +2,8 @@
 
 @section('content')
     @include('layout.partials.heading')
-    <div id="page-content">
-        <div class="col-lg-7 col-lg-offset-2">
+    <div class="row">
+        <div class="col-md-12">
             @if (auth()->check() && auth()->user()->isInHorseTeam($horse))
                 <div class="row">
                     <div class="col-sx-3 pull-right">
