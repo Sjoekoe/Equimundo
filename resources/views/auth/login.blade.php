@@ -21,7 +21,7 @@
                 <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
 
                 <a href="{{ route('password.forgot') }}"><small>Forgot password?</small></a>
-                <p class="text-muted text-center"><small>Do not have an account?</small></p>
+                <p class="text-muted text-center"><small>Not registered yet?</small></p>
                 <a class="btn btn-sm btn-white btn-block" href="{{ route('register') }}">Create an account</a>
             {{ Form::close() }}
             <p class="m-t"> <small>Equimundo All rights reserved © {{ \Carbon\Carbon::now()->format('Y') }}</small> </p>

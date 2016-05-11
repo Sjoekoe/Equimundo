@@ -9,7 +9,23 @@
     }(document, 'script', 'facebook-jssdk'));
 </script>
 <div class="row white-bg">
-    <div class="col-lg-12 heading m-b-md img-border" style="height: 20em; background-position: center; background-size: cover; background-image: url({{ $horse->getHeaderImage() ? route('file.picture', $horse->getHeaderImage()->id()) : asset('images/header.jpg') }})">
+    <div class="col-lg-12 heading m-b-md img-border panel-bg-cover" style="height: 20em; background-position: center; background-size: cover; background-image: url({{ $horse->getHeaderImage() ? route('file.picture', $horse->getHeaderImage()->id()) : asset('images/header.jpg') }})">
+        @if (auth()->check() && auth()->user()->isInHorseTeam($horse))
+            <div class="pull-right">
+                {{ Form::open(['route' => ['horses.pictures.header', $horse->id()], 'files' => 'true']) }}
+                    <div class="image-upload pull-right">
+                        <label for="header_picture">
+                            <i class="btn btn-link btn-icon fa fa-camera fa-2x add-tooltip"></i>
+                        </label>
+                        {{ Form::file('header_picture', ['id' => 'header_picture']) }}
+                    </div>
+                    <div class="confirmation-buttons pull-right" style="display: none;">
+                        <button type="submit" class="btn btn-link fa fa-check fa-2x" id="heading-confirm-button"></button>
+                        <i class="btn btn-link fa fa-remove fa-2x" id="heading-cancel-button"></i>
+                    </div>
+                {{ Form::close() }}
+            </div>
+        @endif
     </div>
     <div class="col-md-6">
         <div class="profile-image">

@@ -89,8 +89,7 @@
     <div class="row">
         <div class="col-lg-12 text-center">
             <div class="navy-line"></div>
-            <h1>The social network re-invented<br/> <span class="navy"> and give your horse a voice.</span> </h1>
-            <p>No matter if you own a horse or not. </p>
+            <h1>Give your horse a voice!<br/> <span class="navy"> The social network re-invented.</span> </h1>
         </div>
     </div>
     <div class="row">
@@ -107,7 +106,7 @@
             </div>
         </div>
         <div class="col-md-6 text-center  wow zoomIn">
-            <img src="{{ asset('images/profile.png') }}" alt="dashboard" class="img-responsive">
+            <img src="{{ asset('images/profile.png') }}" alt="profile" class="img-responsive">
         </div>
         <div class="col-md-3 text-center wow fadeInRight">
             <div>
@@ -137,7 +136,7 @@
             <a href="" class="btn btn-primary">Learn more</a>
         </div>
         <div class="col-lg-6 text-right wow fadeInRight">
-            <img src="{{ asset('images/timeline.png') }}" alt="dashboard" class="img-responsive pull-right">
+            <img src="{{ asset('images/timeline.png') }}" alt="timeline" class="img-responsive pull-right">
         </div>
     </div>
 </section>
@@ -159,7 +158,7 @@
                 <p>Every horse has it's own unique life number. Whit this number, and the horses pedigree, we are able to connect you with all the family members of your horse. Once a family member registers, we will automatically inform you.</p>
             </div>
             <div class="col-lg-6 text-right m-t-n-lg wow zoomIn">
-                <img src="{{ asset('images/pedigree.png') }}" class="img-responsive" alt="dashboard">
+                <img src="{{ asset('images/pedigree.png') }}" class="img-responsive" alt="pedigree">
             </div>
             <div class="col-lg-3 features-text text-right wow fadeInRight">
                 <small>PALMARES</small>
@@ -179,7 +178,7 @@
             <div class="col-lg-12 text-center wow zoomIn">
                 <i class="fa fa-comment big-icon"></i>
                 <h1>
-                    What our users say
+                    What our users say.
                 </h1>
                 <div class="testimonials-text">
                     <i>"Equimundo has given me the opportunity to meet with a half-brother of my horse on the first day I registered. Also people on other social media are less complaining for posting less pictures of Corleana on there."</i>
@@ -252,12 +251,8 @@
                         </div>
                     </div>
                 </div>
-
-
-
             </div>
         </div>
-
     </section>
 @endif
 <section class="features">
