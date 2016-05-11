@@ -89,7 +89,7 @@
     <div class="row">
         <div class="col-lg-12 text-center">
             <div class="navy-line"></div>
-            <h1>Give your horse a voice!<br/> <span class="navy"> The social network re-invented.</span> </h1>
+            <h1>Give your horse a voice!<br/> <span class="navy"> Share their lives.</span> </h1>
         </div>
     </div>
     <div class="row">

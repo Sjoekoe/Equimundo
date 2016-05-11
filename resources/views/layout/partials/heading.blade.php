@@ -62,6 +62,11 @@
                     <strong>{{ count($horse->followers()) }}</strong> {{ trans('copy.titles.followers') }}
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <div class="fb-share-button" data-href="{{ route('horses.show', $horse->slug()) }}" data-layout="icon">
+                </td>
+            </tr>
             </tbody>
         </table>
     </div>
