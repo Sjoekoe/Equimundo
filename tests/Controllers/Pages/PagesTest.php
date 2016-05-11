@@ -14,7 +14,7 @@ class PagesTest extends \TestCase
     public function viewHomepage()
     {
         $this->visit('/')
-            ->see('The social network re-invented');
+            ->see('Give your horse a voice!');
     }
 
     /** @test */

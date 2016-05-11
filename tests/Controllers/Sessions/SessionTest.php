@@ -78,6 +78,6 @@ class SessionTest extends \TestCase
             ->visit('/')
             ->click('Logout')
             ->seePageIs('/home')
-            ->see('The social network re-invented');
+            ->see('Give your horse a voice!');
     }
 }
