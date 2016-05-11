@@ -17,7 +17,7 @@ class SessionTest extends \TestCase
         $this->visit('/login')
             ->type($user->email, 'email')
             ->type('password', 'password')
-            ->press('Sign In')
+            ->press('Login')
             ->seePageIs('/')
             ->dontSee('Welcome to Equimundo');
     }
@@ -33,7 +33,7 @@ class SessionTest extends \TestCase
         $this->visit('/login')
             ->type($user->email, 'email')
             ->type('password', 'password')
-            ->press('Sign In')
+            ->press('Login')
             ->seePageIs('/login')
             ->see('These credentials do not match our records, or your account has not been activated.');
     }
@@ -48,7 +48,7 @@ class SessionTest extends \TestCase
         $this->visit('/login')
             ->type($user->email, 'email')
             ->type('foobar', 'password')
-            ->press('Sign In')
+            ->press('Login')
             ->seePageIs('/login')
             ->see('These credentials do not match our records, or your account has not been activated.');
     }
@@ -63,7 +63,7 @@ class SessionTest extends \TestCase
         $this->visit('/login')
             ->type('wrong@email.com', 'email')
             ->type($user->password, 'password')
-            ->press('Sign In')
+            ->press('Login')
             ->seePageIs('/login')
             ->see('These credentials do not match our records, or your account has not been activated.');
     }
@@ -77,7 +77,7 @@ class SessionTest extends \TestCase
             ->withSession(['foo' => 'bar'])
             ->visit('/')
             ->click('Logout')
-            ->seePageIs('/login')
-            ->see('The social network for horses.');
+            ->seePageIs('/home')
+            ->see('The social network re-invented');
     }
 }

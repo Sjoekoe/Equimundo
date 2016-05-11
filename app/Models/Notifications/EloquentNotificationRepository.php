@@ -33,7 +33,7 @@ class EloquentNotificationRepository implements NotificationRepository
      */
     public function findForUser(User $user)
     {
-        return $this->notification->where('receiver_id', $user->id)->latest()->paginate(10);
+        return $this->notification->where('receiver_id', $user->id)->latest()->paginate(25);
     }
 
     /**

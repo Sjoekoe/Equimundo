@@ -9,19 +9,19 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class PagesTest extends \TestCase
 {
     use DatabaseTransactions;
-    
+
     /** @test */
     public function viewHomepage()
     {
         $this->visit('/')
-            ->see('The social network for horses.');
+            ->see('The social network re-invented');
     }
 
     /** @test */
     public function visitRegisterPage()
     {
-        $this->visit('/')
-            ->click('Create a new account')
+        $this->visit('/home')
+            ->click('Sign Up')
             ->seePageIs('/register');
     }
 
@@ -29,6 +29,6 @@ class PagesTest extends \TestCase
     public function visitLoginPage()
     {
         $this->visit('/')
-            ->seePageIs('/login');
+            ->seePageIs('/home');
     }
 }
