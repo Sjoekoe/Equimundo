@@ -182,119 +182,120 @@
                     What our users say
                 </h1>
                 <div class="testimonials-text">
-                    <i>"Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."</i>
+                    <i>"Equimundo has given me the opportunity to meet with a half-brother of my horse on the first day I registered. Also people on other social media are less complaining for posting less pictures of Corleana on there."</i>
                 </div>
                 <small>
-                    <strong>12.02.2014 - Andy Smith</strong>
+                    <strong>Sofie Poot</strong> - Owner of <a href="{{ route('horses.show', 'corleana') }}" class="text-primary">Corleana</a>
                 </small>
             </div>
         </div>
     </div>
 </section>
 
-<section class="comments gray-section" style="margin-top: 0">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <div class="navy-line"></div>
-                <h1>What our partners say</h1>
-                <p>Donec sed odio dui. Etiam porta sem malesuada. </p>
+@if (App::Environment('production'))
+    <section class="comments gray-section" style="margin-top: 0">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="navy-line"></div>
+                    <h1>Some of our horses.</h1>
+                </div>
+            </div>
+            <div class="row features-block">
+                <div class="col-lg-4">
+                    <?php $horse = \EQM\Models\Horses\EloquentHorse::where('slug', 'florina')->first(); ?>
+                    <div class="comments-avatar">
+                        <a href="" class="pull-left">
+                            <img alt="image" src="{{ route('file.picture', $horse->getProfilePicture()->id()) }}">
+                        </a>
+                        <div class="media-body">
+                            <div class="commens-name">
+                                <a href="{{ route('horses.show', $horse->slug()) }}">
+                                    {{ $horse->name() }}
+                                </a>
+                            </div>
+                            <small class="text-muted">{{ $horse->father()->name() }} X {{ $horse->mothersFather()->name() }}</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <?php $horse = \EQM\Models\Horses\EloquentHorse::where('slug', 'corleana')->first(); ?>
+                    <div class="comments-avatar">
+                        <a href="" class="pull-left">
+                            <img alt="image" src="{{ route('file.picture', $horse->getProfilePicture()->id()) }}">
+                        </a>
+                        <div class="media-body">
+                            <div class="commens-name">
+                                <a href="{{ route('horses.show', $horse->slug()) }}">
+                                    {{ $horse->name() }}
+                                </a>
+                            </div>
+                            <small class="text-muted">{{ $horse->father()->name() }} X {{ $horse->mothersFather()->name() }}</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <?php $horse = \EQM\Models\Horses\EloquentHorse::where('slug', 'jufried-mw')->first(); ?>
+                    <div class="comments-avatar">
+                        <a href="" class="pull-left">
+                            <img alt="image" src="{{ route('file.picture', $horse->getProfilePicture()->id()) }}">
+                        </a>
+                        <div class="media-body">
+                            <div class="commens-name">
+                                <a href="{{ route('horses.show', $horse->slug()) }}">
+                                    {{ $horse->name() }}
+                                </a>
+                            </div>
+                            <small class="text-muted">{{ $horse->father()->name() }} X {{ $horse->mothersFather()->name() }}</small>
+                        </div>
+                    </div>
+                </div>
+
+
+
             </div>
         </div>
-        <div class="row features-block">
-            <div class="col-lg-4">
-                <div class="bubble">
-                    "Uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
-                </div>
-                <div class="comments-avatar">
-                    <a href="" class="pull-left">
-                        <img alt="image" src="img/landing/avatar3.jpg">
-                    </a>
-                    <div class="media-body">
-                        <div class="commens-name">
-                            Andrew Williams
-                        </div>
-                        <small class="text-muted">Company X from California</small>
-                    </div>
-                </div>
-            </div>
 
-            <div class="col-lg-4">
-                <div class="bubble">
-                    "Uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
-                </div>
-                <div class="comments-avatar">
-                    <a href="" class="pull-left">
-                        <img alt="image" src="img/landing/avatar1.jpg">
-                    </a>
-                    <div class="media-body">
-                        <div class="commens-name">
-                            Andrew Williams
-                        </div>
-                        <small class="text-muted">Company X from California</small>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4">
-                <div class="bubble">
-                    "Uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
-                </div>
-                <div class="comments-avatar">
-                    <a href="" class="pull-left">
-                        <img alt="image" src="img/landing/avatar2.jpg">
-                    </a>
-                    <div class="media-body">
-                        <div class="commens-name">
-                            Andrew Williams
-                        </div>
-                        <small class="text-muted">Company X from California</small>
-                    </div>
-                </div>
-            </div>
-
-
-
-        </div>
-    </div>
-
-</section>
-
+    </section>
+@endif
 <section class="features">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
                 <div class="navy-line"></div>
-                <h1>More and more extra great feautres</h1>
-                <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. </p>
+                <h1>More and more extra great features</h1>
+                <p>Not only for horses. </p>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-5 col-lg-offset-1 features-text">
-                <small>INSPINIA</small>
-                <h2>Perfectly designed </h2>
+                <small>ADVERTISERS</small>
+                <h2>More ROI </h2>
                 <i class="fa fa-bar-chart big-icon pull-right"></i>
-                <p>INSPINIA Admin Theme is a premium admin dashboard template with flat design concept. It is fully responsive admin dashboard template built with Bootstrap 3+ Framework, HTML5 and CSS3, Media query. It has a huge collection of reusable UI components and integrated with.</p>
+                <p>Ever wondered how much of your advertising money goes down the drain because of views of people who aren't interested. At Equimundo you have a 100% interested target area of potential customers.</p>
+                <p><a href="mailto:info@equimundo.com">Ask more information here.</a></p>
             </div>
             <div class="col-lg-5 features-text">
-                <small>INSPINIA</small>
-                <h2>Perfectly designed </h2>
-                <i class="fa fa-bolt big-icon pull-right"></i>
-                <p>INSPINIA Admin Theme is a premium admin dashboard template with flat design concept. It is fully responsive admin dashboard template built with Bootstrap 3+ Framework, HTML5 and CSS3, Media query. It has a huge collection of reusable UI components and integrated with.</p>
+                <small>BUSINESSES</small>
+                <h2>Follow your clients</h2>
+                <i class="fa fa-users big-icon pull-right"></i>
+                <p>Whether you are a farrier, a vet, own a stable, or even make embroyments on horse tacks. You can create a page for your business, so people and horses can join your page. This allows you to keep a closer contact with human and animal.</p>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-5 col-lg-offset-1 features-text">
-                <small>INSPINIA</small>
-                <h2>Perfectly designed </h2>
+                <small>BREEDERS</small>
+                <h2>Follow-up forever </h2>
                 <i class="fa fa-clock-o big-icon pull-right"></i>
-                <p>INSPINIA Admin Theme is a premium admin dashboard template with flat design concept. It is fully responsive admin dashboard template built with Bootstrap 3+ Framework, HTML5 and CSS3, Media query. It has a huge collection of reusable UI components and integrated with.</p>
+                <p>Ever wondered what happened with that foal you sold 6 months ago? Why don't yu start a profile from the first day when it is born. A horse profile is transferable to the ne owners, so you can follow it even it has traveled to the other side of the world.</p>
             </div>
             <div class="col-lg-5 features-text">
-                <small>INSPINIA</small>
-                <h2>Perfectly designed </h2>
-                <i class="fa fa-users big-icon pull-right"></i>
-                <p>INSPINIA Admin Theme is a premium admin dashboard template with flat design concept. It is fully responsive admin dashboard template built with Bootstrap 3+ Framework, HTML5 and CSS3, Media query. It has a huge collection of reusable UI components and integrated with.</p>
+                <small>STUDBOOKS</small>
+                <h2>Keeping a clear view </h2>
+                <i class="fa fa-eye big-icon pull-right"></i>
+                <p>Looking for that new approved stallion to improve your studbook? At Equimundo you can find horses that never went to an examination, but still are interesting breeding material.</p>
             </div>
         </div>
     </div>
