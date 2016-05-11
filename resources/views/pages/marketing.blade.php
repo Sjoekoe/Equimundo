@@ -230,7 +230,7 @@
                                     {{ $horse->name() }}
                                 </a>
                             </div>
-                            <small class="text-muted">{{ $horse->father()->name() }} X {{ $horse->mothersFather()->name() }}</small>
+                            <small class="text-muted">{{ $horse->father()->name() }}</small>
                         </div>
                     </div>
                 </div>
