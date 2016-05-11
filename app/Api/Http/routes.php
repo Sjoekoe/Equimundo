@@ -8,6 +8,7 @@ $api->version('v1', function(Router $api) {
         $api->post('/addresses', ['as' => 'api.addresses.create', 'uses' => 'AddressController@create']);
 
         $api->get('/users/{user}', ['as' => 'api.users.show', 'uses' => 'UserController@show']);
+        $api->put('/users/{user}', ['as' => 'api.users.update', 'uses' => 'UserController@update']);
         $api->get('/users/{user}/horses', ['as' => 'api.users.horses.index', 'uses' => 'HorseController@index']);
         $api->get('/users/{user}/feed', ['as' => 'api.users.feed', 'uses' => 'UserController@feed']);
         $api->get('/users/{user}/notifications/reset-count', ['as' => 'api.users.notifications.reset_count', 'uses' => 'NotificationController@resetCount']);

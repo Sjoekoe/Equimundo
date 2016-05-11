@@ -61,7 +61,8 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
         'website',
         'activation_key',
         'slug',
-        'timezone'
+        'timezone',
+        'sidebar_collapsed',
     ];
 
     /**
@@ -573,5 +574,13 @@ class EloquentUser extends Model implements AuthenticatableContract, Authorizabl
         }
 
         return false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function showSideBar()
+    {
+        return $this->sidebar_collapsed;
     }
 }

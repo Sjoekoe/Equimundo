@@ -41,7 +41,7 @@
         </script>
     @endif
 </head>
-<body>
+<body class="{{ ! auth()->check() || ! auth()->user()->showSideBar() ? 'mini-navbar' : '' }}">
     <script>
         window.fbAsyncInit = function() {
             FB.init({
