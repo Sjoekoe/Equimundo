@@ -133,7 +133,6 @@
             <small>Equimundo</small>
             <h2>The new timeline </h2>
             <p>Updates are made in the name of a horse or a company/group. All replies on the updates or made in your own name.</p>
-            <a href="" class="btn btn-primary">Learn more</a>
         </div>
         <div class="col-lg-6 text-right wow fadeInRight">
             <img src="{{ asset('images/timeline.png') }}" alt="timeline" class="img-responsive pull-right">
