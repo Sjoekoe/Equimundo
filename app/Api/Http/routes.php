@@ -85,5 +85,12 @@ $api->version('v1', function(Router $api) {
                 $api->delete('/{advertisement}', ['as' => 'api.admin.advertisements.delete', 'uses' => 'AdvertisementController@delete']);
             });
         });
+
+        $api->group(['namespace' => 'Conversations\\', 'prefix' => 'conversations'], function (Router $api) {
+            $api->group(['namespace' => 'Messages\\', 'prefix' => '{conversation}/messages'], function (Router $api) {
+                $api->get('/', ['as' => 'conversation.messages.index', 'uses' => 'MessageController@index']);
+                $api->post('/', ['as' => 'conversation.messages.store', 'uses' => 'MessageController@store']);
+            });
+        });
     });
 });

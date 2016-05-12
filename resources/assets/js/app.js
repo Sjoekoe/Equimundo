@@ -9,6 +9,8 @@ new Vue({
     },
 
     components: {
+        showconversation: require('./components/conversations/ShowConversation'),
+        
         advertisementstable: require('./components/admin/Advertisements/AdvertisementsTable'),
         advertisingcompany: require('./components/admin/Advertisements/ShowAdvertisingCompany'),
         advertisingcompaniestable: require('./components/admin/Advertisements/AdvertisingCompaniesTable'),

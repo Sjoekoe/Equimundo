@@ -13,7 +13,7 @@
             <table class="table table-hover table-mail">
                 <tbody>
                     @foreach (auth()->user()->conversations() as $conversation)
-                        <tr>
+                        <tr class="{{ $conversation->hasUnreadMessages(auth()->user()) ? 'unread' : '' }}">
                             <td class="check-mail">
                                 {{ Form::checkbox('messages[]', $conversation->id(), false, ['id' => $conversation->id(), 'class' => 'i-checks']) }}
                             </td>

@@ -20,6 +20,10 @@ use EQM\Models\Companies\Horses\EloquentCompanyHorse;
 use EQM\Models\Companies\Stable;
 use EQM\Models\Companies\Users\EloquentFollower;
 use EQM\Models\Companies\Users\Follower;
+use EQM\Models\Conversations\Conversation;
+use EQM\Models\Conversations\EloquentConversation;
+use EQM\Models\Conversations\EloquentMessage;
+use EQM\Models\Conversations\Message;
 use EQM\Models\Disciplines\Discipline;
 use EQM\Models\Disciplines\EloquentDiscipline;
 use EQM\Models\Events\EloquentEvent;
@@ -60,6 +64,7 @@ class EloquentModelFactory implements ModelFactory
         Comment::class => EloquentComment::class,
         CompanyHorse::class => EloquentCompanyHorse::class,
         CompanyStatus::class => EloquentCompanyStatus::class,
+        Conversation::class => EloquentConversation::class,
         Discipline::class => EloquentDiscipline::class,
         Event::class => EloquentEvent::class,
         Stable::class => EloquentStable::class,
@@ -68,6 +73,7 @@ class EloquentModelFactory implements ModelFactory
         HorseTeam::class => EloquentHorseTeam::class,
         Palmares::class => EloquentPalmares::class,
         Pedigree::class => EloquentPedigree::class,
+        Message::class => EloquentMessage::class,
         Notification::class => EloquentNotification::class,
         HorseStatus::class => EloquentHorseStatus::class,
         User::class => EloquentUser::class,

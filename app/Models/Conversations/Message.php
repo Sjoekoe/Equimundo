@@ -3,6 +3,8 @@ namespace EQM\Models\Conversations;
 
 interface Message
 {
+    const TABLE = 'conversation_messages';
+    
     /**
      * @return string
      */
@@ -14,12 +16,12 @@ interface Message
     public function body();
 
     /**
-     * @return \DateTime
+     * @return \Carbon\Carbon
      */
     public function createdAt();
 
     /**
-     * @return \DateTime
+     * @return \Carbon\Carbon
      */
     public function updatedAt();
 

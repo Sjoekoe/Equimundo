@@ -32,7 +32,7 @@
                     <!--Message dropdown menu-->
                     <ul class="dropdown-menu dropdown-messages">
                         @foreach(auth()->user()->conversations() as $conversation)
-                            <li>
+                            <li class="{{ $conversation->hasUnreadMessages(auth()->user()) ? 'bg-warning' : '' }}">
                                 <a href="{{ route('conversation.show', $conversation->id()) }}">
                                     <div class="dropdown-messages-box">
                                         <div class="media-body">

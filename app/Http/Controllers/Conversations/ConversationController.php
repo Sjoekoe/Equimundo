@@ -1,6 +1,7 @@
 <?php
 namespace EQM\Http\Controllers\Conversations;
 
+use EQM\Core\Info\Info;
 use EQM\Http\Controllers\Controller;
 use EQM\Models\Conversations\Conversation;
 use EQM\Models\Conversations\ConversationCreator;
@@ -54,13 +55,15 @@ class ConversationController extends Controller
         return redirect()->route('conversation.index');
     }
 
-    public function show(Conversation $conversation)
+    public function show(Info $info, Conversation $conversation)
     {
         $this->authorize('read-conversation', $conversation);
 
         $conversation->markAsRead(auth()->user());
 
         $messages = $this->conversations->findMessages($conversation);
+
+        $info->flash('conversation', $conversation->id());
 
         return view('conversations.show', compact('conversation', 'messages'));
     }

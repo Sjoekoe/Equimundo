@@ -11,7 +11,7 @@ class EloquentConversation extends Model implements Conversation
     /**
      * @var string
      */
-    protected $table = 'conversations';
+    protected $table = self::TABLE;
 
     /**
      * @var array
@@ -53,9 +53,17 @@ class EloquentConversation extends Model implements Conversation
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function messages()
+    public function messagesRelation()
     {
         return $this->hasMany(EloquentMessage::class, 'conversation_id', 'id');
+    }
+
+    /**
+     * @return \EQM\Models\Conversations\Message[]
+     */
+    public function messages()
+    {
+        return $this->messagesRelation()->orderBy('created_at', 'ASC')->get();
     }
 
     /**
@@ -119,5 +127,28 @@ class EloquentConversation extends Model implements Conversation
                 return $user;
             }
         }
+    }
+
+    /**
+     * @param \EQM\Models\Users\User $user
+     * @return bool
+     */
+    public function hasUnreadMessages(User $user)
+    {
+        foreach ($this->userRelation()->get() as $userRelation) {
+            if ($userRelation->id() == $user->id()) {
+                return is_null($userRelation->pivot->last_view);
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @return \Carbon\Carbon
+     */
+    public function updatedAt()
+    {
+        return Carbon::parse($this->updated_at);
     }
 }
