@@ -107,6 +107,8 @@ return [
         'info' => 'Info',
         'invite_friends' => 'Invite friends',
         'invite_now' => 'Invite Now',
+        'load_older_messages' => 'Load older messages',
+        'loading_older_messages' => 'Loading older messages ...',
         'logout' => 'Sign Out',
         'mark_as_read' => 'Mark as Read',
         'messages' => 'Messages',

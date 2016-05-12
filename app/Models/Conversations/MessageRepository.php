@@ -18,4 +18,11 @@ interface MessageRepository
      * @return \EQM\Models\Conversations\Message
      */
     public function create(Conversation $conversation, User $user, $values);
+
+    /**
+     * @param \EQM\Models\Conversations\Conversation $conversation
+     * @param int $limit
+     * @return \Illuminate\Pagination\LengthAwarePaginator
+     */
+    public function findByConversationPaginated(Conversation $conversation, $limit = 10);
 }

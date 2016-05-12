@@ -1,6 +1,7 @@
 <?php
 namespace EQM\Models\Conversations;
 
+use Carbon\Carbon;
 use EQM\Models\Users\EloquentUser;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,7 +10,7 @@ class EloquentMessage extends Model implements Message
     /**
      * @var string
      */
-    protected $table = 'conversation_messages';
+    protected $table = self::TABLE;
 
     /**
      * @var array
@@ -33,19 +34,27 @@ class EloquentMessage extends Model implements Message
     }
 
     /**
-     * @return \DateTime
+     * @return \Carbon\Carbon
      */
     public function createdAt()
     {
-        return $this->created_at;
+        return Carbon::parse($this->created_at);
     }
 
     /**
-     * @return \DateTime
+     * @return \Carbon\Carbon
      */
     public function updatedAt()
     {
-        return $this->updated_at;
+        return Carbon::parse($this->updated_at);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function conversationRelation()
+    {
+        return $this->belongsTo(EloquentConversation::class, 'conversation_id');
     }
 
     /**
@@ -53,7 +62,15 @@ class EloquentMessage extends Model implements Message
      */
     public function conversation()
     {
-        return $this->belongsTo(EloquentConversation::class, 'conversation_id')->first();
+        return $this->conversationRelation()->first();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function userRelation()
+    {
+        return $this->belongsTo(EloquentUser::class, 'user_id', 'id');
     }
 
     /**
@@ -61,6 +78,6 @@ class EloquentMessage extends Model implements Message
      */
     public function user()
     {
-        return $this->belongsTo(EloquentUser::class)->first();
+        return $this->userRelation()->first();
     }
 }

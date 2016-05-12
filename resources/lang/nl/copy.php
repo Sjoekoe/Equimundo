@@ -38,7 +38,7 @@ return [
         'companies_groups' => 'Bedrijven / Groepen',
         'get_the_most_of_equimundo' => 'Hoe krijg je de beste ervaring op Equimundo?',
         'notifications' => 'Notificaties',
-        'search_results' => ':count resultaten gevonden voor <i class=\\\\\\\"text-info\\\\\\\">:searchWord</i>',
+        'search_results' => ':count resultaten gevonden voor <i class=\\\\\\\\\"text-info\\\\\\\\\">:searchWord</i>',
         'send_message' => 'Verzend bericht aan :receiver',
         'brothers' => 'Broers',
         'sisters' => 'Zussen',
@@ -125,6 +125,8 @@ return [
         'back_to' => 'Terug naar',
         'add_horse' => 'Paard toevoegen',
         'show_more' => 'Meer tonen',
+        'load_older_messages' => 'Oudere berichten',
+        'loading_older_messages' => 'Oudere berichten aan het ophalen ...',
     ],
     'span' => [
         'file' => 'Bestand',

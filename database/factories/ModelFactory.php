@@ -10,6 +10,8 @@ use EQM\Models\Comments\EloquentComment;
 use EQM\Models\Companies\EloquentStable;
 use EQM\Models\Companies\Horses\EloquentCompanyHorse;
 use EQM\Models\Companies\Users\EloquentFollower;
+use EQM\Models\Conversations\EloquentConversation;
+use EQM\Models\Conversations\EloquentMessage;
 use EQM\Models\Disciplines\EloquentDiscipline;
 use EQM\Models\Events\EloquentEvent;
 use EQM\Models\Horses\EloquentHorse;
@@ -81,5 +83,11 @@ $factory->define(EloquentCompanyStatus::class, function (Generator $faker) {
     return [];
 });
 $factory->define(EloquentNotification::class, function (Generator $faker) {
+    return [];
+});
+$factory->define(EloquentConversation::class, function (Generator $faker) {
+    return [];
+});
+$factory->define(EloquentMessage::class, function (Generator $faker) {
     return [];
 });

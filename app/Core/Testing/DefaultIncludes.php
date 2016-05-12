@@ -6,6 +6,8 @@ use EQM\Models\Advertising\Contacts\AdvertisingContact;
 use EQM\Models\Companies\Company;
 use EQM\Models\Companies\Horses\CompanyHorse;
 use EQM\Models\Companies\Users\CompanyUser;
+use EQM\Models\Conversations\Conversation;
+use EQM\Models\Conversations\Message;
 use EQM\Models\Horses\Horse;
 use EQM\Models\Notifications\Notification;
 use EQM\Models\Statuses\Status;
@@ -196,6 +198,39 @@ trait DefaultIncludes
             'created_at' => $notification->createdAt()->toIso8601String(),
             'receiverRelation' => $this->includedUser($notification->receiver()),
             'senderRelation' =>  $this->includedUser($notification->sender()),
+        ], $attributes);
+    }
+
+    /**
+     * @param \EQM\Models\Conversations\Conversation $conversation
+     * @param array $attributes
+     * @return array
+     */
+    public function includedConversation(Conversation $conversation, $attributes = [])
+    {
+        return array_merge([
+            'id' => $conversation->id(),
+            'subject' => $conversation->subject(),
+            'updated_at' => $conversation->updatedAt()->toIso8601String(),
+        ], $attributes);
+    }
+
+    /**
+     * @param \EQM\Models\Conversations\Message $message
+     * @param array $attributes
+     * @return array
+     */
+    public function includedMessage(Message $message, $attributes = [])
+    {
+        return array_merge([
+            'id' => $message->id(),
+            'body' => $message->body(),
+            'made_by_user' => true,
+            'created_at' => $message->createdAt()->toIso8601String(),
+            'userRelation' => $this->includedUser($message->user()),
+            'conversationRelation' => [
+                'data' => $this->includedConversation($message->conversation())
+            ],
         ], $attributes);
     }
 }

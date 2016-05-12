@@ -5,6 +5,8 @@ use EQM\Models\Users\User;
 
 interface Conversation
 {
+    const TABLE = 'conversations';
+    
     /**
      * @return string
      */
@@ -61,4 +63,15 @@ interface Conversation
      * @param \EQM\Models\Users\User $user
      */
     public function unDeleteForContactPerson(User $user);
+
+    /**
+     * @param \EQM\Models\Users\User $user
+     * @return bool
+     */
+    public function hasUnreadMessages(User $user);
+
+    /**
+     * @return \Carbon\Carbon
+     */
+    public function updatedAt();
 }

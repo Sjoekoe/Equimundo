@@ -12,6 +12,8 @@ use EQM\Models\Comments\Comment;
 use EQM\Models\Companies\Horses\CompanyHorse;
 use EQM\Models\Companies\Stable;
 use EQM\Models\Companies\Users\Follower;
+use EQM\Models\Conversations\Conversation;
+use EQM\Models\Conversations\Message;
 use EQM\Models\Disciplines\Discipline;
 use EQM\Models\Horses\Horse;
 use EQM\Models\HorseTeams\HorseTeam;
@@ -119,7 +121,7 @@ trait CreatesModels
     public function createNotification(array $attributes)
     {
         $now = Carbon::now();
-        
+
         return $this->modelFactory->create(Notification::class, array_merge([
             'type' => Notification::STATUS_LIKED,
             'read' => false,
@@ -299,7 +301,7 @@ trait CreatesModels
     public function createPedigree(array $attributes = [])
     {
         return $this->modelFactory->create(Pedigree::class, array_merge([
-            
+
         ], $attributes));
     }
 
@@ -324,6 +326,30 @@ trait CreatesModels
     {
         return $this->modelFactory->create(Comment::class, array_merge([
             'body' => 'Lorem ipsum dolores est',
+        ], $attributes));
+    }
+
+    /**
+     * @param array $attributes
+     * @return \EQM\Models\Conversations\Conversation
+     */
+    public function createConversation(array $attributes = [])
+    {
+        return $this->modelFactory->create(Conversation::class, array_merge([
+            'subject' => 'Foo',
+            'updated_at' => Carbon::now(),
+        ], $attributes));
+    }
+
+    /**
+     * @param array $attributes
+     * @return \EQM\Models\Conversations\Message
+     */
+    public function createMessage(array $attributes = [])
+    {
+        return $this->modelFactory->create(Message::class, array_merge([
+            'body' => 'foo body',
+            'created_at' => Carbon::now(),
         ], $attributes));
     }
 }
