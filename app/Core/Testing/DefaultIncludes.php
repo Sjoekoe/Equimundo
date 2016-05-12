@@ -148,6 +148,7 @@ trait DefaultIncludes
             'date_of_birth' => $horse->dateOfBirth()->toIso8601String(),
             'color' => (int) $horse->color(),
             'slug' => $horse->slug(),
+            'is_followed_by_user' => false,
             'profile_picture' =>  'http://localhost/images/eqm.png',
         ], $attributes);
     }

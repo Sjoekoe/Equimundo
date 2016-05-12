@@ -14,8 +14,9 @@ $api->version('v1', function(Router $api) {
         $api->get('/users/{user}/notifications/reset-count', ['as' => 'api.users.notifications.reset_count', 'uses' => 'NotificationController@resetCount']);
 
         $api->get('/horses/{horse}', ['as' => 'api.horses.show', 'uses' => 'HorseController@show']);
-
         $api->get('/horses/{horse}/statuses', ['as' => 'api.horses.statuses.index', 'uses' => 'HorseStatusController@index']);
+
+        $api->get('/follows/{horse}', ['as' => 'follows.store', 'uses' => 'FollowsController@store']);
 
         $api->post('/statuses', ['as' => 'api.statuses.store', 'uses' => 'StatusController@store']);
         $api->get('/statuses/{status}', ['as' => 'api.statuses.show', 'uses' => 'StatusController@show']);
@@ -28,7 +29,7 @@ $api->version('v1', function(Router $api) {
         $api->get('/statuses/{status}/comments/{comment}', ['as' => 'api.comments.show', 'uses' => 'CommentController@show']);
         $api->put('/statuses/{status}/comments/{comment}', ['as' => 'api.comments.update', 'uses' => 'CommentController@update']);
         $api->delete('/statuses/{status}/comments/{comment}', ['as' => 'api.comments.delete', 'uses' => 'CommentController@delete']);
-        
+
         $api->post('/comments/{comment}/like', ['as' => 'comments.like', 'uses' => 'LikeController@likeComment']);
 
         $api->get('/notifications', ['as' => 'api.notifications.index', 'uses' => 'NotificationController@index']);

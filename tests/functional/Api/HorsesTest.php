@@ -24,6 +24,7 @@ class HorsesTest extends \TestCase
                     'date_of_birth' => $horse->dateOfBirth()->toIso8601String(),
                     'color' => $horse->color(),
                     'slug' => $horse->slug(),
+                    'is_followed_by_user' => false,
                     'profile_picture' =>  'http://localhost/images/eqm.png',
                 ],
             ]);
@@ -49,6 +50,7 @@ class HorsesTest extends \TestCase
                     'date_of_birth' => $horse->dateOfBirth()->toIso8601String(),
                     'color' => $horse->color(),
                     'slug' => $horse->slug(),
+                    'is_followed_by_user' => false,
                     'profile_picture' =>  'http://localhost/images/eqm.png',
                     'statuses' => [
                         'data' => [
@@ -75,6 +77,7 @@ class HorsesTest extends \TestCase
                                         'date_of_birth' => $horse->dateOfBirth()->toIso8601String(),
                                         'color' => $horse->color(),
                                         'slug' => $horse->slug(),
+                                        'is_followed_by_user' => false,
                                         'profile_picture' =>  'http://localhost/images/eqm.png',
                                     ],
                                 ],

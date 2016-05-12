@@ -32,15 +32,7 @@
                                             </li>
                                             <li class="col-sm-4">
                                                 @if (auth()->check() && ! auth()->user()->isInHorseTeam($horse))
-                                                    @if (Auth::user()->isFollowing($horse))
-                                                        {{ Form::open(['route' => ['follows.destroy', $horse->id()], 'method' => 'DELETE']) }}
-                                                        <button type="submit" class="btn btn-info">{{ trans('copy.a.unfollow') }}</button>
-                                                        {{ Form::close() }}
-                                                    @else
-                                                        {{ Form::open(['route' => ['follows.store', $horse->id()]]) }}
-                                                        <button type="submit" class="btn btn-info">{{ trans('copy.a.follow') }}</button>
-                                                        {{ Form::close() }}
-                                                    @endif
+                                                    @include('horses.partials.follow-form')
                                                 @endif
                                             </li>
                                             <li class="col-sm-4">

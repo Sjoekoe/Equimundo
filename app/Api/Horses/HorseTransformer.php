@@ -32,7 +32,8 @@ class HorseTransformer extends TransformerAbstract
             'breed' => (int) $horse->breed(),
             'color' => (int) $horse->color(),
             'slug' => $horse->slug(),
-            'profile_picture' => $horse->getProfilePicture() ? route('file.picture', $horse->getProfilePicture()->id()) : asset('images/eqm.png')
+            'profile_picture' => $horse->getProfilePicture() ? route('file.picture', $horse->getProfilePicture()->id()) : asset('images/eqm.png'),
+            'is_followed_by_user' => auth()->check() ? auth()->user()->isFollowing($horse) : false,
         ];
     }
 

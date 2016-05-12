@@ -33,5 +33,7 @@ new Vue({
         statuscreator: require('./components/statuses/statusCreator'),
 
         sidebarbutton: require('./components/nav/CollapseSideBar'),
+
+        followhorse: require('./components/horses/FollowHorse'),
     },
 });

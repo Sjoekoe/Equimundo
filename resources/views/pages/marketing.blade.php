@@ -14,6 +14,17 @@
     <!-- Fonts -->
     <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    @if (App::environment('production'))
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-65362816-1', 'auto');
+            ga('send', 'pageview');
+        </script>
+    @endif
 </head>
 <body id="page-top" class="landing-page">
 <div class="navbar-wrapper">
@@ -293,7 +304,6 @@
             </div>
         </div>
     </div>
-
 </section>
 
 <section id="contact" class="gray-section contact">
