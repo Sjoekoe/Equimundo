@@ -35,6 +35,12 @@ class StatusConvertor
             $text = preg_replace($regex, '<a href="http://$0" target="_blank">$0</a>', $text);
         }
 
+        foreach(config('emojis') as $key => $value) {
+            if (str_contains($text, $key)) {
+                $text = str_replace($key, $value, $text);
+            }
+        }
+
         return $text;
     }
 

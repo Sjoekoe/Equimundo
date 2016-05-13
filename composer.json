@@ -26,7 +26,8 @@
 		"laravelcollective/html": "^5.2",
 		"nanigans/single-table-inheritance": "^0.6.1",
 		"laravelcollective/iron-queue": "^5.2",
-		"themsaid/laravel-langman": "^1.2"
+		"themsaid/laravel-langman": "^1.2",
+		"spatie/emoji": "^1.0"
 	},
 	"require-dev": {
 	  	"fzaninotto/faker": "~1.4",

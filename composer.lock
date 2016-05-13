@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3709bf3cbdf08717225a7b91d41928e6",
-    "content-hash": "5bf14bc68850a312f82af795afc13f8c",
+    "hash": "abed917177177f0d980a04211e04c683",
+    "content-hash": "93e58f630b6ac1ff51cf6f8df898e714",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -3067,6 +3067,52 @@
                 "trigger"
             ],
             "time": "2015-05-13 11:01:46"
+        },
+        {
+            "name": "spatie/emoji",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/emoji.git",
+                "reference": "c2d458364553f0314ae4149626ca2d2e9913c8e8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/emoji/zipball/c2d458364553f0314ae4149626ca2d2e9913c8e8",
+                "reference": "c2d458364553f0314ae4149626ca2d2e9913c8e8",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Emoji\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Display emoji characters",
+            "homepage": "https://github.com/spatie/emoji",
+            "keywords": [
+                "emoji",
+                "spatie"
+            ],
+            "time": "2016-02-11 11:23:01"
         },
         {
             "name": "stevebauman/location",
