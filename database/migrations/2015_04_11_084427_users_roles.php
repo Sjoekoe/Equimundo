@@ -14,7 +14,7 @@ class UsersRoles extends Migration {
 	{
 		Schema::create('role_user', function(Blueprint $table) {
             $table->increments('id');
-            $table->string('role');
+            $table->string('role', 191);
             $table->integer('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

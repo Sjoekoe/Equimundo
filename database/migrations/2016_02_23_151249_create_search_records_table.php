@@ -14,7 +14,7 @@ class CreateSearchRecordsTable extends Migration
     {
         Schema::create('searches', function(Blueprint $table) {
             $table->increments('id');
-            $table->string('term');
+            $table->string('term', 191);
             $table->integer('count');
             $table->integer('current_results');
             $table->timestamps();

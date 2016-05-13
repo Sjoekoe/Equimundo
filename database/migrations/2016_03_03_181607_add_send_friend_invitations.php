@@ -14,7 +14,7 @@ class AddSendFriendInvitations extends Migration
     {
         Schema::create('friend_invites', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('email');
+            $table->string('email', 191);
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
