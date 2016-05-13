@@ -1,6 +1,6 @@
 <?php
 
-use Spatie\Emoji\Emoji;
+use EQM\Core\Emoji\Emoji;
 
 return [
     // People
