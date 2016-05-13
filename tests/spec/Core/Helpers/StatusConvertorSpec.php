@@ -2,10 +2,10 @@
 namespace spec\EQM\Core\Helpers;
 
 use EQM\Core\Helpers\StatusConvertor;
-use PhpSpec\ObjectBehavior;
+use PhpSpec\Laravel\LaravelObjectBehavior;
 use Prophecy\Argument;
 
-class StatusConvertorSpec extends ObjectBehavior
+class StatusConvertorSpec extends LaravelObjectBehavior
 {
     function it_is_initializable()
     {
@@ -39,6 +39,6 @@ class StatusConvertorSpec extends ObjectBehavior
     function it_converts_youtube_links_to_embedded_videos()
     {
         $this->convert('www.youtube.com/watch?v=2345')
-            ->shouldReturn('<iframe src="//www.youtube.com/embed/2345" width="420" height="315" allowfullscreen></iframe>');
+            ->shouldReturn('<iframe src="//www.youtube.com/embed/2345" width="420" height="315" allowfullscreen> </iframe>');
     }
 }

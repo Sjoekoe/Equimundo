@@ -11,6 +11,7 @@ class StatusConvertor
     {
         $text = $this->convertLinks($text);
         $text = $this->convertYoutube($text);
+        $text = $this->convertEmojis($text);
 
         return $text;
     }
@@ -35,12 +36,6 @@ class StatusConvertor
             $text = preg_replace($regex, '<a href="http://$0" target="_blank">$0</a>', $text);
         }
 
-        foreach(config('emojis') as $key => $value) {
-            if (str_contains($text, $key)) {
-                $text = str_replace($key, $value, $text);
-            }
-        }
-
         return $text;
     }
 
@@ -51,8 +46,23 @@ class StatusConvertor
     private function convertYoutube($text) {
         return preg_replace(
             "/\s*[a-zA-Z\/\/:\.]*youtu(be.com\/watch\?v=|.be\/)([a-zA-Z0-9\-_]+)([a-zA-Z0-9\/\*\-\_\?\&\;\%\=\.]*)/i",
-            "<iframe src=\"//www.youtube.com/embed/$2\" width=\"420\" height=\"315\" allowfullscreen></iframe>",
+            "<iframe src=\"//www.youtube.com/embed/$2\" width=\"420\" height=\"315\" allowfullscreen> </iframe>",
             $text
         );
+    }
+
+    /**
+     * @param string $text
+     * @return string
+     */
+    private function convertEmojis($text)
+    {
+        foreach(config('emojis') as $key => $value) {
+            if (str_contains($text, $key)) {
+                $text = str_replace($key, $value, $text);
+            }
+        }
+
+        return $text;
     }
 }
