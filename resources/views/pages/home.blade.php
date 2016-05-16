@@ -20,7 +20,7 @@
                                     </div>
                                     <br>
                                     <div class="row mar-top">
-                                        <textarea name="body" id="" cols="30" rows="3" class="form-control" placeholder="{{ trans('forms.placeholders.what_you_been_doing') }}" v-model="body"></textarea>
+                                        <textarea name="body" id="" cols="30" rows="3" class="form-control emoji-list" placeholder="{{ trans('forms.placeholders.what_you_been_doing') }}" v-model="body"></textarea>
                                         <small class="help-block text-danger text-left" v-if="errors.body"><i class="fa fa-exclamation-circle"></i> @{{ errors.body }}</small>
                                     </div>
                                     <br>
@@ -56,6 +56,7 @@
                         </div>
                     </div>
                     @include('statuses.partials._status_template')
+                    @include('layout.partials._emoji_dropdowns')
                 </template>
             @else
                 <div class="panel">
@@ -155,5 +156,6 @@
     </div>
     <script>
         var user_id = {{ auth()->user()->id() }}
+        var emojis = {{ json_encode(config('emojis')) }}
     </script>
 @stop
