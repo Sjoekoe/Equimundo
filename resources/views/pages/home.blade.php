@@ -156,6 +156,5 @@
     </div>
     <script>
         var user_id = {{ auth()->user()->id() }}
-        var emojis = {{ json_encode(config('emojis')) }}
     </script>
 @stop
