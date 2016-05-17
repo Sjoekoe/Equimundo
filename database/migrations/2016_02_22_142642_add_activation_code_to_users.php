@@ -13,7 +13,7 @@ class AddActivationCodeToUsers extends Migration
     public function up()
     {
         Schema::table('users', function(Blueprint $table) {
-            $table->string('activation_key')->nullable();
+            $table->string('activation_key', 191)->nullable();
         });
     }
 

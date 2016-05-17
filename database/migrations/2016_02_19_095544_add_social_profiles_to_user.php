@@ -13,9 +13,9 @@ class AddSocialProfilesToUser extends Migration
     public function up()
     {
         Schema::table('users', function(Blueprint $table) {
-            $table->string('facebook')->nullable();
-            $table->string('twitter')->nullable();
-            $table->string('website')->nullable();
+            $table->string('facebook', 191)->nullable();
+            $table->string('twitter', 191)->nullable();
+            $table->string('website', 191)->nullable();
         });
     }
 

@@ -17,9 +17,9 @@ class CreateEventsTable extends Migration {
             $table->increments('id');
             $table->integer('creator_id')->unsigned();
             $table->foreign('creator_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('name');
+            $table->string('name', 191);
             $table->text('description')->nullable();
-            $table->string('place')->nullable();
+            $table->string('place', 191)->nullable();
             $table->datetime('start_date')->nullable();
             $table->datetime('end_date')->nullable();
             $table->timestamps();

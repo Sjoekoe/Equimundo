@@ -22,7 +22,7 @@ class CreatePalmaresTable extends Migration {
             $table->integer('status_id')->unsigned();
             $table->foreign('status_id')->references('id')->on('statuses')->onDelete('cascade');
             $table->integer('discipline');
-            $table->string('level');
+            $table->string('level', 191);
             $table->integer('ranking');
             $table->datetime('date');
             $table->timestamps();

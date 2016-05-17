@@ -13,7 +13,7 @@ class AddWistiaIdToHorse extends Migration
     public function up()
     {
         Schema::table('horses', function (Blueprint $table) {
-            $table->string('wistia_project_id')->nullable();
+            $table->string('wistia_project_id', 191)->nullable();
         });
     }
 

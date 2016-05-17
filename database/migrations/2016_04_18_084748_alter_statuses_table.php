@@ -15,7 +15,7 @@ class AlterStatusesTable extends Migration
     public function up()
     {
         Schema::table(Status::TABLE, function (Blueprint $table) {
-            $table->string('type');
+            $table->string('type', 191);
             $table->integer('company_id')->unsigned()->nullable();
             $table->foreign('company_id')->references('id')->on(Company::TABLE)->onDelete('cascade');
             $table->integer('horse_id')->unsigned()->nullable()->change();

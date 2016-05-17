@@ -17,10 +17,10 @@ class CreatePicturesTable extends Migration {
             $table->increments('id');
             $table->integer('horse_id')->unsigned();
             $table->foreign('horse_id')->references('id')->on('horses')->onDelete('cascade');
-            $table->string('path');
+            $table->string('path', 191);
             $table->boolean('profile_pic');
-            $table->string('mime');
-            $table->string('original_name');
+            $table->string('mime', 191);
+            $table->string('original_name', 191);
             $table->timestamps();
         });
 	}

@@ -14,7 +14,7 @@ class AddIpToUsersTable extends Migration
     public function up()
     {
         Schema::table(User::TABLE, function(Blueprint $table) {
-            $table->string('ip');
+            $table->string('ip', 191);
         });
     }
 

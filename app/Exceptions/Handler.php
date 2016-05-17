@@ -1,4 +1,5 @@
-<?php namespace EQM\Exceptions;
+<?php 
+namespace EQM\Exceptions;
 
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;

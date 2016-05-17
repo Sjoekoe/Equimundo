@@ -103,7 +103,8 @@
                 <div class="social-comment">
                     <div class="media-body">
                         <form method="POST" v-on:submit="postComment($event, status)">
-                            <input type="textarea" name="body", class="form-control" rows="1", placeholder="{{ trans('forms.placeholders.write_a_comment') }}" v-model="newComment.comment[status.id]">
+                            <input type="textarea" name="body", class="form-control emoji-list" rows="1", placeholder="{{ trans('forms.placeholders.write_a_comment') }}" v-model="newComment.comment[status.id]">
+                            @include('layout.partials._emoji_dropdowns')
                             <br>
                             <div class="mar-ver text-right">
                                 <template v-if="commenting">

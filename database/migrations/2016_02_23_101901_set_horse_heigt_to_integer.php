@@ -25,7 +25,7 @@ class SetHorseHeigtToInteger extends Migration
     public function down()
     {
         Schema::table('horses', function(Blueprint $table) {
-            $table->string('height')->change();
+            $table->string('height', 191)->change();
         });
     }
 }

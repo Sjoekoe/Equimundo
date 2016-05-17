@@ -14,14 +14,14 @@ class CreateHorsesTable extends Migration {
     {
         Schema::create('horses', function(Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('gender');
+            $table->string('name', 191);
+            $table->string('gender', 191);
             $table->integer('breed');
-            $table->string('height');
+            $table->string('height', 191);
             $table->dateTime('date_of_birth')->nullable();
-            $table->string('color');
-            $table->string('life_number')->nullable();
-            $table->string('slug');
+            $table->string('color', 191);
+            $table->string('life_number', 191)->nullable();
+            $table->string('slug', 191);
             $table->timestamps();
         });
     }

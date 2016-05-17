@@ -19,15 +19,15 @@ class CreateCompanyTables extends Migration
     {
         Schema::create(Company::TABLE, function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('slug');
-            $table->string('telephone');
-            $table->string('website');
-            $table->string('email');
-            $table->longText('about');
+            $table->string('name', 191);
+            $table->string('slug', 191);
+            $table->string('telephone', 191);
+            $table->string('website', 191);
+            $table->string('email', 191);
+            $table->longText('about', 191);
             $table->integer('address_id')->unsigned()->nullable();
             $table->foreign('address_id')->references('id')->on('addresses')->onDelete('set null');
-            $table->string('type');
+            $table->string('type', 191);
             $table->timestamps();
         });
 
