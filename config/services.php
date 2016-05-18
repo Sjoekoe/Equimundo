@@ -44,4 +44,9 @@ return [
         'redirect' => 'http://equimundo.app/auth/facebook/callback',
     ],
 
+    'twitter' => [
+        'client_id' => env('TWITTER_ID'),
+        'client_secret' => env('TWITTER_SECRET'),
+        'redirect' => 'http://equimundo.app/auth/twitter/callback',
+    ],
 ];

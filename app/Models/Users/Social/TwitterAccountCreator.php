@@ -1,12 +1,13 @@
 <?php
 namespace EQM\Models\Users\Social;
 
+use Carbon\Carbon;
 use EQM\Models\Users\UserCreator;
 use EQM\Models\Users\UserRepository;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Contracts\User as ProviderUser;
 
-class FaceBookAccountCreator implements SocialAccountCreator
+class TwitterAccountCreator implements SocialAccountCreator
 {
     /**
      * @var \EQM\Models\Users\Social\SocialAccountRepository
@@ -36,7 +37,7 @@ class FaceBookAccountCreator implements SocialAccountCreator
      */
     public function createOrGetUser(ProviderUser $providerUser)
     {
-        $account = $this->socialAccounts->findByProvidedUserAndProvider($providerUser, 'facebook');
+        $account = $this->socialAccounts->findByProvidedUserAndProvider($providerUser, 'twitter');
 
         if ($account) {
             return $account->user();
@@ -51,41 +52,23 @@ class FaceBookAccountCreator implements SocialAccountCreator
         if (! $user) {
             $user = $this->creator->create([
                 'email' => array_get($providerUser->user, 'email'),
-                'first_name' => $providerUser->user['first_name'],
-                'last_name' => $providerUser->user['last_name'],
+                'first_name' => $providerUser->getName(),
+                'last_name' => '',
                 'password' => Str::random(10),
                 'activationCode' => bcrypt(str_random(30)),
-                'gender' => strtoupper(substr($providerUser->user['gender'], 0, 1)),
-                'date_of_birth' => $providerUser->user['birthday'],
-                'country' => $this->fetchCountry($providerUser->user['hometown']['name']),
-                'activated' => true
+                'gender' => 'F',
+                'date_of_birth' => Carbon::now()->subYears(13)->format('d/m/Y'),
+                'country' => 'BE',
+                'activated' => true,
+                'twitter' => $providerUser->getNickname(),
             ]);
         }
 
         $this->socialAccounts->create($user, [
             'provider_user_id' => $providerUser->getId(),
-            'provider' => 'facebook',
+            'provider' => 'twitter',
         ]);
 
         return $user;
-    }
-
-    /**
-     * @param $name
-     * @return int|string
-     */
-    private function fetchCountry($name)
-    {
-        $list = explode(', ', $name);
-
-        $country = end($list);
-
-        foreach (trans('countries') as $key => $value) {
-            if ($value == $country) {
-                return $key;
-            }
-        }
-
-        return 'NL';
     }
 }

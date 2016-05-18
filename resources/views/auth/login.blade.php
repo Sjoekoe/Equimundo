@@ -24,6 +24,9 @@
             <a class="btn btn-success btn-facebook" href="{{ route('facebook.redirect') }}">
                 <i class="fa fa-facebook"> </i> Sign in with Facebook
             </a>
+            <a class="btn btn-success btn-twitter" href="{{ route('twitter.redirect') }}">
+                <i class="fa fa-twitter"> </i> Sign in with Twitter
+            </a>
             <hr>
 
             <a href="{{ route('password.forgot') }}"><small>Forgot password?</small></a>

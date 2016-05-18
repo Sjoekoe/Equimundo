@@ -45,6 +45,10 @@ class EloquentUserRepository implements UserRepository
         if (array_key_exists('activated', $values)) {
             $user->activated = true;
         }
+        
+        if (array_key_exists('twitter', $values)) {
+            $user->twitter = $values['twitter'];
+        }
 
         $user->save();
 
