@@ -65,10 +65,18 @@ class Info implements Jsonable
         }
     }
 
+    /**
+     * @return array
+     */
     private function getDefaultInfo()
     {
         $info = [
             'csrf' => $this->session->getToken(),
+            'services' => [
+                'algolia_id' => env('ALGOLIA_APP_ID'),
+                'algolia_app_id' => env('ALGOLIA_ADMIN_API_KEY'),
+                'pusher' => env('PUSHER_KEY'),
+            ]
         ];
 
         if ($this->auth->check()) {

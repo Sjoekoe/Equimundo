@@ -5,6 +5,7 @@ return [
         'about_you' => 'About You',
         'about_me' => 'About Me',
         'about_us' => 'About Us',
+        'add_horse_to_company' => 'Add a horse to this company',
         'address' => 'Address',
         'active_horses' => 'Our most active horses',
         'brothers' => 'Brothers',

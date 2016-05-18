@@ -1,6 +1,7 @@
 var Vue = require('vue');
 var Pusher = require('pusher-js');
 var toastr = require('toastr');
+var userId = window.equimundo.auth ? window.equimundo.auth.user.id : null;
 
 module.exports = Vue.extend({
     template: '#notedrop',
@@ -15,7 +16,7 @@ module.exports = Vue.extend({
     },
 
     ready: function() {
-        $.getJSON('/api/users/' + window.user_id, function (user) {
+        $.getJSON('/api/users/' + userId, function (user) {
             this.unread_notifications = user.data.unread_notifications;
         }.bind(this));
 
@@ -23,8 +24,8 @@ module.exports = Vue.extend({
             this.notifications = notifications.data;
         }.bind(this));
 
-        this.pusher = new Pusher(window.pusher);
-        this.pusherChannel = this.pusher.subscribe('user-' + window.user_id + '');
+        this.pusher = new Pusher(window.equimundo.services.pusher);
+        this.pusherChannel = this.pusher.subscribe('user-' + userId + '');
 
         this.pusherChannel.bind('EQM\\Events\\NotificationWasSent', function(response) {
             this.unread_notifications += 1;
@@ -59,7 +60,7 @@ module.exports = Vue.extend({
 
         resetNotificationCount: function() {
             if (this.unread_notifications) {
-                $.getJSON('/api/users/' + window.user_id + '/notifications/reset-count', function() {
+                $.getJSON('/api/users/' + userId + '/notifications/reset-count', function() {
                     this.unread_notifications = 0;
                 }.bind(this));
             }

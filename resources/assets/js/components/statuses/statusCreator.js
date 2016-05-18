@@ -1,4 +1,5 @@
 var Vue = require('vue');
+var userId = window.equimundo.auth ? window.equimundo.auth.user.id : null;
 
 module.exports = Vue.extend({
     template: '#status-creator',
@@ -28,7 +29,7 @@ module.exports = Vue.extend({
     },
 
     ready: function() {
-        $.getJSON('/api/users/' + window.user_id + '/horses', function(horses) {
+        $.getJSON('/api/users/' + userId + '/horses', function(horses) {
             this.options = horses.data;
             this.selected = horses.data[0].name;
             this.selectedId = horses.data[0].id;

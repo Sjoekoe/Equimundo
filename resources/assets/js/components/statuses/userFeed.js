@@ -1,4 +1,5 @@
 var Vue = require('vue');
+var userId = window.equimundo.auth ? window.equimundo.auth.user.id : null;
 
 module.exports = Vue.extend({
     template: '#user-feed-template',
@@ -21,7 +22,7 @@ module.exports = Vue.extend({
     },
 
     ready: function(){
-        $.getJSON('/api/users/' + window.user_id + '/feed', function(statuses) {
+        $.getJSON('/api/users/' + userId + '/feed', function(statuses) {
             this.loading = false;
             this.statuses = statuses.data;
             this.max_pages = statuses.meta.pagination.total_pages;
@@ -35,7 +36,7 @@ module.exports = Vue.extend({
                     vm.loading = true;
                     vm.page += 1;
 
-                    $.getJSON('/api/users/' + window.user_id + '/feed?page=' + vm.page, function(statuses) {
+                    $.getJSON('/api/users/' + userId + '/feed?page=' + vm.page, function(statuses) {
                         vm.loading = false;
                         statuses.data.map(function(status) {
                             vm.statuses.push(status);

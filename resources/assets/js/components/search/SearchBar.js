@@ -16,7 +16,7 @@ module.exports = Vue.extend({
     },
 
     ready: function() {
-        this.client = Algolia(window.algolia_id, window.algolia_app_id);
+        this.client = Algolia(window.equimundo.services.algolia_id, window.equimundo.services.algolia_app_id);
         this.horseIndex = this.client.initIndex('horses');
         this.userIndex = this.client.initIndex('users');
         this.companyIndex = this.client.initIndex('companies');
