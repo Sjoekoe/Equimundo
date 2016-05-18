@@ -9,12 +9,12 @@
     @if (isset($title))
         <title>{{ $title }}</title>
     @else
-        <title>{{ isset($horse) ? $horse->name() . ' at ' : '' }}EquiMundo</title>
+        <title>{{ isset($horse) ? $horse->name() . ' at ' : '' }}Equimundo</title>
     @endif
 
     <meta property="og:url"           content="{{ isset($horse) ? route('horses.show', $horse->slug()) : '' }}" />
     <meta property="og:type"          content="website" />
-    <meta property="og:title"         content="{{ isset($horse) ? $horse->name() . ' at ' : '' }}EquiMundo" />
+    <meta property="og:title"         content="{{ isset($horse) ? $horse->name() . ' at ' : '' }}Equimundo" />
     <meta property="og:description"   content="The social network for horses" />
     <meta property="og:image"         content="{{ isset($horse) && $horse->getProfilePicture() ? route('file.picture', $horse->getProfilePicture()->id()) : asset('images/eqm.png') }}" />
     <link href="/css/app.css" rel="stylesheet">
