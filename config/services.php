@@ -41,12 +41,12 @@ return [
     'facebook' => [
         'client_id' => env('FACEBOOK_ID'),
         'client_secret' => env('FACEBOOK_SECRET'),
-        'redirect' => 'http://equimundo.app/auth/facebook/callback',
+        'redirect' => env('FACEBOOK_REDIRECT'),
     ],
 
     'twitter' => [
         'client_id' => env('TWITTER_ID'),
         'client_secret' => env('TWITTER_SECRET'),
-        'redirect' => 'http://equimundo.app/auth/twitter/callback',
+        'redirect' => env('TWITTER_REDIRECT'),
     ],
 ];
