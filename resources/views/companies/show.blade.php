@@ -28,7 +28,7 @@
                                         <div class="modal-content">
                                             <div class="modal-body">
                                                 <div class="row">
-                                                    <div class="col-sm-12"><h3 class="m-t-none m-b">Add a horse to this company</h3>
+                                                    <div class="col-sm-12"><h3 class="m-t-none m-b">{{ trans('copy.titles.add_horse_to_company') }}</h3>
 
                                                         @if (auth()->check())
                                                             <ul class="list-unstyled">

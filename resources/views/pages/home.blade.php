@@ -154,7 +154,4 @@
             </div>
         </div>
     </div>
-    <script>
-        var user_id = {{ auth()->user()->id() }}
-    </script>
 @stop

@@ -16,7 +16,7 @@ module.exports = Vue.extend({
     },
 
     ready: function() {
-        this.pusher = new Pusher(window.pusher);
+        this.pusher = new Pusher(window.equimundo.services.pusher);
         this.pusherChannel = this.pusher.subscribe('admin-dashboard');
 
         this.pusherChannel.bind('EQM\\Events\\InvitationWasSent', function() {

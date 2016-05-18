@@ -38,10 +38,11 @@ return [
         'companies_groups' => 'Bedrijven / Groepen',
         'get_the_most_of_equimundo' => 'Hoe krijg je de beste ervaring op Equimundo?',
         'notifications' => 'Notificaties',
-        'search_results' => ':count resultaten gevonden voor <i class=\\\\\\\\\"text-info\\\\\\\\\">:searchWord</i>',
+        'search_results' => ':count resultaten gevonden voor <i class=\\\\\\\\\\\"text-info\\\\\\\\\\\">:searchWord</i>',
         'send_message' => 'Verzend bericht aan :receiver',
         'brothers' => 'Broers',
         'sisters' => 'Zussen',
+        'add_horse_to_company' => 'Voeg een paard toe aan dit bedrijf',
     ],
     'p' => [
         'born' => 'Geboren',
