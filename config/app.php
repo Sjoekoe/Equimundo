@@ -155,6 +155,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         EQM\Core\Database\DatabaseServiceProvider::class,
         Themsaid\Langman\LangmanServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
 
         /*
          * Model Service Providers
@@ -180,6 +181,7 @@ return [
         EQM\Models\Statuses\Likes\LikeServiceProvider::class,
         EQM\Models\Users\AuthServiceProvider::class,
         EQM\Models\Users\UserServiceProvider::class,
+        EQM\Models\Users\Social\SocialAccountServiceProvider::class,
         EQM\Models\Advertising\AdvertisingServiceProvider::class,
     ],
     /*
@@ -233,6 +235,7 @@ return [
         'Active'    => HieuLe\Active\Facades\Active::class,
         'Bugsnag' => Bugsnag\BugsnagLaravel\BugsnagFacade::class,
         'Location' => Stevebauman\Location\Facades\Location::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 
         // EQM Facades
         'Info' => \EQM\Core\Info\Facades\Info::class,

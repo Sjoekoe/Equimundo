@@ -41,6 +41,10 @@ class EloquentUserRepository implements UserRepository
             'country' => $values['country'],
             'sidebar_collapsed' => true,
         ]);
+        
+        if (array_key_exists('activated', $values)) {
+            $user->activated = true;
+        }
 
         $user->save();
 

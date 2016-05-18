@@ -13,15 +13,17 @@ class UserMailer extends Mailer
      */
     public function sendWelcomeMessageTo(User $user)
     {
-        $subject = 'Welcome to Equimundo';
-        $view = 'emails.registration.confirm';
-        $data = [
-            'activationLink' => route('activate', ['token' => $user->activationKey(), 'email' => $user->email()]),
-            'userName' => $user->firstName(),
-            'userMail' => $user->email(),
-        ];
+        if ($user->email()) {
+            $subject = 'Welcome to Equimundo';
+            $view = 'emails.registration.confirm';
+            $data = [
+                'activationLink' => route('activate', ['token' => $user->activationKey(), 'email' => $user->email()]),
+                'userName' => $user->firstName(),
+                'userMail' => $user->email(),
+            ];
 
-        return $this->sendTo($user, $subject, $view, $data);
+            return $this->sendTo($user, $subject, $view, $data);
+        }
     }
 
     /**
@@ -29,15 +31,17 @@ class UserMailer extends Mailer
      */
     public function sendActivationReminder(User $user)
     {
-        $subject = 'Activate your account';
-        $view = 'emails.registration.reminder';
-        $data = [
-            'activationLink' => 'https://www.equimundo.com/activate?token=' . $user->activationKey() . '&email=' . $user->email(),
-            'userName' => $user->firstName(),
-            'userMail' => $user->email(),
-        ];
+        if ($user->email()) {
+            $subject = 'Activate your account';
+            $view = 'emails.registration.reminder';
+            $data = [
+                'activationLink' => 'https://www.equimundo.com/activate?token=' . $user->activationKey() . '&email=' . $user->email(),
+                'userName' => $user->firstName(),
+                'userMail' => $user->email(),
+            ];
 
-        return $this->sendTo($user, $subject, $view, $data);
+            return $this->sendTo($user, $subject, $view, $data);
+        }
     }
 
     /**
@@ -47,20 +51,22 @@ class UserMailer extends Mailer
      */
     public function sendStatusLikedTo(User $user, Status $status, User $sender)
     {
-        $entity = $status instanceof HorseStatus ? $status->horse() : $status->company();
+        if ($user->email()) {
+            $entity = $status instanceof HorseStatus ? $status->horse() : $status->company();
 
-        $subject = $sender->fullName() . ' likes the status of ' . $entity->name();
-        $view = 'emails.statuses.liked';
-        
-        $data = [
-            'link' => route('statuses.show', $status->id()),
-            'sender' => $sender,
-            'userMail' => $user->email(),
-            'userName' => $user->firstName(),
-            'horseName' => $entity->name(),
-        ];
+            $subject = $sender->fullName() . ' likes the status of ' . $entity->name();
+            $view = 'emails.statuses.liked';
 
-        return $this->sendTo($user, $subject, $view, $data);
+            $data = [
+                'link' => route('statuses.show', $status->id()),
+                'sender' => $sender,
+                'userMail' => $user->email(),
+                'userName' => $user->firstName(),
+                'horseName' => $entity->name(),
+            ];
+
+            return $this->sendTo($user, $subject, $view, $data);
+        }
     }
 
     /**
@@ -71,18 +77,20 @@ class UserMailer extends Mailer
      */
     public function sendPedigreeCreated(User $user, Horse $horse, Horse $family, User $sender)
     {
-        $subject = 'A pedigree connection was made for ' . $horse->name();
-        $view = 'emails.horses.pedigree';
-        $data = [
-            'link' => route('horses.show', $family->slug()),
-            'sender' => $sender,
-            'family' => $family,
-            'horse' => $horse,
-            'userName' => $user->firstName(),
-            'userMail' => $user->email(),
-        ];
+        if ($user->email()) {
+            $subject = 'A pedigree connection was made for ' . $horse->name();
+            $view = 'emails.horses.pedigree';
+            $data = [
+                'link' => route('horses.show', $family->slug()),
+                'sender' => $sender,
+                'family' => $family,
+                'horse' => $horse,
+                'userName' => $user->firstName(),
+                'userMail' => $user->email(),
+            ];
 
-        return $this->sendTo($user, $subject, $view, $data);
+            return $this->sendTo($user, $subject, $view, $data);
+        }
     }
 
     public function sendInvitation(User $user, $email)

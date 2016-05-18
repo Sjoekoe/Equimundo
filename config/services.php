@@ -38,4 +38,10 @@ return [
         'secret' => '',
     ],
 
+    'facebook' => [
+        'client_id' => env('FACEBOOK_ID'),
+        'client_secret' => env('FACEBOOK_SECRET'),
+        'redirect' => 'http://equimundo.app/auth/facebook/callback',
+    ],
+
 ];
