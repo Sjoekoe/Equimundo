@@ -28,6 +28,7 @@
             ga('send', 'pageview');
 
         </script>
+        @include('layout.partials._facebook_pixel')
     @endif
 </head>
 <body class="gray-bg bg-img" style="background-image: url({{ asset('images/horses.jpg') }})">
