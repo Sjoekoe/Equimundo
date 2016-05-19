@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="stylesheet" href="https://plus.google.com/u/0/b/114324010963091567789/114324010963091567789">
+    <meta name="description" content="Equimundo - The social network for horses. Create profiles, find relatives, keep track of the palmares and share their daily life">
 
     <title>Equimundo - The social network for horses</title>
 
@@ -60,11 +62,9 @@
         <div class="item active">
             <div class="container">
                 <div class="carousel-caption">
-                    <h1>Create profiles,<br/>
-                        find relatives,<br/>
-                        keep track of the palmares<br/>
-                        and share their daily life</h1>
-                    <p>The social network for horses</p>
+                    <h1>The social network for horses</h1>
+                    <p>Create profiles, find relatives, keep track of the palmares<br/>
+                        and share their daily life</p>
                     <p>
                         <a class="btn btn-lg btn-primary" href="{{ route('register') }}" role="button">Register now</a>
                     </p>
@@ -77,7 +77,7 @@
         <div class="item">
             <div class="container">
                 <div class="carousel-caption blank">
-                    <h1>Find out more about <br/> the history of your horse.</h1>
+                    <h2>Find out more about <br/> the history of your horse.</h2>
                     <p>Our engine let's you find relatives from your horse you never knew about.</p>
                     <p><a class="btn btn-lg btn-primary" href="{{ route('register') }}" role="button">Register now</a></p>
                 </div>
@@ -100,7 +100,7 @@
     <div class="row">
         <div class="col-lg-12 text-center">
             <div class="navy-line"></div>
-            <h1>Give your horse a voice!<br/> <span class="navy"> Share their lives.</span> </h1>
+            <h2>Give your horse a voice!<br/> <span class="navy"> Share their lives.</span> </h2>
         </div>
     </div>
     <div class="row">
@@ -135,7 +135,7 @@
     <div class="row">
         <div class="col-lg-12 text-center">
             <div class="navy-line"></div>
-            <h1>Discover how other horses do.</h1>
+            <h2>Discover how other horses do.</h2>
             <p>On your timeline you can find all updates in the blink of an eye. </p>
         </div>
     </div>
@@ -157,7 +157,7 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <div class="navy-line"></div>
-                <h1>What makes us different than other social networks.</h1>
+                <h2>What makes us different than other social networks.</h2>
                 <p>Even more great features. </p>
             </div>
         </div>
@@ -187,9 +187,9 @@
         <div class="row">
             <div class="col-lg-12 text-center wow zoomIn">
                 <i class="fa fa-comment big-icon"></i>
-                <h1>
+                <h2>
                     What our users say.
-                </h1>
+                </h2>
                 <div class="testimonials-text">
                     <i>"Equimundo has given me the opportunity to meet with a half-brother of my horse on the first day I registered. Also people on other social media are less complaining for posting less pictures of Corleana on there."</i>
                 </div>
@@ -207,7 +207,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="navy-line"></div>
-                    <h1>Some of our horses.</h1>
+                    <h2>Some of our horses.</h2>
                 </div>
             </div>
             <div class="row features-block">
@@ -270,7 +270,7 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <div class="navy-line"></div>
-                <h1>More and more extra great features</h1>
+                <h2>More and more extra great features</h2>
                 <p>Not only for horses. </p>
             </div>
         </div>
@@ -311,7 +311,7 @@
         <div class="row m-b-lg">
             <div class="col-lg-12 text-center">
                 <div class="navy-line"></div>
-                <h1>Contact Us</h1>
+                <h2>Contact Us</h2>
                 <p>If you want more information, or just want to drop us a line.</p>
             </div>
         </div>
