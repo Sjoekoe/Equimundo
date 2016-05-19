@@ -55,7 +55,7 @@ class PagesController extends Controller
         if (! auth()->check()) {
             return redirect()->route('marketing');
         }
-        
+
         $horses = $this->collection->getIdAndNamePairs($this->horses->findForUser(auth()->user()));
         $statuses = $this->statuses->findFeedForUser(auth()->user());
         $likes = $this->likes->findForUser(auth()->user());
@@ -92,9 +92,16 @@ class PagesController extends Controller
     {
         return Queue::marshal();
     }
-    
+
     public function marketing()
     {
         return view('pages.marketing');
+    }
+
+    public function sitemap()
+    {
+        $content = view('pages.sitemap');
+        
+        return response($content)->header('Content-Type', 'text/xml;charset=utf-8');
     }
 }
