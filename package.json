@@ -1,13 +1,13 @@
 {
   "devDependencies": {
-    "gulp": "^3.8.8",
-    "laravel-elixir": "*"
+    "gulp": "^3.8.8"
   },
   "dependencies": {
     "algoliasearch": "^3.13.0",
     "bootstrap-sass": "^3.3.6",
     "bootstrap-select": "^1.9.3",
     "google-maps": "^3.2.1",
+    "laravel-elixir": "^6.0.0-2",
     "lightbox2": "^2.8.2",
     "moment": "^2.12.0",
     "moment-timezone": "^0.5.3",
