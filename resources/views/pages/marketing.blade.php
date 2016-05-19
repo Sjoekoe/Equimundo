@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="stylesheet" href="https://plus.google.com/u/0/b/114324010963091567789/114324010963091567789">
+    <link rel="Publisher" href="https://plus.google.com/u/0/b/114324010963091567789/114324010963091567789">
     <meta name="description" content="Equimundo - The social network for horses. Create profiles, find relatives, keep track of the palmares and share their daily life">
 
     <title>Equimundo - The social network for horses</title>
@@ -181,7 +181,7 @@
 </section>
 
 
-<section id="testimonials" class="navy-section testimonials" style="margin-top: 0">
+<section id="testimonials" class="navy-section testimonials">
 
     <div class="container">
         <div class="row">
@@ -202,7 +202,7 @@
 </section>
 
 @if (App::Environment('production'))
-    <section class="comments gray-section" style="margin-top: 0">
+    <section class="comments gray-bg n-m-t">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -345,7 +345,10 @@
         </div>
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 text-center m-t-lg m-b-lg">
-                <p><strong>&copy; {{ Carbon\Carbon::now()->format('Y') }} Equimundo</strong><br/> All rights reserved.</p>
+                <p><strong>&copy; {{ Carbon\Carbon::now()->format('Y') }} Equimundo</strong></p>
+                <a href="{{ route('terms_of_service') }}">Terms</a> -
+                <a href="{{ route('privacy') }}">Privacy</a> -
+                <a href="{{ route('sitemap') }}">Sitemap</a>
             </div>
         </div>
     </div>
