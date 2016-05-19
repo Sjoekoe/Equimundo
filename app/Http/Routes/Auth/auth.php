@@ -14,9 +14,9 @@ Route::get('settings/password', ['as' => 'password.edit', 'uses' => 'PasswordCon
 Route::post('settings/password', ['as' => 'password.update', 'uses' => 'PasswordController@update', 'middleware' => 'auth']);
 
 Route::group(['namespace' => 'Social\\'], function() {
-    Route::get('/auth/facebook/redirect', ['as' => 'facebook.redirect', 'uses' => 'FaceBookController@redirect']);
-    Route::get('/auth/facebook/callback', ['as' => 'facebook.callback', 'uses' => 'FaceBookController@callback']);
-    
+    Route::get('/auth/facebook/redirect', ['as' => 'facebook.redirect', 'uses' => 'FacebookController@redirect']);
+    Route::get('/auth/facebook/callback', ['as' => 'facebook.callback', 'uses' => 'FacebookController@callback']);
+
     Route::get('/auth/twitter/redirect', ['as' => 'twitter.redirect', 'uses' => 'TwitterController@redirect']);
     Route::get('/auth/twitter/callback', ['as' => 'twitter.callback', 'uses' => 'TwitterController@callback']);
 });
