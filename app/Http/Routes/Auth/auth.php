@@ -12,3 +12,11 @@ Route::get('password/reset/{token}', ['as' => 'password.reset', 'uses' => 'Passw
 Route::post('password/reset/{token}', ['as' => 'password.post_reset', 'uses' => 'PasswordController@postReset', 'middleware' => 'guest']);
 Route::get('settings/password', ['as' => 'password.edit', 'uses' => 'PasswordController@edit', 'middleware' => 'auth']);
 Route::post('settings/password', ['as' => 'password.update', 'uses' => 'PasswordController@update', 'middleware' => 'auth']);
+
+Route::group(['namespace' => 'Social\\'], function() {
+    Route::get('/auth/facebook/redirect', ['as' => 'facebook.redirect', 'uses' => 'FaceBookController@redirect']);
+    Route::get('/auth/facebook/callback', ['as' => 'facebook.callback', 'uses' => 'FaceBookController@callback']);
+    
+    Route::get('/auth/twitter/redirect', ['as' => 'twitter.redirect', 'uses' => 'TwitterController@redirect']);
+    Route::get('/auth/twitter/callback', ['as' => 'twitter.callback', 'uses' => 'TwitterController@callback']);
+});
