@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta id="token" name="token" value="{{ csrf_token() }}" />
     <link rel="stylesheet" href="https://plus.google.com/u/0/b/114324010963091567789/114324010963091567789">
-    <meta name="description" content="Equimundo - The social network for horses. Create profiles, find relatives, keep track of the palmares and share their daily life">
+    <meta name="description" content="The social network for horses. Create profiles, find relatives, keep track of the palmares and share their daily life">
 
     @if (isset($title))
         <title>{{ $title }}</title>
