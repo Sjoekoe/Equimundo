@@ -7,12 +7,20 @@ $api->version('v1', function(Router $api) {
     $api->group(['namespace' => 'EQM\\Api\\Http\\Controllers\\'], function (Router $api) {
         $api->post('/addresses', ['as' => 'api.addresses.create', 'uses' => 'AddressController@create']);
 
-        $api->group(['namespace' => 'Wiki\\'], function(Router $api) {
-            $api->get('/topics', ['as' => 'topics.index', 'uses' => 'TopicController@index']);
-            $api->post('/topics', ['as' => 'topics.store', 'uses' => 'TopicController@store']);
-            $api->get('/topics/{topic}', ['as' => 'topics.show', 'uses' => 'TopicController@show']);
-            $api->put('/topics/{topic}', ['as' => 'topics.update', 'uses' => 'TopicController@update']);
-            $api->delete('/topics/{topic}', ['as' => 'topics.delete', 'uses' => 'TopicController@delete']);
+        $api->group(['namespace' => 'Wiki\\', 'prefix' => 'topics'], function(Router $api) {
+            $api->get('/', ['as' => 'topics.index', 'uses' => 'TopicController@index']);
+            $api->post('/', ['as' => 'topics.store', 'uses' => 'TopicController@store']);
+            $api->get('/{topic}', ['as' => 'topics.show', 'uses' => 'TopicController@show']);
+            $api->put('/{topic}', ['as' => 'topics.update', 'uses' => 'TopicController@update']);
+            $api->delete('/{topic}', ['as' => 'topics.delete', 'uses' => 'TopicController@delete']);
+
+            $api->group(['prefix' => '{topic}/articles'], function (Router $api) {
+                $api->get('/', ['as' => 'articles.index', 'uses' => 'ArticleController@index']);
+                $api->post('/', ['as' => 'articles.store', 'uses' => 'ArticleController@store']);
+                $api->get('/{article}', ['as' => 'articles.show', 'uses' => 'ArticleController@show']);
+                $api->put('/{article}', ['as' => 'articles.update', 'uses' => 'ArticleController@update']);
+                $api->delete('/{article}', ['as' => 'articles.delete', 'uses' => 'ArticleController@delete']);
+            });
         });
 
         $api->get('/users/{user}', ['as' => 'api.users.show', 'uses' => 'UserController@show']);

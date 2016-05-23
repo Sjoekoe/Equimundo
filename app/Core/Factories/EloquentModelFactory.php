@@ -43,6 +43,8 @@ use EQM\Models\Statuses\EloquentHorseStatus;
 use EQM\Models\Statuses\HorseStatus;
 use EQM\Models\Users\EloquentUser;
 use EQM\Models\Users\User;
+use EQM\Models\Wiki\Articles\Article;
+use EQM\Models\Wiki\Articles\EloquentArticle;
 use EQM\Models\Wiki\Topics\EloquentTopic;
 use EQM\Models\Wiki\Topics\Topic;
 use Illuminate\Database\Eloquent\Factory;
@@ -60,6 +62,7 @@ class EloquentModelFactory implements ModelFactory
     private $models = [
         Address::class => EloquentAddress::class,
         Album::class => EloquentAlbum::class,
+        Article::class => EloquentArticle::class,
         Rectangle::class => EloquentRectangle::class,
         AdvertisingCompany::class => EloquentAdvertisingCompany::class,
         AdvertisingContact::class => EloquentAdvertisingContact::class,

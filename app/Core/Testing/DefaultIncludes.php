@@ -12,6 +12,7 @@ use EQM\Models\Horses\Horse;
 use EQM\Models\Notifications\Notification;
 use EQM\Models\Statuses\Status;
 use EQM\Models\Users\User;
+use EQM\Models\Wiki\Articles\Article;
 use EQM\Models\Wiki\Topics\Topic;
 
 trait DefaultIncludes
@@ -245,6 +246,25 @@ trait DefaultIncludes
         return array_merge([
             'id' => $topic->id(),
             'title' => $topic->title(),
+        ], $attributes);
+    }
+
+    /**
+     * @param \EQM\Models\Wiki\Articles\Article $article
+     * @param array $attributes
+     * @return array
+     */
+    public function includedArticle(Article $article, $attributes = [])
+    {
+        return array_merge([
+            'id' => $article->id(),
+            'title' => $article->title(),
+            'slug' => $article->slug(),
+            'body' => $article->body(),
+            'views' => $article->views(),
+            'topicRelation' => [
+                'data' => $this->includedTopic($article->topic()),
+            ],
         ], $attributes);
     }
 }

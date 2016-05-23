@@ -17,6 +17,7 @@ use EQM\Models\Notifications\Notification;
 use EQM\Models\Statuses\CompanyStatus;
 use EQM\Models\Statuses\HorseStatus;
 use EQM\Models\Users\User;
+use Illuminate\Http\Response;
 
 class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
@@ -44,5 +45,10 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
         parent::setUp();
 
         //$this->artisan('migrate');
+    }
+    
+    public function assertNoContent()
+    {
+        return $this->assertResponseStatus(Response::HTTP_NO_CONTENT);
     }
 }
