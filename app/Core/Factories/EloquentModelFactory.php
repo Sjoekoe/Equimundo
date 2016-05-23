@@ -43,6 +43,8 @@ use EQM\Models\Statuses\EloquentHorseStatus;
 use EQM\Models\Statuses\HorseStatus;
 use EQM\Models\Users\EloquentUser;
 use EQM\Models\Users\User;
+use EQM\Models\Wiki\Topics\EloquentTopic;
+use EQM\Models\Wiki\Topics\Topic;
 use Illuminate\Database\Eloquent\Factory;
 
 class EloquentModelFactory implements ModelFactory
@@ -67,7 +69,6 @@ class EloquentModelFactory implements ModelFactory
         Conversation::class => EloquentConversation::class,
         Discipline::class => EloquentDiscipline::class,
         Event::class => EloquentEvent::class,
-        Stable::class => EloquentStable::class,
         Follower::class => EloquentFollower::class,
         Horse::class => EloquentHorse::class,
         HorseTeam::class => EloquentHorseTeam::class,
@@ -76,6 +77,8 @@ class EloquentModelFactory implements ModelFactory
         Message::class => EloquentMessage::class,
         Notification::class => EloquentNotification::class,
         HorseStatus::class => EloquentHorseStatus::class,
+        Stable::class => EloquentStable::class,
+        Topic::class => EloquentTopic::class,
         User::class => EloquentUser::class,
     ];
 

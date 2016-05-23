@@ -23,6 +23,7 @@ use EQM\Models\Pictures\EloquentPicture;
 use EQM\Models\Statuses\EloquentCompanyStatus;
 use EQM\Models\Statuses\EloquentHorseStatus;
 use EQM\Models\Users\EloquentUser;
+use EQM\Models\Wiki\Topics\EloquentTopic;
 use Faker\Generator;
 
 $factory->define(EloquentUser::class, function (Generator $faker) {
@@ -89,5 +90,8 @@ $factory->define(EloquentConversation::class, function (Generator $faker) {
     return [];
 });
 $factory->define(EloquentMessage::class, function (Generator $faker) {
+    return [];
+});
+$factory->define(EloquentTopic::class, function (Generator $faker) {
     return [];
 });

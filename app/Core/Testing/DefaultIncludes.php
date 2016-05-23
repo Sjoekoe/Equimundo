@@ -12,6 +12,7 @@ use EQM\Models\Horses\Horse;
 use EQM\Models\Notifications\Notification;
 use EQM\Models\Statuses\Status;
 use EQM\Models\Users\User;
+use EQM\Models\Wiki\Topics\Topic;
 
 trait DefaultIncludes
 {
@@ -231,6 +232,19 @@ trait DefaultIncludes
             'conversationRelation' => [
                 'data' => $this->includedConversation($message->conversation())
             ],
+        ], $attributes);
+    }
+
+    /**
+     * @param \EQM\Models\Wiki\Topics\Topic $topic
+     * @param array $attributes
+     * @return array
+     */
+    public function includedTopic(Topic $topic, $attributes = [])
+    {
+        return array_merge([
+            'id' => $topic->id(),
+            'title' => $topic->title(),
         ], $attributes);
     }
 }

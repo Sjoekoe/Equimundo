@@ -18,6 +18,7 @@ use EQM\Models\Pictures\PictureRouteBinder;
 use EQM\Models\Statuses\StatusRouteBinder;
 use EQM\Models\Users\UserRouteBinder;
 use EQM\Models\Users\UserSlugRouteBinder;
+use EQM\Models\Wiki\Topics\TopicRouteBinding;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -47,6 +48,7 @@ class RouteServiceProvider extends ServiceProvider {
         $router->bind('pedigree', PedigreeRouteBinder::class);
         $router->bind('picture', PictureRouteBinder::class);
         $router->bind('status', StatusRouteBinder::class);
+        $router->bind('topic', TopicRouteBinding::class);
         $router->bind('user', UserRouteBinder::class);
         $router->bind('user_slug', UserSlugRouteBinder::class);
     }

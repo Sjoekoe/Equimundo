@@ -7,6 +7,14 @@ $api->version('v1', function(Router $api) {
     $api->group(['namespace' => 'EQM\\Api\\Http\\Controllers\\'], function (Router $api) {
         $api->post('/addresses', ['as' => 'api.addresses.create', 'uses' => 'AddressController@create']);
 
+        $api->group(['namespace' => 'Wiki\\'], function(Router $api) {
+            $api->get('/topics', ['as' => 'topics.index', 'uses' => 'TopicController@index']);
+            $api->post('/topics', ['as' => 'topics.store', 'uses' => 'TopicController@store']);
+            $api->get('/topics/{topic}', ['as' => 'topics.show', 'uses' => 'TopicController@show']);
+            $api->put('/topics/{topic}', ['as' => 'topics.update', 'uses' => 'TopicController@update']);
+            $api->delete('/topics/{topic}', ['as' => 'topics.delete', 'uses' => 'TopicController@delete']);
+        });
+
         $api->get('/users/{user}', ['as' => 'api.users.show', 'uses' => 'UserController@show']);
         $api->put('/users/{user}', ['as' => 'api.users.update', 'uses' => 'UserController@update']);
         $api->get('/users/{user}/horses', ['as' => 'api.users.horses.index', 'uses' => 'HorseController@index']);
