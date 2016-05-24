@@ -31,6 +31,7 @@
 
         </script>
         @include('layout.partials._facebook_pixel')
+        @include('layout.partials._hotjar')
     @endif
 </head>
 <body class="gray-bg bg-img" style="background-image: url({{ asset('images/horses.jpg') }})">
