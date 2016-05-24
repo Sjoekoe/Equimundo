@@ -42,6 +42,7 @@
             ga('send', 'pageview');
         </script>
         @include('layout.partials._facebook_pixel')
+        @include('layout.partials._hotjar')
     @endif
 </head>
 <body class="{{ ! auth()->check() ||

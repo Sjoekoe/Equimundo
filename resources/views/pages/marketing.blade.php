@@ -26,6 +26,8 @@
             ga('create', 'UA-65362816-1', 'auto');
             ga('send', 'pageview');
         </script>
+        @include('layout.partials._facebook_pixel')
+        @include('layout.partials._hotjar')
     @endif
 </head>
 <body id="page-top" class="landing-page">
