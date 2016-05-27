@@ -30,6 +30,7 @@
             ga('send', 'pageview');
 
         </script>
+        @include('layout.partials._tag_manager')
         @include('layout.partials._facebook_pixel')
         @include('layout.partials._hotjar')
     @endif
