@@ -71,3 +71,7 @@ Route::group(['namespace' => 'Users'], function() {
     require __DIR__ . '/Routes/Users/settings.php';
 });
 
+Route::group(['namespace' => 'Wiki'], function() {
+    require __DIR__ . '/Routes/Wiki/wiki.php';
+});
+

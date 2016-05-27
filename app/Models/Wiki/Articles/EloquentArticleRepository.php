@@ -53,6 +53,10 @@ class EloquentArticleRepository implements ArticleRepository
         if (array_key_exists('body', $values)) {
             $article->body = $values['body'];
         }
+        
+        if (array_key_exists('views', $values)) {
+            $article->views = $values['views'];
+        }
 
         $article->save();
 

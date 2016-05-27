@@ -16,6 +16,11 @@ interface Topic
     public function title();
 
     /**
+     * @return \EQM\Models\Wiki\Articles\Article[]
+     */
+    public function articles();
+
+    /**
      * @return \Carbon\Carbon
      */
     public function createdAt();

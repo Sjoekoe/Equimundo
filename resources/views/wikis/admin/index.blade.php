@@ -25,7 +25,11 @@
                                 <tbody>
                                     <tr v-for="topic in topics">
                                         <td>@{{ topic.id }}</td>
-                                        <td>@{{ topic.title }}</td>
+                                        <td>
+                                            <a href="/admin/wiki/topics/@{{ topic.id }}">
+                                                @{{ topic.title }}
+                                            </a>
+                                        </td>
                                         <td>
                                             <a href="#add-topic" data-toggle="modal" @click="fillUpdatedValues($index, topic)">
                                                 <i class="fa fa-pencil"></i>

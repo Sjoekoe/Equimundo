@@ -39,5 +39,6 @@ new Vue({
         followhorse: require('./components/horses/FollowHorse'),
 
         wikitopicstable: require('./components/wiki/TopicsTable'),
+        articlestable: require('./components/wiki/ArticlesTable'),
     },
 });
