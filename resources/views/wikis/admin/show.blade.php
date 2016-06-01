@@ -33,10 +33,10 @@
                                         @{{ article.views }}
                                     </td>
                                     <td>
-                                        <a href="#" data-toggle="modal">
+                                        <a href="/admin/wiki/topics/@{{ article.topicRelation.data.id }}/articles/@{{ article.slug }}/edit">
                                             <i class="fa fa-pencil"></i>
                                         </a>
-                                        <a href="#" >
+                                        <a href="#" @click=removeArticle(article)>
                                             <i class="fa fa-remove"></i>
                                         </a>
                                     </td>
