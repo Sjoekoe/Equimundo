@@ -24,6 +24,8 @@ use EQM\Models\Statuses\CompanyStatus;
 use EQM\Models\Statuses\HorseStatus;
 use EQM\Models\Users\User;
 use EQM\Models\Users\UserRepository;
+use EQM\Models\Wiki\Articles\Article;
+use EQM\Models\Wiki\Topics\Topic;
 
 trait CreatesModels
 {
@@ -352,4 +354,30 @@ trait CreatesModels
             'created_at' => Carbon::now(),
         ], $attributes));
     }
+
+    /**
+     * @param array $attributes
+     * @return \EQM\Models\Wiki\Topics\Topic
+     */
+    public function createTopic(array $attributes = [])
+    {
+        return $this->modelFactory->create(Topic::class, array_merge([
+            'title' => 'Foo topic',
+        ], $attributes));
+    }
+
+    /**
+     * @param array $attributes
+     * @return \EQM\Models\Wiki\Articles\Article
+     */
+    public function createArticle(array $attributes = [])
+    {
+        return $this->modelFactory->create(Article::class, array_merge([
+            'title' => 'Test article',
+            'slug' => 'test-article',
+            'views' => 0,
+            'body' => 'Lorem ipsum dolores est',
+        ], $attributes));
+    }
+
 }

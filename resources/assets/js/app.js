@@ -10,7 +10,7 @@ new Vue({
 
     components: {
         showconversation: require('./components/conversations/ShowConversation'),
-        
+
         advertisementstable: require('./components/admin/Advertisements/AdvertisementsTable'),
         advertisingcompany: require('./components/admin/Advertisements/ShowAdvertisingCompany'),
         advertisingcompaniestable: require('./components/admin/Advertisements/AdvertisingCompaniesTable'),
@@ -37,5 +37,8 @@ new Vue({
         sidebarbutton: require('./components/nav/CollapseSideBar'),
 
         followhorse: require('./components/horses/FollowHorse'),
+
+        wikitopicstable: require('./components/wiki/TopicsTable'),
+        articlestable: require('./components/wiki/ArticlesTable'),
     },
 });

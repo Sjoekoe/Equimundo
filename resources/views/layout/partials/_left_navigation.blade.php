@@ -67,6 +67,11 @@
                     </ul>
                 </li>
             @endif
+            <li {{ Active::route('wiki.*', 'active') }}>
+                <a href="{{ route('wiki.index') }}">
+                    <i class="fa fa-info"></i> <span class="nav-label">Wiki</span>
+                </a>
+            </li>
         </ul>
 
     </div>

@@ -79,6 +79,27 @@
                     </li>
                 </ul>
             </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-wikipedia-w"></i>
+                    <span class="menu-title">
+                        <strong>Wiki</strong>
+                    </span>
+                    <i class="arrow"></i>
+                </a>
+                <ul class="nav nav-second-level collapse">
+                    <li>
+                        <a href="{{ route('admin.wiki.topics') }}">
+                            Topics
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Articles
+                        </a>
+                    </li>
+                </ul>
+            </li>
         </ul>
 
     </div>

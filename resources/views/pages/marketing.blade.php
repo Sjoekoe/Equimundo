@@ -48,6 +48,7 @@
                     <li><a class="page-scroll" href="#features">Features</a></li>
                     <li><a class="page-scroll" href="#testimonials">Testimonials</a></li>
                     <li><a class="page-scroll" href="#contact">Contact</a></li>
+                    <li><a href="{{ route('wiki.index') }}">Wiki</a></li>
                     <li><a href="{{ route('register') }}">Sign Up</a></li>
                     <li><a href="{{ route('login') }}">Sign In</a></li>
                 </ul>

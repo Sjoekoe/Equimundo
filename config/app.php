@@ -182,6 +182,7 @@ return [
         EQM\Models\Users\AuthServiceProvider::class,
         EQM\Models\Users\UserServiceProvider::class,
         EQM\Models\Users\Social\SocialAccountServiceProvider::class,
+        EQM\Models\Wiki\WikiServiceProvider::class,
         EQM\Models\Advertising\AdvertisingServiceProvider::class,
     ],
     /*

@@ -4,6 +4,7 @@ namespace EQM\Core\Slugs;
 use EQM\Models\Companies\CompanyRepository;
 use EQM\Models\Horses\HorseRepository;
 use EQM\Models\Users\UserRepository;
+use EQM\Models\Wiki\Articles\ArticleRepository;
 use Illuminate\Support\Str;
 
 class SlugCreator
@@ -42,9 +43,18 @@ class SlugCreator
     public function createForCompany($name)
     {
         $companies = app(CompanyRepository::class);
-        $slug = STR::slug($name);
+        $slug = Str::slug($name);
         $slugCount = $companies->findSlugCount($slug);
         
+        return ($slugCount > 0) ? "{$slug}-{$slugCount}" : $slug;
+    }
+    
+    public function createForArticle($title)
+    {
+        $articles = app(ArticleRepository::class);
+        $slug = Str::slug($title);
+        $slugCount = $articles->findSlugCount($slug);
+
         return ($slugCount > 0) ? "{$slug}-{$slugCount}" : $slug;
     }
 }

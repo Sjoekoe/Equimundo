@@ -18,6 +18,8 @@ use EQM\Models\Pictures\PictureRouteBinder;
 use EQM\Models\Statuses\StatusRouteBinder;
 use EQM\Models\Users\UserRouteBinder;
 use EQM\Models\Users\UserSlugRouteBinder;
+use EQM\Models\Wiki\Articles\ArticleRouteBinding;
+use EQM\Models\Wiki\Topics\TopicRouteBinding;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -36,6 +38,7 @@ class RouteServiceProvider extends ServiceProvider {
         $router->bind('advertising_company', AdvertisingCompanyRouteBinding::class);
         $router->bind('advertising_contact', AdvertisingContactRouteBinding::class);
         $router->bind('album', AlbumRouteBinder::class);
+        $router->bind('article', ArticleRouteBinding::class);
         $router->bind('comment', CommentRouteBinder::class);
         $router->bind('company', CompanyRouteBinding::class);
         $router->bind('conversation', ConversationRouteBinder::class);
@@ -47,6 +50,7 @@ class RouteServiceProvider extends ServiceProvider {
         $router->bind('pedigree', PedigreeRouteBinder::class);
         $router->bind('picture', PictureRouteBinder::class);
         $router->bind('status', StatusRouteBinder::class);
+        $router->bind('topic', TopicRouteBinding::class);
         $router->bind('user', UserRouteBinder::class);
         $router->bind('user_slug', UserSlugRouteBinder::class);
     }

@@ -7,6 +7,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'admin'], function() {
     require __DIR__ . '/Routes/Admin/horses.php';
     require __DIR__ . '/Routes/Admin/searches.php';
     require __DIR__ . '/Routes/Admin/advertisements.php';
+    require __DIR__ . '/Routes/Admin/wiki.php';
 });
 
 // The routes below are used for the Api endpoints.
@@ -68,5 +69,9 @@ Route::group(['namespace' => 'Statuses'], function() {
 Route::group(['namespace' => 'Users'], function() {
     require __DIR__  .'/Routes/Users/profiles.php';
     require __DIR__ . '/Routes/Users/settings.php';
+});
+
+Route::group(['namespace' => 'Wiki'], function() {
+    require __DIR__ . '/Routes/Wiki/wiki.php';
 });
 
