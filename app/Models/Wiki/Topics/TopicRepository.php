@@ -15,21 +15,21 @@ interface TopicRepository
      * @return \EQM\Models\Wiki\Topics\Topic
      */
     public function update(Topic $topic, array $values);
-    
+
     /**
      * @param \EQM\Models\Wiki\Topics\Topic $topic
      */
     public function delete(Topic $topic);
-    
+
     /**
      * @param int $id
      * @return \EQM\Models\Wiki\Topics\Topic|null
      */
     public function find($id);
-    
+
     /**
      * @param int $limit
      * @return \Illuminate\Pagination\LengthAwarePaginator
      */
-    public function findAllPaginated($limit = 10);
+    public function findAllPaginated($limit = 50);
 }
