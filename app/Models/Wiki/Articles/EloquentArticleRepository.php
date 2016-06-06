@@ -85,7 +85,7 @@ class EloquentArticleRepository implements ArticleRepository
      * @param int $limit
      * @return \Illuminate\Pagination\LengthAwarePaginator
      */
-    public function findByTopicPaginated(Topic $topic, $limit = 10)
+    public function findByTopicPaginated(Topic $topic, $limit = 50)
     {
         return $this->article
             ->where('topic_id', $topic->id())

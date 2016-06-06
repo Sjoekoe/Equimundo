@@ -25,7 +25,7 @@ class TopicsTest extends \TestCase
                         'count' => 1,
                         'current_page' => 1,
                         'links' => [],
-                        'per_page' => 10,
+                        'per_page' => 50,
                         'total' => 1,
                         'total_pages' => 1,
                     ],

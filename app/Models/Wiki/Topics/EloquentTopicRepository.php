@@ -63,7 +63,7 @@ class EloquentTopicRepository implements TopicRepository
      * @param int $limit
      * @return \Illuminate\Pagination\LengthAwarePaginator
      */
-    public function findAllPaginated($limit = 10)
+    public function findAllPaginated($limit = 50)
     {
         return $this->topic->paginate($limit);
     }
