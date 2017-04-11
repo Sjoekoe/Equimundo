@@ -26,6 +26,7 @@
             ga('create', 'UA-65362816-1', 'auto');
             ga('send', 'pageview');
         </script>
+        @include('layout.partials._tag_manager')
         @include('layout.partials._facebook_pixel')
         @include('layout.partials._hotjar')
     @endif
